@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <title>Puzzle Master</title>
     <link rel="icon" href="../../icon.jpg" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
-            font-family: 'DM Sans', sans-serif;
+            font-family: 'Sora', sans-serif;
             background: linear-gradient(135deg, #6e8efb, #a777e3);
             display: flex;
             justify-content: center;
@@ -64,7 +64,9 @@
             gap: 10px;
         }
 
-        .theme-toggle, .sound-toggle, .pause-btn {
+        .theme-toggle,
+        .sound-toggle,
+        .pause-btn {
             background: #f0f0f0;
             border: none;
             width: 40px;
@@ -85,7 +87,9 @@
             color: #fff;
         }
 
-        .theme-toggle:hover, .sound-toggle:hover, .pause-btn:hover {
+        .theme-toggle:hover,
+        .sound-toggle:hover,
+        .pause-btn:hover {
             transform: scale(1.1);
             background: #6e8efb;
             color: white;
@@ -206,9 +210,17 @@
         }
 
         @keyframes slideTile {
-            0% { transform: scale(1); }
-            50% { transform: scale(0.9); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(0.9);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
         .controls {
@@ -262,7 +274,7 @@
             background: #f8f9fa;
             padding: 15px;
             border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
         }
 
         .dark-theme .stat-box {
@@ -301,9 +313,17 @@
         }
 
         @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.7; }
-            100% { opacity: 1; }
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+
+            100% {
+                opacity: 1;
+            }
         }
 
         .time-container {
@@ -366,7 +386,7 @@
             background: white;
             padding: 15px;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             max-width: 300px;
             display: none;
             z-index: 1000;
@@ -426,21 +446,21 @@
                 padding: 15px;
                 width: 95%;
             }
-            
+
             .puzzle-tile {
                 font-size: 20px;
             }
-            
+
             .mobile-controls {
                 display: grid;
             }
-            
+
             .mode-btn {
                 min-width: 120px;
                 padding: 10px 15px;
                 font-size: 14px;
             }
-            
+
             .achievements-panel {
                 position: static;
                 max-width: 100%;
@@ -452,19 +472,19 @@
             .puzzle-grid {
                 gap: 4px;
             }
-            
+
             .puzzle-tile {
                 font-size: 18px;
             }
-            
+
             .stats {
                 grid-template-columns: 1fr;
             }
-            
+
             .controls {
                 flex-direction: column;
             }
-            
+
             button {
                 width: 100%;
                 justify-content: center;
@@ -478,7 +498,7 @@
             background: white;
             padding: 15px;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             max-width: 300px;
             display: none;
             z-index: 1000;
@@ -516,7 +536,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0, 0, 0, 0.8);
             display: none;
             justify-content: center;
             align-items: center;
@@ -753,21 +773,21 @@
 
         function beep(freq, duration) {
             if (!state.soundEnabled) return;
-            
+
             try {
                 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
                 const oscillator = audioContext.createOscillator();
                 const gainNode = audioContext.createGain();
-                
+
                 oscillator.connect(gainNode);
                 gainNode.connect(audioContext.destination);
-                
+
                 oscillator.frequency.value = freq;
                 oscillator.type = 'sine';
-                
+
                 gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
                 gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration / 1000);
-                
+
                 oscillator.start(audioContext.currentTime);
                 oscillator.stop(audioContext.currentTime + duration / 1000);
             } catch (e) {
@@ -778,7 +798,7 @@
         // Theme Management
         const themeToggle = document.getElementById('themeToggle');
         const savedTheme = localStorage.getItem(THEME_KEY) || 'light';
-        
+
         if (savedTheme === 'dark') {
             document.body.classList.add('dark-theme');
             themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
@@ -798,7 +818,7 @@
         // Sound Toggle
         const soundToggle = document.getElementById('soundToggle');
         state.soundEnabled = localStorage.getItem(SOUND_KEY) !== 'false';
-        
+
         if (!state.soundEnabled) {
             soundToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
         }
@@ -806,8 +826,8 @@
         soundToggle.onclick = () => {
             state.soundEnabled = !state.soundEnabled;
             localStorage.setItem(SOUND_KEY, state.soundEnabled);
-            soundToggle.innerHTML = state.soundEnabled ? 
-                '<i class="fas fa-volume-up"></i>' : 
+            soundToggle.innerHTML = state.soundEnabled ?
+                '<i class="fas fa-volume-up"></i>' :
                 '<i class="fas fa-volume-mute"></i>';
         };
 
@@ -856,7 +876,7 @@
             if (!state.achievements[key].unlocked) {
                 state.achievements[key].unlocked = true;
                 localStorage.setItem(ACHIEVEMENTS_KEY, JSON.stringify(state.achievements));
-                
+
                 // Show notification
                 showNotification(`Achievement Unlocked: ${state.achievements[key].desc}`);
                 updateAchievementsDisplay();
@@ -879,7 +899,7 @@
             `;
             notification.innerHTML = `<i class="fas fa-trophy"></i> ${message}`;
             document.body.appendChild(notification);
-            
+
             setTimeout(() => {
                 notification.style.animation = 'slideOut 0.3s ease-out';
                 setTimeout(() => notification.remove(), 300);
@@ -901,12 +921,12 @@
         document.head.appendChild(style);
 
         // Mode Selection
-        document.getElementById('endlessModeBtn').onclick = () => { 
-            startMode('endless'); 
+        document.getElementById('endlessModeBtn').onclick = () => {
+            startMode('endless');
             sounds.click();
         };
-        document.getElementById('lastStandBtn').onclick = () => { 
-            startMode('laststand'); 
+        document.getElementById('lastStandBtn').onclick = () => {
+            startMode('laststand');
             sounds.click();
         };
 
@@ -914,27 +934,27 @@
             state.mode = mode;
             state.level = 1;
             state.hints = 3;
-            
+
             document.getElementById('modeSelect').style.display = 'none';
             document.getElementById('difficultySelect').style.display = mode === 'endless' ? 'block' : 'none';
-            
+
             if (mode === 'endless') {
                 const size = parseInt(document.getElementById('difficulty').value);
                 state.gridSize = size;
             }
-            
+
             grid.style.display = 'grid';
             stats.style.display = 'grid';
             timeContainer.style.display = 'block';
             document.getElementById('controls').style.display = 'flex';
             document.getElementById('hintCount').textContent = state.hints;
-            
+
             // Show mobile controls on mobile
             if (window.innerWidth <= 768) {
                 document.getElementById('mobileControls').style.display = 'grid';
                 setupMobileControls();
             }
-            
+
             initializePuzzle();
         }
 
@@ -944,20 +964,20 @@
                     const direction = btn.dataset.direction;
                     const emptyIndex = state.tiles.indexOf(null);
                     let targetIndex = -1;
-                    
-                    switch(direction) {
+
+                    switch (direction) {
                         case 'up': targetIndex = emptyIndex + state.gridSize; break;
                         case 'down': targetIndex = emptyIndex - state.gridSize; break;
                         case 'left': targetIndex = emptyIndex + 1; break;
                         case 'right': targetIndex = emptyIndex - 1; break;
                     }
-                    
+
                     if (targetIndex >= 0 && targetIndex < state.tiles.length) {
                         moveTile(targetIndex);
                     }
                 };
             });
-            
+
             document.getElementById('hintMobile').onclick = () => useHint();
             document.getElementById('undoMobile').onclick = () => undo();
         }
@@ -970,10 +990,10 @@
             state.solved = false;
             state.moveHistory = [];
             winMessage.style.display = "none";
-            
+
             document.getElementById('hintBtn').disabled = state.hints === 0;
             document.getElementById('undoBtn').disabled = true;
-            
+
             shufflePuzzle();
             setupTimerAndLimits();
             updateGridSize();
@@ -984,7 +1004,7 @@
             const tileSize = Math.min(100, 380 / state.gridSize - 10);
             grid.style.gridTemplateColumns = `repeat(${state.gridSize}, ${tileSize}px)`;
             grid.style.width = `${state.gridSize * (tileSize + 6)}px`;
-            
+
             document.querySelectorAll('.puzzle-tile').forEach(tile => {
                 tile.style.width = `${tileSize}px`;
                 tile.style.height = `${tileSize}px`;
@@ -1019,7 +1039,7 @@
 
         function setupTimerAndLimits() {
             stopAllTimers();
-            
+
             if (state.mode === 'endless') {
                 state.timer = 0;
                 state.timerInterval = setInterval(() => {
@@ -1032,15 +1052,15 @@
                 state.timeLimit = baseTime;
                 state.timer = baseTime;
                 state.moveLimit = Math.max(100 - (state.level - 1) * 10, 20);
-                
+
                 document.getElementById('levelDisplay').textContent = state.level;
                 timerDisplay.textContent = state.timer;
-                
+
                 state.countdownInterval = setInterval(() => {
                     state.timer--;
                     timerDisplay.textContent = state.timer;
                     updateTimeBar();
-                    
+
                     if (state.timer <= 0) {
                         gameOver("⏰ Time's up! You reached Level " + state.level);
                     }
@@ -1052,7 +1072,7 @@
             if (state.mode === 'laststand') {
                 const percentage = (state.timer / state.timeLimit) * 100;
                 timeFill.style.width = percentage + '%';
-                
+
                 timeFill.classList.remove('warning', 'danger');
                 if (percentage < 30) timeFill.classList.add('warning');
                 if (percentage < 15) timeFill.classList.add('danger');
@@ -1069,7 +1089,7 @@
             state.tiles.forEach((tile, index) => {
                 const btn = document.createElement('button');
                 btn.className = 'puzzle-tile';
-                
+
                 if (tile === null) {
                     btn.classList.add('empty');
                 } else {
@@ -1077,21 +1097,21 @@
                     if (state.mode === 'laststand' && state.level >= 5) {
                         btn.textContent = tile; // Show numbers on higher levels
                     }
-                    
+
                     if (canMove(index)) btn.classList.add('movable');
-                    
+
                     // Check if tile is in correct position
                     if (tile === index + 1) {
                         btn.classList.add('correct-pos');
                     }
-                    
+
                     btn.onclick = () => moveTile(index);
                 }
                 grid.appendChild(btn);
             });
-            
+
             moveDisplay.textContent = state.moves;
-            
+
             // Update moves display style based on limit
             if (state.mode === 'laststand') {
                 const movesLeft = state.moveLimit - state.moves;
@@ -1113,21 +1133,21 @@
 
         function moveTile(index, isUndo = false) {
             if (state.isPaused || !canMove(index) || state.solved) return;
-            
+
             if (!isUndo) {
                 state.moveHistory.push([...state.tiles]);
                 document.getElementById('undoBtn').disabled = false;
             }
-            
+
             const emptyIndex = state.tiles.indexOf(null);
             [state.tiles[index], state.tiles[emptyIndex]] = [state.tiles[emptyIndex], state.tiles[index]];
             state.moves++;
-            
+
             // Add animation
             const tile = grid.children[index];
             tile.classList.add('moving');
             setTimeout(() => tile.classList.remove('moving'), 300);
-            
+
             moveDisplay.textContent = state.moves;
             sounds.move();
 
@@ -1151,34 +1171,34 @@
             stopAllTimers();
             winMessage.style.display = "block";
             sounds.win();
-            
+
             // Achievement checks
             if (!state.achievements.firstWin.unlocked) {
                 unlockAchievement('firstWin');
             }
-            
+
             if (state.mode === 'endless' && state.timer < 30) {
                 unlockAchievement('speedster');
             }
-            
+
             if (state.gridSize === 5) {
                 unlockAchievement('sizeMaster');
             }
-            
+
             if (state.mode === 'laststand') {
                 setTimeout(() => {
                     state.level++;
-                    
-                    if (state.level > bestLevel) { 
-                        bestLevel = state.level; 
-                        localStorage.setItem(PUZZLE_BEST_KEY, String(bestLevel)); 
-                        document.getElementById('bestLevel').textContent = bestLevel; 
-                        
+
+                    if (state.level > bestLevel) {
+                        bestLevel = state.level;
+                        localStorage.setItem(PUZZLE_BEST_KEY, String(bestLevel));
+                        document.getElementById('bestLevel').textContent = bestLevel;
+
                         if (bestLevel >= 10) {
                             unlockAchievement('master');
                         }
                     }
-                    
+
                     winMessage.style.display = "none";
                     initializePuzzle();
                 }, 2000);
@@ -1199,24 +1219,24 @@
 
         function showConfetti() {
             const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
-            
+
             for (let i = 0; i < 100; i++) {
                 const confetti = document.createElement('div');
                 confetti.className = 'confetti';
                 confetti.style.left = Math.random() * 100 + 'vw';
                 confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
                 confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-                
+
                 document.body.appendChild(confetti);
-                
+
                 const animation = confetti.animate([
-                    { 
-                        top: '-10px', 
+                    {
+                        top: '-10px',
                         opacity: 1,
                         transform: `rotate(0deg) scale(1)`
                     },
-                    { 
-                        top: '100vh', 
+                    {
+                        top: '100vh',
                         opacity: 0,
                         transform: `rotate(${Math.random() * 720}deg) scale(0.5)`
                     }
@@ -1224,29 +1244,29 @@
                     duration: Math.random() * 3000 + 2000,
                     easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
                 });
-                
+
                 animation.onfinish = () => confetti.remove();
             }
         }
 
         function useHint() {
             if (state.hints === 0 || state.solved) return;
-            
+
             const emptyIndex = state.tiles.indexOf(null);
             let possibleMoves = [];
-            
+
             // Find all movable tiles
             state.tiles.forEach((tile, index) => {
                 if (tile !== null && canMove(index)) {
                     possibleMoves.push(index);
                 }
             });
-            
+
             if (possibleMoves.length > 0) {
                 // Find the tile that should be in the empty spot
                 const correctTile = emptyIndex + 1;
                 const tileIndex = state.tiles.indexOf(correctTile);
-                
+
                 // If the correct tile is movable and would make progress, highlight it
                 if (tileIndex !== -1 && possibleMoves.includes(tileIndex)) {
                     highlightTile(tileIndex);
@@ -1255,7 +1275,7 @@
                     const randomIndex = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
                     highlightTile(randomIndex);
                 }
-                
+
                 state.hints--;
                 document.getElementById('hintCount').textContent = state.hints;
                 document.getElementById('hintBtn').disabled = state.hints === 0;
@@ -1266,10 +1286,10 @@
         function highlightTile(index) {
             const tile = grid.children[index];
             const originalColor = tile.style.backgroundColor;
-            
+
             tile.style.backgroundColor = '#f1c40f';
             tile.style.animation = 'pulse 0.5s infinite';
-            
+
             setTimeout(() => {
                 tile.style.backgroundColor = originalColor;
                 tile.style.animation = '';
@@ -1278,14 +1298,14 @@
 
         function undo() {
             if (state.moveHistory.length === 0 || state.solved) return;
-            
+
             state.tiles = state.moveHistory.pop();
             state.moves--;
-            
+
             if (state.moveHistory.length === 0) {
                 document.getElementById('undoBtn').disabled = true;
             }
-            
+
             updateUI();
             sounds.click();
         }
@@ -1298,7 +1318,7 @@
         function gameOver(message) {
             state.solved = true;
             stopAllTimers();
-            
+
             gameOverTitle.textContent = 'Game Over';
             gameOverMessage.textContent = message;
             gameOverModal.style.display = 'flex';
@@ -1331,10 +1351,10 @@
         pauseBtn.onclick = () => {
             if (state.mode) {
                 state.isPaused = !state.isPaused;
-                pauseBtn.innerHTML = state.isPaused ? 
-                    '<i class="fas fa-play"></i>' : 
+                pauseBtn.innerHTML = state.isPaused ?
+                    '<i class="fas fa-play"></i>' :
                     '<i class="fas fa-pause"></i>';
-                
+
                 if (state.isPaused) {
                     stopAllTimers();
                 } else {
@@ -1347,36 +1367,36 @@
         // Keyboard Controls
         document.addEventListener('keydown', (e) => {
             if (state.solved || state.isPaused || !state.mode) return;
-            
+
             const emptyIndex = state.tiles.indexOf(null);
             let targetIndex = -1;
-            
-            switch(e.key) {
+
+            switch (e.key) {
                 case 'ArrowUp': targetIndex = emptyIndex + state.gridSize; break;
                 case 'ArrowDown': targetIndex = emptyIndex - state.gridSize; break;
                 case 'ArrowLeft': targetIndex = emptyIndex + 1; break;
                 case 'ArrowRight': targetIndex = emptyIndex - 1; break;
                 case 'u':
-                case 'U': 
+                case 'U':
                     e.preventDefault();
-                    undo(); 
+                    undo();
                     break;
                 case 'h':
-                case 'H': 
+                case 'H':
                     e.preventDefault();
-                    useHint(); 
+                    useHint();
                     break;
                 case 'r':
-                case 'R': 
+                case 'R':
                     e.preventDefault();
-                    initializePuzzle(); 
+                    initializePuzzle();
                     break;
-                case ' ': 
+                case ' ':
                     e.preventDefault();
-                    pauseBtn.click(); 
+                    pauseBtn.click();
                     break;
             }
-            
+
             if (targetIndex >= 0 && targetIndex < state.tiles.length) {
                 moveTile(targetIndex);
             }
@@ -1390,7 +1410,7 @@
             sounds.click();
             initializePuzzle();
         };
-        
+
         document.getElementById('hintBtn').onclick = useHint;
         document.getElementById('undoBtn').onclick = undo;
 

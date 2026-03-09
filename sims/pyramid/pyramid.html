@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../../icon.jpg" type="image/x-icon">
     <title>Pyramid</title>
-    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #0c0c14;
@@ -34,14 +34,14 @@
         }
 
         body {
-            font-family: 'Jura', sans-serif;
+            font-family: 'Sora', sans-serif;
             background: linear-gradient(135deg, #0c0c14 0%, #1a1a2e 100%);
             color: var(--text-color);
             max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
             line-height: 1.6;
-            background-image: 
+            background-image:
                 radial-gradient(circle at 10% 20%, #2a2a4a 0%, transparent 50%),
                 radial-gradient(circle at 90% 80%, #3a3a6a 0%, transparent 50%);
             min-height: 100vh;
@@ -62,7 +62,7 @@
         }
 
         button {
-            font-family: 'Jura', sans-serif;
+            font-family: 'Sora', sans-serif;
             font-weight: 600;
             letter-spacing: 0.5px;
             text-transform: uppercase;
@@ -95,7 +95,7 @@
             margin: 0;
             font-size: 3rem;
             color: var(--highlight-color);
-            text-shadow: 
+            text-shadow:
                 0 0 20px rgba(255, 215, 0, 0.5),
                 2px 2px 0 #000,
                 4px 4px 0 rgba(0, 0, 0, 0.3);
@@ -133,7 +133,8 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
-        #timer, #level {
+        #timer,
+        #level {
             font-weight: 700;
             font-size: 1.1rem;
             display: flex;
@@ -167,7 +168,7 @@
             padding: 30px;
             border-radius: 15px;
             min-height: 500px;
-            box-shadow: 
+            box-shadow:
                 0 8px 32px rgba(0, 0, 0, 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
             margin-bottom: 30px;
@@ -182,10 +183,10 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, 
-                transparent, 
-                var(--highlight-color),
-                transparent);
+            background: linear-gradient(90deg,
+                    transparent,
+                    var(--highlight-color),
+                    transparent);
         }
 
         #text-display {
@@ -239,6 +240,7 @@
                 opacity: 0;
                 transform: translateX(-20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateX(0);
@@ -274,17 +276,17 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 215, 0, 0.1), 
-                transparent);
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 215, 0, 0.1),
+                    transparent);
             transition: left 0.5s;
         }
 
         .option-btn:hover {
             background: linear-gradient(135deg, var(--button-hover), #2a2a5a);
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 
+            box-shadow:
                 0 8px 25px rgba(0, 0, 0, 0.3),
                 0 0 0 1px rgba(255, 215, 0, 0.3);
         }
@@ -343,9 +345,12 @@
         }
 
         @keyframes pulseGlow {
-            0%, 100% {
+
+            0%,
+            100% {
                 box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
             }
+
             50% {
                 box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
             }
@@ -371,10 +376,10 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 215, 0, 0.2), 
-                transparent);
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 215, 0, 0.2),
+                    transparent);
             transition: left 0.5s;
         }
 
@@ -437,9 +442,12 @@
         }
 
         @keyframes pulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 opacity: 1;
             }
+
             50% {
                 opacity: 0.6;
             }
@@ -491,10 +499,10 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(45deg, 
-                transparent 30%, 
-                rgba(255, 215, 0, 0.1) 50%, 
-                transparent 70%);
+            background: linear-gradient(45deg,
+                    transparent 30%,
+                    rgba(255, 215, 0, 0.1) 50%,
+                    transparent 70%);
             opacity: 0;
             transition: opacity 0.3s;
         }
@@ -502,7 +510,7 @@
         .totem-piece:hover {
             background: linear-gradient(135deg, #3a3a6a, #2a2a5a);
             transform: scale(1.05) rotate(5deg);
-            box-shadow: 
+            box-shadow:
                 0 8px 25px rgba(0, 0, 0, 0.4),
                 0 0 0 2px var(--highlight-color);
         }
@@ -514,7 +522,7 @@
         .totem-piece.selected {
             border-color: var(--highlight-color);
             background: linear-gradient(135deg, #4a4a7a, #3a3a6a);
-            box-shadow: 
+            box-shadow:
                 0 0 20px rgba(255, 215, 0, 0.5),
                 inset 0 0 20px rgba(255, 215, 0, 0.2);
             animation: selectedPulse 1s infinite;
@@ -522,13 +530,16 @@
         }
 
         @keyframes selectedPulse {
-            0%, 100% {
-                box-shadow: 
+
+            0%,
+            100% {
+                box-shadow:
                     0 0 20px rgba(255, 215, 0, 0.5),
                     inset 0 0 20px rgba(255, 215, 0, 0.2);
             }
+
             50% {
-                box-shadow: 
+                box-shadow:
                     0 0 30px rgba(255, 215, 0, 0.8),
                     inset 0 0 30px rgba(255, 215, 0, 0.3);
             }
@@ -563,10 +574,10 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.1), 
-                transparent);
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.1),
+                    transparent);
             transition: left 0.5s;
         }
 
@@ -601,6 +612,7 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -650,10 +662,10 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(45deg, 
-                transparent 40%, 
-                rgba(255, 215, 0, 0.2) 50%, 
-                transparent 60%);
+            background: linear-gradient(45deg,
+                    transparent 40%,
+                    rgba(255, 215, 0, 0.2) 50%,
+                    transparent 60%);
             opacity: 0;
             transition: opacity 0.3s;
         }
@@ -675,6 +687,7 @@
             0% {
                 transform: translateX(-100%);
             }
+
             100% {
                 transform: translateX(100%);
             }
@@ -737,10 +750,10 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.2), 
-                transparent);
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.2),
+                    transparent);
             animation: shimmer 2s infinite;
         }
 
@@ -748,6 +761,7 @@
             0% {
                 transform: translateX(-100%);
             }
+
             100% {
                 transform: translateX(100%);
             }
@@ -758,9 +772,12 @@
         }
 
         @keyframes warningFlash {
-            0%, 100% {
+
+            0%,
+            100% {
                 background: linear-gradient(135deg, #5a0000, #8b0000);
             }
+
             50% {
                 background: linear-gradient(135deg, #8b0000, #b30000);
             }
@@ -788,31 +805,31 @@
             #options-container {
                 grid-template-columns: 1fr;
             }
-            
+
             .puzzle-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
-            
+
             .level-progress {
                 flex-wrap: wrap;
                 gap: 15px;
                 justify-content: center;
             }
-            
+
             .level-circle {
                 width: 50px;
                 height: 50px;
                 font-size: 0.9rem;
             }
-            
+
             .level-circle.current {
                 transform: scale(1.2);
             }
-            
+
             h1 {
                 font-size: 2.2rem;
             }
-            
+
             #game-info {
                 flex-direction: column;
                 gap: 10px;
@@ -834,21 +851,23 @@
                 1/5
             </div>
         </div>
-    </header> 
+    </header>
 
     <div id="game-container" class="fade-in">
         <div class="level-progress" id="level-progress"></div>
-        
+
         <div id="text-display">
             <div class="message">
                 <h2>𓋴 The Great Pyramid</h2>
-                <p>You stand before the massive stone entrance of the ancient pyramid. The air is thick with the scent of centuries-old sand and mystery. Hieroglyphs cover the walls, their stories whispering in the still air...</p>
+                <p>You stand before the massive stone entrance of the ancient pyramid. The air is thick with the scent
+                    of centuries-old sand and mystery. Hieroglyphs cover the walls, their stories whispering in the
+                    still air...</p>
                 <div class="health-bar">
                     <div id="health-fill" class="health-fill" style="width: 100%"></div>
                 </div>
             </div>
         </div>
-        
+
         <div id="options-container"></div>
 
         <div id="puzzle-section" class="puzzle-section hidden">
@@ -1013,15 +1032,15 @@
                 } else if (i < gameState.currentLevel) {
                     circle.classList.add('completed');
                 }
-                
+
                 const levelNum = document.createElement('div');
                 levelNum.textContent = i;
                 circle.appendChild(levelNum);
-                
+
                 const levelName = document.createElement('span');
                 levelName.textContent = levels[i].name.substring(0, 3);
                 circle.appendChild(levelName);
-                
+
                 circle.title = levels[i].name;
                 progress.appendChild(circle);
             }
@@ -1032,26 +1051,26 @@
         function displayScene() {
             const scene = levels[gameState.currentLevel];
             const textDisplay = document.getElementById('text-display');
-            
+
             let html = `<div class="message">
                 <h2>𓋴 ${scene.name}</h2>
                 <p>${scene.description}</p>`;
-            
+
             if (gameState.health < 50) {
                 html += `<div class="danger">⚠️ Your health is low: ${gameState.health}%</div>`;
             }
-            
+
             if (gameState.timeLeft < 300) {
                 html += `<div class="danger">⏳ Time is running out!</div>`;
             }
-            
+
             html += `</div>`;
-            
+
             textDisplay.innerHTML += html;
             updateOptions();
             updateLevelProgress();
             textDisplay.scrollTop = textDisplay.scrollHeight;
-            
+
             gameState.visitedRooms.add(gameState.currentLevel);
         }
 
@@ -1060,23 +1079,23 @@
             container.innerHTML = '';
 
             const scene = levels[gameState.currentLevel];
-            
+
             scene.options.forEach(option => {
                 const btn = document.createElement('button');
                 btn.className = 'option-btn';
                 btn.innerHTML = option.text;
                 btn.addEventListener('click', () => handleAction(option.action));
-                
+
                 if (option.text.includes("Light a torch") && !gameState.hasTorch) {
                     btn.disabled = true;
                     btn.title = "You need to find a torch first";
                 }
-                
+
                 if (option.text.includes("key") && gameState.hasKey) {
                     btn.disabled = true;
                     btn.title = "You already have the key";
                 }
-                
+
                 container.appendChild(btn);
             });
         }
@@ -1085,11 +1104,11 @@
             const textDisplay = document.getElementById('text-display');
             const messageDiv = document.createElement('div');
             messageDiv.className = 'message';
-            
+
             if (type === 'danger') messageDiv.classList.add('trap');
             if (type === 'success') messageDiv.classList.add('success');
             if (type === 'hint') messageDiv.classList.add('hint');
-            
+
             messageDiv.innerHTML = message;
             textDisplay.appendChild(messageDiv);
             textDisplay.scrollTop = textDisplay.scrollHeight;
@@ -1098,19 +1117,19 @@
         function checkForTrap() {
             const scene = levels[gameState.currentLevel];
             if (!scene.traps) return false;
-            
+
             for (const trap of scene.traps) {
                 if (Math.random() < trap.chance * gameState.difficulty) {
                     gameState.trapsTriggered++;
                     gameState.health = Math.max(0, gameState.health - trap.damage);
                     updateHealthDisplay();
-                    
+
                     addMessage(`<span class="danger">⚠️ TRAP! ${trap.message} You lose ${trap.damage}% health!</span>`, 'danger');
-                    
+
                     if (gameState.health <= 0) {
                         setTimeout(() => endGame(false, "You succumbed to the pyramid's traps."), 1000);
                     }
-                    
+
                     return true;
                 }
             }
@@ -1119,7 +1138,7 @@
 
         function handleAction(action) {
             if (checkForTrap() && action !== 'lightTorch') return;
-            
+
             switch (action) {
                 case 'examineWalls':
                     examineWalls();
@@ -1187,17 +1206,17 @@
         function examineWalls() {
             const foundKey = Math.random() < 0.3;
             const sequence = "𓂀 → 𓃒 → 𓊹 → 🐍 → 🦅 → ☥";
-            
+
             addMessage(`The hieroglyphs tell the story of Pharaoh Amenhotep III, who built this pyramid to protect his soul's journey to the afterlife. 
             One panel shows a sequence: <span class="important">${sequence}</span>. This might be important for later puzzles.`);
-            
+
             if (!gameState.hasKey && foundKey) {
                 gameState.hasKey = true;
                 gameState.inventory.push('Ancient Bronze Key');
                 addMessage(`<span class="success">𓍝 You found an ancient bronze key hidden behind a loose stone!</span>`, 'success');
                 updateInventory();
             }
-            
+
             if (Math.random() < 0.4) {
                 gameState.difficulty = Math.min(2, gameState.difficulty + 0.1);
                 addMessage(`<div class="hint">The pyramid seems to grow more dangerous as you learn its secrets...</div>`);
@@ -1239,7 +1258,7 @@
             const puzzleHint = Math.random() < 0.6;
             addMessage(`The statues represent Egyptian gods: Anubis (jackal-headed), Horus (falcon-headed), and Thoth (ibis-headed). 
             Each holds a symbol matching those in the hieroglyphs.`);
-            
+
             if (puzzleHint) {
                 addMessage(`<div class="hint">𓆣 The statues seem to be pointing in a specific order: left to right, they show Anubis, Horus, then Thoth.</div>`, 'hint');
             }
@@ -1249,7 +1268,7 @@
             const pattern = "3 taps, pause, 1 tap, pause, 4 taps...";
             addMessage(`The echoes form a rhythmic pattern: <span class="important">${pattern}</span> 
             This might be a clue for the puzzle ahead.`);
-            
+
             if (Math.random() < 0.3) {
                 gameState.inventory.push('Echo Stone');
                 addMessage(`<span class="success">You find a strangely resonant stone that amplifies the echoes!</span>`, 'success');
@@ -1286,7 +1305,7 @@
         function studyWalls() {
             const hint = Math.random() < 0.5;
             addMessage(`The walls are covered in mathematical equations and star charts. They seem to describe the movement of celestial bodies.`);
-            
+
             if (hint) {
                 addMessage(`<div class="hint">𓆣 The equations suggest that patterns repeat in groups of two...</div>`, 'hint');
             }
@@ -1294,7 +1313,7 @@
 
         function investigateDevices() {
             addMessage(`The mechanical devices are ancient but precise. They seem to be calculating devices, possibly used for astronomical predictions.`);
-            
+
             if (Math.random() < 0.3) {
                 gameState.inventory.push('Bronze Gear');
                 addMessage(`<span class="success">𓍝 You find a perfectly preserved bronze gear!</span>`, 'success');
@@ -1312,10 +1331,10 @@
 
         function examineSarcophagi() {
             const findsKey = !gameState.hasKey && Math.random() < 0.4;
-            
+
             addMessage(`The sarcophagi are beautifully crafted with gold inlay. One bears an inscription: 
             "He who seeks the sun's treasure must first walk in darkness and find the key of life."`);
-            
+
             if (findsKey) {
                 gameState.hasKey = true;
                 gameState.inventory.push('Golden Scarab Key');
@@ -1344,7 +1363,7 @@
             if (!gameState.hasKey) {
                 const findsKey = Math.random() < 0.5;
                 addMessage(`You search the hall carefully. The key must be here somewhere...`);
-                
+
                 if (findsKey) {
                     gameState.hasKey = true;
                     gameState.inventory.push('Golden Scarab Key');
@@ -1359,7 +1378,7 @@
         function examineTreasure() {
             addMessage(`The Pharaoh's Treasure glitters with unimaginable wealth: gold statues, jeweled crowns, 
             and artifacts from a lost civilization. But it's protected by one final challenge.`);
-            
+
             gameState.difficulty = 2; // Maximum difficulty for final level
         }
 
@@ -1391,11 +1410,11 @@
             const puzzle = puzzles[gameState.currentPuzzle];
             const puzzleSection = document.getElementById('puzzle-section');
             puzzleSection.classList.remove('hidden');
-            
-            document.getElementById('puzzle-description').innerHTML = 
+
+            document.getElementById('puzzle-description').innerHTML =
                 `<strong>${puzzle.name}</strong><br>${puzzle.description}<br>
                 <small>Attempts remaining: ${puzzle.maxAttempts - puzzle.attempts}</small>`;
-            
+
             generatePuzzleGrid(gameState.currentPuzzle);
             showPuzzleHint();
         }
@@ -1403,7 +1422,7 @@
         function showPuzzleHint() {
             const puzzle = puzzles[gameState.currentPuzzle];
             const hintDiv = document.getElementById('puzzle-hint');
-            
+
             if (puzzle.attempts >= 2 && gameState.hintsUsed < puzzle.hints.length) {
                 hintDiv.textContent = `💡 Hint: ${puzzle.hints[gameState.hintsUsed]}`;
                 hintDiv.classList.remove('hidden');
@@ -1460,10 +1479,10 @@
             if (areAdjacent(prevIndex, index)) {
                 [gameState._puzzleLayout[prevIndex], gameState._puzzleLayout[index]] =
                     [gameState._puzzleLayout[index], gameState._puzzleLayout[prevIndex]];
-                
+
                 buttons[prevIndex].textContent = gameState._puzzleLayout[prevIndex];
                 buttons[index].textContent = gameState._puzzleLayout[index];
-                
+
                 buttons[prevIndex].classList.remove('selected');
                 buttons[index].style.boxShadow = '0 0 15px var(--success-color)';
                 setTimeout(() => buttons[index].style.boxShadow = '', 300);
@@ -1498,12 +1517,12 @@
         function checkPuzzleSolution() {
             const lvl = gameState.currentPuzzle;
             if (!lvl) return;
-            
+
             const puzzle = puzzles[lvl];
             const layout = gameState._puzzleLayout || [];
-            
+
             puzzle.attempts++;
-            
+
             if (puzzle.attempts >= puzzle.maxAttempts) {
                 addMessage(`<span class="danger">You've run out of attempts! The puzzle resets...</span>`, 'danger');
                 gameState.health = Math.max(0, gameState.health - 25);
@@ -1511,14 +1530,14 @@
                 shufflePuzzle();
                 return;
             }
-            
-            const ok = layout.length === puzzle.solution.length && 
-                       layout.every((v, i) => v === puzzle.solution[i]);
-            
+
+            const ok = layout.length === puzzle.solution.length &&
+                layout.every((v, i) => v === puzzle.solution[i]);
+
             if (ok) {
                 gameState.puzzleSolved = true;
                 addMessage(`<span class="success">𓆣 PUZZLE SOLVED! The door unlocks!</span>`, 'success');
-                
+
                 setTimeout(() => {
                     closePuzzle();
                     if (lvl === 5) {
@@ -1528,9 +1547,9 @@
                     }
                 }, 2000);
             } else {
-                const correct = layout.reduce((count, val, idx) => 
+                const correct = layout.reduce((count, val, idx) =>
                     count + (val === puzzle.solution[idx] ? 1 : 0), 0);
-                
+
                 addMessage(`<span class="danger">Not solved yet. ${correct} out of ${layout.length} symbols are correct.</span>`, 'danger');
                 showPuzzleHint();
             }
@@ -1570,7 +1589,7 @@
         function updateHealthDisplay() {
             const healthFill = document.getElementById('health-fill');
             healthFill.style.width = `${gameState.health}%`;
-            
+
             if (gameState.health < 30) {
                 healthFill.style.background = 'linear-gradient(90deg, var(--danger-color), #ff3333)';
                 healthFill.parentElement.classList.add('warning');
@@ -1584,23 +1603,23 @@
 
         function startTimer() {
             if (gameState.timerInterval) clearInterval(gameState.timerInterval);
-            
+
             gameState.timerInterval = setInterval(() => {
                 gameState.timeLeft = Math.max(0, gameState.timeLeft - 1);
-                
+
                 const mins = Math.floor(gameState.timeLeft / 60);
                 const secs = gameState.timeLeft % 60;
                 const pad = s => s.toString().padStart(2, '0');
-                
+
                 document.getElementById('timer').innerHTML = `
                     <span>SANDS OF TIME</span>
                     ${pad(mins)}:${pad(secs)}
                 `;
-                
+
                 if (gameState.timeLeft === 0) {
                     endGame(false, "Time has run out! The pyramid's curses have claimed you.");
                 }
-                
+
                 if (gameState.timeLeft < 60 && gameState.timeLeft % 10 === 0) {
                     addMessage(`<span class="danger">⏳ The sands of time are running low...</span>`);
                 }
@@ -1669,4 +1688,5 @@
         initGame();
     </script>
 </body>
+
 </html>

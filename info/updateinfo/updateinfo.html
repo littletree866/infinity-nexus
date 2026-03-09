@@ -6,8 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>News & Updates</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-	<link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Jura&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Sora&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Sora&display=swap" rel="stylesheet">
 
 
 	<link rel="icon" href="../../icon.jpg" type="image/x-icon">
@@ -20,7 +20,7 @@
 		}
 
 		body {
-			font-family: "Tahoma", sans-serif;
+			font-family: "Sora", sans-serif;
 			line-height: 1.6;
 			color: #0b0b0b;
 			background: linear-gradient(135deg, #f5f7fa 0%, #e4e7f1 100%);
@@ -157,7 +157,7 @@
 			border-radius: 150px;
 			font-size: 1em;
 			font-weight: bold;
-			font-family: 'DM Sans', sans-serif;
+			font-family: 'Sora', sans-serif;
 			margin-left: 8px;
 			align-self: center;
 		}
@@ -241,6 +241,20 @@
 			<h2 id="releases-heading" class="small" style="margin-top:12px">Release Timeline</h2>
 
 
+
+			<!--<div class="card">
+				<div class="split">
+					<div>
+						<h3>v1.21.25</h3>
+						<div class="small">Planned March 16, 2026</strong></div>
+						<div class="small"><strong id="countdown-text">Loading…</strong></div>
+					</div>
+					<div class="badge" aria-hidden="true">New!</div>
+				</div>
+				<ul class="changelog" aria-hidden="false">
+					<li>Updated Rom to V2.0!</li>
+				</ul>
+			</div>-->
 			<div class="card">
 				<div class="split">
 					<div>
@@ -248,10 +262,13 @@
 						<div class="small">Planned March 16, 2026</strong></div>
 						<div class="small"><strong id="countdown-text">Loading…</strong></div>
 					</div>
-					<div class="badge" aria-hidden="true">Coming soon!</div>
+					<div class="badge" aria-hidden="true">New!</div>
 				</div>
 				<ul class="changelog" aria-hidden="false">
-					<li>???</li>
+					<li>Updated Rom to V2.0!</li>
+					<li>Changed fonts to Sora (or your own browser font)</li>
+					<li>Update Roulette!</li>
+					<li>General improvements and bug fixes</li>
 				</ul>
 			</div>
 
@@ -262,7 +279,6 @@
 						<h3>v1.20.24</h3>
 						<div class="small">Released March 6, 2026</strong></div>
 					</div>
-					<div class="badge" aria-hidden="true">New!</div>
 				</div>
 				<ul class="changelog" aria-hidden="false">
 					<li>New pokemon rom</li>
@@ -276,9 +292,9 @@
 					<div>
 						<h3>v1.19.24</h3>
 						<div class="small">Released February 24, 2026</strong></div>
-		
+
 					</div>
-					<div class="badge" aria-hidden="true">Latest!</div>
+
 				</div>
 				<ul class="changelog" aria-hidden="false">
 					<li>Remade entire homepage</li>
@@ -293,8 +309,10 @@
 				<div class="split">
 					<div>
 						<h3>v1.18.24</h3>
-						<h4 style="font-weight: bold;">This update was released in two parts, once on February 7th, 2026 and again on February 16th, 2026</h4>
-						<div class="small">Released on: <strong id="release-date">February 7, 2026 and February 16, 2026</strong></div>
+						<h4 style="font-weight: bold;">This update was released in two parts, once on February 7th, 2026
+							and again on February 16th, 2026</h4>
+						<div class="small">Released on: <strong id="release-date">February 7, 2026 and February 16,
+								2026</strong></div>
 					</div>
 
 				</div>
@@ -324,7 +342,7 @@
 
 				</div>
 				<ul class="changelog" aria-hidden="false">
-					<li>Changed some fonts to Jura or your own browser font</li>
+					<li>Changed some fonts to Sora or your own browser font</li>
 					<li>Changed the homepage's font weight, may require some getting used to</li>
 					<li>General improvements and bug fixes</li>
 					<li>Improved Archives and Documentation</li>
@@ -349,7 +367,7 @@
 					<li>New pyramid game</li>
 					<li>Remade the homepage format</li>
 					<li>General improvements and bug fixes</li>
-					<li>All fonts changed to DM Sans (or your own browser font) with the exception of some titles being
+					<li>All fonts changed to Sora (or your own browser font) with the exception of some titles being
 						Space Grotesk</li>
 					<li>Bugfixed as best as I could</li>
 					<li>Reorganized files in the project</li>
@@ -426,7 +444,7 @@
 
 		(function () {
 			const targetDate = new Date(2026, 2, 16); // Mar 16, 2026
-			const cdText = document.getElementById('countdown-text'); 
+			const cdText = document.getElementById('countdown-text');
 			const footerYear = document.getElementById('footer-year');
 
 			function update() {

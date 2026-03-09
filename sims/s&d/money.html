@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Supply & Demand</title>
     <link rel="icon" href="../../icon.jpg" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -33,7 +34,7 @@
         }
 
         body {
-            font-family: 'Jura', sans-serif;
+            font-family: 'Sora', sans-serif;
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
@@ -101,7 +102,8 @@
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
         }
 
-        .panel h2, .panel h3 {
+        .panel h2,
+        .panel h3 {
             color: var(--dark);
             margin-bottom: 20px;
             padding-bottom: 10px;
@@ -112,7 +114,8 @@
             gap: 10px;
         }
 
-        .panel h2 i, .panel h3 i {
+        .panel h2 i,
+        .panel h3 i {
             color: var(--secondary);
         }
 
@@ -204,7 +207,8 @@
             gap: 15px;
         }
 
-        .shop-item, .inventory-item {
+        .shop-item,
+        .inventory-item {
             background: white;
             border-radius: 10px;
             padding: 15px;
@@ -216,7 +220,8 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
-        .shop-item:hover, .inventory-item:hover {
+        .shop-item:hover,
+        .inventory-item:hover {
             border-color: var(--primary);
             transform: translateX(5px);
         }
@@ -294,7 +299,7 @@
             border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
-            font-family: 'Jura', sans-serif;
+            font-family: 'Sora', sans-serif;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
@@ -402,9 +407,17 @@
         }
 
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 152, 0, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(255, 152, 0, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 152, 0, 0); }
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 152, 0, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(255, 152, 0, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 152, 0, 0);
+            }
         }
 
         .customer-avatar {
@@ -542,8 +555,13 @@
         }
 
         @keyframes artGlow {
-            0% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); }
-            100% { box-shadow: 0 10px 40px rgba(167, 119, 227, 0.4); }
+            0% {
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            }
+
+            100% {
+                box-shadow: 0 10px 40px rgba(167, 119, 227, 0.4);
+            }
         }
 
         .notification-container {
@@ -580,8 +598,15 @@
         }
 
         @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
 
         .loan-badge {
@@ -676,36 +701,37 @@
             .game-header h1 {
                 font-size: 2rem;
             }
-            
+
             .main-content {
                 padding: 20px;
             }
-            
+
             .panel {
                 padding: 20px;
             }
-            
+
             .stats-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .action-buttons {
                 flex-direction: column;
             }
-            
+
             .btn {
                 width: 100%;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="game-container">
         <div class="game-header">
             <h1><i class="fas fa-chart-line"></i> SUPPLY & DEMAND</h1>
             <div class="subtitle">Business Management Simulator</div>
         </div>
-        
+
         <div class="main-content">
             <!-- Stats Panel -->
             <div class="panel stats-panel">
@@ -728,15 +754,16 @@
                         <div class="stat-value reputation" id="reputation">20/100</div>
                     </div>
                 </div>
-                
+
                 <div class="day-timer">
                     <div class="timer-text">Next day in: <span id="time-left">15</span>s</div>
                     <div class="timer-bar">
                         <div class="timer-fill" id="timer-fill"></div>
                     </div>
-                    <div style="margin-top: 10px; font-size: 0.9rem;">Customers waiting: <span id="customers-waiting">0</span></div>
+                    <div style="margin-top: 10px; font-size: 0.9rem;">Customers waiting: <span
+                            id="customers-waiting">0</span></div>
                 </div>
-                
+
                 <div class="action-buttons">
                     <button class="btn btn-warning" onclick="borrowMoney()">
                         <i class="fas fa-coins"></i> Borrow $250
@@ -746,7 +773,7 @@
                     </button>
                 </div>
             </div>
-            
+
             <!-- Shop Panel -->
             <div class="panel shop-panel">
                 <h2><i class="fas fa-store"></i> Wholesale Supplier</h2>
@@ -758,7 +785,7 @@
                     <p>No items available in the shop</p>
                 </div>
             </div>
-            
+
             <!-- Inventory Panel -->
             <div class="panel inventory-panel">
                 <h2><i class="fas fa-boxes"></i> Your Inventory</h2>
@@ -772,7 +799,7 @@
                 </div>
             </div>
 
-                  <!-- Art Studio --> 
+            <!-- Art Studio -->
             <div class="panel" id="art-studio" style="display: none;">
                 <h2><i class="fas fa-palette"></i> Art Studio</h2>
                 <div class="art-studio">
@@ -789,7 +816,7 @@
                 </div>
             </div>
 
-            
+
             <!-- Customer Area -->
             <div class="customer-area">
                 <div class="panel customers-panel">
@@ -803,7 +830,7 @@
                         <p>Wait for the next day or improve your reputation!</p>
                     </div>
                 </div>
-                
+
                 <div class="panel quest-panel">
                     <div class="quest-giver" onclick="interactWithQuestGiver()" title="Talk to Quest Giver">
                         <i class="fas fa-question-circle"></i>
@@ -827,17 +854,18 @@
                     </div>
                 </div>
             </div>
-            
-      
+
+
         </div>
     </div>
-    
+
     <div class="notification-container" id="notification-container">
         <!-- Notifications will appear here -->
     </div>
-    
+
     <footer>
-        <p>Supply & Demand Business Simulator | Use keyboard shortcuts: B to borrow, N for next day, 1-4 to buy items</p>
+        <p>Supply & Demand Business Simulator | Use keyboard shortcuts: B to borrow, N for next day, 1-4 to buy items
+        </p>
     </footer>
 
     <script>
@@ -855,55 +883,55 @@
         let currentQuest = null;
         let questCompleted = false;
         let moneyEarnedSinceQuestStart = 0;
-        
+
         // Game constants
         const DAY_DURATION = 15; // seconds per day
         const CUSTOMER_PATIENCE = 7000; // ms before customer leaves
         const LOAN_AMOUNT = 250;
         const LOAN_REPAYMENT = 300;
         const LOAN_TERM_DAYS = 30;
-        
+
         // Shop items
         const shopItems = [
-            { 
-                id: 1, 
-                name: "Coffee", 
-                cost: 5, 
-                sellPrice: 10, 
+            {
+                id: 1,
+                name: "Coffee",
+                cost: 5,
+                sellPrice: 10,
                 icon: "fas fa-coffee",
                 description: "Hot brewed coffee",
                 color: "#6f4e37"
             },
-            { 
-                id: 2, 
-                name: "Sandwich", 
-                cost: 8, 
-                sellPrice: 15, 
+            {
+                id: 2,
+                name: "Sandwich",
+                cost: 8,
+                sellPrice: 15,
                 icon: "fas fa-bread-slice",
                 description: "Fresh deli sandwich",
                 color: "#ffb347"
             },
-            { 
-                id: 3, 
-                name: "Book", 
-                cost: 12, 
-                sellPrice: 25, 
+            {
+                id: 3,
+                name: "Book",
+                cost: 12,
+                sellPrice: 25,
                 icon: "fas fa-book",
                 description: "Bestselling novel",
                 color: "#8b4513"
             },
-            { 
-                id: 4, 
-                name: "Painting Supplies", 
-                cost: 50, 
-                sellPrice: 0, 
-                unlocksArt: true, 
+            {
+                id: 4,
+                name: "Painting Supplies",
+                cost: 50,
+                sellPrice: 0,
+                unlocksArt: true,
                 icon: "fas fa-paint-brush",
                 description: "Unlocks art studio",
                 color: "#a777e3"
             }
         ];
-        
+
         // Quests
         const quests = [
             {
@@ -942,7 +970,7 @@
                 progress: 0
             }
         ];
-        
+
         // Customer data
         const customerMessages = [
             "I'll have the usual!",
@@ -954,29 +982,29 @@
             "I need a quick pick-me-up",
             "Love the ambiance here!"
         ];
-        
+
         // Initialize game
         function initGame() {
             // Load saved game if available
             loadGame();
-            
+
             // Start day cycle
             startDayCycle();
-            
+
             // Render initial UI
             updateUI();
             renderShop();
             renderInventory();
-            
+
             // Setup keyboard shortcuts
             setupKeyboardShortcuts();
-            
+
             // Show tutorial on first load
             if (!localStorage.getItem('snd_tutorial_shown')) {
                 showTutorial();
                 localStorage.setItem('snd_tutorial_shown', 'true');
             }
-            
+
             // Add some initial customers
             setTimeout(() => {
                 for (let i = 0; i < 2; i++) {
@@ -984,40 +1012,40 @@
                 }
             }, 1000);
         }
-        
+
         // Start the day timer
         function startDayCycle() {
             clearInterval(dayInterval);
             timeLeft = DAY_DURATION;
-            
+
             dayInterval = setInterval(() => {
                 timeLeft--;
                 updateTimerUI();
-                
+
                 if (timeLeft <= 0) {
                     nextDay();
                 }
-                
+
                 // Update customer patience indicators
                 updateCustomerTimers();
-                
+
                 // Auto-save every 10 seconds
                 if (timeLeft % 10 === 0) {
                     saveGame();
                 }
             }, 1000);
         }
-        
+
         // Update timer display
         function updateTimerUI() {
             const timeLeftEl = document.getElementById('time-left');
             const timerFillEl = document.getElementById('timer-fill');
-            
+
             if (timeLeftEl) timeLeftEl.textContent = timeLeft;
             if (timerFillEl) {
                 const percentage = (timeLeft / DAY_DURATION) * 100;
                 timerFillEl.style.width = `${percentage}%`;
-                
+
                 // Change color based on time remaining
                 if (percentage < 25) {
                     timerFillEl.style.background = 'linear-gradient(to right, #ff9800, #f44336)';
@@ -1026,26 +1054,26 @@
                 }
             }
         }
-        
+
         // Move to next day
         function nextDay() {
             clearInterval(dayInterval);
             day++;
-            
+
             // Clear any existing customers
             activeCustomers.forEach(customer => {
                 clearTimeout(customer.timeout);
             });
             activeCustomers = [];
-            
+
             // Add new customers based on reputation
             const newCustomerCount = Math.floor(reputation / 20) + Math.floor(Math.random() * 3);
             customersWaiting = newCustomerCount;
-            
+
             for (let i = 0; i < newCustomerCount; i++) {
                 setTimeout(() => addCustomer(), i * 1000);
             }
-            
+
             // Check for loan repayment
             if (loan > 0 && day % LOAN_TERM_DAYS === 0) {
                 if (money >= loan) {
@@ -1057,50 +1085,50 @@
                     showNotification("Failed to pay loan! Reputation -20", "danger");
                 }
             }
-            
+
             // Show day notification
             showNotification(`Day ${day} has begun! ${newCustomerCount} customers arrived.`, "info");
-            
+
             // Update UI and restart timer
             updateUI();
             renderCustomers();
             startDayCycle();
-            
+
             // Reset daily money earned for quest
             moneyEarnedSinceQuestStart = 0;
         }
-        
+
         // Borrow money
         function borrowMoney() {
             if (loan > 0) {
                 showNotification("You already have an outstanding loan!", "warning");
                 return;
             }
-            
+
             money += LOAN_AMOUNT;
             loan = LOAN_REPAYMENT;
-            
+
             showNotification(`Borrowed $${LOAN_AMOUNT}. Repay $${LOAN_REPAYMENT} in ${LOAN_TERM_DAYS} days.`, "warning");
             updateUI();
         }
-        
+
         // Buy item from shop
         function buyItem(itemId) {
             const item = shopItems.find(i => i.id === itemId);
             if (!item) return;
-            
+
             if (money < item.cost) {
                 showNotification("Not enough money!", "danger");
                 return;
             }
-            
+
             money -= item.cost;
-            
+
             if (item.unlocksArt) {
                 artUnlocked = true;
                 document.getElementById('art-studio').style.display = 'block';
                 showNotification("Art studio unlocked! You can now create paintings.", "success");
-                
+
                 // Update shop item to show it's purchased
                 renderShop();
             } else {
@@ -1113,40 +1141,40 @@
                     icon: item.icon,
                     color: item.color
                 });
-                
+
                 showNotification(`Bought ${item.name} for $${item.cost}`, "success");
                 renderInventory();
             }
-            
+
             updateUI();
         }
-        
+
         // Sell item to customer
         function sellItem(itemIndex) {
             if (customersWaiting <= 0) {
                 showNotification("No customers to serve!", "warning");
                 return;
             }
-            
+
             if (itemIndex < 0 || itemIndex >= inventory.length) {
                 return;
             }
-            
+
             const item = inventory[itemIndex];
             const amountEarned = item.sellPrice;
-            
+
             money += amountEarned;
             reputation = Math.min(100, reputation + 2);
             customersWaiting--;
-            
+
             // Update quest progress
             updateQuestProgress(item.name, amountEarned);
-            
+
             // Remove customer if any are waiting
             if (activeCustomers.length > 0) {
                 const servedCustomer = activeCustomers.shift();
                 clearTimeout(servedCustomer.timeout);
-                
+
                 // Show customer feedback
                 const feedbackMessages = [
                     "Thanks, that was delicious!",
@@ -1155,27 +1183,27 @@
                     "Thanks for the quick service!"
                 ];
                 const randomFeedback = feedbackMessages[Math.floor(Math.random() * feedbackMessages.length)];
-                
+
                 showNotification(`Sold ${item.name} for $${amountEarned}. ${randomFeedback}`, "success");
             }
-            
+
             // Remove item from inventory
             inventory.splice(itemIndex, 1);
-            
+
             // Update UI
             updateUI();
             renderInventory();
             renderCustomers();
         }
-        
+
         // Create art (if unlocked)
         function createArt() {
             if (!artUnlocked) return;
-            
+
             const artValue = Math.floor(Math.random() * 101) + 50; // $50-$150
             const paintingTypes = ["Abstract", "Portrait", "Landscape", "Modern", "Classic"];
             const paintingType = paintingTypes[Math.floor(Math.random() * paintingTypes.length)];
-            
+
             inventory.push({
                 id: 100 + Math.floor(Math.random() * 1000),
                 name: `${paintingType} Painting`,
@@ -1184,27 +1212,27 @@
                 icon: "fas fa-palette",
                 color: "#a777e3"
             });
-            
+
             // Update quest progress
             updateQuestProgress("Painting");
-            
+
             showNotification(`Created a ${paintingType} painting worth $${artValue}!`, "success");
             renderInventory();
         }
-        
+
         // Add a new customer
         function addCustomer() {
             if (activeCustomers.length >= 8) return;
-            
+
             const customerId = Date.now() + Math.random();
             const messageIndex = Math.floor(Math.random() * customerMessages.length);
             const customerMessage = customerMessages[messageIndex];
-            
+
             // Assign a random icon/avatar
-            const customerIcons = ["fas fa-user", "fas fa-user-tie", "fas fa-user-graduate", "fas fa-user-ninja", 
-                                   "fas fa-user-astronaut", "fas fa-user-md", "fas fa-user-secret"];
+            const customerIcons = ["fas fa-user", "fas fa-user-tie", "fas fa-user-graduate", "fas fa-user-ninja",
+                "fas fa-user-astronaut", "fas fa-user-md", "fas fa-user-secret"];
             const customerIcon = customerIcons[Math.floor(Math.random() * customerIcons.length)];
-            
+
             const customer = {
                 id: customerId,
                 icon: customerIcon,
@@ -1215,18 +1243,18 @@
                     activeCustomers = activeCustomers.filter(c => c.id !== customerId);
                     customersWaiting = Math.max(0, customersWaiting - 1);
                     reputation = Math.max(0, reputation - 1);
-                    
+
                     showNotification("A customer left without being served! Reputation -1", "danger");
-                    
+
                     updateUI();
                     renderCustomers();
                 }, CUSTOMER_PATIENCE)
             };
-            
+
             activeCustomers.push(customer);
             renderCustomers();
         }
-        
+
         // Update customer patience indicators
         function updateCustomerTimers() {
             activeCustomers.forEach(customer => {
@@ -1237,26 +1265,26 @@
                     customer.startTime = Date.now();
                 }
             });
-            
+
             // Re-render customers to update timers
             if (activeCustomers.length > 0) {
                 renderCustomers();
             }
         }
-        
+
         // Quest system
         function interactWithQuestGiver() {
             if (!currentQuest) {
                 // Filter available quests (don't show painting quest if art not unlocked)
-                const availableQuests = quests.filter(q => 
+                const availableQuests = quests.filter(q =>
                     (q.targetItem !== "Painting" || artUnlocked)
                 );
-                
+
                 if (availableQuests.length > 0) {
                     currentQuest = { ...availableQuests[Math.floor(Math.random() * availableQuests.length)] };
                     moneyEarnedSinceQuestStart = 0;
                     currentQuest.progress = 0;
-                    
+
                     showNotification(`New Quest: ${currentQuest.description}`, "info");
                     updateQuestUI();
                 } else {
@@ -1266,11 +1294,11 @@
                 // Complete quest
                 money += currentQuest.reward;
                 showNotification(`Quest completed! You received $${currentQuest.reward}`, "success");
-                
+
                 currentQuest = null;
                 questCompleted = false;
                 moneyEarnedSinceQuestStart = 0;
-                
+
                 updateQuestUI();
                 updateUI();
             } else {
@@ -1278,26 +1306,26 @@
                 showNotification(`Current Quest: ${currentQuest.description}\nProgress: ${currentQuest.progress}/${currentQuest.targetCount}`, "info");
             }
         }
-        
+
         // Update quest progress
         function updateQuestProgress(itemName, amountEarned = 0) {
             if (!currentQuest || questCompleted) return;
-            
+
             if (currentQuest.targetItem === "Money") {
                 moneyEarnedSinceQuestStart += amountEarned;
                 currentQuest.progress = moneyEarnedSinceQuestStart;
             } else if (itemName === currentQuest.targetItem) {
                 currentQuest.progress++;
             }
-            
+
             if (currentQuest.progress >= currentQuest.targetCount) {
                 questCompleted = true;
                 showNotification("Quest completed! Return to the quest giver for your reward.", "success");
             }
-            
+
             updateQuestUI();
         }
-        
+
         // Update quest UI
         function updateQuestUI() {
             const questTitle = document.getElementById('quest-title');
@@ -1306,12 +1334,12 @@
             const questProgressBar = document.getElementById('quest-progress-bar');
             const questProgressText = document.getElementById('quest-progress-text');
             const questReward = document.getElementById('quest-reward');
-            
+
             if (currentQuest) {
                 questTitle.textContent = "Active Quest";
                 questDescription.textContent = currentQuest.description;
                 questProgress.style.display = 'block';
-                
+
                 const progressPercentage = Math.min(100, (currentQuest.progress / currentQuest.targetCount) * 100);
                 questProgressBar.style.width = `${progressPercentage}%`;
                 questProgressText.textContent = `${currentQuest.progress}/${currentQuest.targetCount}`;
@@ -1322,26 +1350,26 @@
                 questProgress.style.display = 'none';
             }
         }
-        
+
         // Show notification
         function showNotification(message, type = "info") {
             const container = document.getElementById('notification-container');
             const notification = document.createElement('div');
             notification.className = `notification ${type}`;
-            
+
             // Set icon based on type
             let icon = "fas fa-info-circle";
             if (type === "success") icon = "fas fa-check-circle";
             if (type === "warning") icon = "fas fa-exclamation-triangle";
             if (type === "danger") icon = "fas fa-times-circle";
-            
+
             notification.innerHTML = `
                 <i class="${icon}"></i>
                 <span>${message}</span>
             `;
-            
+
             container.appendChild(notification);
-            
+
             // Remove notification after 5 seconds
             setTimeout(() => {
                 if (notification.parentNode) {
@@ -1355,24 +1383,24 @@
                 }
             }, 5000);
         }
-        
+
         // Render shop items
         function renderShop() {
             const shopContainer = document.getElementById('shop-items');
             const emptyState = document.getElementById('shop-empty');
-            
+
             if (!shopContainer) return;
-            
+
             shopContainer.innerHTML = '';
-            
+
             shopItems.forEach(item => {
                 const itemElement = document.createElement('div');
                 itemElement.className = `shop-item ${item.unlocksArt && artUnlocked ? 'disabled' : ''}`;
                 itemElement.onclick = () => !(item.unlocksArt && artUnlocked) && buyItem(item.id);
-                
+
                 // Check if painting supplies already purchased
                 const alreadyPurchased = item.unlocksArt && artUnlocked;
-                
+
                 itemElement.innerHTML = `
                     <div class="item-icon" style="background: linear-gradient(135deg, ${item.color}, ${item.color}80);">
                         <i class="${item.icon}"></i>
@@ -1387,35 +1415,35 @@
                         </div>
                     </div>
                 `;
-                
+
                 shopContainer.appendChild(itemElement);
             });
-            
+
             // Show empty state if no items
             emptyState.style.display = shopItems.length === 0 ? 'block' : 'none';
         }
-        
+
         // Render inventory
         function renderInventory() {
             const inventoryContainer = document.getElementById('inventory-items');
             const emptyState = document.getElementById('inventory-empty');
-            
+
             if (!inventoryContainer) return;
-            
+
             inventoryContainer.innerHTML = '';
-            
+
             if (inventory.length === 0) {
                 emptyState.style.display = 'block';
                 return;
             }
-            
+
             emptyState.style.display = 'none';
-            
+
             inventory.forEach((item, index) => {
                 const itemElement = document.createElement('div');
                 itemElement.className = 'inventory-item';
                 itemElement.onclick = () => sellItem(index);
-                
+
                 itemElement.innerHTML = `
                     <div class="item-icon" style="background: linear-gradient(135deg, ${item.color || '#6e8efb'}, ${item.color ? item.color + '80' : '#6e8efb80'});">
                         <i class="${item.icon || 'fas fa-box'}"></i>
@@ -1428,38 +1456,38 @@
                         </div>
                     </div>
                 `;
-                
+
                 inventoryContainer.appendChild(itemElement);
             });
         }
-        
+
         // Render customers
         function renderCustomers() {
             const customersContainer = document.getElementById('customers-container');
             const emptyState = document.getElementById('customers-empty');
             const waitingCountEl = document.getElementById('customers-waiting');
-            
+
             if (!customersContainer) return;
-            
+
             customersContainer.innerHTML = '';
-            
+
             if (activeCustomers.length === 0) {
                 emptyState.style.display = 'block';
                 if (waitingCountEl) waitingCountEl.textContent = '0';
                 return;
             }
-            
+
             emptyState.style.display = 'none';
             if (waitingCountEl) waitingCountEl.textContent = activeCustomers.length.toString();
-            
+
             activeCustomers.forEach(customer => {
                 const customerElement = document.createElement('div');
                 customerElement.className = `customer ${customer.patience < 30 ? 'impatient' : ''}`;
                 customerElement.id = `customer-${customer.id}`;
-                
+
                 // Determine if customer is about to leave
                 const isLeavingSoon = customer.patience < 15;
-                
+
                 customerElement.innerHTML = `
                     <div class="customer-avatar">
                         <i class="${customer.icon}"></i>
@@ -1470,11 +1498,11 @@
                     </div>
                     ${isLeavingSoon ? '<div style="color: #f44336; font-size: 0.8rem; margin-top: 5px;">Getting impatient!</div>' : ''}
                 `;
-                
+
                 customersContainer.appendChild(customerElement);
             });
         }
-        
+
         // Update main UI
         function updateUI() {
             // Update stat values
@@ -1482,10 +1510,10 @@
             document.getElementById('money').textContent = `$${money}`;
             document.getElementById('loan').textContent = `$${loan}`;
             document.getElementById('reputation').textContent = `${reputation}/100`;
-            
+
             // Update timer
             updateTimerUI();
-            
+
             // Update reputation color indicator
             const reputationEl = document.getElementById('reputation');
             if (reputation >= 80) {
@@ -1495,11 +1523,11 @@
             } else {
                 reputationEl.style.color = '#e74c3c';
             }
-            
+
             // Show loan badge if loan exists
             const loanStat = document.querySelector('.stat-card:nth-child(3)');
             const existingBadge = loanStat.querySelector('.loan-badge');
-            
+
             if (loan > 0 && !existingBadge) {
                 const badge = document.createElement('div');
                 badge.className = 'loan-badge';
@@ -1511,7 +1539,7 @@
                 existingBadge.remove();
             }
         }
-        
+
         // Save game to localStorage
         function saveGame() {
             const gameState = {
@@ -1526,22 +1554,22 @@
                 questCompleted,
                 moneyEarnedSinceQuestStart
             };
-            
+
             try {
                 localStorage.setItem('snd_save', JSON.stringify(gameState));
             } catch (e) {
                 console.error('Failed to save game:', e);
             }
         }
-        
+
         // Load game from localStorage
         function loadGame() {
             try {
                 const saved = localStorage.getItem('snd_save');
                 if (!saved) return;
-                
+
                 const gameState = JSON.parse(saved);
-                
+
                 money = gameState.money || money;
                 loan = gameState.loan || loan;
                 day = gameState.day || day;
@@ -1552,25 +1580,25 @@
                 currentQuest = gameState.currentQuest || currentQuest;
                 questCompleted = gameState.questCompleted || questCompleted;
                 moneyEarnedSinceQuestStart = gameState.moneyEarnedSinceQuestStart || moneyEarnedSinceQuestStart;
-                
+
                 // Show art studio if unlocked
                 if (artUnlocked) {
                     document.getElementById('art-studio').style.display = 'block';
                 }
-                
+
                 showNotification('Game loaded successfully!', 'success');
             } catch (e) {
                 console.error('Failed to load game:', e);
             }
         }
-        
+
         // Setup keyboard shortcuts
         function setupKeyboardShortcuts() {
             document.addEventListener('keydown', (e) => {
                 // Don't trigger if user is typing in an input field
                 if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-                
-                switch(e.key.toLowerCase()) {
+
+                switch (e.key.toLowerCase()) {
                     case 'b':
                         e.preventDefault();
                         borrowMoney();
@@ -1618,13 +1646,13 @@
                 }
             });
         }
-        
+
         // Show tutorial
         function showTutorial() {
             const tutorial = document.createElement('div');
             tutorial.className = 'tutorial-overlay';
             tutorial.id = 'tutorial-overlay';
-            
+
             tutorial.innerHTML = `
                 <div class="tutorial-content">
                     <h2><i class="fas fa-graduation-cap"></i> Welcome to Supply & Demand!</h2>
@@ -1654,12 +1682,13 @@
                     </button>
                 </div>
             `;
-            
+
             document.body.appendChild(tutorial);
         }
-        
+
         // Initialize game when page loads
         window.onload = initGame;
     </script>
 </body>
+
 </html>

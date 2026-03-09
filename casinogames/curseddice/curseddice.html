@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cursed Dice</title>
-    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="../../icon.jpg">
     <style>
         :root {
@@ -12,7 +13,7 @@
             --secondary-dark: #1a1a2e;
             --accent-blue: #4cc9f0;
             --accent-pink: #f72585;
-            --accent-purple: #7209b7; 
+            --accent-purple: #7209b7;
             --accent-green: #06d6a0;
             --accent-gold: #ffd166;
             --accent-danger: #ef476f;
@@ -29,7 +30,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Jura', sans-serif;
+            font-family: 'Sora', sans-serif;
         }
 
         body {
@@ -51,7 +52,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
+            background:
                 radial-gradient(circle at 20% 30%, rgba(76, 201, 240, 0.05) 0%, transparent 50%),
                 radial-gradient(circle at 80% 70%, rgba(247, 37, 133, 0.05) 0%, transparent 50%);
             pointer-events: none;
@@ -72,7 +73,7 @@
             background: linear-gradient(145deg, var(--secondary-dark), #141428);
             border-radius: 20px;
             border: 3px solid var(--accent-blue);
-            box-shadow: 
+            box-shadow:
                 0 0 30px rgba(76, 201, 240, 0.3),
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
             position: relative;
@@ -86,16 +87,16 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, 
-                var(--accent-blue), 
-                var(--accent-pink),
-                var(--accent-purple));
+            background: linear-gradient(90deg,
+                    var(--accent-blue),
+                    var(--accent-pink),
+                    var(--accent-purple));
         }
 
         h1 {
             font-size: 3.5rem;
             color: var(--accent-blue);
-            text-shadow: 
+            text-shadow:
                 0 0 20px rgba(76, 201, 240, 0.7),
                 2px 2px 0 rgba(0, 0, 0, 0.3);
             margin-bottom: 10px;
@@ -139,11 +140,11 @@
             .game-area {
                 grid-template-columns: 1fr;
             }
-            
+
             h1 {
                 font-size: 2.8rem;
             }
-            
+
             h1::before,
             h1::after {
                 display: none;
@@ -155,7 +156,7 @@
             border-radius: 20px;
             padding: 25px;
             border: 3px solid;
-            box-shadow: 
+            box-shadow:
                 0 8px 32px rgba(0, 0, 0, 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
@@ -170,9 +171,9 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, 
-                var(--accent-blue), 
-                transparent);
+            background: linear-gradient(90deg,
+                    var(--accent-blue),
+                    transparent);
         }
 
         .game-panel.betting-panel {
@@ -189,7 +190,7 @@
             padding: 25px;
             border: 3px solid var(--accent-green);
             grid-column: 1 / -1;
-            box-shadow: 
+            box-shadow:
                 0 8px 32px rgba(0, 0, 0, 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
             position: relative;
@@ -203,9 +204,9 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, 
-                var(--accent-green), 
-                transparent);
+            background: linear-gradient(90deg,
+                    var(--accent-green),
+                    transparent);
         }
 
         h2 {
@@ -271,10 +272,10 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 215, 0, 0.1), 
-                transparent);
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 215, 0, 0.1),
+                    transparent);
             transition: left 0.5s;
         }
 
@@ -340,10 +341,10 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.2), 
-                transparent);
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.2),
+                    transparent);
             transition: left 0.5s;
         }
 
@@ -393,10 +394,10 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.2), 
-                transparent);
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.2),
+                    transparent);
             transition: left 0.5s;
         }
 
@@ -412,7 +413,7 @@
 
         .number-btn.selected {
             background: linear-gradient(145deg, var(--accent-pink), #d11573);
-            box-shadow: 
+            box-shadow:
                 0 0 30px rgba(247, 37, 133, 0.7),
                 inset 0 0 20px rgba(255, 255, 255, 0.2);
             transform: translateY(-5px);
@@ -420,13 +421,16 @@
         }
 
         @keyframes selectedPulse {
-            0%, 100% {
-                box-shadow: 
+
+            0%,
+            100% {
+                box-shadow:
                     0 0 30px rgba(247, 37, 133, 0.7),
                     inset 0 0 20px rgba(255, 255, 255, 0.2);
             }
+
             50% {
-                box-shadow: 
+                box-shadow:
                     0 0 45px rgba(247, 37, 133, 1),
                     inset 0 0 30px rgba(255, 255, 255, 0.3);
             }
@@ -458,10 +462,10 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.2), 
-                transparent);
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.2),
+                    transparent);
             transition: left 0.5s;
         }
 
@@ -487,9 +491,12 @@
         }
 
         @keyframes rollBtnPulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 box-shadow: 0 0 20px rgba(247, 37, 133, 0.4);
             }
+
             50% {
                 box-shadow: 0 0 35px rgba(247, 37, 133, 0.8);
             }
@@ -526,7 +533,7 @@
             font-size: 4rem;
             font-weight: 800;
             color: var(--secondary-dark);
-            box-shadow: 
+            box-shadow:
                 inset 0 0 20px rgba(0, 0, 0, 0.2),
                 0 5px 15px rgba(0, 0, 0, 0.3);
             border: 4px solid var(--secondary-dark);
@@ -591,10 +598,10 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.1), 
-                transparent);
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.1),
+                    transparent);
             transition: left 0.5s;
         }
 
@@ -607,9 +614,12 @@
         }
 
         @keyframes winPulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 box-shadow: 0 0 30px rgba(6, 214, 160, 0.3);
             }
+
             50% {
                 box-shadow: 0 0 50px rgba(6, 214, 160, 0.6);
             }
@@ -624,9 +634,12 @@
         }
 
         @keyframes losePulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 box-shadow: 0 0 30px rgba(239, 71, 111, 0.3);
             }
+
             50% {
                 box-shadow: 0 0 50px rgba(239, 71, 111, 0.6);
             }
@@ -647,9 +660,12 @@
         }
 
         @keyframes cursePulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 box-shadow: 0 0 35px rgba(157, 78, 221, 0.4);
             }
+
             50% {
                 box-shadow: 0 0 60px rgba(157, 78, 221, 0.7);
             }
@@ -695,10 +711,13 @@
         }
 
         @keyframes curseFlash {
-            0%, 100% {
+
+            0%,
+            100% {
                 opacity: 1;
                 text-shadow: 0 0 10px var(--curse-color);
             }
+
             50% {
                 opacity: 0.8;
                 text-shadow: 0 0 20px var(--curse-color);
@@ -730,10 +749,10 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(76, 201, 240, 0.1), 
-                transparent);
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(76, 201, 240, 0.1),
+                    transparent);
             transition: left 0.5s;
         }
 
@@ -792,7 +811,7 @@
         .log-entry {
             padding: 10px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            font-family: 'Jura', monospace;
+            font-family: 'Sora', monospace;
             font-size: 0.95rem;
             position: relative;
             padding-left: 30px;
@@ -854,7 +873,7 @@
             padding: 25px;
             margin-top: 25px;
             border: 3px solid var(--accent-blue);
-            box-shadow: 
+            box-shadow:
                 0 8px 32px rgba(0, 0, 0, 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
@@ -880,15 +899,19 @@
             0% {
                 transform: rotateX(0) rotateY(0) rotateZ(0) scale(1);
             }
+
             25% {
                 transform: rotateX(180deg) rotateY(90deg) rotateZ(45deg) scale(1.1);
             }
+
             50% {
                 transform: rotateX(360deg) rotateY(180deg) rotateZ(90deg) scale(1.2);
             }
+
             75% {
                 transform: rotateX(540deg) rotateY(270deg) rotateZ(135deg) scale(1.1);
             }
+
             100% {
                 transform: rotateX(720deg) rotateY(360deg) rotateZ(180deg) scale(1);
             }
@@ -912,8 +935,13 @@
         }
 
         @keyframes slideIn {
-            from { right: -300px; }
-            to { right: 30px; }
+            from {
+                right: -300px;
+            }
+
+            to {
+                right: 30px;
+            }
         }
 
         .achievement-icon {
@@ -924,8 +952,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
         }
 
         .achievement-title {
@@ -976,8 +1011,15 @@
         }
 
         @keyframes comboPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
         }
 
         .jackpot-warning {
@@ -1003,11 +1045,14 @@
         }
 
         @keyframes jackpotPulse {
-            0%, 100% { 
+
+            0%,
+            100% {
                 transform: translate(-50%, -50%) scale(1);
                 box-shadow: 0 0 50px rgba(255, 215, 0, 0.7);
             }
-            50% { 
+
+            50% {
                 transform: translate(-50%, -50%) scale(1.1);
                 box-shadow: 0 0 80px rgba(255, 215, 0, 0.9);
             }
@@ -1040,6 +1085,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <header>
@@ -1079,7 +1125,8 @@
 
             <div class="game-log">
                 <div id="log-entries">
-                    <div class="log-entry log-neutral">🚀 Welcome to CURSED DICE! Place your bet and challenge fate...</div>
+                    <div class="log-entry log-neutral">🚀 Welcome to CURSED DICE! Place your bet and challenge fate...
+                    </div>
                 </div>
             </div>
         </div>
@@ -1103,7 +1150,9 @@
                 <div class="bet-controls">
                     <button class="bet-btn" id="decrease-bet">-</button>
                     <div style="text-align: center; flex-grow: 1;">
-                        <div style="font-size: 1.1rem; color: var(--text-dim); margin-bottom: 8px; letter-spacing: 1px;">BET AMOUNT</div>
+                        <div
+                            style="font-size: 1.1rem; color: var(--text-dim); margin-bottom: 8px; letter-spacing: 1px;">
+                            BET AMOUNT</div>
                         <div class="bet-amount" id="bet-amount">10</div>
                     </div>
                     <button class="bet-btn" id="increase-bet">+</button>
@@ -1276,7 +1325,7 @@
             setupEventListeners();
             updateDisplay();
             addLogEntry("🚀 Welcome to CURSED DICE! The cursed spirits await your bet...", "neutral");
-            
+
             // Create special effect canvas
             createSpecialEffectCanvas();
         });
@@ -1306,7 +1355,7 @@
             };
 
             face.querySelectorAll('.dot').forEach(dot => dot.remove());
-            
+
             dotPositions[number].forEach(pos => {
                 const dot = document.createElement('div');
                 dot.className = 'dot';
@@ -1350,9 +1399,9 @@
 
         function selectNumber(number) {
             if (gameState.selectedNumber === number) return;
-            
+
             gameState.selectedNumber = number;
-            
+
             // Visual feedback
             document.querySelectorAll('.number-btn').forEach(btn => {
                 btn.classList.remove('selected');
@@ -1363,12 +1412,12 @@
 
             // Enable roll button
             document.getElementById('roll-btn').disabled = false;
-            
+
             // Update display
             const resultDisplay = document.getElementById('result-display');
             resultDisplay.textContent = `Betting ${gameState.currentBet} coins on number ${number}`;
             resultDisplay.className = 'result-display neutral';
-            
+
             addLogEntry(`Selected number ${number} with bet of ${gameState.currentBet} coins`, "neutral");
         }
 
@@ -1386,21 +1435,21 @@
             // Deduct bet
             gameState.coins -= gameState.currentBet;
             gameState.totalRolls++;
-            
+
             // Disable controls during roll
             const rollBtn = document.getElementById('roll-btn');
             rollBtn.disabled = true;
             rollBtn.classList.add('rolling');
             rollBtn.textContent = "ROLLING...";
-            
+
             // Animate dice
             const dice = document.getElementById('dice');
             dice.classList.add('rolling');
-            
+
             // Determine curse
             let curseEffect = null;
             const curseChance = 0.25 + (gameState.cursedRolls * 0.02);
-            
+
             if (Math.random() < curseChance && gameState.activeCurse === null) {
                 const randomCurse = curses[Math.floor(Math.random() * curses.length)];
                 gameState.activeCurse = randomCurse;
@@ -1408,25 +1457,25 @@
                 gameState.cursesTriggered++;
                 gameState.cursedRolls++;
                 curseEffect = randomCurse.effect;
-                
+
                 addLogEntry(`☠️ CURSE ACTIVATED: ${randomCurse.icon} ${randomCurse.name} - ${randomCurse.description}`, "curse");
-                
+
                 // Update curse display
                 const curseDisplay = document.getElementById('curse-display');
                 curseDisplay.textContent = `${randomCurse.icon} ${randomCurse.name}: ${randomCurse.description}`;
                 curseDisplay.className = 'result-display curse-active';
                 curseDisplay.style.borderColor = randomCurse.color;
-                
+
                 // Show achievement
                 checkAchievement('cursed_roll');
             }
-            
+
             // Apply curse effects to bet
             let actualBet = gameState.currentBet;
             let curseMultiplier = 1.0;
-            
+
             if (gameState.activeCurse) {
-                switch(gameState.activeCurse.effect) {
+                switch (gameState.activeCurse.effect) {
                     case "halfBet":
                         actualBet = Math.floor(actualBet / 2);
                         addLogEntry(`Curse effect: Bet halved to ${actualBet} coins`, "curse");
@@ -1436,7 +1485,7 @@
                         updateMultiplierDisplay(curseMultiplier);
                         break;
                 }
-                
+
                 // Decrease curse duration
                 gameState.curseDuration--;
                 if (gameState.curseDuration <= 0) {
@@ -1447,43 +1496,43 @@
                     curseDisplay.className = 'result-display neutral';
                 }
             }
-            
+
             // Generate dice result
             const diceResult = generateDiceResult(curseEffect);
-            
+
             // Simulate roll animation
             setTimeout(() => {
                 dice.classList.remove('rolling');
                 showDiceResult(diceResult);
-                
+
                 // Check win
                 const isWin = checkWin(diceResult, gameState.selectedNumber, curseEffect);
-                
+
                 // Handle result
                 handleResult(isWin, diceResult, actualBet, curseMultiplier, curseEffect);
-                
+
                 // Re-enable controls
                 rollBtn.disabled = false;
                 rollBtn.classList.remove('rolling');
                 rollBtn.textContent = "ROLL THE DICE";
-                
+
                 // Update display
                 updateDisplay();
-                
+
                 // Check for achievements
                 checkAchievements();
-                
+
                 // Handle special curses
                 if (isWin && gameState.activeCurse && gameState.activeCurse.effect === "rerollOnWin") {
                     setTimeout(() => {
                         addLogEntry("🔄 Reroll Curse: Victory forces another roll!", "curse");
                         showNotification("Reroll Curse! Win again to keep your winnings!");
-                        
+
                         // Auto-roll with same bet and number
                         rollDice();
                     }, 2000);
                 }
-                
+
                 // Check for jackpot
                 if (isWin && diceResult === 6 && gameState.selectedNumber === 6 && actualBet >= 20) {
                     triggerJackpot();
@@ -1497,13 +1546,13 @@
                 const b = Math.floor(Math.random() * 6) + 1;
                 return { type: 'double', values: [a, b] };
             }
-            
+
             if (curseEffect === 'ghostDice') {
                 const visible = Math.floor(Math.random() * 6) + 1;
                 const ghost = Math.floor(Math.random() * 6) + 1;
                 return { type: 'ghost', visible: visible, ghost: ghost };
             }
-            
+
             let result;
             switch (curseEffect) {
                 case "skewOdd":
@@ -1520,13 +1569,13 @@
                         result = Math.floor(Math.random() * 6) + 1;
                     }
             }
-            
+
             return { type: 'single', value: result };
         }
 
         function showDiceResult(result) {
             const dice = document.getElementById('dice');
-            
+
             if (result.type === 'double') {
                 const [first, second] = result.values;
                 let rotation = '';
@@ -1571,11 +1620,11 @@
             if (diceResult.type === 'double') {
                 return diceResult.values[0] === selectedNumber || diceResult.values[1] === selectedNumber;
             }
-            
+
             if (diceResult.type === 'ghost') {
                 return diceResult.visible === selectedNumber || diceResult.ghost === selectedNumber;
             }
-            
+
             if (curseEffect === "adjacentWin") {
                 const adjacentNumbers = [
                     selectedNumber - 1 >= 1 ? selectedNumber - 1 : null,
@@ -1583,7 +1632,7 @@
                 ].filter(num => num !== null);
                 return adjacentNumbers.includes(diceResult.value);
             }
-            
+
             return diceResult.value === selectedNumber;
         }
 
@@ -1592,7 +1641,7 @@
             let resultClass = '';
             let resultText = '';
             let logType = '';
-            
+
             // Calculate combo
             const now = Date.now();
             if (isWin && now - gameState.lastWinTime < 3000) {
@@ -1601,33 +1650,33 @@
             } else {
                 gameState.combo = isWin ? 1 : 0;
             }
-            
+
             if (isWin) {
                 gameState.lastWinTime = now;
                 gameState.winStreak++;
                 gameState.loseStreak = 0;
-                
+
                 // Calculate base winnings
                 let baseWinnings = actualBet * 2;
-                
+
                 // Apply curse effects
                 if (gameState.activeCurse && gameState.activeCurse.effect === "highRisk") {
                     baseWinnings = actualBet * 3;
                 }
-                
+
                 // Apply multiplier
                 winnings = Math.floor(baseWinnings * multiplier);
-                
+
                 // Apply combo bonus
                 if (gameState.combo > 1) {
                     winnings += Math.floor(winnings * (gameState.combo * 0.1));
                 }
-                
+
                 // Update stats
                 gameState.coins += winnings;
                 gameState.wins++;
                 gameState.totalCoinsWon += winnings;
-                
+
                 // Format result text
                 let diceText = '';
                 if (diceResult.type === 'double') {
@@ -1637,32 +1686,32 @@
                 } else {
                     diceText = diceResult.value;
                 }
-                
+
                 resultText = `VICTORY! Dice: ${diceText}. You win ${winnings} coins!`;
                 if (multiplier > 1) resultText += ` (x${multiplier.toFixed(1)})`;
                 if (gameState.combo > 1) resultText += ` + Combo ${gameState.combo}x`;
-                
+
                 addLogEntry(`🏆 WIN! +${winnings} coins on ${diceText}`, "win");
-                
+
                 resultClass = 'win';
                 logType = "win";
-                
+
                 // Check for first win achievement
                 if (gameState.wins === 1) checkAchievement('first_win');
-                
+
             } else {
                 gameState.winStreak = 0;
                 gameState.loseStreak++;
                 gameState.losses++;
                 gameState.totalCoinsLost += actualBet;
-                
+
                 // Check for high risk curse
                 let lossAmount = actualBet;
                 if (gameState.activeCurse && gameState.activeCurse.effect === "highRisk") {
                     lossAmount = actualBet * 2;
                     gameState.coins -= actualBet; // Already deducted base bet
                 }
-                
+
                 let diceText = '';
                 if (diceResult.type === 'double') {
                     diceText = `${diceResult.values[0]} & ${diceResult.values[1]}`;
@@ -1671,23 +1720,23 @@
                 } else {
                     diceText = diceResult.value;
                 }
-                
+
                 resultText = `DEFEAT! Dice: ${diceText}. Lost ${lossAmount} coins.`;
-                
+
                 addLogEntry(`💔 LOSS! -${lossAmount} coins on ${diceText}`, "lose");
-                
+
                 resultClass = 'lose';
                 logType = "lose";
             }
-            
+
             // Update result display
             const resultDisplay = document.getElementById('result-display');
             resultDisplay.textContent = resultText;
             resultDisplay.className = `result-display ${resultClass}`;
-            
+
             // Update streak display
             updateStreakDisplay();
-            
+
             // Check for streak achievement
             if (gameState.winStreak >= 3) checkAchievement('streak_3');
             if (gameState.combo >= 5) checkAchievement('combo_5');
@@ -1699,19 +1748,19 @@
             document.getElementById('current-bet').textContent = gameState.currentBet;
             document.getElementById('bet-amount').textContent = gameState.currentBet;
             document.getElementById('total-coins').textContent = gameState.coins;
-            
+
             // Update statistics
             document.getElementById('total-rolls').textContent = gameState.totalRolls;
             document.getElementById('wins').textContent = gameState.wins;
             document.getElementById('losses').textContent = gameState.losses;
             document.getElementById('curses-triggered').textContent = gameState.cursesTriggered;
             document.getElementById('win-streak').textContent = gameState.winStreak;
-            
+
             // Update roll button state
-            document.getElementById('roll-btn').disabled = 
-                gameState.selectedNumber === null || 
+            document.getElementById('roll-btn').disabled =
+                gameState.selectedNumber === null ||
                 gameState.coins < gameState.currentBet;
-            
+
             // Check for rich achievement
             if (gameState.coins >= 500) checkAchievement('rich');
         }
@@ -1752,13 +1801,13 @@
             const logEntries = document.getElementById('log-entries');
             const logEntry = document.createElement('div');
             logEntry.className = `log-entry log-${type}`;
-            
+
             const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
             logEntry.textContent = `[${timestamp}] ${message}`;
-            
+
             logEntries.appendChild(logEntry);
             logEntries.scrollTop = logEntries.scrollHeight;
-            
+
             // Limit log entries
             if (logEntries.children.length > 15) {
                 logEntries.removeChild(logEntries.firstChild);
@@ -1782,9 +1831,9 @@
                 box-shadow: 0 5px 25px rgba(247, 37, 133, 0.5);
                 animation: slideDown 0.5s;
             `;
-            
+
             document.body.appendChild(notification);
-            
+
             setTimeout(() => {
                 notification.remove();
             }, 3000);
@@ -1795,27 +1844,27 @@
             const jackpotAmount = Math.floor(gameState.currentBet * 10);
             gameState.coins += jackpotAmount;
             gameState.totalCoinsWon += jackpotAmount;
-            
+
             const jackpotWarning = document.getElementById('jackpotWarning');
             jackpotWarning.style.display = 'block';
-            
+
             addLogEntry(`🎰 JACKPOT! You won ${jackpotAmount} coins!`, "win");
             showAchievement("Jackpot King", `Won ${jackpotAmount} coins in a jackpot!`);
-            
+
             // Create special effects
             createJackpotEffects();
-            
+
             setTimeout(() => {
                 jackpotWarning.style.display = 'none';
             }, 3000);
-            
+
             checkAchievement('jackpot');
         }
 
         function createJackpotEffects() {
             const effectContainer = document.getElementById('specialEffect');
             effectContainer.style.display = 'block';
-            
+
             // Create confetti effect
             for (let i = 0; i < 50; i++) {
                 const confetti = document.createElement('div');
@@ -1829,31 +1878,31 @@
                     border-radius: 2px;
                     z-index: 100;
                 `;
-                
+
                 const angle = Math.random() * Math.PI * 2;
                 const velocity = 2 + Math.random() * 3;
                 const vx = Math.cos(angle) * velocity;
                 const vy = Math.sin(angle) * velocity;
-                
+
                 let x = 0, y = 0;
                 const animate = () => {
                     x += vx;
                     y += vy;
                     vy += 0.1; // gravity
-                    
+
                     confetti.style.transform = `translate(${x}px, ${y}px) rotate(${x}deg)`;
-                    
+
                     if (y < 300) {
                         requestAnimationFrame(animate);
                     } else {
                         confetti.remove();
                     }
                 };
-                
+
                 effectContainer.appendChild(confetti);
                 requestAnimationFrame(animate);
             }
-            
+
             setTimeout(() => {
                 effectContainer.style.display = 'none';
                 effectContainer.innerHTML = '';
@@ -1898,11 +1947,12 @@
             document.getElementById('achievementTitle').textContent = title;
             document.getElementById('achievementDesc').textContent = description;
             popup.style.display = 'block';
-            
+
             setTimeout(() => {
                 popup.style.display = 'none';
             }, 4000);
         }
     </script>
 </body>
+
 </html>

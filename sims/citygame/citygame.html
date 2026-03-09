@@ -1,11 +1,14 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Metropolis Builder</title>
-  
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jura:wght@400;500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;700&family=Inter:wght@300;400;500&display=swap"
+    rel="stylesheet" />
   <link rel="icon" type="image/png" href="../../icon.jpg" rel="icon" />
 
 
@@ -14,12 +17,12 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      }
+    }
 
     :root {
       --bg1: #0a0e17;
       --bg2: #1a1f2e;
-      --panel: rgba(30, 35, 50, 0.8); 
+      --panel: rgba(30, 35, 50, 0.8);
       --accent: #00d4ff;
       --accent-glow: rgba(0, 212, 255, 0.3);
       --good: #00ff88;
@@ -30,7 +33,8 @@
       --grid-bg: #151a28;
     }
 
-    html, body {
+    html,
+    body {
       height: 100%;
       overflow-x: hidden;
     }
@@ -51,7 +55,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: 
+      background:
         radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
         radial-gradient(circle at 80% 20%, rgba(0, 255, 136, 0.03) 0%, transparent 50%);
       pointer-events: none;
@@ -75,7 +79,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 
+      box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.05);
@@ -83,7 +87,7 @@
     }
 
     header h1 {
-      font-family: 'Jura', sans-serif;
+      font-family: 'Sora', sans-serif;
       font-size: 28px;
       font-weight: 700;
       background: linear-gradient(90deg, var(--accent), #00ffaa);
@@ -116,7 +120,7 @@
       background: var(--panel);
       padding: 24px;
       border-radius: 20px;
-      box-shadow: 
+      box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.05);
@@ -155,7 +159,7 @@
       font-size: 24px;
       font-weight: 700;
       margin-top: 4px;
-      font-family: 'Jura', sans-serif;
+      font-family: 'Sora', sans-serif;
     }
 
     .stat-label {
@@ -174,7 +178,7 @@
       padding: 16px;
       border-radius: 16px;
       aspect-ratio: 1/1;
-      box-shadow: 
+      box-shadow:
         inset 0 4px 20px rgba(0, 0, 0, 0.5),
         0 0 0 1px rgba(255, 255, 255, 0.02);
       position: relative;
@@ -187,7 +191,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: 
+      background:
         linear-gradient(90deg, transparent 49%, rgba(0, 212, 255, 0.05) 50%, transparent 51%),
         linear-gradient(transparent 49%, rgba(0, 212, 255, 0.05) 50%, transparent 51%);
       pointer-events: none;
@@ -315,7 +319,7 @@
       background: var(--panel);
       padding: 24px;
       border-radius: 20px;
-      box-shadow: 
+      box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.05);
@@ -398,7 +402,7 @@
     .building-cost {
       font-size: 14px;
       color: var(--good);
-      font-family: 'Jura', sans-serif;
+      font-family: 'Sora', sans-serif;
     }
 
     .building-stats {
@@ -447,7 +451,7 @@
       background: var(--panel);
       padding: 20px;
       border-radius: 20px;
-      box-shadow: 
+      box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.05);
@@ -502,7 +506,7 @@
       background: rgba(20, 25, 40, 0.95);
       padding: 16px 20px;
       border-radius: 12px;
-      box-shadow: 
+      box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.3),
         0 0 0 1px rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(10px);
@@ -545,7 +549,7 @@
       background: rgba(255, 255, 255, 0.1);
       padding: 4px 8px;
       border-radius: 6px;
-      font-family: 'Jura', sans-serif;
+      font-family: 'Sora', sans-serif;
       font-size: 12px;
     }
 
@@ -554,28 +558,32 @@
       .main {
         flex-direction: column;
       }
-      
-      .city-panel, .controls {
+
+      .city-panel,
+      .controls {
         width: 100%;
         min-width: auto;
       }
     }
 
     @media (max-width: 768px) {
-      .stats-grid, .challenges-grid {
+
+      .stats-grid,
+      .challenges-grid {
         grid-template-columns: repeat(2, 1fr);
       }
-      
+
       .buildings-grid {
         grid-template-columns: 1fr;
       }
-      
+
       #cityGrid {
         grid-template-columns: repeat(8, 1fr);
       }
     }
   </style>
 </head>
+
 <body>
   <div class="wrap">
     <header>
@@ -634,7 +642,7 @@
         <div id="buildTab" class="tab-content">
           <h3 style="margin-bottom: 16px;">SELECT BUILDING</h3>
           <div class="buildings-grid" id="buildingsGrid"></div>
-          
+
           <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.05);">
             <div class="building-option" id="destroyOption" data-type="destroy" style="grid-column: span 2;">
               <div class="building-icon">🗑️</div>
@@ -678,14 +686,17 @@
               <div class="stat-value" id="roadCount">0</div>
             </div>
           </div>
-          
+
           <div style="margin-top: 20px; padding: 16px; background: rgba(255, 255, 255, 0.03); border-radius: 12px;">
             <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 8px;">EFFICIENCY RATING</div>
             <div style="display: flex; align-items: center; gap: 12px;">
-              <div style="flex: 1; height: 8px; background: rgba(255, 255, 255, 0.1); border-radius: 4px; overflow: hidden;">
-                <div id="efficiencyBar" style="width: 50%; height: 100%; background: linear-gradient(90deg, var(--good), #00ffaa); border-radius: 4px;"></div>
+              <div
+                style="flex: 1; height: 8px; background: rgba(255, 255, 255, 0.1); border-radius: 4px; overflow: hidden;">
+                <div id="efficiencyBar"
+                  style="width: 50%; height: 100%; background: linear-gradient(90deg, var(--good), #00ffaa); border-radius: 4px;">
+                </div>
               </div>
-              <div id="efficiencyValue" style="font-family: 'Jura', sans-serif;">50%</div>
+              <div id="efficiencyValue" style="font-family: 'Sora', sans-serif;">50%</div>
             </div>
           </div>
         </div>
@@ -735,7 +746,7 @@
   <script>
     const CITY_SAVE_KEY = 'metropolis_save_v2';
     const GRID_SIZE = 12;
-    
+
     // Enhanced building data with better balance
     const buildingData = {
       residential: {
@@ -885,10 +896,10 @@
     function showMessage(text, type = 'info', duration = 3000) {
       const msgEl = $('#message');
       clearTimeout(messageTimeout);
-      
+
       msgEl.textContent = text;
       msgEl.className = 'message show';
-      
+
       // Add type-based styling
       if (type === 'success') {
         msgEl.style.borderLeft = '4px solid var(--good)';
@@ -899,7 +910,7 @@
       } else {
         msgEl.style.borderLeft = '4px solid var(--accent)';
       }
-      
+
       messageTimeout = setTimeout(() => {
         msgEl.classList.remove('show');
       }, duration);
@@ -910,12 +921,12 @@
       const gridEl = $('#cityGrid');
       gridEl.innerHTML = '<div class="grid-overlay"></div>';
       gameState.grid = [];
-      
+
       for (let y = 0; y < GRID_SIZE; y++) {
         const row = [];
         for (let x = 0; x < GRID_SIZE; x++) {
           // Create some initial roads
-          const isRoad = (x === Math.floor(GRID_SIZE/2) || y === Math.floor(GRID_SIZE/2));
+          const isRoad = (x === Math.floor(GRID_SIZE / 2) || y === Math.floor(GRID_SIZE / 2));
           const cellData = {
             type: isRoad ? 'road' : 'empty',
             x, y,
@@ -923,12 +934,12 @@
             connected: isRoad
           };
           row.push(cellData);
-          
+
           const cell = document.createElement('div');
           cell.className = `cell ${cellData.type}`;
           cell.dataset.x = x;
           cell.dataset.y = y;
-          
+
           if (cellData.type !== 'empty') {
             const cfg = buildingData[cellData.type];
             cell.innerHTML = `
@@ -938,24 +949,24 @@
               <div class="cell-level">Lv${cellData.level}</div>
             `;
           }
-          
+
           cell.addEventListener('click', (e) => onCellClick(x, y, e));
           cell.addEventListener('contextmenu', (e) => {
             e.preventDefault();
             onCellRightClick(x, y);
           });
-          
+
           gridEl.appendChild(cell);
         }
         gameState.grid.push(row);
       }
-      
+
       // Add initial buildings for tutorial
       gameState.grid[5][5].type = 'residential';
       gameState.grid[5][5].level = 1;
       gameState.grid[6][6].type = 'commercial';
       gameState.grid[6][6].level = 1;
-      
+
       updateGrid();
     }
 
@@ -965,17 +976,17 @@
         residential: 0, commercial: 0, industrial: 0,
         road: 0, park: 0, 'power-plant': 0
       };
-      
+
       for (let y = 0; y < GRID_SIZE; y++) {
         for (let x = 0; x < GRID_SIZE; x++) {
           const cell = gameState.grid[y][x];
           const el = $(`.cell[data-x="${x}"][data-y="${y}"]`);
-          
+
           if (!el) continue;
-          
+
           el.className = `cell ${cell.type}`;
           el.innerHTML = '';
-          
+
           if (cell.type !== 'empty') {
             const cfg = buildingData[cell.type];
             if (cfg) {
@@ -987,16 +998,16 @@
                 <div class="cell-level">Lv${cell.level}</div>
                 ${income > 0 ? `<div class="cell-income">+$${income}</div>` : ''}
               `;
-              
+
               // Add hover tooltip
               el.title = `${cfg.name} (Level ${cell.level})\nIncome: $${income}/cycle\nEnergy: ${calculateBuildingEnergy(cell)}`;
             }
-            
+
             counts[cell.type]++;
           }
         }
       }
-      
+
       updateStatistics(counts);
       calculateStats();
       updateUI();
@@ -1008,20 +1019,20 @@
       if (!cell || cell.type === 'empty') return 0;
       const cfg = buildingData[cell.type];
       if (!cfg) return 0;
-      
+
       let baseIncome = cfg.income || 0;
       const level = cell.level || 1;
-      
+
       // Apply level multiplier
       if (cfg.levelModifiers?.income) {
         baseIncome = Math.floor(baseIncome * Math.pow(cfg.levelModifiers.income, level - 1));
       }
-      
+
       // Apply upgrades
       if (gameState.upgrades.tourism && cell.type === 'commercial') {
         baseIncome = Math.floor(baseIncome * 1.3);
       }
-      
+
       return baseIncome;
     }
 
@@ -1030,20 +1041,20 @@
       if (!cell || cell.type === 'empty') return 0;
       const cfg = buildingData[cell.type];
       if (!cfg) return 0;
-      
+
       let energy = cfg.energy || 0;
       const level = cell.level || 1;
-      
+
       // Apply level multiplier
       if (cfg.levelModifiers?.energy) {
         energy = Math.floor(energy * Math.pow(cfg.levelModifiers.energy, level - 1));
       }
-      
+
       // Apply efficiency upgrade
       if (gameState.upgrades.efficiency && energy < 0) {
         energy = Math.floor(energy * 0.8);
       }
-      
+
       return energy;
     }
 
@@ -1052,15 +1063,15 @@
       let totalIncome = 0;
       let totalEnergy = 0;
       let totalPopulation = 0;
-      
+
       for (let y = 0; y < GRID_SIZE; y++) {
         for (let x = 0; x < GRID_SIZE; x++) {
           const cell = gameState.grid[y][x];
           if (cell.type === 'empty') continue;
-          
+
           totalIncome += calculateBuildingIncome(cell);
           totalEnergy += calculateBuildingEnergy(cell);
-          
+
           if (cell.type === 'residential') {
             let pop = buildingData.residential.population;
             const level = cell.level || 1;
@@ -1071,22 +1082,22 @@
           }
         }
       }
-      
+
       gameState.lastCycleIncome = totalIncome;
       gameState.population = totalPopulation;
       gameState.energy += totalEnergy;
-      
+
       // Cap energy at max
       if (gameState.energy > gameState.maxEnergy) {
         gameState.energy = gameState.maxEnergy;
       }
-      
+
       // Calculate efficiency based on energy usage
       const energyUsage = Math.abs(totalEnergy);
-      gameState.efficiency = Math.min(100, Math.max(0, 
+      gameState.efficiency = Math.min(100, Math.max(0,
         totalEnergy > 0 ? 100 : Math.floor((gameState.maxEnergy - energyUsage) / gameState.maxEnergy * 100)
       ));
-      
+
       updateUI();
     }
 
@@ -1097,11 +1108,11 @@
       $('#population').textContent = gameState.population.toLocaleString();
       $('#energy').textContent = `${gameState.energy}/${gameState.maxEnergy}`;
       $('#incomeDisplay').textContent = `$${gameState.lastCycleIncome}`;
-      
+
       // Update efficiency display
       $('#efficiencyValue').textContent = `${gameState.efficiency}%`;
       $('#efficiencyBar').style.width = `${gameState.efficiency}%`;
-      
+
       // Update building costs display
       $$('.building-option').forEach(option => {
         const type = option.dataset.type;
@@ -1128,27 +1139,27 @@
     // Update challenges progress
     function updateChallenges() {
       const challenges = gameState.challenges;
-      
+
       // Update progress
       challenges.residential5.current = $$('.cell.residential').length;
       challenges.population100.current = gameState.population;
       challenges.income1000.current = Math.max(challenges.income1000.current, gameState.lastCycleIncome);
-      
+
       // Update UI
       Object.keys(challenges).forEach((key, index) => {
         const challenge = challenges[key];
         const el = $(`#challenge${index + 1}`);
         if (!el) return;
-        
+
         const progress = (challenge.current / challenge.target) * 100;
         const bar = el.querySelector('.challenge-bar');
         if (bar) bar.style.width = `${Math.min(100, progress)}%`;
-        
+
         // Check completion
         if (!challenge.completed && challenge.current >= challenge.target) {
           challenge.completed = true;
           el.classList.add('completed');
-          
+
           // Grant rewards
           if (key === 'residential5') {
             gameState.money += challenge.reward;
@@ -1166,20 +1177,20 @@
     // Cell click handler
     function onCellClick(x, y, event) {
       const cell = gameState.grid[y][x];
-      
+
       if (gameState.selectedBuilding === 'destroy') {
         if (cell.type !== 'empty' && cell.type !== 'road') {
           const cfg = buildingData[cell.type];
           const refund = Math.floor(cfg.cost * 0.5 * (cell.level || 1));
-          
+
           if (cell.type === 'power-plant') {
             gameState.energy -= calculateBuildingEnergy(cell);
           }
-          
+
           gameState.money += refund;
           cell.type = 'empty';
           cell.level = 1;
-          
+
           showMessage(`Destroyed building. Refund: $${refund}`, 'info');
           updateGrid();
         } else {
@@ -1187,34 +1198,34 @@
         }
         return;
       }
-      
+
       if (cell.type !== 'empty') {
         showMessage('Tile occupied. Right-click to upgrade.', 'warning');
         return;
       }
-      
+
       const cfg = buildingData[gameState.selectedBuilding];
       if (!cfg) return;
-      
+
       if (gameState.money < cfg.cost) {
         showMessage(`Insufficient funds. Need $${cfg.cost}`, 'error');
         return;
       }
-      
+
       // Check energy for consuming buildings
       if (cfg.energy < 0 && gameState.energy + cfg.energy < 0) {
         showMessage('Insufficient energy. Build a power plant first.', 'error');
         return;
       }
-      
+
       // Build the building
       gameState.money -= cfg.cost;
       cell.type = gameState.selectedBuilding;
       cell.level = 1;
-      
+
       // Update energy
       gameState.energy += calculateBuildingEnergy(cell);
-      
+
       showMessage(`Built ${cfg.name} for $${cfg.cost}`, 'success');
       updateGrid();
     }
@@ -1226,28 +1237,28 @@
         showMessage('Cannot upgrade this tile', 'warning');
         return;
       }
-      
+
       const cfg = buildingData[cell.type];
       if (!cfg || cell.level >= cfg.maxLevel) {
         showMessage('Maximum level reached', 'info');
         return;
       }
-      
+
       const upgradeCost = cfg.upgradeCost * cell.level;
       if (gameState.money < upgradeCost) {
         showMessage(`Need $${upgradeCost} to upgrade`, 'error');
         return;
       }
-      
+
       if (confirm(`Upgrade ${cfg.name} to level ${cell.level + 1} for $${upgradeCost}?`)) {
         gameState.money -= upgradeCost;
         cell.level++;
-        
+
         // Recalculate energy after upgrade
-        const oldEnergy = calculateBuildingEnergy({...cell, level: cell.level - 1});
+        const oldEnergy = calculateBuildingEnergy({ ...cell, level: cell.level - 1 });
         const newEnergy = calculateBuildingEnergy(cell);
         gameState.energy += newEnergy - oldEnergy;
-        
+
         showMessage(`${cfg.name} upgraded to level ${cell.level}!`, 'success');
         updateGrid();
       }
@@ -1257,14 +1268,14 @@
     function initBuildingOptions() {
       const grid = $('#buildingsGrid');
       grid.innerHTML = '';
-      
+
       Object.entries(buildingData).forEach(([type, data]) => {
         if (type === 'road') return; // Roads handled separately
-        
+
         const option = document.createElement('div');
         option.className = 'building-option';
         option.dataset.type = type;
-        
+
         option.innerHTML = `
           <div class="building-icon">${data.symbol}</div>
           <div class="building-name">${data.name}</div>
@@ -1275,17 +1286,17 @@
             ${data.energy ? ` | ⚡ ${data.energy > 0 ? '+' : ''}${data.energy}` : ''}
           </div>
         `;
-        
+
         option.addEventListener('click', () => {
           gameState.selectedBuilding = type;
           $$('.building-option').forEach(el => el.classList.remove('selected'));
           option.classList.add('selected');
           showMessage(`Selected: ${data.name}`, 'info');
         });
-        
+
         grid.appendChild(option);
       });
-      
+
       // Select first building by default
       grid.firstElementChild?.classList.add('selected');
     }
@@ -1294,25 +1305,25 @@
     function initUpgrades() {
       const grid = $('#upgradesGrid');
       grid.innerHTML = '';
-      
+
       Object.entries(upgradesData).forEach(([id, data]) => {
         const option = document.createElement('div');
         option.className = `building-option ${gameState.upgrades[id] ? 'selected' : ''}`;
         option.dataset.upgrade = id;
-        
+
         option.innerHTML = `
           <div class="building-icon">⭐</div>
           <div class="building-name">${data.name}</div>
           <div class="building-cost">$${data.cost}</div>
           <div class="building-stats">${data.description}</div>
         `;
-        
+
         option.addEventListener('click', () => {
           if (gameState.upgrades[id]) {
             showMessage('Already purchased', 'info');
             return;
           }
-          
+
           if (gameState.money >= data.cost) {
             gameState.money -= data.cost;
             gameState.upgrades[id] = true;
@@ -1324,7 +1335,7 @@
             showMessage(`Need $${data.cost} to purchase`, 'error');
           }
         });
-        
+
         grid.appendChild(option);
       });
     }
@@ -1333,19 +1344,19 @@
     function startGameLoop() {
       setInterval(() => {
         if (gameState.gameSpeed === 0) return; // Paused
-        
+
         // Generate income
         const income = gameState.lastCycleIncome;
         gameState.money += income;
         gameState.cycle++;
-        
+
         // Random events
         if (Math.random() < 0.01) { // 1% chance per cycle
           triggerRandomEvent();
         }
-        
+
         updateUI();
-        
+
         // Speed control
       }, 3000 / gameState.gameSpeed);
     }
@@ -1378,7 +1389,7 @@
           }
         }
       ];
-      
+
       const event = events[Math.floor(Math.random() * events.length)];
       showMessage(event.message, 'info', 4000);
       event.effect();
@@ -1425,32 +1436,32 @@
             updateTimeButtons();
             showMessage(gameState.gameSpeed === 0 ? 'Game Paused' : 'Game Resumed', 'info');
             break;
-            
+
           case 'd':
             gameState.selectedBuilding = 'destroy';
             $$('.building-option').forEach(el => el.classList.remove('selected'));
             $('#destroyOption').classList.add('selected');
             showMessage('Destroy mode activated', 'warning');
             break;
-            
+
           case 'b':
             const buildings = Object.keys(buildingData).filter(b => b !== 'road');
             const currentIndex = buildings.indexOf(gameState.selectedBuilding);
             const nextIndex = (currentIndex + 1) % buildings.length;
             gameState.selectedBuilding = buildings[nextIndex];
-            
+
             $$('.building-option').forEach(el => el.classList.remove('selected'));
             $(`.building-option[data-type="${gameState.selectedBuilding}"]`)?.classList.add('selected');
             showMessage(`Selected: ${buildingData[gameState.selectedBuilding]?.name}`, 'info');
             break;
-            
+
           case 's':
             if (e.ctrlKey) {
               e.preventDefault();
               saveGame();
             }
             break;
-            
+
           case 'l':
             if (e.ctrlKey) {
               e.preventDefault();
@@ -1469,7 +1480,7 @@
         { id: 'fastBtn', speed: 2, label: '⏩ Fast' },
         { id: 'ultraBtn', speed: 3, label: '⚡ Ultra' }
       ];
-      
+
       speeds.forEach(({ id, speed }) => {
         $(`#${id}`).addEventListener('click', () => {
           gameState.gameSpeed = speed;
@@ -1478,7 +1489,7 @@
         });
       });
     }
-    
+
     function updateTimeButtons() {
       $$('.time-btn').forEach(btn => btn.classList.remove('active'));
       $(`#${['pauseBtn', 'normalBtn', 'fastBtn', 'ultraBtn'][gameState.gameSpeed]}`)?.classList.add('active');
@@ -1489,15 +1500,15 @@
       $$('.tab').forEach(tab => {
         tab.addEventListener('click', () => {
           const tabId = tab.dataset.tab;
-          
+
           // Update tab styles
           $$('.tab').forEach(t => t.classList.remove('active'));
           tab.classList.add('active');
-          
+
           // Show selected tab content
           $$('.tab-content').forEach(content => content.style.display = 'none');
           $(`#${tabId}Tab`).style.display = 'block';
-          
+
           if (tabId === 'upgrades') {
             initUpgrades();
           }
@@ -1513,12 +1524,12 @@
       setupTimeControls();
       setupKeyboardControls();
       startGameLoop();
-      
+
       // Auto-save every 30 seconds
       setInterval(saveGame, 30000);
-      
+
       showMessage('🏙️ Welcome to Metropolis Architect! Build your dream city.', 'info', 5000);
-      
+
       // Try to load saved game
       setTimeout(loadGame, 1000);
     }
@@ -1527,4 +1538,5 @@
     window.addEventListener('DOMContentLoaded', init);
   </script>
 </body>
+
 </html>

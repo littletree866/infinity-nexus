@@ -1,4 +1,4 @@
-# Infinity Nexus (v1.20.24 — Released Mar 6, 2026)
+# Infinity Nexus (v1.21.24 — Released Mar 16, 2026)
 
 
 ## General Info
@@ -45,7 +45,7 @@ Feel free to contribute by:
 ## Credits
 
 For my Pokemon Rom:
-GBA's pokmeon Emerald
+GBA's pokemon Emerald
 EmulatorJS
 
 Everything else is my own creation

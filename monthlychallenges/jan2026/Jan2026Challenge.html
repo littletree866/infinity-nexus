@@ -5,10 +5,10 @@
   <meta charset="UTF-8">
   <title>January Challenge</title>
   <link rel="icon" href="../../icon.jpg" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Sora', sans-serif;
       margin: 0;
       background: linear-gradient(135deg, #070b1e 0%, #0f152e 100%);
       display: flex;
@@ -225,42 +225,42 @@
       }
 
       // SECRET BETA KEY: Press the uncommon "Shift" key to auto-beat the current level
-    /*  if (e.code === "ShiftLeft" || e.code === "ShiftRight") {
-        if (!gameCompleted) {
-          const L = levels[level];
-          // collect remaining coins and award their score
-          L.coins.forEach(c => {
-            if (!c.collected) {
-              c.collected = true;
-              score += 10;
-              createParticles(c.x, c.y, "#ff0", 20);
+      /*  if (e.code === "ShiftLeft" || e.code === "ShiftRight") {
+          if (!gameCompleted) {
+            const L = levels[level];
+            // collect remaining coins and award their score
+            L.coins.forEach(c => {
+              if (!c.collected) {
+                c.collected = true;
+                score += 10;
+                createParticles(c.x, c.y, "#ff0", 20);
+              }
+            });
+  
+  
+            // simulate reaching the goal
+            createParticles(L.goal.x + L.goal.w / 2, L.goal.y + L.goal.h / 2, "#0f0", 30);
+            const allCoinsCollected = L.coins.every(c => c.collected);
+            if (allCoinsCollected) {
+              score += 50;
+              createParticles(L.goal.x + L.goal.w / 2, L.goal.y + L.goal.h / 2, "#ff0", 40);
             }
-          });
-
-
-          // simulate reaching the goal
-          createParticles(L.goal.x + L.goal.w / 2, L.goal.y + L.goal.h / 2, "#0f0", 30);
-          const allCoinsCollected = L.coins.every(c => c.collected);
-          if (allCoinsCollected) {
-            score += 50;
-            createParticles(L.goal.x + L.goal.w / 2, L.goal.y + L.goal.h / 2, "#ff0", 40);
+  
+            level++;
+            if (level >= levels.length) {
+              finalScoreElement.textContent = `Final Score: ${score}`;
+              win.style.display = "flex";
+              level = levels.length - 1;
+              gameCompleted = true;
+            } else {
+              reset();
+            }
+            updateUI();
           }
+          return;
+        }*/
 
-          level++;
-          if (level >= levels.length) {
-            finalScoreElement.textContent = `Final Score: ${score}`;
-            win.style.display = "flex";
-            level = levels.length - 1;
-            gameCompleted = true;
-          } else {
-            reset();
-          }
-          updateUI();
-        }
-        return;
-      }*/
-
-      keys[e.code] = true; 
+      keys[e.code] = true;
     };
     onkeyup = e => keys[e.code] = false;
 
@@ -871,7 +871,7 @@
       x.fillStyle = "rgba(10, 15, 40, 0.7)";
       x.fillRect(uiX, uiY, 350, 40);
       x.fillStyle = "white";
-      x.font = "bold 16px DM Sans, sans-serif";
+      x.font = "bold 16px Sora, sans-serif";
       x.textAlign = "left";
 
       // Draw text with yellow highlights
@@ -903,11 +903,11 @@
         x.fillRect(0, 0, c.width, c.height);
 
         x.fillStyle = "white";
-        x.font = "bold 48px DM Sans, sans-serif";
+        x.font = "bold 48px Sora, sans-serif";
         x.textAlign = "center";
         x.fillText("PAUSED", c.width / 2, c.height / 2);
 
-        x.font = "24px DM Sans, sans-serif";
+        x.font = "24px Sora, sans-serif";
         x.fillText("Press ESC to resume", c.width / 2, c.height / 2 + 50);
       }
     }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>Wealth Builder</title>
@@ -8,7 +9,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -35,7 +36,7 @@
     }
 
     body {
-      font-family: 'Jura', sans-serif;
+      font-family: 'Sora', sans-serif;
       background: var(--primary-gradient);
       color: var(--text-primary);
       min-height: 100vh;
@@ -66,6 +67,7 @@
       0% {
         transform: translateY(100vh) rotate(0deg);
       }
+
       100% {
         transform: translateY(-100px) rotate(360deg);
       }
@@ -124,7 +126,7 @@
     }
 
     #money {
-      font-family: 'Jura', monospace;
+      font-family: 'Sora', monospace;
       font-size: 2.8rem;
       font-weight: 700;
       color: var(--accent-green);
@@ -133,8 +135,15 @@
     }
 
     @keyframes money-pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.02); }
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.02);
+      }
     }
 
     .income-display {
@@ -153,7 +162,7 @@
     }
 
     #incomePerSec {
-      font-family: 'Jura', monospace;
+      font-family: 'Sora', monospace;
       font-size: 1.8rem;
       font-weight: 600;
       color: var(--text-primary);
@@ -170,7 +179,7 @@
       padding: 16px 20px;
       border: none;
       border-radius: 14px;
-      font-family: 'Jura', sans-serif;
+      font-family: 'Sora', sans-serif;
       font-weight: 600;
       font-size: 1rem;
       cursor: pointer;
@@ -362,7 +371,7 @@
     }
 
     .grid-price {
-      font-family: 'Jura', monospace;
+      font-family: 'Sora', monospace;
       font-weight: 600;
       color: var(--accent-green);
       font-size: 1.1rem;
@@ -392,7 +401,7 @@
       cursor: pointer;
       transition: all 0.2s;
       flex: 1;
-      font-family: 'Jura', sans-serif;
+      font-family: 'Sora', sans-serif;
     }
 
     .buy-btn {
@@ -498,7 +507,7 @@
       border: 2px solid #e5e7eb;
       border-radius: 12px;
       font-size: 1rem;
-      font-family: 'Jura', sans-serif;
+      font-family: 'Sora', sans-serif;
       font-weight: 500;
       transition: border-color 0.3s;
     }
@@ -526,7 +535,7 @@
       font-size: 0.9rem;
       z-index: 1000;
       backdrop-filter: blur(10px);
-      font-family: 'Jura', sans-serif;
+      font-family: 'Sora', sans-serif;
       font-weight: 500;
     }
 
@@ -557,11 +566,11 @@
       .panels-grid {
         grid-template-columns: 1fr;
       }
-      
+
       .action-buttons {
         grid-template-columns: repeat(2, 1fr);
       }
-      
+
       .opportunities-grid {
         grid-template-columns: 1fr;
       }
@@ -571,17 +580,17 @@
       .action-buttons {
         grid-template-columns: 1fr;
       }
-      
+
       .stats-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 15px;
       }
-      
+
       #money {
         font-size: 2.2rem;
       }
-      
+
       h1 {
         font-size: 2rem;
       }
@@ -591,11 +600,11 @@
       .main-card {
         padding: 20px;
       }
-      
+
       .panel {
         padding: 20px;
       }
-      
+
       .btn {
         padding: 14px 16px;
         font-size: 0.95rem;
@@ -717,25 +726,29 @@
     <div class="panels-grid">
       <div id="marketSection" class="panel">
         <h3>🏪 Market Trading</h3>
-        <p style="color: var(--text-secondary); margin-bottom: 15px; font-weight: 500;">Buy low, sell high! Prices change every 10 seconds.</p>
+        <p style="color: var(--text-secondary); margin-bottom: 15px; font-weight: 500;">Buy low, sell high! Prices
+          change every 10 seconds.</p>
         <div id="marketGrid" class="grid"></div>
       </div>
 
       <div id="craftingPanel" class="panel">
         <h3>🛠️ Crafting Workshop</h3>
-        <p style="color: var(--text-secondary); margin-bottom: 15px; font-weight: 500;">Create valuable items from resources</p>
+        <p style="color: var(--text-secondary); margin-bottom: 15px; font-weight: 500;">Create valuable items from
+          resources</p>
         <div id="recipeGrid" class="grid"></div>
       </div>
 
       <div id="buildingPanel" class="panel">
         <h3>🏗️ Business Empire</h3>
-        <p style="color: var(--text-secondary); margin-bottom: 15px; font-weight: 500;">Build and manage your enterprises</p>
+        <p style="color: var(--text-secondary); margin-bottom: 15px; font-weight: 500;">Build and manage your
+          enterprises</p>
         <div id="buildingGrid" class="grid"></div>
       </div>
 
       <div id="investingPanel" class="panel">
         <h3>💹 Long-term Assets</h3>
-        <p style="color: var(--text-secondary); margin-bottom: 15px; font-weight: 500;">Invest in appreciating assets</p>
+        <p style="color: var(--text-secondary); margin-bottom: 15px; font-weight: 500;">Invest in appreciating assets
+        </p>
         <div id="assetGrid" class="grid"></div>
       </div>
     </div>
@@ -826,7 +839,7 @@
     const taskInstructionEl = document.getElementById('taskInstruction');
     const taskInputEl = document.getElementById('taskInput');
     const taskSubmitBtn = document.getElementById('taskSubmit');
-    
+
     // Stats elements
     const statsInvestmentsEl = document.getElementById('statsInvestments');
     const statsStartupsEl = document.getElementById('statsStartups');
@@ -853,14 +866,14 @@
     const startupBtn = document.getElementById('startupBtn');
 
     // Formatting functions
-    function formatMoney(n) { 
+    function formatMoney(n) {
       if (n >= 1000000) return '$' + (n / 1000000).toFixed(2) + 'M';
       if (n >= 1000) return '$' + (n / 1000).toFixed(2) + 'K';
-      return '$' + Math.round(n).toLocaleString(); 
+      return '$' + Math.round(n).toLocaleString();
     }
 
-    function formatIncome(n) { 
-      return '+' + formatMoney(n) + '/sec'; 
+    function formatIncome(n) {
+      return '+' + formatMoney(n) + '/sec';
     }
 
     function formatTime(seconds) {
@@ -877,17 +890,17 @@
       for (let i = 0; i < 20; i++) {
         const particle = document.createElement('div');
         particle.className = 'bg-particle';
-        
+
         const size = Math.random() * 20 + 5;
         particle.style.width = `${size}px`;
         particle.style.height = `${size}px`;
         particle.style.left = `${Math.random() * 100}%`;
         particle.style.animationDelay = `${Math.random() * 20}s`;
         particle.style.animationDuration = `${20 + Math.random() * 20}s`;
-        
+
         const colors = ['rgba(255, 255, 255, 0.2)', 'rgba(16, 185, 129, 0.1)', 'rgba(59, 130, 246, 0.1)'];
         particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-        
+
         container.appendChild(particle);
       }
     }
@@ -895,7 +908,7 @@
     // Update cooldowns
     function updateCooldowns() {
       const now = Date.now();
-      
+
       // Update cooldown displays
       taskCooldownEl.textContent = formatTime(state.cooldowns.task);
       freelanceCooldownEl.textContent = formatTime(state.cooldowns.freelance);
@@ -904,7 +917,7 @@
       stockCooldownEl.textContent = formatTime(state.cooldowns.stock);
       consultingCooldownEl.textContent = formatTime(state.cooldowns.consulting);
       cryptoCooldownEl.textContent = formatTime(state.cooldowns.crypto);
-      
+
       // Enable/disable buttons based on cooldowns
       taskBtn.disabled = state.cooldowns.task > 0;
       freelanceBtn.disabled = state.cooldowns.freelance > 0;
@@ -913,7 +926,7 @@
       stockBtn.disabled = state.cooldowns.stock > 0 || state.money < 25;
       consultingBtn.disabled = state.cooldowns.consulting > 0;
       cryptoBtn.disabled = state.cooldowns.crypto > 0 || state.money < 50;
-      
+
       // Add/remove cooldown-active class
       taskBtn.classList.toggle('cooldown-active', state.cooldowns.task > 0);
       freelanceBtn.classList.toggle('cooldown-active', state.cooldowns.freelance > 0);
@@ -927,37 +940,37 @@
     // Update UI
     function updateUI() {
       moneyEl.textContent = formatMoney(state.money);
-      
+
       // Calculate total income
-      state.totalIncomePerSec = 
-        (state.investments * state.investmentsYieldPerSec) + 
+      state.totalIncomePerSec =
+        (state.investments * state.investmentsYieldPerSec) +
         (state.startups * state.startupYieldPerSec) +
         state.buildings.reduce((sum, b) => sum + (b.owned * b.incomePerMin / 60), 0);
-      
+
       incomePerSecEl.textContent = formatIncome(state.totalIncomePerSec);
-      
+
       // Update stats overlay
       statsInvestmentsEl.textContent = state.investments;
       statsStartupsEl.textContent = state.startups;
       statsTotalIncomeEl.textContent = formatMoney(state.totalIncomePerSec);
-      
+
       // Update button states
       investBtn.disabled = state.money < state.investmentCost;
       investBtn.innerHTML = `<span>📊 Invest</span><span class="btn-cooldown">${formatMoney(state.investmentCost)}</span>`;
-      
+
       startupBtn.disabled = state.money < state.startupCost;
       startupBtn.innerHTML = `<span>🚀 Startup</span><span class="btn-cooldown">${formatMoney(state.startupCost)}</span>`;
-      
+
       // Show/hide opportunity tiers
-      document.getElementById('highTierOpportunities').style.display = 
+      document.getElementById('highTierOpportunities').style.display =
         state.money > 100 ? 'block' : 'none';
-        
+
       // Update all grids
       renderMarket();
       renderBuildings();
       renderAssets();
       renderRecipes();
-      
+
       // Update cooldowns
       updateCooldowns();
     }
@@ -966,7 +979,7 @@
     function showMessage(text, type = 'info') {
       messageEl.textContent = text;
       messageEl.className = `message-${type}`;
-      
+
       setTimeout(() => {
         messageEl.style.opacity = '0';
         messageEl.style.transform = 'translateY(-10px)';
@@ -981,7 +994,7 @@
     // Task system
     function startTask() {
       if (state.cooldowns.task > 0) return;
-      
+
       setCooldown('task');
       state.currentTask = state.tasks[Math.floor(Math.random() * state.tasks.length)];
       taskInstructionEl.textContent = `Type: "${state.currentTask.word}"`;
@@ -994,7 +1007,7 @@
     // Initialize task submit
     taskSubmitBtn.addEventListener('click', () => {
       if (!state.currentTask) return;
-      
+
       if (taskInputEl.value.toUpperCase() === state.currentTask.word) {
         state.money += state.currentTask.reward;
         showMessage(`Task completed! +${formatMoney(state.currentTask.reward)}`, 'success');
@@ -1016,7 +1029,7 @@
 
     freelanceBtn.addEventListener('click', () => {
       if (state.cooldowns.freelance > 0) return;
-      
+
       setCooldown('freelance');
       const reward = 15 + Math.floor(Math.random() * 10);
       state.money += reward;
@@ -1036,7 +1049,7 @@
 
     quickTradeBtn.addEventListener('click', () => {
       if (state.cooldowns.quickTrade > 0) return;
-      
+
       setCooldown('quickTrade');
       if (state.money >= 5) {
         const risk = Math.random();
@@ -1055,7 +1068,7 @@
 
     partTimeBtn.addEventListener('click', () => {
       if (state.cooldowns.partTime > 0) return;
-      
+
       setCooldown('partTime');
       state.money += 10;
       showMessage(`Part-time shift completed! +${formatMoney(10)}`, 'success');
@@ -1064,7 +1077,7 @@
 
     stockBtn.addEventListener('click', () => {
       if (state.cooldowns.stock > 0) return;
-      
+
       setCooldown('stock');
       if (state.money >= 25) {
         const risk = Math.random();
@@ -1083,7 +1096,7 @@
 
     consultingBtn.addEventListener('click', () => {
       if (state.cooldowns.consulting > 0) return;
-      
+
       setCooldown('consulting');
       state.money += 30;
       showMessage(`Consulting contract! +${formatMoney(30)}`, 'success');
@@ -1092,7 +1105,7 @@
 
     cryptoBtn.addEventListener('click', () => {
       if (state.cooldowns.crypto > 0) return;
-      
+
       setCooldown('crypto');
       if (state.money >= 50) {
         const risk = Math.random();
@@ -1123,7 +1136,7 @@
     function renderMarket() {
       const grid = document.getElementById('marketGrid');
       if (!grid) return;
-      
+
       grid.innerHTML = state.market.items.map(item => `
         <div class="grid-item">
           <div class="grid-header">
@@ -1151,7 +1164,7 @@
     function buyMarketItem(name) {
       const item = state.market.items.find(x => x.name === name);
       if (!item || state.money < item.currentPrice) return;
-      
+
       state.money -= item.currentPrice;
       item.owned++;
       showMessage(`Bought ${item.name} for ${formatMoney(item.currentPrice)}`, 'success');
@@ -1161,7 +1174,7 @@
     function sellMarketItem(name) {
       const item = state.market.items.find(x => x.name === name);
       if (!item || item.owned === 0) return;
-      
+
       state.money += item.currentPrice;
       item.owned--;
       showMessage(`Sold ${item.name} for ${formatMoney(item.currentPrice)}`, 'success');
@@ -1172,7 +1185,7 @@
     function updateMarketPrices() {
       const now = Date.now();
       const timeDiff = (now - state.market.lastUpdate) / 1000;
-      
+
       if (timeDiff > 10) {
         state.market.items.forEach(item => {
           const change = (Math.random() - 0.5) * 2 * item.volatility;
@@ -1187,7 +1200,7 @@
     function renderBuildings() {
       const grid = document.getElementById('buildingGrid');
       if (!grid) return;
-      
+
       grid.innerHTML = state.buildings.map(building => `
         <div class="grid-item">
           <div class="grid-header">
@@ -1215,7 +1228,7 @@
     function buyBuilding(name) {
       const building = state.buildings.find(x => x.name === name);
       if (!building || state.money < building.cost) return;
-      
+
       state.money -= building.cost;
       building.owned++;
       building.cost = Math.floor(building.cost * 1.2);
@@ -1227,7 +1240,7 @@
     function renderAssets() {
       const grid = document.getElementById('assetGrid');
       if (!grid) return;
-      
+
       grid.innerHTML = state.assets.map(asset => `
         <div class="grid-item">
           <div class="grid-header">
@@ -1255,7 +1268,7 @@
     function buyAsset(name) {
       const asset = state.assets.find(x => x.name === name);
       if (!asset || state.money < asset.cost) return;
-      
+
       state.money -= asset.cost;
       asset.owned++;
       asset.cost = Math.floor(asset.cost * 1.15);
@@ -1267,13 +1280,13 @@
     function renderRecipes() {
       const grid = document.getElementById('recipeGrid');
       if (!grid) return;
-      
+
       grid.innerHTML = state.crafting.recipes.map(recipe => {
         const canCraft = recipe.ingredients.every(ing => {
           const item = state.market.items.find(x => x.name === ing.name);
           return item && item.owned >= ing.amount;
         });
-        
+
         return `
           <div class="grid-item">
             <div class="grid-header">
@@ -1301,7 +1314,7 @@
     function craftItem(name) {
       const recipe = state.crafting.recipes.find(x => x.name === name);
       if (!recipe) return;
-      
+
       // Check ingredients
       for (const ing of recipe.ingredients) {
         const item = state.market.items.find(x => x.name === ing.name);
@@ -1310,13 +1323,13 @@
           return;
         }
       }
-      
+
       // Consume ingredients
       for (const ing of recipe.ingredients) {
         const item = state.market.items.find(x => x.name === ing.name);
         item.owned -= ing.amount;
       }
-      
+
       // Add money
       state.money += recipe.value;
       showMessage(`Crafted ${recipe.name}! +${formatMoney(recipe.value)}`, 'success');
@@ -1326,14 +1339,14 @@
     // Cooldown reduction loop
     function cooldownLoop() {
       const now = Date.now();
-      
+
       // Reduce all cooldowns by 1 second
       Object.keys(state.cooldowns).forEach(key => {
         if (state.cooldowns[key] > 0) {
           state.cooldowns[key]--;
         }
       });
-      
+
       updateCooldowns();
       setTimeout(cooldownLoop, 1000);
     }
@@ -1360,7 +1373,7 @@
     function assetGrowthLoop() {
       state.assets.forEach(asset => {
         if (asset.owned > 0) {
-          const growth = asset.owned * asset.cost  * (asset.growthPerMin / 60);
+          const growth = asset.owned * asset.cost * (asset.growthPerMin / 60);
           state.money += growth;
         }
       });
@@ -1381,4 +1394,5 @@
     init();
   </script>
 </body>
+
 </html>

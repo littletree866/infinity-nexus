@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>February Challenge</title>
     <link rel="icon" href="../../icon.jpg">
-    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #e6c300;
@@ -25,9 +26,9 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Jura', sans-serif;
+            font-family: 'Sora', sans-serif;
         }
-        
+
         body {
             background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
             color: var(--text-color);
@@ -47,7 +48,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
+            background:
                 radial-gradient(circle at 20% 30%, rgba(230, 195, 0, 0.05) 0%, transparent 50%),
                 radial-gradient(circle at 80% 70%, rgba(76, 175, 80, 0.05) 0%, transparent 50%);
             pointer-events: none;
@@ -59,7 +60,7 @@
             margin-bottom: 20px;
             text-align: center;
             font-size: 3rem;
-            text-shadow: 
+            text-shadow:
                 0 0 20px rgba(230, 195, 0, 0.5),
                 0 2px 4px rgba(0, 0, 0, 0.5);
             letter-spacing: 2px;
@@ -69,7 +70,8 @@
             text-transform: uppercase;
         }
 
-        .game-title::before, .game-title::after {
+        .game-title::before,
+        .game-title::after {
             content: '⚔️';
             position: absolute;
             top: 50%;
@@ -110,7 +112,7 @@
             border: 4px solid var(--medium-bg);
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 
+            box-shadow:
                 0 0 40px rgba(0, 0, 0, 0.7),
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
             transition: transform 0.3s;
@@ -137,7 +139,7 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
-            box-shadow: 
+            box-shadow:
                 0 8px 32px rgba(0, 0, 0, 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
             overflow-y: auto;
@@ -178,10 +180,10 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, 
-                var(--primary-color), 
-                var(--secondary-color),
-                var(--primary-color));
+            background: linear-gradient(90deg,
+                    var(--primary-color),
+                    var(--secondary-color),
+                    var(--primary-color));
         }
 
         .stat-item {
@@ -208,10 +210,10 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 215, 0, 0.1), 
-                transparent);
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 215, 0, 0.1),
+                    transparent);
             transition: left 0.5s;
         }
 
@@ -279,10 +281,10 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 215, 0, 0.1), 
-                transparent);
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 215, 0, 0.1),
+                    transparent);
             transition: left 0.5s;
         }
 
@@ -294,7 +296,7 @@
             background: linear-gradient(145deg, #3a3a5a, #2f2f4a);
             border-color: var(--primary-color);
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 
+            box-shadow:
                 0 8px 25px rgba(0, 0, 0, 0.3),
                 0 0 0 1px rgba(230, 195, 0, 0.3);
         }
@@ -415,6 +417,7 @@
                 transform: scale(0, 0);
                 opacity: 0.5;
             }
+
             100% {
                 transform: scale(40, 40);
                 opacity: 0;
@@ -484,10 +487,10 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, 
-                var(--primary-color), 
-                var(--secondary-color),
-                var(--danger-color));
+            background: linear-gradient(90deg,
+                    var(--primary-color),
+                    var(--secondary-color),
+                    var(--danger-color));
         }
 
         .instructions h3 {
@@ -539,8 +542,13 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         .game-over h2 {
@@ -554,8 +562,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
         }
 
         .game-over p {
@@ -607,8 +622,13 @@
         }
 
         @keyframes slideDown {
-            from { top: -100px; }
-            to { top: 30px; }
+            from {
+                top: -100px;
+            }
+
+            to {
+                top: 30px;
+            }
         }
 
         .enemy-counter {
@@ -704,10 +724,10 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 215, 0, 0.1), 
-                transparent);
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 215, 0, 0.1),
+                    transparent);
             transition: left 0.5s;
         }
 
@@ -728,19 +748,29 @@
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         }
 
-        .difficulty-btn.easy { border-color: var(--secondary-color); }
-        .difficulty-btn.normal { border-color: var(--warning-color); }
-        .difficulty-btn.hard { border-color: var(--danger-color); }
+        .difficulty-btn.easy {
+            border-color: var(--secondary-color);
+        }
 
-        .difficulty-btn.easy.active { 
+        .difficulty-btn.normal {
+            border-color: var(--warning-color);
+        }
+
+        .difficulty-btn.hard {
+            border-color: var(--danger-color);
+        }
+
+        .difficulty-btn.easy.active {
             background: linear-gradient(145deg, var(--secondary-color), #2d6b30);
             color: white;
         }
-        .difficulty-btn.normal.active { 
+
+        .difficulty-btn.normal.active {
             background: linear-gradient(145deg, var(--warning-color), #c66900);
             color: white;
         }
-        .difficulty-btn.hard.active { 
+
+        .difficulty-btn.hard.active {
             background: linear-gradient(145deg, var(--danger-color), #b71c1c);
             color: white;
         }
@@ -763,8 +793,13 @@
         }
 
         @keyframes slideIn {
-            from { right: -300px; }
-            to { right: 30px; }
+            from {
+                right: -300px;
+            }
+
+            to {
+                right: 30px;
+            }
         }
 
         .achievement-icon {
@@ -852,73 +887,73 @@
                 flex-direction: column;
                 align-items: center;
             }
-            
+
             .game-board {
                 width: 500px;
                 height: 500px;
             }
-            
+
             .ui-panel {
                 max-height: 500px;
                 min-width: 500px;
             }
-            
+
             .instructions ul {
                 grid-template-columns: 1fr;
             }
         }
-        
+
         @media (max-width: 650px) {
             .game-board {
                 width: 450px;
                 height: 450px;
             }
-            
+
             .ui-panel {
                 min-width: 100%;
                 max-height: none;
                 order: -1;
             }
-            
+
             .upgrades {
                 grid-template-columns: 1fr;
             }
-            
+
             .stats {
                 grid-template-columns: 1fr;
             }
-            
+
             .controls {
                 flex-direction: column;
                 align-items: center;
             }
-            
+
             .control-btn {
                 width: 100%;
                 max-width: 250px;
             }
-            
+
             .game-title {
                 font-size: 2.2rem;
             }
-            
+
             .game-title::before,
             .game-title::after {
                 display: none;
             }
         }
-        
+
         @media (max-width: 500px) {
             .game-board {
                 width: 400px;
                 height: 400px;
             }
-            
+
             .ui-panel {
                 min-width: 400px;
                 padding: 15px;
             }
-            
+
             .game-title {
                 font-size: 2rem;
                 margin-bottom: 10px;
@@ -970,8 +1005,15 @@
         }
 
         @keyframes warningPulse {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); }
-            50% { transform: translate(-50%, -50%) scale(1.1); }
+
+            0%,
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+            }
         }
 
         .critical-health {
@@ -979,25 +1021,40 @@
         }
 
         @keyframes criticalPulse {
-            0%, 100% { border-color: var(--danger-color); }
-            50% { border-color: #ff0000; }
+
+            0%,
+            100% {
+                border-color: var(--danger-color);
+            }
+
+            50% {
+                border-color: #ff0000;
+            }
         }
-        
+
         @keyframes fadeUp {
-            0% { opacity: 1; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-50px) scale(1.5); }
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-50px) scale(1.5);
+            }
         }
     </style>
 </head>
+
 <body>
     <h1 class="game-title">February Challenge</h1>
-    
+
     <div class="difficulty-selector">
         <button class="difficulty-btn easy" data-difficulty="easy">Easy</button>
         <button class="difficulty-btn normal active" data-difficulty="normal">Normal</button>
         <button class="difficulty-btn hard" data-difficulty="hard">Hard</button>
     </div>
-    
+
     <div class="game-container">
         <div class="game-area">
             <div class="game-board">
@@ -1016,11 +1073,12 @@
                         <p id="finalAccuracy">Accuracy: 0%</p>
                         <p style="color: var(--primary-color); font-size: 1.4rem;" id="finalRank">Rank: Recruit</p>
                     </div>
-                    <button class="control-btn" style="background: linear-gradient(145deg, var(--primary-color), #ffb300);" 
-                            id="restartBtn2">Play Again</button>
+                    <button class="control-btn"
+                        style="background: linear-gradient(145deg, var(--primary-color), #ffb300);"
+                        id="restartBtn2">Play Again</button>
                 </div>
             </div>
-            
+
             <div class="ui-panel">
                 <div class="stats">
                     <div class="stat-item">
@@ -1036,7 +1094,7 @@
                         <div class="stat-label">Current Wave</div>
                     </div>
                 </div>
-                
+
                 <div class="upgrades-section">
                     <h3 class="section-title">Upgrades <span id="skillPoints">(Skill Points: 0)</span></h3>
                     <div class="upgrades">
@@ -1046,35 +1104,35 @@
                             <div class="upgrade-level">Level: 1</div>
                             <div class="upgrade-effect">+12 damage per level</div>
                         </button>
-                        
+
                         <button class="upgrade-btn" id="fireRateUpgrade">
                             <div class="upgrade-name">Fire Rate</div>
                             <div class="upgrade-cost">Cost: $40</div>
                             <div class="upgrade-level">Level: 1</div>
                             <div class="upgrade-effect">+18% speed per level</div>
                         </button>
-                        
+
                         <button class="upgrade-btn" id="rangeUpgrade">
                             <div class="upgrade-name">Cannon Range</div>
                             <div class="upgrade-cost">Cost: $60</div>
                             <div class="upgrade-level">Level: 1</div>
                             <div class="upgrade-effect">+25 range per level</div>
                         </button>
-                        
+
                         <button class="upgrade-btn" id="healthUpgrade">
                             <div class="upgrade-name">Stronghold Health</div>
                             <div class="upgrade-cost">Cost: $80</div>
                             <div class="upgrade-level">Level: 1</div>
                             <div class="upgrade-effect">+25 HP per level</div>
                         </button>
-                        
+
                         <button class="upgrade-btn" id="speedUpgrade">
                             <div class="upgrade-name">Projectile Speed</div>
                             <div class="upgrade-cost">Cost: $35</div>
                             <div class="upgrade-level">Level: 1</div>
                             <div class="upgrade-effect">+30% speed per level</div>
                         </button>
-                        
+
                         <button class="upgrade-btn" id="moneyUpgrade">
                             <div class="upgrade-name">Resource Bonus</div>
                             <div class="upgrade-cost">Cost: $45</div>
@@ -1083,14 +1141,14 @@
                         </button>
                     </div>
                 </div>
-                
+
                 <div class="game-info">
                     <p>⚔️ Defend the stronghold from all sides!</p>
                     <p>💰 Collect resources from defeated enemies</p>
                     <p>⚡ Grab power-ups for temporary boosts</p>
                     <p>🎯 Upgrade cannons between waves</p>
                 </div>
-                
+
                 <div class="controls">
                     <button class="control-btn" id="startBtn">Start Game</button>
                     <button class="control-btn" id="pauseBtn">Pause</button>
@@ -1098,9 +1156,9 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
-    
+
     <div class="achievement-popup" id="achievementPopup">
         <div style="display: flex; align-items: center;">
             <div class="achievement-icon">🏆</div>
@@ -1113,10 +1171,10 @@
 
     <script>
         // Wait for DOM to be fully loaded
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             try {
                 console.log('Game initializing...');
-                
+
                 // Game variables
                 const canvas = document.getElementById('gameCanvas');
                 const ctx = canvas.getContext('2d');
@@ -1138,7 +1196,7 @@
                 const wavePreview = document.getElementById('wavePreview');
                 const combatLog = document.getElementById('combatLog');
                 const bossWarning = document.getElementById('bossWarning');
-                
+
                 // Enhanced game state
                 let gameRunning = false;
                 let gamePaused = false;
@@ -1171,43 +1229,43 @@
                 let lastKillTime = 0;
                 let comboTimeout = null;
                 let animationId = null;
-                
+
                 // Enhanced enemy types with better scaling
                 const ENEMY_TYPES = {
-                    NORMAL: { 
-                        health: 25, 
-                        speed: 1.2, 
-                        color: '#f44336', 
-                        value: 12, 
+                    NORMAL: {
+                        health: 25,
+                        speed: 1.2,
+                        color: '#f44336',
+                        value: 12,
                         radius: 12,
                         name: 'Grunt'
                     },
-                    FAST: { 
-                        health: 15, 
-                        speed: 2.2, 
-                        color: '#2196F3', 
-                        value: 18, 
+                    FAST: {
+                        health: 15,
+                        speed: 2.2,
+                        color: '#2196F3',
+                        value: 18,
                         radius: 10,
                         name: 'Scout'
                     },
-                    TANK: { 
-                        health: 60, 
-                        speed: 0.7, 
-                        color: '#795548', 
-                        value: 35, 
+                    TANK: {
+                        health: 60,
+                        speed: 0.7,
+                        color: '#795548',
+                        value: 35,
                         radius: 20,
                         name: 'Tank'
                     },
-                    BOSS: { 
-                        health: 200, 
-                        speed: 0.5, 
-                        color: '#9C27B0', 
-                        value: 150, 
+                    BOSS: {
+                        health: 200,
+                        speed: 0.5,
+                        color: '#9C27B0',
+                        value: 150,
                         radius: 30,
                         name: 'Warlord'
                     }
                 };
-                
+
                 // Enhanced upgrades with scaling costs
                 let upgrades = {
                     damage: { level: 1, cost: 50, effect: 12, maxLevel: 15 },
@@ -1217,7 +1275,7 @@
                     speed: { level: 1, cost: 35, effect: 1.3, maxLevel: 10 },
                     money: { level: 1, cost: 45, effect: 0.12, maxLevel: 10 }
                 };
-                
+
                 // Stronghold properties
                 const stronghold = {
                     x: canvas.width / 2,
@@ -1225,34 +1283,34 @@
                     radius: 40,
                     color: '#4CAF50'
                 };
-                
+
                 // Enhanced power-up types
                 const POWERUPS = {
-                    RAPID_FIRE: { 
-                        name: 'Rapid Fire', 
-                        color: '#FF9800', 
-                        duration: 10000, 
+                    RAPID_FIRE: {
+                        name: 'Rapid Fire',
+                        color: '#FF9800',
+                        duration: 10000,
                         effect: 'fireRate',
                         icon: '⚡'
                     },
-                    DOUBLE_DAMAGE: { 
-                        name: 'Double Damage', 
-                        color: '#f44336', 
-                        duration: 8000, 
+                    DOUBLE_DAMAGE: {
+                        name: 'Double Damage',
+                        color: '#f44336',
+                        duration: 8000,
                         effect: 'damage',
                         icon: '⚔️'
                     },
-                    SLOW_ENEMIES: { 
-                        name: 'Slow Enemies', 
-                        color: '#2196F3', 
-                        duration: 12000, 
+                    SLOW_ENEMIES: {
+                        name: 'Slow Enemies',
+                        color: '#2196F3',
+                        duration: 12000,
                         effect: 'slow',
                         icon: '🐌'
                     },
-                    MONEY_BOOST: { 
-                        name: 'Money Boost', 
-                        color: '#FFD700', 
-                        duration: 15000, 
+                    MONEY_BOOST: {
+                        name: 'Money Boost',
+                        color: '#FFD700',
+                        duration: 15000,
                         effect: 'money',
                         icon: '💰'
                     },
@@ -1264,7 +1322,7 @@
                         icon: '🛡️'
                     }
                 };
-                
+
                 // Initialize cannons with visual variety
                 function initCannons() {
                     cannons = [];
@@ -1278,9 +1336,9 @@
                         { x: 0, y: -1, angle: 3 * Math.PI / 2 },
                         { x: 0.7, y: -0.7, angle: 7 * Math.PI / 4 }
                     ];
-                    
+
                     const cannonDistance = 70;
-                    
+
                     directions.forEach((dir, index) => {
                         cannons.push({
                             x: stronghold.x + dir.x * cannonDistance,
@@ -1292,21 +1350,21 @@
                         });
                     });
                 }
-                
+
                 // Enhanced Enemy class
                 class Enemy {
                     constructor(type = 'NORMAL') {
                         const config = ENEMY_TYPES[type];
                         const side = Math.floor(Math.random() * 4);
                         let x, y;
-                        
-                        switch(side) {
+
+                        switch (side) {
                             case 0: x = Math.random() * canvas.width; y = -40; break;
                             case 1: x = canvas.width + 40; y = Math.random() * canvas.height; break;
                             case 2: x = Math.random() * canvas.width; y = canvas.height + 40; break;
                             case 3: x = -40; y = Math.random() * canvas.height; break;
                         }
-                        
+
                         this.x = x;
                         this.y = y;
                         this.radius = config.radius;
@@ -1320,51 +1378,51 @@
                         this.trail = [];
                         this.trailLength = 20;
                     }
-                    
+
                     update() {
                         // Add current position to trail
                         this.trail.push({ x: this.x, y: this.y });
                         if (this.trail.length > this.trailLength) {
                             this.trail.shift();
                         }
-                        
+
                         // Apply slow effect if powerup is active
                         let currentSpeed = this.speed;
                         if (powerupActive === 'SLOW_ENEMIES' && Date.now() < powerupEndTime) {
                             currentSpeed *= 0.4;
                         }
-                        
+
                         // Move towards stronghold
                         const dx = stronghold.x - this.x;
                         const dy = stronghold.y - this.y;
                         const distance = Math.sqrt(dx * dx + dy * dy);
-                        
+
                         this.x += (dx / distance) * currentSpeed;
                         this.y += (dy / distance) * currentSpeed;
-                        
+
                         // Check collision with stronghold
                         if (distance < stronghold.radius + this.radius) {
                             const damage = this.type === 'BOSS' ? 25 : this.type === 'TANK' ? 15 : 8;
-                            
+
                             // Apply shield protection
                             if (powerupActive === 'SHIELD' && Date.now() < powerupEndTime) {
                             } else {
                                 strongholdHealth = Math.max(0, strongholdHealth - damage);
                                 healthDisplay.textContent = strongholdHealth;
-                                
+
                                 if (strongholdHealth / maxHealth < 0.3) {
                                     document.querySelector('.game-board').classList.add('critical-health');
                                 }
                             }
-                            
+
                             const index = enemies.indexOf(this);
                             if (index > -1) enemies.splice(index, 1);
-                            
+
                             if (strongholdHealth <= 0) gameOver();
                             return;
                         }
                     }
-                    
+
                     draw() {
                         // Draw trail with fade effect
                         ctx.save();
@@ -1378,7 +1436,7 @@
                             ctx.fill();
                         });
                         ctx.restore();
-                        
+
                         // Enemy body with gradient
                         const gradient = ctx.createRadialGradient(
                             this.x, this.y, 0,
@@ -1386,12 +1444,12 @@
                         );
                         gradient.addColorStop(0, this.color);
                         gradient.addColorStop(1, this.color.replace(')', ', 0.8)'));
-                        
+
                         ctx.fillStyle = gradient;
                         ctx.beginPath();
                         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
                         ctx.fill();
-                        
+
                         // Eyes
                         ctx.fillStyle = '#FFF';
                         ctx.beginPath();
@@ -1400,49 +1458,49 @@
                         ctx.beginPath();
                         ctx.arc(this.x + 6, this.y - 6, 4, 0, Math.PI * 2);
                         ctx.fill();
-                        
+
                         // Health bar
                         const healthPercentage = this.health / this.maxHealth;
                         ctx.fillStyle = '#f44336';
                         ctx.fillRect(this.x - this.radius, this.y - this.radius - 15, this.radius * 2, 6);
                         ctx.fillStyle = healthPercentage > 0.5 ? '#4CAF50' : healthPercentage > 0.25 ? '#FF9800' : '#f44336';
                         ctx.fillRect(this.x - this.radius, this.y - this.radius - 15, this.radius * 2 * healthPercentage, 6);
-                        
+
                         // Name tag for bosses
                         if (this.type === 'BOSS') {
                             ctx.fillStyle = '#FF4081';
-                            ctx.font = 'bold 16px Jura';
+                            ctx.font = 'bold 16px Sora';
                             ctx.textAlign = 'center';
                             ctx.fillText('WARLORD', this.x, this.y - this.radius - 25);
                         }
                     }
-                    
+
                     takeDamage(damage) {
                         this.health -= damage;
                         shotsHit++;
-                        
+
                         // Show damage number
                         showDamageNumber(this.x, this.y, damage);
-                        
+
                         if (this.health <= 0) {
                             // Combo system
                             const now = Date.now();
                             if (now - lastKillTime < 2000) {
                                 combo++;
-   
+
                             } else {
                                 combo = 1;
                             }
                             lastKillTime = now;
-                            
+
                             // Clear combo timeout
                             if (comboTimeout) clearTimeout(comboTimeout);
                             comboTimeout = setTimeout(() => combo = 0, 2000);
-                            
+
                             // Drop money with combo bonus
                             const comboBonus = 1 + (combo * 0.1);
                             const dropValue = Math.floor(this.value * comboBonus);
-                            
+
                             moneyDrops.push({
                                 x: this.x,
                                 y: this.y,
@@ -1450,15 +1508,15 @@
                                 collected: false,
                                 combo: combo
                             });
-                            
+
                             enemiesDefeated++;
                             enemyCounter.textContent = `Enemies: ${enemiesDefeated}`;
-                            
+
                             // Chance to drop powerup
                             let dropChance = 0.05;
                             if (this.type === 'BOSS') dropChance = 0.8;
                             else if (this.type === 'TANK') dropChance = 0.2;
-                            
+
                             if (Math.random() < dropChance) {
                                 const powerupTypes = Object.keys(POWERUPS);
                                 const randomType = powerupTypes[Math.floor(Math.random() * powerupTypes.length)];
@@ -1471,28 +1529,28 @@
                                     floatOffset: Math.random() * Math.PI * 2
                                 });
                             }
-                            
+
                             // Skill point chance
                             if (Math.random() < 0.1) {
                                 skillPoints++;
                                 updateSkillPointsDisplay();
-          
+
                             }
-                            
+
                             const index = enemies.indexOf(this);
                             if (index > -1) enemies.splice(index, 1);
-                            
+
                             if (enemies.length === 0 && enemiesSpawnedThisWave >= enemiesPerWave) {
                                 waveComplete = true;
                                 setTimeout(() => nextWave(), 2500);
                             }
-                            
+
                             return true;
                         }
                         return false;
                     }
                 }
-                
+
                 // Enhanced Projectile class
                 class Projectile {
                     constructor(x, y, target, cannonType = 0) {
@@ -1508,7 +1566,7 @@
                         this.cannonType = cannonType;
                         this.trail = [];
                         shotsFired++;
-                        
+
                         // Apply powerup effects
                         if (powerupActive === 'DOUBLE_DAMAGE' && Date.now() < powerupEndTime) {
                             this.damage *= 2;
@@ -1518,37 +1576,37 @@
                             this.speed *= 1.8;
                         }
                     }
-                    
+
                     update() {
                         // Add to trail
                         this.trail.push({ x: this.x, y: this.y });
                         if (this.trail.length > 5) this.trail.shift();
-                        
+
                         const dx = this.target.x - this.x;
                         const dy = this.target.y - this.y;
                         const distance = Math.sqrt(dx * dx + dy * dy);
-                        
+
                         this.x += (dx / distance) * this.speed;
                         this.y += (dy / distance) * this.speed;
-                        
+
                         if (distance < this.target.radius + this.radius) {
                             if (this.target.takeDamage(this.damage)) {
                                 const moneyBonus = this.damage * 0.1 * combo;
                                 const totalValue = this.target.value + moneyBonus;
-                                
+
                                 money += totalValue;
                                 totalMoneyEarned += totalValue;
                                 moneyDisplay.textContent = money;
                                 updateUpgradeButtons();
                             }
-                            
+
                             const index = projectiles.indexOf(this);
                             if (index > -1) projectiles.splice(index, 1);
                             return true;
                         }
                         return false;
                     }
-                    
+
                     draw() {
                         // Draw trail
                         if (this.trail.length > 1) {
@@ -1561,7 +1619,7 @@
                             }
                             ctx.stroke();
                         }
-                        
+
                         // Glowing effect
                         ctx.shadowColor = this.color;
                         ctx.shadowBlur = 20;
@@ -1570,7 +1628,7 @@
                         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
                         ctx.fill();
                         ctx.shadowBlur = 0;
-                        
+
                         // Inner core
                         ctx.fillStyle = '#FFFFFF';
                         ctx.beginPath();
@@ -1578,17 +1636,17 @@
                         ctx.fill();
                     }
                 }
-                
+
                 // Initialize game
                 function initGame() {
                     console.log('Starting game...');
-                    
+
                     // Cancel any existing animation frame
                     if (animationId) {
                         cancelAnimationFrame(animationId);
                         animationId = null;
                     }
-                    
+
                     strongholdHealth = 100 + (upgrades.health.level - 1) * upgrades.health.effect;
                     maxHealth = strongholdHealth;
                     money = 100;
@@ -1608,7 +1666,7 @@
                     bossWave = false;
                     bossSpawned = false;
                     combo = 0;
-                    
+
                     // Update displays
                     healthDisplay.textContent = strongholdHealth;
                     moneyDisplay.textContent = money;
@@ -1616,66 +1674,66 @@
                     enemyCounter.textContent = `Enemies: ${enemiesDefeated}`;
                     updateWavePreview();
                     document.querySelector('.game-board').classList.remove('critical-health');
-                    
+
                     // Initialize cannons
                     initCannons();
-                    
+
                     // Update UI
                     updateUpgradeButtons();
                     updatePowerupDisplay();
                     updateSkillPointsDisplay();
-                    
+
                     // Hide game over screen
                     gameOverScreen.style.display = 'none';
-                    
+
                     // Start game loop
                     gameRunning = true;
                     gamePaused = false;
                     document.getElementById('pauseBtn').textContent = 'Pause';
                     animationId = requestAnimationFrame(gameLoop);
-                    
+
                     console.log('Game started successfully');
                 }
-                
+
                 // Enhanced game loop
                 function gameLoop(timestamp) {
                     if (!gameRunning || gamePaused) return;
-                    
+
                     // Clear with fade effect
                     ctx.fillStyle = 'rgba(10, 10, 18, 0.2)';
                     ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    
+
                     drawBackground(timestamp);
                     drawStronghold();
-                    
+
                     // Update powerup timer
                     if (powerupActive && Date.now() > powerupEndTime) {
                         powerupActive = null;
                         updatePowerupDisplay();
                     }
-                    
+
                     // Spawn enemies with wave-based logic
                     const now = performance.now();
                     if (now - lastSpawnTime > enemySpawnInterval && enemiesSpawnedThisWave < enemiesPerWave) {
                         let enemyType = getEnemyTypeForWave();
-                        
+
                         if (bossWave && !bossSpawned && enemiesSpawnedThisWave >= enemiesPerWave - 1) {
                             enemyType = 'BOSS';
                             bossSpawned = true;
                             showBossWarning();
                         }
-                        
+
                         enemies.push(new Enemy(enemyType));
                         lastSpawnTime = now;
                         enemiesSpawnedThisWave++;
                     }
-                    
+
                     // Update and draw game objects
                     enemies.forEach(enemy => {
                         enemy.update();
                         enemy.draw();
                     });
-                    
+
                     projectiles.forEach((projectile, index) => {
                         if (projectile.update()) {
                             projectiles.splice(index, 1);
@@ -1683,80 +1741,80 @@
                             projectile.draw();
                         }
                     });
-                    
+
                     moneyDrops.forEach((drop, index) => {
                         drawMoneyDrop(drop);
                         if (drop.collected) moneyDrops.splice(index, 1);
                     });
-                    
+
                     powerups.forEach((powerup, index) => {
                         drawPowerup(powerup);
                         if (powerup.collected) powerups.splice(index, 1);
                     });
-                    
+
                     // Enhanced cannon logic
                     cannons.forEach(cannon => {
                         // Cannon cooldown
                         if (cannon.cooldown > 0) {
                             cannon.cooldown--;
                         }
-                        
+
                         let closestEnemy = null;
                         let closestDistance = 180 + (upgrades.range.level - 1) * upgrades.range.effect;
-                        
+
                         enemies.forEach(enemy => {
                             const dx = enemy.x - cannon.x;
                             const dy = enemy.y - cannon.y;
                             const distance = Math.sqrt(dx * dx + dy * dy);
-                            
+
                             if (distance < closestDistance) {
                                 closestDistance = distance;
                                 closestEnemy = enemy;
                             }
                         });
-                        
+
                         if (closestEnemy && cannon.cooldown <= 0) {
                             const dx = closestEnemy.x - cannon.x;
                             const dy = closestEnemy.y - cannon.y;
                             cannon.angle = Math.atan2(dy, dx);
-                            
+
                             let fireRate = 1200 * Math.pow(upgrades.fireRate.effect, upgrades.fireRate.level - 1);
                             if (powerupActive === 'RAPID_FIRE' && Date.now() < powerupEndTime) {
                                 fireRate /= 3;
                             }
-                            
+
                             if (now - cannon.lastShotTime > fireRate) {
                                 projectiles.push(new Projectile(cannon.x, cannon.y, closestEnemy, cannon.type));
                                 cannon.lastShotTime = now;
                                 cannon.cooldown = cannon.type === 2 ? 10 : 0;
                             }
                         }
-                        
+
                         drawCannon(cannon);
                     });
-                    
+
                     animationId = requestAnimationFrame(gameLoop);
                 }
-                
+
                 // Drawing functions
                 function drawBackground(timestamp) {
                     // Simple background
                     ctx.fillStyle = '#0a0a12';
                     ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    
+
                     // Stars
                     ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
                     for (let i = 0; i < 50; i++) {
                         const x = (i * 53) % canvas.width;
                         const y = (i * 37) % canvas.height;
                         const size = Math.sin(timestamp * 0.001 + i) * 1 + 1;
-                        
+
                         ctx.beginPath();
                         ctx.arc(x, y, size, 0, Math.PI * 2);
                         ctx.fill();
                     }
                 }
-                
+
                 function drawStronghold() {
                     // Base structure
                     const gradient = ctx.createRadialGradient(
@@ -1765,12 +1823,12 @@
                     );
                     gradient.addColorStop(0, '#4CAF50');
                     gradient.addColorStop(1, '#2E7D32');
-                    
+
                     ctx.fillStyle = gradient;
                     ctx.beginPath();
                     ctx.arc(stronghold.x, stronghold.y, stronghold.radius, 0, Math.PI * 2);
                     ctx.fill();
-                    
+
                     // Outer shield with pulse effect
                     if (powerupActive === 'SHIELD' && Date.now() < powerupEndTime) {
                         const pulse = Math.sin(Date.now() * 0.005) * 5;
@@ -1780,51 +1838,51 @@
                         ctx.arc(stronghold.x, stronghold.y, stronghold.radius + 15 + pulse, 0, Math.PI * 2);
                         ctx.stroke();
                     }
-                    
+
                     // Health bar
                     const healthPercentage = strongholdHealth / maxHealth;
                     const barWidth = 120;
                     const barHeight = 12;
                     const barX = stronghold.x - barWidth / 2;
                     const barY = stronghold.y - stronghold.radius - 40;
-                    
+
                     // Background
                     ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
                     ctx.fillRect(barX, barY, barWidth, barHeight);
-                    
+
                     // Health
                     const healthGradient = ctx.createLinearGradient(barX, barY, barX + barWidth, barY);
                     healthGradient.addColorStop(0, healthPercentage > 0.5 ? '#4CAF50' : healthPercentage > 0.25 ? '#FF9800' : '#f44336');
                     healthGradient.addColorStop(1, healthPercentage > 0.5 ? '#2E7D32' : healthPercentage > 0.25 ? '#EF6C00' : '#C62828');
-                    
+
                     ctx.fillStyle = healthGradient;
                     ctx.fillRect(barX, barY, barWidth * healthPercentage, barHeight);
-                    
+
                     // Border
                     ctx.strokeStyle = '#fff';
                     ctx.lineWidth = 2;
                     ctx.strokeRect(barX, barY, barWidth, barHeight);
                 }
-                
+
                 function drawCannon(cannon) {
                     ctx.save();
                     ctx.translate(cannon.x, cannon.y);
                     ctx.rotate(cannon.angle);
-                    
+
                     // Base
                     ctx.fillStyle = '#777';
                     ctx.beginPath();
                     ctx.arc(0, 0, 15, 0, Math.PI * 2);
                     ctx.fill();
-                    
+
                     // Barrel
                     ctx.fillStyle = '#666';
                     ctx.fillRect(0, -10, 40, 20);
-                    
+
                     // Barrel tip
                     ctx.fillStyle = '#222';
                     ctx.fillRect(35, -12, 10, 24);
-                    
+
                     // Cooldown indicator
                     if (cannon.cooldown > 0) {
                         ctx.fillStyle = 'rgba(255, 0, 0, 0.3)';
@@ -1833,14 +1891,14 @@
                         ctx.lineTo(0, 0);
                         ctx.fill();
                     }
-                    
+
                     ctx.restore();
                 }
-                
+
                 function drawMoneyDrop(drop) {
                     const pulse = Math.sin(Date.now() / 200) * 4;
                     const float = Math.sin(Date.now() / 1000 + drop.x) * 3;
-                    
+
                     // Outer glow
                     ctx.shadowColor = '#FFD700';
                     ctx.shadowBlur = 20;
@@ -1849,20 +1907,20 @@
                     ctx.arc(drop.x, drop.y + float, 12 + pulse, 0, Math.PI * 2);
                     ctx.fill();
                     ctx.shadowBlur = 0;
-                    
+
                     // Dollar sign
                     ctx.fillStyle = '#000';
-                    ctx.font = 'bold 18px Jura';
+                    ctx.font = 'bold 18px Sora';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
                     ctx.fillText('$', drop.x, drop.y + float);
                 }
-                
+
                 function drawPowerup(powerup) {
                     const config = POWERUPS[powerup.type];
                     const pulse = Math.sin(Date.now() / 300 + powerup.floatOffset) * 5;
                     const float = Math.sin(Date.now() / 800 + powerup.floatOffset) * 8;
-                    
+
                     // Outer glow
                     ctx.shadowColor = config.color;
                     ctx.shadowBlur = 25;
@@ -1871,36 +1929,36 @@
                     ctx.arc(powerup.x, powerup.y + float, powerup.radius + pulse, 0, Math.PI * 2);
                     ctx.fill();
                     ctx.shadowBlur = 0;
-                    
+
                     // Icon
                     ctx.fillStyle = '#fff';
-                    ctx.font = 'bold 20px Jura';
+                    ctx.font = 'bold 20px Sora';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
                     ctx.fillText(config.icon, powerup.x, powerup.y + float);
                 }
-                
+
                 // Utility functions
                 function getDifficultyMultiplier() {
-                    switch(difficulty) {
+                    switch (difficulty) {
                         case 'easy': return 0.8;
                         case 'hard': return 1.4;
                         default: return 1.0;
                     }
                 }
-                
+
                 function getEnemyTypeForWave() {
                     if (wave >= 15 && Math.random() < 0.15) return 'BOSS';
                     if (wave >= 10 && Math.random() < 0.25) return 'TANK';
                     if (wave >= 5 && Math.random() < 0.4) return 'FAST';
                     return 'NORMAL';
                 }
-                
+
                 function updateWavePreview() {
                     const nextEnemy = getEnemyTypeForWave();
                     wavePreview.textContent = `Next: ${ENEMY_TYPES[nextEnemy].name}`;
                 }
-                
+
                 function showDamageNumber(x, y, damage) {
                     const damageEl = document.createElement('div');
                     damageEl.textContent = `-${damage}`;
@@ -1913,9 +1971,9 @@
                     damageEl.style.pointerEvents = 'none';
                     damageEl.style.zIndex = '100';
                     damageEl.style.animation = 'fadeUp 1s forwards';
-                    
+
                     document.querySelector('.game-board').appendChild(damageEl);
-                    
+
                     setTimeout(() => {
                         if (damageEl.parentNode) {
                             damageEl.parentNode.removeChild(damageEl);
@@ -1923,51 +1981,51 @@
                     }, 1000);
                 }
 
-                
+
                 function showBossWarning() {
                     bossWarning.style.display = 'block';
                     setTimeout(() => bossWarning.style.display = 'none', 3000);
                 }
-                
+
                 // Game progression
                 function nextWave() {
                     wave++;
                     waveDisplay.textContent = wave;
-                    
+
                     // Show wave indicator
                     waveIndicator.textContent = `WAVE ${wave}`;
                     waveIndicator.style.display = 'block';
                     setTimeout(() => waveIndicator.style.display = 'none', 2000);
-                    
+
                     // Increase difficulty
                     enemiesPerWave = Math.floor(8 + wave * 2);
                     enemySpawnInterval = Math.max(500, 2000 - wave * 100);
-                    
+
                     // Check for boss wave
                     bossWave = wave % 5 === 0;
                     bossSpawned = false;
-                    
+
                     // Reset wave state
                     enemiesSpawnedThisWave = 0;
                     waveComplete = false;
-                    
+
                     // Bonus money with wave bonus
                     const waveBonus = 50 + wave * 12;
                     const comboBonus = combo * 10;
                     const totalBonus = waveBonus + comboBonus;
-                    
+
                     money += totalBonus;
                     totalMoneyEarned += totalBonus;
                     moneyDisplay.textContent = money;
 
-                    
+
                     // Update preview
                     updateWavePreview();
-                    
+
                     // Unlock achievements
                     checkAchievements();
                     updateUpgradeButtons();
-                    
+
                     // Grant skill point every 3 waves
                     if (wave % 3 === 0) {
                         skillPoints++;
@@ -1975,27 +2033,27 @@
 
                     }
                 }
-                
+
                 function gameOver() {
                     gameRunning = false;
                     if (animationId) {
                         cancelAnimationFrame(animationId);
                         animationId = null;
                     }
-                    
+
                     // Calculate accuracy
                     const accuracy = shotsFired > 0 ? Math.round((shotsHit / shotsFired) * 100) : 0;
-                    
+
                     // Determine rank
                     let rank = 'Recruit';
                     let rankColor = '#ccc';
                     const score = wave * 100 + enemiesDefeated * 10 + totalMoneyEarned;
-                    
+
                     if (score > 5000) { rank = 'General'; rankColor = '#FFD700'; }
                     else if (score > 3000) { rank = 'Colonel'; rankColor = '#C0C0C0'; }
                     else if (score > 1500) { rank = 'Captain'; rankColor = '#CD7F32'; }
                     else if (score > 500) { rank = 'Sergeant'; rankColor = '#4CAF50'; }
-                    
+
                     // Update final stats
                     finalScore.textContent = `You survived ${wave} waves`;
                     finalEnemies.textContent = `Enemies defeated: ${enemiesDefeated}`;
@@ -2003,16 +2061,16 @@
                     finalAccuracy.textContent = `Accuracy: ${accuracy}%`;
                     finalRank.textContent = `Rank: ${rank}`;
                     finalRank.style.color = rankColor;
-                    
+
                     gameOverScreen.style.display = 'flex';
-                    
+
                     // Unlock defeat achievement
                     if (!achievements.has('first_defeat')) {
                         achievements.add('first_defeat');
                         showAchievement('Fallen Stronghold', 'Your first defeat. The battle continues!');
                     }
                 }
-                
+
                 // UI functions
                 function updateUpgradeButtons() {
                     Object.keys(upgrades).forEach(key => {
@@ -2024,7 +2082,7 @@
                         }
                     });
                 }
-                
+
                 function updatePowerupDisplay() {
                     if (powerupActive && Date.now() < powerupEndTime) {
                         const config = POWERUPS[powerupActive];
@@ -2037,49 +2095,49 @@
                         powerupActive = null;
                     }
                 }
-                
+
                 function updateSkillPointsDisplay() {
                     const skillPointsElement = document.getElementById('skillPoints');
                     if (skillPointsElement) {
                         skillPointsElement.textContent = `(Skill Points: ${skillPoints})`;
                     }
                 }
-                
+
                 function buyUpgrade(upgradeType) {
                     const upgrade = upgrades[upgradeType];
-                    
+
                     if (money >= upgrade.cost && upgrade.level < upgrade.maxLevel) {
                         money -= upgrade.cost;
                         moneyDisplay.textContent = money;
                         upgrade.level++;
                         upgrade.cost = Math.floor(upgrade.cost * 1.6);
-                        
-                        if (upgradeType === 'health') { 
+
+                        if (upgradeType === 'health') {
                             const healthIncrease = upgrade.effect;
                             strongholdHealth += healthIncrease;
                             maxHealth += healthIncrease;
                             healthDisplay.textContent = strongholdHealth;
                         }
-                        
+
                         updateUpgradeButtons();
 
                     }
                 }
-                
+
                 function activatePowerup(type) {
                     powerupActive = type;
                     powerupEndTime = Date.now() + POWERUPS[type].duration;
                     updatePowerupDisplay();
-                    
 
-                    
+
+
                     // Show achievement for first powerup
                     if (!achievements.has('first_powerup')) {
                         achievements.add('first_powerup');
                         showAchievement('Power Surge!', 'Activated your first power-up');
                     }
                 }
-                
+
                 function checkAchievements() {
                     if (wave >= 5 && !achievements.has('wave_5')) {
                         achievements.add('wave_5');
@@ -2106,59 +2164,59 @@
                         showAchievement('Combo Master', 'Achieved 10x combo');
                     }
                 }
-                
+
                 function showAchievement(title, description) {
                     achievementTitle.textContent = title;
                     achievementDesc.textContent = description;
                     achievementPopup.style.display = 'block';
-                    
+
                     setTimeout(() => {
                         achievementPopup.style.display = 'none';
                     }, 4000);
                 }
-                
+
                 // Event listeners
                 canvas.addEventListener('click', (e) => {
                     if (!gameRunning) return;
-                    
+
                     const rect = canvas.getBoundingClientRect();
                     const x = e.clientX - rect.left;
                     const y = e.clientY - rect.top;
-                    
+
                     // Collect money drops
                     moneyDrops.forEach(drop => {
                         const dx = drop.x - x;
                         const dy = drop.y - y;
                         const distance = Math.sqrt(dx * dx + dy * dy);
-                        
+
                         if (distance < 25 && !drop.collected) {
                             drop.collected = true;
                             money += drop.value;
                             totalMoneyEarned += drop.value;
                             moneyDisplay.textContent = money;
                             updateUpgradeButtons();
-                            
+
                         }
                     });
-                    
+
                     // Collect powerups
                     powerups.forEach(powerup => {
                         const dx = powerup.x - x;
                         const dy = powerup.y - y;
                         const distance = Math.sqrt(dx * dx + dy * dy);
-                        
+
                         if (distance < 30 && !powerup.collected) {
                             powerup.collected = true;
                             activatePowerup(powerup.type);
                         }
                     });
                 });
-                
+
                 // Button events
                 document.getElementById('startBtn').addEventListener('click', () => {
                     if (!gameRunning) initGame();
                 });
-                
+
                 document.getElementById('pauseBtn').addEventListener('click', () => {
                     if (gameRunning) {
                         gamePaused = !gamePaused;
@@ -2168,10 +2226,10 @@
                         }
                     }
                 });
-                
+
                 document.getElementById('restartBtn').addEventListener('click', initGame);
                 document.getElementById('restartBtn2').addEventListener('click', initGame);
-                
+
                 // Upgrade buttons
                 Object.keys(upgrades).forEach(key => {
                     const btn = document.getElementById(key + 'Upgrade');
@@ -2179,14 +2237,14 @@
                         btn.addEventListener('click', () => buyUpgrade(key));
                     }
                 });
-                
+
                 // Difficulty buttons
                 document.querySelectorAll('.difficulty-btn').forEach(btn => {
                     btn.addEventListener('click', () => {
                         document.querySelectorAll('.difficulty-btn').forEach(b => b.classList.remove('active'));
                         btn.classList.add('active');
                         difficulty = btn.dataset.difficulty;
-                        
+
                         // Show achievement for changing difficulty
                         if (!achievements.has('difficulty_change')) {
                             achievements.add('difficulty_change');
@@ -2194,15 +2252,15 @@
                         }
                     });
                 });
-                
+
                 // Draw initial screen
                 function drawInitialScreen() {
                     console.log('Drawing initial screen...');
-                    
+
                     // Clear canvas
                     ctx.fillStyle = '#0a0a12';
                     ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    
+
                     // Draw stronghold
                     const gradient = ctx.createRadialGradient(
                         stronghold.x, stronghold.y, 0,
@@ -2210,61 +2268,61 @@
                     );
                     gradient.addColorStop(0, '#4CAF50');
                     gradient.addColorStop(1, '#2E7D32');
-                    
+
                     ctx.fillStyle = gradient;
                     ctx.beginPath();
                     ctx.arc(stronghold.x, stronghold.y, stronghold.radius, 0, Math.PI * 2);
                     ctx.fill();
-                    
+
                     // Draw cannons
                     initCannons();
                     cannons.forEach(cannon => {
                         ctx.save();
                         ctx.translate(cannon.x, cannon.y);
                         ctx.rotate(cannon.angle);
-                        
+
                         // Base
                         ctx.fillStyle = '#777';
                         ctx.beginPath();
                         ctx.arc(0, 0, 15, 0, Math.PI * 2);
                         ctx.fill();
-                        
+
                         // Barrel
                         ctx.fillStyle = '#666';
                         ctx.fillRect(0, -10, 40, 20);
-                        
+
                         ctx.restore();
                     });
-                    
+
                     // Draw title text
                     ctx.fillStyle = '#fff';
-                    ctx.font = 'bold 28px Jura';
+                    ctx.font = 'bold 28px Sora';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
                     ctx.fillText('STRONGHOLD DEFENSE', canvas.width / 2, canvas.height / 2 - 60);
-                    ctx.font = '20px Jura';
+                    ctx.font = '20px Sora';
                     ctx.fillText('Select difficulty and click "Start Game"', canvas.width / 2, canvas.height / 2 - 10);
                     ctx.fillText('Defend the stronghold from all sides!', canvas.width / 2, canvas.height / 2 + 30);
-                    ctx.font = '16px Jura';
+                    ctx.font = '16px Sora';
                     ctx.fillText('Upgrade cannons between waves', canvas.width / 2, canvas.height / 2 + 70);
                     ctx.fillText('Collect power-ups for temporary boosts', canvas.width / 2, canvas.height / 2 + 100);
-                    
+
                     // Draw click prompt
                     ctx.fillStyle = '#e6c300';
-                    ctx.font = '18px Jura';
+                    ctx.font = '18px Sora';
                     ctx.fillText('Click "Start Game" to begin!', canvas.width / 2, canvas.height - 50);
-                    
+
                     console.log('Initial screen drawn');
                 }
-                
+
                 // Initialize UI
                 initCannons();
                 updateUpgradeButtons();
                 updateWavePreview();
                 drawInitialScreen();
-                
+
                 console.log('Game initialized successfully');
-                
+
             } catch (error) {
                 console.error('Error initializing game:', error);
                 alert('Error initializing game. Check console for details.');
@@ -2272,4 +2330,5 @@
         });
     </script>
 </body>
+
 </html>

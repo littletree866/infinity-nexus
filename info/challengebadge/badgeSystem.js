@@ -493,7 +493,7 @@ const BadgeSystem = (() => {
             font-weight: 700;
             animation: slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
             max-width: 380px;
-            font-family: 'DM Sans', Arial, sans-serif;
+            font-family: 'Sora', Arial, sans-serif;
             border: 2px solid rgba(255,255,255,0.2);
             backdrop-filter: blur(10px);
         `;

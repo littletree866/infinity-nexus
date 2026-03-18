@@ -439,12 +439,12 @@
   <!-- Home Screen -->
   <div id="home" class="screen">
     <div>
-      <h1 class="title">The World's Dumbest Game</h1>
-      <p class="subtitle">Please do not play this.</p>
+      <h1 class="title">🎮 The World's Dumbest Game 🎮</h1>
+      <p class="subtitle">Click button. Get bored. Regret life choices. Fun!</p>
     </div>
     <div class="btn-group">
-      <button class="btn" onclick="startGame()">START SIMULATION</button>
-      <button class="btn btn-secondary" onclick="openSettings()">SETTINGS</button>
+      <button class="btn" onclick="startGame()">🚀 START SIMULATION</button>
+      <button class="btn btn-secondary" onclick="openSettings()">⚙️ SETTINGS</button>
     </div>
   </div>
 
@@ -493,59 +493,63 @@
   <!-- Shop Modal -->
   <div id="shopModal" class="modal">
     <div class="modalBox">
-      <h2>Upgrade Shop (May Cause Regret)</h2>
+      <h2>💎 Upgrade Shop (May Cause Regret)</h2>
       <div class="modal-buttons">
         <button class="modal-btn" onclick="buy('power')">
-          <span>💪 Stronger Clicks<br><small>More points per click</small></span>
+          <span>💪 Stronger Clicks<br><small>+0.5 power per level | More points per click</small></span>
           <span class="cost">1 SP</span>
         </button>
         <button class="modal-btn" onclick="buy('crit')">
-          <span>🎯 Critical Chance<br><small>Higher chance for critical hits</small></span>
+          <span>🎯 Critical Chance<br><small>+4% crit per level | 3x damage on critical</small></span>
           <span class="cost">1 SP</span>
         </button>
         <button class="modal-btn" onclick="buy('auto')">
-          <span>🤖 Auto Clicker<br><small>Automated clicking (passive income)</small></span>
+          <span>🤖 Auto Clicker<br><small>Automated clicking for passive income</small></span>
           <span class="cost">2 SP</span>
         </button>
         <button class="modal-btn" onclick="buy('chaos')">
-          <span>🌀 Chaos Engine<br><small>Increases random events</small></span>
+          <span>🌀 Chaos Engine<br><small>Increases random events & rewards</small></span>
           <span class="cost">1 SP</span>
         </button>
         <button class="modal-btn" onclick="buy('multiplier')">
-          <span>✨ Score Multiplier<br><small>Permanent score multiplier</small></span>
+          <span>✨ Score Multiplier<br><small>1.2x permanent multiplier boost</small></span>
           <span class="cost">3 SP</span>
         </button>
+        <button class="modal-btn" onclick="buy('frenzy')">
+          <span>⚡ Click Frenzy<br><small>Increased combo multipliers & rewards</small></span>
+          <span class="cost">2 SP</span>
+        </button>
       </div>
-      <div class="small">Warning: Upgrades may have unintended consequences.</div>
-      <button class="btn btn-secondary" onclick="closeShop()" style="margin-top: 1rem;">Close</button>
+      <div class="small">⚠️ Warning: Upgrades may have unintended consequences.</div>
+      <button class="btn btn-secondary" onclick="closeShop()" style="margin-top: 1rem;">✖️ Close</button>
     </div>
   </div>
 
   <!-- Settings Modal -->
   <div id="settingsModal" class="modal">
     <div class="modalBox">
-      <h2>Settings</h2>
+      <h2>⚙️ Settings</h2>
       <div class="modal-buttons">
         <button class="modal-btn" onclick="toggleSetting('particles')">
-          <span>✨ Particle Effects<br><small>Make everything sparkly</small></span>
+          <span>✨ Particle Effects<br><small>Fill the screen with sparkly chaos</small></span>
           <span id="particles-status">ON</span>
         </button>
         <button class="modal-btn" onclick="toggleSetting('sound')">
-          <span>🔊 Sound Effects<br><small>Add satisfying clicks</small></span>
+          <span>🔊 Sound Effects<br><small>Satisfying click noises</small></span>
           <span id="sound-status">ON</span>
         </button>
         <button class="modal-btn" onclick="toggleSetting('chaosMode')">
-          <span>😈 Chaos Mode<br><small>Everything is unpredictable</small></span>
+          <span>😈 Chaos Mode<br><small>Everything is unpredictable and glitchy</small></span>
           <span id="chaos-status">OFF</span>
         </button>
         <button class="modal-btn" onclick="fakeSetting()">
-          <span>🌌 Raytraced Button<br><small>Extremely realistic shadows</small></span>
+          <span>🌌 Raytraced Button<br><small>Extremely realistic button shadows</small></span>
         </button>
         <button class="modal-btn" onclick="fakeSetting()">
-          <span>⚡ Performance Mode<br><small>For weak computers</small></span>
+          <span>⚡ Performance Mode<br><small>For computers with commitment issues</small></span>
         </button>
       </div>
-      <button class="btn btn-secondary" onclick="closeSettings()" style="margin-top: 1rem;">Close</button>
+      <button class="btn btn-secondary" onclick="closeSettings()" style="margin-top: 1rem;">✖️ Close</button>
     </div>
   </div>
 
@@ -560,11 +564,13 @@
       xp: 0,
       maxXp: 100,
       combo: 0,
+      maxCombo: 0,
       skillPoints: 0,
       crit: 0.05,
       power: 1,
       auto: 0,
       chaos: 0,
+      frenzy: 0,
       multiplier: 1,
       clickCount: 0,
       upgrades: {
@@ -572,7 +578,8 @@
         crit: 0,
         auto: 0,
         chaos: 0,
-        multiplier: 0
+        multiplier: 0,
+        frenzy: 0
       }
     };
 
@@ -602,7 +609,7 @@
       el("home").classList.add("hidden");
       el("game").classList.remove("hidden");
       startTime = Date.now();
-      addLog("Game started. The button awaits.", "normal");
+      addLog("🎮 GAME STARTED. THE BUTTON AWAITS YOUR DEVOTION.", "success");
     }
 
     function goHome() {
@@ -610,7 +617,7 @@
       closeSettings();
       el("game").classList.add("hidden");
       el("home").classList.remove("hidden");
-      addLog("Returned to menu. The button misses you.", "normal");
+      addLog("👋 Returned to menu. The button misses you already...", "normal");
     }
 
     // Game Loop
@@ -676,19 +683,30 @@
       lastClick = now;
       game.clickCount++;
 
-      // Calculate gain
-      let gain = (game.combo * game.power * game.level * game.multiplier) / 10;
+      // Calculate gain with improved combo multiplier
+      let comboMult = 1 + (game.combo * 0.1) + (game.frenzy * 0.05);
+      let gain = (game.combo * game.power * game.level * game.multiplier * comboMult) / 10;
 
       // Critical hit
       const isCrit = Math.random() < game.crit;
       if (isCrit) {
         gain *= 3;
-        showMessage("CRITICAL HIT!", "critical");
+        showMessage("🎯 CRITICAL HIT!", "critical");
         addLog(`Critical hit! +${Math.floor(gain)} points`, "success");
+        createParticles(15);
       }
 
       game.score += gain;
       game.xp += gain * 0.5;
+
+      // Update max combo
+      if (game.combo > game.maxCombo) {
+        game.maxCombo = game.combo;
+        if (game.combo >= 10) {
+          addLog(`NEW PERSONAL RECORD! ${game.combo}x combo!`, "success");
+          createParticles(20);
+        }
+      }
 
       // Level up check
       if (game.xp >= game.maxXp) {
@@ -737,11 +755,26 @@
       game.xp = 0;
       game.maxXp = Math.floor(game.maxXp * 1.5);
 
-      showMessage(`LEVEL UP! You're now level ${game.level}`, "level-up");
-      addLog(`Reached level ${game.level}. Gained 1 skill point.`, "success");
+      const messages = [
+        `🎉 LEVEL ${game.level}! You're unstoppable!`,
+        `⭐ LEVEL UP TO ${game.level}! Keep clicking!`,
+        `🚀 LEVEL ${game.level}! The button is pleased.`,
+        `💫 BREAKTHROUGH! You reached level ${game.level}!`
+      ];
+
+      const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+      showMessage(randomMsg, "level-up");
+      addLog(`Reached level ${game.level}. Gained 1 skill point. Max XP: ${game.maxXp}`, "success");
 
       // Track badge progress
       BadgeSystem.updateProgress('worlds_dumbest', game.level, 30);
+
+      // Level milestone bonuses
+      if (game.level % 5 === 0) {
+        game.score *= 1.5;
+        addLog(`🏆 LEVEL ${game.level} MILESTONE! Score increased by 50%!`, "success");
+        createParticles(30);
+      }
 
       createParticles(20);
       updateUI();
@@ -760,6 +793,7 @@
       let cost = 1;
       if (type === 'auto') cost = 2;
       if (type === 'multiplier') cost = 3;
+      if (type === 'frenzy') cost = 2;
 
       if (game.skillPoints >= cost) {
         game.skillPoints -= cost;
@@ -768,29 +802,34 @@
         switch (type) {
           case 'power':
             game.power += 0.5;
-            addLog("Muscles grown. Click power increased.", "success");
+            addLog(`💪 Muscles grown! Click power: ${game.power.toFixed(1)}`, "success");
             break;
           case 'crit':
             game.crit += 0.04;
-            addLog("Aiming improved. Critical chance increased.", "success");
+            addLog(`🎯 Aiming improved! Crit chance: ${(game.crit * 100).toFixed(1)}%`, "success");
             break;
           case 'auto':
             game.auto++;
-            addLog("Hired a robot assistant. It seems unhappy.", "normal");
+            addLog(`🤖 Hired robot #${game.upgrades.auto}. It seems unhappy.`, "normal");
             break;
           case 'chaos':
             game.chaos++;
-            addLog("Chaos level increased. Reality feels less stable.", "warning");
+            addLog(`🌀 Chaos +1. Reality glitches more often now.`, "warning");
             break;
           case 'multiplier':
             game.multiplier *= 1.2;
-            addLog("Score multiplier activated. Things are getting serious.", "success");
+            addLog(`✨ MULTIPLIER NOW ${game.multiplier.toFixed(2)}x! THINGS GET SERIOUS!`, "success");
+            createParticles(25);
+            break;
+          case 'frenzy':
+            game.frenzy++;
+            addLog(`⚡ FRENZY MODE ACTIVATED! Combo multiplier increased!`, "success");
             break;
         }
 
         updateUI();
       } else {
-        showMessage("Not enough skill points!", "critical");
+        showMessage("❌ Not enough skill points!", "critical");
         addLog("Attempted to buy upgrade without enough points. Shame.", "warning");
       }
     }
@@ -917,18 +956,33 @@
         () => {
           const bonus = game.level * 100;
           game.score += bonus;
-          addLog(`Found ${bonus} bonus points in the code!`, "success");
+          addLog(`💰 Found ${bonus} bonus points in the code!`, "success");
           showMessage("BONUS POINTS!", "level-up");
+          createParticles(15);
         },
         () => {
           game.skillPoints++;
-          addLog("A mysterious benefactor granted you a skill point!", "success");
+          addLog(`🎁 A mysterious benefactor granted you a skill point!`, "success");
           showMessage("FREE SKILL POINT!", "level-up");
+          createParticles(15);
         },
         () => {
           const oldPower = game.power;
           game.power *= 1.1;
-          addLog(`Button feels more powerful! Power: ${oldPower.toFixed(1)} → ${game.power.toFixed(1)}`, "normal");
+          addLog(`⚡ Button feels more powerful! Power: ${oldPower.toFixed(1)} → ${game.power.toFixed(1)}`, "normal");
+          createParticles(10);
+        },
+        () => {
+          const bonusXp = game.maxXp * 0.25;
+          game.xp += bonusXp;
+          addLog(`📊 Lucky event! Gained ${Math.floor(bonusXp)} bonus XP!`, "success");
+          createParticles(10);
+        },
+        () => {
+          const bonusCombo = Math.floor(Math.random() * 5) + 3;
+          game.combo += bonusCombo;
+          addLog(`🔥 Unexpected bonus combo! +${bonusCombo} combo!`, "success");
+          createParticles(12);
         }
       ];
 
@@ -941,24 +995,36 @@
         () => {
           const loss = game.score * 0.1;
           game.score -= loss;
-          addLog(`System glitch! Lost ${Math.floor(loss)} points.`, "warning");
-          showMessage("GLITCH DETECTED!", "critical");
+          addLog(`💥 System glitch! Lost ${Math.floor(loss)} points.`, "warning");
+          showMessage("⚠️ GLITCH DETECTED!", "critical");
         },
         () => {
           const btn = el("btn");
           btn.style.filter = 'hue-rotate(180deg)';
-          addLog("Button colors inverted. This is fine.", "warning");
+          addLog("🌀 Button colors inverted. This is fine.", "warning");
           setTimeout(() => btn.style.filter = '', 2000);
         },
         () => {
           game.combo = 0;
-          addLog("Combo breaker! Combo reset to zero.", "warning");
+          addLog("❌ Combo breaker! Combo reset to zero.", "warning");
+          showMessage("COMBO BROKEN!", "critical");
         },
         () => {
           if (game.auto > 0) {
             game.auto--;
-            addLog("Auto-clicker unionized and left. One less auto-clicker.", "warning");
+            addLog(`🤖 Auto-clicker #${game.auto + 1} unionized and left.`, "warning");
           }
+        },
+        () => {
+          const lossXp = game.maxXp * 0.1;
+          game.xp = Math.max(0, game.xp - lossXp);
+          addLog(`📉 XP malfunction! Lost ${Math.floor(lossXp)} XP.`, "warning");
+        },
+        () => {
+          const btn = el("btn");
+          btn.textContent = "CLICK FOR WHATEVER";
+          setTimeout(() => btn.textContent = "CLICK FOR GLORY", 3000);
+          addLog("🎭 Button feels confused.", "warning");
         }
       ];
 

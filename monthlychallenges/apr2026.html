@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>April Challenge</title>
+    <link rel="icon" type="image/x-icon" href="../icon.jpg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #1a472a 0%, #0e2a1a 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', 'Poppins', 'Quicksand', system-ui, -apple-system, 'Montserrat', sans-serif;
+            padding: 20px;
+            margin: 0;
+        }
+
+        /* main game container */
+        .game-container {
+            background: rgba(255,248,225,0.9);
+            border-radius: 72px;
+            padding: 24px 20px 30px 20px;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.3), inset 0 1px 3px rgba(255,255,200,0.6);
+            backdrop-filter: blur(2px);
+            transition: all 0.2s ease;
+            max-width: 750px;
+            width: 100%;
+        }
+
+        /* header area */
+        .game-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.6rem;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #f7b42c, #fc575e);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+            display: inline-block;
+            padding: 0 10px;
+        }
+
+        .sub {
+            font-size: 0.9rem;
+            color: #2c5a2e;
+            font-weight: 600;
+            background: #fef5e7;
+            display: inline-block;
+            padding: 5px 18px;
+            border-radius: 40px;
+            margin-top: 8px;
+            box-shadow: inset 0 1px 2px #0001, 0 2px 4px #0001;
+        }
+
+        /* stats panel */
+        .stats-panel {
+            display: flex;
+            justify-content: space-between;
+            background: #2e241fdd;
+            background: #2c2e2ad9;
+            backdrop-filter: blur(4px);
+            border-radius: 100px;
+            padding: 12px 24px;
+            margin: 15px 10px 25px 10px;
+            color: #f9eed7;
+            font-weight: bold;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .stat {
+            background: #00000044;
+            padding: 5px 18px;
+            border-radius: 32px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            backdrop-filter: blur(2px);
+        }
+
+        .stat span:first-child {
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .stat span:last-child {
+            font-size: 1.8rem;
+            font-weight: 800;
+            line-height: 1;
+            color: #ffd966;
+        }
+
+        /* game grid */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            justify-items: center;
+            align-items: center;
+            margin: 20px 10px;
+        }
+
+        /* card styling */
+        .card {
+            aspect-ratio: 3 / 4;
+            width: 100%;
+            max-width: 130px;
+            background: linear-gradient(145deg, #fff2df, #ffe0b5);
+            border-radius: 28px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.2rem;
+            font-weight: 600;
+            transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 12px 18px -8px rgba(0,0,0,0.3), inset 0 -2px 0 rgba(0,0,0,0.05);
+            transform: scale(1);
+            text-shadow: 1px 1px 0 white;
+            position: relative;
+        }
+
+        /* card hidden state (face down) */
+        .card.hidden {
+            background: repeating-linear-gradient(45deg, #4b6a3b, #4b6a3b 12px, #3c572b 12px, #3c572b 24px);
+            box-shadow: inset 0 0 0 3px #ffecb3, 0 8px 16px rgba(0,0,0,0.3);
+            color: #ffe2a4;
+            font-size: 2.2rem;
+            text-shadow: none;
+        }
+
+        /* card revealed / matched special style */
+        .card.revealed {
+            background: #fff7e8;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2), inset 0 1px 3px #ffffdd;
+            transform: scale(0.98);
+            cursor: default;
+        }
+
+        .card.matched {
+            background: #b7d968dd;
+            background: linear-gradient(135deg, #b1d46b, #90be4d);
+            color: #2b3b1f;
+            cursor: default;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+            transform: scale(0.96);
+            text-decoration: none;
+            opacity: 0.85;
+        }
+
+        /* disable pointer events on matched & revealed waiting */
+        .card.matched, .card.revealed:not(.hidden) {
+            cursor: default;
+        }
+
+        .card.hidden:hover:not(.matched) {
+            transform: scale(1.02);
+            background: repeating-linear-gradient(45deg, #5f8548, #5f8548 12px, #4d6e38 12px, #4d6e38 24px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+
+        /* message & control */
+        .message-area {
+            text-align: center;
+            margin: 15px 10px 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2a2b1f;
+            background: #efe3cdb3;
+            padding: 10px;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+        }
+
+        .btn-reset {
+            background: #ffb347;
+            background: linear-gradient(to right, #ff9944, #ff7744);
+            border: none;
+            font-size: 1.3rem;
+            font-weight: bold;
+            padding: 12px 28px;
+            border-radius: 48px;
+            color: #2c1a0c;
+            cursor: pointer;
+            margin-top: 8px;
+            margin-bottom: 8px;
+            transition: 0.1s linear;
+            box-shadow: 0 5px 0 #a03f1a;
+            font-family: inherit;
+            letter-spacing: 1px;
+        }
+
+        .btn-reset:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #a03f1a;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 550px) {
+            .game-grid {
+                gap: 10px;
+            }
+            .card {
+                font-size: 2.2rem;
+            }
+            .stat span:last-child {
+                font-size: 1.4rem;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            .stats-panel {
+                padding: 8px 12px;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .game-grid {
+                gap: 8px;
+            }
+            .card {
+                font-size: 1.8rem;
+                border-radius: 20px;
+            }
+        }
+
+        .win-glow {
+            animation: winPulse 0.6s ease-in-out 3;
+        }
+
+        @keyframes winPulse {
+            0% { box-shadow: 0 0 0 0 #ffd966, 0 0 0 0 #ffbb33; }
+            50% { box-shadow: 0 0 0 12px rgba(255, 200, 80, 0.5), 0 0 0 8px #ffb34780; }
+            100% { box-shadow: 0 0 0 0 rgba(255, 200, 80, 0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="game-container">
+    <div class="game-header">
+        <h1>🌸 APRIL CHALLENGE 🌸</h1>
+        <div class="sub">Match all 8 pairs!</div>
+    </div>
+
+    <div class="stats-panel">
+        <div class="stat"><span>🎯 MATCHES</span><span id="matchesCount">0</span></div>
+        <div class="stat"><span>✨ MOVES</span><span id="movesCount">0</span></div>
+        <div class="stat"><span>⏱️ TIME</span><span id="timerDisplay">00:00</span></div>
+    </div>
+
+    <div class="game-grid" id="gameGrid"></div>
+
+    <div class="message-area" id="gameMessage">
+        🌱 Find all the symbols!
+    </div>
+
+    <div class="footer">
+        <button class="btn-reset" id="resetGameBtn">🔄 New Game</button>
+    </div>
+</div>
+
+<script>
+    // ----- GAME DATA : 8 unique pairs (total 16 cards) with APRIL / spring theme
+    const ICON_SET = [
+        "🌸", "🌼", "🌷", "🦋", 
+        "🐝", "☔", "🌈", "🌱"
+    ];
+    
+    // pair mapping for clarity (each icon appears twice)
+    let gameCards = [];       // stores { id, icon, isMatched, isRevealed, element, cardIndex }
+    let cardElements = [];
+    let moves = 0;
+    let matchedPairs = 0;
+    let timerSeconds = 0;
+    let timerInterval = null;
+    let gameActive = true;       // when game finished, disable clicks
+    let lockBoard = false;       // block clicks during flip delay / animation
+    let firstCard = null;
+    let secondCard = null;
+
+    // DOM elements
+    const gridContainer = document.getElementById("gameGrid");
+    const matchesSpan = document.getElementById("matchesCount");
+    const movesSpan = document.getElementById("movesCount");
+    const timerDisplaySpan = document.getElementById("timerDisplay");
+    const messageDiv = document.getElementById("gameMessage");
+    const resetBtn = document.getElementById("resetGameBtn");
+
+    // Helper: format mm:ss
+    function formatTime(sec) {
+        let mins = Math.floor(sec / 60);
+        let remainSec = sec % 60;
+        return `${mins.toString().padStart(2, '0')}:${remainSec.toString().padStart(2, '0')}`;
+    }
+
+    function updateUI() {
+        matchesSpan.innerText = matchedPairs;
+        movesSpan.innerText = moves;
+        timerDisplaySpan.innerText = formatTime(timerSeconds);
+    }
+
+    // stop timer when game finished or reset
+    function stopTimer() {
+        if (timerInterval) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        }
+    }
+
+    function startTimer() {
+        if (timerInterval) stopTimer();
+        timerInterval = setInterval(() => {
+            if (gameActive && matchedPairs < ICON_SET.length) {
+                timerSeconds++;
+                updateUI();
+            } else if (matchedPairs >= ICON_SET.length) {
+                // game completed but keep timer from incrementing? actually we can stop when win
+                if (timerInterval && gameActive === false) {
+                    // do nothing, but we'll stop on win condition
+                }
+            }
+            updateUI();
+        }, 1000);
+    }
+
+    // reset timer (stops, sets to 0, optionally restarts)
+    function resetTimerAndStart() {
+        stopTimer();
+        timerSeconds = 0;
+        updateUI();
+        if (gameActive && matchedPairs < ICON_SET.length) {
+            startTimer();
+        }
+    }
+
+    // check win condition
+    function checkWin() {
+        if (matchedPairs === ICON_SET.length) {
+            // game completed!
+            gameActive = false;
+            stopTimer();
+            messageDiv.innerHTML = "🎉✨ You found all the pairs! ✨🎉<br>🌸 Congrats! 🌸";
+            messageDiv.style.background = "#f9e0a0dd";
+            messageDiv.style.fontSize = "1.2rem";
+            // add glow effect to container
+            document.querySelector('.game-container').classList.add('win-glow');
+            setTimeout(() => {
+                if(document.querySelector('.game-container')) 
+                    document.querySelector('.game-container').classList.remove('win-glow');
+            }, 1000);
+            return true;
+        }
+        return false;
+    }
+
+    // clear selected cards (without resetting lock, but after comparison)
+    function clearSelected() {
+        firstCard = null;
+        secondCard = null;
+        lockBoard = false;
+    }
+
+    // hide unmatched cards (flip back)
+    function resetUnmatched() {
+        if (!firstCard || !secondCard) return;
+        // if both are not matched and are revealed, flip them back to hidden
+        const cardA = gameCards[firstCard];
+        const cardB = gameCards[secondCard];
+        if (!cardA.isMatched && !cardB.isMatched) {
+            cardA.isRevealed = false;
+            cardB.isRevealed = false;
+            // update DOM visuals
+            updateCardDisplay(firstCard);
+            updateCardDisplay(secondCard);
+        }
+        clearSelected();
+    }
+
+    // compare two selected cards
+    function compareCards(idxA, idxB) {
+        if (idxA === idxB) {
+            // same card clicked? should not happen but safety
+            clearSelected();
+            return;
+        }
+        const card1 = gameCards[idxA];
+        const card2 = gameCards[idxB];
+        const isMatch = (card1.icon === card2.icon);
+        
+        if (isMatch) {
+            // match success
+            card1.isMatched = true;
+            card2.isMatched = true;
+            card1.isRevealed = true;   // stays revealed
+            card2.isRevealed = true;
+            matchedPairs++;
+            updateUI();
+            updateCardDisplay(idxA);
+            updateCardDisplay(idxB);
+            
+            // show matching message
+            messageDiv.innerHTML = `🎉 Match found! +1 point (${card1.icon}) 🎉`;
+            setTimeout(() => {
+                if (messageDiv && matchedPairs < ICON_SET.length) 
+                    messageDiv.innerHTML = "🌼 Keep going! Match the April symbols! 🌼";
+            }, 1200);
+            
+            clearSelected();
+            // check win after match
+            const won = checkWin();
+            if (won) {
+                // disable further moves, gameActive already false
+                lockBoard = true; // block any further clicks
+            }
+        } else {
+            // mismatch: show briefly then flip back
+            messageDiv.innerHTML = `❌ Not a match... (${card1.icon} & ${card2.icon}) ❌`;
+            lockBoard = true;   // block any new clicks until flip back
+            setTimeout(() => {
+                if (!gameActive) return;
+                resetUnmatched();
+                lockBoard = false;
+                // after resetting, if game still active allow new clicks
+                if (messageDiv.innerHTML.includes("Not a match")) {
+                    if(matchedPairs < ICON_SET.length)
+                        messageDiv.innerHTML = "🌱 Try again! Find the pairs! 🌱";
+                }
+            }, 800);
+        }
+        // increment moves
+        moves++;
+        updateUI();
+    }
+
+    // handle card click
+    function onCardClick(clickedIdx) {
+        // validation conditions
+        if (!gameActive) return;
+        if (lockBoard) return;
+        const card = gameCards[clickedIdx];
+        if (card.isMatched) return;
+        if (card.isRevealed && !card.isMatched) return; // already face up and waiting?
+        // Prevent selecting same card twice in a turn
+        if (firstCard !== null && secondCard !== null) return; // should not happen but safe
+        
+        // if firstCard is null -> open first card
+        if (firstCard === null) {
+            // reveal current card
+            card.isRevealed = true;
+            updateCardDisplay(clickedIdx);
+            firstCard = clickedIdx;
+            return;
+        }
+        
+        // second card selection
+        if (firstCard !== null && secondCard === null) {
+            // avoid clicking same exact card again
+            if (firstCard === clickedIdx) return;
+            card.isRevealed = true;
+            updateCardDisplay(clickedIdx);
+            secondCard = clickedIdx;
+            // now compare both cards
+            compareCards(firstCard, secondCard);
+        }
+    }
+
+    // update single card DOM based on game state
+    function updateCardDisplay(index) {
+        const cardData = gameCards[index];
+        const cardDiv = cardData.element;
+        if (!cardDiv) return;
+        
+        // clear classes
+        cardDiv.classList.remove("hidden", "revealed", "matched");
+        
+        if (cardData.isMatched) {
+            cardDiv.classList.add("matched");
+            cardDiv.innerText = cardData.icon;
+            cardDiv.style.cursor = "default";
+        } 
+        else if (cardData.isRevealed) {
+            cardDiv.classList.add("revealed");
+            cardDiv.innerText = cardData.icon;
+            cardDiv.style.cursor = "default";
+        } 
+        else {
+            cardDiv.classList.add("hidden");
+            cardDiv.innerText = "?";
+            cardDiv.style.cursor = "pointer";
+        }
+    }
+    
+    // build fresh game board (shuffle)
+    function initGame() {
+        // stop ongoing timer before resetting
+        stopTimer();
+        // reset global state
+        moves = 0;
+        matchedPairs = 0;
+        gameActive = true;
+        lockBoard = false;
+        firstCard = null;
+        secondCard = null;
+        
+        // create card deck: each icon appears twice
+        let deck = [];
+        for (let i = 0; i < ICON_SET.length; i++) {
+            deck.push({ icon: ICON_SET[i], isMatched: false, isRevealed: false });
+            deck.push({ icon: ICON_SET[i], isMatched: false, isRevealed: false });
+        }
+        // Fisher-Yates shuffle
+        for (let i = deck.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [deck[i], deck[j]] = [deck[j], deck[i]];
+        }
+        
+        // rebuild gameCards array
+        gameCards = [];
+        gridContainer.innerHTML = "";
+        
+        for (let idx = 0; idx < deck.length; idx++) {
+            const cardItem = deck[idx];
+            const cardObj = {
+                id: idx,
+                icon: cardItem.icon,
+                isMatched: false,
+                isRevealed: false,
+                element: null,
+                cardIndex: idx
+            };
+            gameCards.push(cardObj);
+            
+            // create DOM element
+            const cardDiv = document.createElement("div");
+            cardDiv.className = "card hidden";
+            cardDiv.innerText = "?";
+            cardDiv.setAttribute("data-idx", idx);
+            cardDiv.addEventListener("click", (e) => {
+                e.stopPropagation();
+                const i = parseInt(cardDiv.getAttribute("data-idx"));
+                onCardClick(i);
+            });
+            gridContainer.appendChild(cardDiv);
+            cardObj.element = cardDiv;
+            cardDiv.style.transition = "all 0.2s";
+            updateCardDisplay(idx);
+        }
+        
+        // reset timer display
+        timerSeconds = 0;
+        updateUI();
+        // start timer if game active (which is true)
+        startTimer();
+        messageDiv.innerHTML = "🌷 Match all the April icons! Good luck! 🌷";
+        // remove win glow class if present
+        document.querySelector('.game-container')?.classList.remove('win-glow');
+        messageDiv.style.background = "#efe3cdb3";
+    }
+    
+    // reset button handler
+    function resetGame() {
+        initGame();
+    }
+    
+    // event binding
+    resetBtn.addEventListener("click", () => {
+        resetGame();
+    });
+    
+    // initial game start
+    initGame();
+    
+    // additional style fix for mobile tap highlight
+    const style = document.createElement('style');
+    style.textContent = `
+        .card {
+            -webkit-tap-highlight-color: transparent;
+        }
+        .btn-reset {
+            -webkit-tap-highlight-color: transparent;
+        }
+    `;
+    document.head.appendChild(style);
+</script>
+</body>
+</html>

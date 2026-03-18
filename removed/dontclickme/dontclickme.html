@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🚫 Don't Click Me!</title>
+  <link rel="icon" type="image/png" href="../../icon.jpg" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0f172a, #1e3c72);
+      font-family: system-ui, sans-serif;
+      color: white;
+      overflow: hidden;
+      font-weight: bold;
+    }
+
+    #game {
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin: 0 0 20px;
+      background: linear-gradient(to right, #ff4444, #ff8844);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 20px rgba(255, 68, 68, 0.5);
+    }
+
+    #button {
+      padding: 28px 60px;
+      font-size: 28px;
+      font-weight: 800;
+      border: 3px solid #ff4444;
+      border-radius: 16px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: white;
+      transition: all 0.2s ease;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.2);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    #button:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 30px rgba(239, 68, 68, 0.8), inset 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+
+    #button:active {
+      transform: scale(0.95);
+    }
+
+    #message {
+      margin-top: 30px;
+      font-size: 20px;
+      min-height: 30px;
+      opacity: 0.9;
+      color: #ffaa00;
+      text-shadow: 0 0 10px rgba(255, 170, 0, 0.5);
+      animation: messageIn 0.3s ease-out;
+    }
+
+    @keyframes messageIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      100% {
+        opacity: 0.9;
+        transform: translateY(0);
+      }
+    }
+
+    #counter {
+      margin-top: 15px;
+      font-size: 16px;
+      opacity: 0.7;
+      color: #00ccff;
+    }
+
+    .shake {
+      animation: shake 0.4s;
+    }
+
+    @keyframes shake {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+
+      10% {
+        transform: translate(-8px, 5px) rotate(-1deg);
+      }
+
+      20% {
+        transform: translate(8px, -5px) rotate(1deg);
+      }
+
+      30% {
+        transform: translate(-6px, 4px) rotate(-0.5deg);
+      }
+
+      40% {
+        transform: translate(6px, -4px) rotate(0.5deg);
+      }
+
+      50% {
+        transform: translate(-4px, 3px) rotate(0deg);
+      }
+
+      60% {
+        transform: translate(4px, -3px) rotate(0deg);
+      }
+
+      70% {
+        transform: translate(-2px, 2px) rotate(0deg);
+      }
+
+      80% {
+        transform: translate(2px, -2px) rotate(0deg);
+      }
+
+      90% {
+        transform: translate(-1px, 1px) rotate(0deg);
+      }
+
+      100% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+    }
+
+    .pulse {
+      animation: pulse 0.6s;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.1);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .particle {
+      position: fixed;
+      pointer-events: none;
+      font-size: 2em;
+      animation: float-up 1.5s ease-out forwards;
+    }
+
+    @keyframes float-up {
+      0% {
+        opacity: 1;
+        transform: translateY(0) translateX(0);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateY(-100px) translateX(var(--tx));
+      }
+    }
+
+    .milestone {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3em;
+      color: #ffaa00;
+      text-shadow: 0 0 30px rgba(255, 170, 0, 0.8);
+      animation: milestoneShow 1s ease-out;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    @keyframes milestoneShow {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.5);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.5);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="game">
+    <h1>⚠️ Don't Click Me! ⚠️</h1>
+    <button id="button">DON'T CLICK!</button>
+    <div id="message"></div>
+    <div id="counter"></div>
+  </div>
+
+  <script>
+    const button = document.getElementById('button');
+    const message = document.getElementById('message');
+    const counter = document.getElementById('counter');
+    const gameDiv = document.getElementById('game');
+
+    let clicks = Number(localStorage.getItem('dontClickClicks')) || 0;
+
+    const messages = [
+      "I literally told you not to.",
+      "Okay, funny. Stop now.",
+      "You're doing this on purpose.",
+      "This isn't impressive.",
+      "Do you feel in control?",
+      "Please stop.",
+      "I'm begging you.",
+      "Something bad will happen.",
+      "Last warning.",
+      "You made your choice.",
+      "Now you've done it...",
+      "There's no turning back.",
+      "The curse has been activated.",
+      "Congratulations.",
+      "You're part of it now.",
+      "The more you click, the worse it gets.",
+      "Can you feel it?",
+      "The connection is forming...",
+      "You're connected to the network.",
+      "Others will follow your path.",
+    ];
+
+    const milestones = [
+      { clicks: 10, text: "🔟" },
+      { clicks: 20, text: "2️⃣0️⃣" },
+      { clicks: 50, text: "5️⃣0️⃣" },
+      { clicks: 100, text: "💯" },
+    ];
+
+    updateUI();
+
+    button.addEventListener('click', (e) => {
+      clicks++;
+      localStorage.setItem('dontClickClicks', clicks);
+
+      // Visual feedback
+      gameDiv.classList.remove('shake');
+      void gameDiv.offsetWidth;
+      gameDiv.classList.add('shake');
+
+      // Pulse effect
+      button.classList.remove('pulse');
+      void button.offsetWidth;
+      button.classList.add('pulse');
+
+      // Update message
+      if (clicks < messages.length) {
+        message.textContent = messages[clicks - 1];
+      } else {
+        message.textContent = "The curse deepens with each click... (" + clicks + ")";
+      }
+
+      // Create floating particle
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.textContent = ['⚠️', '💀', '🔥', '⚡', '👁️'][clicks % 5];
+      particle.style.left = e.clientX + 'px';
+      particle.style.top = e.clientY + 'px';
+      particle.style.setProperty('--tx', (Math.random() - 0.5) * 100 + 'px');
+      document.body.appendChild(particle);
+      setTimeout(() => particle.remove(), 1500);
+
+      // Milestone messages
+      milestones.forEach(m => {
+        if (clicks === m.clicks) {
+          const milestone = document.createElement('div');
+          milestone.className = 'milestone';
+          milestone.textContent = m.text;
+          document.body.appendChild(milestone);
+          setTimeout(() => milestone.remove(), 1000);
+        }
+      });
+
+      // Progressive effects
+      if (clicks > 4) document.body.style.background = `linear-gradient(135deg, #0f172a, #1e3c72, rgba(239, 68, 68, ${Math.min(clicks / 100, 0.2)}))`;
+      if (clicks > 7) button.style.transform = `rotate(${Math.random() * 10 - 5}deg)`;
+      if (clicks > 15) button.style.opacity = Math.max(0.7, 1 - clicks / 100);
+      if (clicks > 30) button.style.background = `linear-gradient(135deg, #${Math.floor(Math.random() * 16777215).toString(16)}, #${Math.floor(Math.random() * 16777215).toString(16)})`;
+      if (clicks > 50) {
+        message.textContent = "You are OBSESSED. Stop!";
+        message.style.color = '#ff0000';
+      }
+      if (clicks > 100) {
+        button.disabled = true;
+        button.textContent = "YOU'VE BROKEN IT";
+        message.textContent = "The curse is complete. Refresh to start over... if you dare.";
+        message.style.color = '#ff00ff';
+      }
+
+      updateUI();
+    });
+
+    function updateUI() {
+      counter.textContent = `Total Clicks: ${clicks} | Resistance: ${Math.max(0, 100 - clicks * 2)}%`;
+    }
+
+    // Idle reward system
+    let idleTimer;
+    document.addEventListener('mousemove', resetIdle);
+    document.addEventListener('click', resetIdle);
+
+    function resetIdle() {
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => {
+        if (clicks < 10) {
+          message.textContent = "You finally stopped... Obedience rewarded.";
+          button.textContent = "GOOD JOB";
+          button.style.background = "linear-gradient(135deg, #22c55e, #16a34a)";
+        }

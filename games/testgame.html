@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Startup Empire</title>
   <link rel="icon" href="../icon.jpg" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -287,6 +287,30 @@
     .income-text {
       animation: float-up 2s ease-out forwards;
     }
+
+    .boost-section {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(0, 242, 254, 0.15));
+      border: 2px solid rgba(255, 215, 0, 0.4);
+    }
+
+    .boost-section:hover {
+      border: 2px solid rgba(255, 215, 0, 0.7);
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.3), 0 15px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes boostPulse {
+      0% {
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.2), inset 0 0 10px rgba(255, 215, 0, 0.1);
+      }
+
+      50% {
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.4), inset 0 0 20px rgba(255, 215, 0, 0.2);
+      }
+
+      100% {
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.2), inset 0 0 10px rgba(255, 215, 0, 0.1);
+      }
+    }
   </style>
 </head>
 
@@ -295,7 +319,9 @@
   <body>
 
     <div class="container">
-      <h1>🚀 Startup Empire</h1>
+      <h1>🚀 Startup Empire: The Rise 🌟</h1>
+      <p style="text-align: center; font-size: 18px; opacity: 0.9; margin-bottom: 30px;">Build your business empire from
+        the ground up!</p>
 
       <div class="header-stats">
         <div class="stat-box">
@@ -311,6 +337,10 @@
           <div class="stat-value" id="totalEarned">$100</div>
         </div>
         <div class="stat-box">
+          <div class="stat-label">⚡ Multiplier</div>
+          <div class="stat-value" id="multiplier">1.0x</div>
+        </div>
+        <div class="stat-box">
           <div class="stat-label">🏆 Total Upgrades</div>
           <div class="stat-value" id="totalUpgrades">0</div>
         </div>
@@ -319,7 +349,7 @@
       <div class="dashboard">
         <div class="section">
           <div class="icon">👩‍💼</div>
-          <h2>Staff</h2>
+          <h2>💪 Staff</h2>
           <div class="stat-row">Level: <strong id="staffSkill">1</strong></div>
           <div class="progress-container">
             <div class="progress-bar" id="staffBar"></div>
@@ -336,7 +366,7 @@
 
         <div class="section">
           <div class="icon">🏢</div>
-          <h2>Office</h2>
+          <h2>🏗️ Office</h2>
           <div class="stat-row">Level: <strong id="officeLevel">1</strong></div>
           <div class="progress-container">
             <div class="progress-bar" id="officeBar"></div>
@@ -353,7 +383,7 @@
 
         <div class="section">
           <div class="icon">📦</div>
-          <h2>Product</h2>
+          <h2>📊 Product</h2>
           <div class="stat-row">Quality: <strong id="productQuality">1</strong></div>
           <div class="progress-container">
             <div class="progress-bar" id="productBar"></div>
@@ -370,7 +400,7 @@
 
         <div class="section">
           <div class="icon">📣</div>
-          <h2>Marketing</h2>
+          <h2>📢 Marketing</h2>
           <div class="stat-row">Power: <strong id="marketingPower">1</strong></div>
           <div class="progress-container">
             <div class="progress-bar" id="marketingBar"></div>
@@ -384,6 +414,35 @@
             <div class="achievements" id="marketingAchievements"></div>
           </div>
         </div>
+
+        <div class="section">
+          <div class="icon">🔬</div>
+          <h2>🚀 R&D</h2>
+          <div class="stat-row">Level: <strong id="researchLevel">1</strong></div>
+          <div class="progress-container">
+            <div class="progress-bar" id="researchBar"></div>
+          </div>
+          <button onclick="upgradeResearch()">
+            Fund Research
+            <br><small>($<span id="researchCost">100</span>)</small>
+          </button>
+          <div class="achievement-bar">
+            <h3>Milestones</h3>
+            <div class="achievements" id="researchAchievements"></div>
+          </div>
+        </div>
+
+        <div class="section boost-section">
+          <div class="icon">⚡</div>
+          <h2>🎯 Boost</h2>
+          <div class="stat-row">Active: <strong id="boostActive">No</strong></div>
+          <div class="stat-row">Multiplier: <strong id="boostMult" style="color: #00f2fe;">1.0x</strong></div>
+          <button onclick="activateBoost()" id="boostBtn">
+            3x Income Boost
+            <br><small>(30 seconds)</small>
+          </button>
+          <p style="font-size: 12px; opacity: 0.7; margin-top: 10px;">Resets after boost ends</p>
+        </div>
       </div>
     </div>
 
@@ -391,17 +450,28 @@
       let cash = 100;
       let totalEarned = 100;
       let totalUpgrades = 0;
-      let staffSkill = 1, officeLevel = 1, productQuality = 1, marketingPower = 1;
-      let staffCost = 50, officeCost = 75, productCost = 60, marketingCost = 40;
+      let staffSkill = 1, officeLevel = 1, productQuality = 1, marketingPower = 1, researchLevel = 1;
+      let staffCost = 50, officeCost = 75, productCost = 60, marketingCost = 40, researchCost = 100;
+      let boostActive = false, boostMultiplier = 1.0;
 
       const milestones = {
         staff: [5, 10, 25, 50, 100],
         office: [5, 10, 25, 50, 100],
         product: [5, 10, 25, 50, 100],
-        marketing: [5, 10, 25, 50, 100]
+        marketing: [5, 10, 25, 50, 100],
+        research: [5, 10, 25, 50, 100]
       };
 
       const milestoneIcons = ['🥉', '🥈', '🥇', '💎', '👑'];
+
+      function getTotalMultiplier() {
+        let mult = 1.0;
+        // Research provides 20% per level
+        mult += (researchLevel - 1) * 0.2;
+        // Boost multiplier if active
+        if (boostActive) mult *= boostMultiplier;
+        return mult;
+      }
 
       function updateDisplay() {
         document.getElementById('cash').innerText = cash;
@@ -409,29 +479,51 @@
         document.getElementById('officeLevel').innerText = officeLevel;
         document.getElementById('productQuality').innerText = productQuality;
         document.getElementById('marketingPower').innerText = marketingPower;
+        document.getElementById('researchLevel').innerText = researchLevel;
         document.getElementById('totalUpgrades').innerText = totalUpgrades;
         document.getElementById('totalEarned').innerText = '$' + formatNumber(totalEarned);
+        document.getElementById('multiplier').innerText = getTotalMultiplier().toFixed(1) + 'x';
 
         document.getElementById('staffCost').innerText = staffCost;
         document.getElementById('officeCost').innerText = officeCost;
         document.getElementById('productCost').innerText = productCost;
         document.getElementById('marketingCost').innerText = marketingCost;
+        document.getElementById('researchCost').innerText = researchCost;
 
         document.getElementById('staffBar').style.width = Math.min(staffSkill * 10, 100) + '%';
         document.getElementById('officeBar').style.width = Math.min(officeLevel * 10, 100) + '%';
         document.getElementById('productBar').style.width = Math.min(productQuality * 10, 100) + '%';
         document.getElementById('marketingBar').style.width = Math.min(marketingPower * 10, 100) + '%';
+        document.getElementById('researchBar').style.width = Math.min(researchLevel * 10, 100) + '%';
+
+        document.getElementById('boostActive').innerText = boostActive ? 'YES ⚡' : 'No';
+        document.getElementById('boostMult').innerText = boostMultiplier.toFixed(1) + 'x';
 
         updateAchievements();
         updateIncomeDisplay();
+        updateBoostButton();
+      }
+
+      function updateBoostButton() {
+        const btn = document.getElementById('boostBtn');
+        btn.disabled = boostActive;
+        if (boostActive) {
+          btn.style.opacity = '0.6';
+          btn.style.cursor = 'not-allowed';
+        } else {
+          btn.style.opacity = '1';
+          btn.style.cursor = 'pointer';
+        }
       }
 
       function updateIncomeDisplay() {
-        const incomePerSecond = (staffSkill * 2 + officeLevel * 3 + productQuality * 2 + marketingPower * 1) * 0.5;
+        const baseIncome = (staffSkill * 2 + officeLevel * 3 + productQuality * 2 + marketingPower * 1) * 0.5;
+        const incomePerSecond = baseIncome * getTotalMultiplier();
         document.getElementById('incomePerSec').innerText = '$' + formatNumber(incomePerSecond);
       }
 
       function formatNumber(num) {
+        if (num >= 1000000000) return (num / 1000000000).toFixed(2) + 'B';
         if (num >= 1000000) return (num / 1000000).toFixed(2) + 'M';
         if (num >= 1000) return (num / 1000).toFixed(2) + 'K';
         return Math.floor(num);
@@ -442,6 +534,7 @@
         updateAchievementBar('office', officeLevel, 'officeAchievements');
         updateAchievementBar('product', productQuality, 'productAchievements');
         updateAchievementBar('marketing', marketingPower, 'marketingAchievements');
+        updateAchievementBar('research', researchLevel, 'researchAchievements');
       }
 
       function updateAchievementBar(type, level, elementId) {
@@ -462,7 +555,8 @@
           cash -= staffCost;
           staffSkill++;
           totalUpgrades++;
-          staffCost = Math.floor(staffCost * 1.5);
+          staffCost = Math.floor(staffCost * 1.4);
+          createFloatingText(Math.random() * window.innerWidth, 100, '💪 Staff Level Up!', '#4facfe');
           updateDisplay();
           playButtonAnimation(event);
         }
@@ -473,7 +567,8 @@
           cash -= officeCost;
           officeLevel++;
           totalUpgrades++;
-          officeCost = Math.floor(officeCost * 1.5);
+          officeCost = Math.floor(officeCost * 1.4);
+          createFloatingText(Math.random() * window.innerWidth, 100, '🏢 Office Upgraded!', '#4facfe');
           updateDisplay();
           playButtonAnimation(event);
         }
@@ -484,7 +579,8 @@
           cash -= productCost;
           productQuality++;
           totalUpgrades++;
-          productCost = Math.floor(productCost * 1.5);
+          productCost = Math.floor(productCost * 1.4);
+          createFloatingText(Math.random() * window.innerWidth, 100, '📦 Product Improved!', '#4facfe');
           updateDisplay();
           playButtonAnimation(event);
         }
@@ -495,9 +591,39 @@
           cash -= marketingCost;
           marketingPower++;
           totalUpgrades++;
-          marketingCost = Math.floor(marketingCost * 1.5);
+          marketingCost = Math.floor(marketingCost * 1.4);
+          createFloatingText(Math.random() * window.innerWidth, 100, '📣 Marketing Boosted!', '#4facfe');
           updateDisplay();
           playButtonAnimation(event);
+        }
+      }
+
+      function upgradeResearch() {
+        if (cash >= researchCost) {
+          cash -= researchCost;
+          researchLevel++;
+          totalUpgrades++;
+          researchCost = Math.floor(researchCost * 1.45);
+          createFloatingText(Math.random() * window.innerWidth, 100, '🔬 Research Advanced!', '#00f2fe');
+          updateDisplay();
+          playButtonAnimation(event);
+        }
+      }
+
+      function activateBoost() {
+        if (!boostActive) {
+          boostActive = true;
+          boostMultiplier = 3.0;
+          createFloatingText(window.innerWidth / 2, 150, '⚡ 3X BOOST ACTIVATED!', '#ffd700');
+          updateDisplay();
+          playButtonAnimation(event);
+
+          setTimeout(() => {
+            boostActive = false;
+            boostMultiplier = 1.0;
+            createFloatingText(window.innerWidth / 2, 150, 'Boost Ended', '#FF6B6B');
+            updateDisplay();
+          }, 30000);
         }
       }
 
@@ -516,6 +642,7 @@
         floatingText.style.left = x + 'px';
         floatingText.style.top = y + 'px';
         floatingText.style.color = color;
+        floatingText.style.fontWeight = 'bold';
         document.body.appendChild(floatingText);
 
         setTimeout(() => floatingText.remove(), 2000);
@@ -523,15 +650,16 @@
 
       // Passive income with visual feedback
       setInterval(() => {
-        const incomeAmount = staffSkill * 2 + officeLevel * 3 + productQuality * 2 + marketingPower * 1;
+        const baseIncome = staffSkill * 2 + officeLevel * 3 + productQuality * 2 + marketingPower * 1;
+        const incomeAmount = baseIncome * getTotalMultiplier();
         cash += incomeAmount;
         totalEarned += incomeAmount;
         updateDisplay();
 
         // Create floating text at random positions
-        const randomX = 480;
+        const randomX = Math.random() * window.innerWidth;
         const randomY = 200;
-        createFloatingText(randomX, randomY, '+$' + incomeAmount, '#00f2fe');
+        createFloatingText(randomX, randomY, '+$' + formatNumber(incomeAmount), boostActive ? '#ffd700' : '#00f2fe');
       }, 2000);
 
       updateDisplay();

@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <title>Puzzle Master</title>
     <link rel="icon" href="../../icon.jpg" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
-            font-family: 'Sora', sans-serif;
+            font-family: 'Bree Serif', sans-serif;
             background: linear-gradient(135deg, #6e8efb, #a777e3);
             display: flex;
             justify-content: center;
@@ -221,6 +221,24 @@
             100% {
                 transform: scale(1);
             }
+        }
+
+        @keyframes tileGlow {
+            0% {
+                box-shadow: 0 0 15px rgba(110, 142, 251, 0.7);
+            }
+
+            50% {
+                box-shadow: 0 0 30px rgba(110, 142, 251, 1);
+            }
+
+            100% {
+                box-shadow: 0 0 15px rgba(110, 142, 251, 0.7);
+            }
+        }
+
+        .puzzle-tile.movable:hover {
+            animation: tileGlow 0.6s ease-in-out infinite;
         }
 
         .controls {
@@ -607,7 +625,7 @@
 
     <div class="game-container">
         <div class="header">
-            <h1><i class="fas fa-puzzle-piece"></i> Puzzle Master</h1>
+            <h1><i class="fas fa-puzzle-piece"></i> 🧩 Puzzle Master Pro 🧩</h1>
             <div class="settings">
                 <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
                     <i class="fas fa-moon"></i>
@@ -628,12 +646,16 @@
         </div>
 
         <div id="modeSelect">
+            <p style="font-size: 14px; color: #666; margin-bottom: 15px;">Select your challenge:</p>
             <div class="mode-select">
-                <button class="mode-btn" id="endlessModeBtn">
+                <button class="mode-btn" id="endlessModeBtn" title="Solve puzzles at your own pace">
                     <i class="fas fa-infinity"></i> Endless Mode
                 </button>
-                <button class="mode-btn" id="lastStandBtn">
-                    <i class="fas fa-shield-alt"></i> Last Stand Mode
+                <button class="mode-btn" id="lastStandBtn" title="Race against time and moves!">
+                    <i class="fas fa-shield-alt"></i> Last Stand
+                </button>
+                <button class="mode-btn" id="practiceModeBtn" title="Unlimited hints, no limits">
+                    <i class="fas fa-graduation-cap"></i> Practice
                 </button>
             </div>
             <div class="difficulty-select" id="difficultySelect">
@@ -929,25 +951,29 @@
             startMode('laststand');
             sounds.click();
         };
+        document.getElementById('practiceModeBtn').onclick = () => {
+            startMode('practice');
+            sounds.click();
+        };
 
         function startMode(mode) {
             state.mode = mode;
             state.level = 1;
-            state.hints = 3;
+            state.hints = mode === 'practice' ? Infinity : 3;
 
             document.getElementById('modeSelect').style.display = 'none';
-            document.getElementById('difficultySelect').style.display = mode === 'endless' ? 'block' : 'none';
+            document.getElementById('difficultySelect').style.display = (mode === 'endless' || mode === 'practice') ? 'block' : 'none';
 
-            if (mode === 'endless') {
+            if (mode === 'endless' || mode === 'practice') {
                 const size = parseInt(document.getElementById('difficulty').value);
                 state.gridSize = size;
             }
 
             grid.style.display = 'grid';
             stats.style.display = 'grid';
-            timeContainer.style.display = 'block';
+            timeContainer.style.display = mode !== 'practice' ? 'block' : 'none';
             document.getElementById('controls').style.display = 'flex';
-            document.getElementById('hintCount').textContent = state.hints;
+            document.getElementById('hintCount').textContent = mode === 'practice' ? '∞' : state.hints;
 
             // Show mobile controls on mobile
             if (window.innerWidth <= 768) {
@@ -1046,6 +1072,12 @@
                     state.timer++;
                     timerDisplay.textContent = state.timer;
                     updateTimeBar();
+                }, 1000);
+            } else if (state.mode === 'practice') {
+                state.timer = 0;
+                state.timerInterval = setInterval(() => {
+                    state.timer++;
+                    timerDisplay.textContent = state.timer;
                 }, 1000);
             } else if (state.mode === 'laststand') {
                 const baseTime = Math.max(180 - (state.level - 1) * 15, 30);
@@ -1202,12 +1234,23 @@
                     winMessage.style.display = "none";
                     initializePuzzle();
                 }, 2000);
+            } else if (state.mode === 'practice') {
+                // Practice mode: show congratulations and allow continue
+                setTimeout(() => {
+                    if (confirm(`✅ Puzzle Solved in ${state.timer}s with ${state.moves} moves!\n\nContinue practicing?`)) {
+                        winMessage.style.display = "none";
+                        initializePuzzle();
+                    } else {
+                        resetToMenu();
+                    }
+                }, 500);
             } else {
                 // Endless mode win
                 setTimeout(() => {
                     showConfetti();
                     setTimeout(() => {
                         if (confirm("🎉 Puzzle Solved! Would you like to play again?")) {
+                            winMessage.style.display = "none";
                             initializePuzzle();
                         } else {
                             resetToMenu();

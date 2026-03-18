@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Space Game</title>
     <link rel="icon" href="../../icon.jpg" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Sora', sans-serif;
+            font-family: 'Bree Serif', sans-serif;
             margin: 0;
             padding: 0;
             background-color: #000;
@@ -28,8 +28,11 @@
         }
 
         #gameCanvas {
-            border: 2px solid #333;
-            background-color: #000;
+            border: 3px solid;
+            border-image: linear-gradient(45deg, #0af, #0f0, #f0a) 1;
+            background: linear-gradient(to bottom, rgba(0, 20, 40, 0.8), rgba(0, 10, 20, 0.95));
+            box-shadow: 0 0 30px rgba(0, 170, 255, 0.5), inset 0 0 20px rgba(0, 255, 0, 0.1);
+            border-radius: 3px;
         }
 
         #startScreen,
@@ -80,8 +83,25 @@
         h1 {
             font-size: 48px;
             color: #0af;
-            text-shadow: 0 0 10px #0af;
+            text-shadow: 0 0 10px #0af, 0 0 20px #0af, 0 0 30px #0f0;
             margin-bottom: 20px;
+            animation: titleGlow 2s ease-in-out infinite;
+            font-weight: bold;
+            letter-spacing: 3px;
+        }
+
+        @keyframes titleGlow {
+
+            0%,
+            100% {
+                text-shadow: 0 0 10px #0af, 0 0 20px #0af, 0 0 30px #0f0;
+                transform: scale(1);
+            }
+
+            50% {
+                text-shadow: 0 0 20px #0af, 0 0 40px #0af, 0 0 60px #0f0, 0 0 80px #f0a;
+                transform: scale(1.05);
+            }
         }
 
         button {
@@ -107,6 +127,26 @@
             left: 10px;
             z-index: 5;
             font-size: 18px;
+            background: rgba(0, 20, 40, 0.7);
+            padding: 12px;
+            border: 2px solid #0af;
+            border-radius: 5px;
+            text-shadow: 0 0 10px #0af;
+            font-weight: bold;
+            letter-spacing: 1px;
+            min-width: 200px;
+        }
+
+        #comboDisplay {
+            position: absolute;
+            top: 150px;
+            left: 10px;
+            z-index: 5;
+            font-size: 20px;
+            color: #ffff00;
+            text-shadow: 0 0 15px #ffff00;
+            font-weight: bold;
+            display: none;
         }
 
         #messageDisplay {
@@ -159,21 +199,24 @@
         <canvas id="gameCanvas" width="800" height="600"></canvas>
 
         <div id="hud">
-            <div>SCORE: <span id="scoreDisplay">0</span></div>
-            <div>WAVE: <span id="levelDisplay">1</span></div>
+            <div>🎯 SCORE: <span id="scoreDisplay">0</span></div>
+            <div>📊 WAVE: <span id="levelDisplay">1</span></div>
             <div><span id="livesDisplay">5</span></div>
+            <div id="comboCounter" style="color: #ffff00; text-shadow: 0 0 10px #ffff00; display: none;">🔥 COMBO: <span
+                    id="comboValue">0</span>x</div>
         </div>
 
         <div id="messageDisplay"></div>
 
         <div id="startScreen">
-            <h1>SPACE GAME</h1>
-            <button id="startButton">START GAME</button>
+            <h1>🚀 SPACE GAME 🚀</h1>
+            <button id="startButton">🎮 START GAME 🎮</button>
             <div id="instructions">
-                <p>Use ARROW KEYS to move</p>
-                <p>SPACEBAR to shoot</p>
-                <p>ESC to pause</p>
-                <p>Avoid enemies and collect power-ups!</p>
+                <p><strong>⬆️ ⬇️ ⬅️ ➡️</strong> - Move Your Ship</p>
+                <p><strong>SPACEBAR</strong> - Shoot</p>
+                <p><strong>ESC</strong> - Pause Game</p>
+                <p>Destroy enemies • Collect power-ups • Survive!</p>
+                <p style="font-size: 12px; margin-top: 15px; color: #0af;">💪 Shield ⚡ Rapid Fire ❄️ Freeze 💣 Bomb</p>
             </div>
         </div>
 
@@ -653,6 +696,14 @@
                 hearts += i < gameState.lives ? '❤️' : '🩶';
             }
             livesDisplay.textContent = hearts;
+
+            // Display combo counter
+            if (gameState.combo > 0) {
+                document.getElementById('comboCounter').style.display = 'block';
+                document.getElementById('comboValue').textContent = gameState.combo;
+            } else {
+                document.getElementById('comboCounter').style.display = 'none';
+            }
         }
 
 
@@ -663,6 +714,7 @@
                 if (checkCollision(player, enemy)) {
 
                     gameState.lives--;
+                    gameState.combo = 0;
                     updateHUD();
                     createExplosion(enemy.x, enemy.y, enemy.width, 1);
                     enemies.splice(i, 1);

@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cosmic Roulette - Enhanced Edition</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --primary-purple: #8a2be2;
@@ -34,7 +35,7 @@
         }
 
         body {
-            font-family: 'Sora', sans-serif;
+            font-family: 'Bree Serif', sans-serif;
             background: linear-gradient(135deg, #0a0a20 0%, #1a1a35 100%);
             color: var(--text-light);
             min-height: 100vh;
@@ -69,8 +70,15 @@
         }
 
         @keyframes titleGlow {
-            0%, 100% { filter: drop-shadow(0 0 20px rgba(138, 43, 226, 0.5)); }
-            50% { filter: drop-shadow(0 0 40px rgba(0, 255, 255, 0.8)); }
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 20px rgba(138, 43, 226, 0.5));
+            }
+
+            50% {
+                filter: drop-shadow(0 0 40px rgba(0, 255, 255, 0.8));
+            }
         }
 
         .header p {
@@ -126,7 +134,7 @@
             height: 100%;
             border-radius: 50%;
             border: 12px solid #2a2a4a;
-            box-shadow: 
+            box-shadow:
                 0 0 60px rgba(138, 43, 226, 0.6),
                 inset 0 0 40px rgba(0, 0, 0, 0.9);
             transition: transform 5s cubic-bezier(0.2, 0.9, 0.3, 1);
@@ -404,16 +412,40 @@
         }
 
         @keyframes chipPulse {
-            0%, 100% { box-shadow: 0 0 30px rgba(255, 255, 255, 0.6); }
-            50% { box-shadow: 0 0 50px rgba(255, 255, 255, 0.9); }
+
+            0%,
+            100% {
+                box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+            }
+
+            50% {
+                box-shadow: 0 0 50px rgba(255, 255, 255, 0.9);
+            }
         }
 
-        .chip-1 { background: var(--chip-1); }
-        .chip-5 { background: var(--chip-5); }
-        .chip-10 { background: var(--chip-10); }
-        .chip-25 { background: var(--chip-25); }
-        .chip-50 { background: var(--chip-50); }
-        .chip-100 { background: var(--chip-100); }
+        .chip-1 {
+            background: var(--chip-1);
+        }
+
+        .chip-5 {
+            background: var(--chip-5);
+        }
+
+        .chip-10 {
+            background: var(--chip-10);
+        }
+
+        .chip-25 {
+            background: var(--chip-25);
+        }
+
+        .chip-50 {
+            background: var(--chip-50);
+        }
+
+        .chip-100 {
+            background: var(--chip-100);
+        }
 
         /* Number grid */
         .bet-grid {
@@ -468,8 +500,15 @@
         }
 
         @keyframes selectedPulse {
-            0%, 100% { box-shadow: 0 0 20px currentColor; }
-            50% { box-shadow: 0 0 35px currentColor; }
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px currentColor;
+            }
+
+            50% {
+                box-shadow: 0 0 35px currentColor;
+            }
         }
 
         .number-red {
@@ -633,8 +672,15 @@
         }
 
         @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .bet-number {
@@ -692,8 +738,15 @@
         }
 
         @keyframes winGlow {
-            0%, 100% { box-shadow: 0 0 50px rgba(0, 255, 136, 0.4); }
-            50% { box-shadow: 0 0 80px rgba(0, 255, 136, 0.7); }
+
+            0%,
+            100% {
+                box-shadow: 0 0 50px rgba(0, 255, 136, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 80px rgba(0, 255, 136, 0.7);
+            }
         }
 
         .result-lose {
@@ -873,8 +926,15 @@
 
         /* Animations */
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.02);
+            }
         }
 
         .pulse {
@@ -908,8 +968,15 @@
         }
 
         @keyframes slideInRight {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
 
         .fade-out {
@@ -917,7 +984,10 @@
         }
 
         @keyframes fadeOut {
-            to { opacity: 0; transform: translateY(20px); }
+            to {
+                opacity: 0;
+                transform: translateY(20px);
+            }
         }
     </style>
 </head>
@@ -954,7 +1024,8 @@
                             </div>
                             <div class="spins-count">
                                 <i class="fas fa-redo" style="color: var(--primary-gold);"></i>
-                                <span>Spins: <span id="spin-count" style="color: var(--primary-gold); font-weight: 600;">0</span></span>
+                                <span>Spins: <span id="spin-count"
+                                        style="color: var(--primary-gold); font-weight: 600;">0</span></span>
                             </div>
                         </div>
                     </div>
@@ -1167,7 +1238,7 @@
                 const number = document.createElement('div');
                 number.className = 'slice-number';
                 number.textContent = i;
-                
+
                 const angle = i * angleStep;
                 const radius = 38;
                 const angleRad = (angle + angleStep / 2) * Math.PI / 180;
@@ -1178,7 +1249,7 @@
                 number.style.left = `${x}%`;
                 number.style.top = `${y}%`;
                 number.style.transform = `translate(-50%, -50%)`;
-                
+
                 if (i === 0) {
                     number.style.background = 'rgba(0, 168, 107, 0.8)';
                 } else if (CONFIG.redNumbers.includes(i)) {
@@ -1299,7 +1370,7 @@
             // Check for duplicate bets on same number
             const existingNumbers = gameState.bets.map(b => b.number);
             const newNumbers = gameState.selectedNumbers.filter(n => !existingNumbers.includes(n));
-            
+
             if (newNumbers.length === 0) {
                 showToast('You already have bets on these numbers!', 'error');
                 return;
@@ -1376,8 +1447,8 @@
             const winningColor = getNumberColor(winningNumber);
 
             const anglePerNumber = 360 / CONFIG.numbers;
-            const targetAngle = 360 * (8 + Math.floor(Math.random() * 5)) + 
-                               (360 - (winningNumber * anglePerNumber + anglePerNumber / 2));
+            const targetAngle = 360 * (8 + Math.floor(Math.random() * 5)) +
+                (360 - (winningNumber * anglePerNumber + anglePerNumber / 2));
 
             gameState.wheelRotation += targetAngle;
             const speed = (11 - gameState.spinSpeed) * 3;
@@ -1408,7 +1479,7 @@
                     winnings += winAmount;
                     winCount++;
                     winningBets.push(bet);
-                    
+
                     if (winAmount > gameState.biggestWin) {
                         gameState.biggestWin = winAmount;
                     }
@@ -1432,7 +1503,7 @@
                 win: winnings > 0,
                 amount: winnings
             };
-            
+
             gameState.history.unshift(historyItem);
             if (gameState.history.length > 15) gameState.history.pop();
 
@@ -1450,7 +1521,7 @@
             if (isWin) {
                 createConfetti();
                 showToast(`Congratulations! You won ${winnings} chips!`, 'success');
-                
+
                 // Play win sound (if browser allows)
                 playWinSound();
             }
@@ -1576,8 +1647,8 @@
                 const betItem = document.createElement('div');
                 betItem.className = 'bet-item';
 
-                const colorStyle = bet.color === 'red' ? '#ff6666' : 
-                                  bet.color === 'green' ? '#00cc88' : '#ddd';
+                const colorStyle = bet.color === 'red' ? '#ff6666' :
+                    bet.color === 'green' ? '#00cc88' : '#ddd';
 
                 betItem.innerHTML = `
                     <div class="bet-number">
@@ -1602,7 +1673,7 @@
                 const historyItem = document.createElement('div');
                 historyItem.className = `history-item ${item.win ? 'history-win' : 'history-lose'}`;
                 historyItem.textContent = item.number;
-                historyItem.setAttribute('data-tooltip', 
+                historyItem.setAttribute('data-tooltip',
                     `Number: ${item.number} (${item.color}) - ${item.win ? `+${item.amount}` : 'Lose'}`);
                 historyList.appendChild(historyItem);
             });
@@ -1643,13 +1714,13 @@
                 document.body.appendChild(confetti);
 
                 const animation = confetti.animate([
-                    { 
+                    {
                         transform: `translateY(0) rotate(0deg)`,
-                        opacity: 1 
+                        opacity: 1
                     },
-                    { 
+                    {
                         transform: `translateY(${window.innerHeight + 100}px) rotate(${Math.random() * 720}deg)`,
-                        opacity: 0 
+                        opacity: 0
                     }
                 ], {
                     duration: duration + Math.random() * 2000,
@@ -1668,7 +1739,7 @@
             try {
                 const AudioContext = window.AudioContext || window.webkitAudioContext;
                 const audioCtx = new AudioContext();
-                
+
                 const oscillator = audioCtx.createOscillator();
                 const gainNode = audioCtx.createGain();
 

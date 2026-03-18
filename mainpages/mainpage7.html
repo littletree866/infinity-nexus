@@ -739,8 +739,7 @@
 
     <header>
         <div class="container">
-            <h1 style="font-family: 'Bree Serif', sans-serif; font-weight: 700;" class="main-title">📚 Information &
-                Guides
+            <h1 style="font-family: 'Bree Serif', sans-serif; font-weight: 700;" class="main-title">🔨Tools
             </h1>
         </div>
     </header>
@@ -748,96 +747,37 @@
     <div class="content-wrapper">
         <div class="container" id="main">
             <div class="links-section">
-                <div class="archive-grid">
-                    <!-- Game Documentation -->
+                <div class="archive-grid" id="archiveGrid">
+                    <!-- Jan -->
                     <div class="archive-card">
                         <div class="card-header">
-                            <div class="card-image-placeholder">📖</div>
-                            <div class="archive-tag">Guide</div>
+                            <div class="card-image-placeholder">🧮</div>
+                            <div class="archive-tag">Calculator</div>
                         </div>
-                        <h3 class="archive-title">Game Documentation</h3>
+                        <h3 class="archive-title">Calculator</h3>
                         <div class="archive-meta">
-                            <span>📖 Complete Guides</span>
+                            <span>🔨 Tools</span>
                         </div>
-                        <p class="content-link">Read detailed guides, tips, strategies, and comprehensive documentation
-                            for all
-                            games on the platform.</p>
+
                         <div style="padding: 0 16px 16px 16px;">
-                            <a href="../info/docs/documentation.html" class="status-pill status-available">Read →</a>
+                            <a href="../tools/calculator.html" class="status-pill status-available"
+                                style="text-decoration: none; display: inline-block;">Use Now →</a>
                         </div>
                     </div>
 
-                    <!-- Update Info -->
-                    <div class="archive-card">
-                        <div class="card-header">
-                            <div class="card-image-placeholder">📝</div>
-                            <div class="archive-tag">News</div>
-                        </div>
-                        <h3 class="archive-title">Update Info</h3>
-                        <div class="archive-meta">
-                            <span>📝 Changelog</span>
-                        </div>
-                        <p class="content-link">Check out the latest updates, new features, bug fixes, and improvements
-                            to the
-                            platform.</p>
-                        <div style="padding: 0 16px 16px 16px;">
-                            <a href="../info/updateinfo/updateinfo.html" class="status-pill status-available">View →</a>
-                        </div>
-                    </div>
-
-                    <!-- Archives -->
-                    <div class="archive-card">
-                        <div class="card-header">
-                            <div class="card-image-placeholder">🗝️</div>
-                            <div class="archive-tag">Archive</div>
-                        </div>
-                        <h3 class="archive-title">Archives</h3>
-                        <div class="archive-meta">
-                            <span>🗝️ Historical</span>
-                        </div>
-                        <p class="content-link">Explore removed games and historical versions of released titles from
-                            previous
-                            updates.</p>
-                        <div style="padding: 0 16px 16px 16px;">
-                            <a href="../info/archives/archives.html" class="status-pill status-available">Browse →</a>
-                        </div>
-                    </div>
-
-                    <!-- Source Code -->
-                    <div class="archive-card">
-                        <div class="card-header">
-                            <div class="card-image-placeholder">💻</div>
-                            <div class="archive-tag">Open Source</div>
-                        </div>
-                        <h3 class="archive-title">Source Code</h3>
-                        <div class="archive-meta">
-                            <span>💻 GitHub</span>
-                        </div>
-                        <p class="content-link">View the open-source code on GitHub and contribute to the project or
-                            report
-                            issues!</p>
-                        <div style="padding: 0 16px 16px 16px;">
-                            <a href="https://github.com/littletree866/infinity-nexus"
-                                class="status-pill status-available" target="_blank">GitHub →</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <footer>
-        <div class="container">
-            <a href="https://forms.gle/X8p7jkC74MFG9Evj7" style="color:white; text-decoration: none;">Report Issues</a>
-            | <a href="../info/privacypolicy.html" style="color:white; text-decoration: none;">Privacy Policy</a>
-            <p class="copyright">© <span id="copyright-year"></span> Infinity Nexus</p>
-            <p class="author">Created by Littletree866</p>
-        </div>
+        <p>Infinity Nexus &copy; <span id="footer-year">2026</span></p>
+        <p>All rights reserved</p>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('copyright-year').textContent = new Date().getFullYear();
+            document.getElementById('footer-year').textContent = new Date().getFullYear();
         });
     </script>
 </body>

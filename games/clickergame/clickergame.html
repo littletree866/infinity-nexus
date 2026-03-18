@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>Clicker Quest+ </title>
   <link rel="icon" href="../../icon.jpg" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #6e8efb;
@@ -26,7 +26,7 @@
 
     body {
       margin: 0;
-      font-family: 'Sora', sans-serif;
+      font-family: 'Bree Serif', sans-serif;
       background: linear-gradient(135deg, var(--primary), var(--secondary));
       color: var(--dark);
       display: flex;
@@ -537,8 +537,8 @@
   <div id="game">
     <div class="game-header">
       <div class="header-info">
-        <h1>Clicker Quest+ Pro</h1>
-        <p class="subtitle">Click your way to wealth and glory!</p>
+        <h1>🎮 Clicker Quest+ Pro 2.0</h1>
+        <p class="subtitle">⚡ Click, Earn, Dominate! Enhanced Edition</p>
       </div>
       <div class="save-indicator" id="saveIndicator">✓ Saved</div>
     </div>
@@ -546,15 +546,19 @@
     <div class="stats-container">
       <div class="stat">
         <div class="stat-value money-primary" id="money">$0</div>
-        <div class="stat-label">Current Balance</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value" id="best">$0</div>
-        <div class="stat-label">Best Score</div>
+        <div class="stat-label">Balance</div>
       </div>
       <div class="stat">
         <div class="stat-value money-secondary" id="perSecond">$0/s</div>
-        <div class="stat-label">Passive Income</div>
+        <div class="stat-label">Income/s</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="multiplier" style="color: #f1c40f;">1.0x</div>
+        <div class="stat-label">Total Multiplier</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="clicksDisplay" style="color: #00ffff;">0</div>
+        <div class="stat-label">Total Clicks</div>
       </div>
     </div>
 
@@ -570,9 +574,9 @@
         <div class="upgrade-info">
           <div class="upgrade-title">
             <span class="upgrade-key">1</span>
-            Better Clicks
+            💪 Better Clicks
           </div>
-          <div class="upgrade-desc">Increase cash per click</div>
+          <div class="upgrade-desc">Increase cash per click (+50% per level)</div>
           <div class="upgrade-stats">
             <span>Current: +$<span id="currentPerClick">1</span>/click</span>
             <span>Owned: <span id="clickUpgrades">0</span></span>
@@ -585,7 +589,7 @@
         <div class="upgrade-info">
           <div class="upgrade-title">
             <span class="upgrade-key">2</span>
-            Auto-Earner
+            🤖 Auto-Earner
           </div>
           <div class="upgrade-desc">Earn cash automatically every second</div>
           <div class="upgrade-stats">
@@ -600,12 +604,12 @@
         <div class="upgrade-info">
           <div class="upgrade-title">
             <span class="upgrade-key">3</span>
-            Power Boost
+            ⚡ Power Surge
           </div>
-          <div class="upgrade-desc">Double your clicking power for 30 seconds</div>
+          <div class="upgrade-desc">Triple your power for 45 seconds (Enhanced!)</div>
           <div class="upgrade-stats">
             <span id="boostStatus">Status: Ready</span>
-            <span id="boostTimer" style="display:none">Time left: 30s</span>
+            <span id="boostTimer" style="display:none">Time left: 45s</span>
           </div>
           <div class="progress-bar" id="boostProgress" style="display:none">
             <div class="progress-fill" id="boostProgressFill"></div>
@@ -618,15 +622,30 @@
         <div class="upgrade-info">
           <div class="upgrade-title">
             <span class="upgrade-key">4</span>
-            Mega Click
+            💥 Critical Hit
           </div>
-          <div class="upgrade-desc">10% chance for 10x cash on click</div>
+          <div class="upgrade-desc">Chance for massive damage (starts at 8%)</div>
           <div class="upgrade-stats">
-            <span>Chance: <span id="megaChance">10</span>%</span>
-            <span>Owned: <span id="megaUpgrades">0</span></span>
+            <span>Chance: <span id="megaChance">8</span>%</span>
+            <span>Multiplier: <span id="critMultiplier">5</span>x</span>
           </div>
         </div>
-        <button id="buyMega">Buy (<span id="megaCost">$7500</span>)</button>
+        <button id="buyMega">Buy (<span id="megaCost">$5000</span>)</button>
+      </div>
+
+      <div class="upgrade">
+        <div class="upgrade-info">
+          <div class="upgrade-title">
+            <span class="upgrade-key">5</span>
+            💰 Money Magnet
+          </div>
+          <div class="upgrade-desc">Increase all money earnings by +15% per level</div>
+          <div class="upgrade-stats">
+            <span>Bonus: <span id="magnetBonus">0</span>%</span>
+            <span>Owned: <span id="magnetUpgrades">0</span></span>
+          </div>
+        </div>
+        <button id="buyMagnet">Buy (<span id="magnetCost">$750</span>)</button>
       </div>
     </div>
 
@@ -652,26 +671,29 @@
     let clickCost = 10;
     let autoCost = 25;
     let boostCost = 500;
-    // use consistent base for mega cost
-    let megaCost = 7500;
+    let megaCost = 5000;
+    let magnetCost = 750;
     let clickUpgrades = 0;
     let autoUpgrades = 0;
     let megaUpgrades = 0;
+    let magnetUpgrades = 0;
     let boostActive = false;
     let boostTimeLeft = 0;
     let boostTimer = null;
     let prestigeCount = 0;
     let lastSaveTime = 0;
+    let totalClicks = 0;
+    let critMultiplier = 5;
 
     // Storage keys
     const MONEY_KEY = 'clicker_money';
     const PER_CLICK_KEY = 'clicker_perClick';
     const PER_SEC_KEY = 'clicker_perSec';
     const UPGRADES_KEY = 'clicker_upgrades';
-    const BEST_KEY = 'clicker_best';
     const PRESTIGE_KEY = 'clicker_prestige';
+    const CLICKS_KEY = 'clicker_clicks';
 
-    // Load game from localStorage
+    // Load game
     function loadGame() {
       try {
         const savedMoney = localStorage.getItem(MONEY_KEY);
@@ -679,51 +701,49 @@
         const savedPerSec = localStorage.getItem(PER_SEC_KEY);
         const savedUpgrades = localStorage.getItem(UPGRADES_KEY);
         const savedPrestige = localStorage.getItem(PRESTIGE_KEY);
-        const savedBest = localStorage.getItem(BEST_KEY);
+        const savedClicks = localStorage.getItem(CLICKS_KEY);
 
         if (savedMoney) money = parseFloat(savedMoney);
         if (savedPerClick) perClick = parseFloat(savedPerClick);
         if (savedPerSec) perSec = parseFloat(savedPerSec);
         if (savedPrestige) prestigeCount = parseInt(savedPrestige);
+        if (savedClicks) totalClicks = parseInt(savedClicks);
 
         if (savedUpgrades) {
           const upgrades = JSON.parse(savedUpgrades);
           clickUpgrades = upgrades.click || 0;
           autoUpgrades = upgrades.auto || 0;
           megaUpgrades = upgrades.mega || 0;
+          magnetUpgrades = upgrades.magnet || 0;
 
-          // Recalculate costs based on owned upgrades
-          clickCost = Math.floor(10 * Math.pow(1.3, clickUpgrades));
-          autoCost = Math.floor(25 * Math.pow(1.4, autoUpgrades));
-          // fixed: use 7500 base to match initial megaCost
-          megaCost = Math.floor(7500 * Math.pow(1.5, megaUpgrades));
+          clickCost = Math.floor(10 * Math.pow(1.25, clickUpgrades));
+          autoCost = Math.floor(25 * Math.pow(1.35, autoUpgrades));
+          megaCost = Math.floor(5000 * Math.pow(1.45, megaUpgrades));
+          magnetCost = Math.floor(750 * Math.pow(1.4, magnetUpgrades));
+          critMultiplier = 5 + (megaUpgrades * 1.5);
         }
       } catch (e) {
         console.error('Error loading game:', e);
-        showNotification('Error loading save data', 'danger');
       }
     }
 
-    // Save game to localStorage
+    // Save game
     function saveGame() {
       try {
         localStorage.setItem(MONEY_KEY, money.toString());
         localStorage.setItem(PER_CLICK_KEY, perClick.toString());
         localStorage.setItem(PER_SEC_KEY, perSec.toString());
         localStorage.setItem(PRESTIGE_KEY, prestigeCount.toString());
+        localStorage.setItem(CLICKS_KEY, totalClicks.toString());
 
         const upgrades = {
           click: clickUpgrades,
           auto: autoUpgrades,
-          mega: megaUpgrades
+          mega: megaUpgrades,
+          magnet: magnetUpgrades
         };
         localStorage.setItem(UPGRADES_KEY, JSON.stringify(upgrades));
 
-        if (money > loadBest()) {
-          saveBest(money);
-        }
-
-        // Show save indicator
         const saveIndicator = document.getElementById('saveIndicator');
         saveIndicator.classList.add('show');
         setTimeout(() => saveIndicator.classList.remove('show'), 1000);
@@ -734,31 +754,13 @@
       }
     }
 
-    // Load best score
-    function loadBest() {
-      try {
-        const best = localStorage.getItem(BEST_KEY);
-        return best ? parseFloat(best) : 0;
-      } catch (e) {
-        return 0;
-      }
-    }
-
-    // Save best score
-    function saveBest(value) {
-      try {
-        localStorage.setItem(BEST_KEY, Math.floor(value).toString());
-      } catch (e) {
-        console.error('Error saving best score:', e);
-      }
-    }
-
     // DOM elements
     const moneyEl = document.getElementById('money');
-    const bestEl = document.getElementById('best');
     const perSecondEl = document.getElementById('perSecond');
     const clickBtn = document.getElementById('click');
     const notificationEl = document.getElementById('notification');
+    const clicksDisplayEl = document.getElementById('clicksDisplay');
+    const multiplierEl = document.getElementById('multiplier');
 
     // Sound elements
     const clickSound = document.getElementById('clickSound');
@@ -769,16 +771,11 @@
     let notificationTimeout = null;
     function showNotification(message, type = 'success') {
       clearTimeout(notificationTimeout);
-
       notificationEl.textContent = message;
       notificationEl.style.background = type === 'success' ? 'var(--success)' : 'var(--danger)';
       notificationEl.classList.remove('show');
-
-      // Force reflow
       void notificationEl.offsetWidth;
-
       notificationEl.classList.add('show');
-
       notificationTimeout = setTimeout(() => {
         notificationEl.classList.remove('show');
       }, 3000);
@@ -792,45 +789,54 @@
       return Math.floor(value).toString();
     }
 
+    // Calculate total multiplier
+    function getTotalMultiplier() {
+      let multiplier = 1;
+      multiplier *= (1 + prestigeCount * 0.15); // Prestige bonus increased
+      multiplier *= (1 + magnetUpgrades * 0.15); // Money magnet bonus
+      if (boostActive) multiplier *= 3; // Boost is now 3x instead of 2x
+      return multiplier;
+    }
+
     // Update UI
     function updateUI() {
-      // Update money display
       moneyEl.textContent = '$' + fmt(money);
-
-      // Add animation for money change
       moneyEl.classList.add('click-animation');
       setTimeout(() => moneyEl.classList.remove('click-animation'), 200);
 
-      // Update best score
-      const best = loadBest();
-      bestEl.textContent = '$' + fmt(best);
-
-      // Update passive income
-      const passiveIncome = perSec * (1 + prestigeCount * 0.1);
-      perSecondEl.textContent = '$' + fmt(passiveIncome) + '/s';
+      const totalMult = getTotalMultiplier();
+      multiplierEl.textContent = totalMult.toFixed(2) + 'x';
+      perSecondEl.textContent = '$' + fmt(perSec * totalMult) + '/s';
+      clicksDisplayEl.textContent = fmt(totalClicks);
 
       // Update upgrade info
-      document.getElementById('currentPerClick').textContent = (perClick * (1 + prestigeCount * 0.1)).toFixed(1);
-      document.getElementById('currentPerSec').textContent = (perSec * (1 + prestigeCount * 0.1)).toFixed(1);
+      const clickMultiplier = getTotalMultiplier();
+      document.getElementById('currentPerClick').textContent = (perClick * clickMultiplier).toFixed(1);
+      document.getElementById('currentPerSec').textContent = (perSec * clickMultiplier).toFixed(1);
       document.getElementById('clickUpgrades').textContent = clickUpgrades;
       document.getElementById('autoUpgrades').textContent = autoUpgrades;
       document.getElementById('megaUpgrades').textContent = megaUpgrades;
-      document.getElementById('megaChance').textContent = 10 + megaUpgrades * 5;
+      document.getElementById('magnetUpgrades').textContent = magnetUpgrades;
+      document.getElementById('magnetBonus').textContent = (magnetUpgrades * 15);
+      document.getElementById('megaChance').textContent = 8 + megaUpgrades * 4;
+      document.getElementById('critMultiplier').textContent = Math.floor(critMultiplier);
 
       // Update costs
       document.getElementById('clickCost').textContent = '$' + fmt(clickCost);
       document.getElementById('autoCost').textContent = '$' + fmt(autoCost);
       document.getElementById('boostCost').textContent = '$' + fmt(boostCost);
       document.getElementById('megaCost').textContent = '$' + fmt(megaCost);
+      document.getElementById('magnetCost').textContent = '$' + fmt(magnetCost);
 
       // Update button states
       document.getElementById('buyClick').disabled = money < clickCost;
       document.getElementById('buyAuto').disabled = money < autoCost;
       document.getElementById('buyBoost').disabled = money < boostCost || boostActive;
       document.getElementById('buyMega').disabled = money < megaCost;
+      document.getElementById('buyMagnet').disabled = money < magnetCost;
 
       // Update prestige
-      const prestigeBonus = prestigeCount * 10;
+      const prestigeBonus = prestigeCount * 15;
       document.getElementById('prestigeBonus').textContent = prestigeBonus;
       document.getElementById('prestigeButton').disabled = money < 10000;
 
@@ -840,7 +846,7 @@
         document.getElementById('boostTimer').style.display = 'inline';
         document.getElementById('boostProgress').style.display = 'block';
         document.getElementById('boostTimer').textContent = `Time left: ${Math.max(0, boostTimeLeft)}s`;
-        const progressPercent = (Math.max(0, boostTimeLeft) / 30) * 100;
+        const progressPercent = (Math.max(0, boostTimeLeft) / 45) * 100;
         document.getElementById('boostProgressFill').style.width = `${progressPercent}%`;
       } else {
         document.getElementById('boostStatus').textContent = 'Status: Ready';
@@ -848,7 +854,6 @@
         document.getElementById('boostProgress').style.display = 'none';
       }
 
-      // Auto-save every 10 seconds
       if (Date.now() - lastSaveTime > 10000) {
         saveGame();
       }
@@ -864,29 +869,23 @@
       t.style.top = y + 'px';
       document.body.appendChild(t);
       setTimeout(() => {
-        if (t.parentNode) {
-          t.remove();
-        }
+        if (t.parentNode) t.remove();
       }, 1000);
     }
 
     // Handle click
     function clickGain(e) {
-      // Calculate base value
-      let value = perClick * (1 + prestigeCount * 0.1);
+      totalClicks++;
+      let value = perClick * getTotalMultiplier();
 
-      // Apply boost
-      if (boostActive) value *= 2;
+      // Check for critical hit
+      const critChance = 8 + megaUpgrades * 4;
+      let isCrit = false;
+      if (Math.random() * 100 < critChance) {
+        value *= critMultiplier;
+        isCrit = true;
+        showNotification(`🔥 CRITICAL HIT! ${critMultiplier.toFixed(1)}x Damage!`, 'success');
 
-      // Check for mega click
-      const megaChance = 10 + megaUpgrades * 5;
-      let isMega = false;
-      if (Math.random() * 100 < megaChance) {
-        value *= 10;
-        isMega = true;
-        showNotification('MEGA CLICK! 10x Cash!', 'success');
-
-        // Visual effect for mega click
         clickBtn.style.animation = 'none';
         setTimeout(() => {
           clickBtn.style.animation = 'glow 0.5s infinite alternate';
@@ -897,29 +896,24 @@
         }, 500);
       }
 
-      // Add money
       money += value;
 
-      // Add floating text
-      const color = isMega ? 'var(--bonus)' : (value > perClick * 5 ? 'var(--bonus)' : 'var(--money)');
+      const color = isCrit ? 'var(--bonus)' : (value > perClick * 5 ? 'var(--bonus)' : 'var(--money)');
       addFloatingText(value, e.clientX, e.clientY - 50, color);
 
-      // Play sound
       try {
         clickSound.currentTime = 0;
         clickSound.play().catch(() => { });
       } catch (e) { }
 
-      // Update UI
       updateUI();
 
-      // Create confetti for big clicks
       if (value > perClick * 20) {
         createConfetti(e.clientX, e.clientY);
       }
     }
 
-    // Create confetti effect
+    // Create confetti
     function createConfetti(x, y) {
       for (let i = 0; i < 20; i++) {
         const confetti = document.createElement('div');
@@ -929,7 +923,6 @@
         confetti.style.background = ['var(--money)', 'var(--bonus)', 'var(--primary)', 'var(--secondary)'][i % 4];
         document.body.appendChild(confetti);
 
-        // Animate confetti
         const angle = Math.random() * Math.PI * 2;
         const velocity = 2 + Math.random() * 3;
         const rotation = Math.random() * 360;
@@ -940,7 +933,7 @@
 
         const animate = () => {
           posX += Math.cos(angle) * velocity;
-          posY += Math.sin(angle) * velocity - 0.1; // Gravity
+          posY += Math.sin(angle) * velocity - 0.1;
           opacity -= 0.02;
 
           confetti.style.left = posX + 'px';
@@ -959,56 +952,40 @@
       }
     }
 
-    // Buy click upgrade
+    // Buy upgrades
     function buyClick() {
       if (money >= clickCost) {
         money -= clickCost;
-        perClick += 1;
+        perClick *= 1.5; // 50% increase per level
         clickUpgrades++;
-        clickCost = Math.floor(clickCost * 1.3);
-
-        try {
-          upgradeSound.currentTime = 0;
-          upgradeSound.play().catch(() => { });
-        } catch (e) { }
-
-        showNotification('Click Power Increased!');
+        clickCost = Math.floor(clickCost * 1.25);
+        try { upgradeSound.currentTime = 0; upgradeSound.play().catch(() => { }); } catch (e) { }
+        showNotification('💪 Click Power Increased!');
         updateUI();
       }
     }
 
-    // Buy auto upgrade
     function buyAuto() {
       if (money >= autoCost) {
         money -= autoCost;
         perSec += 1;
         autoUpgrades++;
-        autoCost = Math.floor(autoCost * 1.4);
-
-        try {
-          upgradeSound.currentTime = 0;
-          upgradeSound.play().catch(() => { });
-        } catch (e) { }
-
-        showNotification('Auto-Earner Purchased!');
+        autoCost = Math.floor(autoCost * 1.35);
+        try { upgradeSound.currentTime = 0; upgradeSound.play().catch(() => { }); } catch (e) { }
+        showNotification('🤖 Auto-Earner Purchased!');
         updateUI();
       }
     }
 
-    // Buy boost
     function buyBoost() {
       if (money >= boostCost && !boostActive) {
         money -= boostCost;
         boostActive = true;
-        boostTimeLeft = 30;
+        boostTimeLeft = 45; // Increased from 30 to 45 seconds
         clickBtn.classList.add('boost');
 
-        // Clear existing timer
-        if (boostTimer) {
-          clearInterval(boostTimer);
-        }
+        if (boostTimer) clearInterval(boostTimer);
 
-        // Start new timer
         boostTimer = setInterval(() => {
           boostTimeLeft--;
           updateUI();
@@ -1017,29 +994,35 @@
             clearInterval(boostTimer);
             boostActive = false;
             clickBtn.classList.remove('boost');
-            showNotification('Boost expired!');
+            showNotification('⚡ Power Surge expired!');
             updateUI();
           }
         }, 1000);
 
-        showNotification('Power Boost Activated for 30s!');
+        showNotification('⚡ Power Surge Activated for 45s!');
         updateUI();
       }
     }
 
-    // Buy mega upgrade
     function buyMega() {
       if (money >= megaCost) {
         money -= megaCost;
         megaUpgrades++;
-        megaCost = Math.floor(megaCost * 1.5);
+        megaCost = Math.floor(megaCost * 1.45);
+        critMultiplier = 5 + (megaUpgrades * 1.5);
+        try { upgradeSound.currentTime = 0; upgradeSound.play().catch(() => { }); } catch (e) { }
+        showNotification('💥 Critical Hit Chance Increased!');
+        updateUI();
+      }
+    }
 
-        try {
-          upgradeSound.currentTime = 0;
-          upgradeSound.play().catch(() => { });
-        } catch (e) { }
-
-        showNotification('Mega Click Chance Increased!');
+    function buyMagnet() {
+      if (money >= magnetCost) {
+        money -= magnetCost;
+        magnetUpgrades++;
+        magnetCost = Math.floor(magnetCost * 1.4);
+        try { upgradeSound.currentTime = 0; upgradeSound.play().catch(() => { }); } catch (e) { }
+        showNotification('💰 Money Magnet Activated!');
         updateUI();
       }
     }
@@ -1047,10 +1030,9 @@
     // Auto earnings
     function autoEarnings() {
       if (perSec > 0) {
-        const earnings = perSec * (1 + prestigeCount * 0.1);
+        const earnings = perSec * getTotalMultiplier();
         money += earnings;
 
-        // Add floating text near money display
         const rect = moneyEl.getBoundingClientRect();
         addFloatingText(earnings, rect.x + rect.width / 2, rect.y, 'var(--secondary)');
 
@@ -1067,18 +1049,15 @@
       document.body.appendChild(coin);
 
       coin.addEventListener('click', (evt) => {
-        const bonus = Math.floor(Math.random() * 300) + 200;
+        const magnet = 1 + (magnetUpgrades * 0.15);
+        const bonus = Math.floor((Math.random() * 500 + 100) * magnet);
         money += bonus;
 
-        try {
-          bonusSound.currentTime = 0;
-          bonusSound.play().catch(() => { });
-        } catch (e) { }
+        try { bonusSound.currentTime = 0; bonusSound.play().catch(() => { }); } catch (e) { }
 
         addFloatingText(bonus, evt.clientX, evt.clientY - 50, 'var(--bonus)');
         showNotification(`Bonus Coin: +$${fmt(bonus)}!`);
 
-        // Remove coin with animation
         coin.style.transform = 'scale(0)';
         setTimeout(() => {
           if (coin.parentNode) coin.remove();
@@ -1123,36 +1102,33 @@
         clickUpgrades = 0;
         autoUpgrades = 0;
         megaUpgrades = 0;
+        magnetUpgrades = 0;
         clickCost = 10;
         autoCost = 25;
-        // restore consistent mega base cost
-        megaCost = 7500;
+        megaCost = 5000;
+        magnetCost = 750;
+        critMultiplier = 5;
 
-        // Clear boost if active
         if (boostActive) {
           clearInterval(boostTimer);
           boostActive = false;
           clickBtn.classList.remove('boost');
         }
 
-        // Save immediately
         saveGame();
 
-        showNotification(`Prestige ${prestigeCount} achieved! You now have a ${prestigeCount * 10}% bonus!`, 'success');
+        showNotification(`✨ Prestige ${prestigeCount}! Bonus: ${prestigeCount * 15}%!`, 'success');
         updateUI();
       }
     }
 
     // Keyboard shortcuts
     function handleKeyPress(e) {
-      // Prevent default for game keys
-      if (e.key === ' ' || (e.key >= '1' && e.key <= '4')) {
+      if (e.key === ' ' || (e.key >= '1' && e.key <= '5')) {
         e.preventDefault();
       }
 
-      // Spacebar to click
       if (e.key === ' ') {
-        // Simulate click at center of button
         const rect = clickBtn.getBoundingClientRect();
         const fakeEvent = {
           clientX: rect.x + rect.width / 2,
@@ -1162,7 +1138,6 @@
         return;
       }
 
-      // Number keys for upgrades
       switch (e.key) {
         case '1':
           document.getElementById('buyClick').click();
@@ -1176,6 +1151,9 @@
         case '4':
           document.getElementById('buyMega').click();
           break;
+        case '5':
+          document.getElementById('buyMagnet').click();
+          break;
       }
     }
 
@@ -1185,41 +1163,32 @@
       createBackgroundCoins();
       updateUI();
 
-      // Event listeners
       clickBtn.onclick = clickGain;
       document.getElementById('buyClick').onclick = buyClick;
       document.getElementById('buyAuto').onclick = buyAuto;
       document.getElementById('buyBoost').onclick = buyBoost;
       document.getElementById('buyMega').onclick = buyMega;
+      document.getElementById('buyMagnet').onclick = buyMagnet;
       document.getElementById('prestigeButton').onclick = prestige;
 
-      // Keyboard support
       document.addEventListener('keydown', handleKeyPress);
-
-      // Auto-save on page unload
       window.addEventListener('beforeunload', saveGame);
 
-      // Auto-save periodically
-      setInterval(saveGame, 30000); // Every 30 seconds
-
-      // Game loops
+      setInterval(saveGame, 30000);
       setInterval(autoEarnings, 1000);
       setInterval(() => {
-        if (Math.random() < 0.15) spawnBonus();
+        if (Math.random() < 0.12) spawnBonus();
       }, 8000);
 
-      // Welcome message
       setTimeout(() => {
         if (money === 0 && perClick === 1) {
-          showNotification('Welcome to Clicker Quest+ Pro! Click the button or press Spacebar to earn money!');
+          showNotification('Welcome to Clicker Quest+ Pro 2.0! Click or press Spacebar to earn!');
         }
       }, 1000);
 
-      // Initial save
       saveGame();
     }
 
-    // Start the game
     init();
   </script>
 </body>

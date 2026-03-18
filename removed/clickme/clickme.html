@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CLICK ME.</title>
+  <link rel="icon" href="../../icon.jpg" type="image/png">
+  <style>
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #ffffff;
+      font-family: monospace;
+      user-select: none;
+    }
+
+    #world {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    #btn {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px 40px;
+      font-size: 1.2em;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border: 3px solid #764ba2;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      z-index: 100;
+      transition: all 0.2s;
+      box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+    }
+
+    #btn:hover {
+      transform: translate(-50%, -50%) scale(1.1);
+      box-shadow: 0 0 30px rgba(102, 126, 234, 0.8);
+    }
+
+    #btn:active {
+      transform: translate(-50%, -50%) scale(0.95);
+    }
+
+    .eye {
+      position: absolute;
+      width: 50px;
+      height: 30px;
+      border: 3px solid #0f0;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #0f0;
+    }
+
+    .eye::after {
+      content: '';
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: #0f0;
+      border-radius: 50%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 8px #0f0;
+    }
+
+    .fall {
+      position: fixed;
+      top: -50px;
+      color: #0f0;
+      pointer-events: none;
+      font-size: 28px;
+      font-weight: bold;
+      text-shadow: 0 0 10px #0f0;
+      animation: fallDown 3s ease-in forwards;
+      z-index: 50;
+    }
+
+    @keyframes fallDown {
+      to {
+        transform: translateY(110vh) rotateZ(360deg);
+        opacity: 0;
+      }
+    }
+
+    .drift-particle {
+      position: fixed;
+      pointer-events: none;
+      font-size: 2em;
+      animation: drift 2s ease-out forwards;
+      z-index: 30;
+    }
+
+    @keyframes drift {
+      to {
+        opacity: 0;
+        transform: translateY(-100px) translateX(var(--drift-x));
+      }
+    }
+
+    @keyframes shake {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      25% {
+        transform: translate(-5px, 5px);
+      }
+
+      50% {
+        transform: translate(5px, -5px);
+      }
+
+      75% {
+        transform: translate(-3px, 3px);
+      }
+
+      100% {
+        transform: translate(0, 0);
+      }
+    }
+
+    #world.chaos-active {
+      animation: shake 0.15s infinite;
+    }
+
+    .replica-btn {
+      position: absolute;
+      padding: 15px 30px;
+      font-size: 1em;
+      background: rgba(102, 126, 234, 0.6);
+      color: white;
+      border: 2px solid rgba(102, 126, 234, 0.8);
+      border-radius: 8px;
+      cursor: pointer;
+      pointer-events: all;
+      z-index: 80;
+      opacity: 0;
+      animation: appear 0.5s ease-out forwards;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+
+      to {
+        opacity: 0.8;
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="world">
+    <button id="btn" onclick="clickMe()">CLICK ME</button>
+  </div>
+
+  <script>
+    let clicks = 0, entropy = 0, silent = false, mirror = false;
+    let chaosActive = false;
+
+    function clickMe() {
+      clicks++;
+      entropy = Math.floor(clicks / 10);
+      document.title = "CLICK " + clicks;
+      realityShift();
+    }
+
+    function realityShift() {
+      if (entropy >= 1) pulse();
+      if (entropy >= 2) fakeCrash();
+      if (entropy >= 3 && Math.random() < 0.6) fallingText();
+      if (entropy >= 4 && Math.random() < 0.3) shake();
+      if (entropy >= 5 && Math.random() < 0.3) spawnEye();
+      if (entropy >= 6 && Math.random() < 0.2) fakeAd();
+      if (entropy >= 7) fakeAd();
+      if (entropy >= 8 && Math.random() < 0.2) flip();
+      if (entropy >= 10 && Math.random() < 0.2) fakeCrash();
+      if (entropy >= 12 && Math.random() < 0.15) portal();
+      if (entropy >= 15 && Math.random() < 0.15) rewind();
+      if (entropy >= 18 && Math.random() < 0.1) toggleMirror();
+      if (entropy >= 25) finalForm();
+      if (entropy >= 30) createReplicas();
+    }
+
+    function pulse() {
+      document.body.style.background = `rgb(${Math.random() * 255},${Math.random() * 255},${Math.random() * 255})`;
+    }
+
+    function shake() {
+      world.classList.add('chaos-active');
+      setTimeout(() => world.classList.remove('chaos-active'), 300);
+    }
+
+    function drift() {
+      btn().style.left = Math.random() * 80 + 10 + "%";
+      btn().style.top = Math.random() * 80 + 10 + "%";
+    }
+
+    function fallingText() {
+      const t = document.createElement("div");
+      t.className = "fall";
+      t.innerText = ["ERROR", "STOP", "RUN", "HELP", "HELLO", "WHY", "NO", "DOOM", "VOID"][Math.random() * 9 | 0];
+      t.style.left = Math.random() * 100 + "%";
+      world.appendChild(t);
+      setTimeout(() => t.remove(), 3500);
+    }
+
+    function spawnEye() {
+      const e = document.createElement("div");
+      e.className = "eye";
+      e.style.left = Math.random() * 80 + "%";
+      e.style.top = Math.random() * 80 + "%";
+      e.style.animation = `drift ${2 + Math.random() * 2}s ease-out forwards`;
+      world.appendChild(e);
+      setTimeout(() => e.remove(), 3000);
+    }
+
+    function fakeAd() {
+      const a = document.createElement("div");
+      a.className = "drift-particle";
+      a.innerText = ["FREE RAM", "YOU WON!", "CLICK HERE", "ERROR 404"][Math.random() * 4 | 0];
+      a.style.left = Math.random() * 80 + "%";
+      a.style.top = Math.random() * 80 + "%";
+      a.style.setProperty('--drift-x', (Math.random() - 0.5) * 200 + 'px');
+      a.style.cursor = "pointer";
+      a.onclick = () => a.remove();
+      world.appendChild(a);
+      setTimeout(() => a.remove(), 2500);
+    }
+
+    function dodge() {
+      btn().onmouseenter = () => drift();
+    }
+
+    function flip() {
+      world.style.transform = "rotate(180deg)";
+      setTimeout(() => world.style.transform = "", 2000);
+    }
+
+    function fakeCrash() {
+      alert("⚠️ SYSTEM ERROR ⚠️\n\nUnexpected click behavior detected!");
+    }
+
+    function portal() {
+      const p = document.createElement("div");
+      p.innerText = "🌀 PORTAL";
+      p.style.position = "absolute";
+      p.style.left = Math.random() * 80 + "%";
+      p.style.top = Math.random() * 80 + "%";
+      p.style.border = "3px solid cyan";
+      p.style.padding = "20px";
+      p.style.cursor = "pointer";
+      p.style.color = "cyan";
+      p.style.textShadow = "0 0 10px cyan";
+      p.style.fontWeight = "bold";
+      p.onclick = () => location.reload();
+      world.appendChild(p);
+      setTimeout(() => p.remove(), 5000);
+    }
+
+    function rewind() {
+      clicks = Math.max(0, clicks - 20);
+      document.title = "CLICK " + clicks + " (REWIND)";
+    }
+
+    function toggleMirror() {
+      mirror = !mirror;
+      world.style.transform = mirror ? "scaleX(-1)" : "";
+    }
+
+    function finalForm() {
+      btn().innerText = "WHY DID YOU KEEP CLICKING";
+      btn().style.background = "linear-gradient(45deg, #000, #ff0000, #000)";
+      btn().style.backgroundSize = "200% 200%";
+      btn().style.animation = "gradientShift 2s ease infinite";
+    }
+
+    function createReplicas() {
+      if (entropy >= 30) {
+        for (let i = 0; i < 3; i++) {
+          const replica = document.createElement("button");
+          replica.className = "replica-btn";
+          replica.innerText = "CLICK ME";
+          replica.style.left = Math.random() * 80 + 10 + "%";
+          replica.style.top = Math.random() * 80 + 10 + "%";
+          replica.onclick = clickMe;
+          world.appendChild(replica);
+          setTimeout(() => replica.remove(), 5000);
+        }
+      }
+    }
+
+    function btn() { return document.getElementById("btn"); }
+    const world = document.getElementById("world");
+
+    @keyframes gradientShift {
+      0 % { background- position: 0 % 50 %;
+    }
+    50 % { background- position: 100 % 50 %; }
+    100 % { background- position: 0 % 50 %; }
+    }
+  </script>
+
+
+</body>
+
+</html>

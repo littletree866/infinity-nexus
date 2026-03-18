@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROM Walkthrough</title>
+<link rel="icon" type="image/x-icon" href="../icon.jpg">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  background: #f6f6f6;
+  color: #202122;
+}
+
+/* Layout */
+.container {
+  display: flex;
+}
+
+.sidebar {
+  width: 220px;
+  background: #f8f9fa;
+  border-right: 1px solid #a2a9b1;
+  padding: 15px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+.sidebar h2 {
+  font-size: 16px;
+  margin-top: 0;
+}
+
+.sidebar a {
+  display: block;
+  text-decoration: none;
+  color: #0645ad;
+  margin: 5px 0;
+}
+
+.sidebar a:hover {
+  text-decoration: underline;
+}
+
+.content {
+  flex: 1;
+  padding: 20px 40px;
+  max-width: 1000px;
+}
+
+/* Headings */
+h1 {
+  font-size: 28px;
+  border-bottom: 1px solid #a2a9b1;
+}
+
+h2 {
+  border-bottom: 1px solid #a2a9b1;
+  font-size: 22px;
+  margin-top: 30px;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 15px 0;
+  font-size: 14px;
+}
+
+th, td {
+  border: 1px solid #a2a9b1;
+  padding: 6px;
+}
+
+th {
+  background: #eaecf0;
+  text-align: center;
+}
+
+/* Sprite */
+.sprite {
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+}
+
+/* TOC */
+.toc {
+  border: 1px solid #a2a9b1;
+  background: #f8f9fa;
+  padding: 10px;
+  width: fit-content;
+}
+
+.toc a {
+  display: block;
+  font-size: 14px;
+  color: #0645ad;
+  text-decoration: none;
+}
+
+.toc a:hover {
+  text-decoration: underline;
+}
+
+/* Collapsible */
+.collapsible {
+  cursor: pointer;
+  color: #0645ad;
+}
+
+.hidden {
+  display: none;
+}
+
+button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  border: 1px solid #a2a9b1;
+  background: #f8f9fa;
+  cursor: pointer;
+}
+
+</style>
+
+<script>
+let expanded = false;
+
+function toggle(id) {
+  document.getElementById(id).classList.toggle('hidden');
+}
+
+function toggleAll(btn) {
+  expanded = !expanded;
+  document.querySelectorAll('[data-section]').forEach(el => {
+    if(expanded) el.classList.remove('hidden');
+    else el.classList.add('hidden');
+  });
+  btn.innerText = expanded ? "Collapse All" : "Expand All";
+}
+</script>
+
+</head>
+<body>
+
+<div class="container">
+
+<div class="sidebar">
+  <h2>Navigation</h2>
+  <a href="#route1">Route 101</a>
+  <a href="#gym1">Gym 1</a>
+  <button onclick="toggleAll(this)">Expand All</button>
+</div>
+
+<div class="content">
+
+<h1>Walkthrough</h1>
+
+<div class="toc">
+  <b>Contents</b>
+  <a href="#route1">1. Route 101</a>
+  <a href="#gym1">2. Gym 1</a>
+</div>
+
+<h2 id="route1">Route 101</h2>
+
+<p><b>Route 101</b> is a short route connecting <b>Littleroot Town</b> to the south and <b>Oldale Town</b> to the north. This is the first route in the game and serves as the player's introduction to wild Pokémon battles.</p>
+
+<p>Upon first entering the route, the player will hear a cry for help from <b>Professor Birch</b>, who is being chased by a wild Pokémon. After selecting a starter Pokémon from his bag and defeating the attacker, the player officially begins their journey.</p>
+
+<p>Afterward, Route 101 becomes a simple early-game training area with low-level Pokémon, making it ideal for gaining initial experience.</p>
+
+<p class="collapsible" onclick="toggle('r1-enc')">▶ Wild Pokémon</p>
+<div id="r1-enc" class="hidden" data-section>
+  <table>
+    <tr>
+      <th></th>
+      <th>Pokémon</th>
+      <th>Level</th>
+      <th>Rate</th>
+    </tr>
+
+    <tr>
+      <td><img class="sprite" src="images/Poochyena.png"></td>
+      <td>Poochyena</td>
+      <td>2-3</td>
+      <td>45%</td>
+    </tr>
+
+    <tr>
+      <td><img class="sprite" src="images/Lotad.png"></td>
+      <td>Lotad</td>
+      <td>2-3</td>
+      <td>30%</td>
+    </tr>
+
+    <tr>
+      <td><img class="sprite" src="images/Wurmple.png"></td>
+      <td>Wurmple</td>
+      <td>2-3</td>
+      <td>10%</td>
+    </tr>
+
+    <tr>
+      <td><img class="sprite" src="images/Pidgey.png"></td>
+      <td>Pidgey</td>
+      <td>2-3</td>
+      <td>5%</td>
+    </tr>
+
+    <tr>
+      <td><img class="sprite" src="images/Rattata.png"></td>
+      <td>Rattata</td>
+      <td>2-3</td>
+      <td>5%</td>
+    </tr>
+
+    <tr>
+      <td><img class="sprite" src="images/Zigzagoon.png"></td>
+      <td>Zigzagoon</td>
+      <td>2-3</td>
+      <td>5%</td>
+    </tr>
+
+  </table>
+</div>
+
+<p class="collapsible" onclick="toggle('r1-notes')">▶ Tips</p>
+<div id="r1-notes" class="hidden" data-section>
+  <ul>
+    <li>This is the first place to train your starter Pokémon safely.</li>
+    <li><b>Poochyena</b> is the most common encounter and can be useful early on.</li>
+    <li><b>Zigzagoon</b> can have the Ability Pickup, making it valuable for collecting items.</li>
+    <li>Return here later if you need quick, low-risk experience.</li>
+  </ul>
+</div>
+
+<h2 id="gym1">Gym 1</h2>
+<p>Description of the gym and puzzle.</p>
+
+<p class="collapsible" onclick="toggle('g1-team')">▶ Trainer Pokémon</p>
+<div id="g1-team" class="hidden" data-section>
+  <table>
+    <tr>
+      <th></th>
+      <th>Pokémon</th>
+      <th>Level</th>
+      <th>Moves</th>
+    </tr>
+    <tr>
+      <td><img class="sprite" src="images/charmander.png"></td>
+      <td>Charmander</td>
+      <td>12</td>
+      <td>Tackle</td>
+    </tr>
+  </table>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

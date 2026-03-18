@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tower Defense</title>
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="icon" href="../../icon.jpg" type="image/x-icon">
     <style>
         * {
@@ -13,7 +14,7 @@
         }
 
         body {
-            font-family: 'Sora', sans-serif;
+            font-family: 'Bree Serif', sans-serif;
             margin: 0;
             background: linear-gradient(135deg, #1E3A5F 0%, #2C4B70 30%, #3A5C82 70%, #4A6E95 100%);
 
@@ -290,7 +291,7 @@
             border-radius: 10px;
             cursor: pointer;
             border: 2px solid;
-            font-family: 'Sora', sans-serif;
+            font-family: 'Bree Serif', sans-serif;
             font-weight: 600;
             font-size: 12px;
             text-transform: uppercase;
@@ -350,7 +351,7 @@
             text-align: left;
             position: relative;
             overflow: hidden;
-            font-family: 'Sora', sans-serif;
+            font-family: 'Bree Serif', sans-serif;
         }
 
         .towerButton::before {
@@ -433,7 +434,7 @@
             pointer-events: none;
             border: 1px solid rgba(255, 215, 0, 0.3);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-            font-family: 'Sora', sans-serif;
+            font-family: 'Bree Serif', sans-serif;
             font-weight: 500;
         }
 
@@ -498,7 +499,7 @@
             font-size: 16px;
             cursor: pointer;
             margin-top: 20px;
-            font-family: 'Sora', sans-serif;
+            font-family: 'Bree Serif', sans-serif;
             font-weight: 600;
         }
 
@@ -1303,7 +1304,7 @@
                 // Boss health text
                 if (this.type === "boss") {
                     ctx.fillStyle = "#FFFFFF";
-                    ctx.font = "12px Sora";
+                    ctx.font = "12px Bree Serif";
                     ctx.textAlign = "center";
                     ctx.fillText(`BOSS: ${Math.ceil(this.hp)}`, this.x, barY - 5);
                 }
@@ -1496,7 +1497,7 @@
 
                 // Level indicator
                 ctx.fillStyle = "#FFD700";
-                ctx.font = "bold 12px Sora";
+                ctx.font = "bold 12px Bree Serif";
                 ctx.textAlign = "center";
                 ctx.fillText(`L${this.level + 1}`, this.x, this.y + 32);
             }
@@ -1754,7 +1755,7 @@
                 ctx.globalAlpha = num.life;
                 ctx.fillStyle = num.color;
                 const fontSize = num.isBonus ? 20 : (14 + (1 - num.life) * 8);
-                ctx.font = `bold ${fontSize}px Sora`;
+                ctx.font = `bold ${fontSize}px Bree Serif`;
                 ctx.textAlign = 'center';
                 ctx.fillText(num.isBonus ? num.value : `-${Math.round(num.value)}`, num.x, num.y);
                 ctx.restore();

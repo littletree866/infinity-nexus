@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cosmic Roulette - Enhanced Edition</title>
+    <title>Roulette</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@300;400;500;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family= Trebuchet MS:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+    <link rel="icon" href="../../icon.jpg" type="image/x-icon">
+
     <style>
         :root {
             --primary-purple: #8a2be2;
@@ -35,7 +37,7 @@
         }
 
         body {
-            font-family: 'Bree Serif', sans-serif;
+            font-family: ' Trebuchet MS', serif;
             background: linear-gradient(135deg, #0a0a20 0%, #1a1a35 100%);
             color: var(--text-light);
             min-height: 100vh;
@@ -59,7 +61,7 @@
         .header h1 {
             font-size: 3.5rem;
             font-weight: 700;
-            background: linear-gradient(90deg, var(--primary-purple), var(--primary-cyan), var(--primary-gold));
+            background: linear-gradient(90deg, #ff6464, #ff4444, #ff8844);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -909,7 +911,7 @@
             background: #2a2a4a;
             padding: 4px 12px;
             border-radius: 8px;
-            font-family: monospace;
+            font-family: serif;
             font-weight: 600;
             color: var(--primary-cyan);
             border: 1px solid var(--primary-cyan);
@@ -993,6 +995,10 @@
 </head>
 
 <body>
+    <a href="../index.html" class="home-btn" title="Back to Casino Games">
+        <i class="fas fa-home"></i> CASINO
+    </a>
+
     <div class="container">
         <div class="header">
             <h1><i class="fas fa-globe-americas"></i> COSMIC ROULETTE</h1>
@@ -1109,39 +1115,8 @@
                 <div class="history-list" id="history-list"></div>
             </div>
         </section>
-
-        <!-- Game Information -->
-        <section class="game-info">
-            <h3><i class="fas fa-info-circle"></i> GAME INFORMATION</h3>
-            <div class="info-grid">
-                <div class="info-item">
-                    <h4>Payouts</h4>
-                    <p>• Single Number: 35:1<br>
-                        • Even/Odd/Red/Black: 1:1<br>
-                        • 1-18/19-36: 1:1<br>
-                        • Dozens (1-12,13-24,25-36): 2:1</p>
-                </div>
-                <div class="info-item">
-                    <h4>How to Play</h4>
-                    <p>1. Select chip value<br>
-                        2. Choose numbers or bet type<br>
-                        3. Place bet (multiple allowed)<br>
-                        4. Spin the wheel and win!</p>
-                </div>
-                <div class="info-item">
-                    <h4>Hotkeys</h4>
-                    <div class="hotkeys">
-                        <div class="hotkey"><span class="key">SPACE</span> Spin wheel</div>
-                        <div class="hotkey"><span class="key">1-6</span> Chip values</div>
-                        <div class="hotkey"><span class="key">ESC</span> Clear bets</div>
-                        <div class="hotkey"><span class="key">R</span> Quick bet</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <footer>
-            <p>Cosmic Roulette Enhanced • Use keyboard shortcuts for faster gameplay • Good luck!</p>
+            <p>Roulette</p>
         </footer>
     </div>
 

@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casino Games Hub</title>
+    <link rel="icon" href="../icon.jpg" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Trebuchet+MS:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-purple: #a855f7;
+            --primary-cyan: #06d6d6;
+            --primary-gold: #fbbf24;
+            --dark-bg: #0f172a;
+            --dark-card: #1e293b;
+            --success-green: #10b981;
+            --danger-red: #ef5350;
+            --secondary-green: #34d399;
+            --text-light: #f1f5f9;
+            --text-dim: #cbd5e1;
+        }
+
+        body {
+            font-family: 'Trebuchet MS', serif;
+            background: linear-gradient(-45deg, #1a1a3f, #2d1b69, #16213e, #0f3460);
+            background-size: 500% 500%;
+            background-attachment: fixed;
+            animation: gradientParallax 15s ease infinite;
+            color: var(--text-light);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientParallax {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            25% {
+                background-position: 100% 50%;
+            }
+
+            50% {
+                background-position: 100% 0%;
+            }
+
+            75% {
+                background-position: 0% 100%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(0, 255, 255, 0.1) 0%, transparent 25%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 60px 20px;
+            position: relative;
+            background: linear-gradient(180deg, rgba(168, 85, 247, 0.1), rgba(6, 214, 214, 0.05));
+            border-radius: 30px;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .header-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-purple), var(--primary-cyan));
+            font-size: 50px;
+            box-shadow: 0 0 40px rgba(168, 85, 247, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.1);
+            flex-shrink: 0;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            animation: iconFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes iconFloat {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary-purple), var(--primary-cyan), var(--primary-gold), var(--primary-cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            animation: titleGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.6));
+                text-shadow: 0 0 30px rgba(168, 85, 247, 0.4);
+            }
+
+            50% {
+                filter: drop-shadow(0 0 40px rgba(6, 214, 214, 0.8));
+                text-shadow: 0 0 50px rgba(6, 214, 214, 0.6);
+            }
+        }
+
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 1.3rem;
+            font-weight: 300;
+            margin-bottom: 5px;
+        }
+
+        .tagline {
+            color: var(--primary-gold);
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .game-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.8));
+            border: 2px solid rgba(168, 85, 247, 0.4);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s;
+            z-index: 0;
+        }
+
+        .game-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 0% 0%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .game-card:hover::before {
+            left: 100%;
+        }
+
+        .game-card:hover {
+            border-color: var(--primary-cyan);
+            transform: translateY(-12px);
+            box-shadow: 0 20px 50px rgba(168, 85, 247, 0.4), inset 0 0 30px rgba(6, 214, 214, 0.1);
+        }
+
+        .game-icon {
+            font-size: 60px;
+            line-height: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .game-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-cyan);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+        }
+
+        .game-description {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+            flex-grow: 1;
+        }
+
+        .game-stats {
+            display: flex;
+            justify-content: space-around;
+            gap: 10px;
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat {
+            flex: 1;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        .stat-value {
+            color: var(--primary-gold);
+            font-weight: 700;
+            display: block;
+        }
+
+        .play-button {
+            background: linear-gradient(135deg, var(--primary-purple), var(--primary-cyan));
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 10px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.3);
+        }
+
+        .play-button:hover {
+            box-shadow: 0 12px 30px rgba(168, 85, 247, 0.6);
+            transform: scale(1.08) translateY(-3px);
+        }
+
+        .play-button:active {
+            transform: scale(0.95);
+        }
+
+        /* Game-specific colors */
+        .blackjack {
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+
+        .blackjack:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 20px 50px rgba(59, 130, 246, 0.4), inset 0 0 30px rgba(59, 130, 246, 0.1);
+        }
+
+        .blackjack .game-name {
+            color: #60a5fa;
+        }
+
+        .blackjack .play-button {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        }
+
+        .poker {
+            border-color: rgba(16, 185, 129, 0.5);
+        }
+
+        .poker:hover {
+            border-color: #10b981;
+            box-shadow: 0 20px 50px rgba(16, 185, 129, 0.4), inset 0 0 30px rgba(16, 185, 129, 0.1);
+        }
+
+        .poker .game-name {
+            color: #34d399;
+        }
+
+        .poker .play-button {
+            background: linear-gradient(135deg, #10b981, #047857);
+        }
+
+        .slot {
+            border-color: rgba(251, 191, 36, 0.5);
+        }
+
+        .slot:hover {
+            border-color: #fbbf24;
+            box-shadow: 0 20px 50px rgba(251, 191, 36, 0.4), inset 0 0 30px rgba(251, 191, 36, 0.1);
+        }
+
+        .slot .game-name {
+            color: #fcd34d;
+        }
+
+        .slot .play-button {
+            background: linear-gradient(135deg, #fbbf24, #d97706);
+        }
+
+        .roulette {
+            border-color: rgba(239, 68, 68, 0.5);
+        }
+
+        .roulette:hover {
+            border-color: #ef4444;
+            box-shadow: 0 20px 50px rgba(239, 68, 68, 0.4), inset 0 0 30px rgba(239, 68, 68, 0.1);
+        }
+
+        .roulette .game-name {
+            color: #f87171;
+        }
+
+        .roulette .play-button {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+
+        .curseddice {
+            border-color: rgba(6, 182, 212, 0.5);
+        }
+
+        .curseddice:hover {
+            border-color: #06b6d4;
+            box-shadow: 0 20px 50px rgba(6, 182, 212, 0.4), inset 0 0 30px rgba(6, 182, 212, 0.1);
+        }
+
+        .curseddice .game-name {
+            color: #22d3ee;
+        }
+
+        .curseddice .play-button {
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 50px 20px;
+            border-top: 1px solid rgba(168, 85, 247, 0.3);
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            background: linear-gradient(180deg, transparent, rgba(15, 23, 42, 0.5));
+            backdrop-filter: blur(10px);
+            margin-top: auto;
+        }
+
+        .footer p {
+            margin: 12px 0;
+            font-weight: 500;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--primary-cyan);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gold);
+            transition: width 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-gold);
+        }
+
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .header-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 30px;
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .game-card {
+                padding: 20px;
+            }
+
+            .game-name {
+                font-size: 1.5rem;
+            }
+
+            .game-icon {
+                font-size: 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .tagline {
+                font-size: 1rem;
+            }
+
+            .game-card {
+                padding: 15px;
+            }
+
+            .game-name {
+                font-size: 1.3rem;
+            }
+
+            .game-description {
+                font-size: 0.9rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .game-card {
+            animation: slideIn 0.6s ease-out backwards;
+        }
+
+        .game-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .game-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .game-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .game-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .game-card:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="header-icon">
+                    <img src="../icon.jpg" alt="Casino Icon"
+                        style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                </div>
+                <div>
+                    <h1>CASINO GAMES</h1>
+                    <p class="subtitle">Challenge Your Luck</p>
+                    <p class="tagline">🎰 Experience the Thrill 🎰</p>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="games-grid">
+                <!-- Blackjack -->
+                <a href="blackjack/blackjack.html" class="game-card blackjack">
+                    <div class="game-icon">🎴</div>
+                    <div class="game-name">Blackjack</div>
+                    <div class="game-description">Beat the dealer by getting closer to 21 without going over. Classic
+                        card game with strategy and luck.</div>
+                    <div class="game-stats">
+                        <div class="stat">
+                            <span class="stat-value">Quick</span>
+                            <span>Play</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">Easy</span>
+                            <span>Learn</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">High</span>
+                            <span>Fun</span>
+                        </div>
+                    </div>
+                    <button class="play-button">Play Now</button>
+                </a>
+
+                <!-- Poker -->
+                <a href="poker/poker.html" class="game-card poker">
+                    <div class="game-icon">🃏</div>
+                    <div class="game-name">Poker</div>
+                    <div class="game-description">Master the ultimate card game. Bluff, bet, and outwit your opponents
+                        in Texas Hold'em style poker.</div>
+                    <div class="game-stats">
+                        <div class="stat">
+                            <span class="stat-value">Strategic</span>
+                            <span>Game</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">Expert</span>
+                            <span>Level</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">Epic</span>
+                            <span>Fun</span>
+                        </div>
+                    </div>
+                    <button class="play-button">Play Now</button>
+                </a>
+
+                <!-- Slot Machine -->
+                <a href="slot/slot.html" class="game-card slot">
+                    <div class="game-icon">🎯</div>
+                    <div class="game-name">Slot Machine</div>
+                    <div class="game-description">Spin for fortune! Match symbols to win big jackpots. Pure luck and
+                        exciting rewards await.</div>
+                    <div class="game-stats">
+                        <div class="stat">
+                            <span class="stat-value">Pure</span>
+                            <span>Luck</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">Big</span>
+                            <span>Wins</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">Fast</span>
+                            <span>Paced</span>
+                        </div>
+                    </div>
+                    <button class="play-button">Play Now</button>
+                </a>
+
+                <!-- Roulette -->
+                <a href="roulette/roulette.html" class="game-card roulette">
+                    <div class="game-icon">🎡</div>
+                    <div class="game-name">Roulette</div>
+                    <div class="game-description">Spin the wheel and place your bets. Will fortune smile on your lucky
+                        numbers?</div>
+                    <div class="game-stats">
+                        <div class="stat">
+                            <span class="stat-value">Classic</span>
+                            <span>Game</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">Exciting</span>
+                            <span>Spins</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">High</span>
+                            <span>Stakes</span>
+                        </div>
+                    </div>
+                    <button class="play-button">Play Now</button>
+                </a>
+
+                <!-- Cursed Dice -->
+                <a href="curseddice/curseddice.html" class="game-card curseddice">
+                    <div class="game-icon">🎲</div>
+                    <div class="game-name">Cursed Dice</div>
+                    <div class="game-description">Roll the mystical dice! Curses and blessings will change your fortune.
+                        Are you brave enough?</div>
+                    <div class="game-stats">
+                        <div class="stat">
+                            <span class="stat-value">Unique</span>
+                            <span>Twist</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">Thrilling</span>
+                            <span>Curses</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">Intense</span>
+                            <span>Game</span>
+                        </div>
+                    </div>
+                    <button class="play-button">Play Now</button>
+                </a>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p><strong>Welcome to Casino Games Hub</strong></p>
+            <p>Experience thrilling casino games with stunning graphics and immersive gameplay.</p>
+            <p style="font-size: 0.85rem; margin-top: 15px; opacity: 0.7;">Remember: These are games of chance and
+                strategy. Play responsibly!</p>
+            <div class="footer-links">
+                <a href="../index.html">← Back to Main</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

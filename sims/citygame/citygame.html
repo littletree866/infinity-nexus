@@ -4,12 +4,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Metropolis Builder</title>
+  <title>🏙️ Metropolis Builder Pro 🏙️</title>
 
   <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@400;500;700&family=Inter:wght@300;400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family= Trebuchet MS:wght@400;500;700&family=Inter:wght@300;400;500&display=swap"
     rel="stylesheet" />
-  <link rel="icon" type="image/png" href="../../icon.jpg" rel="icon" />
+  <link rel="icon" href="../../icon.jpg" type="image/x-icon" />
 
 
   <style>
@@ -44,7 +44,7 @@
       background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
       color: var(--text);
       padding: 20px;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', serif;
       position: relative;
     }
 
@@ -87,7 +87,7 @@
     }
 
     header h1 {
-      font-family: 'Bree Serif', sans-serif;
+      font-family: ' Trebuchet MS', serif;
       font-size: 28px;
       font-weight: 700;
       background: linear-gradient(90deg, var(--accent), #00ffaa);
@@ -159,7 +159,7 @@
       font-size: 24px;
       font-weight: 700;
       margin-top: 4px;
-      font-family: 'Bree Serif', sans-serif;
+      font-family: ' Trebuchet MS', serif;
     }
 
     .stat-label {
@@ -402,7 +402,7 @@
     .building-cost {
       font-size: 14px;
       color: var(--good);
-      font-family: 'Bree Serif', sans-serif;
+      font-family: ' Trebuchet MS', serif;
     }
 
     .building-stats {
@@ -549,7 +549,7 @@
       background: rgba(255, 255, 255, 0.1);
       padding: 4px 8px;
       border-radius: 6px;
-      font-family: 'Bree Serif', sans-serif;
+      font-family: ' Trebuchet MS', serif;
       font-size: 12px;
     }
 
@@ -585,6 +585,21 @@
 </head>
 
 <body>
+  <!-- Home Screen -->
+  <div id="homeScreen"
+    style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, #0a0e17, #1a1f2e); display: flex; align-items: center; justify-content: center; z-index: 9999;">
+    <div
+      style="background: rgba(30, 35, 50, 0.95); border: 2px solid #00d4ff; border-radius: 20px; padding: 2.5rem; max-width: 600px; width: 90%; text-align: center; box-shadow: 0 20px 60px rgba(0, 212, 255, 0.3);">
+      <h2 style="color: #00d4ff; font-size: 2.5rem; margin-bottom: 0.5rem;">🏙️ Metropolis Architect</h2>
+      <p style="color: #a0b3d6; font-size: 1rem; margin-bottom: 2rem;">Build and manage your city. Place buildings,
+        manage resources, and grow a thriving metropolis!</p>
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <button onclick="startCityGame()"
+          style="background: linear-gradient(135deg, #00d4ff, #00a8cc); color: #000; border: none; padding: 12px 30px; font-size: 1.1rem; border-radius: 10px; cursor: pointer; font-weight: 600;">🎮
+          Build City</button>
+      </div>
+    </div>
+  </div>
   <div class="wrap">
     <header>
       <h1>🏙️ METROPOLIS ARCHITECT</h1>
@@ -696,7 +711,7 @@
                   style="width: 50%; height: 100%; background: linear-gradient(90deg, var(--good), #00ffaa); border-radius: 4px;">
                 </div>
               </div>
-              <div id="efficiencyValue" style="font-family: 'Bree Serif', sans-serif;">50%</div>
+              <div id="efficiencyValue" style="font-family: ' Trebuchet MS', serif;">50%</div>
             </div>
           </div>
         </div>
@@ -1534,9 +1549,15 @@
       setTimeout(loadGame, 1000);
     }
 
+    // Home screen function
+    function startCityGame() {
+      document.getElementById('homeScreen').style.display = 'none';
+    }
+
     // Start the game
     window.addEventListener('DOMContentLoaded', init);
   </script>
+  </div>
 </body>
 
 </html>

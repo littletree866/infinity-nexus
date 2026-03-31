@@ -1,267 +1,310 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ROM Walkthrough</title>
-<link rel="icon" type="image/x-icon" href="../icon.jpg">
+<link href="../icon.jpg" rel="icon" type="image/png">
 
 <style>
 body {
   margin: 0;
-  font-family: 'Arial', 'Helvetica', sans-serif;
-  background: #f6f6f6;
-  color: #202122;
+  font-family: Trebuchet MS, sans-serif;
+  background: #1b1f2a;
+  color: #e8e8e8;
 }
 
-/* Layout */
 .container {
   display: flex;
 }
 
 .sidebar {
-  width: 220px;
-  background: #f8f9fa;
-  border-right: 1px solid #a2a9b1;
-  padding: 15px;
+  width: 260px;
+  background: #11151d;
+  padding: 20px;
   height: 100vh;
   position: sticky;
   top: 0;
-}
-
-.sidebar h2 {
-  font-size: 16px;
-  margin-top: 0;
+  overflow-y: auto;
 }
 
 .sidebar a {
   display: block;
+  color: #8ab4ff;
   text-decoration: none;
-  color: #0645ad;
-  margin: 5px 0;
+  margin: 6px 0;
 }
 
 .sidebar a:hover {
-  text-decoration: underline;
+  color: #bfd9ff;
 }
 
 .content {
   flex: 1;
-  padding: 20px 40px;
-  max-width: 1000px;
+  padding: 30px;
+  max-width: 1100px;
 }
 
-/* Headings */
 h1 {
-  font-size: 28px;
-  border-bottom: 1px solid #a2a9b1;
+  border-bottom: 2px solid #444;
+  padding-bottom: 10px;
 }
 
 h2 {
-  border-bottom: 1px solid #a2a9b1;
-  font-size: 22px;
-  margin-top: 30px;
+  border-bottom: 1px solid #444;
+  margin-top: 40px;
+  padding-bottom: 5px;
 }
 
-/* Tables */
 table {
-  border-collapse: collapse;
   width: 100%;
+  border-collapse: collapse;
   margin: 15px 0;
-  font-size: 14px;
 }
 
 th, td {
-  border: 1px solid #a2a9b1;
-  padding: 6px;
-}
-
-th {
-  background: #eaecf0;
+  border: 1px solid #444;
+  padding: 8px;
   text-align: center;
 }
 
-/* Sprite */
-.sprite {
-  width: 32px;
-  height: 32px;
-  image-rendering: pixelated;
+th {
+  background: #222;
+  text-align: center;
 }
 
-/* TOC */
-.toc {
-  border: 1px solid #a2a9b1;
-  background: #f8f9fa;
-  padding: 10px;
-  width: fit-content;
-}
-
-.toc a {
-  display: block;
-  font-size: 14px;
-  color: #0645ad;
-  text-decoration: none;
-}
-
-.toc a:hover {
-  text-decoration: underline;
-}
-
-/* Collapsible */
 .collapsible {
   cursor: pointer;
-  color: #0645ad;
+  color: #8ab4ff;
+  margin-top: 10px;
 }
 
 .hidden {
   display: none;
 }
-
-button {
-  margin-top: 10px;
-  padding: 5px 10px;
-  border: 1px solid #a2a9b1;
-  background: #f8f9fa;
-  cursor: pointer;
-}
-
 </style>
 
 <script>
-let expanded = false;
-
 function toggle(id) {
-  document.getElementById(id).classList.toggle('hidden');
-}
-
-function toggleAll(btn) {
-  expanded = !expanded;
-  document.querySelectorAll('[data-section]').forEach(el => {
-    if(expanded) el.classList.remove('hidden');
-    else el.classList.add('hidden');
-  });
-  btn.innerText = expanded ? "Collapse All" : "Expand All";
+  document.getElementById(id).classList.toggle("hidden");
 }
 </script>
 
 </head>
+
 <body>
 
 <div class="container">
 
+<!-- SIDEBAR -->
 <div class="sidebar">
-  <h2>Navigation</h2>
-  <a href="#route1">Route 101</a>
+  <h3>Walkthrough</h3>
+
+  <a href="#route101">Route 101</a>
+  <a href="#route102">Route 102</a>
+  <a href="#town1">Town 1</a>
   <a href="#gym1">Gym 1</a>
-  <button onclick="toggleAll(this)">Expand All</button>
+  <a href="#route103">Route 103</a>
+  <a href="#route104">Route 104</a>
+  <a href="#town2">Town 2</a>
+  <a href="#gym2">Gym 2</a>
+  <a href="#gym3">Gym 3</a>
+  <a href="#gym4">Gym 4</a>
+  <a href="#gym5">Gym 5</a>
+  <a href="#gym6">Gym 6</a>
+  <a href="#gym7">Gym 7</a>
+  <a href="#gym8">Gym 8</a>
+  <a href="#victoryroad">Victory Road</a>
+  <a href="#e4">Elite Four</a>
+  <a href="#champion">Champion</a>
 </div>
 
+<!-- CONTENT -->
 <div class="content">
 
 <h1>Walkthrough</h1>
 
-<div class="toc">
-  <b>Contents</b>
-  <a href="#route1">1. Route 101</a>
-  <a href="#gym1">2. Gym 1</a>
+<!-- TEMPLATE SECTION -->
+<h2 id="route101">Route 101</h2>
+<p>Route 101 is a peaceful route that connects Littleroot Town to Oldale Town. 
+  Few wild Pokémon can be found here, 
+  making it an ideal place to train Pokémon.</p>
+
+<p class="collapsible" onclick="toggle('r101-enc')">▶ Wild Pokémon</p>
+<div id="r101-enc" class="hidden">
+<table>
+<tr>
+<th>Pokémon</th>
+<th>Level</th>
+<th>Rate</th>
+</tr>
+<tr>
+<td>POOCHYENA</td>
+<td>LEVELS 2-3</td>
+<td>45%</td>
+</tr>
+<tr>
+<td>LOTAD</td>
+<td>LEVELS 2-3</td>
+<td>30%</td>
+</tr>
+<tr>
+<td>WURMPLE</td>
+<td>LEVELS 2-3</td>
+<td>10%</td>
+</tr>
+<tr>
+<td>PIDGEY</td>
+<td>LEVELS 2-3</td>
+<td>5%</td>
+<tr>
+<td>RATTATA</td>
+<td>LEVELS 2-3</td>
+<td>5%</td>
+<tr>
+<td>ZIGZAGOON</td>
+<td>LEVELS 2-3</td>
+<td>5%</td>
+</tr>
+</tr>
+</tr>
+</table>
 </div>
 
-<h2 id="route1">Route 101</h2>
-
-<p><b>Route 101</b> is a short route connecting <b>Littleroot Town</b> to the south and <b>Oldale Town</b> to the north. This is the first route in the game and serves as the player's introduction to wild Pokémon battles.</p>
-
-<p>Upon first entering the route, the player will hear a cry for help from <b>Professor Birch</b>, who is being chased by a wild Pokémon. After selecting a starter Pokémon from his bag and defeating the attacker, the player officially begins their journey.</p>
-
-<p>Afterward, Route 101 becomes a simple early-game training area with low-level Pokémon, making it ideal for gaining initial experience.</p>
-
-<p class="collapsible" onclick="toggle('r1-enc')">▶ Wild Pokémon</p>
-<div id="r1-enc" class="hidden" data-section>
-  <table>
-    <tr>
-      <th></th>
-      <th>Pokémon</th>
-      <th>Level</th>
-      <th>Rate</th>
-    </tr>
-
-    <tr>
-      <td><img class="sprite" src="images/Poochyena.png"></td>
-      <td>Poochyena</td>
-      <td>2-3</td>
-      <td>45%</td>
-    </tr>
-
-    <tr>
-      <td><img class="sprite" src="images/Lotad.png"></td>
-      <td>Lotad</td>
-      <td>2-3</td>
-      <td>30%</td>
-    </tr>
-
-    <tr>
-      <td><img class="sprite" src="images/Wurmple.png"></td>
-      <td>Wurmple</td>
-      <td>2-3</td>
-      <td>10%</td>
-    </tr>
-
-    <tr>
-      <td><img class="sprite" src="images/Pidgey.png"></td>
-      <td>Pidgey</td>
-      <td>2-3</td>
-      <td>5%</td>
-    </tr>
-
-    <tr>
-      <td><img class="sprite" src="images/Rattata.png"></td>
-      <td>Rattata</td>
-      <td>2-3</td>
-      <td>5%</td>
-    </tr>
-
-    <tr>
-      <td><img class="sprite" src="images/Zigzagoon.png"></td>
-      <td>Zigzagoon</td>
-      <td>2-3</td>
-      <td>5%</td>
-    </tr>
-
-  </table>
+<p class="collapsible" onclick="toggle('r101-trainers')">▶ Trainers</p>
+<div id="r101-trainers" class="hidden">
+<table>
+<tr>
+<th>Trainer</th>
+<th>Pokémon</th>
+<th>Level</th>
+</tr>
+<tr>
+<td>---</td>
+<td>---</td>
+<td>--</td>
+</tr>
+</table>
 </div>
 
-<p class="collapsible" onclick="toggle('r1-notes')">▶ Tips</p>
-<div id="r1-notes" class="hidden" data-section>
-  <ul>
-    <li>This is the first place to train your starter Pokémon safely.</li>
-    <li><b>Poochyena</b> is the most common encounter and can be useful early on.</li>
-    <li><b>Zigzagoon</b> can have the Ability Pickup, making it valuable for collecting items.</li>
-    <li>Return here later if you need quick, low-risk experience.</li>
-  </ul>
+<p class="collapsible" onclick="toggle('r101-items')">▶ Items</p>
+<div id="r101-items" class="hidden">
+<ul>
+<li>---</li>
+</ul>
 </div>
 
-<h2 id="gym1">Gym 1</h2>
-<p>Description of the gym and puzzle.</p>
+<!-- GYM TEMPLATE -->
+<h2 id="gym1">RUSTBORO CITY GYM</h2>
+<p>The Rustboro City gym leader is Roxanne, who specializes in Rock-type Pokémon. 
+  Her full team of six can be dangerous to face.
+   It also might be troubling that it's a double battle as well.
+  Use caution when challenging her!
+</p>
 
-<p class="collapsible" onclick="toggle('g1-team')">▶ Trainer Pokémon</p>
-<div id="g1-team" class="hidden" data-section>
-  <table>
-    <tr>
-      <th></th>
-      <th>Pokémon</th>
-      <th>Level</th>
-      <th>Moves</th>
-    </tr>
-    <tr>
-      <td><img class="sprite" src="images/charmander.png"></td>
-      <td>Charmander</td>
-      <td>12</td>
-      <td>Tackle</td>
-    </tr>
-  </table>
+<p class="collapsible" onclick="toggle('gym1-trainers')">▶ Trainers</p>
+<div id="gym1-trainers" class="hidden">
+<table>
+<tr>
+<th>Trainer</th>
+<th>Pokémon</th>
+<th>Level</th>
+</tr>
+<tr>
+<td>---</td>
+<td>---</td>
+<td>--</td>
+</tr>
+</table>
 </div>
 
+<p class="collapsible" onclick="toggle('gym1-leader')">▶ Gym Leader</p>
+<div id="gym1-leader" class="hidden">
+<table>
+<tr>
+<th>Pokémon</th>
+<th>Level</th>
+<th>Moves</th>
+</tr>
+<tr>
+<td>GEODUDE</td>
+<td>14</td>
+<td>---</td>
+</tr>
+</table>
 </div>
 
+<!-- COPY THESE BLOCKS FOR EVERYTHING BELOW -->
+
+<h2 id="route102">Route 102</h2>
+<p>Placeholder</p>
+
+<h2 id="town1">Town 1</h2>
+<p>Shops, NPCs, events.</p>
+
+<h2 id="route103">Route 103</h2>
+<p>Placeholder</p>
+
+<h2 id="route104">Route 104</h2>
+<p>Placeholder</p>
+
+<h2 id="town2">Town 2</h2>
+<p>Placeholder</p>
+
+<h2 id="gym2">Gym 2</h2>
+<p>Placeholder</p>
+
+<h2 id="gym3">Gym 3</h2>
+<p>Placeholder</p>
+
+<h2 id="gym4">Gym 4</h2>
+<p>Placeholder</p>
+
+<h2 id="gym5">Gym 5</h2>
+<p>Placeholder</p>
+
+<h2 id="gym6">Gym 6</h2>
+<p>Placeholder</p>
+
+<h2 id="gym7">Gym 7</h2>
+<p>Placeholder</p>
+
+<h2 id="gym8">Gym 8</h2>
+<p>Placeholder</p>
+
+<h2 id="victoryroad">Victory Road</h2>
+<p>Final dungeon placeholder.</p>
+
+<h2 id="e4">Elite Four</h2>
+
+<table>
+<tr>
+<th>Member</th>
+<th>Type</th>
+</tr>
+<tr><td>1</td><td>---</td></tr>
+<tr><td>2</td><td>---</td></tr>
+<tr><td>3</td><td>---</td></tr>
+<tr><td>4</td><td>---</td></tr>
+</table>
+
+<h2 id="champion">Champion</h2>
+
+<table>
+<tr>
+<th>Pokémon</th>
+<th>Level</th>
+<th>Moves</th>
+</tr>
+<tr>
+<td>---</td>
+<td>--</td>
+<td>---</td>
+</tr>
+</table>
+
+</div>
 </div>
 
 </body>

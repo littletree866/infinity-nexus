@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blackjack+</title>
+    <title>Blackjack Pro</title>
     <link rel="icon" type="image/x-icon" href="../../icon.jpg">
-    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@300;400;500;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family= Trebuchet MS:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -30,7 +30,7 @@
         }
 
         body {
-            font-family: 'Bree Serif', sans-serif;
+            font-family: ' Trebuchet MS', serif;
             margin: 0;
             background: radial-gradient(circle, var(--background-dark), #000);
             color: var(--text-light);
@@ -63,9 +63,10 @@
 
         h2 {
             color: var(--primary-color);
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             font-weight: 700;
             font-size: 28px;
+            text-transform: uppercase;
         }
 
         #chips {
@@ -177,7 +178,7 @@
             font-size: 18px;
             font-weight: 600;
             transition: all 0.2s;
-            font-family: 'Bree Serif', sans-serif;
+            font-family: ' Trebuchet MS', serif;
             min-width: 130px;
             display: flex;
             align-items: center;
@@ -378,17 +379,52 @@
         .high-contrast .card {
             border: 2px solid white;
         }
+
+        .home-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #8a2be2, #00ffff);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+        }
+
+        .home-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.6);
+        }
+
+        @media (max-width: 600px) {
+            .home-btn {
+                padding: 10px 15px;
+                font-size: 0.85rem;
+            }
+        }
     </style>
 </head>
 
 <body>
+    <a href="../index.html" class="home-btn" title="Back to Casino Games">
+        <i class="fas fa-home"></i> CASINO
+    </a>
+
     <button id="soundToggle" class="sound-toggle" aria-label="Toggle sound">
         <i class="fas fa-volume-up"></i>
     </button>
 
     <div id="game">
         <div class="game-header">
-            <h2>♠️ BLACKJACK+ ♣️</h2>
+            <h2>BLACKJACK+</h2>
             <div id="chips">CHIPS: <span id="chipCount">100</span></div>
         </div>
 

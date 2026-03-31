@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +10,9 @@
     <style>
         * {
             box-sizing: border-box;
-            font-family: 'Roboto', system-ui, sans-serif;
+            font-family: 'Roboto', system-ui, serif;
         }
+
         body {
             background: linear-gradient(145deg, #2b3a4a 0%, #1d2a35 100%);
             min-height: 100vh;
@@ -19,14 +21,16 @@
             justify-content: center;
             align-items: center;
         }
+
         .calculator {
             background-color: #1e2a36;
             border-radius: 2.2rem;
             padding: 1.8rem 1.5rem 2rem 1.5rem;
-            box-shadow: 0 25px 40px -10px rgba(0,0,0,0.7), 
-                        0 0 0 1px rgba(255,255,255,0.08) inset;
+            box-shadow: 0 25px 40px -10px rgba(0, 0, 0, 0.7),
+                0 0 0 1px rgba(255, 255, 255, 0.08) inset;
             width: 340px;
         }
+
         .display {
             background-color: #10171f;
             border-radius: 1.8rem;
@@ -35,6 +39,7 @@
             text-align: right;
             box-shadow: 0 8px 0 #0b1115, 0 0 0 1px #3a4c5e inset;
         }
+
         .display input {
             width: 100%;
             background: transparent;
@@ -44,19 +49,23 @@
             font-size: 2.8rem;
             font-weight: 500;
             letter-spacing: 1px;
-            text-shadow: 0 3px 3px rgba(0,0,0,0.5);
-            pointer-events: none;   /* read-only feel, but keeps value */
+            text-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
+            pointer-events: none;
+            /* read-only feel, but keeps value */
         }
+
         .display input::placeholder {
             color: #3e5568;
             font-weight: 400;
             opacity: 0.7;
         }
+
         .buttons {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 0.8rem;
         }
+
         button {
             border: none;
             padding: 1.1rem 0.2rem;
@@ -65,7 +74,7 @@
             border-radius: 1.8rem;
             background-color: #263542;
             color: #edf4fa;
-            box-shadow: 0 6px 0 #151f27, 0 2px 10px rgba(0,0,0,0.4);
+            box-shadow: 0 6px 0 #151f27, 0 2px 10px rgba(0, 0, 0, 0.4);
             cursor: pointer;
             transition: 0.06s linear;
             display: flex;
@@ -74,10 +83,12 @@
             line-height: 1;
             user-select: none;
         }
+
         button:active {
             transform: translateY(5px);
-            box-shadow: 0 1px 0 #151f27, 0 2px 8px rgba(0,0,0,0.5);
+            box-shadow: 0 1px 0 #151f27, 0 2px 8px rgba(0, 0, 0, 0.5);
         }
+
         /* operator & special keys */
         .operator {
             background-color: #364f68;
@@ -85,6 +96,7 @@
             text-shadow: 0 2px 0 #1d3343;
             box-shadow: 0 6px 0 #1f3140, 0 2px 8px black;
         }
+
         .equals {
             background-color: #d48c4c;
             color: white;
@@ -92,6 +104,7 @@
             font-weight: 700;
             box-shadow: 0 6px 0 #8f562b, 0 2px 10px #131e28;
         }
+
         .clear {
             background-color: #3f313c;
             color: #fcc8b0;
@@ -99,14 +112,17 @@
             font-size: 1.7rem;
             font-weight: 600;
         }
+
         .zero {
             grid-column: span 2;
         }
+
         /* subtle active effect for all buttons */
         button:focus-visible {
             outline: 2px solid #7a9fbf;
             outline-offset: 2px;
         }
+
         /* footer note (tiny) */
         .note {
             color: #617e99;
@@ -120,6 +136,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="calculator">
         <!-- display screen (readonly input) -->
@@ -157,7 +174,7 @@
     </div>
 
     <script>
-        (function() {
+        (function () {
             // --- get elements
             const screen = document.getElementById('calcScreen');
 
@@ -211,7 +228,7 @@
                             currentInput = digit;  // replace leading zero
                         } else {
                             // avoid excessively long numbers (optional, keep max 12 chars)
-                            if (currentInput.replace('.','').length >= 12) return; // too many digits
+                            if (currentInput.replace('.', '').length >= 12) return; // too many digits
                             currentInput += digit;
                         }
                     }
@@ -392,4 +409,5 @@
         })();
     </script>
 </body>
+
 </html>

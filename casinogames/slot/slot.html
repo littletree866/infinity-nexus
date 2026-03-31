@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Slot Machine</title>
     <link rel="icon" type="image/x-icon" href="../../icon.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family= Trebuchet MS:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <style>
         :root {
@@ -20,9 +21,8 @@
             --accent-silver: #C0C0C0;
             --accent-red: #ff2b2b;
             --accent-green: #00ff88;
-            <<<<<<< HEAD --cell-bg: rgba(255, 255, 255, 0.08);
-            =======--cell-bg: rgba(255, 255, 255, 0.08);
-            >>>>>>>ef2b66adec447d5c0c04f1770677c19698a1950d --machine-bg: rgba(0, 0, 0, 0.5);
+            --cell-bg: rgba(255, 255, 255, 0.08);
+            --machine-bg: rgba(0, 0, 0, 0.5);
             --text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
@@ -33,7 +33,7 @@
         }
 
         body {
-            font-family: 'Bree Serif', sans-serif;
+            font-family: ' Trebuchet MS', serif;
             background: var(--primary-gradient);
             color: #fff;
             text-align: center;
@@ -169,7 +169,7 @@
             border-radius: 10px;
             background: rgba(255, 255, 255, 0.1);
             color: white;
-            font-family: 'Bree Serif', sans-serif;
+            font-family: ' Trebuchet MS', serif;
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
@@ -553,10 +553,45 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .home-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0, 114, 255, 0.4);
+        }
+
+        .home-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 114, 255, 0.6);
+        }
+
+        @media (max-width: 600px) {
+            .home-btn {
+                padding: 10px 15px;
+                font-size: 0.85rem;
+            }
+        }
     </style>
 </head>
 
 <body>
+    <a href="../index.html" class="home-btn" title="Back to Casino Games">
+        <i class="fas fa-home"></i> CASINO
+    </a>
+
     <!-- Animated background particles -->
     <div class="particles" id="particles"></div>
 

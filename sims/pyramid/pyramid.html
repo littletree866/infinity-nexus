@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../../icon.jpg" type="image/x-icon">
-    <title>Pyramid</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@300;400;500;600;700&display=swap"
+    <title>🔺 Pyramid Pro 🔺</title>
+    <link href="https://fonts.googleapis.com/css2?family= Trebuchet MS:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <style>
         :root {
@@ -35,7 +35,7 @@
         }
 
         body {
-            font-family: 'Bree Serif', sans-serif;
+            font-family: ' Trebuchet MS', serif;
             background: linear-gradient(135deg, #0c0c14 0%, #1a1a2e 100%);
             color: var(--text-color);
             max-width: 1000px;
@@ -63,7 +63,7 @@
         }
 
         button {
-            font-family: 'Bree Serif', sans-serif;
+            font-family: ' Trebuchet MS', serif;
             font-weight: 600;
             letter-spacing: 0.5px;
             text-transform: uppercase;
@@ -840,6 +840,21 @@
 </head>
 
 <body>
+    <!-- Home Screen -->
+    <div id="homeScreen"
+        style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, #0c0c14, #1a1a2e); display: flex; align-items: center; justify-content: center; z-index: 9999;">
+        <div
+            style="background: #1a1a2e; border: 3px solid #ffd700; border-radius: 20px; padding: 2.5rem; max-width: 600px; width: 90%; text-align: center; box-shadow: 0 20px 60px rgba(255, 215, 0, 0.3);">
+            <h2 style="color: #ffd700; font-size: 2.5rem; margin-bottom: 0.5rem;">🔺 Pyramid Pro</h2>
+            <p style="color: #ddd; font-size: 1rem; margin-bottom: 2rem;">Explore the ancient pyramid, solve
+                hieroglyphic puzzles, and escape the cursed chambers!</p>
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <button onclick="startPyramid()"
+                    style="background: linear-gradient(135deg, #ffd700, #ffaa00); color: #000; border: none; padding: 12px 30px; font-size: 1.1rem; border-radius: 10px; cursor: pointer; font-weight: 600;">🎮
+                    Enter Pyramid</button>
+            </div>
+        </div>
+    </div>
     <header>
         <h1>PYRAMID</h1>
         <div id="game-info">
@@ -967,7 +982,7 @@
             },
             5: {
                 name: "Inner Sanctum",
-                description: `The treasure room glitters with unimaginable wealth, but a final puzzle protects the pharaoh's greatest treasure. An escape passage is visible behind a tapestry.`,
+                description: `The treasure room glitters with unimaginable wealth, but a final puzzle protects the pharaoh's greatest treasure. An escape passage is visible be Trebuchet MS a tapestry.`,
                 options: [
                     { text: "💎 Examine the treasure", action: "examineTreasure" },
                     { text: "🧩 Approach the final challenge", action: "approachFinalChallenge" },
@@ -1214,7 +1229,7 @@
             if (!gameState.hasKey && foundKey) {
                 gameState.hasKey = true;
                 gameState.inventory.push('Ancient Bronze Key');
-                addMessage(`<span class="success">𓍝 You found an ancient bronze key hidden behind a loose stone!</span>`, 'success');
+                addMessage(`<span class="success">𓍝 You found an ancient bronze key hidden be Trebuchet MS a loose stone!</span>`, 'success');
                 updateInventory();
             }
 
@@ -1403,7 +1418,7 @@
         }
 
         function studyEscape() {
-            addMessage(`You notice a hidden passage behind a tapestry. It seems to lead outside. 
+            addMessage(`You notice a hidden passage be Trebuchet MS a tapestry. It seems to lead outside. 
             Once you solve the final puzzle, you can escape with the treasure.`);
         }
 
@@ -1684,6 +1699,10 @@
                 location.reload();
             });
             optionsContainer.appendChild(restartBtn);
+        }
+
+        function startPyramid() {
+            document.getElementById('homeScreen').style.display = 'none';
         }
 
         initGame();

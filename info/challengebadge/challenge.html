@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Badges</title>
+    <title>🏆 Game Badges Pro 🏆</title>
     <link rel="icon" href="../../icon.jpg" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family= Trebuchet MS:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #6e8efb;
@@ -25,11 +25,35 @@
         }
 
         body {
-            font-family: 'Bree Serif', sans-serif;
-            background: linear-gradient(135deg, var(--darker), var(--dark));
-            color: #e0e0e0;
+            font-family: ' Trebuchet MS', serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 500% 500%;
+            animation: gradientBG 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            color: #f4f4f4;
             min-height: 100vh;
             padding: 20px;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 50% 100%;
+            }
+
+            25% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 50% 0%;
+            }
+
+            75% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 50% 100%;
+            }
         }
 
         .container {
@@ -43,19 +67,50 @@
             padding: 40px 20px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(110, 142, 251, 0.3);
+            box-shadow: 0 12px 40px rgba(110, 142, 251, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+            animation: shimmer 8s infinite;
+        }
+
+        @keyframes shimmer {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            50% {
+                transform: translate(20px, 20px) rotate(180deg);
+            }
         }
 
         header h1 {
             font-size: 3em;
             margin-bottom: 10px;
             color: white;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         header p {
             font-size: 1.1em;
             opacity: 0.95;
             color: white;
+            position: relative;
+            z-index: 2;
         }
 
         .stats-grid {
@@ -66,26 +121,35 @@
         }
 
         .stat-card {
-            background: rgba(44, 62, 80, 0.8);
+            background: rgba(255, 255, 255, 0.08);
             padding: 25px;
             border-radius: 15px;
             border: 2px solid var(--secondary);
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(110, 142, 251, 0.2);
+            border-color: var(--primary);
         }
 
         .stat-value {
             font-size: 2.5em;
             font-weight: 700;
-            color: var(--primary);
+            color: #8ab4ff;
             margin-bottom: 10px;
         }
 
         .stat-label {
-            color: #a0a0a0;
+            color: #bbb;
             text-transform: uppercase;
             letter-spacing: 1px;
             font-size: 0.9em;
+            font-weight: 600;
         }
 
         .filters {
@@ -105,11 +169,13 @@
             cursor: pointer;
             transition: all 0.3s;
             font-weight: 600;
+            font-family: ' Trebuchet MS', serif;
         }
 
         .filter-btn.active {
             background: var(--primary);
             color: white;
+            box-shadow: 0 8px 20px rgba(110, 142, 251, 0.4);
         }
 
         .filter-btn:hover {
@@ -119,26 +185,28 @@
 
         .badges-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
             margin-bottom: 50px;
         }
 
         .badge-card {
-            background: rgba(30, 41, 59, 0.6);
-            border: 2px solid rgba(167, 119, 227, 0.3);
-            border-radius: 15px;
-            padding: 20px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 2px solid rgba(167, 119, 227, 0.4);
+            border-radius: 18px;
+            padding: 25px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            min-height: 280px;
+            min-height: 300px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
         }
 
         .badge-card::before {
@@ -148,15 +216,15 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(167, 119, 227, 0.1) 0%, transparent 70%);
-            transition: all 0.3s;
+            background: radial-gradient(circle, rgba(167, 119, 227, 0.15) 0%, transparent 70%);
+            transition: all 0.4s;
             z-index: 0;
         }
 
         .badge-card:hover {
-            border-color: var(--secondary);
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(110, 142, 251, 0.2);
+            border-color: var(--primary);
+            transform: translateY(-12px);
+            box-shadow: 0 20px 50px rgba(110, 142, 251, 0.25);
         }
 
         .badge-card:hover::before {
@@ -165,7 +233,7 @@
         }
 
         .badge-card.locked {
-            opacity: 0.6;
+            opacity: 0.65;
             border-color: rgba(255, 71, 87, 0.3);
         }
 
@@ -224,44 +292,64 @@
         }
 
         .badge-earned {
-            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(110, 142, 251, 0.1));
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(110, 142, 251, 0.15));
             border-color: var(--success);
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.2);
+            animation: badgePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes badgePulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 25px rgba(16, 185, 129, 0.2), inset 0 0 20px rgba(16, 185, 129, 0.1);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(16, 185, 129, 0.4), inset 0 0 20px rgba(16, 185, 129, 0.2);
+            }
         }
 
         .rarity {
             display: inline-block;
-            padding: 5px 12px;
+            padding: 6px 14px;
             border-radius: 20px;
             font-size: 0.75em;
             font-weight: 700;
-            margin-top: 10px;
+            margin-top: 12px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
+            transition: all 0.3s ease;
         }
 
         .rarity.common {
-            background: rgba(100, 200, 100, 0.2);
-            color: #4ade80;
+            background: linear-gradient(135deg, rgba(74, 222, 128, 0.2), rgba(74, 222, 128, 0.05));
+            color: #86efac;
+            border: 1px solid rgba(74, 222, 128, 0.4);
         }
 
         .rarity.uncommon {
-            background: rgba(100, 150, 255, 0.2);
-            color: #60a5fa;
+            background: linear-gradient(135deg, rgba(96, 165, 250, 0.2), rgba(96, 165, 250, 0.05));
+            color: #93c5fd;
+            border: 1px solid rgba(96, 165, 250, 0.4);
         }
 
         .rarity.rare {
-            background: rgba(167, 119, 227, 0.2);
-            color: var(--secondary);
+            background: linear-gradient(135deg, rgba(196, 181, 253, 0.2), rgba(196, 181, 253, 0.05));
+            color: #d8b4fe;
+            border: 1px solid rgba(196, 181, 253, 0.4);
         }
 
         .rarity.epic {
-            background: rgba(255, 215, 0, 0.2);
-            color: var(--warning);
+            background: linear-gradient(135deg, rgba(253, 224, 71, 0.2), rgba(253, 224, 71, 0.05));
+            color: #fde047;
+            border: 1px solid rgba(253, 224, 71, 0.4);
         }
 
         .rarity.legendary {
-            background: rgba(255, 71, 87, 0.2);
-            color: var(--danger);
+            background: linear-gradient(135deg, rgba(248, 113, 113, 0.2), rgba(248, 113, 113, 0.05));
+            color: #fca5a5;
+            border: 1px solid rgba(248, 113, 113, 0.4);
         }
 
         .modal {
@@ -271,11 +359,22 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             z-index: 1000;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         .modal.active {
@@ -283,64 +382,110 @@
         }
 
         .modal-content {
-            background: linear-gradient(135deg, var(--dark), rgba(30, 41, 59, 0.9));
-            border: 2px solid var(--secondary);
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 500px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            padding: 45px;
+            max-width: 520px;
             width: 90%;
             text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 25px 70px rgba(110, 142, 251, 0.4), inset 0 0 50px rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: shimmer 8s infinite;
         }
 
         .modal-icon {
-            font-size: 5em;
+            font-size: 5.5em;
             margin-bottom: 20px;
+            display: block;
+            position: relative;
+            z-index: 2;
+            animation: bounce 0.6s ease;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
         }
 
         .modal-title {
-            font-size: 2em;
+            font-size: 2.2em;
             color: white;
             margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .modal-description {
-            color: #a0a0a0;
-            margin-bottom: 20px;
-            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 25px;
+            line-height: 1.7;
+            position: relative;
+            z-index: 2;
+            font-size: 1.05em;
         }
 
         .modal-reward {
-            background: rgba(110, 142, 251, 0.2);
-            padding: 15px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border-left: 4px solid var(--primary);
+            background: rgba(255, 255, 255, 0.12);
+            padding: 18px;
+            border-radius: 12px;
+            margin: 25px 0;
+            border-left: 5px solid white;
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 2;
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .modal-close {
-            margin-top: 20px;
-            padding: 10px 30px;
-            background: var(--primary);
-            border: none;
+            margin-top: 25px;
+            padding: 12px 35px;
+            background: rgba(255, 255, 255, 0.25);
+            border: 2px solid white;
             color: white;
-            border-radius: 10px;
+            border-radius: 15px;
             cursor: pointer;
             font-weight: 600;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 2;
+            font-family: ' Trebuchet MS', serif;
         }
 
         .modal-close:hover {
-            background: var(--secondary);
-            transform: translateY(-2px);
+            background: white;
+            color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
 
         footer {
             text-align: center;
-            padding: 40px 20px;
+            padding: 45px 20px;
             border-top: 2px solid rgba(255, 255, 255, 0.1);
-            color: #a0a0a0;
-            margin-top: 60px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 70px;
+            font-size: 0.95em;
         }
 
         @media (max-width: 768px) {

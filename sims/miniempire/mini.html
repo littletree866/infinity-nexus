@@ -3,13 +3,69 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Mini Empire: Defenders</title>
+  <title>🏰 Mini Empire Pro 🏰</title>
   <link rel="icon" href="../../icon.jpg" type="image/x-icon">
   <style>
+    /* Home Screen */
+    #homeScreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at top, #1a1a1a, #0c0c0c);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .home-card-mini {
+      background: #1a1a1a;
+      border: 3px solid #ffd700;
+      border-radius: 20px;
+      padding: 2.5rem;
+      max-width: 600px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(255, 215, 0, 0.3);
+      color: #eee;
+    }
+
+    .home-card-mini h2 {
+      color: #ffd700;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 2px;
+    }
+
+    .home-card-mini p {
+      color: #ccc;
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .home-card-mini button {
+      background: linear-gradient(135deg, #ffd700, #ffaa00);
+      color: #000;
+      border: none;
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .home-card-mini button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+    }
+
     body {
       background: radial-gradient(circle at top, #1a1a1a, #0c0c0c);
       color: #eee;
-      font-family: "Segoe UI", sans-serif;
+      font-family: "Segoe UI", serif;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -20,11 +76,12 @@
       letter-spacing: 2px;
     }
 
+
     /* ==== GRID ==== */
     #game {
       display: grid;
       grid-template-columns: repeat(10, 45px);
-      grid-template-rows: repeat(10, 45px); 
+      grid-template-rows: repeat(10, 45px);
       gap: 3px;
       margin-top: 20px;
     }
@@ -161,6 +218,14 @@
 </head>
 
 <body>
+  <!-- Home Screen -->
+  <div id="homeScreen">
+    <div class="home-card-mini">
+      <h2>🏰 Mini Empire</h2>
+      <p>Build your kingdom tile by tile. Manage resources, grow your population, and defend against invasions!</p>
+      <button onclick="startMiniEmpire()">🎮 Build Empire</button>
+    </div>
+  </div>
 
   <h1>Mini Empire 🏰</h1>
 
@@ -454,6 +519,11 @@
       defenseDisplay.textContent = defense;
     }
 
+
+    // Home screen function
+    function startMiniEmpire() {
+      document.getElementById('homeScreen').style.display = 'none';
+    }
 
     // ensure single game loop interval and start handler
     let gameLoopInterval = null;

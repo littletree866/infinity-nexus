@@ -6,78 +6,209 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy</title>
     <link rel="icon" href="../icon.jpg">
-    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family= Trebuchet MS:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
-            font-family: 'Bree Serif', sans-serif;
-            background: linear-gradient(135deg, #1e1e2f, #2a2a40);
+            font-family: ' Trebuchet MS', serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 500% 500%;
+            animation: gradientBG 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
             color: #f4f4f4;
-            line-height: 1.6;
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 50% 100%;
+            }
+
+            25% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 50% 0%;
+            }
+
+            75% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 50% 100%;
+            }
         }
 
         .container {
             max-width: 900px;
             margin: 60px auto;
             padding: 40px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(6px);
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(138, 180, 255, 0.3);
         }
 
         h1 {
-            text-align: center;
-            margin-bottom: 10px;
-            font-size: 2.5rem;
+            text-align: left;
+            margin: 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #fff;
         }
 
-        .updated {
-            text-align: center;
-            font-size: 0.9rem;
-            opacity: 0.7;
-            margin-bottom: 30px;
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            white-space: nowrap;
+        }
+
+        .important-box {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(236, 72, 153, 0.15) 100%);
+            border-left: 4px solid #ec4899;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 24px 0 32px 0;
+            color: #fff;
+        }
+
+        .important-box h2 {
+            margin-top: 0;
+            color: #fca5a5;
+        }
+
+        .important-box p {
+            margin: 0;
+            font-size: 1.05rem;
         }
 
         h2 {
-            margin-top: 30px;
+            margin-top: 32px;
             color: #8ab4ff;
+            font-size: 1.4rem;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(138, 180, 255, 0.2);
+            padding-bottom: 12px;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+        }
+
+        p {
+            margin: 16px 0;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #e8e8e8;
         }
 
         a {
             color: #8ab4ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border-bottom: 2px solid rgba(138, 180, 255, 0.3);
+        }
+
+        a:hover {
+            color: #bfd9ff;
+            border-bottom-color: rgba(191, 217, 255, 0.6);
+        }
+
+        strong {
+            color: #ffffff;
+            font-weight: 700;
         }
 
         footer {
-            margin-top: 40px;
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(138, 180, 255, 0.2);
             text-align: center;
-            font-size: 0.85rem;
-            opacity: 0.6;
+            font-size: 0.95rem;
+            opacity: 0.8;
+            color: #cbd5e1;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                padding: 24px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .header-section {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>Privacy Policy</h1>
+        <div class="header-section">
+            <h1>🔒 Privacy Policy</h1>
+            <span class="status-badge">v1.0 - March 2026</span>
+        </div>
 
-        <h2>1. Overview</h2>
+        <div class="important-box">
+            <h2>⚡ Most Important Thing to Know</h2>
+            <p>This is a <strong>personal website project</strong> and is <strong>NOT a commercial website</strong>. I
+                do not want your money, data, or anything else. Your privacy is respected and protected to the maximum
+                extent possible. </p>
+        </div>
+
+        <h2>📋 1. Overview</h2>
         <p>
             This is a personal project created and maintained by an individual developer. I respect your privacy and
             keep data collection to an absolute minimum.
         </p>
 
-        <h2>2. Information I Collect</h2>
+        <h2>👤 2. Information I Collect</h2>
         <p>
             I do not collect personal information such as your name, email address, phone number, or home address.
         </p>
 
-        <h2>3. Automatic Data</h2>
+        <h2>⚙️ 3. Automatic Data</h2>
         <p>
             There is no automatic data collection on this site.
         </p>
 
-        <h2>4. Cookies</h2>
+        <h2>🍪 4. Cookies</h2>
         <p>
             This site does not use tracking cookies or advertising cookies.
         </p>
@@ -86,28 +217,28 @@
             in your browser) and are not used to track you across other websites.
         </p>
 
-        <h2>5. Third-Party Services</h2>
+        <h2>🔗 5. Third-Party Services</h2>
         <p>
             I do not sell your data. I do not share personal information with third parties. Please see the GitHub
             repository for this project for any information about third-party tools or services that may be used in the
             development or hosting of this site.
         </p>
 
-        <h2>6. Changes to This Policy</h2>
+        <h2>📢 6. Changes to This Policy</h2>
         <p>
             I may update this Privacy Policy from time to time. Any changes will be posted on the update info page,
             which is available <a href="updateinfo/updateinfo.html">here</a>.
         </p>
-        <h2>7. Contact</h2>
+        <h2>💬 7. Contact</h2>
         <p>
             If you have questions about this Privacy Policy, you can contact me through <a
                 href="https://forms.gle/8c9Tbep4Z3ZrvxNU9">this form</a>, with any bug reports, questions, or
             suggestions, you may also use GitHub to submit an issue, send a message through discussions, or pull
             request.
         </p>
-        <h2>8. MOST IMPORTANT</h2>
-        <p>This is a personal website project and is not intended for commercial use. I do not want your money, data, or
-            anything else, I repeat: THIS IS NOT A COMMERCIAL WEBSITE.</p>
+        <h2>🎯 8. Summary</h2>
+        <p>Your privacy comes first on this platform. No tracking, no data selling, no commercialization. Just games and
+            good vibes! 🎮✨</p>
 
         <footer>
             © 2026 Infinity Nexus. All rights reserved.

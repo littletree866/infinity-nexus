@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Poker Pro</title>
     <link rel="icon" type="image/x-icon" href="../../icon.jpg">
-    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@300;400;500;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family= Trebuchet MS:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -31,7 +31,7 @@
         }
 
         body {
-            font-family: 'Bree Serif', sans-serif;
+            font-family: ' Trebuchet MS', serif;
             background: var(--background);
             color: var(--text-light);
             text-align: center;
@@ -102,7 +102,7 @@
             border: 1px solid var(--primary-green);
             border-radius: 6px;
             color: var(--primary-green);
-            font-family: 'Bree Serif', sans-serif;
+            font-family: ' Trebuchet MS', serif;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
@@ -293,7 +293,7 @@
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.2s;
-            font-family: 'Bree Serif', sans-serif;
+            font-family: ' Trebuchet MS', serif;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -370,7 +370,7 @@
             border: 1px solid var(--primary-green);
             border-radius: 6px;
             color: var(--primary-green);
-            font-family: 'Bree Serif', sans-serif;
+            font-family: ' Trebuchet MS', serif;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
@@ -503,10 +503,45 @@
                 font-size: 20px;
             }
         }
+
+        .home-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #18e07c, #0d8f4d);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(24, 224, 124, 0.4);
+        }
+
+        .home-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(24, 224, 124, 0.6);
+        }
+
+        @media (max-width: 600px) {
+            .home-btn {
+                padding: 10px 15px;
+                font-size: 0.85rem;
+            }
+        }
     </style>
 </head>
 
 <body>
+    <a href="../index.html" class="home-btn" title="Back to Casino Games">
+        <i class="fas fa-home"></i> CASINO
+    </a>
+
     <h1><i class="fas fa-diamond"></i> POKER PRO <i class="fas fa-club"></i></h1>
 
     <div class="game-header">

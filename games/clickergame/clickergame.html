@@ -3,10 +3,20 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Clicker Quest+ </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Clicker Quest+ Pro</title>
   <link rel="icon" href="../../icon.jpg" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family= Trebuchet MS:wght@400;500;700;900&display=swap"
+    rel="stylesheet">
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
     :root {
       --primary: #6e8efb;
       --secondary: #a777e3;
@@ -16,109 +26,204 @@
       --bonus: #f1c40f;
       --danger: #e74c3c;
       --success: #2ecc71;
-      --ui-bg: rgba(255, 255, 255, 0.97);
-      --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    }
-
-    * {
-      box-sizing: border-box;
+      --ui-bg: rgba(255, 255, 255, 0.98);
+      --shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
+      --glow: 0 0 15px rgba(110, 142, 251, 0.5);
     }
 
     body {
-      margin: 0;
-      font-family: 'Bree Serif', sans-serif;
+      font-family: ' Trebuchet MS', serif;
       background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: var(--dark);
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
       padding: 20px;
       position: relative;
       overflow-x: hidden;
-      user-select: none;
-      -webkit-tap-highlight-color: transparent;
     }
 
+    /* HOME SCREEN STYLES */
+    .home-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(2px);
+      transition: opacity 0.5s ease, visibility 0.5s;
+      font-family: ' Trebuchet MS', serif;
+    }
+
+    .home-card {
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: 48px;
+      padding: 2rem 2rem 2.5rem;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      animation: fadeInUp 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .home-icon {
+      font-size: 5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .home-title {
+      font-size: 2.5rem;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .home-sub {
+      color: #555;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 20px 0;
+      text-align: left;
+    }
+
+    .feature {
+      background: #f0f2f5;
+      padding: 8px 12px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 200;
+      color: #2c3e50;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .start-btn {
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      color: white;
+      border: none;
+      padding: 14px 30px;
+      font-size: 1.3rem;
+      font-weight: 200;
+      border-radius: 60px;
+      width: 100%;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: all 0.2s;
+      box-shadow: 0 8px 0 rgba(110, 142, 251, 0.4);
+      font-family: inherit;
+    }
+
+    .start-btn:active {
+      transform: translateY(3px);
+      box-shadow: 0 4px 0 rgba(110, 142, 251, 0.4);
+    }
+
+    /* GAME CONTAINER */
     #game {
       background: var(--ui-bg);
-      border-radius: 24px;
-      padding: 30px;
-      text-align: center;
+      border-radius: 32px;
+      padding: 25px 22px;
       width: 100%;
-      max-width: 500px;
+      max-width: 550px;
       box-shadow: var(--shadow);
+      transition: all 0.2s;
       position: relative;
-      overflow: hidden;
       z-index: 10;
-      transition: transform 0.3s ease;
     }
 
     .game-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
-      padding-bottom: 15px;
-      border-bottom: 2px solid rgba(110, 142, 251, 0.1);
-    }
-
-    .header-info {
-      text-align: left;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 15px;
+      border-bottom: 2px solid rgba(110, 142, 251, 0.2);
+      padding-bottom: 12px;
     }
 
     h1 {
-      margin: 0 0 8px;
-      color: var(--dark);
-      font-size: 2.2rem;
+      margin: 0;
+      font-size: 1.8rem;
       background: linear-gradient(to right, var(--primary), var(--secondary));
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .subtitle {
-      font-size: 0.9rem;
-      color: #666;
-      margin: 0;
+    .home-icon-btn {
+      background: rgba(110, 142, 251, 0.1);
+      border: none;
+      font-size: 1.7rem;
+      cursor: pointer;
+      border-radius: 40px;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
     }
 
-    .save-indicator {
-      font-size: 0.8rem;
-      color: var(--success);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .save-indicator.show {
-      opacity: 1;
+    .home-icon-btn:hover {
+      background: rgba(110, 142, 251, 0.2);
+      transform: scale(1.05);
     }
 
     .stats-container {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       background: rgba(110, 142, 251, 0.05);
-      border-radius: 12px;
+      border-radius: 20px;
       padding: 15px;
-      margin: 20px 0;
+      margin: 15px 0;
+      gap: 12px;
     }
 
     .stat {
       flex: 1;
       text-align: center;
+      background: white;
+      border-radius: 16px;
+      padding: 8px 5px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
     }
 
     .stat-value {
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 5px;
-      transition: transform 0.2s;
-    }
-
-    .stat-label {
-      font-size: 0.8rem;
-      color: #666;
-      font-weight: 500;
+      font-size: 1.3rem;
+      font-weight: 300;
     }
 
     .money-primary {
@@ -129,101 +234,25 @@
       color: var(--bonus);
     }
 
-    #money {
-      font-size: 2.8rem;
-      font-weight: 800;
-      color: var(--money);
-      margin: 10px 0;
-      transition: all 0.3s;
-      text-shadow: 0 2px 10px rgba(39, 174, 96, 0.2);
-      min-height: 70px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .click-animation {
-      animation: pulse 0.2s ease-in-out;
-    }
-
-    @keyframes pulse {
-      0% {
-        transform: scale(1);
-      }
-
-      50% {
-        transform: scale(1.05);
-      }
-
-      100% {
-        transform: scale(1);
-      }
-    }
-
     #click {
-      font-size: 1.4rem;
+      width: 100%;
       background: linear-gradient(to right, var(--primary), var(--secondary));
-      color: white;
-      padding: 22px 50px;
-      border-radius: 50px;
-      margin: 20px 0 30px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
       border: none;
+      padding: 20px;
+      font-size: 1.8rem;
+      font-weight: 200;
+      color: white;
+      border-radius: 60px;
       cursor: pointer;
-      transition: all 0.2s;
-      box-shadow: 0 6px 0 rgba(110, 142, 251, 0.4);
-      position: relative;
-      overflow: hidden;
-      touch-action: manipulation;
-    }
-
-    #click:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 9px 0 rgba(110, 142, 251, 0.4);
+      transition: 0.07s linear;
+      box-shadow: 0 8px 0 rgba(110, 142, 251, 0.5);
+      margin: 10px 0 20px;
+      font-family: inherit;
     }
 
     #click:active {
-      transform: translateY(2px) scale(0.98);
-      box-shadow: 0 4px 0 rgba(110, 142, 251, 0.4);
-    }
-
-    #click:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: 0.5s;
-    }
-
-    #click:hover:before {
-      left: 100%;
-    }
-
-    .upgrades-container {
-      margin-top: 25px;
-    }
-
-    .upgrade-section-title {
-      text-align: left;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--dark);
-      margin-bottom: 15px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .keyboard-hint {
-      font-size: 0.8rem;
-      color: #666;
-      font-weight: normal;
+      transform: translateY(4px);
+      box-shadow: 0 4px 0 rgba(110, 142, 251, 0.5);
     }
 
     .upgrade {
@@ -232,17 +261,10 @@
       align-items: center;
       background: var(--light);
       margin: 10px 0;
-      padding: 15px;
-      border-radius: 12px;
-      font-size: 15px;
-      transition: all 0.2s;
+      padding: 12px;
+      border-radius: 18px;
       border-left: 5px solid var(--primary);
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
-    }
-
-    .upgrade:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.08);
+      transition: 0.1s;
     }
 
     .upgrade-info {
@@ -251,90 +273,89 @@
     }
 
     .upgrade-title {
-      font-weight: 600;
+      font-weight: 300;
       margin-bottom: 5px;
       display: flex;
-      align-items: center;
       gap: 8px;
+      align-items: center;
     }
 
     .upgrade-key {
       background: var(--dark);
       color: white;
-      width: 24px;
-      height: 24px;
-      border-radius: 4px;
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.9rem;
-      font-weight: bold;
+      font-weight: 200;
     }
 
     .upgrade-desc {
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       color: #666;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
 
     .upgrade-stats {
-      display: flex;
-      gap: 15px;
-      font-size: 0.85rem;
+      font-size: 0.7rem;
       color: #777;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     .upgrade button {
       background: linear-gradient(to right, var(--primary), var(--secondary));
       color: white;
-      padding: 10px 18px;
-      border-radius: 8px;
-      font-weight: 700;
       border: none;
+      padding: 8px 16px;
+      border-radius: 40px;
+      font-weight: 200;
       cursor: pointer;
-      transition: all 0.2s;
-      white-space: nowrap;
-      position: relative;
-    }
-
-    .upgrade button:hover:not(:disabled) {
-      transform: scale(1.05);
-      box-shadow: 0 4px 8px rgba(110, 142, 251, 0.3);
+      font-family: inherit;
     }
 
     .upgrade button:disabled {
-      background: #ddd;
-      color: #999;
+      background: #bbb;
       cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
+      opacity: 0.6;
     }
 
-    .upgrade button:disabled:after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 8px;
+    .prestige-section {
+      margin-top: 25px;
+      background: linear-gradient(135deg, #fff3e0, #ffe8d4);
+      padding: 15px;
+      border-radius: 24px;
+      border: 2px dashed var(--primary);
     }
 
-    .upgrade-cost {
-      font-weight: 700;
-      color: var(--money);
+    .prestige-button {
+      background: linear-gradient(to right, #e67e22, #d35400);
+      width: 100%;
+      padding: 12px;
+      border-radius: 40px;
+      font-weight: 200;
+      border: none;
+      color: white;
+      margin-top: 12px;
+      cursor: pointer;
+    }
+
+    .prestige-button:disabled {
+      background: #bdc3c7;
+      cursor: not-allowed;
     }
 
     .floating {
       position: fixed;
-      color: var(--money);
-      font-weight: bold;
+      font-weight: 200;
       pointer-events: none;
-      z-index: 1000;
+      z-index: 2000;
       font-size: 1.2rem;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      animation: floatUp 1s ease-out forwards;
+      animation: floatUp 0.9s ease-out forwards;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
     @keyframes floatUp {
@@ -345,185 +366,115 @@
 
       100% {
         opacity: 0;
-        transform: translateY(-60px) scale(1.2);
+        transform: translateY(-70px) scale(1.2);
       }
     }
 
     .bonus-coin {
       position: fixed;
-      width: 50px;
-      height: 50px;
+      width: 55px;
+      height: 55px;
+      background: radial-gradient(circle, #f9d71c, #f1b80a);
       border-radius: 50%;
-      background: radial-gradient(circle, #f9d71c 0%, #f1b80a 80%);
-      border: 3px solid #f5c400;
       cursor: pointer;
-      box-shadow: 0 0 20px #f1c40f;
-      animation: floatCoin 5s linear;
-      z-index: 5;
-      transition: transform 0.2s;
-    }
-
-    .bonus-coin:hover {
-      transform: scale(1.1);
+      box-shadow: 0 0 20px gold;
+      animation: floatCoin 6s linear forwards;
+      z-index: 200;
+      transition: 0.1s;
     }
 
     @keyframes floatCoin {
-      from {
-        opacity: 1;
+      0% {
         transform: translateY(0) rotate(0deg);
+        opacity: 1;
       }
 
-      to {
+      100% {
+        transform: translateY(-250px) rotate(400deg);
         opacity: 0;
-        transform: translateY(-200px) rotate(360deg);
       }
     }
 
-    .boost {
-      animation: glow 1s infinite alternate;
+    .boost-active {
+      animation: pulseGlow 0.5s infinite alternate;
     }
 
-    @keyframes glow {
+    @keyframes pulseGlow {
       from {
-        box-shadow: 0 6px 0 rgba(110, 142, 251, 0.4), 0 0 15px var(--bonus);
+        box-shadow: 0 8px 0 rgba(110, 142, 251, 0.5), 0 0 5px gold;
       }
 
       to {
-        box-shadow: 0 6px 0 rgba(110, 142, 251, 0.4), 0 0 30px var(--bonus);
+        box-shadow: 0 8px 0 rgba(110, 142, 251, 0.5), 0 0 25px orange;
       }
     }
 
     .notification {
       position: fixed;
-      top: 20px;
-      right: 20px;
-      background: var(--success);
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #2c3e50;
       color: white;
-      padding: 15px 20px;
-      border-radius: 10px;
-      box-shadow: var(--shadow);
-      z-index: 10000;
-      font-weight: 600;
-      transform: translateX(150%);
-      transition: transform 0.3s ease-out;
-      max-width: 300px;
-      word-break: break-word;
+      padding: 12px 24px;
+      border-radius: 60px;
+      font-weight: 200;
+      transition: 0.25s ease;
+      z-index: 3000;
+      background: #2ecc71;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      white-space: nowrap;
+      font-size: 0.9rem;
+      pointer-events: none;
     }
 
     .notification.show {
-      transform: translateX(0);
-    }
-
-    .background-coins {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .background-coin {
-      position: absolute;
-      opacity: 0.03;
-      font-size: 2rem;
+      transform: translateX(-50%) translateY(0);
     }
 
     .progress-bar {
       height: 6px;
-      background: rgba(110, 142, 251, 0.2);
-      border-radius: 3px;
-      margin-top: 10px;
-      overflow: hidden;
+      background: #ddd;
+      border-radius: 4px;
+      margin-top: 6px;
     }
 
     .progress-fill {
       height: 100%;
       background: linear-gradient(to right, var(--primary), var(--secondary));
       width: 0%;
-      transition: width 0.3s;
-    }
-
-    .prestige-section {
-      margin-top: 30px;
-      padding: 20px;
-      background: linear-gradient(135deg, rgba(110, 142, 251, 0.1), rgba(167, 119, 227, 0.1));
-      border-radius: 15px;
-      border: 2px dashed var(--primary);
-    }
-
-    .prestige-button {
-      background: linear-gradient(to right, #e74c3c, #c0392b);
-      color: white;
-      padding: 15px 30px;
-      font-size: 1.1rem;
-      font-weight: 700;
-      border-radius: 50px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s;
-      margin-top: 15px;
-    }
-
-    .prestige-button:hover:not(:disabled) {
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(231, 76, 60, 0.3);
-    }
-
-    .prestige-button:disabled {
-      background: #ccc;
-      cursor: not-allowed;
-    }
-
-    .confetti {
-      position: fixed;
-      width: 10px;
-      height: 10px;
-      background: var(--bonus);
-      opacity: 0;
-      z-index: 1000;
-      pointer-events: none;
+      border-radius: 4px;
     }
 
     @media (max-width: 550px) {
       #game {
-        padding: 20px;
+        padding: 16px;
       }
 
       .stats-container {
         flex-direction: column;
-        gap: 15px;
       }
 
       .upgrade {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
+        gap: 8px;
       }
 
       .upgrade button {
-        margin-top: 10px;
         align-self: flex-end;
+        margin-top: 5px;
       }
 
       h1 {
-        font-size: 1.8rem;
+        font-size: 1.3rem;
       }
 
-      #click {
-        padding: 18px 30px;
-        font-size: 1.2rem;
-      }
-    }
-
-    @media (hover: none) {
-      .upgrade:hover {
-        transform: none;
-      }
-
-      #click:hover {
-        transform: none;
-        box-shadow: 0 6px 0 rgba(110, 142, 251, 0.4);
+      .notification {
+        white-space: normal;
+        width: 80%;
+        text-align: center;
+        font-size: 0.8rem;
       }
     }
   </style>
@@ -531,16 +482,33 @@
 
 <body>
 
-  <div class="background-coins" id="backgroundCoins"></div>
-  <div class="notification" id="notification"></div>
-
-  <div id="game">
-    <div class="game-header">
-      <div class="header-info">
-        <h1>🎮 Clicker Quest+ Pro 2.0</h1>
-        <p class="subtitle">⚡ Click, Earn, Dominate! Enhanced Edition</p>
+  <!-- HOME SCREEN -->
+  <div class="home-screen" id="homeScreen">
+    <div class="home-card">
+      <div class="home-icon">🎮💰</div>
+      <div class="home-title">Clicker Quest+ Pro</div>
+      <div class="home-sub">Ultimate Clicking Adventure</div>
+      <div class="feature-grid">
+        <div class="feature">⚡ Click & Earn</div>
+        <div class="feature">🤖 Auto Income</div>
+        <div class="feature">💥 Critical Hits</div>
+        <div class="feature">⚡ Power Surge 3x</div>
+        <div class="feature">🧲 Money Magnet</div>
+        <div class="feature">🏆 Prestige System</div>
       </div>
-      <div class="save-indicator" id="saveIndicator">✓ Saved</div>
+      <button class="start-btn" id="startGameBtn">▶ START QUEST</button>
+      <p style="margin-top: 16px; font-size: 0.7rem; color: #777;">🔥 Keyboard: Spacebar | 1-5 for upgrades</p>
+    </div>
+  </div>
+
+  <!-- MAIN GAME -->
+  <div id="game" style="display: none;">
+    <div class="game-header">
+      <div>
+        <h1>⚔️ Clicker Quest+</h1>
+        <p class="subtitle" style="font-size:0.7rem;">Pro 2.0 | Enhanced</p>
+      </div>
+      <button class="home-icon-btn" id="backToHomeBtn" title="Main Menu">🏠</button>
     </div>
 
     <div class="stats-container">
@@ -553,643 +521,339 @@
         <div class="stat-label">Income/s</div>
       </div>
       <div class="stat">
-        <div class="stat-value" id="multiplier" style="color: #f1c40f;">1.0x</div>
-        <div class="stat-label">Total Multiplier</div>
+        <div class="stat-value" id="multiplier" style="color:#f1c40f;">1.0x</div>
+        <div class="stat-label">Multiplier</div>
       </div>
       <div class="stat">
-        <div class="stat-value" id="clicksDisplay" style="color: #00ffff;">0</div>
-        <div class="stat-label">Total Clicks</div>
+        <div class="stat-value" id="clicksDisplay" style="color:#00acc1;">0</div>
+        <div class="stat-label">Clicks</div>
       </div>
     </div>
 
-    <button id="click">CLICK ME!</button>
+    <button id="click">💎 CLICK ME! 💎</button>
 
     <div class="upgrades-container">
-      <div class="upgrade-section-title">
-        Upgrades
-        <span class="keyboard-hint">Press 1-4 to buy</span>
-      </div>
-
+      <div class="upgrade-section-title" style="display:flex; justify-content:space-between;"><span>⚙️
+          UPGRADES</span><span class="keyboard-hint" style="font-size:0.7rem;">⌨️ 1-5</span></div>
       <div class="upgrade">
         <div class="upgrade-info">
-          <div class="upgrade-title">
-            <span class="upgrade-key">1</span>
-            💪 Better Clicks
-          </div>
-          <div class="upgrade-desc">Increase cash per click (+50% per level)</div>
-          <div class="upgrade-stats">
-            <span>Current: +$<span id="currentPerClick">1</span>/click</span>
-            <span>Owned: <span id="clickUpgrades">0</span></span>
-          </div>
-        </div>
-        <button id="buyClick">Buy (<span id="clickCost">$10</span>)</button>
+          <div class="upgrade-title"><span class="upgrade-key">1</span> 💪 Better Clicks</div>
+          <div class="upgrade-desc">+50% click value</div>
+          <div class="upgrade-stats"><span>+$<span id="currentPerClick">1</span>/click</span><span>Lv.<span
+                id="clickUpgrades">0</span></span></div>
+        </div><button id="buyClick">Buy (<span id="clickCost">$10</span>)</button>
       </div>
-
       <div class="upgrade">
         <div class="upgrade-info">
-          <div class="upgrade-title">
-            <span class="upgrade-key">2</span>
-            🤖 Auto-Earner
-          </div>
-          <div class="upgrade-desc">Earn cash automatically every second</div>
-          <div class="upgrade-stats">
-            <span>Current: +$<span id="currentPerSec">0</span>/s</span>
-            <span>Owned: <span id="autoUpgrades">0</span></span>
-          </div>
-        </div>
-        <button id="buyAuto">Buy (<span id="autoCost">$25</span>)</button>
+          <div class="upgrade-title"><span class="upgrade-key">2</span> 🤖 Auto-Earner</div>
+          <div class="upgrade-desc">Passive income/sec</div>
+          <div class="upgrade-stats"><span>+$<span id="currentPerSec">0</span>/s</span><span>Lv.<span
+                id="autoUpgrades">0</span></span></div>
+        </div><button id="buyAuto">Buy (<span id="autoCost">$25</span>)</button>
       </div>
-
       <div class="upgrade">
         <div class="upgrade-info">
-          <div class="upgrade-title">
-            <span class="upgrade-key">3</span>
-            ⚡ Power Surge
-          </div>
-          <div class="upgrade-desc">Triple your power for 45 seconds (Enhanced!)</div>
-          <div class="upgrade-stats">
-            <span id="boostStatus">Status: Ready</span>
-            <span id="boostTimer" style="display:none">Time left: 45s</span>
-          </div>
+          <div class="upgrade-title"><span class="upgrade-key">3</span> ⚡ Power Surge</div>
+          <div class="upgrade-desc">3x earnings for 45s</div>
+          <div class="upgrade-stats"><span id="boostStatus">Ready</span></div>
           <div class="progress-bar" id="boostProgress" style="display:none">
             <div class="progress-fill" id="boostProgressFill"></div>
           </div>
-        </div>
-        <button id="buyBoost">Buy (<span id="boostCost">$500</span>)</button>
+        </div><button id="buyBoost">Buy (<span id="boostCost">$500</span>)</button>
       </div>
-
       <div class="upgrade">
         <div class="upgrade-info">
-          <div class="upgrade-title">
-            <span class="upgrade-key">4</span>
-            💥 Critical Hit
-          </div>
-          <div class="upgrade-desc">Chance for massive damage (starts at 8%)</div>
-          <div class="upgrade-stats">
-            <span>Chance: <span id="megaChance">8</span>%</span>
-            <span>Multiplier: <span id="critMultiplier">5</span>x</span>
-          </div>
-        </div>
-        <button id="buyMega">Buy (<span id="megaCost">$5000</span>)</button>
+          <div class="upgrade-title"><span class="upgrade-key">4</span> 💥 Critical Hit</div>
+          <div class="upgrade-desc">Chance for massive dmg</div>
+          <div class="upgrade-stats"><span>Chance: <span id="megaChance">8</span>%</span><span>Crit x<span
+                id="critMultiplier">5</span></span></div>
+        </div><button id="buyMega">Buy (<span id="megaCost">$5000</span>)</button>
       </div>
-
       <div class="upgrade">
         <div class="upgrade-info">
-          <div class="upgrade-title">
-            <span class="upgrade-key">5</span>
-            💰 Money Magnet
-          </div>
-          <div class="upgrade-desc">Increase all money earnings by +15% per level</div>
-          <div class="upgrade-stats">
-            <span>Bonus: <span id="magnetBonus">0</span>%</span>
-            <span>Owned: <span id="magnetUpgrades">0</span></span>
-          </div>
-        </div>
-        <button id="buyMagnet">Buy (<span id="magnetCost">$750</span>)</button>
+          <div class="upgrade-title"><span class="upgrade-key">5</span> 🧲 Money Magnet</div>
+          <div class="upgrade-desc">+15% global income/level</div>
+          <div class="upgrade-stats"><span>Bonus: <span id="magnetBonus">0</span>%</span><span>Lv.<span
+                id="magnetUpgrades">0</span></span></div>
+        </div><button id="buyMagnet">Buy (<span id="magnetCost">$750</span>)</button>
       </div>
     </div>
 
     <div class="prestige-section">
-      <h3>Prestige</h3>
-      <p>Reset your progress for permanent bonuses! You need at least $10,000 to prestige.</p>
-      <p>You will earn: <span id="prestigeBonus">0</span>% bonus per prestige</p>
-      <button class="prestige-button" id="prestigeButton" disabled>PRESTIGE (Resets Progress)</button>
+      <h3 style="font-size:1rem;">✨ PRESTIGE ✨</h3>
+      <p>Reset for +15% permanent bonus per prestige (need $10,000)</p>
+      <p>Current bonus: <span id="prestigeBonus">0</span>%</p>
+      <button class="prestige-button" id="prestigeButton" disabled>🌟 PRESTIGE 🌟</button>
     </div>
   </div>
 
-  <audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" preload="auto"></audio>
-  <audio id="bonusSound" src="https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3"
-    preload="auto"></audio>
-  <audio id="upgradeSound" src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3"
-    preload="auto"></audio>
+  <div id="notification" class="notification"></div>
+
+  <audio id="clickSound" preload="auto" src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3"></audio>
+  <audio id="bonusSound" preload="auto"
+    src="https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3"></audio>
+  <audio id="upgradeSound" preload="auto"
+    src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3"></audio>
 
   <script>
-    // Game state
+    // ========== GAME STATE ==========
     let money = 0;
     let perClick = 1;
     let perSec = 0;
-    let clickCost = 10;
-    let autoCost = 25;
-    let boostCost = 500;
-    let megaCost = 5000;
-    let magnetCost = 750;
-    let clickUpgrades = 0;
-    let autoUpgrades = 0;
-    let megaUpgrades = 0;
-    let magnetUpgrades = 0;
-    let boostActive = false;
-    let boostTimeLeft = 0;
-    let boostTimer = null;
+    let clickUpgrades = 0, autoUpgrades = 0, megaUpgrades = 0, magnetUpgrades = 0;
+    let clickCost = 10, autoCost = 25, boostCost = 500, megaCost = 5000, magnetCost = 750;
+    let boostActive = false, boostTimeLeft = 0, boostInterval = null;
     let prestigeCount = 0;
-    let lastSaveTime = 0;
     let totalClicks = 0;
     let critMultiplier = 5;
-
-    // Storage keys
-    const MONEY_KEY = 'clicker_money';
-    const PER_CLICK_KEY = 'clicker_perClick';
-    const PER_SEC_KEY = 'clicker_perSec';
-    const UPGRADES_KEY = 'clicker_upgrades';
-    const PRESTIGE_KEY = 'clicker_prestige';
-    const CLICKS_KEY = 'clicker_clicks';
-
-    // Load game
-    function loadGame() {
-      try {
-        const savedMoney = localStorage.getItem(MONEY_KEY);
-        const savedPerClick = localStorage.getItem(PER_CLICK_KEY);
-        const savedPerSec = localStorage.getItem(PER_SEC_KEY);
-        const savedUpgrades = localStorage.getItem(UPGRADES_KEY);
-        const savedPrestige = localStorage.getItem(PRESTIGE_KEY);
-        const savedClicks = localStorage.getItem(CLICKS_KEY);
-
-        if (savedMoney) money = parseFloat(savedMoney);
-        if (savedPerClick) perClick = parseFloat(savedPerClick);
-        if (savedPerSec) perSec = parseFloat(savedPerSec);
-        if (savedPrestige) prestigeCount = parseInt(savedPrestige);
-        if (savedClicks) totalClicks = parseInt(savedClicks);
-
-        if (savedUpgrades) {
-          const upgrades = JSON.parse(savedUpgrades);
-          clickUpgrades = upgrades.click || 0;
-          autoUpgrades = upgrades.auto || 0;
-          megaUpgrades = upgrades.mega || 0;
-          magnetUpgrades = upgrades.magnet || 0;
-
-          clickCost = Math.floor(10 * Math.pow(1.25, clickUpgrades));
-          autoCost = Math.floor(25 * Math.pow(1.35, autoUpgrades));
-          megaCost = Math.floor(5000 * Math.pow(1.45, megaUpgrades));
-          magnetCost = Math.floor(750 * Math.pow(1.4, magnetUpgrades));
-          critMultiplier = 5 + (megaUpgrades * 1.5);
-        }
-      } catch (e) {
-        console.error('Error loading game:', e);
-      }
-    }
-
-    // Save game
-    function saveGame() {
-      try {
-        localStorage.setItem(MONEY_KEY, money.toString());
-        localStorage.setItem(PER_CLICK_KEY, perClick.toString());
-        localStorage.setItem(PER_SEC_KEY, perSec.toString());
-        localStorage.setItem(PRESTIGE_KEY, prestigeCount.toString());
-        localStorage.setItem(CLICKS_KEY, totalClicks.toString());
-
-        const upgrades = {
-          click: clickUpgrades,
-          auto: autoUpgrades,
-          mega: megaUpgrades,
-          magnet: magnetUpgrades
-        };
-        localStorage.setItem(UPGRADES_KEY, JSON.stringify(upgrades));
-
-        const saveIndicator = document.getElementById('saveIndicator');
-        saveIndicator.classList.add('show');
-        setTimeout(() => saveIndicator.classList.remove('show'), 1000);
-
-        lastSaveTime = Date.now();
-      } catch (e) {
-        console.error('Error saving game:', e);
-      }
-    }
 
     // DOM elements
     const moneyEl = document.getElementById('money');
     const perSecondEl = document.getElementById('perSecond');
-    const clickBtn = document.getElementById('click');
-    const notificationEl = document.getElementById('notification');
-    const clicksDisplayEl = document.getElementById('clicksDisplay');
     const multiplierEl = document.getElementById('multiplier');
+    const clicksDisplay = document.getElementById('clicksDisplay');
+    const clickBtn = document.getElementById('click');
+    const notificationDiv = document.getElementById('notification');
 
-    // Sound elements
+    // sounds
     const clickSound = document.getElementById('clickSound');
     const bonusSound = document.getElementById('bonusSound');
     const upgradeSound = document.getElementById('upgradeSound');
 
-    // Show notification
-    let notificationTimeout = null;
-    function showNotification(message, type = 'success') {
-      clearTimeout(notificationTimeout);
-      notificationEl.textContent = message;
-      notificationEl.style.background = type === 'success' ? 'var(--success)' : 'var(--danger)';
-      notificationEl.classList.remove('show');
-      void notificationEl.offsetWidth;
-      notificationEl.classList.add('show');
-      notificationTimeout = setTimeout(() => {
-        notificationEl.classList.remove('show');
-      }, 3000);
+    function playSound(sound) {
+      try { if (sound) { sound.currentTime = 0; sound.play().catch(e => { }); } } catch (e) { }
     }
 
-    // Format numbers
-    function fmt(value) {
-      if (value >= 1e9) return (value / 1e9).toFixed(2).replace(/\.00$/, '') + 'B';
-      if (value >= 1e6) return (value / 1e6).toFixed(2).replace(/\.00$/, '') + 'M';
-      if (value >= 1e3) return (value / 1e3).toFixed(2).replace(/\.00$/, '') + 'K';
-      return Math.floor(value).toString();
+    function fmt(v) {
+      if (v >= 1e9) return (v / 1e9).toFixed(2).replace(/\.00$/, '') + 'B';
+      if (v >= 1e6) return (v / 1e6).toFixed(2).replace(/\.00$/, '') + 'M';
+      if (v >= 1e3) return (v / 1e3).toFixed(2).replace(/\.00$/, '') + 'K';
+      return Math.floor(v).toString();
     }
 
-    // Calculate total multiplier
     function getTotalMultiplier() {
-      let multiplier = 1;
-      multiplier *= (1 + prestigeCount * 0.15); // Prestige bonus increased
-      multiplier *= (1 + magnetUpgrades * 0.15); // Money magnet bonus
-      if (boostActive) multiplier *= 3; // Boost is now 3x instead of 2x
-      return multiplier;
+      let mult = 1 + (prestigeCount * 0.15) + (magnetUpgrades * 0.15);
+      if (boostActive) mult *= 3;
+      return mult;
     }
 
-    // Update UI
     function updateUI() {
+      const mult = getTotalMultiplier();
       moneyEl.textContent = '$' + fmt(money);
-      moneyEl.classList.add('click-animation');
-      setTimeout(() => moneyEl.classList.remove('click-animation'), 200);
-
-      const totalMult = getTotalMultiplier();
-      multiplierEl.textContent = totalMult.toFixed(2) + 'x';
-      perSecondEl.textContent = '$' + fmt(perSec * totalMult) + '/s';
-      clicksDisplayEl.textContent = fmt(totalClicks);
-
-      // Update upgrade info
-      const clickMultiplier = getTotalMultiplier();
-      document.getElementById('currentPerClick').textContent = (perClick * clickMultiplier).toFixed(1);
-      document.getElementById('currentPerSec').textContent = (perSec * clickMultiplier).toFixed(1);
+      perSecondEl.textContent = '$' + fmt(perSec * mult) + '/s';
+      multiplierEl.textContent = mult.toFixed(2) + 'x';
+      clicksDisplay.textContent = fmt(totalClicks);
+      document.getElementById('currentPerClick').textContent = (perClick * mult).toFixed(1);
+      document.getElementById('currentPerSec').textContent = (perSec * mult).toFixed(1);
       document.getElementById('clickUpgrades').textContent = clickUpgrades;
       document.getElementById('autoUpgrades').textContent = autoUpgrades;
-      document.getElementById('megaUpgrades').textContent = megaUpgrades;
       document.getElementById('magnetUpgrades').textContent = magnetUpgrades;
       document.getElementById('magnetBonus').textContent = (magnetUpgrades * 15);
-      document.getElementById('megaChance').textContent = 8 + megaUpgrades * 4;
+      const critChance = 8 + megaUpgrades * 4;
+      document.getElementById('megaChance').textContent = critChance;
       document.getElementById('critMultiplier').textContent = Math.floor(critMultiplier);
-
-      // Update costs
       document.getElementById('clickCost').textContent = '$' + fmt(clickCost);
       document.getElementById('autoCost').textContent = '$' + fmt(autoCost);
       document.getElementById('boostCost').textContent = '$' + fmt(boostCost);
       document.getElementById('megaCost').textContent = '$' + fmt(megaCost);
       document.getElementById('magnetCost').textContent = '$' + fmt(magnetCost);
-
-      // Update button states
       document.getElementById('buyClick').disabled = money < clickCost;
       document.getElementById('buyAuto').disabled = money < autoCost;
       document.getElementById('buyBoost').disabled = money < boostCost || boostActive;
       document.getElementById('buyMega').disabled = money < megaCost;
       document.getElementById('buyMagnet').disabled = money < magnetCost;
-
-      // Update prestige
-      const prestigeBonus = prestigeCount * 15;
-      document.getElementById('prestigeBonus').textContent = prestigeBonus;
       document.getElementById('prestigeButton').disabled = money < 10000;
-
-      // Update boost status
+      document.getElementById('prestigeBonus').textContent = prestigeCount * 15;
       if (boostActive) {
-        document.getElementById('boostStatus').textContent = 'Status: Active';
-        document.getElementById('boostTimer').style.display = 'inline';
+        document.getElementById('boostStatus').innerHTML = `⚡ ACTIVE: ${Math.floor(boostTimeLeft)}s left`;
         document.getElementById('boostProgress').style.display = 'block';
-        document.getElementById('boostTimer').textContent = `Time left: ${Math.max(0, boostTimeLeft)}s`;
-        const progressPercent = (Math.max(0, boostTimeLeft) / 45) * 100;
-        document.getElementById('boostProgressFill').style.width = `${progressPercent}%`;
+        const percent = (boostTimeLeft / 45) * 100;
+        document.getElementById('boostProgressFill').style.width = `${percent}%`;
+        clickBtn.classList.add('boost-active');
       } else {
-        document.getElementById('boostStatus').textContent = 'Status: Ready';
-        document.getElementById('boostTimer').style.display = 'none';
+        document.getElementById('boostStatus').innerHTML = '✅ Ready';
         document.getElementById('boostProgress').style.display = 'none';
-      }
-
-      if (Date.now() - lastSaveTime > 10000) {
-        saveGame();
+        clickBtn.classList.remove('boost-active');
       }
     }
 
-    // Add floating text
-    function addFloatingText(value, x, y, color = 'var(--money)') {
-      const t = document.createElement('div');
-      t.className = 'floating';
-      t.textContent = '+$' + fmt(value);
-      t.style.color = color;
-      t.style.left = x + 'px';
-      t.style.top = y + 'px';
-      document.body.appendChild(t);
-      setTimeout(() => {
-        if (t.parentNode) t.remove();
-      }, 1000);
+    function showNotif(msg, isError = false) {
+      notificationDiv.textContent = msg;
+      notificationDiv.style.background = isError ? '#e74c3c' : '#2ecc71';
+      notificationDiv.classList.add('show');
+      setTimeout(() => notificationDiv.classList.remove('show'), 2500);
     }
 
-    // Handle click
-    function clickGain(e) {
-      totalClicks++;
-      let value = perClick * getTotalMultiplier();
+    function addFloating(value, x, y, color = '#27ae60') {
+      const el = document.createElement('div');
+      el.className = 'floating';
+      el.textContent = '+$' + fmt(value);
+      el.style.color = color;
+      el.style.left = x + 'px';
+      el.style.top = y + 'px';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 900);
+    }
 
-      // Check for critical hit
+    // Click handling with crit & floating fix
+    function handleClick(e) {
+      let clickValue = perClick * getTotalMultiplier();
       const critChance = 8 + megaUpgrades * 4;
       let isCrit = false;
       if (Math.random() * 100 < critChance) {
-        value *= critMultiplier;
+        clickValue *= critMultiplier;
         isCrit = true;
-        showNotification(`🔥 CRITICAL HIT! ${critMultiplier.toFixed(1)}x Damage!`, 'success');
-
-        clickBtn.style.animation = 'none';
-        setTimeout(() => {
-          clickBtn.style.animation = 'glow 0.5s infinite alternate';
-        }, 10);
-
-        setTimeout(() => {
-          clickBtn.style.animation = '';
-        }, 500);
+        showNotif(`🔥 CRITICAL! ${critMultiplier.toFixed(1)}x damage!`);
+        playSound(upgradeSound);
       }
-
-      money += value;
-
-      const color = isCrit ? 'var(--bonus)' : (value > perClick * 5 ? 'var(--bonus)' : 'var(--money)');
-      addFloatingText(value, e.clientX, e.clientY - 50, color);
-
-      try {
-        clickSound.currentTime = 0;
-        clickSound.play().catch(() => { });
-      } catch (e) { }
-
+      money += clickValue;
+      totalClicks++;
+      let clientX = e.clientX, clientY = e.clientY;
+      if (!clientX || !clientY) {
+        const rect = clickBtn.getBoundingClientRect();
+        clientX = rect.left + rect.width / 2;
+        clientY = rect.top + rect.height / 2;
+      }
+      addFloating(clickValue, clientX, clientY - 40, isCrit ? '#f1c40f' : '#27ae60');
+      playSound(clickSound);
       updateUI();
-
-      if (value > perClick * 20) {
-        createConfetti(e.clientX, e.clientY);
-      }
+      if (isCrit) createMiniConfetti(clientX, clientY);
     }
 
-    // Create confetti
-    function createConfetti(x, y) {
-      for (let i = 0; i < 20; i++) {
-        const confetti = document.createElement('div');
-        confetti.className = 'confetti';
-        confetti.style.left = x + 'px';
-        confetti.style.top = y + 'px';
-        confetti.style.background = ['var(--money)', 'var(--bonus)', 'var(--primary)', 'var(--secondary)'][i % 4];
-        document.body.appendChild(confetti);
-
-        const angle = Math.random() * Math.PI * 2;
-        const velocity = 2 + Math.random() * 3;
-        const rotation = Math.random() * 360;
-
-        let posX = x;
-        let posY = y;
+    function createMiniConfetti(x, y) {
+      for (let i = 0; i < 12; i++) {
+        const c = document.createElement('div');
+        c.style.position = 'fixed';
+        c.style.width = '6px';
+        c.style.height = '6px';
+        c.style.background = `hsl(${Math.random() * 360}, 80%, 60%)`;
+        c.style.left = x + 'px';
+        c.style.top = y + 'px';
+        c.style.pointerEvents = 'none';
+        c.style.zIndex = '999';
+        document.body.appendChild(c);
+        let dx = (Math.random() - 0.5) * 8;
+        let dy = (Math.random() - 0.5) * 8 - 4;
         let opacity = 1;
-
-        const animate = () => {
-          posX += Math.cos(angle) * velocity;
-          posY += Math.sin(angle) * velocity - 0.1;
+        const anim = () => {
+          dx *= 0.97;
+          dy += 0.2;
+          x += dx; y += dy;
+          c.style.left = x + 'px';
+          c.style.top = y + 'px';
           opacity -= 0.02;
-
-          confetti.style.left = posX + 'px';
-          confetti.style.top = posY + 'px';
-          confetti.style.opacity = opacity;
-          confetti.style.transform = `rotate(${rotation}deg)`;
-
-          if (opacity > 0) {
-            requestAnimationFrame(animate);
-          } else {
-            confetti.remove();
-          }
+          c.style.opacity = opacity;
+          if (opacity > 0) requestAnimationFrame(anim);
+          else c.remove();
         };
-
-        requestAnimationFrame(animate);
+        requestAnimationFrame(anim);
       }
     }
 
     // Buy upgrades
-    function buyClick() {
-      if (money >= clickCost) {
-        money -= clickCost;
-        perClick *= 1.5; // 50% increase per level
-        clickUpgrades++;
-        clickCost = Math.floor(clickCost * 1.25);
-        try { upgradeSound.currentTime = 0; upgradeSound.play().catch(() => { }); } catch (e) { }
-        showNotification('💪 Click Power Increased!');
-        updateUI();
-      }
-    }
-
-    function buyAuto() {
-      if (money >= autoCost) {
-        money -= autoCost;
-        perSec += 1;
-        autoUpgrades++;
-        autoCost = Math.floor(autoCost * 1.35);
-        try { upgradeSound.currentTime = 0; upgradeSound.play().catch(() => { }); } catch (e) { }
-        showNotification('🤖 Auto-Earner Purchased!');
-        updateUI();
-      }
-    }
-
-    function buyBoost() {
-      if (money >= boostCost && !boostActive) {
-        money -= boostCost;
-        boostActive = true;
-        boostTimeLeft = 45; // Increased from 30 to 45 seconds
-        clickBtn.classList.add('boost');
-
-        if (boostTimer) clearInterval(boostTimer);
-
-        boostTimer = setInterval(() => {
-          boostTimeLeft--;
-          updateUI();
-
-          if (boostTimeLeft <= 0) {
-            clearInterval(boostTimer);
-            boostActive = false;
-            clickBtn.classList.remove('boost');
-            showNotification('⚡ Power Surge expired!');
-            updateUI();
-          }
-        }, 1000);
-
-        showNotification('⚡ Power Surge Activated for 45s!');
-        updateUI();
-      }
-    }
-
-    function buyMega() {
-      if (money >= megaCost) {
-        money -= megaCost;
-        megaUpgrades++;
-        megaCost = Math.floor(megaCost * 1.45);
-        critMultiplier = 5 + (megaUpgrades * 1.5);
-        try { upgradeSound.currentTime = 0; upgradeSound.play().catch(() => { }); } catch (e) { }
-        showNotification('💥 Critical Hit Chance Increased!');
-        updateUI();
-      }
-    }
-
-    function buyMagnet() {
-      if (money >= magnetCost) {
-        money -= magnetCost;
-        magnetUpgrades++;
-        magnetCost = Math.floor(magnetCost * 1.4);
-        try { upgradeSound.currentTime = 0; upgradeSound.play().catch(() => { }); } catch (e) { }
-        showNotification('💰 Money Magnet Activated!');
-        updateUI();
-      }
-    }
+    function buyClickUpgrade() { if (money >= clickCost) { money -= clickCost; perClick *= 1.5; clickUpgrades++; clickCost = Math.floor(clickCost * 1.25); playSound(upgradeSound); showNotif('💪 Click power increased!'); updateUI(); } }
+    function buyAutoUpgrade() { if (money >= autoCost) { money -= autoCost; perSec += 1; autoUpgrades++; autoCost = Math.floor(autoCost * 1.35); playSound(upgradeSound); showNotif('🤖 Auto-earner upgraded!'); updateUI(); } }
+    function buyBoost() { if (money >= boostCost && !boostActive) { money -= boostCost; boostActive = true; boostTimeLeft = 45; if (boostInterval) clearInterval(boostInterval); boostInterval = setInterval(() => { boostTimeLeft--; updateUI(); if (boostTimeLeft <= 0) { clearInterval(boostInterval); boostActive = false; showNotif('⚡ Power Surge expired'); updateUI(); } }, 1000); playSound(upgradeSound); showNotif('⚡ POWER SURGE ACTIVATED! 3x earnings for 45s'); updateUI(); } }
+    function buyMegaUpgrade() { if (money >= megaCost) { money -= megaCost; megaUpgrades++; megaCost = Math.floor(megaCost * 1.45); critMultiplier = 5 + (megaUpgrades * 1.5); playSound(upgradeSound); showNotif('💥 Critical strike upgraded!'); updateUI(); } }
+    function buyMagnetUpgrade() { if (money >= magnetCost) { money -= magnetCost; magnetUpgrades++; magnetCost = Math.floor(magnetCost * 1.4); playSound(upgradeSound); showNotif('🧲 Money Magnet bonus increased!'); updateUI(); } }
+    function prestige() { if (money >= 10000) { prestigeCount++; money = 0; perClick = 1; perSec = 0; clickUpgrades = 0; autoUpgrades = 0; megaUpgrades = 0; magnetUpgrades = 0; clickCost = 10; autoCost = 25; megaCost = 5000; magnetCost = 750; critMultiplier = 5; if (boostActive) { clearInterval(boostInterval); boostActive = false; } showNotif(`✨ PRESTIGE ${prestigeCount}! +${prestigeCount * 15}% permanent bonus ✨`); saveGame(); updateUI(); } else { showNotif('Need $10,000 to prestige!', true); } }
 
     // Auto earnings
-    function autoEarnings() {
+    function autoEarn() {
       if (perSec > 0) {
-        const earnings = perSec * getTotalMultiplier();
-        money += earnings;
-
+        const earn = perSec * getTotalMultiplier();
+        money += earn;
         const rect = moneyEl.getBoundingClientRect();
-        addFloatingText(earnings, rect.x + rect.width / 2, rect.y, 'var(--secondary)');
-
+        addFloating(earn, rect.left + rect.width / 2, rect.top + 10, '#a777e3');
         updateUI();
       }
     }
 
-    // Spawn bonus coin
-    function spawnBonus() {
+    // Bonus coin spawn (fixed bug: properly remove and give magnet bonus)
+    function spawnBonusCoin() {
       const coin = document.createElement('div');
       coin.className = 'bonus-coin';
-      coin.style.left = Math.random() * 80 + 10 + '%';
-      coin.style.bottom = '20px';
+      const leftPos = Math.random() * 80 + 10;
+      coin.style.left = leftPos + '%';
+      coin.style.bottom = '15px';
       document.body.appendChild(coin);
-
-      coin.addEventListener('click', (evt) => {
-        const magnet = 1 + (magnetUpgrades * 0.15);
-        const bonus = Math.floor((Math.random() * 500 + 100) * magnet);
-        money += bonus;
-
-        try { bonusSound.currentTime = 0; bonusSound.play().catch(() => { }); } catch (e) { }
-
-        addFloatingText(bonus, evt.clientX, evt.clientY - 50, 'var(--bonus)');
-        showNotification(`Bonus Coin: +$${fmt(bonus)}!`);
-
-        coin.style.transform = 'scale(0)';
-        setTimeout(() => {
-          if (coin.parentNode) coin.remove();
-        }, 200);
-
+      const onClickCoin = (ev) => {
+        ev.stopPropagation();
+        const magnetBonus = 1 + (magnetUpgrades * 0.15);
+        let bonusVal = Math.floor((Math.random() * 600 + 150) * magnetBonus);
+        money += bonusVal;
+        playSound(bonusSound);
+        addFloating(bonusVal, ev.clientX, ev.clientY - 30, '#f1c40f');
+        showNotif(`💰 BONUS COIN! +$${fmt(bonusVal)}`);
+        coin.remove();
         updateUI();
-      });
-
-      setTimeout(() => {
-        if (coin.parentNode) {
-          coin.style.opacity = '0';
-          setTimeout(() => {
-            if (coin.parentNode) coin.remove();
-          }, 500);
-        }
-      }, 5000);
+      };
+      coin.addEventListener('click', onClickCoin);
+      setTimeout(() => { if (coin.parentNode) coin.remove(); }, 5500);
     }
 
-    // Create background coins
-    function createBackgroundCoins() {
-      const coins = ['💰', '💎', '💵', '🪙', '💸'];
-
-      for (let i = 0; i < 20; i++) {
-        const coin = document.createElement('div');
-        coin.className = 'background-coin';
-        coin.textContent = coins[Math.floor(Math.random() * coins.length)];
-        coin.style.left = Math.random() * 100 + '%';
-        coin.style.top = Math.random() * 100 + '%';
-        coin.style.transform = `scale(${0.5 + Math.random() * 1.5})`;
-        coin.style.animation = `floatCoin ${10 + Math.random() * 20}s linear infinite`;
-        document.getElementById('backgroundCoins').appendChild(coin);
-      }
+    // Save & Load
+    function saveGame() {
+      const data = { money, perClick, perSec, clickUpgrades, autoUpgrades, megaUpgrades, magnetUpgrades, clickCost, autoCost, megaCost, magnetCost, prestigeCount, totalClicks };
+      localStorage.setItem('clicker_quest_pro', JSON.stringify(data));
     }
-
-    // Prestige function
-    function prestige() {
-      if (money >= 10000) {
-        prestigeCount++;
-        money = 0;
-        perClick = 1;
-        perSec = 0;
-        clickUpgrades = 0;
-        autoUpgrades = 0;
-        megaUpgrades = 0;
-        magnetUpgrades = 0;
-        clickCost = 10;
-        autoCost = 25;
-        megaCost = 5000;
-        magnetCost = 750;
-        critMultiplier = 5;
-
-        if (boostActive) {
-          clearInterval(boostTimer);
-          boostActive = false;
-          clickBtn.classList.remove('boost');
-        }
-
-        saveGame();
-
-        showNotification(`✨ Prestige ${prestigeCount}! Bonus: ${prestigeCount * 15}%!`, 'success');
-        updateUI();
+    function loadGame() {
+      const raw = localStorage.getItem('clicker_quest_pro');
+      if (raw) {
+        try {
+          const d = JSON.parse(raw);
+          money = d.money ?? 0; perClick = d.perClick ?? 1; perSec = d.perSec ?? 0;
+          clickUpgrades = d.clickUpgrades ?? 0; autoUpgrades = d.autoUpgrades ?? 0;
+          megaUpgrades = d.megaUpgrades ?? 0; magnetUpgrades = d.magnetUpgrades ?? 0;
+          clickCost = d.clickCost ?? 10; autoCost = d.autoCost ?? 25;
+          megaCost = d.megaCost ?? 5000; magnetCost = d.magnetCost ?? 750;
+          prestigeCount = d.prestigeCount ?? 0; totalClicks = d.totalClicks ?? 0;
+          critMultiplier = 5 + (megaUpgrades * 1.5);
+        } catch (e) { }
       }
     }
 
-    // Keyboard shortcuts
-    function handleKeyPress(e) {
-      if (e.key === ' ' || (e.key >= '1' && e.key <= '5')) {
-        e.preventDefault();
-      }
-
-      if (e.key === ' ') {
-        const rect = clickBtn.getBoundingClientRect();
-        const fakeEvent = {
-          clientX: rect.x + rect.width / 2,
-          clientY: rect.y + rect.height / 2
-        };
-        clickGain(fakeEvent);
-        return;
-      }
-
-      switch (e.key) {
-        case '1':
-          document.getElementById('buyClick').click();
-          break;
-        case '2':
-          document.getElementById('buyAuto').click();
-          break;
-        case '3':
-          document.getElementById('buyBoost').click();
-          break;
-        case '4':
-          document.getElementById('buyMega').click();
-          break;
-        case '5':
-          document.getElementById('buyMagnet').click();
-          break;
-      }
+    // Keyboard handler
+    function onKey(e) {
+      const key = e.key;
+      if (key === ' ' || key === 'Space') { e.preventDefault(); const fake = { clientX: window.innerWidth / 2, clientY: window.innerHeight / 2 }; handleClick(fake); return; }
+      if (key === '1') document.getElementById('buyClick')?.click();
+      if (key === '2') document.getElementById('buyAuto')?.click();
+      if (key === '3') document.getElementById('buyBoost')?.click();
+      if (key === '4') document.getElementById('buyMega')?.click();
+      if (key === '5') document.getElementById('buyMagnet')?.click();
     }
 
-    // Initialize game
-    function init() {
+    // Home screen & game visibility
+    const homeDiv = document.getElementById('homeScreen');
+    const gameDiv = document.getElementById('game');
+    const startBtn = document.getElementById('startGameBtn');
+    const backHomeBtn = document.getElementById('backToHomeBtn');
+
+    function showHome() { homeDiv.style.display = 'flex'; gameDiv.style.display = 'none'; }
+    function showGame() { homeDiv.style.display = 'none'; gameDiv.style.display = 'block'; loadGame(); updateUI(); }
+
+    startBtn.onclick = () => { showGame(); };
+    backHomeBtn.onclick = () => { saveGame(); showHome(); };
+
+    // intervals & init
+    window.addEventListener('load', () => {
       loadGame();
-      createBackgroundCoins();
       updateUI();
-
-      clickBtn.onclick = clickGain;
-      document.getElementById('buyClick').onclick = buyClick;
-      document.getElementById('buyAuto').onclick = buyAuto;
+      setInterval(autoEarn, 1000);
+      setInterval(() => { if (gameDiv.style.display !== 'none') spawnBonusCoin(); }, 9000);
+      setInterval(() => { if (gameDiv.style.display !== 'none') saveGame(); }, 20000);
+      document.addEventListener('keydown', onKey);
+      clickBtn.onclick = handleClick;
+      document.getElementById('buyClick').onclick = buyClickUpgrade;
+      document.getElementById('buyAuto').onclick = buyAutoUpgrade;
       document.getElementById('buyBoost').onclick = buyBoost;
-      document.getElementById('buyMega').onclick = buyMega;
-      document.getElementById('buyMagnet').onclick = buyMagnet;
+      document.getElementById('buyMega').onclick = buyMegaUpgrade;
+      document.getElementById('buyMagnet').onclick = buyMagnetUpgrade;
       document.getElementById('prestigeButton').onclick = prestige;
-
-      document.addEventListener('keydown', handleKeyPress);
-      window.addEventListener('beforeunload', saveGame);
-
-      setInterval(saveGame, 30000);
-      setInterval(autoEarnings, 1000);
-      setInterval(() => {
-        if (Math.random() < 0.12) spawnBonus();
-      }, 8000);
-
-      setTimeout(() => {
-        if (money === 0 && perClick === 1) {
-          showNotification('Welcome to Clicker Quest+ Pro 2.0! Click or press Spacebar to earn!');
-        }
-      }, 1000);
-
-      saveGame();
-    }
-
-    init();
+      // show home first
+      showHome();
+    });
   </script>
 </body>
 

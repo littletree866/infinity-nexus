@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>February Challenge</title>
     <link rel="icon" href="../../icon.jpg">
-    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@300;400;500;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family= Trebuchet MS:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <style>
         :root {
@@ -27,7 +27,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Bree Serif', sans-serif;
+            font-family: ' Trebuchet MS', serif;
         }
 
         body {
@@ -1470,7 +1470,7 @@
                         // Name tag for bosses
                         if (this.type === 'BOSS') {
                             ctx.fillStyle = '#FF4081';
-                            ctx.font = 'bold 16px Bree Serif';
+                            ctx.font = 'bold 16px  Trebuchet MS';
                             ctx.textAlign = 'center';
                             ctx.fillText('WARLORD', this.x, this.y - this.radius - 25);
                         }
@@ -1911,7 +1911,7 @@
 
                     // Dollar sign
                     ctx.fillStyle = '#000';
-                    ctx.font = 'bold 18px Bree Serif';
+                    ctx.font = 'bold 18px  Trebuchet MS';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
                     ctx.fillText('$', drop.x, drop.y + float);
@@ -1933,7 +1933,7 @@
 
                     // Icon
                     ctx.fillStyle = '#fff';
-                    ctx.font = 'bold 20px Bree Serif';
+                    ctx.font = 'bold 20px  Trebuchet MS';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
                     ctx.fillText(config.icon, powerup.x, powerup.y + float);
@@ -2297,20 +2297,20 @@
 
                     // Draw title text
                     ctx.fillStyle = '#fff';
-                    ctx.font = 'bold 28px Bree Serif';
+                    ctx.font = 'bold 28px  Trebuchet MS';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
                     ctx.fillText('STRONGHOLD DEFENSE', canvas.width / 2, canvas.height / 2 - 60);
-                    ctx.font = '20px Bree Serif';
+                    ctx.font = '20px  Trebuchet MS';
                     ctx.fillText('Select difficulty and click "Start Game"', canvas.width / 2, canvas.height / 2 - 10);
                     ctx.fillText('Defend the stronghold from all sides!', canvas.width / 2, canvas.height / 2 + 30);
-                    ctx.font = '16px Bree Serif';
+                    ctx.font = '16px  Trebuchet MS';
                     ctx.fillText('Upgrade cannons between waves', canvas.width / 2, canvas.height / 2 + 70);
                     ctx.fillText('Collect power-ups for temporary boosts', canvas.width / 2, canvas.height / 2 + 100);
 
                     // Draw click prompt
                     ctx.fillStyle = '#e6c300';
-                    ctx.font = '18px Bree Serif';
+                    ctx.font = '18px  Trebuchet MS';
                     ctx.fillText('Click "Start Game" to begin!', canvas.width / 2, canvas.height - 50);
 
                     console.log('Initial screen drawn');

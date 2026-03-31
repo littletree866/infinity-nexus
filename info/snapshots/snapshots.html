@@ -5,9 +5,14 @@
   <meta charset="utf-8">
   <title>Mystery Reveal</title>
   <link rel="icon" href="../../icon.jpg" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family= Trebuchet MS&display=swap" rel="stylesheet">
 
   <style>
+    :root {
+      --primary: #6e8efb;
+      --secondary: #a777e3;
+    }
+
     html,
     body {
       height: 100%;
@@ -15,36 +20,128 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #0a0a0a;
-      color: #ccc;
-      font-family: "Bree Serif", sans-serif;
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 500% 500%;
+      animation: gradientBG 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      color: #ffffff;
+      font-family: " Trebuchet MS", serif;
       flex-direction: column;
+      overflow: hidden;
+    }
+
+    @keyframes gradientBG {
+      0% {
+        background-position: 50% 100%;
+      }
+
+      25% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 50% 0%;
+      }
+
+      75% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 50% 100%;
+      }
+    }
+
+    .container {
+      text-align: center;
+      z-index: 2;
+      position: relative;
     }
 
     img {
       width: 500px;
       max-width: 90vw;
-      border-radius: 10px;
-      border-color: aliceblue;
+      border-radius: 20px;
+      border-color: rgba(255, 255, 255, 0.3);
       border-style: solid;
-      border-width: 5px;
+      border-width: 3px;
       opacity: 0;
-      filter: blur(10px) brightness(0.2);
+      filter: blur(15px) brightness(0.3);
       transition: opacity 1s linear, filter 1s linear;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    img.visible {
+      animation: imagePulse 0.5s ease-out;
+    }
+
+    @keyframes imagePulse {
+      0% {
+        transform: scale(0.95);
+      }
+
+      100% {
+        transform: scale(1);
+      }
     }
 
     h2 {
       font-weight: 400;
-      margin-top: 20px;
-      color: #777;
-      font-size: 16px;
+      margin-top: 30px;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      animation: fadeInText 0.8s ease-out;
+    }
+
+    @keyframes fadeInText {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .countdown {
+      display: inline-block;
+      padding: 10px 20px;
+      background: rgba(110, 142, 251, 0.2);
+      border: 2px solid rgba(167, 119, 227, 0.4);
+      border-radius: 20px;
+      color: rgba(255, 255, 255, 0.95);
+      font-size: 0.95rem;
+      margin-top: 10px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .countdown.active {
+      animation: countdownPulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes countdownPulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 20px rgba(110, 142, 251, 0.2);
+      }
+
+      50% {
+        box-shadow: 0 0 40px rgba(110, 142, 251, 0.4);
+      }
     }
   </style>
 </head>
 
 <body>
-  <img id="mystery" src="mystery.png" alt="Mystery">
-  <h2 id="text"></h2>
+  <div class="container">
+    <img id="mystery" src="mystery.png" alt="Mystery">
+    <h2 id="text" class="countdown"></h2>
+  </div>
   <script>
     const img = document.getElementById('mystery');
     const text = document.getElementById('text');
@@ -58,10 +155,16 @@
     const progress = Math.min(1, Math.max(0, 1 - diffDays / fadeDays));
 
     img.style.opacity = progress;
-    img.style.filter = `blur(${8 - progress * 3}px) brightness(${0.5 + progress * 0.1})`;
-    text.textContent = diffDays > 0
-      ? `Revealing in ${diffDays} day${diffDays === 1 ? '' : 's'}...`
-      : `Fully revealed!`;
+    img.style.filter = `blur(${15 - progress * 8}px) brightness(${0.3 + progress * 0.2})`;
+
+    if (diffDays > 0) {
+      text.textContent = `Revealing in ${diffDays} day${diffDays === 1 ? '' : 's'}...`;
+      text.classList.add('active');
+    } else {
+      text.textContent = `Fully revealed!`;
+      img.classList.add('visible');
+      text.classList.remove('active');
+    }
   </script>
 </body>
 

@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supply & Demand</title>
+    <title>📊 Supply & Demand Pro 📊</title>
     <link rel="icon" href="../../icon.jpg" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@300;400;500;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family= Trebuchet MS:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -35,7 +35,7 @@
         }
 
         body {
-            font-family: 'Bree Serif', sans-serif;
+            font-family: ' Trebuchet MS', serif;
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
@@ -300,7 +300,7 @@
             border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
-            font-family: 'Bree Serif', sans-serif;
+            font-family: ' Trebuchet MS', serif;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
@@ -684,7 +684,7 @@
             color: white;
             padding: 2px 8px;
             border-radius: 4px;
-            font-family: monospace;
+            font-family: serif;
             margin-right: 5px;
         }
 
@@ -727,6 +727,21 @@
 </head>
 
 <body>
+    <!-- Home Screen -->
+    <div id="homeScreen"
+        style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; z-index: 9999;">
+        <div
+            style="background: white; border-radius: 20px; padding: 2.5rem; max-width: 600px; width: 90%; text-align: center; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);">
+            <h2 style="color: #667eea; font-size: 2.5rem; margin-bottom: 0.5rem;">📊 Supply & Demand</h2>
+            <p style="color: #666; font-size: 1rem; margin-bottom: 2rem;">Manage your business through market dynamics.
+                Buy products low, sell them high, and maximize your profits!</p>
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <button onclick="startSupplyDemand()"
+                    style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 12px 30px; font-size: 1.1rem; border-radius: 10px; cursor: pointer; font-weight: 600;">🎮
+                    Start Business</button>
+            </div>
+        </div>
+    </div>
     <div class="game-container">
         <div class="game-header">
             <h1><i class="fas fa-chart-line"></i> SUPPLY & DEMAND</h1>
@@ -1687,9 +1702,15 @@
             document.body.appendChild(tutorial);
         }
 
+        // Home screen function
+        function startSupplyDemand() {
+            document.getElementById('homeScreen').style.display = 'none';
+        }
+
         // Initialize game when page loads
         window.onload = initGame;
     </script>
+    </div>
 </body>
 
 </html>

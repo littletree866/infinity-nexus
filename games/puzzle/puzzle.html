@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <title>Puzzle Master</title>
     <link rel="icon" href="../../icon.jpg" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family= Trebuchet MS:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
-            font-family: 'Bree Serif', sans-serif;
+            font-family: ' Trebuchet MS', serif;
             background: linear-gradient(135deg, #6e8efb, #a777e3);
             display: flex;
             justify-content: center;
@@ -585,329 +585,412 @@
         .modal-buttons button {
             min-width: 120px;
         }
+
+        /* Home Screen Styles */
+        #homeScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .home-card-puzzle {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .home-card-puzzle h2 {
+            color: #6e8efb;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .home-card-puzzle p {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .home-buttons-puzzle {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .puzzle-home-btn {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .puzzle-home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(110, 142, 251, 0.4);
+        }
     </style>
 </head>
 
 <body>
-    <div class="game-over" id="gameOver">
-        <div class="game-over-content">
-            <h2 id="gameOverTitle">Game Over</h2>
-            <p id="gameOverMessage"></p>
-            <div class="modal-buttons">
-                <button id="retryBtn"><i class="fas fa-redo"></i> Retry</button>
-                <button id="menuBtn"><i class="fas fa-home"></i> Menu</button>
+    <div id="homeScreen">
+        <div class="home-card-puzzle">
+            <h2>🧩 Puzzle Master</h2>
+            <p>Solve sliding puzzles and unlock your logic skills!</p>
+            <div class="home-buttons-puzzle">
+                <button class="puzzle-home-btn" onclick="startFromHome()">🎮 Start Game</button>
+                <button class="puzzle-home-btn" onclick="togglePuzzleHelp()"
+                    style="background: rgba(110, 142, 251, 0.2); color: #6e8efb; border: 2px solid #6e8efb;">📖 How to
+                    Play</button>
+            </div>
+            <div id="puzzleHomeHelp"
+                style="display: none; margin-top: 1.5rem; text-align: left; background: #f8f9fa; padding: 1rem; border-radius: 10px; font-size: 0.9rem; color: #333;">
+                <strong style="color: #6e8efb;">How to Play:</strong>
+                <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                    <li><strong>Endless:</strong> Solve puzzles with no time or move limits</li>
+                    <li><strong>Last Stand:</strong> Beat levels with time &amp; move challenges</li>
+                    <li>Click tiles to move them into the empty space</li>
+                    <li>Use hints strategically to complete harder puzzles</li>
+                </ul>
             </div>
         </div>
     </div>
 
-    <div class="how-to-play" id="howToPlay">
-        <button class="close-btn" id="closeHelp">&times;</button>
-        <h3>🎮 How to Play</h3>
-        <p><strong>Goal:</strong> Arrange tiles in numerical order with the empty space at the bottom-right.</p>
-        <p><strong>Modes:</strong></p>
-        <ul>
-            <li><strong>Endless:</strong> Solve puzzles with no limits</li>
-            <li><strong>Last Stand:</strong> Beat levels with time & move limits</li>
-        </ul>
-        <p><strong>Controls:</strong></p>
-        <ul>
-            <li>Click tiles next to empty space to move</li>
-            <li>Use arrow keys or mobile controls</li>
-            <li>Press H for hint</li>
-            <li>Press U to undo</li>
-        </ul>
-    </div>
-
-    <div class="achievements-panel" id="achievementsPanel">
-        <h3><i class="fas fa-trophy"></i> Achievements</h3>
-        <div id="achievementsList"></div>
-    </div>
-
-    <div class="game-container">
-        <div class="header">
-            <h1><i class="fas fa-puzzle-piece"></i> 🧩 Puzzle Master Pro 🧩</h1>
-            <div class="settings">
-                <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <button class="sound-toggle" id="soundToggle" title="Toggle Sound">
-                    <i class="fas fa-volume-up"></i>
-                </button>
-                <button class="pause-btn" id="pauseBtn" title="Pause Game">
-                    <i class="fas fa-pause"></i>
-                </button>
-                <button class="theme-toggle" id="helpBtn" title="How to Play">
-                    <i class="fas fa-question"></i>
-                </button>
-                <button class="theme-toggle" id="achievementsBtn" title="Achievements">
-                    <i class="fas fa-trophy"></i>
-                </button>
+    <div id="gameContainer" style="display: none;">
+        <div class="game-over" id="gameOver">
+            <div class="game-over-content">
+                <h2 id="gameOverTitle">Game Over</h2>
+                <p id="gameOverMessage"></p>
+                <div class="modal-buttons">
+                    <button id="retryBtn"><i class="fas fa-redo"></i> Retry</button>
+                    <button id="menuBtn"><i class="fas fa-home"></i> Menu</button>
+                </div>
             </div>
         </div>
 
-        <div id="modeSelect">
-            <p style="font-size: 14px; color: #666; margin-bottom: 15px;">Select your challenge:</p>
-            <div class="mode-select">
-                <button class="mode-btn" id="endlessModeBtn" title="Solve puzzles at your own pace">
-                    <i class="fas fa-infinity"></i> Endless Mode
+        <div class="how-to-play" id="howToPlay">
+            <button class="close-btn" id="closeHelp">&times;</button>
+            <h3>🎮 How to Play</h3>
+            <p><strong>Goal:</strong> Arrange tiles in numerical order with the empty space at the bottom-right.</p>
+            <p><strong>Modes:</strong></p>
+            <ul>
+                <li><strong>Endless:</strong> Solve puzzles with no limits</li>
+                <li><strong>Last Stand:</strong> Beat levels with time & move limits</li>
+            </ul>
+            <p><strong>Controls:</strong></p>
+            <ul>
+                <li>Click tiles next to empty space to move</li>
+                <li>Use arrow keys or mobile controls</li>
+                <li>Press H for hint</li>
+                <li>Press U to undo</li>
+            </ul>
+        </div>
+
+        <div class="achievements-panel" id="achievementsPanel">
+            <h3><i class="fas fa-trophy"></i> Achievements</h3>
+            <div id="achievementsList"></div>
+        </div>
+
+        <div class="game-container">
+            <div class="header">
+                <h1><i class="fas fa-puzzle-piece"></i> 🧩 Puzzle Master Pro 🧩</h1>
+                <div class="settings">
+                    <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="sound-toggle" id="soundToggle" title="Toggle Sound">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <button class="pause-btn" id="pauseBtn" title="Pause Game">
+                        <i class="fas fa-pause"></i>
+                    </button>
+                    <button class="theme-toggle" id="helpBtn" title="How to Play">
+                        <i class="fas fa-question"></i>
+                    </button>
+                    <button class="theme-toggle" id="achievementsBtn" title="Achievements">
+                        <i class="fas fa-trophy"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="modeSelect">
+                <p style="font-size: 14px; color: #666; margin-bottom: 15px;">Select your challenge:</p>
+                <div class="mode-select">
+                    <button class="mode-btn" id="endlessModeBtn" title="Solve puzzles at your own pace">
+                        <i class="fas fa-infinity"></i> Endless Mode
+                    </button>
+                    <button class="mode-btn" id="lastStandBtn" title="Race against time and moves!">
+                        <i class="fas fa-shield-alt"></i> Last Stand
+                    </button>
+                    <button class="mode-btn" id="practiceModeBtn" title="Unlimited hints, no limits">
+                        <i class="fas fa-graduation-cap"></i> Practice
+                    </button>
+                </div>
+                <div class="difficulty-select" id="difficultySelect">
+                    <select id="difficulty">
+                        <option value="3">3×3 (Easy)</option>
+                        <option value="4">4×4 (Medium)</option>
+                        <option value="5">5×5 (Hard)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="puzzle-grid" id="puzzleGrid" style="display:none;"></div>
+
+            <div class="mobile-controls" id="mobileControls" style="display:none;">
+                <button class="mobile-btn" data-direction="up">↑</button>
+                <button class="mobile-btn" data-direction="left">←</button>
+                <button class="mobile-btn" data-direction="right">→</button>
+                <button class="mobile-btn" data-direction="down">↓</button>
+                <button class="mobile-btn" id="hintMobile">💡</button>
+                <button class="mobile-btn" id="undoMobile">↶</button>
+            </div>
+
+            <div class="time-container" id="timeContainer" style="display:none;">
+                <div>Time: <span id="timer">0</span>s</div>
+                <div class="time-bar">
+                    <div class="time-fill" id="timeFill"></div>
+                </div>
+            </div>
+
+            <div class="stats" id="stats" style="display:none;">
+                <div class="stat-box">
+                    <h3>Moves</h3>
+                    <div class="stat-value moves" id="moveCount">0</div>
+                </div>
+                <div class="stat-box">
+                    <h3>Level</h3>
+                    <div class="stat-value" id="levelDisplay">1</div>
+                </div>
+                <div class="stat-box">
+                    <h3>Best Level</h3>
+                    <div class="stat-value" id="bestLevel">1</div>
+                </div>
+                <div class="stat-box">
+                    <h3>Hints Left</h3>
+                    <div class="stat-value" id="hintCount">3</div>
+                </div>
+            </div>
+
+            <div class="controls" id="controls" style="display:none;">
+                <button id="newGameBtn">
+                    <i class="fas fa-redo"></i> Restart
                 </button>
-                <button class="mode-btn" id="lastStandBtn" title="Race against time and moves!">
-                    <i class="fas fa-shield-alt"></i> Last Stand
+                <button id="hintBtn" disabled>
+                    <i class="fas fa-lightbulb"></i> Hint
                 </button>
-                <button class="mode-btn" id="practiceModeBtn" title="Unlimited hints, no limits">
-                    <i class="fas fa-graduation-cap"></i> Practice
+                <button id="undoBtn" disabled>
+                    <i class="fas fa-undo"></i> Undo
                 </button>
             </div>
-            <div class="difficulty-select" id="difficultySelect">
-                <select id="difficulty">
-                    <option value="3">3×3 (Easy)</option>
-                    <option value="4">4×4 (Medium)</option>
-                    <option value="5">5×5 (Hard)</option>
-                </select>
+
+            <div class="win-message" id="winMessage">
+                <i class="fas fa-trophy"></i> 🎉 Level Complete! 🎉
             </div>
         </div>
 
-        <div class="puzzle-grid" id="puzzleGrid" style="display:none;"></div>
+        <script>
+            // Game State
+            const state = {
+                tiles: [],
+                moves: 0,
+                solved: false,
+                timer: 0,
+                timerInterval: null,
+                mode: null,
+                level: 1,
+                moveLimit: null,
+                timeLimit: null,
+                countdownInterval: null,
+                moveHistory: [],
+                soundEnabled: true,
+                isPaused: false,
+                gridSize: 3,
+                hints: 3,
+                achievements: {
+                    firstWin: { unlocked: false, desc: "Solve your first puzzle" },
+                    speedster: { unlocked: false, desc: "Solve in under 30 seconds" },
+                    perfectionist: { unlocked: false, desc: "Solve in minimum moves" },
+                    master: { unlocked: false, desc: "Reach level 10 in Last Stand" },
+                    sizeMaster: { unlocked: false, desc: "Complete a 5×5 puzzle" }
+                },
+                records: {
+                    endless: {
+                        fastest: 0,
+                        leastMoves: Infinity,
+                        bestScore: 0
+                    }
+                }
+            };
 
-        <div class="mobile-controls" id="mobileControls" style="display:none;">
-            <button class="mobile-btn" data-direction="up">↑</button>
-            <button class="mobile-btn" data-direction="left">←</button>
-            <button class="mobile-btn" data-direction="right">→</button>
-            <button class="mobile-btn" data-direction="down">↓</button>
-            <button class="mobile-btn" id="hintMobile">💡</button>
-            <button class="mobile-btn" id="undoMobile">↶</button>
-        </div>
+            // DOM Elements
+            const grid = document.getElementById('puzzleGrid');
+            const winMessage = document.getElementById('winMessage');
+            const moveDisplay = document.getElementById('moveCount');
+            const timerDisplay = document.getElementById('timer');
+            const timeFill = document.getElementById('timeFill');
+            const stats = document.getElementById('stats');
+            const timeContainer = document.getElementById('timeContainer');
 
-        <div class="time-container" id="timeContainer" style="display:none;">
-            <div>Time: <span id="timer">0</span>s</div>
-            <div class="time-bar">
-                <div class="time-fill" id="timeFill"></div>
-            </div>
-        </div>
+            // Storage Keys
+            const PUZZLE_BEST_KEY = 'puzzle_best_laststand';
+            const ACHIEVEMENTS_KEY = 'puzzle_achievements';
+            const ENDLESS_RECORDS_KEY = 'puzzle_endless_records';
+            const SOUND_KEY = 'puzzle_sound';
+            const THEME_KEY = 'puzzle_theme';
 
-        <div class="stats" id="stats" style="display:none;">
-            <div class="stat-box">
-                <h3>Moves</h3>
-                <div class="stat-value moves" id="moveCount">0</div>
-            </div>
-            <div class="stat-box">
-                <h3>Level</h3>
-                <div class="stat-value" id="levelDisplay">1</div>
-            </div>
-            <div class="stat-box">
-                <h3>Best Level</h3>
-                <div class="stat-value" id="bestLevel">1</div>
-            </div>
-            <div class="stat-box">
-                <h3>Hints Left</h3>
-                <div class="stat-value" id="hintCount">3</div>
-            </div>
-        </div>
+            // Initialize from storage
+            let bestLevel = Number(localStorage.getItem(PUZZLE_BEST_KEY) || 1);
+            document.getElementById('bestLevel').textContent = bestLevel;
 
-        <div class="controls" id="controls" style="display:none;">
-            <button id="newGameBtn">
-                <i class="fas fa-redo"></i> Restart
-            </button>
-            <button id="hintBtn" disabled>
-                <i class="fas fa-lightbulb"></i> Hint
-            </button>
-            <button id="undoBtn" disabled>
-                <i class="fas fa-undo"></i> Undo
-            </button>
-        </div>
+            const savedAchievements = localStorage.getItem(ACHIEVEMENTS_KEY);
+            if (savedAchievements) {
+                state.achievements = { ...state.achievements, ...JSON.parse(savedAchievements) };
+            }
 
-        <div class="win-message" id="winMessage">
-            <i class="fas fa-trophy"></i> 🎉 Level Complete! 🎉
-        </div>
-    </div>
+            const savedRecords = localStorage.getItem(ENDLESS_RECORDS_KEY);
+            if (savedRecords) {
+                state.records.endless = JSON.parse(savedRecords);
+            }
 
-    <script>
-        // Game State
-        const state = {
-            tiles: [],
-            moves: 0,
-            solved: false,
-            timer: 0,
-            timerInterval: null,
-            mode: null,
-            level: 1,
-            moveLimit: null,
-            timeLimit: null,
-            countdownInterval: null,
-            moveHistory: [],
-            soundEnabled: true,
-            isPaused: false,
-            gridSize: 3,
-            hints: 3,
-            achievements: {
-                firstWin: { unlocked: false, desc: "Solve your first puzzle" },
-                speedster: { unlocked: false, desc: "Solve in under 30 seconds" },
-                perfectionist: { unlocked: false, desc: "Solve in minimum moves" },
-                master: { unlocked: false, desc: "Reach level 10 in Last Stand" },
-                sizeMaster: { unlocked: false, desc: "Complete a 5×5 puzzle" }
-            },
-            records: {
-                endless: {
-                    fastest: 0,
-                    leastMoves: Infinity,
-                    bestScore: 0
+            // Sound effects
+            const sounds = {
+                move: () => beep(440, 100),
+                win: () => beep(880, 300),
+                click: () => beep(220, 50),
+                error: () => beep(110, 200)
+            };
+
+            function beep(freq, duration) {
+                if (!state.soundEnabled) return;
+
+                try {
+                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+
+                    oscillator.frequency.value = freq;
+                    oscillator.type = 'sine';
+
+                    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration / 1000);
+
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + duration / 1000);
+                } catch (e) {
+                    console.log('Audio not supported');
                 }
             }
-        };
 
-        // DOM Elements
-        const grid = document.getElementById('puzzleGrid');
-        const winMessage = document.getElementById('winMessage');
-        const moveDisplay = document.getElementById('moveCount');
-        const timerDisplay = document.getElementById('timer');
-        const timeFill = document.getElementById('timeFill');
-        const stats = document.getElementById('stats');
-        const timeContainer = document.getElementById('timeContainer');
+            // Theme Management
+            const themeToggle = document.getElementById('themeToggle');
+            const savedTheme = localStorage.getItem(THEME_KEY) || 'light';
 
-        // Storage Keys
-        const PUZZLE_BEST_KEY = 'puzzle_best_laststand';
-        const ACHIEVEMENTS_KEY = 'puzzle_achievements';
-        const ENDLESS_RECORDS_KEY = 'puzzle_endless_records';
-        const SOUND_KEY = 'puzzle_sound';
-        const THEME_KEY = 'puzzle_theme';
-
-        // Initialize from storage
-        let bestLevel = Number(localStorage.getItem(PUZZLE_BEST_KEY) || 1);
-        document.getElementById('bestLevel').textContent = bestLevel;
-
-        const savedAchievements = localStorage.getItem(ACHIEVEMENTS_KEY);
-        if (savedAchievements) {
-            state.achievements = { ...state.achievements, ...JSON.parse(savedAchievements) };
-        }
-
-        const savedRecords = localStorage.getItem(ENDLESS_RECORDS_KEY);
-        if (savedRecords) {
-            state.records.endless = JSON.parse(savedRecords);
-        }
-
-        // Sound effects
-        const sounds = {
-            move: () => beep(440, 100),
-            win: () => beep(880, 300),
-            click: () => beep(220, 50),
-            error: () => beep(110, 200)
-        };
-
-        function beep(freq, duration) {
-            if (!state.soundEnabled) return;
-
-            try {
-                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                const oscillator = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
-
-                oscillator.connect(gainNode);
-                gainNode.connect(audioContext.destination);
-
-                oscillator.frequency.value = freq;
-                oscillator.type = 'sine';
-
-                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration / 1000);
-
-                oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + duration / 1000);
-            } catch (e) {
-                console.log('Audio not supported');
-            }
-        }
-
-        // Theme Management
-        const themeToggle = document.getElementById('themeToggle');
-        const savedTheme = localStorage.getItem(THEME_KEY) || 'light';
-
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-theme');
-            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-        }
-
-        themeToggle.onclick = () => {
-            document.body.classList.toggle('dark-theme');
-            if (document.body.classList.contains('dark-theme')) {
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-theme');
                 themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-                localStorage.setItem(THEME_KEY, 'dark');
-            } else {
-                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-                localStorage.setItem(THEME_KEY, 'light');
             }
-        };
 
-        // Sound Toggle
-        const soundToggle = document.getElementById('soundToggle');
-        state.soundEnabled = localStorage.getItem(SOUND_KEY) !== 'false';
+            themeToggle.onclick = () => {
+                document.body.classList.toggle('dark-theme');
+                if (document.body.classList.contains('dark-theme')) {
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                    localStorage.setItem(THEME_KEY, 'dark');
+                } else {
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                    localStorage.setItem(THEME_KEY, 'light');
+                }
+            };
 
-        if (!state.soundEnabled) {
-            soundToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
-        }
+            // Sound Toggle
+            const soundToggle = document.getElementById('soundToggle');
+            state.soundEnabled = localStorage.getItem(SOUND_KEY) !== 'false';
 
-        soundToggle.onclick = () => {
-            state.soundEnabled = !state.soundEnabled;
-            localStorage.setItem(SOUND_KEY, state.soundEnabled);
-            soundToggle.innerHTML = state.soundEnabled ?
-                '<i class="fas fa-volume-up"></i>' :
-                '<i class="fas fa-volume-mute"></i>';
-        };
+            if (!state.soundEnabled) {
+                soundToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            }
 
-        // Help Panel
-        const helpBtn = document.getElementById('helpBtn');
-        const howToPlay = document.getElementById('howToPlay');
-        const closeHelp = document.getElementById('closeHelp');
+            soundToggle.onclick = () => {
+                state.soundEnabled = !state.soundEnabled;
+                localStorage.setItem(SOUND_KEY, state.soundEnabled);
+                soundToggle.innerHTML = state.soundEnabled ?
+                    '<i class="fas fa-volume-up"></i>' :
+                    '<i class="fas fa-volume-mute"></i>';
+            };
 
-        helpBtn.onclick = () => {
-            howToPlay.style.display = 'block';
-            sounds.click();
-        };
+            // Help Panel
+            const helpBtn = document.getElementById('helpBtn');
+            const howToPlay = document.getElementById('howToPlay');
+            const closeHelp = document.getElementById('closeHelp');
 
-        closeHelp.onclick = () => {
-            howToPlay.style.display = 'none';
-        };
+            helpBtn.onclick = () => {
+                howToPlay.style.display = 'block';
+                sounds.click();
+            };
 
-        // Achievements Panel
-        const achievementsBtn = document.getElementById('achievementsBtn');
-        const achievementsPanel = document.getElementById('achievementsPanel');
-        const achievementsList = document.getElementById('achievementsList');
+            closeHelp.onclick = () => {
+                howToPlay.style.display = 'none';
+            };
 
-        function updateAchievementsDisplay() {
-            achievementsList.innerHTML = '';
-            for (const [key, achievement] of Object.entries(state.achievements)) {
-                const div = document.createElement('div');
-                div.className = `achievement ${achievement.unlocked ? 'unlocked' : ''}`;
-                div.innerHTML = `
+            // Achievements Panel
+            const achievementsBtn = document.getElementById('achievementsBtn');
+            const achievementsPanel = document.getElementById('achievementsPanel');
+            const achievementsList = document.getElementById('achievementsList');
+
+            function updateAchievementsDisplay() {
+                achievementsList.innerHTML = '';
+                for (const [key, achievement] of Object.entries(state.achievements)) {
+                    const div = document.createElement('div');
+                    div.className = `achievement ${achievement.unlocked ? 'unlocked' : ''}`;
+                    div.innerHTML = `
                     <i class="fas ${achievement.unlocked ? 'fa-check-circle' : 'fa-lock'}"></i>
                     <div>
                         <strong>${achievement.desc}</strong>
                         <div style="font-size:12px;color:#666;">${achievement.unlocked ? 'Unlocked!' : 'Locked'}</div>
                     </div>
                 `;
-                achievementsList.appendChild(div);
+                    achievementsList.appendChild(div);
+                }
             }
-        }
 
-        achievementsBtn.onclick = () => {
-            updateAchievementsDisplay();
-            achievementsPanel.style.display = achievementsPanel.style.display === 'block' ? 'none' : 'block';
-            sounds.click();
-        };
-
-        function unlockAchievement(key) {
-            if (!state.achievements[key].unlocked) {
-                state.achievements[key].unlocked = true;
-                localStorage.setItem(ACHIEVEMENTS_KEY, JSON.stringify(state.achievements));
-
-                // Show notification
-                showNotification(`Achievement Unlocked: ${state.achievements[key].desc}`);
+            achievementsBtn.onclick = () => {
                 updateAchievementsDisplay();
-            }
-        }
+                achievementsPanel.style.display = achievementsPanel.style.display === 'block' ? 'none' : 'block';
+                sounds.click();
+            };
 
-        function showNotification(message) {
-            const notification = document.createElement('div');
-            notification.style.cssText = `
+            function unlockAchievement(key) {
+                if (!state.achievements[key].unlocked) {
+                    state.achievements[key].unlocked = true;
+                    localStorage.setItem(ACHIEVEMENTS_KEY, JSON.stringify(state.achievements));
+
+                    // Show notification
+                    showNotification(`Achievement Unlocked: ${state.achievements[key].desc}`);
+                    updateAchievementsDisplay();
+                }
+            }
+
+            function showNotification(message) {
+                const notification = document.createElement('div');
+                notification.style.cssText = `
                 position: fixed;
                 top: 20px;
                 right: 20px;
@@ -919,18 +1002,18 @@
                 z-index: 1000;
                 animation: slideIn 0.3s ease-out;
             `;
-            notification.innerHTML = `<i class="fas fa-trophy"></i> ${message}`;
-            document.body.appendChild(notification);
+                notification.innerHTML = `<i class="fas fa-trophy"></i> ${message}`;
+                document.body.appendChild(notification);
 
-            setTimeout(() => {
-                notification.style.animation = 'slideOut 0.3s ease-out';
-                setTimeout(() => notification.remove(), 300);
-            }, 3000);
-        }
+                setTimeout(() => {
+                    notification.style.animation = 'slideOut 0.3s ease-out';
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
 
-        // Add CSS for notification animations
-        const style = document.createElement('style');
-        style.textContent = `
+            // Add CSS for notification animations
+            const style = document.createElement('style');
+            style.textContent = `
             @keyframes slideIn {
                 from { transform: translateX(100%); opacity: 0; }
                 to { transform: translateX(0); opacity: 1; }
@@ -940,533 +1023,545 @@
                 to { transform: translateX(100%); opacity: 0; }
             }
         `;
-        document.head.appendChild(style);
+            document.head.appendChild(style);
 
-        // Mode Selection
-        document.getElementById('endlessModeBtn').onclick = () => {
-            startMode('endless');
-            sounds.click();
-        };
-        document.getElementById('lastStandBtn').onclick = () => {
-            startMode('laststand');
-            sounds.click();
-        };
-        document.getElementById('practiceModeBtn').onclick = () => {
-            startMode('practice');
-            sounds.click();
-        };
+            // Mode Selection
+            document.getElementById('endlessModeBtn').onclick = () => {
+                startMode('endless');
+                sounds.click();
+            };
+            document.getElementById('lastStandBtn').onclick = () => {
+                startMode('laststand');
+                sounds.click();
+            };
+            document.getElementById('practiceModeBtn').onclick = () => {
+                startMode('practice');
+                sounds.click();
+            };
 
-        function startMode(mode) {
-            state.mode = mode;
-            state.level = 1;
-            state.hints = mode === 'practice' ? Infinity : 3;
+            function startMode(mode) {
+                state.mode = mode;
+                state.level = 1;
+                state.hints = mode === 'practice' ? Infinity : 3;
 
-            document.getElementById('modeSelect').style.display = 'none';
-            document.getElementById('difficultySelect').style.display = (mode === 'endless' || mode === 'practice') ? 'block' : 'none';
+                document.getElementById('modeSelect').style.display = 'none';
+                document.getElementById('difficultySelect').style.display = (mode === 'endless' || mode === 'practice') ? 'block' : 'none';
 
-            if (mode === 'endless' || mode === 'practice') {
-                const size = parseInt(document.getElementById('difficulty').value);
-                state.gridSize = size;
-            }
-
-            grid.style.display = 'grid';
-            stats.style.display = 'grid';
-            timeContainer.style.display = mode !== 'practice' ? 'block' : 'none';
-            document.getElementById('controls').style.display = 'flex';
-            document.getElementById('hintCount').textContent = mode === 'practice' ? '∞' : state.hints;
-
-            // Show mobile controls on mobile
-            if (window.innerWidth <= 768) {
-                document.getElementById('mobileControls').style.display = 'grid';
-                setupMobileControls();
-            }
-
-            initializePuzzle();
-        }
-
-        function setupMobileControls() {
-            document.querySelectorAll('.mobile-btn[data-direction]').forEach(btn => {
-                btn.onclick = () => {
-                    const direction = btn.dataset.direction;
-                    const emptyIndex = state.tiles.indexOf(null);
-                    let targetIndex = -1;
-
-                    switch (direction) {
-                        case 'up': targetIndex = emptyIndex + state.gridSize; break;
-                        case 'down': targetIndex = emptyIndex - state.gridSize; break;
-                        case 'left': targetIndex = emptyIndex + 1; break;
-                        case 'right': targetIndex = emptyIndex - 1; break;
-                    }
-
-                    if (targetIndex >= 0 && targetIndex < state.tiles.length) {
-                        moveTile(targetIndex);
-                    }
-                };
-            });
-
-            document.getElementById('hintMobile').onclick = () => useHint();
-            document.getElementById('undoMobile').onclick = () => undo();
-        }
-
-        function initializePuzzle() {
-            const totalTiles = state.gridSize * state.gridSize;
-            state.tiles = Array.from({ length: totalTiles - 1 }, (_, i) => i + 1);
-            state.tiles.push(null);
-            state.moves = 0;
-            state.solved = false;
-            state.moveHistory = [];
-            winMessage.style.display = "none";
-
-            document.getElementById('hintBtn').disabled = state.hints === 0;
-            document.getElementById('undoBtn').disabled = true;
-
-            shufflePuzzle();
-            setupTimerAndLimits();
-            updateGridSize();
-            updateUI();
-        }
-
-        function updateGridSize() {
-            const tileSize = Math.min(100, 380 / state.gridSize - 10);
-            grid.style.gridTemplateColumns = `repeat(${state.gridSize}, ${tileSize}px)`;
-            grid.style.width = `${state.gridSize * (tileSize + 6)}px`;
-
-            document.querySelectorAll('.puzzle-tile').forEach(tile => {
-                tile.style.width = `${tileSize}px`;
-                tile.style.height = `${tileSize}px`;
-                tile.style.fontSize = `${tileSize / 3}px`;
-            });
-        }
-
-        function shufflePuzzle() {
-            let attempts = 0;
-            do {
-                for (let i = state.tiles.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [state.tiles[i], state.tiles[j]] = [state.tiles[j], state.tiles[i]];
+                if (mode === 'endless' || mode === 'practice') {
+                    const size = parseInt(document.getElementById('difficulty').value);
+                    state.gridSize = size;
                 }
-                attempts++;
-            } while (!isSolvable() && attempts < 100);
-        }
 
-        function isSolvable() {
-            if (state.gridSize % 2 === 1) {
-                let inversions = 0;
-                const tiles = state.tiles.filter(t => t !== null);
-                for (let i = 0; i < tiles.length - 1; i++) {
-                    for (let j = i + 1; j < tiles.length; j++) {
-                        if (tiles[i] > tiles[j]) inversions++;
-                    }
+                grid.style.display = 'grid';
+                stats.style.display = 'grid';
+                timeContainer.style.display = mode !== 'practice' ? 'block' : 'none';
+                document.getElementById('controls').style.display = 'flex';
+                document.getElementById('hintCount').textContent = mode === 'practice' ? '∞' : state.hints;
+
+                // Show mobile controls on mobile
+                if (window.innerWidth <= 768) {
+                    document.getElementById('mobileControls').style.display = 'grid';
+                    setupMobileControls();
                 }
-                return inversions % 2 === 0;
+
+                initializePuzzle();
             }
-            return true; // For even grids, always solvable with proper shuffling
-        }
 
-        function setupTimerAndLimits() {
-            stopAllTimers();
+            function setupMobileControls() {
+                document.querySelectorAll('.mobile-btn[data-direction]').forEach(btn => {
+                    btn.onclick = () => {
+                        const direction = btn.dataset.direction;
+                        const emptyIndex = state.tiles.indexOf(null);
+                        let targetIndex = -1;
 
-            if (state.mode === 'endless') {
-                state.timer = 0;
-                state.timerInterval = setInterval(() => {
-                    state.timer++;
-                    timerDisplay.textContent = state.timer;
-                    updateTimeBar();
-                }, 1000);
-            } else if (state.mode === 'practice') {
-                state.timer = 0;
-                state.timerInterval = setInterval(() => {
-                    state.timer++;
-                    timerDisplay.textContent = state.timer;
-                }, 1000);
-            } else if (state.mode === 'laststand') {
-                const baseTime = Math.max(180 - (state.level - 1) * 15, 30);
-                state.timeLimit = baseTime;
-                state.timer = baseTime;
-                state.moveLimit = Math.max(100 - (state.level - 1) * 10, 20);
+                        switch (direction) {
+                            case 'up': targetIndex = emptyIndex + state.gridSize; break;
+                            case 'down': targetIndex = emptyIndex - state.gridSize; break;
+                            case 'left': targetIndex = emptyIndex + 1; break;
+                            case 'right': targetIndex = emptyIndex - 1; break;
+                        }
 
-                document.getElementById('levelDisplay').textContent = state.level;
-                timerDisplay.textContent = state.timer;
+                        if (targetIndex >= 0 && targetIndex < state.tiles.length) {
+                            moveTile(targetIndex);
+                        }
+                    };
+                });
 
-                state.countdownInterval = setInterval(() => {
-                    state.timer--;
-                    timerDisplay.textContent = state.timer;
-                    updateTimeBar();
+                document.getElementById('hintMobile').onclick = () => useHint();
+                document.getElementById('undoMobile').onclick = () => undo();
+            }
 
-                    if (state.timer <= 0) {
-                        gameOver("⏰ Time's up! You reached Level " + state.level);
+            function initializePuzzle() {
+                const totalTiles = state.gridSize * state.gridSize;
+                state.tiles = Array.from({ length: totalTiles - 1 }, (_, i) => i + 1);
+                state.tiles.push(null);
+                state.moves = 0;
+                state.solved = false;
+                state.moveHistory = [];
+                winMessage.style.display = "none";
+
+                document.getElementById('hintBtn').disabled = state.hints === 0;
+                document.getElementById('undoBtn').disabled = true;
+
+                shufflePuzzle();
+                setupTimerAndLimits();
+                updateGridSize();
+                updateUI();
+            }
+
+            function updateGridSize() {
+                const tileSize = Math.min(100, 380 / state.gridSize - 10);
+                grid.style.gridTemplateColumns = `repeat(${state.gridSize}, ${tileSize}px)`;
+                grid.style.width = `${state.gridSize * (tileSize + 6)}px`;
+
+                document.querySelectorAll('.puzzle-tile').forEach(tile => {
+                    tile.style.width = `${tileSize}px`;
+                    tile.style.height = `${tileSize}px`;
+                    tile.style.fontSize = `${tileSize / 3}px`;
+                });
+            }
+
+            function shufflePuzzle() {
+                let attempts = 0;
+                do {
+                    for (let i = state.tiles.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [state.tiles[i], state.tiles[j]] = [state.tiles[j], state.tiles[i]];
                     }
-                }, 1000);
-            }
-        }
-
-        function updateTimeBar() {
-            if (state.mode === 'laststand') {
-                const percentage = (state.timer / state.timeLimit) * 100;
-                timeFill.style.width = percentage + '%';
-
-                timeFill.classList.remove('warning', 'danger');
-                if (percentage < 30) timeFill.classList.add('warning');
-                if (percentage < 15) timeFill.classList.add('danger');
-            }
-        }
-
-        function stopAllTimers() {
-            clearInterval(state.timerInterval);
-            clearInterval(state.countdownInterval);
-        }
-
-        function updateUI() {
-            grid.innerHTML = '';
-            state.tiles.forEach((tile, index) => {
-                const btn = document.createElement('button');
-                btn.className = 'puzzle-tile';
-
-                if (tile === null) {
-                    btn.classList.add('empty');
-                } else {
-                    btn.textContent = tile;
-                    if (state.mode === 'laststand' && state.level >= 5) {
-                        btn.textContent = tile; // Show numbers on higher levels
-                    }
-
-                    if (canMove(index)) btn.classList.add('movable');
-
-                    // Check if tile is in correct position
-                    if (tile === index + 1) {
-                        btn.classList.add('correct-pos');
-                    }
-
-                    btn.onclick = () => moveTile(index);
-                }
-                grid.appendChild(btn);
-            });
-
-            moveDisplay.textContent = state.moves;
-
-            // Update moves display style based on limit
-            if (state.mode === 'laststand') {
-                const movesLeft = state.moveLimit - state.moves;
-                moveDisplay.classList.remove('near-limit', 'at-limit');
-                if (movesLeft <= 10) moveDisplay.classList.add('near-limit');
-                if (movesLeft <= 3) moveDisplay.classList.add('at-limit');
-            }
-        }
-
-        function canMove(index) {
-            if (state.tiles[index] === null) return false;
-            const row = Math.floor(index / state.gridSize);
-            const col = index % state.gridSize;
-            const emptyIndex = state.tiles.indexOf(null);
-            const emptyRow = Math.floor(emptyIndex / state.gridSize);
-            const emptyCol = emptyIndex % state.gridSize;
-            return (Math.abs(row - emptyRow) + Math.abs(col - emptyCol)) === 1;
-        }
-
-        function moveTile(index, isUndo = false) {
-            if (state.isPaused || !canMove(index) || state.solved) return;
-
-            if (!isUndo) {
-                state.moveHistory.push([...state.tiles]);
-                document.getElementById('undoBtn').disabled = false;
+                    attempts++;
+                } while (!isSolvable() && attempts < 100);
             }
 
-            const emptyIndex = state.tiles.indexOf(null);
-            [state.tiles[index], state.tiles[emptyIndex]] = [state.tiles[emptyIndex], state.tiles[index]];
-            state.moves++;
-
-            // Add animation
-            const tile = grid.children[index];
-            tile.classList.add('moving');
-            setTimeout(() => tile.classList.remove('moving'), 300);
-
-            moveDisplay.textContent = state.moves;
-            sounds.move();
-
-            if (state.mode === 'laststand' && state.moves > state.moveLimit) {
-                return gameOver("🚫 Move limit reached! You made it to Level " + state.level);
-            }
-
-            if (checkWin()) handleWin();
-            updateUI();
-        }
-
-        function checkWin() {
-            for (let i = 0; i < state.tiles.length - 1; i++) {
-                if (state.tiles[i] !== i + 1) return false;
-            }
-            return state.tiles[state.tiles.length - 1] === null;
-        }
-
-        function handleWin() {
-            state.solved = true;
-            stopAllTimers();
-            winMessage.style.display = "block";
-            sounds.win();
-
-            // Achievement checks
-            if (!state.achievements.firstWin.unlocked) {
-                unlockAchievement('firstWin');
-            }
-
-            if (state.mode === 'endless' && state.timer < 30) {
-                unlockAchievement('speedster');
-            }
-
-            if (state.gridSize === 5) {
-                unlockAchievement('sizeMaster');
-            }
-
-            if (state.mode === 'laststand') {
-                setTimeout(() => {
-                    state.level++;
-
-                    if (state.level > bestLevel) {
-                        bestLevel = state.level;
-                        localStorage.setItem(PUZZLE_BEST_KEY, String(bestLevel));
-                        document.getElementById('bestLevel').textContent = bestLevel;
-
-                        if (bestLevel >= 10) {
-                            unlockAchievement('master');
+            function isSolvable() {
+                if (state.gridSize % 2 === 1) {
+                    let inversions = 0;
+                    const tiles = state.tiles.filter(t => t !== null);
+                    for (let i = 0; i < tiles.length - 1; i++) {
+                        for (let j = i + 1; j < tiles.length; j++) {
+                            if (tiles[i] > tiles[j]) inversions++;
                         }
                     }
+                    return inversions % 2 === 0;
+                }
+                return true; // For even grids, always solvable with proper shuffling
+            }
 
-                    winMessage.style.display = "none";
-                    initializePuzzle();
-                }, 2000);
-            } else if (state.mode === 'practice') {
-                // Practice mode: show congratulations and allow continue
-                setTimeout(() => {
-                    if (confirm(`✅ Puzzle Solved in ${state.timer}s with ${state.moves} moves!\n\nContinue practicing?`)) {
+            function setupTimerAndLimits() {
+                stopAllTimers();
+
+                if (state.mode === 'endless') {
+                    state.timer = 0;
+                    state.timerInterval = setInterval(() => {
+                        state.timer++;
+                        timerDisplay.textContent = state.timer;
+                        updateTimeBar();
+                    }, 1000);
+                } else if (state.mode === 'practice') {
+                    state.timer = 0;
+                    state.timerInterval = setInterval(() => {
+                        state.timer++;
+                        timerDisplay.textContent = state.timer;
+                    }, 1000);
+                } else if (state.mode === 'laststand') {
+                    const baseTime = Math.max(180 - (state.level - 1) * 15, 30);
+                    state.timeLimit = baseTime;
+                    state.timer = baseTime;
+                    state.moveLimit = Math.max(100 - (state.level - 1) * 10, 20);
+
+                    document.getElementById('levelDisplay').textContent = state.level;
+                    timerDisplay.textContent = state.timer;
+
+                    state.countdownInterval = setInterval(() => {
+                        state.timer--;
+                        timerDisplay.textContent = state.timer;
+                        updateTimeBar();
+
+                        if (state.timer <= 0) {
+                            gameOver("⏰ Time's up! You reached Level " + state.level);
+                        }
+                    }, 1000);
+                }
+            }
+
+            function updateTimeBar() {
+                if (state.mode === 'laststand') {
+                    const percentage = (state.timer / state.timeLimit) * 100;
+                    timeFill.style.width = percentage + '%';
+
+                    timeFill.classList.remove('warning', 'danger');
+                    if (percentage < 30) timeFill.classList.add('warning');
+                    if (percentage < 15) timeFill.classList.add('danger');
+                }
+            }
+
+            function stopAllTimers() {
+                clearInterval(state.timerInterval);
+                clearInterval(state.countdownInterval);
+            }
+
+            function updateUI() {
+                grid.innerHTML = '';
+                state.tiles.forEach((tile, index) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'puzzle-tile';
+
+                    if (tile === null) {
+                        btn.classList.add('empty');
+                    } else {
+                        btn.textContent = tile;
+                        if (state.mode === 'laststand' && state.level >= 5) {
+                            btn.textContent = tile; // Show numbers on higher levels
+                        }
+
+                        if (canMove(index)) btn.classList.add('movable');
+
+                        // Check if tile is in correct position
+                        if (tile === index + 1) {
+                            btn.classList.add('correct-pos');
+                        }
+
+                        btn.onclick = () => moveTile(index);
+                    }
+                    grid.appendChild(btn);
+                });
+
+                moveDisplay.textContent = state.moves;
+
+                // Update moves display style based on limit
+                if (state.mode === 'laststand') {
+                    const movesLeft = state.moveLimit - state.moves;
+                    moveDisplay.classList.remove('near-limit', 'at-limit');
+                    if (movesLeft <= 10) moveDisplay.classList.add('near-limit');
+                    if (movesLeft <= 3) moveDisplay.classList.add('at-limit');
+                }
+            }
+
+            function canMove(index) {
+                if (state.tiles[index] === null) return false;
+                const row = Math.floor(index / state.gridSize);
+                const col = index % state.gridSize;
+                const emptyIndex = state.tiles.indexOf(null);
+                const emptyRow = Math.floor(emptyIndex / state.gridSize);
+                const emptyCol = emptyIndex % state.gridSize;
+                return (Math.abs(row - emptyRow) + Math.abs(col - emptyCol)) === 1;
+            }
+
+            function moveTile(index, isUndo = false) {
+                if (state.isPaused || !canMove(index) || state.solved) return;
+
+                if (!isUndo) {
+                    state.moveHistory.push([...state.tiles]);
+                    document.getElementById('undoBtn').disabled = false;
+                }
+
+                const emptyIndex = state.tiles.indexOf(null);
+                [state.tiles[index], state.tiles[emptyIndex]] = [state.tiles[emptyIndex], state.tiles[index]];
+                state.moves++;
+
+                // Add animation
+                const tile = grid.children[index];
+                tile.classList.add('moving');
+                setTimeout(() => tile.classList.remove('moving'), 300);
+
+                moveDisplay.textContent = state.moves;
+                sounds.move();
+
+                if (state.mode === 'laststand' && state.moves > state.moveLimit) {
+                    return gameOver("🚫 Move limit reached! You made it to Level " + state.level);
+                }
+
+                if (checkWin()) handleWin();
+                updateUI();
+            }
+
+            function checkWin() {
+                for (let i = 0; i < state.tiles.length - 1; i++) {
+                    if (state.tiles[i] !== i + 1) return false;
+                }
+                return state.tiles[state.tiles.length - 1] === null;
+            }
+
+            function handleWin() {
+                state.solved = true;
+                stopAllTimers();
+                winMessage.style.display = "block";
+                sounds.win();
+
+                // Achievement checks
+                if (!state.achievements.firstWin.unlocked) {
+                    unlockAchievement('firstWin');
+                }
+
+                if (state.mode === 'endless' && state.timer < 30) {
+                    unlockAchievement('speedster');
+                }
+
+                if (state.gridSize === 5) {
+                    unlockAchievement('sizeMaster');
+                }
+
+                if (state.mode === 'laststand') {
+                    setTimeout(() => {
+                        state.level++;
+
+                        if (state.level > bestLevel) {
+                            bestLevel = state.level;
+                            localStorage.setItem(PUZZLE_BEST_KEY, String(bestLevel));
+                            document.getElementById('bestLevel').textContent = bestLevel;
+
+                            if (bestLevel >= 10) {
+                                unlockAchievement('master');
+                            }
+                        }
+
                         winMessage.style.display = "none";
                         initializePuzzle();
-                    } else {
-                        resetToMenu();
-                    }
-                }, 500);
-            } else {
-                // Endless mode win
-                setTimeout(() => {
-                    showConfetti();
+                    }, 2000);
+                } else if (state.mode === 'practice') {
+                    // Practice mode: show congratulations and allow continue
                     setTimeout(() => {
-                        if (confirm("🎉 Puzzle Solved! Would you like to play again?")) {
+                        if (confirm(`✅ Puzzle Solved in ${state.timer}s with ${state.moves} moves!\n\nContinue practicing?`)) {
                             winMessage.style.display = "none";
                             initializePuzzle();
                         } else {
                             resetToMenu();
                         }
-                    }, 1000);
-                }, 500);
+                    }, 500);
+                } else {
+                    // Endless mode win
+                    setTimeout(() => {
+                        showConfetti();
+                        setTimeout(() => {
+                            if (confirm("🎉 Puzzle Solved! Would you like to play again?")) {
+                                winMessage.style.display = "none";
+                                initializePuzzle();
+                            } else {
+                                resetToMenu();
+                            }
+                        }, 1000);
+                    }, 500);
+                }
             }
-        }
 
-        function showConfetti() {
-            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+            function showConfetti() {
+                const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
 
-            for (let i = 0; i < 100; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                for (let i = 0; i < 100; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
 
-                document.body.appendChild(confetti);
+                    document.body.appendChild(confetti);
 
-                const animation = confetti.animate([
-                    {
-                        top: '-10px',
-                        opacity: 1,
-                        transform: `rotate(0deg) scale(1)`
-                    },
-                    {
-                        top: '100vh',
-                        opacity: 0,
-                        transform: `rotate(${Math.random() * 720}deg) scale(0.5)`
+                    const animation = confetti.animate([
+                        {
+                            top: '-10px',
+                            opacity: 1,
+                            transform: `rotate(0deg) scale(1)`
+                        },
+                        {
+                            top: '100vh',
+                            opacity: 0,
+                            transform: `rotate(${Math.random() * 720}deg) scale(0.5)`
+                        }
+                    ], {
+                        duration: Math.random() * 3000 + 2000,
+                        easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
+                    });
+
+                    animation.onfinish = () => confetti.remove();
+                }
+            }
+
+            function useHint() {
+                if (state.hints === 0 || state.solved) return;
+
+                const emptyIndex = state.tiles.indexOf(null);
+                let possibleMoves = [];
+
+                // Find all movable tiles
+                state.tiles.forEach((tile, index) => {
+                    if (tile !== null && canMove(index)) {
+                        possibleMoves.push(index);
                     }
-                ], {
-                    duration: Math.random() * 3000 + 2000,
-                    easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
                 });
 
-                animation.onfinish = () => confetti.remove();
+                if (possibleMoves.length > 0) {
+                    // Find the tile that should be in the empty spot
+                    const correctTile = emptyIndex + 1;
+                    const tileIndex = state.tiles.indexOf(correctTile);
+
+                    // If the correct tile is movable and would make progress, highlight it
+                    if (tileIndex !== -1 && possibleMoves.includes(tileIndex)) {
+                        highlightTile(tileIndex);
+                    } else {
+                        // Otherwise highlight a random movable tile
+                        const randomIndex = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
+                        highlightTile(randomIndex);
+                    }
+
+                    state.hints--;
+                    document.getElementById('hintCount').textContent = state.hints;
+                    document.getElementById('hintBtn').disabled = state.hints === 0;
+                    sounds.click();
+                }
             }
-        }
 
-        function useHint() {
-            if (state.hints === 0 || state.solved) return;
+            function highlightTile(index) {
+                const tile = grid.children[index];
+                const originalColor = tile.style.backgroundColor;
 
-            const emptyIndex = state.tiles.indexOf(null);
-            let possibleMoves = [];
+                tile.style.backgroundColor = '#f1c40f';
+                tile.style.animation = 'pulse 0.5s infinite';
 
-            // Find all movable tiles
-            state.tiles.forEach((tile, index) => {
-                if (tile !== null && canMove(index)) {
-                    possibleMoves.push(index);
+                setTimeout(() => {
+                    tile.style.backgroundColor = originalColor;
+                    tile.style.animation = '';
+                }, 2000);
+            }
+
+            function undo() {
+                if (state.moveHistory.length === 0 || state.solved) return;
+
+                state.tiles = state.moveHistory.pop();
+                state.moves--;
+
+                if (state.moveHistory.length === 0) {
+                    document.getElementById('undoBtn').disabled = true;
+                }
+
+                updateUI();
+                sounds.click();
+            }
+
+            // Game Over Modal
+            const gameOverModal = document.getElementById('gameOver');
+            const gameOverTitle = document.getElementById('gameOverTitle');
+            const gameOverMessage = document.getElementById('gameOverMessage');
+
+            function gameOver(message) {
+                state.solved = true;
+                stopAllTimers();
+
+                gameOverTitle.textContent = 'Game Over';
+                gameOverMessage.textContent = message;
+                gameOverModal.style.display = 'flex';
+                sounds.error();
+            }
+
+            document.getElementById('retryBtn').onclick = () => {
+                gameOverModal.style.display = 'none';
+                initializePuzzle();
+            };
+
+            document.getElementById('menuBtn').onclick = () => {
+                gameOverModal.style.display = 'none';
+                resetToMenu();
+            };
+
+            function resetToMenu() {
+                stopAllTimers();
+                grid.style.display = 'none';
+                stats.style.display = 'none';
+                timeContainer.style.display = 'none';
+                document.getElementById('controls').style.display = 'none';
+                document.getElementById('mobileControls').style.display = 'none';
+                document.getElementById('modeSelect').style.display = 'block';
+                winMessage.style.display = 'none';
+            }
+
+            // Pause Functionality
+            const pauseBtn = document.getElementById('pauseBtn');
+            pauseBtn.onclick = () => {
+                if (state.mode) {
+                    state.isPaused = !state.isPaused;
+                    pauseBtn.innerHTML = state.isPaused ?
+                        '<i class="fas fa-play"></i>' :
+                        '<i class="fas fa-pause"></i>';
+
+                    if (state.isPaused) {
+                        stopAllTimers();
+                    } else {
+                        setupTimerAndLimits();
+                    }
+                    sounds.click();
+                }
+            };
+
+            // Keyboard Controls
+            document.addEventListener('keydown', (e) => {
+                if (state.solved || state.isPaused || !state.mode) return;
+
+                const emptyIndex = state.tiles.indexOf(null);
+                let targetIndex = -1;
+
+                switch (e.key) {
+                    case 'ArrowUp': targetIndex = emptyIndex + state.gridSize; break;
+                    case 'ArrowDown': targetIndex = emptyIndex - state.gridSize; break;
+                    case 'ArrowLeft': targetIndex = emptyIndex + 1; break;
+                    case 'ArrowRight': targetIndex = emptyIndex - 1; break;
+                    case 'u':
+                    case 'U':
+                        e.preventDefault();
+                        undo();
+                        break;
+                    case 'h':
+                    case 'H':
+                        e.preventDefault();
+                        useHint();
+                        break;
+                    case 'r':
+                    case 'R':
+                        e.preventDefault();
+                        initializePuzzle();
+                        break;
+                    case ' ':
+                        e.preventDefault();
+                        pauseBtn.click();
+                        break;
+                }
+
+                if (targetIndex >= 0 && targetIndex < state.tiles.length) {
+                    moveTile(targetIndex);
                 }
             });
 
-            if (possibleMoves.length > 0) {
-                // Find the tile that should be in the empty spot
-                const correctTile = emptyIndex + 1;
-                const tileIndex = state.tiles.indexOf(correctTile);
-
-                // If the correct tile is movable and would make progress, highlight it
-                if (tileIndex !== -1 && possibleMoves.includes(tileIndex)) {
-                    highlightTile(tileIndex);
-                } else {
-                    // Otherwise highlight a random movable tile
-                    const randomIndex = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
-                    highlightTile(randomIndex);
-                }
-
-                state.hints--;
-                document.getElementById('hintCount').textContent = state.hints;
-                document.getElementById('hintBtn').disabled = state.hints === 0;
-                sounds.click();
-            }
-        }
-
-        function highlightTile(index) {
-            const tile = grid.children[index];
-            const originalColor = tile.style.backgroundColor;
-
-            tile.style.backgroundColor = '#f1c40f';
-            tile.style.animation = 'pulse 0.5s infinite';
-
-            setTimeout(() => {
-                tile.style.backgroundColor = originalColor;
-                tile.style.animation = '';
-            }, 2000);
-        }
-
-        function undo() {
-            if (state.moveHistory.length === 0 || state.solved) return;
-
-            state.tiles = state.moveHistory.pop();
-            state.moves--;
-
-            if (state.moveHistory.length === 0) {
-                document.getElementById('undoBtn').disabled = true;
-            }
-
-            updateUI();
-            sounds.click();
-        }
-
-        // Game Over Modal
-        const gameOverModal = document.getElementById('gameOver');
-        const gameOverTitle = document.getElementById('gameOverTitle');
-        const gameOverMessage = document.getElementById('gameOverMessage');
-
-        function gameOver(message) {
-            state.solved = true;
-            stopAllTimers();
-
-            gameOverTitle.textContent = 'Game Over';
-            gameOverMessage.textContent = message;
-            gameOverModal.style.display = 'flex';
-            sounds.error();
-        }
-
-        document.getElementById('retryBtn').onclick = () => {
-            gameOverModal.style.display = 'none';
-            initializePuzzle();
-        };
-
-        document.getElementById('menuBtn').onclick = () => {
-            gameOverModal.style.display = 'none';
-            resetToMenu();
-        };
-
-        function resetToMenu() {
-            stopAllTimers();
-            grid.style.display = 'none';
-            stats.style.display = 'none';
-            timeContainer.style.display = 'none';
-            document.getElementById('controls').style.display = 'none';
-            document.getElementById('mobileControls').style.display = 'none';
-            document.getElementById('modeSelect').style.display = 'block';
-            winMessage.style.display = 'none';
-        }
-
-        // Pause Functionality
-        const pauseBtn = document.getElementById('pauseBtn');
-        pauseBtn.onclick = () => {
-            if (state.mode) {
-                state.isPaused = !state.isPaused;
-                pauseBtn.innerHTML = state.isPaused ?
-                    '<i class="fas fa-play"></i>' :
-                    '<i class="fas fa-pause"></i>';
-
-                if (state.isPaused) {
-                    stopAllTimers();
-                } else {
-                    setupTimerAndLimits();
-                }
-                sounds.click();
-            }
-        };
-
-        // Keyboard Controls
-        document.addEventListener('keydown', (e) => {
-            if (state.solved || state.isPaused || !state.mode) return;
-
-            const emptyIndex = state.tiles.indexOf(null);
-            let targetIndex = -1;
-
-            switch (e.key) {
-                case 'ArrowUp': targetIndex = emptyIndex + state.gridSize; break;
-                case 'ArrowDown': targetIndex = emptyIndex - state.gridSize; break;
-                case 'ArrowLeft': targetIndex = emptyIndex + 1; break;
-                case 'ArrowRight': targetIndex = emptyIndex - 1; break;
-                case 'u':
-                case 'U':
-                    e.preventDefault();
-                    undo();
-                    break;
-                case 'h':
-                case 'H':
-                    e.preventDefault();
-                    useHint();
-                    break;
-                case 'r':
-                case 'R':
-                    e.preventDefault();
-                    initializePuzzle();
-                    break;
-                case ' ':
-                    e.preventDefault();
-                    pauseBtn.click();
-                    break;
-            }
-
-            if (targetIndex >= 0 && targetIndex < state.tiles.length) {
-                moveTile(targetIndex);
-            }
-        });
-
-        // Initialize achievements display
-        updateAchievementsDisplay();
-
-        // Initialize controls
-        document.getElementById('newGameBtn').onclick = () => {
-            sounds.click();
-            initializePuzzle();
-        };
-
-        document.getElementById('hintBtn').onclick = useHint;
-        document.getElementById('undoBtn').onclick = undo;
-
-        // Check for mobile
-        if ('ontouchstart' in window) {
-            document.body.classList.add('touch-device');
-        }
-
-        // Initialize with saved sound preference
-        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize achievements display
             updateAchievementsDisplay();
-        });
-    </script>
+
+            // Initialize controls
+            document.getElementById('newGameBtn').onclick = () => {
+                sounds.click();
+                initializePuzzle();
+            };
+
+            document.getElementById('hintBtn').onclick = useHint;
+            document.getElementById('undoBtn').onclick = undo;
+
+            // Check for mobile
+            if ('ontouchstart' in window) {
+                document.body.classList.add('touch-device');
+            }
+
+            // Home screen and initialization functions
+            function startFromHome() {
+                document.getElementById('homeScreen').style.display = 'none';
+                document.getElementById('gameContainer').style.display = 'block';
+            }
+
+            function togglePuzzleHelp() {
+                const help = document.getElementById('puzzleHomeHelp');
+                help.style.display = help.style.display === 'none' ? 'block' : 'none';
+            }
+
+            // Initialize with saved sound preference
+            document.addEventListener('DOMContentLoaded', () => {
+                updateAchievementsDisplay();
+            });
+        </script>
+    </div>
 </body>
 
 </html>

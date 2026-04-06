@@ -6,13 +6,49 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>News & Updates</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-	<link href="https://fonts.googleapis.com/css2?family= Trebuchet MS&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family= Trebuchet MS&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
 
 	<link rel="icon" href="../../icon.jpg" type="image/x-icon">
 	<meta name="description" content="Release notes, changelog and upcoming releases for Infinity Nexus.">
+	
 	<style>
+
+		 :root[data-theme="dark"] {
+            --primary: #7c3aed;
+            --secondary: #ec4899;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border-color: #475569;
+            --border-radius: 12px;
+            --card-bg: #1e293b;
+            --header-bg: #1a1f35;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            --shadow-hover: 0 12px 32px rgba(124, 58, 237, 0.2);
+        }
+
+        :root[data-theme="light"],
+        :root {
+            --primary: #7c3aed;
+            --secondary: #ec4899;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #e2e8f0;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --border-color: #cbd5e1;
+            --border-radius: 12px;
+            --card-bg: #ffffff;
+            --header-bg: #f8fafc;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 12px 32px rgba(63, 51, 83, 0.15);
+        }
+
 		* {
 			margin: 0;
 			padding: 0;
@@ -20,57 +56,33 @@
 		}
 
 		body {
-			font-family: " Trebuchet MS", serif;
-			line-height: 1.8;
-			color: #f4f4f4;
-			background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-			background-size: 500% 500%;
-			animation: gradientBG 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-			min-height: 100vh;
-			display: flex;
-			flex-direction: column;
-			padding: 20px;
-		}
-
-		@keyframes gradientBG {
-			0% {
-				background-position: 50% 100%;
-			}
-
-			25% {
-				background-position: 0% 50%;
-			}
-
-			50% {
-				background-position: 50% 0%;
-			}
-
-			75% {
-				background-position: 100% 50%;
-			}
-
-			100% {
-				background-position: 50% 100%;
-			}
+            font-family: 'Elms Sans', sans-serif;
+            line-height: 1.8;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
 		}
 
 		.container {
 			max-width: 1000px;
 			width: 100%;
-			margin: 0 auto;
+            margin: 0 auto;
 		}
 
 		header {
 			text-align: center;
-			padding: 50px 20px;
+			padding: 60px 20px;
 			background: linear-gradient(135deg, #6e8efb, #a777e3);
 			color: white;
 			border-radius: 16px;
-			margin: 20px 0 30px;
+			margin: 20px 0 40px 0;
 			box-shadow: 0 12px 40px rgba(110, 142, 251, 0.3);
 			position: relative;
 			overflow: hidden;
-			width: 100%;
 			border: 1px solid rgba(255, 255, 255, 0.1);
 		}
 
@@ -103,16 +115,15 @@
 			position: relative;
 			z-index: 2;
 			text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-			margin-bottom: 15px;
+			margin-bottom: 10px;
 		}
 
 		header p {
 			position: relative;
 			z-index: 2;
-			margin-top: 10px;
-			font-size: 1.05rem;
+			margin: 8px auto 0;
+			font-size: 1rem;
 			max-width: 700px;
-			margin: 0 auto;
 			opacity: 0.95;
 		}
 
@@ -124,20 +135,19 @@
 		}
 
 		.card {
-			background: rgba(255, 255, 255, 0.08);
+			background: var(--card-bg);
 			border-radius: 12px;
 			padding: 24px;
-			box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+			box-shadow: var(--shadow);
 			transition: all 0.3s ease;
 			animation: cardFadeUp 0.5s ease forwards;
-			backdrop-filter: blur(10px);
-			border: 1px solid rgba(255, 255, 255, 0.1);
+			border: 1px solid var(--border-color);
 		}
 
 		.card:hover {
-			transform: translateY(-6px);
-			box-shadow: 0 16px 40px rgba(110, 142, 251, 0.2);
-			border-color: rgba(110, 142, 251, 0.3);
+			transform: translateY(-4px);
+			box-shadow: var(--shadow-hover);
+			border-color: var(--primary);
 		}
 
 		@keyframes cardFadeUp {
@@ -153,13 +163,20 @@
 		}
 
 		.card h3 {
-			margin: 0 0 12px 0;
-			font-weight: 600;
-			font-size: 1.4rem;
-			color: #fff;
+			margin: 0 0 6px 0;
+			font-weight: 700;
+			font-size: 1.3rem;
+			color: var(--text-primary);
 			display: flex;
 			align-items: center;
 			gap: 10px;
+		}
+
+		.card h4 {
+			font-weight: 600;
+			font-size: 0.95rem;
+			color: var(--text-secondary);
+			margin: 6px 0;
 		}
 
 		.version-badge {
@@ -183,33 +200,50 @@
 		.changelog {
 			margin-top: 12px;
 			padding-left: 20px;
-			color: #fff9f9;
+			color: var(--text-secondary);
+			list-style: none;
 		}
 
 		.changelog li {
-			margin: 8px 0;
-			line-height: 1.6;
+			margin: 6px 0;
+			line-height: 1.5;
 		}
 
-		.changelog li::before {
-			content: "✨ ";
-			margin-right: 6px;
-			color: #8ab4ff;
+		.changelog li.section-header {
+			font-weight: 600;
+			color: var(--primary);
+			margin-top: 12px;
+			list-style: none;
+			padding: 0;
+		}
+
+		.changelog li.section-header::before {
+			content: none;
 		}
 
 		.small {
-			font-size: 0.85rem;
-			color: #ffffff;
-			margin-top: 8px;
+			font-size: 0.8rem;
+			color: var(--text-muted);
+			margin-top: 4px;
+		}
+
+		#releases-heading {
+			font-size: 1.2rem;
+			font-weight: 600;
+			color: var(--text-primary);
+			margin-bottom: 24px;
+			padding-bottom: 12px;
+			border-bottom: 2px solid var(--primary);
+			display: inline-block;
 		}
 
 		footer {
 			text-align: center;
-			margin-top: 40px;
+			margin-top: 50px;
 			padding-top: 20px;
-			border-top: 1px solid rgba(255, 255, 255, 0.1);
-			opacity: 0.8;
-			color: #fffcfc;
+			border-top: 1px solid var(--border-color);
+			color: var(--text-muted);
+			font-size: 0.9rem;
 		}
 
 		@media (max-width: 768px) {
@@ -233,7 +267,7 @@
 			border-radius: 150px;
 			font-size: 1em;
 			font-weight: 200;
-			font-family: ' Trebuchet MS', serif;
+			font-family: 'Trebuchet MS', serif;
 			margin-left: 8px;
 			align-self: center;
 		}
@@ -266,65 +300,41 @@
 			}
 		}
 
-		.snow {
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			pointer-events: none;
-			z-index: 9999;
-			background-image:
-				radial-gradient(2px 2px at 20px 30px, white 98%, transparent),
-				radial-gradient(3px 3px at 100px 150px, white 98%, transparent),
-				radial-gradient(2px 2px at 200px 80px, white 98%, transparent),
-				radial-gradient(1.5px 1.5px at 300px 200px, white 98%, transparent),
-				radial-gradient(2.5px 2.5px at 400px 100px, white 98%, transparent),
-				radial-gradient(1.8px 1.8px at 500px 250px, white 98%, transparent);
-			background-repeat: repeat;
-			background-size: 600px 600px;
-			animation: snowFall 6s linear infinite;
-			opacity: 0.8;
-			filter: drop-shadow(0 0 6px white);
-		}
-
-		@keyframes snowFall {
-			from {
-				background-position: 0 -600px;
-			}
-
-			to {
-				background-position: 0 600px;
-			}
-		}
 	</style>
 </head>
 
 <body>
 
+<nav class="navbar" style="position: sticky; top: 0; background: var(--card-bg); padding: 16px 24px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+	<h2 style="margin: 0; font-size: 1.2rem; font-weight: 600; color: var(--text-primary);">📰 News & Updates</h2>
+	<button id="themeToggle" style="background: transparent; border: 1px solid var(--border-color); color: var(--text-primary); padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 1.1rem; transition: all 0.3s ease;" aria-label="Toggle theme"><span id="themeIcon">🌙</span></button>
+</nav>
+
 	<main class="container" id="main">
 		<header role="banner" aria-labelledby="page-title">
 			<h1 id="page-title">News & Updates</h1>
-			<p style="color: #ffffff; font-weight: 200;" class="small">Release notes, changelogs and upcoming features
-				for the game collection.</p>
-			<p style="margin-top:8px; color: #ffffff; font-weight: 200;" class="small">Dates are subject to change any
-				time. Check
-				regularly for updates. Stay tuned!</p>
-
+			<p>Release notes, changelogs and upcoming features for the game collection.</p>
+			<p style="font-size: 0.95rem;">Dates are subject to change. Check regularly for updates!</p>
 		</header>
 
 		<section class="releases" aria-labelledby="releases-heading">
-			<h2 id="releases-heading" class="small" style="margin-top:12px">Release Timeline</h2>
+			<h2 id="releases-heading" class="small" style="margin-top: 0; margin-bottom: 24px; border-bottom: 2px solid var(--primary); padding-bottom: 12px; display: block;">Release Timeline</h2>
 
 			<div class="card">
-				<div class="split">
-					<div>
-						<h3>v1.21.26</h3>
-						<div class="small">Released April 5, 2026</strong></div>
+				<h3>v1.22.26</h3>
+				<div class="small">Released April 14, 2026</div>
+				<ul class="changelog">
+					<li>Updated site interface</li>
+					<li>General improvements and bug fixes</li>
+					<li>UI fixes, also fixed broken code</li>
+				</ul>
+			</div>
 
-					</div>
-				</div>
-				<ul class="changelog" aria-hidden="false">
+
+			<div class="card">
+				<h3>v1.21.26</h3>
+				<div class="small">Released April 5, 2026</div>
+				<ul class="changelog">
 					<li>Upgraded Clicker Quest+</li>
 					<li>Remade partial UI elements</li>
 					<li>General improvements and bug fixes</li>
@@ -337,16 +347,9 @@
 
 
 			<div class="card">
-				<div class="split">
-					<div>
-						<h3>v1.21.25</h3>
-
-						<h3>1st ANNIVERSARY UPDATE!</h3>
-						<div class="small">Released March 26, 2026</strong></div>
-
-					</div>
-				</div>
-				<ul class="changelog" aria-hidden="false">
+				<h3>v1.21.25 — 1st ANNIVERSARY UPDATE! 🎉</h3>
+				<div class="small">Released March 26, 2026</div>
+				<ul class="changelog">
 					<li>Updated ROM to V2.3!</li>
 					<li>Bugfixed most games</li>
 					<li>General improvements and bug fixes</li>
@@ -357,14 +360,9 @@
 			</div>
 
 			<div class="card">
-				<div class="split">
-					<div>
-						<h3>v1.21.24</h3>
-						<div class="small">Released March 16, 2026</strong></div>
-					</div>
-
-				</div>
-				<ul class="changelog" aria-hidden="false">
+				<h3>v1.21.24</h3>
+				<div class="small">Released March 16, 2026</div>
+				<ul class="changelog">
 					<li>Updated Rom to V2.0!</li>
 					<li>Changed fonts to Trebuchet MS (or your own browser font)</li>
 					<li>Update Roulette!</li>
@@ -374,13 +372,9 @@
 
 
 			<div class="card">
-				<div class="split">
-					<div>
-						<h3>v1.20.24</h3>
-						<div class="small">Released March 6, 2026</strong></div>
-					</div>
-				</div>
-				<ul class="changelog" aria-hidden="false">
+				<h3>v1.20.24</h3>
+				<div class="small">Released March 6, 2026</div>
+				<ul class="changelog">
 					<li>New pokemon rom</li>
 					<li>New March Challenge</li>
 					<li>Expandable text added</li>
@@ -388,15 +382,9 @@
 			</div>
 
 			<div class="card">
-				<div class="split">
-					<div>
-						<h3>v1.19.24</h3>
-						<div class="small">Released February 24, 2026</strong></div>
-
-					</div>
-
-				</div>
-				<ul class="changelog" aria-hidden="false">
+				<h3>v1.19.24</h3>
+				<div class="small">Released February 24, 2026</div>
+				<ul class="changelog">
 					<li>Remade entire homepage</li>
 					<li>Added six new main pages, organized everything into categories</li>
 					<li>Updated all the documentation and game information</li>
@@ -406,42 +394,28 @@
 			</div>
 
 			<div class="card">
-				<div class="split">
-					<div>
-						<h3>v1.18.24</h3>
-						<h4 style="font-weight: 200;">This update was released in two parts, once on February 7th, 2026
-							and again on February 16th, 2026</h4>
-						<div class="small">Released on: <strong id="release-date">February 7, 2026 and February 16,
-								2026</strong></div>
-					</div>
-
-				</div>
-				<ul class="changelog" aria-hidden="false">
-					<p style="font-weight: 200;">Part 1 (February 7, 2026)</p>
+				<h3>v1.18.24 — Dual Release</h3>
+				<div class="small">Released February 7 & 16, 2026 (Two Parts)</div>
+				<ul class="changelog">
+					<li class="section-header">📦 Part 1 (February 7, 2026)</li>
 					<li>Added new game: Pokémon Nova</li>
 					<li>Added new game: The Science Experiment</li>
 					<li>Polished Tower Defense 2</li>
 					<li>General improvements and bug fixes</li>
 					<li>Upgraded Casino</li>
-					<p style="font-weight: 200; margin-top:12px;">Part 2 (February 16, 2026)</p>
+					<li class="section-header">📦 Part 2 (February 16, 2026)</li>
 					<li>Remade the Impossible Game, now with 4 brand new levels and design</li>
 					<li>Added 5 new achievements to Puzzle Master, and now with 2 harder difficulties too</li>
-					<li>Added dropdown boxes to documentation </li>
+					<li>Added dropdown boxes to documentation</li>
 					<li>Went through information, checked accuracy, and made changes if needed</li>
 					<li>Remade the homepage and added more detailed categories</li>
-
 				</ul>
 			</div>
 
 			<div class="card">
-				<div class="split">
-					<div>
-						<h3>v1.18.22</h3>
-						<div class="small">Released on: <strong id="release-date">February 2, 2026</strong></div>
-					</div>
-
-				</div>
-				<ul class="changelog" aria-hidden="false">
+				<h3>v1.18.22</h3>
+				<div class="small">Released February 2, 2026</div>
+				<ul class="changelog">
 					<li>Changed some fonts to Trebuchet MS or your own browser font</li>
 					<li>Changed the homepage's font weight, may require some getting used to</li>
 					<li>General improvements and bug fixes</li>
@@ -456,13 +430,9 @@
 
 
 			<div class="card">
-				<div class="split">
-					<div>
-						<h3>v1.17.20</h3>
-						<div class="small">Released on: <strong id="release-date">January 15, 2026</strong></div>
-					</div>
-				</div>
-				<ul class="changelog" aria-hidden="false">
+				<h3>v1.17.20</h3>
+				<div class="small">Released January 15, 2026</div>
+				<ul class="changelog">
 					<li>Improved the January Challenge (added new features for you to explore)</li>
 					<li>New pyramid game</li>
 					<li>Remade the homepage format</li>
@@ -480,13 +450,9 @@
 
 
 			<div class="card">
-				<div class="split">
-					<div>
-						<h3>v1.16.19</h3>
-						<div class="small">Released on: <strong id="release-date">January 1, 2026</strong></div>
-					</div>
-				</div>
-				<ul class="changelog" aria-hidden="false">
+				<h3>v1.16.19 — New Year Update 🎊</h3>
+				<div class="small">Released January 1, 2026</div>
+				<ul class="changelog">
 					<li>New Tower Defense 2 game</li>
 					<li>Bonus level in the Impossible game</li>
 					<li>Improved Geometric Dash</li>
@@ -502,13 +468,9 @@
 				</ul>
 			</div>
 
-			<div class="card" aria-labelledby="recent-title">
-				<div class="split">
-					<div>
-						<h3 id="recent-title">v1.15.18</h3>
-						<div class="small">Released on: <strong id="release-date">December 10, 2025</strong></div>
-					</div>
-				</div>
+			<div class="card">
+				<h3>v1.15.18</h3>
+				<div class="small">Released December 10, 2025</div>
 				<ul class="changelog">
 					<li>Added new Tower Defense+ </li>
 					<li>Polished the homepage</li>
@@ -519,13 +481,9 @@
 				</ul>
 			</div>
 
-			<div class="card" aria-labelledby="recent-title">
-				<div class="split">
-					<div>
-						<h3 id="recent-title">v1.15.16</h3>
-						<div class="small">Released on: <strong id="release-date">November 25, 2025</strong></div>
-					</div>
-				</div>
+			<div class="card">
+				<h3>v1.15.16</h3>
+				<div class="small">Released November 25, 2025</div>
 				<ul class="changelog">
 					<li>New Polish</li>
 					<li>Rough New Game setup</li>
@@ -536,7 +494,7 @@
 
 		</section>
 
-		<footer style="margin-top:18px" class="small" aria-label="copyright">
+		<footer class="small" aria-label="copyright">
 			<p>© <span id="footer-year"></span> Littletree866 — All rights reserved.</p>
 		</footer>
 	</main>
@@ -544,21 +502,38 @@
 	<script>
 
 		(function () {
-			const targetDate = new Date(2026, 3, 5); // Apr 5, 2026
-			const cdText = document.getElementById('countdown-text');
 			const footerYear = document.getElementById('footer-year');
 
-			function update() {
-				const now = new Date();
-				const diff = Math.max(0, targetDate - now);
-				const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-				cdText.textContent = diff <= 0 ? 'Released' : `${days + 1}d remaining`;
+			if (footerYear) {
+				footerYear.textContent = new Date().getFullYear();
 			}
-
-			update();
-			setInterval(update, 60 * 1000);
-			if (footerYear) footerYear.textContent = new Date().getFullYear();
 		})();
+	</script>
+	<script>
+		 // Theme Toggle Functionality
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const newTheme = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            initTheme();
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        });
 	</script>
 </body>
 

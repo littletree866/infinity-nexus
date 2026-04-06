@@ -9,19 +9,45 @@
     <link rel="icon" href="icon.jpg" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" rel="stylesheet">
 
 
 
     <style>
-        /* CSS Variables */
-        :root {
-            --primary: #6e8efb;
-            --secondary: #a777e3;
-            --dark: #2c3e50;
-            --light: #f8f9fa;
-            --text: #333;
+        /* Modern Color Themes - CSS Variables */
+        :root[data-theme="dark"] {
+            --primary: #7c3aed;
+            --secondary: #ec4899;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border-color: #475569;
             --border-radius: 12px;
+            --card-bg: #1e293b;
+            --header-bg: #1a1f35;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            --shadow-hover: 0 12px 32px rgba(124, 58, 237, 0.2);
+        }
 
+        :root[data-theme="light"],
+        :root {
+            --primary: #7c3aed;
+            --secondary: #ec4899;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #e2e8f0;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --border-color: #cbd5e1;
+            --border-radius: 12px;
+            --card-bg: #ffffff;
+            --header-bg: #f8fafc;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 12px 32px rgba(63, 51, 83, 0.15);
         }
 
         /* Reset & Base */
@@ -38,46 +64,16 @@
         }
 
         body {
-            font-family: 'Trebuchet MS', serif;
+            font-family: 'Elms Sans', sans-serif;
             line-height: 1.6;
-            color: var(--text);
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-            background-size: 500% 500%;
-            animation: gradientBG 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            transition: "background" 0.3s ease, color 0.3s ease;
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             display: flex;
             flex-direction: column;
-        }
-
-        @keyframes gradientBG {
-
-            0% {
-                background-position: 50% 100%;
-            }
-
-            25% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 50% 0%;
-            }
-
-            75% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 50% 100%;
-            }
-
-
-        }
-
-        body> :not(footer) {
-            padding: 28px;
         }
 
         /* Container */
@@ -97,6 +93,47 @@
             padding: 5px 0px;
         }
 
+        /* Navbar/Header Top */
+        .navbar {
+            background: var(--header-bg);
+            padding: 16px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-brand {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .theme-toggle {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-primary);
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+            transform: scale(1.05);
+        }
+
         /* Sidebar Styles */
         .sidebar {
             flex-shrink: 0;
@@ -108,17 +145,18 @@
         }
 
         .sidebar-content {
-            background: white;
+            background: var(--card-bg);
             border-radius: var(--border-radius);
             padding: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(0, 0, 0, 0.02);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
         }
 
         .sidebar-content h3 {
             font-size: 1.1rem;
             font-weight: 700;
-            color: var(--dark);
+            color: var(--text-primary);
             margin-bottom: 16px;
             display: flex;
             align-items: center;
@@ -127,7 +165,7 @@
 
         .sidebar-content p {
             font-size: 0.95rem;
-            color: #555;
+            color: var(--text-secondary);
             line-height: 1.6;
             margin-bottom: 12px;
         }
@@ -137,7 +175,7 @@
         }
 
         .sidebar-announcement {
-            background: linear-gradient(135deg, rgba(110, 142, 251, 0.1), rgba(167, 119, 227, 0.1));
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(236, 72, 153, 0.1));
             border-left: 4px solid var(--primary);
             padding: 12px;
             border-radius: 6px;
@@ -147,7 +185,7 @@
         .sidebar-announcement p {
             margin: 0;
             font-size: 0.9rem;
-            color: var(--dark);
+            color: var(--text-primary);
         }
 
         /* Main Content Area */
@@ -165,27 +203,21 @@
         h6 {
             font-weight: 600;
             line-height: 1.3;
-            color: var(--dark);
+            color: var(--text-primary);
         }
 
         .main-title {
             font-size: clamp(2.5rem, 6.0vw, 4.0rem);
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: -0.02em;
             text-align: center;
             color: white;
-
             margin: 0;
-            /* remove weird tiny top margin */
             z-index: 1;
-
             display: flex;
             justify-content: center;
-            /* horizontal centering, already handled by text-align too */
             align-items: center;
-            /* vertical centering */
             height: 100%;
-            /* make it fill the header's height */
         }
 
         /* Header */
@@ -197,18 +229,14 @@
             color: white;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: var(--border-radius);
-            box-shadow: 0 12px 40px rgba(110, 142, 251, 0.2);
+            box-shadow: var(--shadow-hover);
             position: relative;
             overflow: hidden;
             letter-spacing: -0.01em;
-
             display: flex;
-            /* allows vertical centering */
             justify-content: center;
             align-items: center;
         }
-
-
 
         header::before {
             content: "";
@@ -224,7 +252,6 @@
         }
 
         @keyframes shimmer {
-
             0%,
             100% {
                 transform: translate(0, 0);
@@ -274,7 +301,7 @@
             /* center text */
             color: white;
             /* default text color */
-            font-family: ' Trebuchet MS', serif;
+            font-family: 'Trebuchet MS', serif;
             font-weight: 400;
             line-height: 1.6;
             background: none;
@@ -302,34 +329,28 @@
             margin: 32px 0 20px 0;
             padding: 16px 24px;
             border-radius: var(--border-radius);
-            background: rgba(255, 255, 255, 0.9);
+            background: var(--card-bg);
             backdrop-filter: blur(10px);
-            font-family: ' Trebuchet MS', serif;
-            box-shadow: 0 4px 12px rgba(110, 142, 251, 0.08);
-            border: 1px solid rgba(110, 142, 251, 0.1);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
             transition: all 0.2s ease;
-        }
-
-
-        .category-header:hover {
-            box-shadow: 0 6px 20px rgba(110, 142, 251, 0.12);
-            border-color: rgba(110, 142, 251, 0.2);
-        }
-
-
-
-        .category-header {
-            color: var(--dark);
+            color: var(--text-primary);
             font-size: 1.5rem;
             font-weight: 600;
             letter-spacing: -0.01em;
+        }
+
+        .category-header:hover {
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
         }
 
         /* Section Header */
         .section-header {
             font-size: 1.75rem;
             font-weight: 600;
-            color: var(--dark);
+            color: var(--text-primary);
             margin: 48px 0 24px 0;
             display: flex;
             align-items: center;
@@ -346,14 +367,14 @@
 
         /* Cards */
         .archive-card {
-            background: white;
+            background: var(--card-bg);
             border-radius: var(--border-radius);
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            box-shadow: var(--shadow);
             transition: all 0.3s ease;
             animation: cardFadeUp 0.5s ease forwards;
             opacity: 0;
-            border: 1px solid rgba(0, 0, 0, 0.02);
+            border: 1px solid var(--border-color);
         }
 
         @keyframes cardFadeUp {
@@ -370,8 +391,8 @@
 
         .archive-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 12px 32px rgba(110, 142, 251, 0.15);
-            border-color: rgba(67, 97, 238, 0.1);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
         }
 
         .archive-card:nth-child(1) {
@@ -465,7 +486,7 @@
         .archive-title {
             font-size: 1.25rem;
             font-weight: 700;
-            color: var(--dark);
+            color: var(--text-primary);
             margin-bottom: 12px;
             padding: 16px 16px 0 16px;
         }
@@ -474,7 +495,7 @@
             display: flex;
             gap: 12px;
             font-size: 0.875rem;
-            color: var(--muted);
+            color: var(--text-muted);
             padding: 0 16px;
             margin-bottom: 12px;
         }
@@ -482,7 +503,7 @@
         .content-link {
             font-size: 0.95rem;
             line-height: 1.5;
-            color: #555;
+            color: var(--text-secondary);
             padding: 0 16px 16px 16px;
         }
 
@@ -575,27 +596,29 @@
 
         /* Footer */
         footer {
-            background: linear-gradient(135deg, var(--dark), #1a2332);
-            color: white;
+            background: var(--header-bg);
+            color: var(--text-primary);
             padding: 48px 0;
             text-align: center;
             margin-top: 80px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid var(--border-color);
+            transition: all 0.3s ease;
         }
 
         footer a {
+            color: var(--primary);
             transition: color 0.2s ease;
         }
 
         footer a:hover {
-            color: var(--primary);
+            color: var(--secondary);
         }
 
         .copyright {
             margin-top: 20px;
             opacity: 0.8;
             font-size: 0.9rem;
-            color: var(--light-gray);
+            color: var(--text-muted);
         }
 
         /* Utility Classes */
@@ -736,9 +759,16 @@
 
 <body>
 
+    <nav class="navbar">
+        <div class="navbar-brand">Infinity Nexus</div>
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+            <span id="themeIcon">🌙</span>
+        </button>
+    </nav>
+
     <header>
         <div class="container">
-            <h1 style="font-weight: 700; font-size: 29px;" class="main-title">
+            <h1 style="font-weight: 700; font-size: 30px; font-family: 'Elms Sans', sans-serif;" class="main-title">
                 Infinity Nexus v1.21.26</h1>
 
         </div>
@@ -765,13 +795,13 @@
 
                         </div>
                         <p class="content-link">
-                            I'm excited to announce that I'm working on a ROM hack of the classic Pokémon Emerald!
-                            <a href="#"
+                            I'm excited to announce that I'm working on a ROM hack of the classic Pokémon Emerald! 
+                            This is only a test version and is playable directly through your browser.
+                            <a href="#" style="color:white"
                                 onclick="this.nextElementSibling.style.display='inline'; this.style.display='none'; return false;">
                                 Read More...
                             </a>
                             <span style="display:none;">
-                                This is only a test version and is playable directly through your browser.
                                 It is based on Cosmic Emerald (thank you SkyVortex), and has Physical/Special split,
                                 a Gen 5+ pokemon screen, and more! The ROM will be updated regularly with new features,
                                 so stay tuned for updates! Thank you for playing!
@@ -792,7 +822,7 @@
 
                         </div>
                         <p class="content-link">Test your skills against special monthly challenges! Enjoy challenging
-                            games that can keep you playing!
+                            games that can keep you playing! New monthly challeneges will be added regularly, so check back often!
                         </p>
                         <div style="padding: 0 16px 16px 16px;">
                             <a href="mainpages/mainpage6.html" class="status-pill status-available">Explore →</a>
@@ -809,7 +839,7 @@
 
                         </div>
                         <p class="content-link">Some of my favorite games that are definintly worth playing! Includes
-                            classics like Tower Defense, but also some other games.</p>
+                            classics like Tower Defense, but also some other games. Basically, some of the best games on the site.</p>
                         <div style="padding: 0 16px 16px 16px;">
                             <a href="mainpages/mainpage2.html" class="status-pill status-available">Explore →</a>
                         </div>
@@ -828,8 +858,7 @@
 
                         </div>
 
-                        <p class="content-link">A diverse collection of casual, action, and puzzle games for
-                            everyone!</p>
+                        <p class="content-link">All the good stuff, puzzles, grinding, parkour, lots of fun stuff!</p>
                         <div style="padding: 0 16px 16px 16px;">
                             <a href="mainpages/mainpage3.html" class="status-pill status-available">Explore →</a>
                         </div>
@@ -848,7 +877,7 @@
                             Poker, and
                             more!</p>
                         <div style="padding: 0 16px 16px 16px;">
-                            <a href="casinogames/index.html" class="status-pill status-available">Play Now →</a>
+                            <a href="mainpages/mainpage1.html" class="status-pill status-available">Play Now →</a>
                         </div>
                     </div>
 
@@ -893,22 +922,40 @@
     </div>
     <footer>
         <div class="container">
-            <a href="https://forms.gle/X8p7jkC74MFG9Evj7" style="color:white; text-decoration: none;">Report Issues</a>
-            | <a href="info/privacypolicy.html" style="color:white; text-decoration: none;">Privacy Policy</a>
-            <p style="color: white; font-size: 12px;" class="sub-title"> new link can be found <a
-                    href="https://infinity-nexus.pages.dev/" style="color:white" target="_blank">here</a> </p>
+            <a href="https://forms.gle/X8p7jkC74MFG9Evj7" style="text-decoration: none;">Report Issues</a>
+            | <a href="info/privacypolicy.html" style="text-decoration: none;">Privacy Policy</a>
+            <p style="font-size: 12px;" class="sub-title"> new link can be found <a
+                    href="https://infinity-nexus.pages.dev/"target="_blank">here</a> </p>
             <p class="copyright">© <span id="copyright-year"></span> Infinity Nexus</p>
-
-
-
             <p class="author">Created by Littletree866</p>
         </div>
     </footer>
 
     <script>
+        // Theme Toggle Functionality
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const newTheme = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
 
         document.addEventListener('DOMContentLoaded', function () {
+            initTheme();
             document.getElementById('copyright-year').textContent = new Date().getFullYear();
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
         });
     </script>
 </body>

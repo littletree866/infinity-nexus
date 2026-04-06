@@ -4,21 +4,43 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Documentation</title>
+	<title>Game Documentation - Infinity Nexus</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-	<link href="https://fonts.googleapis.com/css2?family= Trebuchet MS:wght@400;500;700&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family= Trebuchet MS:wght@400;500;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 	<link rel="icon" href="../../icon.jpg" type="image/x-icon">
 
 	<style>
+		:root[data-theme="dark"] {
+            --primary: #7c3aed;
+            --secondary: #ec4899;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --card-bg: #1e293b;
+            --border-color: #475569;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            --shadow-hover: 0 12px 32px rgba(124, 58, 237, 0.2);
+        }
+
+        :root[data-theme="light"],
+        :root {
+            --primary: #7c3aed;
+            --secondary: #ec4899;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --card-bg: #f8fafc;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 12px 32px rgba(124, 58, 237, 0.15);
+        }
+
 		:root {
-			--primary: #6e8efb;
-			--secondary: #a777e3;
-			--dark: #2c3e50;
-			--light: #f8f9fa;
-			--text: #333;
 			--border-radius: 12px;
-			--muted: #6f7b8a;
 		}
 
 		* {
@@ -28,30 +50,34 @@
 		}
 
 		body {
-			font-family: ' Trebuchet MS', serif;
-			line-height: 1.7;
-			color: var(--text);
-			background: linear-gradient(135deg, #f5f7fa 0%, #e4e7f1 100%);
-			min-height: 100vh;
-			padding: 28px 20px;
-		}
+            font-family: 'Elms Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            min-height: 100vh;
+            padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
 
 		.container {
 			max-width: 1200px;
 			margin: 0 auto;
+			padding: 40px 24px;
 		}
 
 		/* Header */
 		header {
 			text-align: center;
-			padding: 60px 20px;
-			background: linear-gradient(135deg, var(--primary), var(--secondary));
+			padding: 70px 24px;
+			background: linear-gradient(135deg, #7c3aed 0%, #a777e3 100%);
 			color: white;
 			border-radius: var(--border-radius);
-			margin-bottom: 40px;
-			box-shadow: 0 12px 40px rgba(110, 142, 251, 0.2);
+			margin-bottom: 48px;
+			margin-top: 20px;
+			box-shadow: 0 12px 40px rgba(124, 58, 237, 0.3);
 			position: relative;
 			overflow: hidden;
+			border: 1px solid rgba(255, 255, 255, 0.1);
 		}
 
 		header::before {
@@ -61,17 +87,14 @@
 			left: -50%;
 			width: 200%;
 			height: 200%;
-			background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+			background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
 			animation: shimmer 8s infinite;
 		}
 
 		@keyframes shimmer {
-
-			0%,
-			100% {
+			0%, 100% {
 				transform: translate(0, 0) rotate(0deg);
 			}
-
 			50% {
 				transform: translate(20px, 20px) rotate(180deg);
 			}
@@ -79,11 +102,12 @@
 
 		header h1 {
 			font-size: 2.8rem;
-			margin-bottom: 10px;
+			margin: 0 0 12px 0;
 			font-weight: 700;
 			text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 			position: relative;
 			z-index: 2;
+			line-height: 1.2;
 		}
 
 		header p {
@@ -92,12 +116,13 @@
 			font-weight: 500;
 			position: relative;
 			z-index: 2;
+			margin: 8px 0;
 		}
 
 		.section-header {
-			font-size: 1.9rem;
-			color: var(--dark);
-			margin: 50px 0 25px 0;
+			font-size: 2rem;
+			color: var(--text-primary);
+			margin: 60px 0 28px 0;
 			padding-bottom: 12px;
 			border-bottom: 3px solid var(--primary);
 			font-weight: 700;
@@ -114,35 +139,105 @@
 		}
 
 		.intro-card {
-			background: white;
+			background: var(--card-bg);
 			border-radius: var(--border-radius);
 			padding: 32px;
-			margin-bottom: 40px;
-			box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+			margin-bottom: 48px;
+			box-shadow: var(--shadow);
 			border-left: 5px solid var(--secondary);
+			border: 1px solid var(--border-color);
 		}
 
 		.intro-card h2 {
-			color: var(--primary);
-			margin-bottom: 16px;
-			font-size: 1.8rem;
+			color: var(--text-primary);
+			margin: 0 0 12px 0;
+			font-size: 1.4rem;
 			font-weight: 700;
 		}
 
 		.intro-card p {
-			color: #555;
-			margin-bottom: 12px;
+			color: var(--text-primary);
+			margin: 0;
 			line-height: 1.8;
 			font-weight: 500;
 		}
 
+		.description {
+			color: var(--text-secondary);
+			margin-bottom: 24px;
+			line-height: 1.8;
+		}
+
+		.game-card h3 {
+			color: var(--text-primary);
+			margin-top: 26px;
+			margin-bottom: 14px;
+			font-size: 1.2rem;
+			font-weight: 700;
+			border-left: 4px solid var(--secondary);
+			padding-left: 12px;
+		}
+
+		.controls,
+		.features,
+		.tips {
+			background: var(--bg-secondary);
+			padding: 18px;
+			border-radius: 10px;
+			margin: 14px 0;
+			border-left: 4px solid var(--secondary);
+		}
+
+		.controls ul,
+		.features ul,
+		.tips ul {
+			margin-left: 24px;
+            margin-top: 0;
+            margin-bottom: 0;
+		}
+
+		.controls li,
+		.features li,
+		.tips li {
+			margin: 12px 0;
+			font-weight: 500;
+			line-height: 1.7;
+			color: var(--text-secondary);
+		}
+
+		.controls li strong,
+		.features li strong,
+		.tips li strong {
+			color: var(--primary);
+			font-weight: 700;
+		}
+
+		.play-link {
+			display: inline-block;
+			background: linear-gradient(135deg, var(--primary), var(--secondary));
+			color: white;
+			padding: 12px 28px;
+			border-radius: 8px;
+			text-decoration: none;
+			margin-top: 24px;
+			transition: all 0.3s ease;
+			font-weight: 700;
+			box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+		}
+
+		.play-link:hover {
+			transform: translateY(-3px);
+			box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4);
+		}
+
 		/* Collapsible Card System */
 		.game-card {
-			background: white;
+			background: var(--card-bg);
 			border-radius: var(--border-radius);
 			margin-bottom: 16px;
-			box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+			box-shadow: var(--shadow);
 			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			border: 1px solid var(--border-color);
 			border-left: 5px solid var(--primary);
 			overflow: hidden;
 			animation: slideUp 0.6s ease-out forwards;
@@ -153,7 +248,6 @@
 				opacity: 0;
 				transform: translateY(20px);
 			}
-
 			to {
 				opacity: 1;
 				transform: translateY(0);
@@ -161,15 +255,16 @@
 		}
 
 		.game-card:hover {
-			box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+			box-shadow: var(--shadow-hover);
+			border-left-color: var(--secondary);
 		}
 
 		.game-card.expanded {
-			box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+			box-shadow: var(--shadow-hover);
 		}
 
 		.game-header {
-			padding: 24px 32px;
+			padding: 24px 28px;
 			cursor: pointer;
 			display: flex;
 			justify-content: space-between;
@@ -180,11 +275,11 @@
 		}
 
 		.game-header:hover {
-			background-color: rgba(110, 142, 251, 0.04);
+			background-color: rgba(124, 58, 237, 0.04);
 		}
 
 		.game-header.active {
-			background-color: rgba(110, 142, 251, 0.08);
+			background-color: rgba(124, 58, 237, 0.08);
 		}
 
 		.game-title-group {
@@ -193,8 +288,8 @@
 		}
 
 		.game-card h2 {
-			color: var(--primary);
-			margin: 0 0 8px 0;
+			color: var(--text-primary);
+			margin: 0 0 10px 0;
 			font-size: 1.5rem;
 			font-weight: 700;
 		}
@@ -208,7 +303,7 @@
 
 		.game-year {
 			font-size: 0.85rem;
-			color: var(--muted);
+			color: var(--text-muted);
 			font-weight: 600;
 		}
 
@@ -216,7 +311,7 @@
 			display: inline-block;
 			background: linear-gradient(135deg, var(--primary), var(--secondary));
 			color: white;
-			padding: 4px 10px;
+			padding: 5px 12px;
 			border-radius: 999px;
 			font-size: 0.7rem;
 			font-weight: 800;
@@ -225,9 +320,9 @@
 
 		.difficulty {
 			display: inline-block;
-			padding: 4px 12px;
+			padding: 5px 12px;
 			border-radius: 20px;
-			font-size: 0.8rem;
+			font-size: 0.75rem;
 			font-weight: 700;
 		}
 
@@ -266,7 +361,7 @@
 			max-height: 0;
 			overflow: hidden;
 			transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-			border-top: 1px solid rgba(110, 142, 251, 0.1);
+			border-top: 1px solid var(--border-color);
 		}
 
 		.game-content.active {
@@ -274,7 +369,7 @@
 		}
 
 		.game-details {
-			padding: 32px;
+			padding: 32px 28px;
 		}
 
 		.description {
@@ -348,13 +443,19 @@
 			text-align: center;
 			margin-top: 70px;
 			padding: 40px 0;
-			border-top: 2px solid #ddd;
-			color: #666;
+			border-top: 2px solid var(--border-color);
+			color: var(--text-muted);
 		}
 
 		footer p {
 			margin: 8px 0;
 			font-weight: 500;
+		}
+
+		footer a {
+			color: var(--primary);
+			text-decoration: none;
+			font-weight: 700;
 		}
 
 		.back-link {
@@ -408,14 +509,17 @@
 </head>
 
 <body>
+	<nav class="navbar" style="position: sticky; top: 0; background: var(--card-bg); padding: 16px 24px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; z-index: 1000; box-shadow: var(--shadow);">
+		<h1 style="margin: 0; font-size: 1.3rem; font-weight: 600; color: var(--text-primary);">📚 Documentation</h1>
+		<button id="themeToggle" style="background: transparent; border: 1px solid var(--border-color); color: var(--text-primary); padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 1.1rem; transition: all 0.3s ease;" aria-label="Toggle theme"><span id="themeIcon">🌙</span></button>
+	</nav>
 	<div class="container">
 		<a href="../../index.html" class="back-link">← Back to Home</a>
 
 		<header>
-			<h1>📖 Game Documentation</h1>
-			<p>Complete guides, controls, strategies, and pro tips for all Infinity Nexus games</p>
-			<p style="font-size: 0.95rem; margin-top: 12px; opacity: 0.9;">Last Updated: February 16, 2026 • Version
-				1.18.24</p>
+			<h1>📖 Complete Game Documentation</h1>
+			<p>Comprehensive guides, detailed controls, strategies, and pro tips for all Infinity Nexus titles</p>
+			<p style="font-size: 0.95rem; margin-top: 12px; opacity: 0.9;">Last Updated: April 9, 2026 • Maintained by Littletree866</p>
 		</header>
 
 		<div class="intro-card">
@@ -1505,6 +1609,32 @@
 
 		// Set year in footer
 		document.getElementById('year').textContent = new Date().getFullYear();
+	</script>
+	<script>
+		// Theme Toggle Functionality
+		function initTheme() {
+			const savedTheme = localStorage.getItem('theme') || 'dark';
+			document.documentElement.setAttribute('data-theme', savedTheme);
+			updateThemeIcon(savedTheme);
+		}
+
+		function updateThemeIcon(theme) {
+			const icon = document.getElementById('themeIcon');
+			icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+		}
+
+		function toggleTheme() {
+			const current = document.documentElement.getAttribute('data-theme');
+			const newTheme = current === 'dark' ? 'light' : 'dark';
+			document.documentElement.setAttribute('data-theme', newTheme);
+			localStorage.setItem('theme', newTheme);
+			updateThemeIcon(newTheme);
+		}
+
+		document.addEventListener('DOMContentLoaded', function () {
+			initTheme();
+			document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+		});
 	</script>
 </body>
 

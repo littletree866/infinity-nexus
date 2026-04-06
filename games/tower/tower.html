@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🏰 Tower Defense Pro 🏰</title>
-    <link href="https://fonts.googleapis.com/css2?family= Trebuchet MS:wght@300;400;500;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Trebuchet MS:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="icon" href="../../icon.jpg" type="image/x-icon">
     <style>
@@ -14,7 +14,7 @@
         }
 
         body {
-            font-family: ' Trebuchet MS', serif;
+            font-family: 'Trebuchet MS', serif;
             margin: 0;
             background: linear-gradient(135deg, #1E3A5F 0%, #2C4B70 30%, #3A5C82 70%, #4A6E95 100%);
 
@@ -291,7 +291,7 @@
             border-radius: 10px;
             cursor: pointer;
             border: 2px solid;
-            font-family: ' Trebuchet MS', serif;
+            font-family: 'Trebuchet MS', serif;
             font-weight: 600;
             font-size: 12px;
             text-transform: uppercase;
@@ -351,7 +351,7 @@
             text-align: left;
             position: relative;
             overflow: hidden;
-            font-family: ' Trebuchet MS', serif;
+            font-family: 'Trebuchet MS', serif;
         }
 
         .towerButton::before {
@@ -434,7 +434,7 @@
             pointer-events: none;
             border: 1px solid rgba(255, 215, 0, 0.3);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-            font-family: ' Trebuchet MS', serif;
+            font-family: 'Trebuchet MS', serif;
             font-weight: 500;
         }
 
@@ -499,7 +499,7 @@
             font-size: 16px;
             cursor: pointer;
             margin-top: 20px;
-            font-family: ' Trebuchet MS', serif;
+            font-family: 'Trebuchet MS', serif;
             font-weight: 600;
         }
 
@@ -1109,11 +1109,11 @@
 
         // Enhanced Enemy class
         class Enemy {
-            constructor(type, pat Trebuchet MSex = 0) {
+            constructor(type, patTrebuchet MSex = 0) {
                 const t = getEnemyTypeStats(type);
                 this.type = type;
-                this.pat Trebuchet MSex = pat Trebuchet MSex;
-                const selectedPath = pat Trebuchet MSex === 0 ? path1 : path2;
+                this.patTrebuchet MSex = patTrebuchet MSex;
+                const selectedPath = patTrebuchet MSex === 0 ? path1 : path2;
                 this.x = selectedPath[0].x;
                 this.y = selectedPath[0].y;
                 this.hp = t.hp;
@@ -1304,7 +1304,7 @@
                 // Boss health text
                 if (this.type === "boss") {
                     ctx.fillStyle = "#FFFFFF";
-                    ctx.font = "12px  Trebuchet MS";
+                    ctx.font = "12px Trebuchet MS";
                     ctx.textAlign = "center";
                     ctx.fillText(`BOSS: ${Math.ceil(this.hp)}`, this.x, barY - 5);
                 }
@@ -1497,7 +1497,7 @@
 
                 // Level indicator
                 ctx.fillStyle = "#FFD700";
-                ctx.font = "bold 12px  Trebuchet MS";
+                ctx.font = "bold 12px Trebuchet MS";
                 ctx.textAlign = "center";
                 ctx.fillText(`L${this.level + 1}`, this.x, this.y + 32);
             }
@@ -1755,7 +1755,7 @@
                 ctx.globalAlpha = num.life;
                 ctx.fillStyle = num.color;
                 const fontSize = num.isBonus ? 20 : (14 + (1 - num.life) * 8);
-                ctx.font = `bold ${fontSize}px  Trebuchet MS`;
+                ctx.font = `bold ${fontSize}px Trebuchet MS`;
                 ctx.textAlign = 'center';
                 ctx.fillText(num.isBonus ? num.value : `-${Math.round(num.value)}`, num.x, num.y);
                 ctx.restore();
@@ -1978,8 +1978,8 @@
             else if (r < 0.70) type = "runner";
 
             // Randomly choose which path the enemy spawns on
-            const pat Trebuchet MSex = Math.random() < 0.5 ? 0 : 1;
-            game.enemies.push(new Enemy(type, pat Trebuchet MSex));
+            const patTrebuchet MSex = Math.random() < 0.5 ? 0 : 1;
+            game.enemies.push(new Enemy(type, patTrebuchet MSex));
         }
 
         // Game loop

@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ZOMBIE APOCALYPSE</title>
-  <link href="https://fonts.googleapis.com/css2?family= Trebuchet MS:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Trebuchet MS:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
@@ -15,7 +15,7 @@
     }
 
     body {
-      font-family: ' Trebuchet MS', serif;
+      font-family: 'Trebuchet MS', serif;
       margin: 0;
       background: radial-gradient(circle at top, #1a0f0f, #000);
       color: #fff;
@@ -764,7 +764,7 @@
         ctx.fill();
 
         // Draw emoji
-        ctx.font = '24px  Trebuchet MS';
+        ctx.font = '24px Trebuchet MS';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillStyle = '#ffffff';
@@ -791,7 +791,7 @@
         ctx.fill();
 
         // Draw emoji
-        ctx.font = '32px  Trebuchet MS';
+        ctx.font = '32px Trebuchet MS';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillStyle = '#ffffff';
@@ -815,7 +815,7 @@
         ctx.arc(h.x, h.y, h.r, 0, Math.PI * 2);
         ctx.fill();
 
-        ctx.font = '28px  Trebuchet MS';
+        ctx.font = '28px Trebuchet MS';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillStyle = '#ffffff';
@@ -843,7 +843,7 @@
       ctx.fill();
 
       // Player emoji
-      ctx.font = '36px  Trebuchet MS';
+      ctx.font = '36px Trebuchet MS';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillStyle = '#ffffff';
@@ -858,7 +858,7 @@
         ctx.lineWidth = 2;
         ctx.strokeRect(20, canvas.height - 40, 200, 20);
 
-        ctx.font = '14px  Trebuchet MS';
+        ctx.font = '14px Trebuchet MS';
         ctx.fillStyle = '#ffffff';
         ctx.fillText('POWER METER', 120, canvas.height - 27);
       }
@@ -872,17 +872,17 @@
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         ctx.fillStyle = '#ff4444';
-        ctx.font = 'bold 64px  Trebuchet MS';
+        ctx.font = 'bold 64px Trebuchet MS';
         ctx.textAlign = 'center';
         ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2 - 50);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = '32px  Trebuchet MS';
+        ctx.font = '32px Trebuchet MS';
         ctx.fillText(`Kills: ${kills}`, canvas.width / 2, canvas.height / 2 + 20);
         ctx.fillText(`Wave: ${wave}`, canvas.width / 2, canvas.height / 2 + 60);
         ctx.fillText(`Allies Saved: ${humans.length}`, canvas.width / 2, canvas.height / 2 + 100);
 
-        ctx.font = '24px  Trebuchet MS';
+        ctx.font = '24px Trebuchet MS';
         ctx.fillStyle = '#ffcc00';
         ctx.fillText('Refresh to play again!', canvas.width / 2, canvas.height / 2 + 160);
         return;

@@ -10,36 +10,37 @@
 <style>
 body {
   margin: 0;
-  font-family: Trebuchet MS, sans-serif;
-  background: #1b1f2a;
-  color: #e8e8e8;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
 }
-
 .container {
   display: flex;
 }
 
 .sidebar {
   width: 260px;
-  background: #11151d;
-  padding: 20px;
-  height: 100vh;
-  position: sticky;
-  top: 0;
-  overflow-y: auto;
-}
+            background: var(--card-bg);
+            padding: 20px;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            overflow-y: auto;
+            border-right: 1px solid var(--border-color);
+        }
 
-.sidebar a {
-  display: block;
-  color: #8ab4ff;
-  text-decoration: none;
-  margin: 6px 0;
-}
+        .sidebar a {
+            display: block;
+            color: var(--primary);
+            text-decoration: none;
+            margin: 6px 0;
+            transition: color 0.3s ease;
+        }
 
-.sidebar a:hover {
-  color: #bfd9ff;
-}
-
+        .sidebar a:hover {
+            color: var(--secondary);
+        }
 .content {
   flex: 1;
   padding: 30px;
@@ -94,8 +95,12 @@ function toggle(id) {
 </head>
 
 <body>
+    <nav class="navbar" style="position: sticky; top: 0; background: var(--card-bg); padding: 16px 20px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; z-index: 1000;">
+        <h1 style="margin: 0; font-size: 1.2rem; color: var(--text-primary);">ROM Walkthrough</h1>
+        <button id="themeToggle" style="background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-primary); padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 1.2rem;" aria-label="Toggle theme"><span id="themeIcon">🌙</span></button>
+    </nav>
 
-<div class="container">
+    <div class="container">
 
 <!-- SIDEBAR -->
 <div class="sidebar">
@@ -306,6 +311,33 @@ function toggle(id) {
 
 </div>
 </div>
+
+  <script>
+    // Theme Toggle Functionality
+    function initTheme() {
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+    }
+
+    function updateThemeIcon(theme) {
+        const icon = document.getElementById('themeIcon');
+        icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+    }
+
+    function toggleTheme() {
+        const current = document.documentElement.getAttribute('data-theme');
+        const newTheme = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        initTheme();
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+    });
+  </script>
 
 </body>
 </html>

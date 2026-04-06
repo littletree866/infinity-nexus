@@ -5,12 +5,12 @@
   <meta charset="UTF-8">
   <title>👑 Empire Conquest Pro 👑</title>
   <link rel="icon" href="../../icon.jpg" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css2?family= Trebuchet MS:wght@400;500;700;900&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Trebuchet MS:wght@400;500;700;900&display=swap"
     rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: ' Trebuchet MS', serif;
+      font-family: 'Trebuchet MS', serif;
       background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2a 100%);
       color: #fff;
       display: flex;
@@ -399,7 +399,7 @@
 
           // Title
           ctx.fillStyle = "#fff";
-          ctx.font = "bold 36px ' Trebuchet MS'";
+          ctx.font = "bold 36px 'Trebuchet MS'";
           ctx.textAlign = "center";
           ctx.fillText("EMPIRE CONQUEST", canvas.width / 2, 70);
 
@@ -428,19 +428,19 @@
 
             // Region name
             ctx.fillStyle = "#fff";
-            ctx.font = "bold 20px ' Trebuchet MS'";
+            ctx.font = "bold 20px 'Trebuchet MS'";
             ctx.textAlign = "left";
             ctx.fillText(r, x + 15, y + 35);
 
             // Progress
-            ctx.font = "14px ' Trebuchet MS'";
+            ctx.font = "14px 'Trebuchet MS'";
             ctx.fillStyle = "#aaa";
             ctx.fillText(`${completed}/${regions[r].length} completed`, x + 15, y + 60);
 
             // Requirements if locked
             if (!unlocked) {
               ctx.fillStyle = "#f55";
-              ctx.font = "12px ' Trebuchet MS'";
+              ctx.font = "12px 'Trebuchet MS'";
               ctx.fillText(`Req: ATK ${regionUnlocks[r].atk}, DEF ${regionUnlocks[r].def}`, x + 15, y + 85);
             }
 
@@ -465,7 +465,7 @@
 
           // Region title
           ctx.fillStyle = "#fff";
-          ctx.font = "bold 28px ' Trebuchet MS'";
+          ctx.font = "bold 28px 'Trebuchet MS'";
           ctx.textAlign = "center";
           ctx.fillText(currentRegion, canvas.width / 2, 70);
 
@@ -493,12 +493,12 @@
 
             // Enemy name
             ctx.fillStyle = unlocked ? "#fff" : "#888";
-            ctx.font = "bold 18px ' Trebuchet MS'";
+            ctx.font = "bold 18px 'Trebuchet MS'";
             ctx.textAlign = "left";
             ctx.fillText(area.name, x + 10, y + 30);
 
             // Stats
-            ctx.font = "14px ' Trebuchet MS'";
+            ctx.font = "14px 'Trebuchet MS'";
             ctx.fillText(`HP: ${area.hp}`, x + 10, y + 55);
             ctx.fillText(`ATK: ${area.atk}`, x + 10, y + 75);
             ctx.fillText(`DEF: ${area.def}`, x + 100, y + 55);
@@ -537,7 +537,7 @@
 
           // Enemy stats
           ctx.fillStyle = "#fff";
-          ctx.font = "bold 24px ' Trebuchet MS'";
+          ctx.font = "bold 24px 'Trebuchet MS'";
           ctx.textAlign = "center";
           ctx.fillText(currentEnemy.name, canvas.width / 2, 50);
 
@@ -553,7 +553,7 @@
           ctx.strokeStyle = "#fff";
           ctx.strokeRect(250, 70, 400, 25);
           ctx.fillStyle = "#fff";
-          ctx.font = "16px ' Trebuchet MS'";
+          ctx.font = "16px 'Trebuchet MS'";
           ctx.fillText(`${Math.floor(currentEnemy.hp)}/${currentEnemy.maxHp}`, canvas.width / 2, 65);
 
           // Player stats
@@ -568,7 +568,7 @@
           ctx.strokeStyle = "#fff";
           ctx.strokeRect(250, 120, 400, 20);
           ctx.fillStyle = "#fff";
-          ctx.font = "16px ' Trebuchet MS'";
+          ctx.font = "16px 'Trebuchet MS'";
           ctx.fillText(`HP: ${Math.floor(player.hp)}/${player.maxHp}`, canvas.width / 2, 115);
 
           // Battle options
@@ -588,7 +588,7 @@
           goldAnim.forEach(g => {
             ctx.globalAlpha = g.alpha;
             ctx.fillStyle = "gold";
-            ctx.font = "bold 20px ' Trebuchet MS'";
+            ctx.font = "bold 20px 'Trebuchet MS'";
             ctx.textAlign = "center";
             ctx.fillText(`+${g.amount}💰`, g.x, g.y);
             g.y -= 2;
@@ -598,7 +598,7 @@
           textAnim.forEach(t => {
             ctx.globalAlpha = t.alpha;
             ctx.fillStyle = t.color;
-            ctx.font = "bold 20px ' Trebuchet MS'";
+            ctx.font = "bold 20px 'Trebuchet MS'";
             ctx.textAlign = "center";
             ctx.fillText(t.text, t.x, t.y);
             t.y -= 1;
@@ -621,10 +621,10 @@
 
           // Title
           ctx.fillStyle = "#fff";
-          ctx.font = "bold 32px ' Trebuchet MS'";
+          ctx.font = "bold 32px 'Trebuchet MS'";
           ctx.textAlign = "center";
           ctx.fillText("SHOP", canvas.width / 2, 60);
-          ctx.font = "24px ' Trebuchet MS'";
+          ctx.font = "24px 'Trebuchet MS'";
           ctx.fillStyle = "gold";
           ctx.fillText(`${player.gold}💰`, canvas.width - 100, 60);
 
@@ -653,11 +653,11 @@
 
             // Item info
             ctx.fillStyle = isEquipped ? "#0f0" : (canAfford ? "#fff" : "#888");
-            ctx.font = "bold 18px ' Trebuchet MS'";
+            ctx.font = "bold 18px 'Trebuchet MS'";
             ctx.textAlign = "left";
             ctx.fillText(item.name, x + 10, y + 25);
 
-            ctx.font = "16px ' Trebuchet MS'";
+            ctx.font = "16px 'Trebuchet MS'";
             if (item.atk) ctx.fillText(`ATK +${item.atk}`, x + 10, y + 50);
             if (item.def) ctx.fillText(`DEF +${item.def}`, x + 10, y + 50);
             if (item.heal) ctx.fillText(`Heal ${item.heal} HP`, x + 10, y + 50);
@@ -693,7 +693,7 @@
 
           // Button text
           ctx.fillStyle = "#fff";
-          ctx.font = "bold 18px ' Trebuchet MS'";
+          ctx.font = "bold 18px 'Trebuchet MS'";
           ctx.textAlign = "center";
           ctx.textBaseline = "middle";
           ctx.fillText(text, x + w / 2, y + h / 2);

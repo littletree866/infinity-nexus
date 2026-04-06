@@ -4,111 +4,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy</title>
+    <title>Privacy Policy - Infinity Nexus</title>
     <link rel="icon" href="../icon.jpg">
-    <link href="https://fonts.googleapis.com/css2?family= Trebuchet MS:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
-        body {
-            margin: 0;
-            font-family: ' Trebuchet MS', serif;
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-            background-size: 500% 500%;
-            animation: gradientBG 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-            color: #f4f4f4;
-            line-height: 1.8;
-            min-height: 100vh;
+        :root[data-theme="dark"] {
+            --primary: #7c3aed;
+            --secondary: #ec4899;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1a1f3a;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --card-bg: #1e293b;
+            --header-bg: #1a202c;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow: rgba(0, 0, 0, 0.3);
+            --shadow-hover: rgba(0, 0, 0, 0.5);
         }
 
-        @keyframes gradientBG {
-            0% {
-                background-position: 50% 100%;
-            }
+        :root[data-theme="light"] {
+            --primary: #7c3aed;
+            --secondary: #ec4899;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --card-bg: #f1f5f9;
+            --header-bg: #f0f4f8;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --shadow: rgba(0, 0, 0, 0.1);
+            --shadow-hover: rgba(0, 0, 0, 0.15);
+        }
 
-            25% {
-                background-position: 0% 50%;
-            }
+        :root {
+            color-scheme: dark light;
+        }
 
-            50% {
-                background-position: 50% 0%;
-            }
+        body {
+            margin: 0;
+            font-family: 'Elms Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
 
-            75% {
-                background-position: 100% 50%;
-            }
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: var(--header-bg);
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
 
-            100% {
-                background-position: 50% 100%;
-            }
+        .navbar h1 {
+            margin: 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        #themeToggle {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        #themeToggle:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
         }
 
         .container {
             max-width: 900px;
-            margin: 60px auto;
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 0 auto;
+            padding: 60px 24px;
         }
 
         .header-section {
             display: flex;
             align-items: center;
             gap: 16px;
-            margin-bottom: 32px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid rgba(138, 180, 255, 0.3);
+            margin-bottom: 40px;
+            padding-bottom: 24px;
+            border-bottom: 2px solid var(--border-color);
         }
 
         h1 {
             text-align: left;
             margin: 0;
-            font-size: 2.2rem;
+            font-size: 2.4rem;
             font-weight: 700;
-            color: #fff;
+            color: var(--text-primary);
+            line-height: 1.2;
         }
 
         .status-badge {
             display: inline-flex;
             align-items: center;
-            padding: 8px 14px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 20px;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 24px;
             font-size: 0.75rem;
             font-weight: 700;
             color: white;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            letter-spacing: 0.6px;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
             white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .important-box {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(236, 72, 153, 0.15) 100%);
-            border-left: 4px solid #ec4899;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 24px 0 32px 0;
-            color: #fff;
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.08), rgba(124, 58, 237, 0.06));
+            border-left: 4px solid var(--secondary);
+            padding: 28px;
+            border-radius: 12px;
+            margin: 40px 0 48px 0;
+            color: var(--text-primary);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
         }
 
         .important-box h2 {
-            margin-top: 0;
-            color: #fca5a5;
+            margin: 0 0 12px 0;
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            font-weight: 700;
         }
 
         .important-box p {
             margin: 0;
             font-size: 1.05rem;
+            line-height: 1.7;
         }
 
         h2 {
-            margin-top: 32px;
-            color: #8ab4ff;
-            font-size: 1.4rem;
-            font-weight: 600;
-            border-bottom: 1px solid rgba(138, 180, 255, 0.2);
+            margin-top: 40px;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+            font-size: 1.35rem;
+            font-weight: 700;
+            border-bottom: 2px solid var(--border-color);
             padding-bottom: 12px;
         }
 
@@ -117,48 +168,47 @@
         }
 
         p {
-            margin: 16px 0;
+            margin: 14px 0;
             font-size: 1.05rem;
             line-height: 1.8;
-            color: #e8e8e8;
+            color: var(--text-primary);
         }
 
         a {
-            color: #8ab4ff;
+            color: var(--primary);
             text-decoration: none;
             transition: all 0.3s ease;
-            font-weight: 500;
-            border-bottom: 2px solid rgba(138, 180, 255, 0.3);
+            font-weight: 600;
+            border-bottom: 2px solid rgba(124, 58, 237, 0.3);
+            padding-bottom: 2px;
         }
 
         a:hover {
-            color: #bfd9ff;
-            border-bottom-color: rgba(191, 217, 255, 0.6);
+            color: var(--secondary);
+            border-bottom-color: var(--secondary);
         }
 
         strong {
-            color: #ffffff;
+            color: var(--text-primary);
             font-weight: 700;
         }
 
         footer {
-            margin-top: 48px;
-            padding-top: 24px;
-            border-top: 1px solid rgba(138, 180, 255, 0.2);
+            margin-top: 60px;
+            padding-top: 28px;
+            border-top: 2px solid var(--border-color);
             text-align: center;
             font-size: 0.95rem;
-            opacity: 0.8;
-            color: #cbd5e1;
+            color: var(--text-muted);
         }
 
         @media (max-width: 768px) {
             .container {
-                margin: 20px;
-                padding: 24px;
+                padding: 40px 16px;
             }
 
             h1 {
-                font-size: 1.8rem;
+                font-size: 1.9rem;
             }
 
             .header-section {
@@ -179,71 +229,98 @@
 </head>
 
 <body>
+    <nav class="navbar">
+        <h1 style="margin: 0; font-size: 1.3rem; font-weight: 600;">🔒 Privacy & Security</h1>
+        <button id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">🌙</span></button>
+    </nav>
     <div class="container">
         <div class="header-section">
-            <h1>🔒 Privacy Policy</h1>
-            <span class="status-badge">v1.0 - March 2026</span>
+            <h1>Privacy Policy</h1>
+            <span class="status-badge">v2.0 - April 2026</span>
         </div>
 
         <div class="important-box">
-            <h2>⚡ Most Important Thing to Know</h2>
-            <p>This is a <strong>personal website project</strong> and is <strong>NOT a commercial website</strong>. I
-                do not want your money, data, or anything else. Your privacy is respected and protected to the maximum
-                extent possible. </p>
+            <h2>⚡ Key Privacy Statement</h2>
+            <p><strong>Infinity Nexus</strong> is a personal project created by an independent developer. This platform respects user privacy and maintains strict data minimization practices. No personal information is collected, sold, or shared with third parties. User data security and privacy are paramount.</p>
         </div>
 
-        <h2>📋 1. Overview</h2>
-        <p>
-            This is a personal project created and maintained by an individual developer. I respect your privacy and
-            keep data collection to an absolute minimum.
+        <h2>📋 1. Overview & Scope</h2>
+        <p>Infinity Nexus is a personal entertainment platform maintained by an independent developer. This Privacy Policy outlines how user data is (and is not) collected, processed, and protected. All visitors should review this policy before using the platform.</p>
+
+        <h2>👤 2. Personal Information Collection</h2>
+        <p><strong>We do not collect personal information</strong> such as your name, email address, phone number, or home address through standard website interaction. Infinity Nexus operates on a strict no-collection policy for personally identifiable information.</p>
+
+        <h2>⚙️ 3. Automatic Data & Analytics</h2>
+        <p><strong>No automatic data collection or tracking is implemented</strong> on this platform. We do not use analytics tracking services, pixel tags, or similar technologies to monitor user behavior. Your browsing activity on Infinity Nexus is not tracked or recorded.</p>
+
+        <h2>🍪 4. Cookies & Local Storage</h2>
+        <p>Infinity Nexus may use <strong>local browser storage only for essential functionality</strong>:</p>
+        <p style="margin-left: 20px; margin: 12px 0;">
+            • <strong>Theme Preference:</strong> Saves your light/dark mode selection<br>
+            • <strong>Game Progress:</strong> Stores game state data locally (on your device only)<br>
+            • <strong>Session Data:</strong> Temporary data required for game functionality
+        </p>
+        <p>These are <strong>first-party cookies only</strong> and are never used for cross-site tracking or advertising purposes.</p>
+
+        <h2>🔗 5. Third-Party Services & Integrations</h2>
+        <p>Infinity Nexus minimizes third-party dependencies. The platform uses:</p>
+        <p style="margin-left: 20px;">
+            • <strong>Google Fonts:</strong> For typography (no tracking)<br>
+            • <strong>Font Awesome:</strong> For icon assets (no tracking)<br>
+            • <strong>GitHub:</strong> For code hosting and issue management
+        </p>
+        <p>These services are open-source or transparent. No data is sold to third parties.</p>
+
+        <h2>📊 6. Data Retention Policy</h2>
+        <p>All locally stored game data is retained on your device until you manually clear your browser data. No server-side database stores user information. Data is not backed up externally.</p>
+
+        <h2>📢 7. Policy Updates</h2>
+        <p>This Privacy Policy may be updated periodically to reflect changes in platform practices or legal requirements. Updates will be posted on the <a href="updateinfo/updateinfo.html">News & Updates</a> page with version numbers and dates.</p>
+
+        <h2>💬 8. Contact & Support</h2>
+        <p>For privacy-related questions, data concerns, or inquiries:</p>
+        <p style="margin-left: 20px;">
+            • <strong>Feedback Form:</strong> <a href="https://forms.gle/8c9Tbep4Z3ZrvxNU9">Submit here</a><br>
+            • <strong>GitHub Issues:</strong> Report concerns via <a href="https://github.com/Littletree866/infinity-nexus">the repository</a><br>
+            • <strong>GitHub Discussions:</strong> Ask questions in the community forum
         </p>
 
-        <h2>👤 2. Information I Collect</h2>
-        <p>
-            I do not collect personal information such as your name, email address, phone number, or home address.
-        </p>
+        <h2>🎯 9. GDPR & Legal Compliance</h2>
+        <p>While Infinity Nexus does not collect personal data, this platform respects privacy regulations including GDPR. No personal data means no data subject rights requests are necessary. Users retain complete control over their local device data.</p>
 
-        <h2>⚙️ 3. Automatic Data</h2>
-        <p>
-            There is no automatic data collection on this site.
-        </p>
-
-        <h2>🍪 4. Cookies</h2>
-        <p>
-            This site does not use tracking cookies or advertising cookies.
-        </p>
-        <p>
-            If any cookies are used, they are strictly for essential functionality (such as saving game progress locally
-            in your browser) and are not used to track you across other websites.
-        </p>
-
-        <h2>🔗 5. Third-Party Services</h2>
-        <p>
-            I do not sell your data. I do not share personal information with third parties. Please see the GitHub
-            repository for this project for any information about third-party tools or services that may be used in the
-            development or hosting of this site.
-        </p>
-
-        <h2>📢 6. Changes to This Policy</h2>
-        <p>
-            I may update this Privacy Policy from time to time. Any changes will be posted on the update info page,
-            which is available <a href="updateinfo/updateinfo.html">here</a>.
-        </p>
-        <h2>💬 7. Contact</h2>
-        <p>
-            If you have questions about this Privacy Policy, you can contact me through <a
-                href="https://forms.gle/8c9Tbep4Z3ZrvxNU9">this form</a>, with any bug reports, questions, or
-            suggestions, you may also use GitHub to submit an issue, send a message through discussions, or pull
-            request.
-        </p>
-        <h2>🎯 8. Summary</h2>
-        <p>Your privacy comes first on this platform. No tracking, no data selling, no commercialization. Just games and
-            good vibes! 🎮✨</p>
+        <h2>📜 10. Summary & Commitment</h2>
+        <p><strong>Your privacy is protected by design.</strong> Infinity Nexus operates with transparency and minimal data collection. No tracking, no analytics, no advertising, and no data commercialization. Just games, community, and good vibes. 🎮✨</p>
 
         <footer>
             © 2026 Infinity Nexus. All rights reserved.
         </footer>
     </div>
+    <script>
+        // Theme Toggle Functionality
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const newTheme = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            initTheme();
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        });
+    </script>
 </body>
 
 </html>

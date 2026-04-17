@@ -50,7 +50,7 @@
 		}
 
 		body {
-            font-family: 'Elms Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Trebuchet MS', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             line-height: 1.7;
             color: var(--text-primary);
             background: var(--bg-primary);
@@ -518,13 +518,13 @@
 
 		<header>
 			<h1>📖 Complete Game Documentation</h1>
-			<p>Comprehensive guides, detailed controls, strategies, and pro tips for all Infinity Nexus titles</p>
+			<p>Comprehensive guides, detailed controls, strategies, and   tips for all Infinity Nexus titles</p>
 			<p style="font-size: 0.95rem; margin-top: 12px; opacity: 0.9;">Last Updated: April 9, 2026 • Maintained by Littletree866</p>
 		</header>
 
 		<div class="intro-card">
 			<h2>⚜️ Welcome to the Documentation</h2>
-			<p>Click any game card to expand and view complete guides, controls, strategies, and pro tips.</p>
+			<p>Click any game card to expand and view complete guides, controls, strategies, and   tips.</p>
 		</div>
 
 		<!-- ===== MONTHLY CHALLENGES ===== -->
@@ -1612,28 +1612,65 @@
 	</script>
 	<script>
 		// Theme Toggle Functionality
+		// Storage Manager for safe localStorage access
+		const StorageManager = {
+			get: (key) => {
+				try {
+					return localStorage.getItem(key);
+				} catch (e) {
+					console.warn('Storage get error:', e);
+					return null;
+				}
+			},
+			set: (key, value) => {
+				try {
+					localStorage.setItem(key, value);
+				} catch (e) {
+					console.warn('Storage set error:', e);
+				}
+			}
+		};
+
 		function initTheme() {
-			const savedTheme = localStorage.getItem('theme') || 'dark';
-			document.documentElement.setAttribute('data-theme', savedTheme);
-			updateThemeIcon(savedTheme);
+			try {
+				const savedTheme = StorageManager.get('theme') || 'dark';
+				document.documentElement.setAttribute('data-theme', savedTheme);
+				updateThemeIcon(savedTheme);
+			} catch (e) {
+				console.warn('Theme init error:', e);
+				document.documentElement.setAttribute('data-theme', 'dark');
+			}
 		}
 
 		function updateThemeIcon(theme) {
-			const icon = document.getElementById('themeIcon');
-			icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+			try {
+				const icon = document.getElementById('themeIcon');
+				if (icon) {
+					icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+				}
+			} catch (e) {
+				console.warn('Theme icon update error:', e);
+			}
 		}
 
 		function toggleTheme() {
-			const current = document.documentElement.getAttribute('data-theme');
-			const newTheme = current === 'dark' ? 'light' : 'dark';
-			document.documentElement.setAttribute('data-theme', newTheme);
-			localStorage.setItem('theme', newTheme);
-			updateThemeIcon(newTheme);
+			try {
+				const current = document.documentElement.getAttribute('data-theme') || 'dark';
+				const newTheme = current === 'dark' ? 'light' : 'dark';
+				document.documentElement.setAttribute('data-theme', newTheme);
+				StorageManager.set('theme', newTheme);
+				updateThemeIcon(newTheme);
+			} catch (e) {
+				console.error('Theme toggle error:', e);
+			}
 		}
 
 		document.addEventListener('DOMContentLoaded', function () {
 			initTheme();
-			document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+			const themeBtn = document.getElementById('themeToggle');
+			if (themeBtn) {
+				themeBtn.addEventListener('click', toggleTheme);
+			}
 		});
 	</script>
 </body>

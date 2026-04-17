@@ -4,11 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🏰 Tower Defense Pro 🏰</title>
-    <link href="https://fonts.googleapis.com/css2?family=Trebuchet MS:wght@300;400;500;600;700&display=swap"
+    <title>Tower Defense  </title>
+    <link href="https://fonts.googleapis.com/css2?family=Trebuchet+MS:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="icon" href="../../icon.jpg" type="image/x-icon">
     <style>
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 215, 0, 0.15);
+            border: 2px solid #ffd700;
+            color: #ffd700;
+            padding: 12px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.3s;
+            z-index: 2001;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: inherit;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 215, 0, 0.25);
+            transform: scale(1.05);
+        }
+
+        .back-button:focus {
+            outline: 2px solid #ffd700;
+            outline-offset: 2px;
+        }
+
         * {
             box-sizing: border-box;
         }
@@ -1109,11 +1140,11 @@
 
         // Enhanced Enemy class
         class Enemy {
-            constructor(type, patTrebuchet MSex = 0) {
+            constructor(type, pathIndex = 0) {
                 const t = getEnemyTypeStats(type);
                 this.type = type;
-                this.patTrebuchet MSex = patTrebuchet MSex;
-                const selectedPath = patTrebuchet MSex === 0 ? path1 : path2;
+                this.pathIndex = pathIndex;
+                const selectedPath = pathIndex === 0 ? path1 : path2;
                 this.x = selectedPath[0].x;
                 this.y = selectedPath[0].y;
                 this.hp = t.hp;
@@ -1978,8 +2009,8 @@
             else if (r < 0.70) type = "runner";
 
             // Randomly choose which path the enemy spawns on
-            const patTrebuchet MSex = Math.random() < 0.5 ? 0 : 1;
-            game.enemies.push(new Enemy(type, patTrebuchet MSex));
+            const pathIndex = Math.random() < 0.5 ? 0 : 1;
+            game.enemies.push(new Enemy(type, pathIndex));
         }
 
         // Game loop
@@ -2184,6 +2215,13 @@
 
         document.getElementById("autoNext").addEventListener("change", (e) => {
             game.autoNext = e.target.checked;
+        });
+
+        // Keyboard support - Escape to exit
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                window.location.href = '../../index.html';
+            }
         });
 
         // Initialize

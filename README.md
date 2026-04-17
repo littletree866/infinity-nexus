@@ -1,4 +1,4 @@
-# Infinity Nexus (v1.22.26 — Released Apr 14 2026)
+# Infinity Nexus (v1.23.26 - Released May 1, 2026)
 
 
 ## General Info
@@ -17,25 +17,27 @@
 - **Smooth Animations** - CSS3 transitions and particle effects
 - **Accessible UI** - Clear controls and intuitive gameplay
 - **No Dependencies** - Standalone HTML files, no build process
-- **Has games for everyone** — All different types of games, play what you want.
+- **Has games for everyone** - All different types of games, play what you want.
 
 
 ## 📅 Updates Log
 
-- **Version 1.21.26** — April 4, 2026 
-- **Version 1.21.25** — March 26, 2026 
-- **Version 1.21.24** — March 16, 2026 
-- **Version 1.20.24** — March 6, 2026 
-- **Version 1.19.24** — February 24, 2026 
-- **Version 1.18.24** — February 7, 2026 and February 16, 2026
-- **Version 1.18.22** — February 2, 2026
-- **Version 1.17.20** — January 15, 2026
-- **Version 1.16.19** — January 1, 2026
-- **Version 1.15.18** — December 10, 2025
-- **Version 1.15.16** — November 25, 2025
-- **Version 1.14.15** — November 12, 2025
-- **Version 1.13.15** — October 25, 2025
-- **Version 1.12.14** — October 10, 2025
+- **Version 1.23.26** - May 1, 2026
+- **Version 1.22.26** - April 14, 2026
+- **Version 1.21.26** - April 4, 2026 
+- **Version 1.21.25** - March 26, 2026 
+- **Version 1.21.24** - March 16, 2026 
+- **Version 1.20.24** - March 6, 2026 
+- **Version 1.19.24** - February 24, 2026 
+- **Version 1.18.24** - February 7, 2026 and February 16, 2026
+- **Version 1.18.22** - February 2, 2026
+- **Version 1.17.20** - January 15, 2026
+- **Version 1.16.19** - January 1, 2026
+- **Version 1.15.18** - December 10, 2025
+- **Version 1.15.16** - November 25, 2025
+- **Version 1.14.15** - November 12, 2025
+- **Version 1.13.15** - October 25, 2025
+- **Version 1.12.14** - October 10, 2025
 
 
 ## 🤝 Contributing

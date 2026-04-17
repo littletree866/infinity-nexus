@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🏰 Tower Defense 2 Pro 🏰</title>
-    <link href="https://fonts.googleapis.com/css2?family=Trebuchet MS:wght@300;400;500;600;700&display=swap"
+    <title>Tower Defense 2  </title>
+    <link href="https://fonts.googleapis.com/css2?family=Trebuchet+MS:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="icon" href="../../icon.jpg" type="image/x-icon">
     <style>
@@ -1057,11 +1057,7 @@
             // Scale stats with wave
             if (type === 'normal') {
                 stats.hp += Math.floor(wave * 1.5);
-<<<<<<< HEAD
                 stats.gold += Math.floor(wave / 3);
-=======
-                stats.gold += Math.floor(wave / 3);
->>>>>>> ef2b66adec447d5c0c04f1770677c19698a1950d
             } else if (type === 'runner') {
                 stats.hp += Math.floor(wave * 1.2);
                 stats.gold += Math.floor(wave / 3);
@@ -1114,11 +1110,11 @@
 
         // Enhanced Enemy class
         class Enemy {
-            constructor(type, patTrebuchet MSex = 0) {
+            constructor(type, pathIndex = 0) {
                 const t = getEnemyTypeStats(type);
                 this.type = type;
-                this.patTrebuchet MSex = patTrebuchet MSex;
-                const selectedPath = patTrebuchet MSex === 0 ? path1 : path2;
+                this.pathIndex = pathIndex;
+                const selectedPath = pathIndex === 0 ? path1 : path2;
                 this.x = selectedPath[0].x;
                 this.y = selectedPath[0].y;
                 this.hp = t.hp;
@@ -2065,8 +2061,8 @@
 
 
             // Randomly choose which path the enemy spawns on
-            const patTrebuchet MSex = Math.random() < 0.5 ? 0 : 1;
-            game.enemies.push(new Enemy(type, patTrebuchet MSex));
+            const pathIndex = Math.random() < 0.5 ? 0 : 1;
+            game.enemies.push(new Enemy(type, pathIndex));
         }
 
         // Game loop

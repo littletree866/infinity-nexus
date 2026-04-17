@@ -3,11 +3,43 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Puzzle Master</title>
     <link rel="icon" href="../../icon.jpg" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Trebuchet MS:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        .back-button {
+            position: fixed; 
+            top: 20px;
+            left: 20px;
+            background: #6e8efb;
+            border: none;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.3s;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: inherit;
+        }
+
+        .back-button:hover {
+            background: #5669d8;
+            transform: scale(1.05);
+        }
+
+        .back-button:focus {
+            outline: 2px solid #ec4899;
+            outline-offset: 2px;
+        }
+
         body {
             font-family: 'Trebuchet MS', serif;
             background: linear-gradient(135deg, #6e8efb, #a777e3);
@@ -648,10 +680,11 @@
 </head>
 
 <body>
+    <a href="../../index.html" class="back-button" title="Return to Infinity Nexus" aria-label="Return to home">← Back</a>
     <div id="homeScreen">
         <div class="home-card-puzzle">
             <h2>🧩 Puzzle Master</h2>
-            <p>Solve sliding puzzles and unlock your logic skills!</p>
+            <p>Solve sliding puzzles and test your logic skills!</p>
             <div class="home-buttons-puzzle">
                 <button class="puzzle-home-btn" onclick="startFromHome()">🎮 Start Game</button>
                 <button class="puzzle-home-btn" onclick="togglePuzzleHelp()"
@@ -708,7 +741,7 @@
 
         <div class="game-container">
             <div class="header">
-                <h1><i class="fas fa-puzzle-piece"></i> 🧩 Puzzle Master Pro 🧩</h1>
+                <h1><i class="fas fa-puzzle-piece"></i> 🧩 Puzzle Master   🧩</h1>
                 <div class="settings">
                     <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
                         <i class="fas fa-moon"></i>
@@ -1559,6 +1592,13 @@
             // Initialize with saved sound preference
             document.addEventListener('DOMContentLoaded', () => {
                 updateAchievementsDisplay();
+            });
+
+            // Keyboard support - Escape to return home
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    window.location.href = '../../index.html';
+                }
             });
         </script>
     </div>

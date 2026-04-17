@@ -177,28 +177,65 @@
   </script>
   <script>
     // Theme Toggle Functionality
+    // Storage Manager for safe localStorage access
+    const StorageManager = {
+        get: (key) => {
+            try {
+                return localStorage.getItem(key);
+            } catch (e) {
+                console.warn('Storage get error:', e);
+                return null;
+            }
+        },
+        set: (key, value) => {
+            try {
+                localStorage.setItem(key, value);
+            } catch (e) {
+                console.warn('Storage set error:', e);
+            }
+        }
+    };
+
     function initTheme() {
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        document.documentElement.setAttribute('data-theme', savedTheme);
-        updateThemeIcon(savedTheme);
+        try {
+            const savedTheme = StorageManager.get('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        } catch (e) {
+            console.warn('Theme init error:', e);
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
     }
 
     function updateThemeIcon(theme) {
-        const icon = document.getElementById('themeIcon');
-        icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+        try {
+            const icon = document.getElementById('themeIcon');
+            if (icon) {
+                icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+        } catch (e) {
+            console.warn('Theme icon update error:', e);
+        }
     }
 
     function toggleTheme() {
-        const current = document.documentElement.getAttribute('data-theme');
-        const newTheme = current === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateThemeIcon(newTheme);
+        try {
+            const current = document.documentElement.getAttribute('data-theme') || 'dark';
+            const newTheme = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            StorageManager.set('theme', newTheme);
+            updateThemeIcon(newTheme);
+        } catch (e) {
+            console.error('Theme toggle error:', e);
+        }
     }
 
     document.addEventListener('DOMContentLoaded', function () {
         initTheme();
-        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        const themeBtn = document.getElementById('themeToggle');
+        if (themeBtn) {
+            themeBtn.addEventListener('click', toggleTheme);
+        }
     });
   </script>
 </body>

@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎮 The Impossible Game Pro 🎮</title>
+    <title>The Impossible Game  </title>
     <link rel="icon" href="../../icon.jpg" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Trebuchet MS:wght@300;400;500;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Trebuchet+MS:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <style>
         * {
@@ -431,8 +431,8 @@
         <div id="instructionsScreen" class="screen">
             <h2>The Impossible Game</h2>
             <p>Reach the goal while avoiding enemies and traps!</p>
-            <p>Collect coins for points and power-ups for abilities.</p>
-            <p>Squish enemies for health drops when injured!</p>
+            <p>Collect coins for bonus points!</p>
+            <p>Enemies may drop extra health if you're injured!</p>
             <button onclick="startGame()">Start Game</button>
         </div>
     </div>
@@ -499,6 +499,7 @@
         let goal = null;
         let decorations = [];
         let backgrounds = [];
+        let fakePlatforms = []; // Track fake platforms separately
         let lastTime = performance.now();
 
         // Update hearts display
@@ -524,7 +525,7 @@
         }
 
         function makeCoin(x, y) {
-            return { x, y, w: 20, h: 20, collected: false, anim: 0 };
+            return { x, y, w: 20, h: 20, collected: false, anim: 0, points: 100 };
         }
 
         function makePowerUp(x, y, type = 'doubleJump') {
@@ -564,25 +565,23 @@
             heartDrops = [];
             checkpoints = [];
             lastCheckpoint = null;
+            fakePlatforms = [];
         }
 
         function createCheckpointsForLevel() {
             checkpoints = [];
             if (level === 1) {
                 checkpoints.push(makeCheckpoint(50, 800, true)); // Starting checkpoint
-                checkpoints.push(makeCheckpoint(900, 546, false));
             } else if (level === 2) {
                 checkpoints.push(makeCheckpoint(50, 800, true)); // Starting checkpoint
-
             } else if (level === 3) {
-                checkpoints.push(makeCheckpoint(50, 750, true)); // Starting checkpoint
-                checkpoints.push(makeCheckpoint(850, 600, false));
-                checkpoints.push(makeCheckpoint(1650, 350, false));
+                checkpoints.push(makeCheckpoint(50, 800, true)); // Starting checkpoint
             } else if (level === 4) {
-                checkpoints.push(makeCheckpoint(50, 750, true)); // Starting checkpoint
-                checkpoints.push(makeCheckpoint(450, 700, false));
-                checkpoints.push(makeCheckpoint(1250, 400, false));
-                checkpoints.push(makeCheckpoint(2600, 200, false));
+                checkpoints.push(makeCheckpoint(50, 800, true)); // Starting checkpoint
+            } else if (level === 5) {
+                checkpoints.push(makeCheckpoint(50, 800, true)); // Starting checkpoint
+            } else if (level === 6) {
+                checkpoints.push(makeCheckpoint(50, 800, true)); // Starting checkpoint
             }
             lastCheckpoint = checkpoints[0]; // Set starting checkpoint as last
         }
@@ -658,188 +657,292 @@
 
             // Level designs
             if (level === 1) {
-                world.width = 1800;
+                world.width = 2500;
                 platforms = [
-                    staticPlat(0, 860, 1800, 40),
+                    staticPlat(0, 860, 2400, 40),
+                    
+                    staticPlat(150, 780, 100, 20),
+                    staticPlat(350, 740, 100, 20),
 
+                    { x: 500, y: 700, w: 100, h: 20, type: 'lift', vx: 2.0, minX: 500, maxX: 900, color: '#FF6B8B' },
 
-
-                    staticPlat(200, 750, 120, 20),
-                    staticPlat(400, 700, 120, 20),
-                    movingPlat(620, 650, 140, 20, 600, 850, 1.8),
-
-                    staticPlat(900, 600, 120, 20),
-                    staticPlat(1100, 550, 120, 20),
-
-                    staticPlat(1340, 500, 80, 20),
-                    staticPlat(1500, 400, 80, 20),
-
-                    movingPlat(1480, 350, 80, 20, 1260, 1480, -2.0),
-
-                    staticPlat(1150, 360, 80, 20),
-                    staticPlat(970, 370, 80, 20),
-
-
-                    spike(450, 856, 100, 12),
-                    spike(750, 856, 100, 12),
-
+                    
+                    
                 ];
 
-                enemies.push(makeEnemy(320, 840, 300, 800, 1.5));
+                // enemies.push(makeEnemy(280, 820, 250, 400, 1.5));
+                // enemies.push(makeEnemy(900, 720, 850, 1050, 1.8));
 
-                goal = { x: 800, y: 360, w: 50, h: 70, anim: 0 };
+                goal = { x: 2250, y: 140, w: 50, h: 70, anim: 0 };
 
                 coins.push(
-                    makeCoin(250, 710),
-                    makeCoin(670, 610),
-                    makeCoin(1050, 560),
-                    makeCoin(1350, 450),
-                    makeCoin(1550, 350)
+                    makeCoin(750, 600),
+                    makeCoin(1750, 380),
+                    makeCoin(2200, 180)
                 );
-
             }
 
             if (level === 2) {
-                world.width = 2300;
+                world.width = 2900;
                 platforms = [
-                    staticPlat(0, 860, 2300, 40),
-
-                    staticPlat(200, 750, 120, 20),
-                    staticPlat(400, 700, 120, 20),
-                    staticPlat(600, 650, 120, 20),
-
-                    staticPlat(900, 600, 120, 20),
-                    staticPlat(1100, 550, 120, 20),
-                    staticPlat(1300, 500, 120, 20),
-
-                    staticPlat(1500, 450, 120, 20),
-
-                    bouncyPlat(1800, 500, 160, 20),
-
-                    spike(750, 850, 100, 12),
-                    spike(1950, 850, 100, 12),
-
-                    // bonus
-                    staticPlat(1900, 300, 50, 20),
-                    staticPlat(1800, 250, 50, 20),
-
-                    staticPlat(1700, 200, 50, 20),
-                    staticPlat(1600, 150, 50, 20),
-
-                    staticPlat(1500, 100, 50, 20),
-                    staticPlat(1400, 100, 50, 20),
-
-                    movingPlat(1300, 300, 80, 20, 150, 1350, 2.5),
-
-                    spike(450, 400, 100, 12),
-
-
+                    staticPlat(0, 860, 2900, 40),
+                    
+                    staticPlat(150, 800, 80, 20),
+                    staticPlat(300, 760, 80, 20),
+                    staticPlat(450, 720, 80, 20),
+                    
+                    bouncyPlat(600, 680, 100, 20),
+                    staticPlat(800, 640, 80, 20),
+                    movingPlat(950, 600, 90, 20, 900, 1100, 2.2),
+                    
+                    // Fake platforms section
+                    staticPlat(1200, 560, 80, 20),
+                    { x: 1350, y: 530, w: 90, h: 20, type: 'fake', triggered: false, fadeStart: 0 }, // Fake platform
+                    staticPlat(1500, 490, 80, 20),
+                    
+                    staticPlat(1700, 450, 80, 20),
+                    conveyor(1850, 410, 120, 20, 1),
+                    staticPlat(2050, 370, 80, 20),
+                    
+                    // Lift platforms
+                    { x: 2200, y: 330, w: 100, h: 20, type: 'lift', vx: 1.5, minX: 2100, maxX: 2300, color: '#FF6B8B' },
+                    
+                    staticPlat(2400, 280, 100, 20),
+                    staticPlat(2650, 200, 120, 20),
+                    
+                    spike(500, 856, 80, 12),
+                    spike(1600, 856, 80, 12),
+                    spike(2300, 856, 80, 12),
                 ];
 
-                enemies.push(makeEnemy(320, 840, 300, 800, 1.5));
-                // unreachable goal for now
-                goal = { x: 100, y: 300, w: 50, h: 70, anim: 0 };
+                enemies.push(makeEnemy(250, 820, 200, 500, 1.6));
+                enemies.push(makeEnemy(1050, 640, 900, 1200, 1.9));
+                enemies.push(makeEnemy(1900, 450, 1800, 2150, 2.0));
+
+                goal = { x: 2680, y: 80, w: 50, h: 70, anim: 0 };
 
                 coins.push(
-                    makeCoin(280, 700),
-                    makeCoin(700, 610),
-                    makeCoin(1150, 510),
-                    makeCoin(1600, 310),
-                    makeCoin(1850, 260)
+                    makeCoin(1350, 460),
+                    makeCoin(1850, 330),
+                    makeCoin(2650, 150)
                 );
-
             }
 
             if (level === 3) {
-                world.width = 2600;
+                world.width = 3200;
                 platforms = [
-                    staticPlat(0, 860, 2600, 40),
-                    lava(150, 876, 100, 24),
-
-
-                    movingPlat(300, 750, 120, 20, 280, 500, 2.0),
-                    movingPlat(600, 700, 120, 20, 550, 750, 2.2),
-
-                    fallPlat(850, 650, 100, 20, 400),
-                    fallPlat(1000, 600, 100, 20, 400),
-
-                    conveyor(1300, 500, 200, 20, 1),
-                    conveyor(1520, 450, 200, 20, -1),
-
-                    staticPlat(1350, 400, 60, 20),
-                    spike(1350, 396, 60, 12),
-
-                    bouncyPlat(1650, 400, 140, 20),
-                    staticPlat(1800, 350, 120, 20),
-
-                    lava(900, 876, 400, 24),
-                    lava(1400, 876, 300, 24)
+                    staticPlat(0, 860, 3200, 40),
+                    
+                    staticPlat(150, 800, 100, 20),
+                    movingPlat(350, 760, 100, 20, 300, 500, 2.0),
+                    staticPlat(600, 720, 100, 20),
+                    
+                    { x: 800, y: 680, w: 90, h: 20, type: 'fake', triggered: false, fadeStart: 0 },
+                    staticPlat(950, 640, 100, 20),
+                    bouncyPlat(1150, 600, 110, 20),
+                    
+                    staticPlat(1350, 560, 100, 20),
+                    { x: 1550, y: 520, w: 100, h: 20, type: 'lift', vx: -1.8, minX: 1400, maxX: 1700, color: '#FF6B8B' },
+                    
+                    staticPlat(1700, 480, 100, 20),
+                    conveyor(1900, 440, 130, 20, -1),
+                    staticPlat(2100, 400, 100, 20),
+                    
+                    { x: 2300, y: 360, w: 90, h: 20, type: 'fake', triggered: false, fadeStart: 0 },
+                    staticPlat(2450, 320, 100, 20),
+                    
+                    staticPlat(2650, 280, 100, 20),
+                    movingPlat(2850, 240, 110, 20, 2800, 3050, 2.3),
+                    
+                    spike(500, 856, 80, 12),
+                    spike(1200, 856, 80, 12),
+                    spike(2000, 856, 80, 12),
+                    spike(2800, 856, 100, 12),
                 ];
 
-                enemies.push(makeEnemy(320, 730, 300, 500, 1.8));
-                enemies.push(makeEnemy(620, 680, 600, 750, 2.0));
-                enemies.push(makeEnemy(1020, 530, 1000, 1150, 1.5));
+                enemies.push(makeEnemy(300, 820, 250, 550, 1.7));
+                enemies.push(makeEnemy(1000, 680, 950, 1200, 1.8));
+                enemies.push(makeEnemy(1950, 500, 1850, 2150, 1.9));
+                enemies.push(makeEnemy(2700, 360, 2650, 2950, 2.0));
 
-                goal = { x: 2500, y: 250, w: 50, h: 70, anim: 0 };
+                goal = { x: 3050, y: 100, w: 50, h: 70, anim: 0 };
 
                 coins.push(
-                    makeCoin(350, 710),
-                    makeCoin(650, 660),
-                    makeCoin(900, 610),
-                    makeCoin(1050, 560),
-                    makeCoin(1400, 460),
-                    makeCoin(1480, 310),
-                    makeCoin(2000, 260)
+                    makeCoin(800, 620),
+                    makeCoin(1550, 440),
+                    makeCoin(2850, 190)
                 );
-
             }
 
             if (level === 4) {
-                world.width = 3000;
+                world.width = 3600;
                 platforms = [
-                    staticPlat(0, 860, 3000, 40),
-
-                    movingPlat(250, 800, 100, 20, 240, 400, 2.8),
-                    movingPlat(450, 750, 100, 20, 430, 600, 2.5),
-
-                    bouncyPlat(1100, 500, 100, 20),
-                    bouncyPlat(1250, 450, 100, 20),
-                    bouncyPlat(1400, 400, 100, 20),
-
-                    conveyor(1500, 600, 200, 20, 1),
-                    conveyor(1720, 550, 200, 20, -1),
-
-                    fallPlat(1950, 500, 80, 20, 300),
-                    fallPlat(2050, 450, 80, 20, 300),
-
-                    movingPlat(2400, 300, 120, 20, 2380, 2550, 3.2),
-                    movingPlat(2600, 250, 120, 20, 2580, 2750, 3.0),
-
-                    lava(200, 876, 600, 24),
-                    lava(850, 876, 300, 24),
-                    lava(1900, 876, 400, 24)
+                    staticPlat(0, 860, 3600, 40),
+                    
+                    movingPlat(200, 800, 110, 20, 150, 400, 2.2),
+                    staticPlat(550, 760, 100, 20),
+                    bouncyPlat(750, 720, 100, 20),
+                    
+                    { x: 950, y: 680, w: 100, h: 20, type: 'fake', triggered: false, fadeStart: 0 },
+                    staticPlat(1150, 640, 100, 20),
+                    conveyor(1350, 600, 140, 20, 1),
+                    
+                    staticPlat(1600, 560, 100, 20),
+                    { x: 1800, y: 520, w: 110, h: 20, type: 'lift', vx: 1.9, minX: 1700, maxX: 2000, color: '#FF6B8B' },
+                    
+                    movingPlat(2000, 480, 100, 20, 1950, 2200, -2.1),
+                    staticPlat(2300, 440, 100, 20),
+                    bouncyPlat(2500, 400, 110, 20),
+                    
+                    { x: 2700, y: 360, w: 100, h: 20, type: 'fake', triggered: false, fadeStart: 0 },
+                    staticPlat(2900, 320, 100, 20),
+                    conveyor(3100, 280, 140, 20, -1),
+                    
+                    staticPlat(3300, 240, 100, 20),
+                    movingPlat(3450, 180, 120, 20, 3400, 3550, 2.0),
+                    
+                    spike(600, 856, 80, 12),
+                    spike(1400, 856, 80, 12),
+                    spike(2200, 856, 100, 12),
+                    spike(3000, 856, 100, 12),
+                    
+                    lava(400, 876, 150, 24),
+                    lava(1800, 876, 200, 24),
                 ];
 
-                enemies.push(makeEnemy(270, 780, 250, 400, 2.2));
-                enemies.push(makeEnemy(470, 730, 450, 600, 2.0));
-                enemies.push(makeEnemy(820, 630, 800, 960, 1.8));
-                enemies.push(makeEnemy(1520, 580, 1500, 1700, 2.3));
+                enemies.push(makeEnemy(300, 820, 200, 500, 1.8));
+                enemies.push(makeEnemy(800, 700, 750, 1050, 1.9));
+                enemies.push(makeEnemy(1500, 600, 1400, 1700, 2.0));
+                enemies.push(makeEnemy(2400, 480, 2300, 2600, 1.95));
+                enemies.push(makeEnemy(3000, 350, 2900, 3200, 2.0));
 
-                goal = { x: 2900, y: 150, w: 50, h: 70, anim: 0 };
+                goal = { x: 3500, y: 50, w: 50, h: 70, anim: 0 };
 
                 coins.push(
-                    makeCoin(300, 760),
-                    makeCoin(500, 710),
-                    makeCoin(700, 660),
-                    makeCoin(850, 610),
-                    makeCoin(1150, 460),
-                    makeCoin(1350, 410),
-                    makeCoin(1550, 560),
-                    makeCoin(2450, 260),
-                    makeCoin(2650, 210)
+                    makeCoin(950, 610),
+                    makeCoin(2700, 290),
+                    makeCoin(3450, 130)
                 );
-
             }
+
+            if (level === 5) {
+                world.width = 4000;
+                platforms = [
+                    staticPlat(0, 860, 4000, 40),
+                    
+                    staticPlat(200, 800, 100, 20),
+                    movingPlat(400, 760, 110, 20, 350, 600, 2.3),
+                    bouncyPlat(700, 720, 100, 20),
+                    
+                    { x: 900, y: 680, w: 100, h: 20, type: 'fake', triggered: false, fadeStart: 0 },
+                    staticPlat(1100, 640, 100, 20),
+                    conveyor(1300, 600, 150, 20, 1),
+                    
+                    staticPlat(1600, 560, 100, 20),
+                    { x: 1800, y: 520, w: 120, h: 20, type: 'lift', vx: 2.0, minX: 1700, maxX: 2050, color: '#FF6B8B' },
+                    
+                    movingPlat(2100, 480, 110, 20, 2000, 2300, -2.2),
+                    staticPlat(2400, 440, 100, 20),
+                    bouncyPlat(2600, 400, 110, 20),
+                    
+                    { x: 2800, y: 360, w: 100, h: 20, type: 'fake', triggered: false, fadeStart: 0 },
+                    staticPlat(3000, 320, 100, 20),
+                    conveyor(3200, 280, 150, 20, -1),
+                    
+                    staticPlat(3500, 240, 100, 20),
+                    { x: 3700, y: 200, w: 110, h: 20, type: 'lift', vx: -2.1, minX: 3550, maxX: 3800, color: '#FF6B8B' },
+                    
+                    staticPlat(3800, 160, 150, 20),
+                    
+                    spike(600, 856, 80, 12),
+                    spike(1400, 856, 80, 12),
+                    spike(2200, 856, 100, 12),
+                    spike(3100, 856, 100, 12),
+                    spike(3700, 856, 120, 12),
+                    
+                    lava(300, 876, 150, 24),
+                    lava(1900, 876, 200, 24),
+                    lava(3300, 876, 180, 24),
+                ];
+
+                enemies.push(makeEnemy(350, 820, 250, 600, 1.8));
+                enemies.push(makeEnemy(800, 700, 750, 1050, 1.9));
+                enemies.push(makeEnemy(1500, 600, 1400, 1700, 2.0));
+                enemies.push(makeEnemy(2500, 480, 2400, 2700, 1.95));
+                enemies.push(makeEnemy(3200, 350, 3100, 3400, 2.1));
+
+                goal = { x: 3900, y: 0, w: 50, h: 70, anim: 0 };
+
+                coins.push(
+                    makeCoin(900, 610),
+                    makeCoin(2800, 290),
+                    makeCoin(3700, 120)
+                );
+            }
+
+            if (level === 6) {
+                world.width = 4400;
+                platforms = [
+                    staticPlat(0, 860, 4400, 40),
+                    
+                    movingPlat(250, 800, 120, 20, 200, 500, 2.4),
+                    staticPlat(650, 760, 100, 20),
+                    bouncyPlat(850, 720, 110, 20),
+                    
+                    { x: 1050, y: 680, w: 100, h: 20, type: 'fake', triggered: false, fadeStart: 0 },
+                    staticPlat(1250, 640, 100, 20),
+                    conveyor(1450, 600, 160, 20, 1),
+                    
+                    staticPlat(1750, 560, 100, 20),
+                    { x: 1950, y: 520, w: 120, h: 20, type: 'lift', vx: 2.1, minX: 1850, maxX: 2150, color: '#FF6B8B' },
+                    
+                    movingPlat(2250, 480, 110, 20, 2150, 2450, -2.3),
+                    staticPlat(2550, 440, 100, 20),
+                    bouncyPlat(2750, 400, 110, 20),
+                    
+                    { x: 2950, y: 360, w: 100, h: 20, type: 'fake', triggered: false, fadeStart: 0 },
+                    staticPlat(3150, 320, 100, 20),
+                    conveyor(3350, 280, 160, 20, -1),
+                    
+                    staticPlat(3650, 240, 100, 20),
+                    { x: 3850, y: 200, w: 110, h: 20, type: 'lift', vx: -2.2, minX: 3700, maxX: 3950, color: '#FF6B8B' },
+                    
+                    staticPlat(3950, 160, 100, 20),
+                    movingPlat(4100, 110, 130, 20, 4050, 4250, 2.4),
+                    
+                    spike(700, 856, 100, 12),
+                    spike(1500, 856, 80, 12),
+                    spike(2300, 856, 100, 12),
+                    spike(3250, 856, 100, 12),
+                    spike(3900, 856, 120, 12),
+                    spike(4200, 856, 100, 12),
+                    
+                    lava(400, 876, 180, 24),
+                    lava(2000, 876, 220, 24),
+                    lava(3450, 876, 200, 24),
+                ];
+
+                enemies.push(makeEnemy(400, 820, 300, 650, 1.8));
+                enemies.push(makeEnemy(900, 700, 850, 1150, 1.9));
+                enemies.push(makeEnemy(1600, 600, 1500, 1800, 2.0));
+                enemies.push(makeEnemy(2650, 480, 2550, 2850, 1.95));
+                enemies.push(makeEnemy(3350, 350, 3250, 3550, 2.1));
+                enemies.push(makeEnemy(4100, 150, 4000, 4300, 2.0));
+
+                goal = { x: 4250, y: -40, w: 50, h: 70, anim: 0 };
+
+                coins.push(
+                    makeCoin(1050, 610),
+                    makeCoin(2950, 290),
+                    makeCoin(4100, 40)
+                );
+            }
+
+            // Extract fake platforms from platforms array
+            fakePlatforms = platforms.filter(p => p.type === 'fake');
+            
+            // Remove fake platforms from main platforms array (they're handled separately)
+            platforms = platforms.filter(p => p.type !== 'fake');
 
             createCheckpointsForLevel();
             resetPlayer();
@@ -862,7 +965,7 @@
                 case "shift":
                     // secret beta key to auto-complete levels for testing
                     if (e.shiftKey) {
-                        if (level < 4) {
+                        if (level < 6) {
                             loadLevel(level + 1);
                         } else {
                             winScore.textContent = score;
@@ -1145,7 +1248,7 @@
                         heart.scale = 1 - (t * 0.5);
 
                         // Update heart color phases
-                        if (t < 0.5) {
+                        if (t < 0.5) { 
                             // Phase 1: Green heart drifting to position
                             heart.colorPhase = 'green';
                         } else if (t < 0.9) {
@@ -1304,6 +1407,43 @@
             }
             player.onGround = onGround;
 
+            // Fake platform collision
+            for (let fp of fakePlatforms) {
+                if (!fp.triggered && rectCollision(player, fp) && player.vy > 0 && (player.y + player.h) - player.vy <= fp.y + 10) {
+                    fp.triggered = true;
+                    fp.fadeStart = gameTime;
+                    player.y = fp.y - player.h;
+                    player.vy = 0;
+                    player.jumping = false;
+                    onGround = true;
+                    createParticles(fp.x + fp.w / 2, fp.y, 15, "#FF6B6B", 3);
+                }
+            }
+            
+            // Lift platform collision
+            for (let l of platforms) {
+                if (l.type === 'lift' && rectCollision(player, l)) {
+                    // Calculate where player was in previous frame
+                    let previousBottom = (player.y + player.h) - player.vy;
+                    
+                    // Landing on top of lift
+                    if (player.vy >= 0 && previousBottom <= l.y + 10) {
+                        player.y = l.y - player.h;
+                        player.vy = 0;
+                        player.jumping = false;
+                        onGround = true;
+                        
+                        // Move player with lift
+                        player.x += l.vx;
+                        
+                        // Optional: Constrain player to lift boundaries
+                        let leftBound = l.x;
+                        let rightBound = l.x + l.w - player.w;
+                        player.x = Math.max(leftBound, Math.min(rightBound, player.x));
+                    }
+                }
+            }
+
             // Enemy collision
             for (let i = enemies.length - 1; i >= 0; i--) {
                 const e = enemies[i];
@@ -1365,6 +1505,13 @@
                     if (h.x < h.minX) h.vx = Math.abs(h.vx);
                     if (h.x + h.w > h.maxX) h.vx = -Math.abs(h.vx);
                 }
+                
+                // Update lift platforms
+                if (h.type === 'lift') {
+                    h.x += h.vx;
+                    if (h.x < h.minX) h.vx = Math.abs(h.vx);
+                    if (h.x + h.w > h.maxX) h.vx = -Math.abs(h.vx);
+                }
 
                 // Update falling platforms
                 if (h.type === 'fall' && h.falling) {
@@ -1379,7 +1526,7 @@
                     c.anim += 0.2;
                     if (rectCollision(player, c)) {
                         c.collected = true;
-                        score += 75;
+                        score += 100;
                         createParticles(c.x + 10, c.y + 10, 15, "#ffdd00", 3);
                     }
                 }
@@ -1405,7 +1552,7 @@
             // Goal collision
             if (goal && rectCollision(player, goal)) {
                 goal.anim += 0.1;
-                if (level < 4) {
+                if (level < 6) {
                     loadLevel(level + 1);
                     score += 750;
                     createParticles(goal.x + 25, goal.y + 35, 40, "#FFD700", 5);
@@ -1721,24 +1868,37 @@
                     p.anim += 0.2;
                     ctx.fillStyle = p.color;
                     ctx.fillRect(sx, sy, p.w, p.h);
-
-                    // Arrow pattern
-                    ctx.fillStyle = "#6666ff";
-                    for (let i = 0; i < p.w / 20; i++) {
-                        let arrowX = sx + (i * 20 - p.anim * p.dir * 20) % p.w;
+                    
+                    // Conveyor belt pattern
+                    ctx.strokeStyle = "#4444CC";
+                    ctx.lineWidth = 2;
+                    for (let i = 0; i < p.w / 15; i++) {
+                        let beltX = sx + (i * 15 - p.anim * p.dir * 15) % p.w;
+                        ctx.beginPath();
+                        ctx.arc(beltX, sy + p.h / 2, 4, 0, Math.PI * 2);
+                        ctx.stroke();
+                    }
+                    
+                    // Direction arrows
+                    ctx.fillStyle = "#00FFFF";
+                    for (let i = 0; i < p.w / 25; i++) {
+                        let arrowX = sx + (i * 25 - p.anim * p.dir * 25) % p.w;
                         ctx.beginPath();
                         if (p.dir > 0) {
-                            ctx.moveTo(arrowX, sy + p.h / 2);
-                            ctx.lineTo(arrowX + 15, sy + 5);
-                            ctx.lineTo(arrowX + 15, sy + p.h - 5);
+                            ctx.moveTo(arrowX + 8, sy + p.h / 2 - 5);
+                            ctx.lineTo(arrowX + 12, sy + p.h / 2);
+                            ctx.lineTo(arrowX + 8, sy + p.h / 2 + 5);
                         } else {
-                            ctx.moveTo(arrowX + 15, sy + p.h / 2);
-                            ctx.lineTo(arrowX, sy + 5);
-                            ctx.lineTo(arrowX, sy + p.h - 5);
+                            ctx.moveTo(arrowX + 2, sy + p.h / 2);
+                            ctx.lineTo(arrowX - 2, sy + p.h / 2 - 5);
+                            ctx.lineTo(arrowX - 2, sy + p.h / 2 + 5);
                         }
-                        ctx.closePath();
-                        ctx.fill();
+                        ctx.stroke();
                     }
+                    
+                    ctx.strokeStyle = "#5555DD";
+                    ctx.lineWidth = 3;
+                    ctx.strokeRect(sx, sy, p.w, p.h);
 
                     // Grass for conveyor platforms
                     ctx.fillStyle = "#98FB98";
@@ -1768,6 +1928,47 @@
                         ctx.fillRect(grassX, sy - 3, 1, grassHeight);
                         ctx.fillStyle = "#5CDB95";
                     }
+                    break;
+                
+                case 'lift':
+                    // Lift platform (moving platform that player sticks to)
+                    ctx.fillStyle = "#FF6B8B";
+                    ctx.fillRect(sx, sy, p.w, p.h);
+                    ctx.strokeStyle = "#FF1744";
+                    ctx.lineWidth = 3;
+                    ctx.strokeRect(sx, sy, p.w, p.h);
+                    
+                    // Lift indicator arrows
+                    ctx.fillStyle = "#FFD700";
+                    const arrowSize = 12;
+                    if (p.vx > 0) {
+                        // Moving right
+                        for (let i = 0; i < p.w; i += 30) {
+                            ctx.beginPath();
+                            ctx.moveTo(sx + i + arrowSize / 2, sy + p.h / 2 - arrowSize / 2);
+                            ctx.lineTo(sx + i + arrowSize / 2 + arrowSize, sy + p.h / 2);
+                            ctx.lineTo(sx + i + arrowSize / 2, sy + p.h / 2 + arrowSize / 2);
+                            ctx.fill();
+                        }
+                    } else {
+                        // Moving left
+                        for (let i = 0; i < p.w; i += 30) {
+                            ctx.beginPath();
+                            ctx.moveTo(sx + i + arrowSize / 2, sy + p.h / 2);
+                            ctx.lineTo(sx + i + arrowSize / 2 - arrowSize, sy + p.h / 2 - arrowSize / 2);
+                            ctx.lineTo(sx + i + arrowSize / 2 - arrowSize, sy + p.h / 2 + arrowSize / 2);
+                            ctx.fill();
+                        }
+                    }
+                    
+                    // Grass on top
+                    ctx.fillStyle = "#FFB6C1";
+                    for (let i = 0; i < p.w / 12; i++) {
+                        let grassX = sx + i * 12 + Math.sin(i) * 2;
+                        let grassHeight = 6 + Math.sin(i + gameTime) * 3;
+                        ctx.fillRect(grassX, sy - 2, 2, grassHeight);
+                    }
+                    break;
             }
 
             ctx.restore();
@@ -1785,6 +1986,53 @@
             // Draw all platforms
             for (let p of platforms) {
                 drawPlatform(p);
+            }
+
+            // Draw fake platforms
+            for (let fp of fakePlatforms) {
+                let sx = fp.x - camera.x;
+                let sy = fp.y - camera.y;
+                
+                if (sx + fp.w < 0 || sx > canvas.width || sy + fp.h < 0 || sy > canvas.height) continue;
+                
+                let alpha = 1;
+                if (fp.triggered) {
+                    const fadeTime = gameTime - fp.fadeStart;
+                    if (fadeTime < 0.5) {
+                        alpha = 1 - (fadeTime / 0.5);
+                    } else {
+                        // Check if player is still on it (reset if off)
+                        if (!rectCollision(player, fp)) {
+                            fp.triggered = false;
+                        } else {
+                            alpha = 0;
+                        }
+                    }
+                }
+                
+                ctx.globalAlpha = alpha;
+                ctx.fillStyle = "#FFB84D";
+                ctx.fillRect(sx, sy, fp.w, fp.h);
+                ctx.strokeStyle = "#FF9800";
+                ctx.lineWidth = 3;
+                ctx.strokeRect(sx, sy, fp.w, fp.h);
+                
+                // Dashed pattern to indicate trap
+                ctx.strokeStyle = "rgba(255, 200, 0, 0.5)";
+                ctx.lineWidth = 2;
+                ctx.setLineDash([5, 5]);
+                ctx.strokeRect(sx + 5, sy + 5, fp.w - 10, fp.h - 10);
+                ctx.setLineDash([]);
+                
+                // Grass on top
+                ctx.fillStyle = "#FFD700";
+                for (let i = 0; i < fp.w / 12; i++) {
+                    let grassX = sx + i * 12 + Math.sin(i) * 2;
+                    let grassHeight = 6;
+                    ctx.fillRect(grassX, sy - 3, 2, grassHeight);
+                }
+                
+                ctx.globalAlpha = 1;
             }
 
             // Draw enemies
@@ -2072,6 +2320,8 @@
         instructionsScreen.style.display = "block";
         lastTime = performance.now();
         loop(lastTime);
+
+
     </script>
 </body>
 

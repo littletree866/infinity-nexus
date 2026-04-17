@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>💰 Wealth Builder Pro 💰</title>
+  <title>Wealth Builder  </title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link rel="icon" href="../../icon.jpg" type="image/x-icon">
   <!-- Fonts -->
@@ -28,6 +28,37 @@
       --success-color: #10b981;
       --warning-color: #f59e0b;
       --danger-color: #ef4444;
+    }
+
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid white;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      transition: all 0.3s;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: inherit;
+    }
+
+    .back-button:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: scale(1.05);
+    }
+
+    .back-button:focus {
+      outline: 2px solid white;
+      outline-offset: 2px;
     }
 
     * {
@@ -634,6 +665,7 @@
 </head>
 
 <body>
+  <a href="../../index.html" class="back-button" title="Return to Infinity Nexus" aria-label="Return to home">← Back</a>
   <!-- Home Screen -->
   <div id="homeScreen"
     style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--primary-gradient); display: flex; align-items: center; justify-content: center; z-index: 9999;">
@@ -1435,6 +1467,13 @@
 
     // Start the game
     init();
+
+    // Keyboard support - Escape to exit
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        window.location.href = '../../index.html';
+      }
+    });
   </script>
 </body>
 

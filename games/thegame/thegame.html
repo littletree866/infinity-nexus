@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DO NOT PRESS</title>
   <link rel="icon" href="../../icon.jpg" type="image/x-icon">
   <style>
@@ -15,6 +16,37 @@
       color: #eaeaea;
       font-family: serif;
       overflow: hidden;
+    }
+
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid #555;
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      transition: all 0.3s;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .back-button:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: #999;
+      transform: scale(1.05);
+    }
+
+    .back-button:focus {
+      outline: 2px solid #6e8efb;
+      outline-offset: 2px;
     }
 
     @keyframes shake {
@@ -114,8 +146,10 @@
 
 <body>
 
-  <div id="narrator">Please do not press the button.</div>
-  <button id="btn">DO NOT PRESS</button>
+  <a href="../../index.html" class="back-button" title="Return to Infinity Nexus">← Back</a>
+
+  <div id="narrator" role="status" aria-live="polite">Please do not press the button.</div>
+  <button id="btn" aria-label="Press button to activate the mysterious game">DO NOT PRESS</button>
 
   <script>
     let presses = 0;
@@ -260,6 +294,13 @@
         document.body.innerHTML += "<div style='position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);color:#0f0;font-size:2em;text-shadow:0 0 20px #0f0;z-index:10000'>THANK YOU</div>";
       }
     };
+
+    // Keyboard support
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        window.location.href = '../../index.html';
+      }
+    });
   </script>
 
 </body>

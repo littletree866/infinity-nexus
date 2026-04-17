@@ -16,7 +16,7 @@
     <style>
         /* Modern Color Themes - CSS Variables */
         :root[data-theme="dark"] {
-            --primary: #7c3aed;
+            --primary: #3a8eed;
             --secondary: #ec4899;
             --bg-primary: #0f172a;
             --bg-secondary: #1e293b;
@@ -34,7 +34,7 @@
 
         :root[data-theme="light"],
         :root {
-            --primary: #7c3aed;
+            --primary: #3a8eed;
             --secondary: #ec4899;
             --bg-primary: #ffffff;
             --bg-secondary: #f8fafc;
@@ -64,11 +64,11 @@
         }
 
         body {
-            font-family: 'Elms Sans', sans-serif;
+            font-family: 'Trebuchet MS', sans-serif;
             line-height: 1.6;
             color: var(--text-primary);
             background: var(--bg-primary);
-            transition: "background" 0.3s ease, color 0.3s ease;
+            transition: "background" 0.3s ease, "color" 0.3s ease;
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -500,6 +500,33 @@
             margin-bottom: 12px;
         }
 
+        .read-more-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-weight: 700;
+            text-decoration: underline;
+            padding: 0;
+            font-family: inherit;
+            font-size: inherit;
+            transition: opacity 0.2s ease;
+        }
+
+        .read-more-btn:hover {
+            opacity: 0.8;
+        }
+
+        .read-more-btn:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        .read-more-content {
+            display: inline;
+            margin-left: 4px;
+        }
+
         .content-link {
             font-size: 0.95rem;
             line-height: 1.5;
@@ -592,7 +619,168 @@
             box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
         }
 
+        /* Announcement Modal Styles */
+        .announcement-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            animation: announcementFadeIn 0.3s ease;
+        }
 
+        .announcement-overlay.active {
+            display: flex;
+        }
+
+        @keyframes announcementFadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .announcement-modal {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 32px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: announcementSlideIn 0.3s ease;
+            border: 2px solid var(--primary);
+            position: relative;
+        }
+
+        @keyframes announcementSlideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .announcement-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            gap: 16px;
+        }
+
+        .announcement-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .announcement-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .announcement-badge.returning {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .announcement-user-status {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            padding: 12px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .announcement-content {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .announcement-content h3 {
+            color: var(--text-primary);
+            margin: 16px 0 8px 0;
+            font-size: 1.1rem;
+        }
+
+        .announcement-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 8px 0 16px 0;
+        }
+
+        .announcement-content li {
+            padding: 6px 0 6px 24px;
+            position: relative;
+            color: var(--text-secondary);
+        }
+
+        .announcement-content li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .announcement-content a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .announcement-content a:hover {
+            text-decoration: underline;
+        }
+
+        .announcement-close-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+            margin-top: 12px;
+        }
+
+        .announcement-close-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+        }
+
+        .announcement-close-btn:active {
+            transform: translateY(0);
+        }
 
         /* Footer */
         footer {
@@ -690,6 +878,22 @@
             .card-header {
                 height: 140px;
             }
+
+            .announcement-modal {
+                padding: 24px;
+            }
+
+            .announcement-title {
+                font-size: 1.2rem;
+            }
+
+            .announcement-header {
+                flex-direction: column;
+            }
+
+            .announcement-badge {
+                align-self: flex-start;
+            }
         }
 
         @media (max-width: 480px) {
@@ -727,6 +931,23 @@
             .status-available {
                 padding: 6px 12px;
                 font-size: 0.7rem;
+            }
+
+            .announcement-modal {
+                padding: 24px;
+                width: 95%;
+            }
+
+            .announcement-title {
+                font-size: 1.1rem;
+            }
+
+            .announcement-header {
+                flex-direction: column;
+            }
+
+            .announcement-badge {
+                align-self: flex-start;
             }
         }
 
@@ -768,8 +989,8 @@
 
     <header>
         <div class="container">
-            <h1 style="font-weight: 700; font-size: 30px; font-family: 'Elms Sans', sans-serif;" class="main-title">
-                Infinity Nexus v1.21.26</h1>
+            <h1 style="font-weight: 700; font-size: 30px; font-family: 'Trebuchet MS', sans-serif;" class="main-title">
+                Infinity Nexus v1.23.26</h1>
 
         </div>
 
@@ -778,52 +999,19 @@
     </header>
 
     <!-- Main Content -->
-    <div class="content-wrapper">
+    <main class="content-wrapper">
         <div class="container" id="main">
-
             <div class="links-section">
-
-
                 <div class="archive-grid">
-
-                    <div class="archive-card">
-                        <div class="card-header">
-                            <div class="card-image-placeholder">😀</div>
-                        </div>
-                        <h3 class="archive-title">EMERALD ECLIPSE!</h3>
-                        <div class="archive-meta">
-
-                        </div>
-                        <p class="content-link">
-                            I'm excited to announce that I'm working on a ROM hack of the classic Pokémon Emerald! 
-                            This is only a test version and is playable directly through your browser.
-                            <a href="#" style="color:white"
-                                onclick="this.nextElementSibling.style.display='inline'; this.style.display='none'; return false;">
-                                Read More...
-                            </a>
-                            <span style="display:none;">
-                                It is based on Cosmic Emerald (thank you SkyVortex), and has Physical/Special split,
-                                a Gen 5+ pokemon screen, and more! The ROM will be updated regularly with new features,
-                                so stay tuned for updates! Thank you for playing!
-                            </span>
-                        </p>
-                        <div style="padding: 0 16px 16px 16px;">
-                            <a href="https://pokemonemeraldeclipse.pages.dev" class="status-pill status-available">Explore →</a>
-                        </div>
-                    </div>
 
                     <!-- Monthly Challenges -->
                     <div class="archive-card">
                         <div class="card-header">
-                            <div class="card-image-placeholder">🏆</div>
+                            <div class="card-image-placeholder" aria-hidden="true">🏆</div>
                         </div>
                         <h3 class="archive-title">Monthly Challenges</h3>
-                        <div class="archive-meta">
-
-                        </div>
                         <p class="content-link">Test your skills against special monthly challenges! Enjoy challenging
-                            games that can keep you playing! New monthly challeneges will be added regularly, so check back often!
-                        </p>
+                            games that can keep you playing! New monthly challenges will be added regularly, so check back often!</p>
                         <div style="padding: 0 16px 16px 16px;">
                             <a href="mainpages/mainpage6.html" class="status-pill status-available">Explore →</a>
                         </div>
@@ -832,13 +1020,10 @@
 
                     <div class="archive-card">
                         <div class="card-header">
-                            <div class="card-image-placeholder">👍</div>
+                            <div class="card-image-placeholder" aria-hidden="true">👍</div>
                         </div>
                         <h3 class="archive-title">Must Play Games</h3>
-                        <div class="archive-meta">
-
-                        </div>
-                        <p class="content-link">Some of my favorite games that are definintly worth playing! Includes
+                        <p class="content-link">Some of my favorite games that are definitely worth playing! Includes
                             classics like Tower Defense, but also some other games. Basically, some of the best games on the site.</p>
                         <div style="padding: 0 16px 16px 16px;">
                             <a href="mainpages/mainpage2.html" class="status-pill status-available">Explore →</a>
@@ -849,14 +1034,9 @@
                     <div class="archive-card">
 
                         <div class="card-header">
-                            <div class="card-image-placeholder">🎮</div>
+                            <div class="card-image-placeholder" aria-hidden="true">🎮</div>
                         </div>
                         <h3 class="archive-title">Game Corner</h3>
-
-                        <div class="archive-meta">
-
-
-                        </div>
 
                         <p class="content-link">All the good stuff, puzzles, grinding, parkour, lots of fun stuff!</p>
                         <div style="padding: 0 16px 16px 16px;">
@@ -867,12 +1047,9 @@
 
                     <div class="archive-card">
                         <div class="card-header">
-                            <div class="card-image-placeholder">🎰</div>
+                            <div class="card-image-placeholder" aria-hidden="true">🎰</div>
                         </div>
                         <h3 class="archive-title">Casino Games</h3>
-                        <div class="archive-meta">
-
-                        </div>
                         <p class="content-link">Test your luck with classic casino games like Slots, Blackjack,
                             Poker, and
                             more!</p>
@@ -885,12 +1062,9 @@
 
                     <div class="archive-card">
                         <div class="card-header">
-                            <div class="card-image-placeholder">💡</div>
+                            <div class="card-image-placeholder" aria-hidden="true">💡</div>
                         </div>
                         <h3 class="archive-title">Simulation Games</h3>
-                        <div class="archive-meta">
-
-                        </div>
                         <p class="content-link">Build empires, manage cities, and learn economics through
                             interactive
                             simulations!</p>
@@ -902,12 +1076,9 @@
                     <!-- Information & Guides -->
                     <div class="archive-card">
                         <div class="card-header">
-                            <div class="card-image-placeholder">📚</div>
+                            <div class="card-image-placeholder" aria-hidden="true">📚</div>
                         </div>
                         <h3 class="archive-title">Information & Guides</h3>
-                        <div class="archive-meta">
-
-                        </div>
                         <p class="content-link">Access comprehensive guides, documentation, updates, and archives
                             for all
                             games.</p>
@@ -918,12 +1089,11 @@
                 </div>
             </div>
         </div>
-    </div>
-    </div>
+    </main>
     <footer>
         <div class="container">
             <a href="https://forms.gle/X8p7jkC74MFG9Evj7" style="text-decoration: none;">Report Issues</a>
-            | <a href="info/privacypolicy.html" style="text-decoration: none;">Privacy Policy</a>
+            | <a href="info/privacy/privacypolicy.html" style="text-decoration: none;">Privacy Policy</a>
             <p style="font-size: 12px;" class="sub-title"> new link can be found <a
                     href="https://infinity-nexus.pages.dev/"target="_blank">here</a> </p>
             <p class="copyright">© <span id="copyright-year"></span> Infinity Nexus</p>
@@ -932,30 +1102,256 @@
     </footer>
 
     <script>
-        // Theme Toggle Functionality
+        // Safe localStorage wrapper
+        const StorageManager = {
+            get: (key) => {
+                try {
+                    return localStorage.getItem(key);
+                } catch (e) {
+                    console.warn('Storage get error:', e);
+                    return null;
+                }
+            },
+            set: (key, value) => {
+                try {
+                    localStorage.setItem(key, value);
+                } catch (e) {
+                    console.warn('Storage set error:', e);
+                }
+            },
+            remove: (key) => {
+                try {
+                    localStorage.removeItem(key);
+                } catch (e) {
+                    console.warn('Storage remove error:', e);
+                }
+            }
+        };
+
+        // Announcement System
+        const CURRENT_VERSION = "1.23.26";
+        const LATEST_UPDATE_DATE = "May 1, 2026";
+
+        function checkAndShowAnnouncement() {
+            try {
+                const lastSeenVersion = StorageManager.get('lastSeenVersion');
+                const userFirstVisit = StorageManager.get('userFirstVisit');
+
+                // Determine if user is new or returning
+                if (!userFirstVisit) {
+                    // New user
+                    StorageManager.set('userFirstVisit', new Date().toISOString());
+                    showAnnouncement(true, lastSeenVersion);
+                } else if (lastSeenVersion !== CURRENT_VERSION) {
+                    // Returning user with new version
+                    showAnnouncement(false, lastSeenVersion);
+                }
+
+                // Update the last seen version
+                StorageManager.set('lastSeenVersion', CURRENT_VERSION);
+            } catch (e) {
+                console.error('Announcement check error:', e);
+            }
+        }
+
+        function showAnnouncement(isNewUser, previousVersion) {
+            try {
+                // Create modal elements
+                const overlay = document.createElement('div');
+                overlay.className = 'announcement-overlay active';
+                overlay.id = 'announcementOverlay';
+
+                let content = '';
+                let badgeText = '';
+
+                if (isNewUser) {
+                    badgeText = 'Welcome!';
+                    content = `
+                        <div class="announcement-user-status">
+                            <strong>Welcome to Infinity Nexus!</strong> 
+                        </div>
+                        <div class="announcement-content">
+                            <h3>What's New in v${CURRENT_VERSION}</h3>
+                            <p><strong>Released:</strong> ${LATEST_UPDATE_DATE}</p>
+                            <p>This update brings major improvements to gameplay and system performance!</p>
+                            
+                            <h3>Major Updates Include:</h3>
+                            <ul>
+                                <li>Complete overhaul of the user interface for better usability</li>
+                                <li>Improved most games with new features and optimizations</li>
+                                <li>Most bugs have been fixed, and many games have been revamped with new content!</li>
+                            </ul>
+
+                            <p style="margin-top: 16px; font-size: 0.95rem; color: var(--text-muted);">
+                                For detailed release notes, visit the <a href="info/updateinfo/updateinfo.html" style="color: var(--primary); text-decoration: none;">News & Updates</a> page.
+                            </p>
+                        </div>
+                    `;
+                } else {
+                    badgeText = 'Update Available';
+                    let updateMessage = previousVersion 
+                        ? `Updated from v${previousVersion} to v${CURRENT_VERSION}`
+                        : `Updated to v${CURRENT_VERSION}`;
+
+                    content = `
+                        <div class="announcement-user-status">
+                            <strong>${updateMessage}</strong><br>
+                            <small>Released: ${LATEST_UPDATE_DATE}</small>
+                        </div>
+                        <div class="announcement-content">
+                            <h3>What's New</h3>
+                            <p>Check out this major update with lots of improvements!</p>
+                            
+                            <h3>Key Improvements:</h3>
+                            <ul>
+                                <li>>
+                            </ul>
+
+                            <p style="margin-top: 16px; font-size: 0.95rem; color: var(--text-muted);">
+                                <a href="info/updateinfo/updateinfo.html" style="color: var(--primary); text-decoration: none; font-weight: 600;">View Full Changelog →</a>
+                            </p>
+                        </div>
+                    `;
+                }
+
+                const modal = document.createElement('div');
+                modal.className = 'announcement-modal';
+                modal.innerHTML = `
+                    <div class="announcement-header">
+                        <h2 class="announcement-title">${isNewUser ? 'Welcome to Infinity Nexus!' : 'What\'s New'}</h2>
+                        <span class="announcement-badge ${isNewUser ? '' : 'returning'}">${badgeText}</span>
+                    </div>
+                    ${content}
+                    <button class="announcement-close-btn" id="closeAnnouncement">Get Started →</button>
+                `;
+
+                overlay.appendChild(modal);
+                document.body.appendChild(overlay);
+
+                // Close announcement
+                const closeBtn = document.getElementById('closeAnnouncement');
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', () => {
+                        overlay.remove();
+                    });
+                }
+
+                // Allow closing with Escape key
+                const closeOnEscape = (e) => {
+                    if (e.key === 'Escape') {
+                        overlay.remove();
+                        document.removeEventListener('keydown', closeOnEscape);
+                    }
+                };
+
+                document.addEventListener('keydown', closeOnEscape);
+            } catch (e) {
+                console.error('Error showing announcement:', e);
+            }
+        }
+
+        // Theme Toggle Functionality with safe storage
         function initTheme() {
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            document.documentElement.setAttribute('data-theme', savedTheme);
-            updateThemeIcon(savedTheme);
+            try {
+                const savedTheme = StorageManager.get('theme') || 'dark';
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                updateThemeIcon(savedTheme);
+            } catch (e) {
+                console.warn('Theme init error:', e);
+                document.documentElement.setAttribute('data-theme', 'dark');
+                updateThemeIcon('dark');
+            }
         }
 
         function updateThemeIcon(theme) {
-            const icon = document.getElementById('themeIcon');
-            icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            try {
+                const icon = document.getElementById('themeIcon');
+                if (icon) {
+                    icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+                }
+            } catch (e) {
+                console.warn('Theme icon update error:', e);
+            }
         }
 
         function toggleTheme() {
-            const current = document.documentElement.getAttribute('data-theme');
-            const newTheme = current === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateThemeIcon(newTheme);
+            try {
+                const current = document.documentElement.getAttribute('data-theme') || 'dark';
+                const newTheme = current === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                StorageManager.set('theme', newTheme);
+                updateThemeIcon(newTheme);
+            } catch (e) {
+                console.error('Theme toggle error:', e);
+            }
         }
 
         document.addEventListener('DOMContentLoaded', function () {
             initTheme();
-            document.getElementById('copyright-year').textContent = new Date().getFullYear();
-            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+            
+            try {
+                const yearEl = document.getElementById('copyright-year');
+                if (yearEl) {
+                    yearEl.textContent = new Date().getFullYear();
+                }
+            } catch (e) {
+                console.warn('Year update error:', e);
+            }
+
+            const themeToggleBtn = document.getElementById('themeToggle');
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', toggleTheme);
+            }
+            
+            // Show announcement on page load (with small delay to ensure DOM is ready)
+            setTimeout(() => {
+                checkAndShowAnnouncement();
+            }, 100);
+
+            // Debug utility
+            window.testAnnouncement = function(forceNew = false) {
+                if (forceNew) {
+                    StorageManager.remove('userFirstVisit');
+                    StorageManager.remove('lastSeenVersion');
+                }
+                checkAndShowAnnouncement();
+            };
+
+            window.resetAnnouncement = function() {
+                StorageManager.remove('userFirstVisit');
+                StorageManager.remove('lastSeenVersion');
+                console.log('Announcement reset. Reload page to see it again.');
+            };
+
+            window.resetTheme = function() {
+                StorageManager.remove('theme');
+                initTheme();
+                console.log('Theme reset to dark.');
+            };
+            
+            // READ MORE FUNCTIONALITY
+            document.querySelectorAll('.read-more-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('data-target');
+                    const targetElement = document.querySelector(targetId);
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                    
+                    if (targetElement) {
+                        targetElement.style.display = isExpanded ? 'none' : 'inline';
+                        this.setAttribute('aria-expanded', !isExpanded);
+                        this.textContent = isExpanded ? 'Read More...' : 'Read Less';
+                    }
+                });
+                
+                // Keyboard support
+                button.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.click();
+                    }
+                });
+            });
         });
     </script>
 </body>

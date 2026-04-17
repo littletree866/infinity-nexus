@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cursed Dice</title>
-    <link href="https://fonts.googleapis.com/css2?family=Trebuchet MS:wght@300;400;500;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Trebuchet+MS:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="../../icon.jpg">
     <style>
@@ -115,37 +115,38 @@
         h1::after {
             content: '';
             display: none;
+        }
 
-            .subtitle {
-                font-size: 1.3rem;
-                color: var(--text-dim);
-                margin-bottom: 15px;
-                letter-spacing: 1px;
-                font-weight: 500;
-            }
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-dim);
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
 
+        .game-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        @media (max-width: 900px) {
             .game-area {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 25px;
+                grid-template-columns: 1fr;
             }
 
-            @media (max-width: 900px) {
-                .game-area {
-                    grid-template-columns: 1fr;
-                }
-
-                h1 {
-                    font-size: 2.8rem;
-                }
-
-                h1::before,
-                h1::after {
-                    display: none;
-                }
+            h1 {
+                font-size: 2.8rem;
             }
 
-            .game-panel {
+            h1::before,
+            h1::after {
+                display: none;
+            }
+        }
+
+        .game-panel {
                 background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(20, 20, 40, 0.9));
                 border-radius: 20px;
                 padding: 25px;
@@ -1950,6 +1951,7 @@
                 popup.style.display = 'none';
             }, 4000);
         }
+    
     </script>
 </body>
 

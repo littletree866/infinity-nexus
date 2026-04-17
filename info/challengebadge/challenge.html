@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🏆 Game Badges Pro 🏆</title>
+    <title>Game Badges  </title>
     <link rel="icon" href="../../icon.jpg" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Trebuchet MS:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -483,7 +483,7 @@
 
 <body>
     <nav class="navbar" style="position: sticky; top: 0; background: var(--card-bg); padding: 16px 20px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; z-index: 1000;">
-        <h1 style="margin: 0; font-size: 1.2rem; color: var(--text-primary);">Game Badges Pro</h1>
+        <h1 style="margin: 0; font-size: 1.2rem; color: var(--text-primary);">Game Badges  </h1>
         <button id="themeToggle" style="background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-primary); padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 1.2rem;" aria-label="Toggle theme"><span id="themeIcon">🌙</span></button>
     </nav>
     <div class="container">
@@ -655,28 +655,65 @@
     </script>
     <script>
         // Theme Toggle Functionality
+        // Storage Manager for safe localStorage access
+        const StorageManager = {
+            get: (key) => {
+                try {
+                    return localStorage.getItem(key);
+                } catch (e) {
+                    console.warn('Storage get error:', e);
+                    return null;
+                }
+            },
+            set: (key, value) => {
+                try {
+                    localStorage.setItem(key, value);
+                } catch (e) {
+                    console.warn('Storage set error:', e);
+                }
+            }
+        };
+
         function initTheme() {
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            document.documentElement.setAttribute('data-theme', savedTheme);
-            updateThemeIcon(savedTheme);
+            try {
+                const savedTheme = StorageManager.get('theme') || 'dark';
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                updateThemeIcon(savedTheme);
+            } catch (e) {
+                console.warn('Theme init error:', e);
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
         }
 
         function updateThemeIcon(theme) {
-            const icon = document.getElementById('themeIcon');
-            icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            try {
+                const icon = document.getElementById('themeIcon');
+                if (icon) {
+                    icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+                }
+            } catch (e) {
+                console.warn('Theme icon update error:', e);
+            }
         }
 
         function toggleTheme() {
-            const current = document.documentElement.getAttribute('data-theme');
-            const newTheme = current === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateThemeIcon(newTheme);
+            try {
+                const current = document.documentElement.getAttribute('data-theme') || 'dark';
+                const newTheme = current === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                StorageManager.set('theme', newTheme);
+                updateThemeIcon(newTheme);
+            } catch (e) {
+                console.error('Theme toggle error:', e);
+            }
         }
 
         document.addEventListener('DOMContentLoaded', function () {
             initTheme();
-            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+            const themeBtn = document.getElementById('themeToggle');
+            if (themeBtn) {
+                themeBtn.addEventListener('click', toggleTheme);
+            }
         });
     </script>
 </body>

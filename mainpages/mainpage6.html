@@ -15,8 +15,8 @@
 
     <style>
         /* Modern Color Themes - CSS Variables */
-        :root[data-theme="dark"] {
-            --primary: #7c3aed;
+         :root[data-theme="dark"] {
+            --primary: #3a8eed;
             --secondary: #ec4899;
             --bg-primary: #0f172a;
             --bg-secondary: #1e293b;
@@ -34,7 +34,7 @@
 
         :root[data-theme="light"],
         :root {
-            --primary: #7c3aed;
+            --primary: #3a8eed;
             --secondary: #ec4899;
             --bg-primary: #ffffff;
             --bg-secondary: #f8fafc;
@@ -47,7 +47,7 @@
             --card-bg: #ffffff;
             --header-bg: #f8fafc;
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --shadow-hover: 0 12px 32px rgba(124, 58, 237, 0.15);
+            --shadow-hover: 0 12px 32px rgba(63, 51, 83, 0.15);
         }
 
         /* Reset & Base */
@@ -64,7 +64,7 @@
         }
 
         body {
-            font-family: "Elms Sans", sans-serif;
+            font-family: "Trebuchet MS", sans-serif;
             line-height: 1.6;
             color: var(--text-primary);
             background: var(--bg-primary);
@@ -670,7 +670,7 @@
         /* Enhanced Card Description */
         .card-description {
             font-size: 0.9rem;
-            color: #666;
+            color: white;
             padding: 8px 16px;
             line-height: 1.5;
             min-height: 2.7em;
@@ -983,29 +983,70 @@
 
     <script>
         // Theme Toggle Functionality
+        // Storage Manager for safe localStorage access
+        const StorageManager = {
+            get: (key) => {
+                try {
+                    return localStorage.getItem(key);
+                } catch (e) {
+                    console.warn('Storage get error:', e);
+                    return null;
+                }
+            },
+            set: (key, value) => {
+                try {
+                    localStorage.setItem(key, value);
+                } catch (e) {
+                    console.warn('Storage set error:', e);
+                }
+            }
+        };
+
         function initTheme() {
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            document.documentElement.setAttribute('data-theme', savedTheme);
-            updateThemeIcon(savedTheme);
+            try {
+                const savedTheme = StorageManager.get('theme') || 'dark';
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                updateThemeIcon(savedTheme);
+            } catch (e) {
+                console.warn('Theme init error:', e);
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
         }
 
         function updateThemeIcon(theme) {
-            const icon = document.getElementById('themeIcon');
-            icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            try {
+                const icon = document.getElementById('themeIcon');
+                if (icon) {
+                    icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+                }
+            } catch (e) {
+                console.warn('Theme icon update error:', e);
+            }
         }
 
         function toggleTheme() {
-            const current = document.documentElement.getAttribute('data-theme');
-            const newTheme = current === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateThemeIcon(newTheme);
+            try {
+                const current = document.documentElement.getAttribute('data-theme') || 'dark';
+                const newTheme = current === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                StorageManager.set('theme', newTheme);
+                updateThemeIcon(newTheme);
+            } catch (e) {
+                console.error('Theme toggle error:', e);
+            }
         }
 
         document.addEventListener('DOMContentLoaded', function () {
             initTheme();
-            document.getElementById('footer-year').textContent = new Date().getFullYear();
-            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+            try {
+                document.getElementById('footer-year').textContent = new Date().getFullYear();
+            } catch (e) {
+                console.warn('Year update error:', e);
+            }
+            const themeBtn = document.getElementById('themeToggle');
+            if (themeBtn) {
+                themeBtn.addEventListener('click', toggleTheme);
+            }
         });
     </script>
 </body>

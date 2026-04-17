@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>TestGame</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      user-select: none;
+    }
+
+    body {
+      background: linear-gradient(145deg, #0a0f1e 0%, #03060c 100%);
+      font-family: 'Segoe UI', 'Press Start 2P', 'Courier New', monospace;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      margin: 0;
+    }
+
+    /* main game panel */
+    .game-container {
+      max-width: 1100px;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(2px);
+      border-radius: 3rem;
+      padding: 1.5rem;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,215,0,0.3);
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 1.9rem;
+      letter-spacing: 3px;
+      text-shadow: 0 0 8px #ffaa33, 0 0 2px #ffcc66;
+      color: #ffdd99;
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-weight: bold;
+      word-break: keep-all;
+    }
+
+    .battle {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin: 1.2rem 0;
+    }
+
+    .box {
+      background: #0f121cee;
+      border-radius: 2rem;
+      padding: 1.2rem;
+      width: 260px;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1);
+      border-left: 3px solid #f7c56e;
+      border-right: 1px solid #3a2e1f;
+      transition: all 0.2s;
+    }
+
+    .box h3 {
+      font-size: 1.7rem;
+      margin: 0 0 0.3rem;
+      color: #fad974;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .stat-line {
+      font-size: 0.9rem;
+      background: #00000066;
+      border-radius: 1rem;
+      padding: 0.2rem 0.5rem;
+      margin: 0.3rem 0;
+    }
+
+    .hpbar {
+      height: 16px;
+      background: #2c2118;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 8px 0;
+      box-shadow: inset 0 1px 3px #000;
+    }
+
+    .hpfill {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #3eff6e, #7eff3f);
+      border-radius: 20px;
+      transition: width 0.2s ease;
+    }
+
+    .type-badge {
+      display: inline-block;
+      background: #1f2a36;
+      padding: 2px 12px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 4px;
+      border-left: 2px solid gold;
+    }
+
+    /* action panel */
+    .action-panel {
+      background: #03060cd9;
+      border-radius: 2rem;
+      margin: 1rem 0;
+      padding: 1rem;
+    }
+
+    .move-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .move-btn {
+      background: #20242f;
+      border: none;
+      font-family: monospace;
+      font-weight: bold;
+      font-size: 1.2rem;
+      padding: 12px 20px;
+      min-width: 130px;
+      border-radius: 60px;
+      color: #f0f0f0;
+      cursor: pointer;
+      transition: 0.1s linear;
+      box-shadow: 0 5px 0 #0b0e14;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .move-btn:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 #0b0e14;
+    }
+
+    .move-btn:nth-child(1) { background: #5a4a2e; border-bottom: 3px solid #bc9a5a; }
+    .move-btn:nth-child(2) { background: #a53f2b; border-bottom: 3px solid #ff7b4a; }
+    .move-btn:nth-child(3) { background: #2c6e8f; border-bottom: 3px solid #5bc8ff; }
+
+    #log {
+      background: #010101aa;
+      border-radius: 1.5rem;
+      height: 150px;
+      overflow-y: auto;
+      font-size: 13px;
+      padding: 12px 16px;
+      font-family: 'Courier New', monospace;
+      margin-top: 1rem;
+      border: 1px solid #ffcf5a40;
+      color: #ddd9c6;
+      text-shadow: 0 0 2px black;
+      scroll-behavior: smooth;
+    }
+
+    #log div {
+      border-left: 3px solid #ffbb55;
+      padding-left: 12px;
+      margin: 6px 0;
+    }
+
+    .reset-area {
+      text-align: right;
+      margin-top: 10px;
+    }
+
+    .reset-btn {
+      background: #2e1e2e;
+      border: none;
+      color: #ffbc6e;
+      padding: 6px 20px;
+      border-radius: 40px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    @keyframes pulse {
+      0% { text-shadow: 0 0 0 gold; }
+      100% { text-shadow: 0 0 6px orange; }
+    }
+
+    .critical {
+      animation: pulse 0.2s 2;
+      color: #ffaa66;
+    }
+  </style>
+</head>
+<body>
+<div class="game-container">
+  <h2>⚡ CHROMATIC DUEL ⚡</h2>
+  <div class="battle">
+    <div class="box">
+      <h3>✦ CHAMPION ✦</h3>
+      <div class="stat-line">Lv <span id="pLvl">5</span> &nbsp;| ⚔️ <span id="pAtk">15</span></div>
+      <div>❤️ HP: <span id="pHpText">120/120</span></div>
+      <div class="hpbar"><div id="pHpBar" class="hpfill"></div></div>
+      <div class="type-badge">🔥🌊🌀 NEUTRAL</div>
+    </div>
+
+    <div class="box">
+      <h3 id="eName">WILD SHADE</h3>
+      <div class="stat-line">Lv <span id="eLvl"></span> &nbsp;| ⚔️ <span id="eAtk"></span></div>
+      <div>❤️ HP: <span id="eHpText"></span></div>
+      <div class="hpbar"><div id="eHpBar" class="hpfill"></div></div>
+      <div>🌀 TYPE: <span id="eType" class="type-badge" style="background:#000000aa;">???</span></div>
+    </div>
+  </div>
+
+  <div class="action-panel">
+    <div class="move-buttons">
+      <button class="move-btn" data-move="normal">💥 TACKLE</button>
+      <button class="move-btn" data-move="fire">🔥 FIRE BLAST</button>
+      <button class="move-btn" data-move="water">💧 WATER GUN</button>
+    </div>
+  </div>
+
+  <div id="log"></div>
+  <div class="reset-area">
+    <button class="reset-btn" id="resetBattle">⟳ FORGE NEW PATH</button>
+  </div>
+</div>
+
+<script>
+  // ------------------- ENHANCED CORE GAMEPLAY ------------------
+  // more strategic: type interaction expanded, critical hits, dynamic scaling, SP system? 
+  // We keep it fluid: ATK, better AI, random crits, better level scaling, 8 enemy variants, special effects.
+  
+  // expanded enemy pool with unique flavor & attributes
+  const enemyRoster = [
+    { name: "EMBERWYRM", baseHp: 38, baseAtk: 9, innateType: "fire", flavor: "scorching scales" },
+    { name: "CORALSPRITE", baseHp: 45, baseAtk: 7, innateType: "water", flavor: "bubbling veil" },
+    { name: "GOLEMITE", baseHp: 52, baseAtk: 11, innateType: "normal", flavor: "stone armor" },
+    { name: "FROSTBITE", baseHp: 42, baseAtk: 10, innateType: "water", flavor: "icy fangs" },
+    { name: "FLAREWISP", baseHp: 36, baseAtk: 12, innateType: "fire", flavor: "wild blaze" },
+    { name: "RUMBLEHORN", baseHp: 58, baseAtk: 9, innateType: "normal", flavor: "heavy stomp" },
+    { name: "AQUADRAKE", baseHp: 48, baseAtk: 10, innateType: "water", flavor: "riptide" },
+    { name: "CINDERWOLF", baseHp: 44, baseAtk: 12, innateType: "fire", flavor: "inferno howl" }
+  ];
+
+  // player object with enhanced progression
+  let player = {
+    lvl: 6,
+    hp: 130,
+    maxhp: 130,
+    atk: 16,
+    exp: 0,
+    nextExp: 85
+  };
+
+  let enemy = null;
+  let actionLock = false;      // prevent spam during animations
+  let pendingEnemyTurn = false;
+
+  // helper: update UI & HP bars, attack, level etc
+  function log(msg, isCritical = false) {
+    const logDiv = document.getElementById("log");
+    const msgSpan = document.createElement("div");
+    msgSpan.innerHTML = isCritical ? `⚡✨ ${msg} ✨⚡` : `➤ ${msg}`;
+    if (isCritical) msgSpan.style.color = "#ffcc88";
+    logDiv.appendChild(msgSpan);
+    msgSpan.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    // keep log tidy but scrollable
+    while (logDiv.children.length > 25) logDiv.removeChild(logDiv.firstChild);
+  }
+
+  // Type effectiveness chart (advanced with more nuance)
+  function getTypeEffectiveness(moveType, enemyType) {
+    if (moveType === "fire" && enemyType === "water") return 0.6;   // not very effective (water resists fire)
+    if (moveType === "fire" && enemyType === "normal") return 1.2;  // fire singes normal (slight advantage)
+    if (moveType === "water" && enemyType === "fire") return 1.5;   // super effective
+    if (moveType === "water" && enemyType === "normal") return 1.0;
+    if (moveType === "normal" && enemyType === "fire") return 0.9;  // normal vs fire - slightly resisted
+    if (moveType === "normal" && enemyType === "water") return 0.9;
+    if (moveType === "normal" && enemyType === "normal") return 1.0;
+    if (moveType === "fire" && enemyType === "fire") return 0.7;     // same type resistance
+    if (moveType === "water" && enemyType === "water") return 0.7;
+    return 1.0;
+  }
+
+  // generate enemy with scaling and dynamic level (challenge)
+  function spawnEnemy() {
+    const base = enemyRoster[Math.floor(Math.random() * enemyRoster.length)];
+    // level variation: player lvl -1 to +2 (fair but punishing)
+    let lvlOffset = Math.floor(Math.random() * 4) - 1;
+    let newLvl = Math.max(2, player.lvl + lvlOffset);
+    // special rare chance: elite enemy +1 extra level
+    const isElite = Math.random() < 0.2;
+    if (isElite) newLvl += 1;
+    newLvl = Math.min(14, newLvl);
+    
+    const baseHpCurve = base.baseHp + newLvl * 9;
+    const baseAtkCurve = base.baseAtk + Math.floor(newLvl * 1.8);
+    
+    enemy = {
+      name: base.name,
+      lvl: newLvl,
+      type: base.innateType,
+      maxhp: baseHpCurve,
+      hp: baseHpCurve,
+      atk: baseAtkCurve,
+      isElite: isElite
+    };
+    
+    log(`⚠️ WILD ${enemy.name} (Lv.${enemy.lvl}) appears! ${enemy.isElite ? "★ ELITE FOE ★" : ""} [${enemy.type.toUpperCase()} type]`);
+    if (enemy.type === "fire") log("🔥 Embers dance around it...");
+    if (enemy.type === "water") log("💧 Waves swirl menacingly.");
+    if (enemy.type === "normal") log("⚙️ It stands firm with raw might.");
+    updateUI();
+  }
+
+  // level up system with rewarding feeling & stat bonuses
+  function grantExp(amount) {
+    let gained = Math.floor(amount + (enemy.lvl * 2));
+    log(`🏆 +${gained} EXP!`);
+    player.exp += gained;
+    while (player.exp >= player.nextExp) {
+      player.exp -= player.nextExp;
+      player.lvl++;
+      // stat increase: each level yields HP+12, ATK+3, maxhp increase by 12
+      let hpGain = 12;
+      let atkGain = 3;
+      player.maxhp += hpGain;
+      player.atk += atkGain;
+      player.hp = player.maxhp;  // full heal on level up
+      player.nextExp = Math.floor(55 + player.lvl * 12);
+      log(`🌟 LEVEL UP! → Lv.${player.lvl} 🌟`, true);
+      log(`❤️ MAX HP ↑ ${hpGain}  |  ⚔️ ATK ↑ ${atkGain}`, true);
+      updateUI();
+    }
+    // ensure HP does not exceed max
+    if (player.hp > player.maxhp) player.hp = player.maxhp;
+    updateUI();
+  }
+
+  // damage calculation with critical hit flair & randomness
+  function computeDamage(baseAtk, moveType, enemyType, isPlayerAttacking) {
+    let effectiveness = getTypeEffectiveness(moveType, enemyType);
+    let raw = baseAtk + (Math.floor(Math.random() * 5) + 2);
+    let multiplier = effectiveness;
+    // Critical hit! (10% base chance, boosted by tension)
+    let isCritical = false;
+    let critChance = 0.12;
+    if (Math.random() < critChance) {
+      isCritical = true;
+      multiplier *= 1.55;
+    }
+    let finalDamage = Math.max(3, Math.floor(raw * multiplier));
+    return { damage: finalDamage, effectiveness, isCritical };
+  }
+
+  // attack handler
+  async function performAttack(moveType, moveName) {
+    if (actionLock) {
+      log("Wait for the current move to finish...");
+      return;
+    }
+    if (!enemy || enemy.hp <= 0) {
+      log("No enemy to fight! respawning...");
+      spawnEnemy();
+      updateUI();
+      return;
+    }
+    if (player.hp <= 0) {
+      log("You're exhausted! click 'FORGE NEW PATH' to rise again.");
+      return;
+    }
+    
+    actionLock = true;
+    
+    // player attack phase
+    const { damage, effectiveness, isCritical } = computeDamage(player.atk, moveType, enemy.type, true);
+    let appliedDmg = Math.min(damage, enemy.hp);
+    enemy.hp -= appliedDmg;
+    
+    let effText = "";
+    if (effectiveness > 1.2) effText = "💥 SUPER EFFECTIVE! 💥";
+    else if (effectiveness < 0.8) effText = "⚠️ NOT VERY EFFECTIVE... ⚠️";
+    else if (effectiveness > 1.0) effText = "✨ Effective hit! ✨";
+    
+    let critText = isCritical ? "🔥 CRITICAL STRIKE! 🔥" : "";
+    log(`${moveName} dealt ${appliedDmg} damage! ${critText} ${effText}`, isCritical);
+    
+    updateUI();
+    
+    // enemy fainted check
+    if (enemy.hp <= 0) {
+      log(`💀 ${enemy.name} has been DEFEATED! 💀`, true);
+      const expReward = 45 + enemy.lvl * 6;
+      grantExp(expReward);
+      spawnEnemy();
+      updateUI();
+      actionLock = false;
+      return;
+    }
+    
+    // Enemy turn after short delay
+    await new Promise(resolve => setTimeout(resolve, 380));
+    if (enemy && enemy.hp > 0 && player.hp > 0) {
+      await enemyAction();
+    }
+    actionLock = false;
+    updateUI();
+  }
+  
+  // smarter enemy AI: chooses move based on type advantage or raw power
+  async function enemyAction() {
+    if (!enemy || enemy.hp <= 0) return;
+    if (player.hp <= 0) return;
+    
+    // enemy decides move type: 50% chance to use type advantage or just neutral attack flavor
+    let moveTypeChosen = enemy.type;
+    // sometimes enemy changes to surprise: if enemy type is fire, may use fire move; but we can show 'Bite' etc.
+    let moveName = "";
+    let enemyMoveType = "";
+    
+    // 70% chance to use own type for synergy, 30% to use a different neutral strike (normal-like)
+    if (Math.random() < 0.7) {
+      enemyMoveType = enemy.type;
+      if (enemy.type === "fire") moveName = "🔥 FLARE CHARGE";
+      else if (enemy.type === "water") moveName = "💧 AQUA TAIL";
+      else moveName = "⚡ CRUSHING STOMP";
+    } else {
+      enemyMoveType = "normal";
+      moveName = "💢 WILD TACKLE";
+    }
+    
+    // compute damage from enemy perspective (enemy's ATK vs player)
+    let baseEnemyAtk = enemy.atk;
+    let effectivenessVsPlayer = getTypeEffectiveness(enemyMoveType, "normal"); // player always neutral type for simplicity, but to add fun: player is neutral champion
+    // however we can treat champion as neutral (always 1.0, but we add variance)
+    let rawDmg = baseEnemyAtk + Math.floor(Math.random() * 7);
+    let isEnemyCrit = Math.random() < 0.1;
+    let finalMulti = effectivenessVsPlayer;
+    if (isEnemyCrit) finalMulti *= 1.5;
+    let enemyDamage = Math.max(2, Math.floor(rawDmg * finalMulti));
+    player.hp = Math.max(0, player.hp - enemyDamage);
+    
+    let critMsg = isEnemyCrit ? " ★ DEVASTATING CRIT! ★ " : "";
+    log(`${enemy.name} uses ${moveName} and deals ${enemyDamage} damage! ${critMsg}`);
+    if (effectivenessVsPlayer > 1.2) log("It's super effective against you!");
+    if (effectivenessVsPlayer < 0.8) log("It's not very effective...");
+    
+    updateUI();
+    
+    if (player.hp <= 0) {
+      log("❌ YOU FELL in battle... but your spirit endures! ❌", true);
+      log("The wilds revive you with a second chance (HP restored to half)");
+      player.hp = Math.max(20, Math.floor(player.maxhp * 0.6));
+      if (player.hp <= 0) player.hp = 35;
+      updateUI();
+      log("Stand up, fighter! The duel continues!");
+    }
+  }
+  
+  // UI update
+  function updateUI() {
+    document.getElementById("pLvl").innerText = player.lvl;
+    document.getElementById("pAtk").innerText = player.atk;
+    document.getElementById("pHpText").innerHTML = `${Math.max(0,player.hp)}/${player.maxhp}`;
+    document.getElementById("pHpBar").style.width = `${(player.hp/player.maxhp)*100}%`;
+    
+    if (enemy) {
+      document.getElementById("eName").innerHTML = enemy.name + (enemy.isElite ? " ⭐" : "");
+      document.getElementById("eLvl").innerText = enemy.lvl;
+      document.getElementById("eAtk").innerText = enemy.atk;
+      document.getElementById("eType").innerHTML = enemy.type.toUpperCase();
+      document.getElementById("eHpText").innerHTML = `${Math.max(0,enemy.hp)}/${enemy.maxhp}`;
+      let ePercent = (enemy.hp/enemy.maxhp)*100;
+      document.getElementById("eHpBar").style.width = `${Math.max(0, ePercent)}%`;
+      // color hint based on type
+      let typeElem = document.getElementById("eType");
+      if (enemy.type === "fire") typeElem.style.background = "#7a2e1a";
+      else if (enemy.type === "water") typeElem.style.background = "#1c4e6e";
+      else typeElem.style.background = "#3c3a2e";
+    }
+  }
+  
+  // reset / new game with improved starting values but preserving challenge
+  function fullReset() {
+    actionLock = false;
+    player = {
+      lvl: 6,
+      hp: 130,
+      maxhp: 130,
+      atk: 16,
+      exp: 0,
+      nextExp: 85
+    };
+    const logDiv = document.getElementById("log");
+    logDiv.innerHTML = "";
+    log("⚔️ BATTLE RENEWED ⚔️ - sharpen your instincts!");
+    log("Type advantages: Water → Fire (1.5x) | Fire → Normal (1.2x) | Normal slightly resisted by fire/water");
+    log("Critical hits & Elite foes appear! Good luck!");
+    spawnEnemy();
+    updateUI();
+  }
+  
+  // UI attack bindings with enhanced moves
+  function attackHandler(move) {
+    let moveDisplay = "";
+    if (move === "normal") moveDisplay = "💥 TACKLE";
+    if (move === "fire") moveDisplay = "🔥 FIRE BLAST";
+    if (move === "water") moveDisplay = "💧 WATER GUN";
+    performAttack(move, moveDisplay);
+  }
+  
+  // Event listeners & initializer
+  function bindEvents() {
+    const btns = document.querySelectorAll(".move-btn");
+    btns.forEach(btn => {
+      btn.removeEventListener("click", (e) => {});
+      const move = btn.getAttribute("data-move");
+      btn.addEventListener("click", () => attackHandler(move));
+    });
+    document.getElementById("resetBattle").addEventListener("click", () => {
+      fullReset();
+    });
+  }
+  
+  // additional visual flair
+  function startGame() {
+    bindEvents();
+    fullReset();  // initializes enemy and log
+  }
+  
+  startGame();
+</script>
+</body>
+</html>

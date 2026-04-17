@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base Plan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="../../icon.jpg" rel="icon" type="image/x-icon">
+
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #eef2f5;
+            font-family: 'Lato',serif;
+            font-weight: 400;
+            color: #2a2a2a;
+            line-height: 1.45;
+            padding: 2rem 1.5rem;
+        }
+
+        
+        .bulba-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #f9fbfd;
+            border: 1px solid #8ba5b0;
+            box-shadow: 0 0 12px rgba(0,0,0,0.1);
+            padding: 1.8rem 2rem 2.5rem;
+        }
+
+        
+        .bulba-header {
+            border-bottom: 3px solid #3b6e8f;
+            margin-bottom: 1.8rem;
+            padding-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+        .bulba-header h1 {
+            font-size: 2rem;
+            font-weight: 400;
+            color: #2a4b6e;
+            text-shadow: none;
+            letter-spacing: -0.3px;
+        }
+        .bulba-sub {
+            font-size: 0.85rem;
+            color: #4c6a7c;
+            font-style: italic;
+        }
+        .version-badge {
+            background: #dce6eb;
+            padding: 0.2rem 0.7rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            border: 1px solid #8ba5b0;
+        }
+
+        .trainer-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0 2rem;
+            background: #ffffff;
+            font-size: 0.9rem;
+            border: 1px solid #b7c9d3;
+        }
+        .trainer-table th, 
+        .trainer-table td {
+            border: 1px solid #b7c9d3;
+            padding: 0.6rem 0.8rem;
+            vertical-align: top;
+            text-align: left;
+        }
+        .trainer-table th {
+            background: #d9e3e8;
+            color: #1e3a4d;
+            font-weight: 400;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+        }
+        .trainer-table tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        .trainer-table tr:hover {
+            background: #f1f3f4;
+        }
+        .ace-row {
+            background: #f2e6ce !important;
+            font-weight: 400;
+        }
+        .pokemon-name {
+            font-weight: 400;
+            color: #1a4d5f;
+        }
+        .item-name {
+            font-size: 0.8rem;
+            background: #f0f0f0;
+            display: inline-block;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+        }
+        .move-list {
+            font-size: 0.85rem;
+        }
+        hr {
+            border: none;
+            border-top: 2px solid #cbdbe0;
+            margin: 1rem 0;
+        }
+
+        
+        .section-title {
+            font-size: 1.7rem;
+            font-weight: 400;
+            border-left: 8px solid #3b6e8f;
+            padding-left: 1rem;
+            margin: 1.8rem 0 1rem;
+            color: #2a4b6e;
+        }
+        .subsection-title {
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin: 1.5rem 0 0.8rem;
+            padding-bottom: 0.2rem;
+            border-bottom: 1px solid #cbdbe0;
+            color: #3a6a4b;
+        }
+        .trainer-heading {
+            background: #eef3f7;
+            padding: 0.4rem 0.8rem;
+            margin: 1rem 0 0.5rem;
+            font-weight: 400;
+            font-size: 1.2rem;
+            border-left: 4px solid #c59a6b;
+        }
+        .reward-info {
+            background: #f9f2e0;
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            margin: 0.5rem 0 1rem;
+            border: 1px solid #e2d5b6;
+            display: inline-block;
+        }
+        .type-note {
+            font-size: 0.75rem;
+            color: #4f6f7f;
+            margin-top: 0.1rem;
+        }
+        footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #6d8aa5;
+            border-top: 1px solid #cbdbe0;
+            padding-top: 1rem;
+        }
+        
+        .small-caps {
+            font-variant: small-caps;
+            font-weight: 400;
+        }
+        @media (max-width: 700px) {
+            .bulba-container {
+                padding: 1rem;
+            }
+            .trainer-table th, .trainer-table td {
+                padding: 0.4rem;
+            }
+        }
+        .nature-ev {
+            font-size: 0.75rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+<div class="bulba-container">
+    <div class="bulba-header">
+        <div>
+            <h1>Gym Leader &amp; Elite Four Walkthrough</h1>
+        </div>
+        <div class="version-badge">Pokémon FireRed Plan v1.0</div>
+    </div>
+
+    
+    <div class="section-title">Gym Leader Overview</div>
+    <table class="trainer-table">
+        <thead>
+            <tr><th>Gym</th><th>Leader</th><th>Type</th><th>Double Battle</th><th>Items</th><th>Prize Money / TM</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td>Brock</td><td>Rock</td><td>No</td><td>2 Potions</td><td>TM39 Rock Tomb</td></tr>
+            <tr><td>2</td><td>Misty</td><td>Water/Ice</td><td>Yes</td><td>2 Super Potions</td><td>TM03 Water Pulse</td></tr>
+            <tr><td>3</td><td>Lt. Surge</td><td>Electric/Fighting</td><td>No</td><td>3 Super Potions</td><td>TM34 Shock Wave</td></tr>
+            <tr><td>4</td><td>Erika</td><td>Grass/Poison</td><td>Yes</td><td>2 Hyper Potions</td><td>TM19 Giga Drain</td></tr>
+            <tr><td>5</td><td>Sabrina</td><td>Psychic</td><td>No</td><td>2 Full Restores</td><td>TM04 Calm Mind</td></tr>
+            <tr><td>6</td><td>Koga</td><td>Dark/Ghost</td><td>Yes</td><td>3 Full Restores</td><td>TM49 Snatch</td></tr>
+            <tr><td>7</td><td>Blaine</td><td>Fire</td><td>No</td><td>3 Full Restores</td><td>TM35 Flamethrower</td></tr>
+            <tr><td>8</td><td>Giovanni</td><td>Ground</td><td>Yes</td><td>4 Full Restores</td><td>TM26 Earthquake</td></tr>
+        </tbody>
+    </table>
+
+    
+    <div class="section-title">Gym #1 · Brock (Rock)</div>
+    <table class="trainer-table">
+        <thead><tr><th>Pokémon</th><th>Level</th><th>Held Item</th><th>Moves</th><th>Nature / EVs</th></tr></thead>
+        <tbody>
+            <tr><td class="pokemon-name">Geodude</td><td>12</td><td><span class="item-name">Oran Berry</span></td><td class="move-list">Defense Curl / Rock Tomb / Mud Sport / Tackle</td><td>—</td></tr>
+            <tr><td class="pokemon-name">Onix</td><td>14</td><td><span class="item-name">Oran Berry</span></td><td class="move-list">Screech / Rock Tomb / Bulldoze / Defense Curl</td><td>—</td></tr>
+            <tr class="ace-row"><td class="pokemon-name">Lileep ★ Ace</td><td>15</td><td><span class="item-name">Miracle Seed</span></td><td class="move-list">Absorb / Acid / Rock Tomb / Ancient Power</td><td>Bold nature, 252 HP / 128 Def / 128 SpD</td></tr>
+        </tbody>
+    </table>
+
+    <div class="section-title">Gym #2 · Misty (Water / Ice)</div>
+    <table class="trainer-table">
+        <thead><tr><th>Pokémon</th><th>Level</th><th>Held Item</th><th>Moves</th><th>Nature / EVs</th></tr></thead>
+        <tbody>
+            <tr><td class="pokemon-name">Staryu</td><td>18</td><td><span class="item-name">Chesto Berry</span></td><td>Water Pulse / Recover / Rapid Spin / Light Screen</td><td>Timid, 252 Spe</td></tr>
+            <tr><td class="pokemon-name">Piloswine</td><td>20</td><td><span class="item-name">Oran Berry</span></td><td>Icy Wind / Bulldoze / Icicle Shard / Fury Attack</td><td>Adamant, HP 252 / Atk 252</td></tr>
+            <tr class="ace-row"><td class="pokemon-name">Cloyster ★ Ace</td><td>22</td><td><span class="item-name">Quick Claw</span></td><td>Water Pulse / Icicle Spear / Ice Beam / Swords Dance</td><td>Impish, 252 Def / 252 HP</td></tr>
+        </tbody>
+    </table>
+
+    <div class="section-title">Gym #3 · Lt. Surge (Electric / Fighting)</div>
+    <table class="trainer-table">
+        <thead><tr><th>Pokémon</th><th>Level</th><th>Held Item</th><th>Moves</th><th>Nature / EVs</th></tr></thead>
+        <tbody>
+            <tr><td class="pokemon-name">Raichu</td><td>29</td><td><span class="item-name">Magnet</span></td><td>Thunder Wave / Thunder Shock / Light Screen / Quick Attack</td><td>Hasty, 252 Spe / 252 SpA</td></tr>
+            <tr><td class="pokemon-name">Hitmontop</td><td>31</td><td><span class="item-name">Focus Band</span></td><td>Low Kick / Brick Break / Hidden Power / Swords Dance</td><td>Impish, 252 HP / 252 Def</td></tr>
+            <tr><td class="pokemon-name">Electrode</td><td>31</td><td><span class="item-name">Magnet</span></td><td>Self-Destruct / Shock Wave / Hidden Power / Toxic</td><td>Timid, 252 Spe</td></tr>
+            <tr class="ace-row"><td class="pokemon-name">Electabuzz ★ Ace</td><td>32</td><td><span class="item-name">Quick Claw</span></td><td>Thunder Punch / Shock Wave / Low Kick / Quick Attack</td><td>Jolly, 252 Atk / 252 Spe</td></tr>
+        </tbody>
+    </table>
+
+    <div class="section-title">Gym #4 · Erika (Grass / Poison)</div>
+    <table class="trainer-table">
+        <thead><tr><th>Pokémon</th><th>Level</th><th>Held Item</th><th>Moves</th><th>Nature / EVs</th></tr></thead>
+        <tbody>
+            <tr><td class="pokemon-name">Nidoking</td><td>40</td><td><span class="item-name">Poison Barb</span></td><td>Toxic / Magnitude / Earth Power / Gunk Shot</td><td>Adamant, 252 Atk</td></tr>
+            <tr><td class="pokemon-name">Venusaur</td><td>42</td><td><span class="item-name">Focus Band</span></td><td>Sleep Powder / Giga Drain / Sludge Bomb / Toxic</td><td>Calm, 252 HP / 252 SpD</td></tr>
+            <tr><td class="pokemon-name">Sceptile</td><td>44</td><td><span class="item-name">Sitrus Berry</span></td><td>Giga Drain / Leaf Blade / Earthquake / Swords Dance</td><td>Jolly, 252 Atk / 252 Spe</td></tr>
+            <tr class="ace-row"><td class="pokemon-name">Cradily ★ Ace</td><td>44</td><td><span class="item-name">Sitrus Berry</span></td><td>Ancient Power / Rock Slide / Giga Drain / Recover</td><td>Careful, 252 HP / 252 SpD</td></tr>
+        </tbody>
+    </table>
+
+    <div class="section-title">Gym #5 · Sabrina (Psychic)</div>
+    <table class="trainer-table">
+        <thead><tr><th>Pokémon</th><th>Level</th><th>Held Item</th><th>Moves</th><th>Nature / EVs</th></tr></thead>
+        <tbody>
+            <tr><td class="pokemon-name">Claydol</td><td>51</td><td><span class="item-name">Sitrus Berry</span></td><td>Rock Slide / Calm Mind / Psychic / Earthquake</td><td>Bold, 252 HP / 252 Def</td></tr>
+            <tr><td class="pokemon-name">Solrock</td><td>50</td><td><span class="item-name">Sitrus Berry</span></td><td>Psychic / Calm Mind / Earth Power / Cosmic Power</td><td>Impish, 252 Atk / 252 Def</td></tr>
+            <tr><td class="pokemon-name">Lunatone</td><td>51</td><td><span class="item-name">Hard Stone</span></td><td>Psychic / Cosmic Power / Earthquake / Protect</td><td>Modest, 252 SpA</td></tr>
+            <tr><td class="pokemon-name">Alakazam</td><td>53</td><td><span class="item-name">Twisted Spoon</span></td><td>Psychic / Shadow Ball / Calm Mind / Psyshock</td><td>Timid, 252 SpA / 252 Spe</td></tr>
+            <tr class="ace-row"><td class="pokemon-name">Gardevoir ★ Ace</td><td>54</td><td><span class="item-name">Twisted Spoon</span></td><td>Shadow Ball / Calm Mind / Psychic / Protect</td><td>Modest, 252 SpA / 252 HP</td></tr>
+        </tbody>
+    </table>
+
+    <div class="section-title">Gym #6 · Koga (Dark / Ghost)</div>
+    <table class="trainer-table">
+        <thead><tr><th>Pokémon</th><th>Level</th><th>Held Item</th><th>Moves</th><th>Nature / EVs</th></tr></thead>
+        <tbody>
+            <tr><td class="pokemon-name">Mightyena</td><td>59</td><td><span class="item-name">Sitrus Berry</span></td><td>Crunch / Roar / Swagger / Fire Fang</td><td>Jolly, 252 Atk / 252 Spe</td></tr>
+            <tr><td class="pokemon-name">Sableye</td><td>60</td><td><span class="item-name">Black Glasses</span></td><td>Thief / Snatch / Hex / Protect</td><td>Careful, 252 HP / 252 SpD</td></tr>
+            <tr><td class="pokemon-name">Gengar</td><td>61</td><td><span class="item-name">Sitrus Berry</span></td><td>Hex / Destiny Bond / Hypnosis / Dream Eater</td><td>Timid, 252 SpA / 252 Spe</td></tr>
+            <tr><td class="pokemon-name">Dusclops</td><td>62</td><td><span class="item-name">Spell Tag</span></td><td>Hex / Snatch / Mean Look / Toxic</td><td>Impish, 252 Def / 252 HP</td></tr>
+            <tr class="ace-row"><td class="pokemon-name">Houndoom ★ Ace</td><td>63</td><td><span class="item-name">Black Glasses</span></td><td>Crunch / Flamethrower / Protect / Fire Fang</td><td>Timid, 252 SpA / 252 Spe</td></tr>
+        </tbody>
+    </table>
+
+    <div class="section-title">Gym #7 · Blaine (Fire)</div>
+    <table class="trainer-table">
+        <thead><tr><th>Pokémon</th><th>Level</th><th>Held Item</th><th>Moves</th><th>Nature / EVs</th></tr></thead>
+        <tbody>
+            <tr><td class="pokemon-name">Ninetales</td><td>70</td><td><span class="item-name">Charcoal</span></td><td>Flamethrower / Sunny Day / Overheat / Will-O-Wisp</td><td>Timid, 252 SpA / 252 Spe</td></tr>
+            <tr><td class="pokemon-name">Arcanine</td><td>70</td><td><span class="item-name">Charcoal</span></td><td>Flame Wheel / Sunny Day / Crunch / Overheat</td><td>Jolly, 252 Atk / 252 Spe</td></tr>
+            <tr><td class="pokemon-name">Rapidash</td><td>71</td><td><span class="item-name">White Herb</span></td><td>Overheat / Flame Charge / Flamethrower / Take Down</td><td>Jolly, 252 Atk</td></tr>
+            <tr class="ace-row"><td class="pokemon-name">Charizard ★ Ace</td><td>72</td><td><span class="item-name">White Herb</span></td><td>Overheat / Dragon Dance / Flamethrower / Dragon Claw</td><td>Adamant, 252 Atk / 252 Spe</td></tr>
+        </tbody>
+    </table>
+
+    <div class="section-title">Gym #8 · Giovanni (Ground)</div>
+    <table class="trainer-table">
+        <thead><tr><th>Pokémon</th><th>Level</th><th>Held Item</th><th>Moves</th><th>Nature / EVs</th></tr></thead>
+        <tbody>
+            <tr><td class="pokemon-name">Tyranitar</td><td>75</td><td><span class="item-name">Soft Sand</span></td><td>Earthquake / Crunch / Dragon Dance / Stone Edge</td><td>Jolly, 252 Atk / 252 Spe</td></tr>
+            <tr><td class="pokemon-name">Nidoking</td><td>77</td><td><span class="item-name">Poison Barb</span></td><td>Toxic / Sludge Bomb / Earthquake / Crunch</td><td>Adamant, 252 Atk</td></tr>
+            <tr><td class="pokemon-name">Dugtrio</td><td>78</td><td><span class="item-name">Soft Sand</span></td><td>Dig / Earthquake / Taunt / Fissure</td><td>Jolly, 252 Atk / 252 Spe</td></tr>
+            <tr><td class="pokemon-name">Rhyperior</td><td>79</td><td><span class="item-name">Soft Sand</span></td><td>Earthquake / Rock Slide / Protect / Facade</td><td>Adamant, 252 HP / 252 Atk</td></tr>
+            <tr class="ace-row"><td class="pokemon-name">Mamoswine ★ Ace</td><td>80</td><td><span class="item-name">Soft Sand</span></td><td>Earthquake / Blizzard / Hail / Ice Shard</td><td>Adamant, 252 Atk / 252 Spe</td></tr>
+        </tbody>
+    </table>
+
+    
+    <div class="section-title">🏆 Pokémon League — Indigo Plateau</div>
+
+    
+    <div class="subsection-title">✦ Elite Four #1 · Lorelei (Ice) ✦</div>
+    <table class="trainer-table">
+        <thead><tr><th>Pokémon</th><th>Level</th><th>Held Item</th><th>Moves</th><th>Nature / EVs</th></tr></thead>
+        <tbody>
+            <tr><td class="pokemon-name">Slowbro</td><td>82</td><td><span class="item-name">Leftovers</span></td><td>Ice Beam / Psychic / Recover / Surf</td><td>Bold, 252 HP / 252 Def</td></tr>
+            <tr><td class="pokemon-name">Lapras</td><td>82</td><td><span class="item-name">Sitrus Berry</span></td><td>Ice Beam / Surf / Hydro Pump / Thunderbolt</td><td>Modest, 252 SpA / 252 HP</td></tr>
+            <tr><td class="pokemon-name">Dewgong</td><td>84</td><td><span class="item-name">Assault Vest</span></td><td>Ice Beam / Aurora Beam / Aqua Jet / Aqua Ring</td><td>Adamant, 252 Atk / 252 HP</td></tr>
+            <tr><td class="pokemon-name">Articuno</td><td>85</td><td><span class="item-name">Cheri Berry</span></td><td>Ice Beam / Blizzard / Roost / Agility</td><td>Timid, 252 SpA / 252 Spe</td></tr>
+            <tr class="ace-row"><td class="pokemon-name">Cloyster ★ Ace</td><td>86</td><td><span class="item-name">Weakness Policy</span></td><td>Ice Beam / Aurora Beam / Hydro Pump / Swords Dance</td><td>Impish, 252 Def / 252 HP</td></tr>
+        </tbody>
+    </table>
+
+    <div class="subsection-title">✦ Elite Four #2 · Bruno (Fighting) ✦</div>
+    <table class="trainer-table">
+        <thead><tr><th>Pokémon</th><th>Level</th><th>Held Item</th><th>Moves</th><th>Nature / EVs</th></tr></thead>
+        <tbody>
+            <tr><td class="pokemon-name">Machamp</td><td>83</td><td><span class="item-name">Choice Band</span></td><td>Dynamic Punch / Stone Edge / Ice Punch / Close Combat</td><td>Adamant, 252 Atk / 252 Spe</td></tr>
+            <tr><td class="pokemon-name">Golem</td><td>84</td><td><span class="item-name">Soft Sand</span></td><td>Stone Edge / Earthquake / Close Combat / Explosion</td><td>Adamant, 252 Atk / 252 HP</td></tr>
+            <tr><td class="pokemon-name">Hitmonlee</td><td>84</td><td><span class="item-name">Life Orb</span></td><td>Close Combat / Stone Edge / Earthquake / Low Sweep</td><td>Jolly, 252 Atk / 252 Spe</td></tr>
+            <tr><td class="pokemon-name">Hitmonchan</td><td>85</td><td><span class="item-name">Assault Vest</span></td><td>Close Combat / Ice Punch / Fire Punch / Mach Punch</td><td>Adamant, 252 Atk / 252 HP</td></tr>
+            <tr class="ace-row"><td class="pokemon-name">Primeape ★ Ace</td><td>86</td><td><span class="item-name">Lum Berry</span></td><td>Close Combat / Stone Edge / Earthquake / Swagger</td><td>Jolly, 252 Atk / 252 Spe</td></tr>
+        </tbody>
+    </table>
+
+    <div class="subsection-title">✦ Elite Four #3 · Agatha (Ghost) ✦</div>
+    <table class="trainer-table">
+        <thead><tr><th>Pokémon</th><th>Level</th><th>Held Item</th><th>Moves</th><th>Nature / EVs</th></tr></thead>
+        <tbody>
+            <tr><td class="pokemon-name">Haunter</td><td>84</td><td><span class="item-name">Focus Sash</span></td><td>Shadow Ball / Focus Blast / Sludge Bomb / Destiny Bond</td><td>Timid, 252 SpA / 252 Spe</td></tr>
+            <tr><td class="pokemon-name">Arbok</td><td>84</td><td><span class="item-name">Sitrus Berry</span></td><td>Sludge Bomb / Crunch / Seed Bomb / Earthquake</td><td>Adamant, 252 Atk / 252 Spe</td></tr>
+            <tr><td class="pokemon-name">Mr. Mime</td><td>85</td><td><span class="item-name">Life Orb</span></td><td>Psychic / Focus Blast / Shadow Ball / Dazzling Gleam</td><td>Timid, 252 SpA / 252 Spe</td></tr>
+            <tr><td class="pokemon-name">Weezing</td><td>85</td><td><span class="item-name">Black Sludge</span></td><td>Sludge Bomb / Fire Blast / Shadow Ball / Toxic</td><td>Bold, 252 HP / 252 Def</td></tr>
+            <tr class="ace-row"><td class="pokemon-name">Gengar ★ Ace</td><td>87</td><td><span class="item-name">Twisted Spoon</span></td><td>Shadow Ball / Focus Blast / Sludge Bomb / Destiny Bond</td><td>Timid, 252 SpA / 252 Spe</td></tr>
+        </tbody>
+    </table>
+
+    <div class="subsection-title">✦ Elite Four #4 · Lance (Dragon) ✦</div>
+    <table class="trainer-table">
+        <thead><tr><th>Pokémon</th><th>Level</th><th>Held Item</th><th>Moves</th><th>Nature / EVs</th></tr></thead>
+        <tbody>
+            <tr><td class="pokemon-name">Dragonite</td><td>84</td><td><span class="item-name">Lum Berry</span></td><td>Dragon Dance / Outrage / Earthquake / Crunch</td><td>Jolly, 252 Atk / 252 Spe</td></tr>
+            <tr><td class="pokemon-name">Aerodactyl</td><td>85</td><td><span class="item-name">Life Orb</span></td><td>Stone Edge / Earthquake / Crunch / Taunt</td><td>Jolly, 252 Atk / 252 Spe</td></tr>
+            <tr><td class="pokemon-name">Gyarados</td><td>85</td><td><span class="item-name">Assault Vest</span></td><td>Waterfall / Earthquake / Crunch / Dragon Dance</td><td>Adamant, 252 Atk / 252 Spe</td></tr>
+            <tr><td class="pokemon-name">Salamence</td><td>86</td><td><span class="item-name">Choice Specs</span></td><td>Draco Meteor / Outrage / Earthquake / Crunch</td><td>Naive, 252 SpA / 252 Spe</td></tr>
+            <tr class="ace-row"><td class="pokemon-name">Pidgeot ★ Ace</td><td>87</td><td><span class="item-name">Choice Band</span></td><td>Brave Bird / Drill Peck / Earthquake / Roost</td><td>Jolly, 252 Atk / 252 Spe</td></tr>
+        </tbody>
+    </table>
+
+    <div class="subsection-title" style="border-bottom-color: #c59a6b;">★ CHAMPION · Blue (Mixed) ★</div>
+    <table class="trainer-table">
+        <thead><tr><th>Pokémon</th><th>Level</th><th>Held Item</th><th>Moves</th><th>Nature / EVs</th></tr></thead>
+        <tbody>
+            <tr><td class="pokemon-name">Charizard / Blastoise / Venusaur</td><td>87</td><td><span class="item-name">Sitrus Berry</span></td><td>Shadow Ball / Focus Blast / Dark Pulse / Will-O-Wisp</td><td>Timid (starter based)</td></tr>
+            <tr><td class="pokemon-name">Roserade</td><td>88</td><td><span class="item-name">Sitrus Berry</span></td><td>Leaf Storm / Focus Blast / Sludge Bomb / Spikes</td><td>Timid, 252 SpA / 252 Spe</td></tr>
+            <tr><td class="pokemon-name">Togekiss</td><td>89</td><td><span class="item-name">Leftovers</span></td><td>Air Slash / Aura Sphere / Shadow Ball / Nasty Plot</td><td>Timid, 252 SpA / 252 Spe</td></tr>
+            <tr><td class="pokemon-name">Lucario</td><td>89</td><td><span class="item-name">Life Orb</span></td><td>Close Combat / Flash Cannon / Bullet Punch / Extreme Speed</td><td>Jolly, 252 Atk / 252 Spe</td></tr>
+            <tr><td class="pokemon-name">Milotic</td><td>90</td><td><span class="item-name">Marvel Scale</span></td><td>Hydro Pump / Ice Beam / Recover / Dragon Tail</td><td>Bold, 252 HP / 252 Def</td></tr>
+            <tr class="ace-row"><td class="pokemon-name">Garchomp ★ Ace</td><td>91</td><td><span class="item-name">Yache Berry</span></td><td>Earthquake / Outrage / Stone Edge / Dragon Dance</td><td>Jolly, 252 Atk / 252 Spe</td></tr>
+        </tbody>
+    </table>
+
+    
+</div>
+</body>
+</html>

@@ -56,7 +56,7 @@
 		}
 
 		body {
-            font-family: 'Elms Sans', sans-serif;
+            font-family: 'Trebuchet MS', sans-serif;
             line-height: 1.8;
             color: var(--text-primary);
             background: var(--bg-primary);
@@ -321,6 +321,18 @@
 			<h2 id="releases-heading" class="small" style="margin-top: 0; margin-bottom: 24px; border-bottom: 2px solid var(--primary); padding-bottom: 12px; display: block;">Release Timeline</h2>
 
 			<div class="card">
+				<h3>v1.23.26</h3>
+				<div class="small">Released May 1, 2026</div>
+				<ul class="changelog">
+					<li>Updated site interface</li>
+					<li>Fixed the dark/light theme toggle</li>
+					<li>Improved performance and stability</li>
+					<li>Organized file structure</li>
+				</ul>
+			</div>
+
+
+			<div class="card">
 				<h3>v1.22.26</h3>
 				<div class="small">Released April 14, 2026</div>
 				<ul class="changelog">
@@ -348,7 +360,7 @@
 
 
 			<div class="card">
-				<h3>v1.21.25 — 1st ANNIVERSARY UPDATE! 🎉</h3>
+				<h3>v1.21.25 — 1st ANNIVERSARY UPDATE! </h3>
 				<div class="small">Released March 26, 2026</div>
 				<ul class="changelog">
 					<li>Updated ROM to V2.3!</li>
@@ -398,13 +410,13 @@
 				<h3>v1.18.24 — Dual Release</h3>
 				<div class="small">Released February 7 & 16, 2026 (Two Parts)</div>
 				<ul class="changelog">
-					<li class="section-header">📦 Part 1 (February 7, 2026)</li>
+					<li class="section-header">Part 1 (February 7, 2026)</li>
 					<li>Added new game: Pokémon Nova</li>
 					<li>Added new game: The Science Experiment</li>
 					<li>Polished Tower Defense 2</li>
 					<li>General improvements and bug fixes</li>
 					<li>Upgraded Casino</li>
-					<li class="section-header">📦 Part 2 (February 16, 2026)</li>
+					<li class="section-header">Part 2 (February 16, 2026)</li>
 					<li>Remade the Impossible Game, now with 4 brand new levels and design</li>
 					<li>Added 5 new achievements to Puzzle Master, and now with 2 harder difficulties too</li>
 					<li>Added dropdown boxes to documentation</li>
@@ -451,7 +463,7 @@
 
 
 			<div class="card">
-				<h3>v1.16.19 — New Year Update 🎊</h3>
+				<h3>v1.16.19 — New Year Update</h3>
 				<div class="small">Released January 1, 2026</div>
 				<ul class="changelog">
 					<li>New Tower Defense 2 game</li>
@@ -490,6 +502,7 @@
 					<li>Rough New Game setup</li>
 					<li>General fix and edits throughout site</li>
 					<li>New Casino</li>
+					<li>New update info page!</li>
 				</ul>
 			</div>
 
@@ -512,28 +525,65 @@
 	</script>
 	<script>
 		 // Theme Toggle Functionality
+        // Storage Manager for safe localStorage access
+        const StorageManager = {
+            get: (key) => {
+                try {
+                    return localStorage.getItem(key);
+                } catch (e) {
+                    console.warn('Storage get error:', e);
+                    return null;
+                }
+            },
+            set: (key, value) => {
+                try {
+                    localStorage.setItem(key, value);
+                } catch (e) {
+                    console.warn('Storage set error:', e);
+                }
+            }
+        };
+
         function initTheme() {
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            document.documentElement.setAttribute('data-theme', savedTheme);
-            updateThemeIcon(savedTheme);
+            try {
+                const savedTheme = StorageManager.get('theme') || 'dark';
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                updateThemeIcon(savedTheme);
+            } catch (e) {
+                console.warn('Theme init error:', e);
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
         }
 
         function updateThemeIcon(theme) {
-            const icon = document.getElementById('themeIcon');
-            icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            try {
+                const icon = document.getElementById('themeIcon');
+                if (icon) {
+                    icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+                }
+            } catch (e) {
+                console.warn('Theme icon update error:', e);
+            }
         }
 
         function toggleTheme() {
-            const current = document.documentElement.getAttribute('data-theme');
-            const newTheme = current === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateThemeIcon(newTheme);
+            try {
+                const current = document.documentElement.getAttribute('data-theme') || 'dark';
+                const newTheme = current === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                StorageManager.set('theme', newTheme);
+                updateThemeIcon(newTheme);
+            } catch (e) {
+                console.error('Theme toggle error:', e);
+            }
         }
 
         document.addEventListener('DOMContentLoaded', function () {
             initTheme();
-            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+            const themeBtn = document.getElementById('themeToggle');
+            if (themeBtn) {
+                themeBtn.addEventListener('click', toggleTheme);
+            }
         });
 	</script>
 </body>

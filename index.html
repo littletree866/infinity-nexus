@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Infinity Nexus</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="icon.jpg" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
 
 
@@ -786,11 +787,110 @@
         footer {
             background: var(--header-bg);
             color: var(--text-primary);
-            padding: 48px 0;
+            padding: 60px 0;
             text-align: center;
-            margin-top: 80px;
+            margin-top: 100px;
             border-top: 1px solid var(--border-color);
             transition: all 0.3s ease;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+            text-align: left;
+        }
+
+        .footer-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            transform: translateX(4px);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .footer-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 32px 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .footer-author {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 12px;
         }
 
         footer a {
@@ -803,7 +903,7 @@
         }
 
         .copyright {
-            margin-top: 20px;
+            margin: 0;
             opacity: 0.8;
             font-size: 0.9rem;
             color: var(--text-muted);
@@ -820,6 +920,245 @@
                     rgba(255, 255, 255, 0.9) 0%,
                     rgba(248, 250, 252, 0.95) 100%);
             border-bottom: 1px solid rgba(67, 97, 238, 0.1);
+        }
+
+        /* Statistics Section */
+        .stats-section {
+            padding: 40px 20px;
+            background: linear-gradient(135deg, rgba(58, 142, 237, 0.1), rgba(236, 72, 153, 0.1));
+            margin: 32px 0;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 24px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Search Section */
+        .search-section {
+            padding: 32px 20px;
+            margin: 40px 0;
+        }
+
+        .search-bar-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .game-search-input {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            margin-bottom: 16px;
+            font-family: inherit;
+        }
+
+        .game-search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(58, 142, 237, 0.1);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-family: inherit;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Featured Section */
+        .featured-section {
+            margin: 50px 0 40px 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title::before {
+            content: '✨';
+            font-size: 1.8rem;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .featured-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow);
+        }
+
+        .featured-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+
+        .featured-card-large {
+            grid-column: span 2;
+        }
+
+        .featured-image {
+            height: 180px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: shimmer 4s ease-in-out infinite;
+        }
+
+        .featured-icon {
+            font-size: 80px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--primary);
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 3;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .featured-badge.new {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+
+        .featured-content {
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .featured-content h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .featured-content p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            flex: 1;
+        }
+
+        .featured-link {
+            display: inline-block;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 0;
+            border-bottom: 2px solid var(--primary);
+            transition: all 0.3s ease;
+            width: fit-content;
+        }
+
+        .featured-link:hover {
+            color: var(--secondary);
+            border-bottom-color: var(--secondary);
+            transform: translateX(4px);
         }
 
         /* Responsive Design */
@@ -841,6 +1180,18 @@
 
             .archive-grid {
                 gap: 20px;
+            }
+
+            .featured-card-large {
+                grid-column: span 1;
+            }
+
+            .featured-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -989,22 +1340,41 @@
 
     <header>
         <div class="container">
-            <h1 style="font-weight: 700; font-size: 30px; font-family: 'Trebuchet MS', sans-serif;" class="main-title">
-                Infinity Nexus v1.23.26</h1>
-
+            <div style="text-align: center;">
+                <h1 style="font-weight: 700; font-size: 3.5rem; font-family: 'Trebuchet MS', sans-serif; margin-bottom: 20px; letter-spacing: -0.5px;" class="main-title">
+                    Infinity Nexus
+                </h1>
+                <div style="margin-top: 20px; font-size: 0.95rem; opacity: 0.85;">v1.24.26 | Last Updated: May 12, 2026</div>
+            </div>
         </div>
-
-        </div>
-
     </header>
 
+   
     <!-- Main Content -->
     <main class="content-wrapper">
         <div class="container" id="main">
-            <div class="links-section">
-                <div class="archive-grid">
 
-                    <!-- Monthly Challenges -->
+                    
+
+
+            <div class="links-section">
+                <div class="archive-grid" id="gamesGrid">
+
+                    <div class="archive-card">
+                        <div class="card-header">
+                            <div class="card-image-placeholder" aria-hidden="true">🔥</div>
+                        </div>
+                        <h3 class="archive-title">FireRed Hack</h3>
+                        <p class="content-link">A work in progress Pokémon FireRed hack that adds new features, 
+                            quality of life improvements, and more! 
+                            This is a pre-release and major changes may break your save file. You may have to restart your game if you encounter any issues.</p>
+                        <div style="padding: 0 16px 16px 16px;">
+                            <a href="https://fireredhack.pages.dev/" target="_blank" class="status-pill status-available">View→</a>
+                        </div>
+                    </div>    
+
+
+
                     <div class="archive-card">
                         <div class="card-header">
                             <div class="card-image-placeholder" aria-hidden="true">🏆</div>
@@ -1092,16 +1462,81 @@
     </main>
     <footer>
         <div class="container">
-            <a href="https://forms.gle/X8p7jkC74MFG9Evj7" style="text-decoration: none;">Report Issues</a>
-            | <a href="info/privacy/privacypolicy.html" style="text-decoration: none;">Privacy Policy</a>
-            <p style="font-size: 12px;" class="sub-title"> new link can be found <a
-                    href="https://infinity-nexus.pages.dev/"target="_blank">here</a> </p>
-            <p class="copyright">© <span id="copyright-year"></span> Infinity Nexus</p>
-            <p class="author">Created by Littletree866</p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 class="footer-title">Infinity Nexus</h4>
+                    <p class="footer-desc">Your ultimate collection of premium web games. Play free games anytime, anywhere.</p>
+                    <div class="footer-socials">
+                        <a href="https://forms.gle/X8p7jkC74MFG9Evj7" title="Report Issues" class="social-link">Bug Report</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Game Categories</h4>
+                    <ul class="footer-links">
+                        <li><a href="mainpages/mainpage1.html">Casino Games</a></li>
+                        <li><a href="mainpages/mainpage3.html">Game Corner</a></li>
+                        <li><a href="mainpages/mainpage4.html">Simulations</a></li>
+                        <li><a href="mainpages/mainpage6.html">Monthly Challenges</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Information</h4>
+                    <ul class="footer-links">
+                        <li><a href="info/updateinfo/updateinfo.html">News & Updates</a></li>
+                        <li><a href="info/docs/documentation.html">Documentation</a></li>
+                        <li><a href="info/privacy/privacypolicy.html">Privacy Policy</a></li>
+                        <li><a href="info/archives/archives.html">Archives</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Connect</h4>
+                    <p class="footer-desc" style="font-size: 0.9rem;">v1.24.26 | Last Updated: May 12, 2026</p>
+                    <p class="footer-desc" style="font-size: 0.9rem; margin-top: 8px;">
+                        <a href="https://infinity-nexus.pages.dev/" target="_blank">Deploy Link →</a>
+                    </p>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p class="copyright">© <span id="copyright-year"></span> Infinity Nexus. All rights reserved.</p>
+                <p class="footer-author">Crafted by <strong>Littletree866</strong></p>
+            </div>
         </div>
     </footer>
 
     <script>
+        // Game Data and Search/Filter Functionality
+        const gamesData = [
+            { title: 'FireRed Hack', link: 'https://fireredhack.pages.dev/', icon: '🔥', tags: ['new', 'featured'] },
+            { title: 'Monthly Challenges', link: 'mainpages/mainpage6.html', icon: '🏆', tags: ['popular', 'featured'] },
+            { title: 'Must Play Games', link: 'mainpages/mainpage2.html', icon: '👍', tags: ['popular'] },
+            { title: 'Game Corner', link: 'mainpages/mainpage3.html', icon: '🎮', tags: ['popular'] },
+            { title: 'Casino Games', link: 'mainpages/mainpage1.html', icon: '🎰', tags: ['popular'] },
+            { title: 'Simulation Games', link: 'mainpages/mainpage4.html', icon: '💡', tags: ['popular'] },
+            { title: 'Information & Guides', link: 'mainpages/mainpage5.html', icon: '📚', tags: ['featured'] }
+        ];
+
+    
+
+        function filterGames(query = '', filterTag = 'all') {
+            let filtered = gamesData;
+            
+            // Filter by search query
+            if (query) {
+                filtered = filtered.filter(game =>
+                    game.title.toLowerCase().includes(query.toLowerCase())
+                );
+            }
+            
+            // Filter by tag
+            if (filterTag !== 'all') {
+                filtered = filtered.filter(game =>
+                    game.tags.includes(filterTag)
+                );
+            }
+            
+        }
+
         // Safe localStorage wrapper
         const StorageManager = {
             get: (key) => {
@@ -1129,8 +1564,8 @@
         };
 
         // Announcement System
-        const CURRENT_VERSION = "1.23.26";
-        const LATEST_UPDATE_DATE = "May 1, 2026";
+        const CURRENT_VERSION = "1.24.26";
+        const LATEST_UPDATE_DATE = "May 12, 2026";
 
         function checkAndShowAnnouncement() {
             try {
@@ -1287,6 +1722,28 @@
         }
 
         document.addEventListener('DOMContentLoaded', function () {
+            // Initialize games grid
+
+            
+            // Search functionality
+            const searchInput = document.getElementById('gameSearch');
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    const currentFilter = document.querySelector('.filter-btn.active')?.dataset.filter || 'all';
+                    filterGames(e.target.value, currentFilter);
+                });
+            }
+            
+            // Filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const searchQuery = searchInput?.value || '';
+                    filterGames(searchQuery, btn.dataset.filter);
+                });
+            });
+
             initTheme();
             
             try {

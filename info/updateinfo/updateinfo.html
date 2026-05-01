@@ -306,7 +306,10 @@
 <body>
 
 <nav class="navbar" style="position: sticky; top: 0; background: var(--card-bg); padding: 16px 24px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-	<h2 style="margin: 0; font-size: 1.2rem; font-weight: 600; color: var(--text-primary);">📰 News & Updates</h2>
+	<div style="display: flex; align-items: center; gap: 16px;">
+		<a href="../../index.html" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 600; padding: 6px 12px; border: 1px solid var(--border-color); border-radius: 6px; transition: all 0.3s ease;" onmouseover="this.style.color='var(--primary)'; this.style.borderColor='var(--primary)'" onmouseout="this.style.color='var(--text-secondary)'; this.style.borderColor='var(--border-color)'">← Home</a>
+		<h2 style="margin: 0; font-size: 1.2rem; font-weight: 600; color: var(--text-primary);">📰 News & Updates</h2>
+	</div>
 	<button id="themeToggle" style="background: transparent; border: 1px solid var(--border-color); color: var(--text-primary); padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 1.1rem; transition: all 0.3s ease;" aria-label="Toggle theme"><span id="themeIcon">🌙</span></button>
 </nav>
 
@@ -314,11 +317,23 @@
 		<header role="banner" aria-labelledby="page-title">
 			<h1 id="page-title">News & Updates</h1>
 			<p>Release notes, changelogs and upcoming features for the game collection.</p>
-			<p style="font-size: 0.95rem;">Dates are subject to change. Check regularly for updates!</p>
+			<p style="font-size: 0.95rem;">Next update scheduled for May 12, 2026</p>
 		</header>
 
 		<section class="releases" aria-labelledby="releases-heading">
 			<h2 id="releases-heading" class="small" style="margin-top: 0; margin-bottom: 24px; border-bottom: 2px solid var(--primary); padding-bottom: 12px; display: block;">Release Timeline</h2>
+
+			<div class="card">
+				<h3>v1.26.26 </h3>
+				<div class="small">Released May 12, 2026</div>
+				<ul class="changelog">
+					<li>Complete remake of all games and interfaces</li>
+					<li>Improved performance and stability</li>
+					<li>Fixed several bugs and issues</li>
+
+				</ul>
+			</div>
+
 
 			<div class="card">
 				<h3>v1.23.26</h3>
@@ -508,9 +523,30 @@
 
 		</section>
 
-		<footer class="small" aria-label="copyright">
-			<p>© <span id="footer-year"></span> Littletree866 — All rights reserved.</p>
+		<footer style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-top: 60px; padding: 40px 0; border-top: 1px solid var(--border-color); text-align: left;">
+			<div>
+				<h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin-bottom: 12px;">News & Updates</h4>
+				<p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0; line-height: 1.6;">Stay up to date with the latest releases, updates, and improvements to Infinity Nexus.</p>
+			</div>
+			<div>
+				<h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin-bottom: 12px;">Quick Links</h4>
+				<ul style="list-style: none; padding: 0; margin: 0;">
+					<li style="margin-bottom: 8px;"><a href="../../index.html" style="color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: color 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-secondary)'">Home</a></li>
+					<li style="margin-bottom: 8px;"><a href="../docs/documentation.html" style="color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: color 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-secondary)'">Documentation</a></li>
+					<li><a href="../../mainpages/mainpage2.html" style="color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: color 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-secondary)'">Games</a></li>
+				</ul>
+			</div>
+			<div>
+				<h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin-bottom: 12px;">Support</h4>
+				<ul style="list-style: none; padding: 0; margin: 0;">
+					<li style="margin-bottom: 8px;"><a href="https://forms.gle/X8p7jkC74MFG9Evj7" style="color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: color 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-secondary)'">Report Issue</a></li>
+					<li><a href="../privacy/privacypolicy.html" style="color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: color 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-secondary)'">Privacy Policy</a></li>
+				</ul>
+			</div>
 		</footer>
+		<div style="text-align: center; padding: 24px 0; border-top: 1px solid var(--border-color); margin-top: 24px; font-size: 0.85rem; color: var(--text-muted);">
+			<p>© <span id="footer-year"></span> Infinity Nexus | v1.24.26 | Created by Littletree866</p>
+		</div>
 	</main>
 
 	<script>

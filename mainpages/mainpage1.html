@@ -4,12 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infinity Nexus</title>
+    <title>Casino Games - Infinity Nexus</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
     <link rel="icon" href="../icon.jpg" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
 
 
@@ -235,7 +236,7 @@
         header {
             padding: 50px 20px;
             margin: 32px auto;
-            max-width: 800px;
+            max-width: 900px;
             text-align: center;
             color: white;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -249,9 +250,58 @@
             /* allows vertical centering */
             justify-content: center;
             align-items: center;
+            flex-direction: column;
         }
 
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
 
+        .back-button {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateX(-2px);
+        }
+
+        .breadcrumb {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.5rem;
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.95);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            opacity: 0.7;
+        }
+
+        .header-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            margin-top: 12px;
+            font-weight: 300;
+        }
 
         header::before {
             content: "";
@@ -716,11 +766,66 @@
         footer {
             background: var(--header-bg);
             color: var(--text-primary);
-            padding: 48px 0;
-            text-align: center;
-            margin-top: 80px;
+            padding: 60px 0;
+            margin-top: 100px;
             border-top: 1px solid var(--border-color);
             transition: all 0.3s ease;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+
+        .footer-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .footer-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            transform: translateX(4px);
+            display: inline-block;
+        }
+
+        .footer-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 32px 0;
         }
 
         footer a {
@@ -733,10 +838,11 @@
         }
 
         .copyright {
-            margin-top: 20px;
+            margin: 0;
             opacity: 0.8;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
+            text-align: center;
         }
 
         /* Utility Classes */
@@ -835,6 +941,16 @@
                 display: none;
             }
 
+            .header-top {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+
+            .breadcrumb {
+                font-size: 0.75rem;
+            }
+
             .badge-base,
             .coming-soon-badge,
             .popular-badge,
@@ -885,13 +1001,11 @@
     </nav>
 
     <header>
-
-
         <div class="container">
-            <h1 style="font-weight: 700; font-size: 15px;" class="main-title">🎰 Casino Games
-            </h1>
+            
+            <h1 class="main-title">🎰 Casino Games</h1>
+           
         </div>
-
     </header>
 
     <div class="content-wrapper">
@@ -997,8 +1111,31 @@
     </div>
 
     <footer>
-        <p>Infinity Nexus Casino &copy; <span id="footer-year">2026</span></p>
-        <p>All rights reserved</p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 class="footer-title">Casino Games</h4>
+                    <p class="footer-desc">Experience premium casino gaming with professional gameplay and design.</p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="mainpage2.html">Must Play</a></li>
+                        <li><a href="mainpage3.html">Games</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="../info/updateinfo/updateinfo.html">Updates</a></li>
+                        <li><a href="https://forms.gle/X8p7jkC74MFG9Evj7">Report Issue</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <p class="copyright">© <span id="footer-year">2026</span> Infinity Nexus | Created by Littletree866</p>
+        </div>
     </footer>
 
     <script>

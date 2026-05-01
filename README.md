@@ -9,7 +9,7 @@
 4. Please report broken code through the form at the bottom of the main page of the site.
 
 
-## ⚡ Key Features
+## Key Features
 
 - **Pure HTML JavaScript** - No frameworks, lightweight and fast
 - **Responsive Design** - Works on all device sizes
@@ -20,8 +20,9 @@
 - **Has games for everyone** - All different types of games, play what you want.
 
 
-## 📅 Updates Log
+## Updates Log
 
+- **Version 1.24.26** - May 12, 2026
 - **Version 1.23.26** - May 1, 2026
 - **Version 1.22.26** - April 14, 2026
 - **Version 1.21.26** - April 4, 2026 
@@ -40,7 +41,7 @@
 - **Version 1.12.14** - October 10, 2025
 
 
-## 🤝 Contributing
+## Contributing
 
 Feel free to contribute by:
 1. Opening issues for bugs or suggestions
@@ -51,11 +52,12 @@ Feel free to contribute by:
 
 For my Pokemon Rom:
 GBA's pokemon Emerald
+GBA's pokemon FireRed
 EmulatorJS
 
 Everything else is my own creation
 
 
-## 📜 License
+## License
 
 All rights reserved © 2026 Littletree866 under MIT license

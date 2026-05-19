@@ -1,7 +1,7 @@
-# Infinity Nexus (v1.24.26 - Released May 12, 2026)
+# Infinity Nexus (v1.25.26 - Released June 15, 2026)
 
-Next update: June 16, 2026 
-v1.24.26 -> v1.25.26
+Next update: July 12, 2026 
+v1.25.26 -> v1.26.26
 
 
 ## General Info
@@ -25,6 +25,7 @@ v1.24.26 -> v1.25.26
 
 ## Updates Log
 
+- **Version 1.25.26** - June 7, 2026
 - **Version 1.24.26** - May 12, 2026
 - **Version 1.23.26** - May 1, 2026
 - **Version 1.22.26** - April 14, 2026

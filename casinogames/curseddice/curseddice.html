@@ -1,568 +1,795 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cursed Dice - Professional Edition</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Cursed Dice</title>
     <link rel="icon" type="image/x-icon" href="../../icon.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Trebuchet+MS:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #2b0000, #4d0000, #330000);
-            --accent-gold: #FFD700;
-            --accent-purple: #9d4edd;
-            --accent-red: #ff2b2b;
-            --accent-cyan: #00c6ff;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            user-select: none;
         }
 
         body {
-            font-family: 'Trebuchet MS', serif;
-            background: var(--primary-gradient);
-            color: #fff;
-            text-align: center;
             min-height: 100vh;
-            padding: 20px;
-            user-select: none;
+            background: radial-gradient(ellipse at 20% 30%, #0b0a1a 0%, #03010a 100%);
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            position: relative;
             overflow-x: hidden;
-            background-attachment: fixed;
         }
 
-        .header {
-            margin-bottom: 30px;
-            padding: 20px;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        /* mystic smoke animation */
+        body::before {
+            content: '';
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(157, 78, 221, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Main Game Container */
+        .game-portal {
+            position: relative;
+            z-index: 2;
+            max-width: 650px;
+            width: 100%;
+        }
+
+        /* Home button */
+        .home-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #f5b042, #d48a1f);
+            color: #1e2a1a;
+            padding: 10px 20px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: 0.2s;
+            font-family: inherit;
+        }
+        .home-btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
+
+        .cursed-panel {
+            background: linear-gradient(145deg, rgba(15, 5, 25, 0.92), rgba(5, 2, 15, 0.96));
+            backdrop-filter: blur(12px);
+            border-radius: 3rem;
+            border: 1px solid rgba(157, 78, 221, 0.6);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            padding: 1.8rem 2rem 2rem;
+            transition: all 0.2s;
+        }
+
+        /* Header with cursed energy */
+        .occult-header {
+            text-align: center;
+            margin-bottom: 1.8rem;
+            border-bottom: 2px dashed rgba(157, 78, 221, 0.4);
+            padding-bottom: 1rem;
         }
 
         h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            background: linear-gradient(to right, var(--accent-purple), var(--accent-red));
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #C084FC, #F0A3FF, #FF4D6D);
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 5px;
-            animation: glow 2s ease-in-out infinite;
+            color: transparent;
+            text-shadow: 0 0 12px rgba(192, 132, 252, 0.5);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        @keyframes glow {
-            0%, 100% { filter: drop-shadow(0 0 15px rgba(157, 78, 221, 0.5)); }
-            50% { filter: drop-shadow(0 0 30px rgba(255, 43, 43, 0.6)); }
-        }
-
-        .subtitle {
-            font-size: 0.95rem;
-            color: #aaa;
+        .sub {
+            color: #9b8caf;
+            font-weight: 500;
+            font-size: 0.75rem;
+            margin-top: 8px;
             letter-spacing: 1px;
         }
 
-        .game-container {
+        /* stat cards */
+        .stat-row {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: calc(100vh - 250px);
+            gap: 1rem;
+            margin-bottom: 1.8rem;
         }
 
-        #game {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(77, 0, 0, 0.3));
-            border: 4px solid var(--accent-purple);
-            border-radius: 30px;
-            padding: 40px;
-            max-width: 700px;
-            width: 100%;
-            box-shadow: 0 0 60px rgba(157, 78, 221, 0.4), inset 0 0 30px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
-        }
-
-        #game::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-purple), var(--accent-red), var(--accent-purple));
-        }
-
-        /* Balance Display */
-        .balance-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 25px;
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-
-        .balance-item {
-            background: rgba(157, 78, 221, 0.15);
-            border: 2px solid var(--accent-purple);
-            border-radius: 12px;
-            padding: 12px;
-            box-shadow: inset 0 0 15px rgba(157, 78, 221, 0.2);
-        }
-
-        .balance-label {
-            font-size: 0.75rem;
-            opacity: 0.8;
-            margin-bottom: 3px;
-        }
-
-        .balance-value {
-            font-size: 1.3rem;
-            color: var(--accent-purple);
-            font-weight: 700;
-        }
-
-        /* Bet Control */
-        .bet-control {
-            margin: 20px 0;
-            padding: 15px;
-            background: rgba(157, 78, 221, 0.1);
-            border: 2px dashed var(--accent-purple);
-            border-radius: 15px;
-        }
-
-        .input-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 12px;
-        }
-
-        input[type="number"] {
+        .stat-card {
             flex: 1;
-            padding: 12px;
-            border: 2px solid var(--accent-cyan);
-            border-radius: 8px;
-            background: rgba(0, 198, 255, 0.1);
-            color: white;
-            font-size: 1rem;
-            font-weight: 700;
+            background: rgba(0, 0, 0, 0.55);
+            border-radius: 1.6rem;
+            padding: 0.8rem;
+            border: 1px solid rgba(157, 78, 221, 0.4);
+            backdrop-filter: blur(4px);
             text-align: center;
         }
 
-        .action-btn {
-            padding: 12px 20px;
-            border: 2px solid var(--accent-purple);
-            border-radius: 10px;
-            background: rgba(157, 78, 221, 0.15);
-            color: var(--accent-purple);
-            font-family: 'Orbitron', serif;
-            font-weight: 700;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
+        .stat-label {
+            font-size: 0.7rem;
+            text-transform: capitalize;
+            font-weight: 600;
+            color: #b79eff;
+            letter-spacing: 1.5px;
         }
 
-        .action-btn:hover:not(:disabled) {
-            background: rgba(157, 78, 221, 0.3);
-            box-shadow: 0 0 15px rgba(157, 78, 221, 0.5);
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            font-family: 'Space Mono', monospace;
+            color: #f0e6ff;
+            text-shadow: 0 0 6px #a855f7;
+            line-height: 1;
+        }
+
+        /* BET ZONE */
+        .bet-ritual {
+            background: rgba(79, 31, 113, 0.2);
+            border-radius: 2rem;
+            padding: 1.2rem;
+            margin: 1rem 0 1.5rem;
+            border: 1px solid rgba(192, 132, 252, 0.5);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .bet-title {
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: #d9b4ff;
+            letter-spacing: 2px;
+            margin-bottom: 0.8rem;
+        }
+
+        .flex-bet {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .cursed-input {
+            flex: 2;
+            background: #0c0518;
+            border: 2px solid #6b21a5;
+            border-radius: 60px;
+            padding: 0.9rem 1rem;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #f5d0ff;
+            font-family: 'Space Mono', monospace;
+            outline: none;
+            transition: 0.2s;
+            text-align: center;
+        }
+
+        .cursed-input:focus {
+            border-color: #c084fc;
+            box-shadow: 0 0 12px #c084fc;
+        }
+
+        .primary-btn {
+            flex: 1;
+            background: linear-gradient(95deg, #7c3aed, #b45cf2);
+            border: none;
+            border-radius: 60px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            color: #0a0212;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: inherit;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.5);
+        }
+
+        .primary-btn:hover:not(:disabled) {
+            transform: scale(1.02);
+            background: linear-gradient(95deg, #9b4dff, #cd7eff);
+            box-shadow: 0 6px 16px #a855f7;
+        }
+
+        .quick-chips {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .chip-quick {
+            background: #1b102b;
+            border: 1px solid #a155df;
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: #e2c6ff;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .chip-quick:hover {
+            background: #3a1e5e;
+            border-color: #da8eff;
             transform: translateY(-2px);
         }
 
-        .action-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-
-        .quick-bets {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            margin-top: 10px;
-        }
-
-        .quick-bet-btn {
-            padding: 8px;
-            border: 1px solid rgba(157, 78, 221, 0.3);
-            border-radius: 6px;
-            background: rgba(157, 78, 221, 0.05);
-            color: var(--accent-purple);
-            font-weight: 700;
-            cursor: pointer;
-            font-size: 0.8rem;
-            transition: all 0.2s ease;
-        }
-
-        .quick-bet-btn:hover {
-            background: rgba(157, 78, 221, 0.2);
-            border-color: var(--accent-purple);
-        }
-
-        /* Dice Display */
-        .dice-container {
-            margin: 30px 0;
-            padding: 25px;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 15px;
-            border: 2px solid rgba(157, 78, 221, 0.3);
+        /* DICE ARENA */
+        .dice-arena {
+            margin: 2rem 0;
+            background: radial-gradient(ellipse at center, #0e001f, #020005);
+            border-radius: 2rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(157, 78, 221, 0.5);
         }
 
         .dice-label {
-            font-size: 0.9rem;
-            color: var(--accent-purple);
-            margin-bottom: 15px;
+            text-align: center;
+            font-size: 0.7rem;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            text-transform: capitalize;
+            letter-spacing: 3px;
+            color: #b27eff;
         }
 
         .dice-display {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 2rem;
             flex-wrap: wrap;
-            min-height: 150px;
+            min-height: 140px;
             align-items: center;
+            margin: 1rem 0;
         }
 
-        .die {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(200, 200, 200, 0.05));
-            border: 3px solid var(--accent-purple);
-            border-radius: 12px;
+        /* recreated dice with real SVG look & no glitch */
+        .cursed-die {
+            width: 110px;
+            height: 110px;
+            background: radial-gradient(circle at 30% 35%, #fcf3e0, #eadbc0);
+            border-radius: 20px;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255,255,240,0.6);
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.2s cubic-bezier(0.2, 1.2, 0.3, 1);
+            position: relative;
+            border: 2px solid #ba85ff;
+        }
+
+        .cursed-die.rolling-animation {
+            animation: shakeRotate 0.08s infinite;
+        }
+
+        @keyframes shakeRotate {
+            0% { transform: rotate(0deg) translateY(0px); }
+            25% { transform: rotate(6deg) translateY(-4px); }
+            75% { transform: rotate(-6deg) translateY(2px); }
+            100% { transform: rotate(0deg) translateY(0); }
+        }
+
+        .die-value {
             font-size: 4rem;
+            font-weight: 800;
+            font-family: 'Space Mono', monospace;
+            text-shadow: 1px 2px 2px rgba(0,0,0,0.3);
+        }
+
+        .cursed-die.highlight-win {
+            border-color: #FFD966;
+            box-shadow: 0 0 22px rgba(255, 217, 0, 0.8);
+            background: radial-gradient(circle at 30% 35%, #fff2cf, #ffe0a3);
+        }
+
+        .cursed-die.highlight-lose {
+            border-color: #ff5e7e;
+            box-shadow: 0 0 20px #ff3860;
+        }
+
+        /* result card */
+        .result-card {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 2rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
             font-weight: 700;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(157, 78, 221, 0.2);
-            transition: all 0.3s ease;
-            cursor: default;
+            backdrop-filter: blur(10px);
+            border-left: 4px solid #c084fc;
+            transition: all 0.2s;
         }
 
-        .die.rolling {
-            animation: roll 0.1s infinite;
+        .result-win {
+            background: rgba(0, 255, 115, 0.12);
+            border-left-color: #00ffaa;
+            color: #b9ffda;
         }
 
-        @keyframes roll {
-            0%, 100% { transform: rotateX(0) rotateY(0); }
-            50% { transform: rotateX(20deg) rotateY(20deg); }
+        .result-lose {
+            background: rgba(255, 50, 80, 0.12);
+            border-left-color: #ff4d6d;
+            color: #ffbcce;
         }
 
-        .die.highlight {
-            border-color: var(--accent-gold);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 215, 0, 0.3), 0 0 20px rgba(255, 215, 0, 0.3);
+        .result-push {
+            background: rgba(212, 175, 55, 0.12);
+            border-left-color: #f5c542;
+            color: #ffe1a0;
         }
 
-        /* Result Display */
-        .result-display {
-            margin: 20px 0;
-            padding: 20px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(157, 78, 221, 0.3);
-            font-size: 1.1rem;
+        .action-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.8rem;
+        }
+
+        .secondary-btn {
+            flex: 1;
+            background: rgba(157, 78, 221, 0.2);
+            border: 1px solid #b47cff;
+            border-radius: 60px;
+            padding: 0.8rem;
             font-weight: 700;
-            letter-spacing: 1px;
-            font-family: 'Orbitron', serif;
-            min-height: 40px;
-        }
-
-        .result-display.win {
-            background: rgba(157, 78, 221, 0.2);
-            border-color: var(--accent-purple);
-            color: var(--accent-gold);
-            box-shadow: 0 0 20px rgba(157, 78, 221, 0.4);
-        }
-
-        .result-display.lose {
-            background: rgba(255, 43, 43, 0.2);
-            border-color: var(--accent-red);
-            color: var(--accent-red);
-            box-shadow: 0 0 15px rgba(255, 43, 43, 0.3);
-        }
-
-        /* Control Buttons */
-        .control-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .back-button {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            padding: 10px 20px;
-            background: rgba(157, 78, 221, 0.2);
-            border: 2px solid var(--accent-purple);
-            border-radius: 8px;
-            color: var(--accent-purple);
+            color: #dac5ff;
             cursor: pointer;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            z-index: 1000;
+            transition: 0.2s;
         }
 
-        .back-button:hover {
-            background: rgba(157, 78, 221, 0.3);
-            transform: translateX(-5px);
+        .secondary-btn:hover:not(:disabled) {
+            background: rgba(157, 78, 221, 0.5);
         }
 
-        .rules {
-            margin-top: 20px;
-            font-size: 0.8rem;
-            color: #aaa;
+        .rules-tome {
+            margin-top: 1.6rem;
+            font-size: 0.7rem;
+            background: #00000044;
+            border-radius: 1rem;
+            padding: 0.8rem;
+            color: #ab8fd9;
             text-align: left;
-            background: rgba(157, 78, 221, 0.1);
-            padding: 12px;
-            border-radius: 8px;
-            border-left: 3px solid var(--accent-purple);
+            border-top: 1px solid #6b21a5;
         }
 
-        @media (max-width: 600px) {
-            #game {
-                padding: 20px;
-            }
-
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            .die {
-                width: 80px;
-                height: 80px;
-                font-size: 3rem;
-            }
-
-            .quick-bets {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            filter: grayscale(0.1);
+        }
+        @media (max-width: 700px) {
+            .game-portal { max-width: 100%; }
+            .cursed-panel { padding: 1.2rem 1rem; }
+            .cursed-die { width: 90px; height: 90px; }
+            .die-value { font-size: 3rem; }
+            h1 { font-size: 1.8rem; }
+            .stat-row { flex-direction: column; gap: 0.8rem; }
+            .stat-card { padding: 0.7rem 0.5rem; }
+            .stat-number { font-size: 1.6rem; }
+            .dice-display { gap: 1.5rem; }
+            .primary-btn, .secondary-btn { padding: 0.7rem 0.8rem; font-size: 0.85rem; }
+            .cursed-input { padding: 0.8rem 0.8rem; font-size: 0.95rem; }
+            .quick-chips { gap: 6px; }
+            .chip-quick { padding: 0.4rem 0.8rem; font-size: 0.75rem; }
+        }
+        @media (max-width: 480px) {
+            .cursed-panel { padding: 1rem; border-radius: 1.5rem; }
+            .cursed-die { width: 70px; height: 70px; }
+            .die-value { font-size: 2.4rem; }
+            h1 { font-size: 1.5rem; letter-spacing: 1px; }
+            .stat-number { font-size: 1.4rem; }
+            .dice-display { min-height: 100px; gap: 1rem; }
+            .flex-bet { flex-direction: column; gap: 8px; }
+            .cursed-input { flex: 1; }
+            .primary-btn { flex: 1; }
+            .action-group { gap: 0.8rem; }
+            .secondary-btn { padding: 0.6rem; font-size: 0.8rem; }
+            .rules-tome { font-size: 0.65rem; padding: 0.6rem; }
         }
     </style>
 </head>
-
 <body>
-    <a href="../../index.html" class="back-button">← Back</a>
+<a href="../../mainpages/mainpage1.html" class="home-btn"><i class="fas fa-home"></i> Casino</a>
+<div class="game-portal">
+    <div class="cursed-panel">
+        <div class="occult-header">
+            <h1>Cursed dice</h1>
+            <div class="sub">where luck has a demonic price</div>
+        </div>
 
-    <div class="header">
-        <h1>🎲 CURSED DICE 🎲</h1>
-        <p class="subtitle">High Risk, High Reward Gamble</p>
-    </div>
+        <div class="stat-row">
+            <div class="stat-card"><div class="stat-label">Soul balance</div><div class="stat-number" id="balanceValue">500</div></div>
+            <div class="stat-card"><div class="stat-label">Current wager</div><div class="stat-number" id="betAmount">0</div></div>
+        </div>
 
-    <div class="game-container">
-        <div id="game">
-            <div class="balance-container">
-                <div class="balance-item">
-                    <div class="balance-label">💰 Balance</div>
-                    <div class="balance-value"><span id="balance">500</span></div>
-                </div>
-                <div class="balance-item">
-                    <div class="balance-label">🎲 Bet</div>
-                    <div class="balance-value">$<span id="currentBet">0</span></div>
-                </div>
+        <!-- BET SECTION -->
+        <div class="bet-ritual">
+            <div class="bet-title">✦ Sacrifice your bet ✦</div>
+            <div class="flex-bet">
+                <input type="number" id="betInput" class="cursed-input" placeholder="enter amount" min="1" step="1">
+                <button class="primary-btn" id="placeBetBtn">Bet</button>
             </div>
-
-            <div class="bet-control">
-                <div style="margin-bottom: 10px; font-size: 0.9rem; color: var(--accent-purple); font-weight: 600;">PLACE YOUR BET</div>
-                <div class="input-group">
-                    <input type="number" id="betInput" placeholder="Enter bet amount" min="1" max="100">
-                    <button class="action-btn" id="betBtn">BET</button>
-                </div>
-                <div style="font-size: 0.8rem; color: #aaa; margin-bottom: 10px;">Quick:</div>
-                <div class="quick-bets">
-                    <button class="quick-bet-btn" data-quick="10">$10</button>
-                    <button class="quick-bet-btn" data-quick="25">$25</button>
-                    <button class="quick-bet-btn" data-quick="50">$50</button>
-                    <button class="quick-bet-btn" data-quick="100">$100</button>
-                </div>
-            </div>
-
-            <div class="dice-container">
-                <div class="dice-label">Roll Dice</div>
-                <div class="dice-display" id="diceDisplay"></div>
-            </div>
-
-            <div class="result-display" id="resultDisplay" style="display:none;"></div>
-
-            <div class="control-buttons" id="controlButtons"></div>
-
-            <div class="rules">
-                <strong>🎮 Game Rules:</strong>
-                <ul style="margin-top: 8px; margin-left: 20px;">
-                    <li><strong>High Roll (13+):</strong> Win 1.5x your bet</li>
-                    <li><strong>Mid Roll (10-12):</strong> Win 1x your bet</li>
-                    <li><strong>Low Roll (7-9):</strong> Lose your bet</li>
-                    <li><strong>Critical Curse (2-6):</strong> Lose 1.5x your bet</li>
-                    <li><strong>Snake Eyes (1):</strong> Lose ALL your chips! ☠️</li>
-                </ul>
+            <div class="quick-chips">
+                <div class="chip-quick" data-quick="10">$10</div>
+                <div class="chip-quick" data-quick="25">$25</div>
+                <div class="chip-quick" data-quick="50">$50</div>
+                <div class="chip-quick" data-quick="100">$100</div>
+                <div class="chip-quick" data-quick="250">$250</div>
             </div>
         </div>
+
+        <!-- DICE BATTLEFIELD -->
+        <div class="dice-arena">
+            <div class="dice-label">⟡ The cursed roll ⟡</div>
+            <div class="dice-display" id="diceContainer">
+                <div class="cursed-die" id="die1"><span class="die-value">🎲</span></div>
+                <div class="cursed-die" id="die2"><span class="die-value">🎲</span></div>
+            </div>
+        </div>
+
+        <!-- DYNAMIC RESULT AREA -->
+        <div id="resultContainer"></div>
+
+        <!-- GAME ACTIONS -->
+        <div class="action-group" id="actionFooter">
+            <button class="secondary-btn" id="clearBetBtn" style="display: flex; justify-content: center; align-items: center;">OK</button>
+            <button class="secondary-btn" id="newGameBtn" style="display: none;">New game</button>
+        </div>
+
+        <div class="rules-tome">
+            <div>Demonic rules:</div>
+            <div><strong style="color:#fdbe5c;">13+ (High)</strong> → +150% win</div>
+            <div><strong>10-12 (Mid)</strong> → +100%</div>
+            <div><strong style="color:#ff8c8c;">7-9 (Low)</strong> → Lose bet</div>
+            <div><strong style="color:#ff4d6d;">2-6 (Curse)</strong> → Lose 150%</div>
+            <div><strong style="color:#ff2277;">Snake eyes (1)</strong> → Total annihilation!</div>
+        </div>
+
     </div>
+</div>
 
-    <script>
-        const diceEmojis = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣'];
+<script>
+    // ------------------- CURSED DICE ENGINE -------------------
+    let balance = 500;
+    let currentBet = 0;
+    let isRolling = false;
+    let gameActive = false;     // true only when bet placed and awaiting roll / result shown after roll locks
 
-        let balance = parseInt(localStorage.getItem('curseddice-balance')) || 500;
-        let currentBet = 0;
-        let gameActive = false;
+    // DOM elements
+    const balanceSpan = document.getElementById('balanceValue');
+    const betAmountSpan = document.getElementById('betAmount');
+    const betInput = document.getElementById('betInput');
+    const placeBetBtn = document.getElementById('placeBetBtn');
+    const clearBetBtn = document.getElementById('clearBetBtn');
+    const newGameBtn = document.getElementById('newGameBtn');
+    const diceContainer = document.getElementById('diceContainer');
+    const die1Elem = document.getElementById('die1');
+    const die2Elem = document.getElementById('die2');
+    const resultContainer = document.getElementById('resultContainer');
 
-        const balanceDisplay = document.getElementById('balance');
-        const betDisplay = document.getElementById('currentBet');
-        const betInput = document.getElementById('betInput');
-        const betBtn = document.getElementById('betBtn');
-        const quickBets = document.querySelectorAll('.quick-bet-btn');
-        const diceDisplay = document.getElementById('diceDisplay');
-        const resultDisplay = document.getElementById('resultDisplay');
-        const controlButtons = document.getElementById('controlButtons');
+    // Visual die value update (clean crisp numbers)
+    function updateDieUI(dieElement, value, highlightType = null) {
+        const span = dieElement.querySelector('.die-value');
+        if (value === null || value === undefined) {
+            span.textContent = '🎲';
+        } else {
+            // show nice number style
+            span.textContent = value;
+        }
+        // remove highlight classes
+        dieElement.classList.remove('highlight-win', 'highlight-lose');
+        if (highlightType === 'win') dieElement.classList.add('highlight-win');
+        if (highlightType === 'lose') dieElement.classList.add('highlight-lose');
+    }
 
-        updateDisplay();
+    // reset dice visuals to neutral
+    function resetDiceNeutral() {
+        updateDieUI(die1Elem, null);
+        updateDieUI(die2Elem, null);
+        die1Elem.classList.remove('rolling-animation');
+        die2Elem.classList.remove('rolling-animation');
+    }
 
-        betBtn.addEventListener('click', () => {
-            const bet = parseInt(betInput.value);
-            if (bet > 0 && bet <= balance && !gameActive) {
-                currentBet = bet;
-                balance -= bet;
-                gameActive = true;
-                rollDice();
-                updateDisplay();
+    function setDiceRolling(rolling) {
+        if (rolling) {
+            die1Elem.classList.add('rolling-animation');
+            die2Elem.classList.add('rolling-animation');
+            updateDieUI(die1Elem, '🎲');
+            updateDieUI(die2Elem, '🎲');
+        } else {
+            die1Elem.classList.remove('rolling-animation');
+            die2Elem.classList.remove('rolling-animation');
+        }
+    }
+
+    // Store roll result values for final animation
+    function displayFinalRoll(val1, val2, highlightOutcome) {
+        updateDieUI(die1Elem, val1, highlightOutcome);
+        updateDieUI(die2Elem, val2, highlightOutcome);
+    }
+
+    // update UI (balance, bet, buttons)
+    function refreshUI() {
+        balanceSpan.innerText = Math.floor(balance);
+        betAmountSpan.innerText = currentBet;
+        // enable/disable bet actions
+        const canPlaceBet = (!isRolling && !gameActive && currentBet === 0 && balance > 0);
+        placeBetBtn.disabled = !canPlaceBet;
+        clearBetBtn.disabled = (gameActive || isRolling || currentBet === 0);
+        betInput.disabled = (gameActive || isRolling);
+        if (balance <= 0) {
+            placeBetBtn.disabled = true;
+            clearBetBtn.disabled = true;
+            if (!resultContainer.innerHTML.includes('game over')) {
+                showResultMessage('💀 Game over — Your soul is bankrupt 💀', 'lose');
             }
-        });
+        }
+    }
 
-        betInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') betBtn.click();
-        });
+    function showResultMessage(message, type = 'neutral') {
+        let resultDiv = document.createElement('div');
+        resultDiv.className = 'result-card';
+        if (type === 'win') resultDiv.classList.add('result-win');
+        else if (type === 'lose') resultDiv.classList.add('result-lose');
+        else resultDiv.classList.add('result-push');
+        resultDiv.innerHTML = `<span style="font-weight:800; word-wrap: break-word; display: block;">${message}</span>`;
+        resultContainer.innerHTML = '';
+        resultContainer.appendChild(resultDiv);
+    }
 
-        quickBets.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const bet = parseInt(btn.dataset.quick);
-                if (bet <= balance && !gameActive) {
-                    betInput.value = bet;
-                    betBtn.click();
+    function clearResult() {
+        resultContainer.innerHTML = '';
+    }
+
+    // Core: evaluate and apply bet outcome
+    function evaluateRoll(total, roll1, roll2) {
+        let outcomeType = '';
+        let winnings = 0;
+        let message = '';
+        let highlightType = 'lose';
+
+        if (total >= 13) {
+            // HIGH ROLL: win 1.5x bet (total win = bet*1.5 + original bet removed before)
+            // bet already subtracted from balance, we add back (bet + profit)
+            const profit = Math.floor(currentBet * 1.5);
+            const totalReturn = currentBet + profit;
+            balance += totalReturn;
+            winnings = profit;
+            outcomeType = 'win';
+            message = `✨ High roll (${total})! You won +$${profit}! ✨`;
+            highlightType = 'win';
+        } 
+        else if (total >= 10 && total <= 12) {
+            const profit = currentBet;
+            balance += currentBet + profit;
+            winnings = profit;
+            outcomeType = 'win';
+            message = `🎲 Mid roll (${total})! You won +$${profit}! 🎲`;
+            highlightType = 'win';
+        }
+        else if (total >= 7 && total <= 9) {
+            // LOSE bet fully (already deducted)
+            message = `💀 Low roll (${total})! You lost $${currentBet}. 💀`;
+            outcomeType = 'lose';
+            highlightType = 'lose';
+        }
+        else if (total >= 2 && total <= 6) {
+            // CURSE: lose 1.5x bet
+            const curseLoss = Math.floor(currentBet * 1.5);
+            balance = Math.max(0, balance - curseLoss);
+            message = `⚠️ Cursed roll (${total})! You lost an extra $${curseLoss} (1.5x penalty)! ⚠️`;
+            outcomeType = 'lose';
+            highlightType = 'lose';
+        }
+        else if (total === 1) {
+            // SNAKE EYES → lose everything (balance zero)
+            balance = 0;
+            message = `☠️☠️ Snake eyes (1)!! Your balance is obliterated! ☠️☠️`;
+            outcomeType = 'lose';
+            highlightType = 'lose';
+        }
+
+        saveBalanceToLocal();
+        refreshUI();
+        showResultMessage(message, outcomeType === 'win' ? 'win' : 'lose');
+        displayFinalRoll(roll1, roll2, highlightType);
+        return outcomeType;
+    }
+
+    // random dice simulator with clean animation
+    async function performRoll() {
+        if (isRolling) return;
+        isRolling = true;
+        clearResult();
+        setDiceRolling(true);
+        
+        // final values
+        let finalVal1 = 0, finalVal2 = 0;
+        let rollsCount = 0;
+        const MAX_SPINS = 15;
+        
+        const spinInterval = setInterval(() => {
+            // fake random values for flickering (showing digits)
+            const fake1 = Math.floor(Math.random() * 6) + 1;
+            const fake2 = Math.floor(Math.random() * 6) + 1;
+            updateDieUI(die1Elem, fake1);
+            updateDieUI(die2Elem, fake2);
+            rollsCount++;
+            if (rollsCount >= MAX_SPINS) {
+                clearInterval(spinInterval);
+                // actual roll values
+                finalVal1 = Math.floor(Math.random() * 6) + 1;
+                finalVal2 = Math.floor(Math.random() * 6) + 1;
+                const total = finalVal1 + finalVal2;
+                setDiceRolling(false);
+                // final evaluation
+                evaluateRoll(total, finalVal1, finalVal2);
+                // after evaluation lock gameActive ended
+                gameActive = false;
+                isRolling = false;
+                // show new game button if needed (bankrupt or not)
+                if (balance <= 0) {
+                    newGameBtn.style.display = 'flex';
+                    clearBetBtn.style.display = 'none';
+                } else {
+                    newGameBtn.style.display = 'none';
+                    clearBetBtn.style.display = 'flex';
                 }
-            });
-        });
-
-        function rollDice() {
-            diceDisplay.innerHTML = '';
-            const dice = [];
-
-            for (let i = 0; i < 2; i++) {
-                const die = document.createElement('div');
-                die.className = 'die rolling';
-                die.textContent = '🎲';
-                diceDisplay.appendChild(die);
-                dice.push(die);
-            }
-
-            let spinCount = 0;
-            const maxSpins = 20;
-
-            const spinInterval = setInterval(() => {
-                dice.forEach(die => {
-                    die.textContent = diceEmojis[Math.floor(Math.random() * 6)];
-                });
-                spinCount++;
-
-                if (spinCount >= maxSpins) {
-                    clearInterval(spinInterval);
-                    finalizeDice(dice);
+                refreshUI();
+                // allow new bet after rolling done
+                if (balance > 0 && !gameActive && currentBet === 0) {
+                    placeBetBtn.disabled = false;
+                } else {
+                    placeBetBtn.disabled = true;
                 }
-            }, 80);
-        }
-
-        function finalizeDice(dice) {
-            const roll1 = Math.floor(Math.random() * 6) + 1;
-            const roll2 = Math.floor(Math.random() * 6) + 1;
-            const total = roll1 + roll2;
-
-            dice[0].textContent = diceEmojis[roll1 - 1];
-            dice[1].textContent = diceEmojis[roll2 - 1];
-            dice.forEach(die => die.classList.remove('rolling'));
-
-            if (total >= 13) {
-                dice.forEach(die => die.classList.add('highlight'));
-                evaluateRoll(total, 'HIGH', 1.5);
-            } else if (total >= 10) {
-                dice.forEach(die => die.classList.add('highlight'));
-                evaluateRoll(total, 'MID', 1);
-            } else if (total >= 7) {
-                evaluateRoll(total, 'LOW', 0);
-            } else if (total >= 2) {
-                evaluateRoll(total, 'CURSE', -0.5);
-            } else {
-                evaluateRoll(total, 'SNAKE EYES', -2);
             }
+        }, 80);
+    }
+
+    // Place bet function: validates, subtracts balance, activates game
+    function placeBet() {
+        if (isRolling || gameActive) return;
+        let betAmount = parseInt(betInput.value);
+        if (isNaN(betAmount) || betAmount <= 0) {
+            showResultMessage("Enter a valid positive bet amount.", "lose");
+            return;
         }
+        if (betAmount > balance) {
+            showResultMessage(`Insufficient balance! Max bet: $${balance}`, "lose");
+            return;
+        }
+        if (balance <= 0) {
+            showResultMessage("You are bankrupt! Press new game.", "lose");
+            return;
+        }
+        // commit bet
+        currentBet = betAmount;
+        balance -= currentBet;
+        gameActive = true;
+        refreshUI();
+        clearResult();
+        resetDiceNeutral();
+        betInput.value = '';
+        // perform dice rolling and final outcome
+        performRoll().catch(e => console.warn(e));
+    }
 
-        function evaluateRoll(total, type, multiplier) {
-            let message = '';
-            let winAmount = 0;
+    function clearBet() {
+        if (isRolling || gameActive) return;
+        if (currentBet !== 0) {
+            balance += currentBet;
+            currentBet = 0;
+            refreshUI();
+            resetDiceNeutral();
+            clearResult();
+            placeBetBtn.disabled = false;
+        }
+        betInput.value = '';
+    }
 
-            switch (type) {
-                case 'HIGH':
-                    winAmount = Math.floor(currentBet * 1.5);
-                    balance += currentBet + winAmount;
-                    message = `🎉 HIGH ROLL! You won $${winAmount}! (Total: ${total})`;
-                    resultDisplay.className = 'result-display win';
-                    break;
-                case 'MID':
-                    winAmount = currentBet;
-                    balance += currentBet + winAmount;
-                    message = `✅ MID ROLL! You won $${winAmount}! (Total: ${total})`;
-                    resultDisplay.className = 'result-display win';
-                    break;
-                case 'LOW':
-                    message = `❌ LOW ROLL! Bet lost! (Total: ${total})`;
-                    resultDisplay.className = 'result-display lose';
-                    break;
-                case 'CURSE':
-                    const curseLoss = Math.floor(currentBet * 1.5);
-                    balance = Math.max(0, balance - curseLoss);
-                    message = `⚠️ CURSED! Lost $${curseLoss}! (Total: ${total})`;
-                    resultDisplay.className = 'result-display lose';
-                    break;
-                case 'SNAKE EYES':
-                    message = `☠️ SNAKE EYES! LOST ALL! Total: ${total}`;
-                    resultDisplay.className = 'result-display lose';
-                    balance = 0;
-                    break;
+    function resetFullGame() {
+        if (isRolling) return;
+        balance = 500;
+        currentBet = 0;
+        gameActive = false;
+        isRolling = false;
+        saveBalanceToLocal();
+        refreshUI();
+        resetDiceNeutral();
+        clearResult();
+        betInput.value = '';
+        newGameBtn.style.display = 'none';
+        clearBetBtn.style.display = 'flex';
+        showResultMessage("🔄 New game started! 500 chips restored. Good luck.", "push");
+        setTimeout(() => {
+            if (resultContainer.innerHTML.includes("New game started")) clearResult();
+        }, 2000);
+    }
+
+    function quickBet(amount) {
+        if (isRolling || gameActive) return;
+        if (amount > balance) {
+            showResultMessage(`Can't afford $${amount} bet`, "lose");
+            return;
+        }
+        betInput.value = amount;
+        // optional: place instantly? according to polish we can make it direct bet or just fill. Better UX: fill & enable.
+        // but to speed up we can also call placeBet automatically? makes it fluid.
+        placeBet();
+    }
+
+    function saveBalanceToLocal() {
+        localStorage.setItem('cursed_dice_balance', Math.floor(balance));
+    }
+
+    function loadBalanceFromStorage() {
+        const saved = localStorage.getItem('cursed_dice_balance');
+        if (saved && !isNaN(parseInt(saved)) && parseInt(saved) > 0) {
+            balance = parseInt(saved);
+        } else {
+            balance = 500;
+        }
+        if (balance <= 0) balance = 500;
+        refreshUI();
+    }
+
+    // Event listeners
+    placeBetBtn.addEventListener('click', placeBet);
+    clearBetBtn.addEventListener('click', clearBet);
+    newGameBtn.addEventListener('click', resetFullGame);
+
+    document.querySelectorAll('.chip-quick').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const val = parseInt(btn.getAttribute('data-quick'));
+            if (!isNaN(val) && !isRolling && !gameActive) {
+                quickBet(val);
             }
+        });
+    });
 
-            resultDisplay.textContent = message;
-            resultDisplay.style.display = 'block';
-
-            showPlayAgainBtn();
-            saveBalance();
-            updateDisplay();
+    // initial load
+    loadBalanceFromStorage();
+    resetDiceNeutral();
+    refreshUI();
+    clearResult();
+    if (balance <= 0) {
+        newGameBtn.style.display = 'flex';
+        clearBetBtn.style.display = 'none';
+        showResultMessage("Game over — Click new game to revive", "lose");
+    } else {
+        newGameBtn.style.display = 'none';
+        clearBetBtn.style.display = 'flex';
+    }
+    // Allow pressing Enter to place bet
+    betInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && !isRolling && !gameActive) {
+            placeBet();
         }
-
-        function showPlayAgainBtn() {
-            controlButtons.innerHTML = '<button class="action-btn" onclick="location.reload()" style="grid-column: 1/-1;">PLAY AGAIN</button>';
-            gameActive = false;
-        }
-
-        function updateDisplay() {
-            balanceDisplay.textContent = balance;
-            betDisplay.textContent = currentBet;
-
-            if (balance < 1) {
-                betBtn.disabled = true;
-                resultDisplay.style.display = 'block';
-                resultDisplay.className = 'result-display lose';
-                resultDisplay.textContent = 'GAME OVER - OUT OF FUNDS!';
-            }
-        }
-
-        function saveBalance() {
-            localStorage.setItem('curseddice-balance', balance);
-        }
-    </script>
+    });
+    // remove any glitch: dice never show broken emojis, only numbers after roll.
+    updateDieUI(die1Elem, null);
+    updateDieUI(die2Elem, null);
+</script>
 </body>
-
 </html>

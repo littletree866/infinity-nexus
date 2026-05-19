@@ -12,9 +12,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" rel="stylesheet">
 
 
+
     <style>
         /* Modern Color Themes - CSS Variables */
-        :root[data-theme="dark"] {
+          :root[data-theme="dark"] {
             --primary: #3a8eed;
             --secondary: #ec4899;
             --bg-primary: #0f172a;
@@ -39,7 +40,7 @@
             --bg-secondary: #f8fafc;
             --bg-tertiary: #e2e8f0;
             --text-primary: #1e293b;
-            --text-secondary: #475569;
+            --text-secondary: #000000;
             --text-muted: #64748b;
             --border-color: #cbd5e1;
             --border-radius: 12px;
@@ -67,7 +68,7 @@
             line-height: 1.6;
             color: var(--text-primary);
             background: var(--bg-primary);
-            transition: "background" 0.3s ease, "color" 0.3s ease;
+            transition: "background" 0.3s ease, color 0.3s ease;
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -330,6 +331,7 @@
         .description p {
             margin: 4px 0;
             /* spacing between paragraphs */
+            color:white;
         }
 
         .description p.warning {
@@ -346,7 +348,7 @@
             border-radius: var(--border-radius);
             background: var(--card-bg);
             backdrop-filter: blur(10px);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            font-family: "Trebuchet MS", sans-serif;
             box-shadow: var(--shadow);
             border: 1px solid var(--border-color);
             transition: all 0.2s ease;
@@ -669,7 +671,7 @@
         /* Enhanced Card Description */
         .card-description {
             font-size: 0.9rem;
-            color: white;
+            color: var(--text-secondary);
             padding: 8px 16px;
             line-height: 1.5;
             min-height: 2.7em;
@@ -718,7 +720,7 @@
             padding: 48px 0;
             text-align: center;
             margin-top: 80px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid var(--border-color);
         }
 
         footer a {
@@ -884,7 +886,7 @@
     <header>
         <div class="container">
 
-            <h1 class="main-title">🎮 Game Corner</h1>
+            <h1 class="main-title">👍 Must Play Games</h1>
 
         </div>
     </header>
@@ -893,123 +895,139 @@
         <div class="container" id="main">
             <div class="links-section">
 
-
                 <div class="archive-grid" id="archiveGrid">
-                    <!-- Geometry Runner -->
-                    <div class="archive-card">
-                        <div class="card-header">
-                            <div class="card-image-placeholder">🏃</div>
-                            <div class="archive-tag">Action</div>
-                        </div>
-                        <h3 class="archive-title">Geometry Runner</h3>
-                        <div class="badge-container">
-                            <span class="status-badge">Fast-Paced</span>
-                            <span class="status-badge">Exciting</span>
-                        </div>
-                        <p class="card-description">Navigate through geometric obstacles and customize your runner. A
-                            fast-paced, addictive running game!</p>
-                        <div style="padding: 0 16px 16px 16px;">
-                            <a href="../games/georunner/runner.html" class="status-pill status-available"
-                                style="text-decoration: none; display: inline-block;">Play Now →</a>
-                        </div>
-                    </div>
 
-                    <!-- Puzzle Master -->
+                      <!-- Emerald Eclipse -->
                     <div class="archive-card">
                         <div class="card-header">
-                            <div class="card-image-placeholder">🧩</div>
-                            <div class="archive-tag">Puzzle</div>
+                            <div class="card-image-placeholder">😀</div>
+                            <div class="archive-tag">Pokémon</div>
                         </div>
-                        <h3 class="archive-title">Puzzle Master</h3>
+                        <h3 class="archive-title">Emerald Eclipse</h3>
                         <div class="badge-container">
-                            <span class="status-badge featured-badge">Featured</span>
-                            <span class="status-badge">Brain-Teaser</span>
-                        </div>
-                        <p class="card-description">Solve challenging puzzles and unlock your problem-solving abilities.
-                            Perfect for exercising your mind!</p>
-                        <div style="padding: 0 16px 16px 16px;">
-                            <a href="../games/puzzle/puzzle.html" class="status-pill status-available"
-                                style="text-decoration: none; display: inline-block;">Play Now →</a>
-                        </div>
-                    </div>
-
-                    <!-- Wizard Battle -->
-                    <div class="archive-card">
-                        <div class="card-header">
-                            <div class="card-image-placeholder">🧙</div>
-                            <div class="archive-tag">RPG</div>
-                        </div>
-                        <h3 class="archive-title">Wizard Battle</h3>
-                        <div class="badge-container">
-                            <span class="status-badge">RPG</span>
-                            <span class="status-badge">Action</span>
-                        </div>
-                        <p class="card-description">Cast spells and battle enemies as a powerful wizard! An engaging RPG
-                            experience with magical combat.</p>
-                        <div style="padding: 0 16px 16px 16px;">
-                            <a href="../games/wizardgame/wizardgame.html" class="status-pill status-available"
-                                style="text-decoration: none; display: inline-block;">Play Now →</a>
-                        </div>
-                    </div>
-
-                    <!-- Zombie Survival -->
-                    <div class="archive-card">
-                        <div class="card-header">
-                            <div class="card-image-placeholder">🧟</div>
-                            <div class="archive-tag">Survival</div>
-                        </div>
-                        <h3 class="archive-title">Zombie Survival</h3>
-                        <div class="badge-container">
-                            <span class="status-badge">Intense</span>
+                            <span class="status-badge popular-badge">🏆 Popular</span>
                             <span class="status-badge favorite-badge">Favorite</span>
                         </div>
-                        <p class="card-description">Survive waves of zombies with strategic positioning and upgrades. A
-                            thrilling survival experience!</p>
+                        <p class="card-description">Play a classic ROM hack of Pokémon Emerald!</p>
                         <div style="padding: 0 16px 16px 16px;">
-                            <a href="../games/zombiegame/zombie.html" class="status-pill status-available"
+                            <a href="https://pokemonromhacks.pages.dev/" class="status-pill status-available"
                                 style="text-decoration: none; display: inline-block;">Play Now →</a>
                         </div>
                     </div>
 
-                    <!-- The World's Dumbest Game -->
+                    <!-- Tower Defense+ -->
                     <div class="archive-card">
                         <div class="card-header">
-                            <div class="card-image-placeholder">🤓</div>
-                            <div class="archive-tag">Casual</div>
+                            <div class="card-image-placeholder">🛡️</div>
+                            <div class="archive-tag">Strategy</div>
                         </div>
-                        <h3 class="archive-title">The World's Dumbest Game</h3>
+                        <h3 class="archive-title">Tower Defense+</h3>
                         <div class="badge-container">
-                            <span class="status-badge">Hilarious</span>
-                            <span class="status-badge">Fun</span>
+                            <span class="status-badge popular-badge">🏆 Popular</span>
+                            <span class="status-badge favorite-badge">Favorite</span>
                         </div>
-                        <p class="card-description">Embrace the absurdity! A comical game that challenges expectations
-                            and rewards your sense of humor.</p>
+                        <p class="card-description">Defend against waves of enemies by placing strategic towers. A
+                            timeless classic that keeps you engaged for hours!</p>
                         <div style="padding: 0 16px 16px 16px;">
-                            <a href="../games/dumbestgame/dumbestgame.html" class="status-pill status-available"
+                            <a href="../games/tower/tower.html" class="status-pill status-available"
                                 style="text-decoration: none; display: inline-block;">Play Now →</a>
                         </div>
                     </div>
 
-                    <!-- Pokémon Nova -->
+                    <!-- Tower Defense 2+ -->
                     <div class="archive-card">
                         <div class="card-header">
-                            <div class="card-image-placeholder">⚔️</div>
-                            <div class="archive-tag">Adventure</div>
+                            <div class="card-image-placeholder">🛡️</div>
+                            <div class="archive-tag">Strategy</div>
                         </div>
-                        <h3 class="archive-title">Pokémon Nova</h3>
+                        <h3 class="archive-title">Tower Defense 2+</h3>
                         <div class="badge-container">
-                            <span class="status-badge popular-badge">🔥 Popular</span>
-                            <span class="status-badge">Adventure</span>
+                            <span class="status-badge">Sequel</span>
+                            <span class="status-badge featured-badge">Featured</span>
                         </div>
-                        <p class="card-description">Battle and catch creatures in this Pokémon-inspired adventure!
-                            Experience strategic turn-based combat!</p>
+                        <p class="card-description">The improved sequel with new towers, maps, and enemy types!
+                            Experience enhanced graphics and challenging new waves.</p>
                         <div style="padding: 0 16px 16px 16px;">
-                            <a href="../games/pokemonnova/pokemonnova.html" class="status-pill status-available"
+                            <a href="../games/tower2/tower2.html" class="status-pill status-available"
                                 style="text-decoration: none; display: inline-block;">Play Now →</a>
                         </div>
                     </div>
 
+                    <!-- Clicker Quest+ -->
+                    <div class="archive-card">
+                        <div class="card-header">
+                            <div class="card-image-placeholder">👆</div>
+                            <div class="archive-tag">Clicker</div>
+                        </div>
+                        <h3 class="archive-title">Clicker Quest+</h3>
+                        <div class="badge-container">
+                            <span class="status-badge">Incremental</span>
+                            <span class="status-badge">Addictive</span>
+                        </div>
+                        <p class="card-description">Click your way to victory! An engaging incremental game with
+                            upgrades, prestige, and endless progression mechanics.</p>
+                        <div style="padding: 0 16px 16px 16px;">
+                            <a href="../games/clickergame/clickergame.html" class="status-pill status-available"
+                                style="text-decoration: none; display: inline-block;">Play Now →</a>
+                        </div>
+                    </div>
 
+                    <!-- Space Game -->
+                    <div class="archive-card">
+                        <div class="card-header">
+                            <div class="card-image-placeholder">🚀</div>
+                            <div class="archive-tag">Action</div>
+                        </div>
+                        <h3 class="archive-title">Space Game</h3>
+                        <div class="badge-container">
+                            <span class="status-badge">Action-Packed</span>
+                            <span class="status-badge">Exciting</span>
+                        </div>
+                        <p class="card-description">Blast through space with your spaceship! Dodge obstacles and defeat
+                            enemies in this fast-paced shooter experience.</p>
+                        <div style="padding: 0 16px 16px 16px;">
+                            <a href="../games/spacegame/spacegame.html" class="status-pill status-available"
+                                style="text-decoration: none; display: inline-block;">Play Now →</a>
+                        </div>
+                    </div>
+
+                    <!-- The Impossible Game -->
+                    <div class="archive-card">
+                        <div class="card-header">
+                            <div class="card-image-placeholder">😵</div>
+                            <div class="archive-tag">Challenge</div>
+                        </div>
+                        <h3 class="archive-title">The Impossible Game</h3>
+                        <div class="badge-container">
+                            <span class="status-badge">Ultra-Hard</span>
+                            <span class="status-badge">Challenge</span>
+                        </div>
+                        <p class="card-description">Test your reflexes! An extremely challenging platformer that will
+                            push your skills to the absolute limit.</p>
+                        <div style="padding: 0 16px 16px 16px;">
+                            <a href="../games/platformergame/platformergame.html" class="status-pill status-available"
+                                style="text-decoration: none; display: inline-block;">Play Now →</a>
+                        </div>
+                    </div>
+
+                    <!-- Pyramid -->
+                    <div class="archive-card">
+                        <div class="card-header">
+                            <div class="card-image-placeholder">🏜️</div>
+                            <div class="archive-tag">Simulation</div>
+                        </div>
+                        <h3 class="archive-title">Pyramid</h3>
+                        <div class="badge-container">
+                            <span class="status-badge">Building</span>
+                            <span class="status-badge">Strategy</span>
+                        </div>
+                        <p class="card-description">Build magnificent pyramids through strategic planning and resource
+                            management. A unique construction simulation!</p>
+                        <div style="padding: 0 16px 16px 16px;">
+                            <a href="../sims/pyramid/pyramid.html" class="status-pill status-available"
+                                style="text-decoration: none; display: inline-block;">Play Now →</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

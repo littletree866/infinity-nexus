@@ -15,7 +15,7 @@
 
     <style>
         /* Modern Color Themes - CSS Variables */
-          :root[data-theme="dark"] {
+         :root[data-theme="dark"] {
             --primary: #3a8eed;
             --secondary: #ec4899;
             --bg-primary: #0f172a;
@@ -40,7 +40,7 @@
             --bg-secondary: #f8fafc;
             --bg-tertiary: #e2e8f0;
             --text-primary: #1e293b;
-            --text-secondary: #000000;
+            --text-secondary: #475569;
             --text-muted: #64748b;
             --border-color: #cbd5e1;
             --border-radius: 12px;
@@ -68,7 +68,7 @@
             line-height: 1.6;
             color: var(--text-primary);
             background: var(--bg-primary);
-            transition: "background" 0.3s ease, color 0.3s ease;
+            transition: "background" 0.3s ease, "color" 0.3s ease;
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -331,7 +331,6 @@
         .description p {
             margin: 4px 0;
             /* spacing between paragraphs */
-            color:white;
         }
 
         .description p.warning {
@@ -348,7 +347,7 @@
             border-radius: var(--border-radius);
             background: var(--card-bg);
             backdrop-filter: blur(10px);
-            font-family: "Trebuchet MS", sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
             box-shadow: var(--shadow);
             border: 1px solid var(--border-color);
             transition: all 0.2s ease;
@@ -671,7 +670,7 @@
         /* Enhanced Card Description */
         .card-description {
             font-size: 0.9rem;
-            color: white;
+            color: var(--text-secondary);
             padding: 8px 16px;
             line-height: 1.5;
             min-height: 2.7em;
@@ -720,7 +719,7 @@
             padding: 48px 0;
             text-align: center;
             margin-top: 80px;
-            border-top: 1px solid var(--border-color);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         footer a {
@@ -886,7 +885,7 @@
     <header>
         <div class="container">
 
-            <h1 class="main-title">👍 Must Play Games</h1>
+            <h1 class="main-title">💡 Simulation Games</h1>
 
         </div>
     </header>
@@ -895,136 +894,118 @@
         <div class="container" id="main">
             <div class="links-section">
 
+
                 <div class="archive-grid" id="archiveGrid">
-
-                      <!-- Emerald Eclipse -->
+                    <!-- Wealth Builder -->
                     <div class="archive-card">
                         <div class="card-header">
-                            <div class="card-image-placeholder">😀</div>
-                            <div class="archive-tag">Pokémon</div>
-                        </div>
-                        <h3 class="archive-title">Emerald Eclipse</h3>
-                        <div class="badge-container">
-                            <span class="status-badge popular-badge">🏆 Popular</span>
-                            <span class="status-badge favorite-badge">Favorite</span>
-                        </div>
-                        <p class="card-description">Play a classic ROM hack of Pokémon Emerald!</p>
-                        <div style="padding: 0 16px 16px 16px;">
-                            <a href="https://pokemonemeraldeclipse.pages.dev" class="status-pill status-available"
-                                style="text-decoration: none; display: inline-block;">Play Now →</a>
-                        </div>
-                    </div>
-
-                    <!-- Tower Defense+ -->
-                    <div class="archive-card">
-                        <div class="card-header">
-                            <div class="card-image-placeholder">🛡️</div>
-                            <div class="archive-tag">Strategy</div>
-                        </div>
-                        <h3 class="archive-title">Tower Defense+</h3>
-                        <div class="badge-container">
-                            <span class="status-badge popular-badge">🏆 Popular</span>
-                            <span class="status-badge favorite-badge">Favorite</span>
-                        </div>
-                        <p class="card-description">Defend against waves of enemies by placing strategic towers. A
-                            timeless classic that keeps players engaged for hours!</p>
-                        <div style="padding: 0 16px 16px 16px;">
-                            <a href="../games/tower/tower.html" class="status-pill status-available"
-                                style="text-decoration: none; display: inline-block;">Play Now →</a>
-                        </div>
-                    </div>
-
-                    <!-- Tower Defense 2+ -->
-                    <div class="archive-card">
-                        <div class="card-header">
-                            <div class="card-image-placeholder">🛡️</div>
-                            <div class="archive-tag">Strategy</div>
-                        </div>
-                        <h3 class="archive-title">Tower Defense 2+</h3>
-                        <div class="badge-container">
-                            <span class="status-badge">Sequel</span>
-                            <span class="status-badge featured-badge">Featured</span>
-                        </div>
-                        <p class="card-description">The improved sequel with new towers, maps, and enemy types!
-                            Experience enhanced graphics and challenging new waves.</p>
-                        <div style="padding: 0 16px 16px 16px;">
-                            <a href="../games/tower2/tower2.html" class="status-pill status-available"
-                                style="text-decoration: none; display: inline-block;">Play Now →</a>
-                        </div>
-                    </div>
-
-                    <!-- Clicker Quest+ -->
-                    <div class="archive-card">
-                        <div class="card-header">
-                            <div class="card-image-placeholder">👆</div>
-                            <div class="archive-tag">Clicker</div>
-                        </div>
-                        <h3 class="archive-title">Clicker Quest+</h3>
-                        <div class="badge-container">
-                            <span class="status-badge">Incremental</span>
-                            <span class="status-badge">Addictive</span>
-                        </div>
-                        <p class="card-description">Click your way to victory! An engaging incremental game with
-                            upgrades, prestige, and endless progression mechanics.</p>
-                        <div style="padding: 0 16px 16px 16px;">
-                            <a href="../games/clickergame/clickergame.html" class="status-pill status-available"
-                                style="text-decoration: none; display: inline-block;">Play Now →</a>
-                        </div>
-                    </div>
-
-                    <!-- Space Game -->
-                    <div class="archive-card">
-                        <div class="card-header">
-                            <div class="card-image-placeholder">🚀</div>
-                            <div class="archive-tag">Action</div>
-                        </div>
-                        <h3 class="archive-title">Space Game</h3>
-                        <div class="badge-container">
-                            <span class="status-badge">Action-Packed</span>
-                            <span class="status-badge">Exciting</span>
-                        </div>
-                        <p class="card-description">Blast through space with your spaceship! Dodge obstacles and defeat
-                            enemies in this fast-paced shooter experience.</p>
-                        <div style="padding: 0 16px 16px 16px;">
-                            <a href="../games/spacegame/spacegame.html" class="status-pill status-available"
-                                style="text-decoration: none; display: inline-block;">Play Now →</a>
-                        </div>
-                    </div>
-
-                    <!-- The Impossible Game -->
-                    <div class="archive-card">
-                        <div class="card-header">
-                            <div class="card-image-placeholder">😵</div>
-                            <div class="archive-tag">Challenge</div>
-                        </div>
-                        <h3 class="archive-title">The Impossible Game</h3>
-                        <div class="badge-container">
-                            <span class="status-badge">Ultra-Hard</span>
-                            <span class="status-badge">Challenge</span>
-                        </div>
-                        <p class="card-description">Test your reflexes! An extremely challenging platformer that will
-                            push your skills to the absolute limit.</p>
-                        <div style="padding: 0 16px 16px 16px;">
-                            <a href="../games/platformergame/platformergame.html" class="status-pill status-available"
-                                style="text-decoration: none; display: inline-block;">Play Now →</a>
-                        </div>
-                    </div>
-
-                    <!-- Pyramid -->
-                    <div class="archive-card">
-                        <div class="card-header">
-                            <div class="card-image-placeholder">🏜️</div>
+                            <div class="card-image-placeholder">💰</div>
                             <div class="archive-tag">Simulation</div>
                         </div>
-                        <h3 class="archive-title">Pyramid</h3>
+                        <h3 class="archive-title">Wealth Builder</h3>
                         <div class="badge-container">
-                            <span class="status-badge">Building</span>
+                            <span class="status-badge">Economic</span>
+                            <span class="status-badge">Educational</span>
+                        </div>
+                        <p class="card-description">Build wealth through strategic decisions and smart investments.
+                            Learn the fundamentals of economics!</p>
+                        <div style="padding: 0 16px 16px 16px;">
+                            <a href="../sims/lifegame/life.html" class="status-pill status-available"
+                                style="text-decoration: none; display: inline-block;">Play Now →</a>
+                        </div>
+                    </div>
+
+                    <!-- Metropolis Builder -->
+                    <div class="archive-card">
+                        <div class="card-header">
+                            <div class="card-image-placeholder">🏙️</div>
+                            <div class="archive-tag">Simulation</div>
+                        </div>
+                        <h3 class="archive-title">Metropolis Builder</h3>
+                        <div class="badge-container">
+                            <span class="status-badge popular-badge">🏆 Popular</span>
+                            <span class="status-badge">City-Building</span>
+                        </div>
+                        <p class="card-description">Design and manage your own city! Balance resources, citizens, and
+                            growth in this engaging city builder.</p>
+                        <div style="padding: 0 16px 16px 16px;">
+                            <a href="../sims/citygame/citygame.html" class="status-pill status-available"
+                                style="text-decoration: none; display: inline-block;">Play Now →</a>
+                        </div>
+                    </div>
+
+                    <!-- The Box -->
+                    <div class="archive-card">
+                        <div class="card-header">
+                            <div class="card-image-placeholder">📦</div>
+                            <div class="archive-tag">Puzzle</div>
+                        </div>
+                        <h3 class="archive-title">The Box</h3>
+                        <div class="badge-container">
+                            <span class="status-badge">Interactive</span>
+                            <span class="status-badge featured-badge">Featured</span>
+                        </div>
+                        <p class="card-description">Explore a mysterious interactive box with hidden secrets. A unique
+                            and intriguing experience awaits!</p>
+                        <div style="padding: 0 16px 16px 16px;">
+                            <a href="../sims/box/box.html" class="status-pill status-available"
+                                style="text-decoration: none; display: inline-block;">Play Now →</a>
+                        </div>
+                    </div>
+
+                    <!-- Supply & Demand -->
+                    <div class="archive-card">
+                        <div class="card-header">
+                            <div class="card-image-placeholder">📊</div>
+                            <div class="archive-tag">Simulation</div>
+                        </div>
+                        <h3 class="archive-title">Supply & Demand</h3>
+                        <div class="badge-container">
+                            <span class="status-badge">Economic</span>
+                            <span class="status-badge">Trading</span>
+                        </div>
+                        <p class="card-description">Master the market by managing supply and demand dynamics. An
+                            economic simulation game that teaches business principles!</p>
+                        <div style="padding: 0 16px 16px 16px;">
+                            <a href="../sims/s&d/money.html" class="status-pill status-available"
+                                style="text-decoration: none; display: inline-block;">Play Now →</a>
+                        </div>
+                    </div>
+
+                    <!-- Empire Game -->
+                    <div class="archive-card">
+                        <div class="card-header">
+                            <div class="card-image-placeholder">👑</div>
+                            <div class="archive-tag">Strategy</div>
+                        </div>
+                        <h3 class="archive-title">Empire Game</h3>
+                        <div class="badge-container">
+                            <span class="status-badge favorite-badge">Favorite</span>
+                            <span class="status-badge">Strategic</span>
+                        </div>
+                        <p class="card-description">Build an empire from scratch! Expand territories, manage resources,
+                            and become a powerful ruler.</p>
+                        <div style="padding: 0 16px 16px 16px;">
+                            <a href="../sims/empiregame/empire.html" class="status-pill status-available"
+                                style="text-decoration: none; display: inline-block;">Play Now →</a>
+                        </div>
+                    </div>
+
+                    <!-- Mini Empire -->
+                    <div class="archive-card">
+                        <div class="card-header">
+                            <div class="card-image-placeholder">🏰</div>
+                            <div class="archive-tag">Strategy</div>
+                        </div>
+                        <h3 class="archive-title">Mini Empire</h3>
+                        <div class="badge-container">
+                            <span class="status-badge">Quick-Play</span>
                             <span class="status-badge">Strategy</span>
                         </div>
-                        <p class="card-description">Build magnificent pyramids through strategic planning and resource
-                            management. A unique construction simulation!</p>
+                        <p class="card-description">A compact version of empire building! Perfect for quick gaming
+                            sessions with all the strategy-building fun.</p>
                         <div style="padding: 0 16px 16px 16px;">
-                            <a href="../sims/pyramid/pyramid.html" class="status-pill status-available"
+                            <a href="../sims/miniempire/mini.html" class="status-pill status-available"
                                 style="text-decoration: none; display: inline-block;">Play Now →</a>
                         </div>
                     </div>

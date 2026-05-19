@@ -4,13 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Casino Games - Infinity Nexus</title>
+    <title>Infinity Nexus</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../styles.css">
     <link rel="icon" href="../icon.jpg" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" rel="stylesheet">
 
 
 
@@ -69,7 +68,7 @@
             line-height: 1.6;
             color: var(--text-primary);
             background: var(--bg-primary);
-            transition: "background" 0.3s ease, color 0.3s ease;
+            transition: background 0.3s ease, color 0.3s ease;
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -236,7 +235,7 @@
         header {
             padding: 50px 20px;
             margin: 32px auto;
-            max-width: 900px;
+            max-width: 800px;
             text-align: center;
             color: white;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -250,58 +249,9 @@
             /* allows vertical centering */
             justify-content: center;
             align-items: center;
-            flex-direction: column;
         }
 
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-        }
 
-        .back-button {
-            color: rgba(255, 255, 255, 0.9);
-            text-decoration: none;
-            font-weight: 600;
-            padding: 8px 16px;
-            border-radius: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .back-button:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.6);
-            transform: translateX(-2px);
-        }
-
-        .breadcrumb {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.5rem;
-        }
-
-        .breadcrumb a {
-            color: rgba(255, 255, 255, 0.95);
-            text-decoration: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .breadcrumb a:hover {
-            opacity: 0.7;
-        }
-
-        .header-subtitle {
-            font-size: 1.1rem;
-            opacity: 0.95;
-            position: relative;
-            z-index: 1;
-            margin-top: 12px;
-            font-weight: 300;
-        }
 
         header::before {
             content: "";
@@ -720,7 +670,7 @@
         /* Enhanced Card Description */
         .card-description {
             font-size: 0.9rem;
-            color: white;
+            color: var(--text-secondary);
             padding: 8px 16px;
             line-height: 1.5;
             min-height: 2.7em;
@@ -766,83 +716,25 @@
         footer {
             background: var(--header-bg);
             color: var(--text-primary);
-            padding: 60px 0;
-            margin-top: 100px;
-            border-top: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto 40px;
-            padding: 0 20px;
-        }
-
-        .footer-section {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .footer-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 16px;
-        }
-
-        .footer-desc {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin: 0;
-        }
-
-        .footer-links {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--primary);
-            transform: translateX(4px);
-            display: inline-block;
-        }
-
-        .footer-divider {
-            height: 1px;
-            background: var(--border-color);
-            margin: 32px 0;
+            padding: 48px 0;
+            text-align: center;
+            margin-top: 80px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         footer a {
-            color: var(--primary);
             transition: color 0.2s ease;
         }
 
         footer a:hover {
-            color: var(--secondary);
+            color: var(--primary);
         }
 
         .copyright {
-            margin: 0;
+            margin-top: 20px;
             opacity: 0.8;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            text-align: center;
+            font-size: 0.9rem;
+            color: var(--light-gray);
         }
 
         /* Utility Classes */
@@ -941,16 +833,6 @@
                 display: none;
             }
 
-            .header-top {
-                flex-direction: column;
-                gap: 12px;
-                align-items: flex-start;
-            }
-
-            .breadcrumb {
-                font-size: 0.75rem;
-            }
-
             .badge-base,
             .coming-soon-badge,
             .popular-badge,
@@ -1002,9 +884,9 @@
 
     <header>
         <div class="container">
-            
-            <h1 class="main-title">🎰 Casino Games</h1>
-           
+
+            <h1 class="main-title">🏆 Monthly Challenges</h1>
+
         </div>
     </header>
 
@@ -1012,130 +894,91 @@
         <div class="container" id="main">
             <div class="links-section">
                 <div class="archive-grid" id="archiveGrid">
-                    <!-- Slot Machine -->
+                    <!-- Jan -->
                     <div class="archive-card">
                         <div class="card-header">
-                            <div class="card-image-placeholder">🎰</div>
-                            <div class="archive-tag">Luck</div>
+                            <div class="card-image-placeholder">🎯</div>
+                            <div class="archive-tag">Challenge</div>
                         </div>
-                        <h3 class="archive-title">Slot Machine</h3>
+                        <h3 class="archive-title">January 2026</h3>
                         <div class="badge-container">
-                            <span class="status-badge">🎲 Classic</span>
-                            <span class="status-badge">Popular</span>
+                            <span class="status-badge">Platformer</span>
+                            <span class="status-badge">Active</span>
                         </div>
-                        <p class="card-description">Spin the reels and try your luck! A classic casino experience with
-                            exciting animations and engaging gameplay.</p>
+                        <p class="card-description">Navigate challenging platforms and obstacles! A dynamic monthly
+                            challenge testing your reflexes and precision.</p>
                         <div style="padding: 0 16px 16px 16px;">
-                            <a href="../casinogames/slot/slot.html" class="status-pill status-available"
+                            <a href="../monthlychallenges/jan2026/Jan2026Challenge.html"
+                                class="status-pill status-available"
+                                style="text-decoration: none; display: inline-block;">Play Now →</a>
+                        </div>
+                    </div>
+                    <!-- Feb -->
+                    <div class="archive-card">
+                        <div class="card-header">
+                            <div class="card-image-placeholder">🎯</div>
+                            <div class="archive-tag">Challenge</div>
+                        </div>
+                        <h3 class="archive-title">February 2026</h3>
+                        <div class="badge-container">
+                            <span class="status-badge">Strategy</span>
+                            <span class="status-badge featured-badge">Featured</span>
+                        </div>
+                        <p class="card-description">Strategize your way through tower defense waves! A tactical
+                            challenge featuring advanced enemy patterns and defensive mechanics.</p>
+                        <div style="padding: 0 16px 16px 16px;">
+                            <a href="../monthlychallenges/feb2026/Feb2026Challenge.html"
+                                class="status-pill status-available"
+                                style="text-decoration: none; display: inline-block;">Play Now →</a>
+                        </div>
+                    </div>
+                    <!-- Mar -->
+                    <div class="archive-card">
+                        <div class="card-header">
+                            <div class="card-image-placeholder">🎯</div>
+                            <div class="archive-tag">Challenge</div>
+                        </div>
+                        <h3 class="archive-title">March 2026</h3>
+                        <div class="badge-container">
+                            <span class="status-badge">Arcade</span>
+                            <span class="status-badge favorite-badge">Favorite</span>
+                        </div>
+                        <p class="card-description">Classic arcade-style challenges await! Fast-paced action meets retro
+                            gaming nostalgia in this spectacular March challenge.</p>
+                        <div style="padding: 0 16px 16px 16px;">
+                            <a href="../monthlychallenges/mar2026/Mar2026Challenge.html"
+                                class="status-pill status-available"
                                 style="text-decoration: none; display: inline-block;">Play Now →</a>
                         </div>
                     </div>
 
-                    <!-- Blackjack -->
+                    <!-- Apr -->
                     <div class="archive-card">
                         <div class="card-header">
-                            <div class="card-image-placeholder">♦️</div>
-                            <div class="archive-tag">Skill</div>
+                            <div class="card-image-placeholder">🎯</div>
+                            <div class="archive-tag">Challenge</div>
                         </div>
-                        <h3 class="archive-title">Blackjack</h3>
+                        <h3 class="archive-title">April 2026</h3>
                         <div class="badge-container">
-                            <span class="status-badge">Strategic</span>
-                            <span class="status-badge">Featured</span>
+                            <span class="status-badge">Puzzle</span>
+                            <span class="status-badge featured-badge">Featured</span>
                         </div>
-                        <p class="card-description">Beat the dealer in this timeless card game! Test your strategy and
-                            decision-making skills against the computer opponent.</p>
+                        <p class="card-description">Match all sixteen cards to beat the challenge!</p>
                         <div style="padding: 0 16px 16px 16px;">
-                            <a href="../casinogames/blackjack/blackjack.html" class="status-pill status-available"
+                            <a href="../monthlychallenges/apr2026/apr2026.html"
+                                class="status-pill status-available"
                                 style="text-decoration: none; display: inline-block;">Play Now →</a>
                         </div>
                     </div>
 
-                    <!-- Poker -->
-                    <div class="archive-card">
-                        <div class="card-header">
-                            <div class="card-image-placeholder">♥️</div>
-                            <div class="archive-tag">Skill</div>
-                        </div>
-                        <h3 class="archive-title">Poker</h3>
-                        <div class="badge-container">
-                            <span class="status-badge">Strategic</span>
-                            <span class="status-badge">Challenge</span>
-                        </div>
-                        <p class="card-description">Master the art of poker with bluffing, betting, and reading
-                            opponents. A challenging take on the world's most popular card game.</p>
-                        <div style="padding: 0 16px 16px 16px;">
-                            <a href="../casinogames/poker/poker.html" class="status-pill status-available"
-                                style="text-decoration: none; display: inline-block;">Play Now →</a>
-                        </div>
-                    </div>
-
-                    <!-- Cursed Dice -->
-                    <div class="archive-card">
-                        <div class="card-header">
-                            <div class="card-image-placeholder">🎲</div>
-                            <div class="archive-tag">Luck</div>
-                        </div>
-                        <h3 class="archive-title">Cursed Dice</h3>
-                        <div class="badge-container">
-                            <span class="status-badge">Unique</span>
-                            <span class="status-badge">Fun</span>
-                        </div>
-                        <p class="card-description">Roll the cursed dice and defy fate itself! An entertaining twist on
-                            traditional dice gaming with unpredictable outcomes.</p>
-                        <div style="padding: 0 16px 16px 16px;">
-                            <a href="../casinogames/curseddice/curseddice.html" class="status-pill status-available"
-                                style="text-decoration: none; display: inline-block;">Play Now →</a>
-                        </div>
-                    </div>
-
-                    <!-- Roulette -->
-                    <div class="archive-card">
-                        <div class="card-header">
-                            <div class="card-image-placeholder">🎡</div>
-                            <div class="archive-tag">Luck</div>
-                        </div>
-                        <h3 class="archive-title">Roulette</h3>
-                        <div class="badge-container">
-                            <span class="status-badge">🏆 Popular</span>
-                        </div>
-                        <p class="card-description">Spin the roulette wheel and place your bets! Experience the thrill
-                            of this elegant and timeless casino game.</p>
-                        <div style="padding: 0 16px 16px 16px;">
-                            <a href="../casinogames/roulette/roulette.html" class="status-pill status-available"
-                                style="text-decoration: none; display: inline-block;">Play Now →</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4 class="footer-title">Casino Games</h4>
-                    <p class="footer-desc">Experience premium casino gaming with professional gameplay and design.</p>
-                </div>
-                <div class="footer-section">
-                    <h4 class="footer-title">Quick Links</h4>
-                    <ul class="footer-links">
-                        <li><a href="../index.html">Home</a></li>
-                        <li><a href="mainpage2.html">Must Play</a></li>
-                        <li><a href="mainpage3.html">Games</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4 class="footer-title">Support</h4>
-                    <ul class="footer-links">
-                        <li><a href="../info/updateinfo/updateinfo.html">Updates</a></li>
-                        <li><a href="https://forms.gle/X8p7jkC74MFG9Evj7">Report Issue</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-divider"></div>
-            <p class="copyright">© <span id="footer-year">2026</span> Infinity Nexus | Created by Littletree866</p>
-        </div>
+        <p>Infinity Nexus &copy; <span id="footer-year">2026</span></p>
+        <p>All rights reserved</p>
     </footer>
 
     <script>

@@ -1,66 +1,87 @@
-# Infinity Nexus (v1.25.26 - Released June 7, 2026)
+# Infinity Nexus
+**Version 1.26.26** | Next Release: v1.26.27 (TBD)
 
-Next update: July 12, 2026 
+A comprehensive collection of HTML5-based games featuring diverse genres, engaging gameplay mechanics, and persistent progress tracking.
 
+## Overview
 
-## General Info
+Infinity Nexus is a pure JavaScript gaming platform offering a wide variety of games without external dependencies or frameworks. The project prioritizes performance, accessibility, and user experience through lightweight implementation and responsive design.
 
-1. Starting February 2, 2026 my main focus will be improving all the games on my site. There will still be a monthly challenge, but new games will come less frequently. 
-2. All of this code is licensed under the MIT license, please give me credit for any code you use in this repo, and please do not make money off the code you used.
-3. Updates may come every 1-3 weeks, unless otherwise specified.
-4. Please report broken code through the form at the bottom of the main page of the site.
+### Development Focus
 
+As of February 2, 2026, development priorities have shifted toward quality improvements across existing games rather than rapid expansion. Monthly challenges remain a core feature, with new game releases scheduled at a measured pace to ensure quality standards.
 
 ## Key Features
 
-- **Pure HTML JavaScript** - No frameworks, lightweight and fast
-- **Responsive Design** - Works on all device sizes
-- **Local Storage** - Most games save automatically to browser storage
-- **Smooth Animations** - CSS3 transitions and particle effects
-- **Accessible UI** - Clear controls and intuitive gameplay
-- **No Dependencies** - Standalone HTML files, no build process
-- **Has games for everyone** - All different types of games, play what you want.
+- **Framework-Free Architecture** – Pure HTML5 and JavaScript for optimal performance and minimal overhead
+- **Fully Responsive** – Seamless experience across desktop, tablet, and mobile devices
+- **Persistent Storage** – Automatic game state persistence via browser local storage
+- **Polished Animations** – CSS3-based transitions and particle effects for enhanced visual feedback
+- **Intuitive Interface** – Accessible controls and clear gameplay mechanics
+- **No External Dependencies** – Self-contained HTML files with zero build process requirements
+- **Diverse Game Library** – Comprehensive selection spanning multiple genres and difficulty levels
 
+## Game Categories
 
-## Updates Log
+The platform includes games across multiple categories:
+- **Casino Games** – Traditional gambling
+- **Game Corner** – Classic gameplay patterns and mechanics
+- **Simulation Games** – City building, empire management, and lifestyle simulations
+- **Monthly Challenges (discontinued)** – Limited games. No longer updated and may be removed in a future update
 
-- **Version 1.25.26** - June 7, 2026
-- **Version 1.24.26** - May 12, 2026
-- **Version 1.23.26** - May 1, 2026
-- **Version 1.22.26** - April 14, 2026
-- **Version 1.21.26** - April 4, 2026 
-- **Version 1.21.25** - March 26, 2026 
-- **Version 1.21.24** - March 16, 2026 
-- **Version 1.20.24** - March 6, 2026 
-- **Version 1.19.24** - February 24, 2026 
-- **Version 1.18.24** - February 7, 2026 and February 16, 2026
-- **Version 1.18.22** - February 2, 2026
-- **Version 1.17.20** - January 15, 2026
-- **Version 1.16.19** - January 1, 2026
-- **Version 1.15.18** - December 10, 2025
-- **Version 1.15.16** - November 25, 2025
-- **Version 1.14.15** - November 12, 2025
-- **Version 1.13.15** - October 25, 2025
-- **Version 1.12.14** - October 10, 2025
+## Release Information
 
+**Current Version:** 1.26.26  
+**Next Update:** v1.26.27 (TBD)  
+**Update Cycle:** Releases every 1–3 weeks (subject to variation)
+
+### Version History
+
+| Version | Release Date |
+|---------|--------------|
+| 1.26.26 | June 28, 2026|
+| 1.25.26 | June 7, 2026 |
+| 1.24.26 | May 12, 2026 |
+| 1.23.26 | May 1, 2026 |
+| 1.22.26 | April 14, 2026 |
+| 1.21.26 | April 4, 2026 |
+| 1.21.25 | March 26, 2026 |
+| 1.21.24 | March 16, 2026 |
+| 1.20.24 | March 6, 2026 |
+| 1.19.24 | February 24, 2026 |
+| 1.18.24 | February 7, 2026 & February 16, 2026 |
+| 1.18.22 | February 2, 2026 |
+| 1.17.20 | January 15, 2026 |
+| 1.16.19 | January 1, 2026 |
+| 1.15.18 | December 10, 2025 |
+
+## Bug Reporting & Support
+
+Issues and bugs can be reported via the feedback form located at the bottom of the main page. I encourage you to provide detailed information regarding any encountered problems to facilitate resolution.
 
 ## Contributing
 
-Feel free to contribute by:
-1. Opening issues for bugs or suggestions
-2. Creating pull requests for improvements
-3. Sharing feedback and ideas
+Contributions are welcome and can take the following forms:
 
-## Credits
+- **Bug Reports** – Document issues and unexpected behavior
+- **Feature Requests** – Suggest improvements or new game concepts
+- **Pull Requests** – Submit code improvements and enhancements
+- **Feedback** – Share gameplay experience and suggestions
 
-For my Pokemon Rom:
-GBA's pokemon Emerald
-GBA's pokemon FireRed
-EmulatorJS
+## License & Attribution
 
-Everything else is my own creation
+This project is distributed under the **MIT License**.
 
+**Usage Requirements:**
+- Attribution to the original author (me) is required when utilizing this code
+- Commercial use or redistribution for profit is prohibited
 
-## License
+**Credits & Inspirations:**
+- Pokémon Emerald (GBA)
+- Pokémon FireRed (GBA)
+- HexManiacAdvance
+- EmulatorJS
 
-All rights reserved © 2026 Littletree866 under MIT license
+---
+
+© 2026 Littletree866 – All rights reserved under MIT License

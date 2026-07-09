@@ -820,7 +820,6 @@
   </div>
 
   <script>
-    // Enhanced game state with cooldowns
     const state = {
       money: 1,
       investments: 0,
@@ -873,7 +872,6 @@
       currentTask: null,
       prestige: 0,
       gameStartTime: Date.now(),
-      // Cooldowns in seconds
       cooldowns: {
         task: 0,
         freelance: 0,
@@ -883,7 +881,6 @@
         consulting: 0,
         crypto: 0
       },
-      // Cooldown durations in seconds
       cooldownDurations: {
         task: 10,
         freelance: 15,
@@ -895,7 +892,6 @@
       }
     };
 
-    // DOM elements
     const moneyEl = document.getElementById('money');
     const incomePerSecEl = document.getElementById('incomePerSec');
     const incomeProgressEl = document.getElementById('incomeProgress');
@@ -905,12 +901,10 @@
     const taskInputEl = document.getElementById('taskInput');
     const taskSubmitBtn = document.getElementById('taskSubmit');
 
-    // Stats elements
     const statsInvestmentsEl = document.getElementById('statsInvestments');
     const statsStartupsEl = document.getElementById('statsStartups');
     const statsTotalIncomeEl = document.getElementById('statsTotalIncome');
 
-    // Cooldown display elements
     const taskCooldownEl = document.getElementById('taskCooldown');
     const freelanceCooldownEl = document.getElementById('freelanceCooldown');
     const tradeCooldownEl = document.getElementById('tradeCooldown');
@@ -919,7 +913,6 @@
     const consultingCooldownEl = document.getElementById('consultingCooldown');
     const cryptoCooldownEl = document.getElementById('cryptoCooldown');
 
-    // Button elements
     const taskBtn = document.getElementById('taskBtn');
     const freelanceBtn = document.getElementById('freelanceBtn');
     const investBtn = document.getElementById('investBtn');
@@ -930,7 +923,6 @@
     const cryptoBtn = document.getElementById('cryptoBtn');
     const startupBtn = document.getElementById('startupBtn');
 
-    // Formatting functions
     function formatMoney(n) {
       if (n >= 1000000) return '$' + (n / 1000000).toFixed(2) + 'M';
       if (n >= 1000) return '$' + (n / 1000).toFixed(2) + 'K';
@@ -949,7 +941,6 @@
       return mins + 'm ' + secs + 's';
     }
 
-    // Create animated background particles
     function createParticles() {
       const container = document.getElementById('bgParticles');
       for (let i = 0; i < 20; i++) {
@@ -970,11 +961,9 @@
       }
     }
 
-    // Update cooldowns
     function updateCooldowns() {
       const now = Date.now();
 
-      // Update cooldown displays
       taskCooldownEl.textContent = formatTime(state.cooldowns.task);
       freelanceCooldownEl.textContent = formatTime(state.cooldowns.freelance);
       tradeCooldownEl.textContent = formatTime(state.cooldowns.quickTrade);
@@ -983,7 +972,6 @@
       consultingCooldownEl.textContent = formatTime(state.cooldowns.consulting);
       cryptoCooldownEl.textContent = formatTime(state.cooldowns.crypto);
 
-      // Enable/disable buttons based on cooldowns
       taskBtn.disabled = state.cooldowns.task > 0;
       freelanceBtn.disabled = state.cooldowns.freelance > 0;
       quickTradeBtn.disabled = state.cooldowns.quickTrade > 0;
@@ -992,7 +980,6 @@
       consultingBtn.disabled = state.cooldowns.consulting > 0;
       cryptoBtn.disabled = state.cooldowns.crypto > 0 || state.money < 50;
 
-      // Add/remove cooldown-active class
       taskBtn.classList.toggle('cooldown-active', state.cooldowns.task > 0);
       freelanceBtn.classList.toggle('cooldown-active', state.cooldowns.freelance > 0);
       quickTradeBtn.classList.toggle('cooldown-active', state.cooldowns.quickTrade > 0);
@@ -1002,11 +989,9 @@
       cryptoBtn.classList.toggle('cooldown-active', state.cooldowns.crypto > 0);
     }
 
-    // Update UI
     function updateUI() {
       moneyEl.textContent = formatMoney(state.money);
 
-      // Calculate total income
       state.totalIncomePerSec =
         (state.investments * state.investmentsYieldPerSec) +
         (state.startups * state.startupYieldPerSec) +
@@ -1014,33 +999,27 @@
 
       incomePerSecEl.textContent = formatIncome(state.totalIncomePerSec);
 
-      // Update stats overlay
       statsInvestmentsEl.textContent = state.investments;
       statsStartupsEl.textContent = state.startups;
       statsTotalIncomeEl.textContent = formatMoney(state.totalIncomePerSec);
 
-      // Update button states
       investBtn.disabled = state.money < state.investmentCost;
       investBtn.innerHTML = `<span>📊 Invest</span><span class="btn-cooldown">${formatMoney(state.investmentCost)}</span>`;
 
       startupBtn.disabled = state.money < state.startupCost;
       startupBtn.innerHTML = `<span>🚀 Startup</span><span class="btn-cooldown">${formatMoney(state.startupCost)}</span>`;
 
-      // Show/hide opportunity tiers
       document.getElementById('highTierOpportunities').style.display =
         state.money > 100 ? 'block' : 'none';
 
-      // Update all grids
       renderMarket();
       renderBuildings();
       renderAssets();
       renderRecipes();
 
-      // Update cooldowns
       updateCooldowns();
     }
 
-    // Show message with animation
     function showMessage(text, type = 'info') {
       messageEl.textContent = text;
       messageEl.className = `message-${type}`;
@@ -1051,12 +1030,10 @@
       }, 3000);
     }
 
-    // Set cooldown for a button
     function setCooldown(type) {
       state.cooldowns[type] = state.cooldownDurations[type];
     }
 
-    // Task system
     function startTask() {
       if (state.cooldowns.task > 0) return;
 
@@ -1069,7 +1046,6 @@
       updateCooldowns();
     }
 
-    // Initialize task submit
     taskSubmitBtn.addEventListener('click', () => {
       if (!state.currentTask) return;
 
@@ -1089,7 +1065,6 @@
       }
     });
 
-    // Button event handlers with cooldowns
     taskBtn.addEventListener('click', startTask);
 
     freelanceBtn.addEventListener('click', () => {
@@ -1197,7 +1172,6 @@
       }
     });
 
-    // Market functions
     function renderMarket() {
       const grid = document.getElementById('marketGrid');
       if (!grid) return;
@@ -1246,7 +1220,6 @@
       updateUI();
     }
 
-    // Update market prices
     function updateMarketPrices() {
       const now = Date.now();
       const timeDiff = (now - state.market.lastUpdate) / 1000;
@@ -1261,7 +1234,6 @@
       }
     }
 
-    // Building functions
     function renderBuildings() {
       const grid = document.getElementById('buildingGrid');
       if (!grid) return;
@@ -1301,7 +1273,6 @@
       updateUI();
     }
 
-    // Asset functions
     function renderAssets() {
       const grid = document.getElementById('assetGrid');
       if (!grid) return;
@@ -1341,7 +1312,6 @@
       updateUI();
     }
 
-    // Crafting functions
     function renderRecipes() {
       const grid = document.getElementById('recipeGrid');
       if (!grid) return;
@@ -1380,7 +1350,6 @@
       const recipe = state.crafting.recipes.find(x => x.name === name);
       if (!recipe) return;
 
-      // Check ingredients
       for (const ing of recipe.ingredients) {
         const item = state.market.items.find(x => x.name === ing.name);
         if (!item || item.owned < ing.amount) {
@@ -1389,23 +1358,19 @@
         }
       }
 
-      // Consume ingredients
       for (const ing of recipe.ingredients) {
         const item = state.market.items.find(x => x.name === ing.name);
         item.owned -= ing.amount;
       }
 
-      // Add money
       state.money += recipe.value;
       showMessage(`Crafted ${recipe.name}! +${formatMoney(recipe.value)}`, 'success');
       updateUI();
     }
 
-    // Cooldown reduction loop
     function cooldownLoop() {
       const now = Date.now();
 
-      // Reduce all cooldowns by 1 second
       Object.keys(state.cooldowns).forEach(key => {
         if (state.cooldowns[key] > 0) {
           state.cooldowns[key]--;
@@ -1416,7 +1381,6 @@
       setTimeout(cooldownLoop, 1000);
     }
 
-    // Passive income loop
     function passiveIncomeLoop() {
       const income = state.totalIncomePerSec;
       if (income > 0) {
@@ -1428,13 +1392,11 @@
       setTimeout(passiveIncomeLoop, 1000);
     }
 
-    // Market update loop
     function marketUpdateLoop() {
       updateMarketPrices();
       setTimeout(marketUpdateLoop, 1000);
     }
 
-    // Asset growth loop
     function assetGrowthLoop() {
       state.assets.forEach(asset => {
         if (asset.owned > 0) {
@@ -1445,7 +1407,6 @@
       setTimeout(assetGrowthLoop, 60000); // Every minute
     }
 
-    // Initialize game
     function init() {
       createParticles();
       updateUI();
@@ -1455,7 +1416,6 @@
       assetGrowthLoop();
     }
 
-    // Home screen functions
     function startWealthBuilder() {
       document.getElementById('homeScreen').style.display = 'none';
     }
@@ -1465,10 +1425,8 @@
       help.style.display = help.style.display === 'none' ? 'block' : 'none';
     }
 
-    // Start the game
     init();
 
-    // Keyboard support - Escape to exit
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         window.location.href = '../../index.html';

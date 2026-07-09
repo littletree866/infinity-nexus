@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geometric Dash  </title>
+    <title>Geometric Dash</title>
     <link rel="icon" href="../../icon.jpg" type="image/x-icon">
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600&display=swap"
@@ -803,45 +803,45 @@
         <!-- Professional Home Screen -->
         <div id="homeScreen">
             <div class="header">
-                <h1 id="gameTitle">GEOMETRIC DASH  </h1>
-                <div class="tagline">SHAPE YOUR DESTINY</div>
+                <h1 id="gameTitle">Geometric Dash</h1>
+                <div class="tagline">Shape your destiny</div>
             </div>
 
             <div class="main-menu">
                 <button class="menu-button play" id="startGame">
-                    <i>▶</i> START JOURNEY
+                    Start
                 </button>
                 <button class="menu-button" id="shopBtn">
-                    <i>⚡</i> UPGRADES SHOP
+                    Upgrades
                 </button>
                 <button class="menu-button" id="howToPlay">
-                    <i>❓</i> HOW TO PLAY
+                    How to play
                 </button>
                 <button class="menu-button" id="settingsBtn">
-                    <i>⚙️</i> SETTINGS
+                    Settings
                 </button>
             </div>
 
             <div class="controls-hint">
                 <div class="control-item">
                     <span class="key">SPACE</span>
-                    <span>JUMP</span>
+                    <span>Jump</span>
                 </div>
                 <div class="control-item">
                     <span class="key">1</span>
-                    <span>SQUARE</span>
+                    <span>Square</span>
                 </div>
                 <div class="control-item">
                     <span class="key">2</span>
-                    <span>TRIANGLE</span>
+                    <span>Triangle</span>
                 </div>
                 <div class="control-item">
                     <span class="key">3</span>
-                    <span>CIRCLE</span>
+                    <span>Circle</span>
                 </div>
                 <div class="control-item">
                     <span class="key">P</span>
-                    <span>PAUSE</span>
+                    <span>Pause</span>
                 </div>
             </div>
 
@@ -852,73 +852,68 @@
                 </div>
                 <div class="stat-card">
                     <div class="stat-value" id="homeTotalPoints">0</div>
-                    <div class="stat-label">TOTAL POINTS</div>
+                    <div class="stat-label">Total points</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-value" id="homeGamesPlayed">0</div>
-                    <div class="stat-label">GAMES PLAYED</div>
+                    <div class="stat-label">Games Played</div>
                 </div>
             </div>
 
-            <div class="footer">
-                <p>© 2024 GEOMETRIC DASH   | USE YOUR SHAPES WISELY</p>
-                <p style="margin-top: 10px; font-size: 12px; opacity: 0.3;">Created with passion for endless fun</p>
-            </div>
         </div>
 
         <!-- Shop Screen -->
         <div id="shopScreen" class="hidden">
             <h1
                 style="font-family: 'Orbitron', serif; font-size: 48px; margin-bottom: 20px; background: linear-gradient(45deg, var(--warning), var(--accent)); background-clip: text; -webkit-text-fill-color: transparent;">
-                UPGRADES SHOP</h1>
-            <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 40px;">Spend your points to unlock powerful
-                upgrades</p>
+                Upgrades</h1>
+            <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 40px;">Spend your points to unlock useful upgrades.</p>
 
             <div class="shop-grid">
                 <div class="upgrade-card" data-upgrade="jump">
-                    <div class="upgrade-icon">🚀</div>
-                    <div class="upgrade-name">BOOST JUMP</div>
-                    <div class="upgrade-description">Increase jump height by 25%. Reach new heights!</div>
+                    <div class="upgrade-icon">Jump</div>
+                    <div class="upgrade-name">Boost jump</div>
+                    <div class="upgrade-description">Increase jump height by 25%.</div>
                     <div class="upgrade-price" data-cost="500">500</div>
                     <div class="upgrade-level">Level: <span id="jumpLevel">0</span>/5</div>
                 </div>
 
                 <div class="upgrade-card" data-upgrade="speed">
-                    <div class="upgrade-icon">⚡</div>
-                    <div class="upgrade-name">SPEED BOOST</div>
-                    <div class="upgrade-description">Move 20% faster. Outrun everything!</div>
+                    <div class="upgrade-icon">Speed</div>
+                    <div class="upgrade-name">Speed boost</div>
+                    <div class="upgrade-description">Move faster for better control.</div>
                     <div class="upgrade-price" data-cost="750">750</div>
                     <div class="upgrade-level">Level: <span id="speedLevel">0</span>/5</div>
                 </div>
 
                 <div class="upgrade-card" data-upgrade="shield">
-                    <div class="upgrade-icon">🛡️</div>
-                    <div class="upgrade-name">ENHANCED SHIELD</div>
-                    <div class="upgrade-description">Shield lasts 50% longer. Extra protection!</div>
+                    <div class="upgrade-icon">Shield</div>
+                    <div class="upgrade-name">Shield</div>
+                    <div class="upgrade-description">Shield lasts longer and blocks damage.</div>
                     <div class="upgrade-price" data-cost="1000">1000</div>
                     <div class="upgrade-level">Level: <span id="shieldLevel">0</span>/5</div>
                 </div>
 
                 <div class="upgrade-card" data-upgrade="magnet">
-                    <div class="upgrade-icon">🧲</div>
-                    <div class="upgrade-name">POWER MAGNET</div>
-                    <div class="upgrade-description">Attract power-ups from further away.</div>
+                    <div class="upgrade-icon">Magnet</div>
+                    <div class="upgrade-name">Power magnet</div>
+                    <div class="upgrade-description">Attract power-ups from farther away.</div>
                     <div class="upgrade-price" data-cost="800">800</div>
                     <div class="upgrade-level">Level: <span id="magnetLevel">0</span>/3</div>
                 </div>
 
                 <div class="upgrade-card" data-upgrade="combo">
-                    <div class="upgrade-icon">💥</div>
-                    <div class="upgrade-name">COMBO BOOSTER</div>
-                    <div class="upgrade-description">Combo multiplier gives 50% more points.</div>
+                    <div class="upgrade-icon">Combo</div>
+                    <div class="upgrade-name">Combo booster</div>
+                    <div class="upgrade-description">Earn more points per pass.</div>
                     <div class="upgrade-price" data-cost="1200">1200</div>
                     <div class="upgrade-level">Level: <span id="comboLevel">0</span>/3</div>
                 </div>
 
                 <div class="upgrade-card" data-upgrade="ability">
-                    <div class="upgrade-icon">🌀</div>
-                    <div class="upgrade-name">ABILITY RECHARGE</div>
-                    <div class="upgrade-description">Reduce ability cooldown by 30%.</div>
+                    <div class="upgrade-icon">Ability</div>
+                    <div class="upgrade-name">Ability recharge</div>
+                    <div class="upgrade-description">Reduce ability cooldown.</div>
                     <div class="upgrade-price" data-cost="1500">1500</div>
                     <div class="upgrade-level">Level: <span id="abilityLevel">0</span>/3</div>
                 </div>
@@ -926,12 +921,12 @@
 
             <div style="display: flex; gap: 30px; align-items: center; margin-top: 50px;">
                 <div style="background: rgba(255, 255, 255, 0.05); padding: 20px 40px; border-radius: 15px;">
-                    <div style="font-size: 14px; color: rgba(255, 255, 255, 0.6);">TOTAL POINTS</div>
+                    <div style="font-size: 14px; color: rgba(255, 255, 255, 0.6);">Total points</div>
                     <div id="shopTotalPoints"
                         style="font-family: 'Orbitron', serif; font-size: 36px; color: var(--warning);">0</div>
                 </div>
                 <button class="menu-button" id="backFromShop" style="background: rgba(255, 255, 255, 0.05);">
-                    <i>←</i> BACK TO MENU
+                    Back
                 </button>
             </div>
         </div>
@@ -939,7 +934,7 @@
         <!-- Game UI -->
         <div id="ui">
             <div id="score" class="ui-element">0</div>
-            <div id="bestScore" class="ui-element">BEST: 0</div>
+            <div id="bestScore" class="ui-element">Best: 0</div>
             <div id="shapeIndicator" class="ui-element">
                 <div class="shape-icon square active" data-shape="square">S</div>
                 <div class="shape-icon triangle" data-shape="triangle">T</div>
@@ -953,44 +948,44 @@
 
         <!-- Game Over Screen -->
         <div id="gameOverScreen" class="hidden">
-            <div class="result-title">MISSION FAILED</div>
+            <div class="result-title">Mission failed</div>
 
             <div class="result-stats">
                 <div class="result-stat">
                     <div class="result-value" id="finalScore">0</div>
-                    <div class="result-label">SCORE</div>
+                    <div class="result-label">Score</div>
                 </div>
                 <div class="result-stat highlight">
                     <div class="result-value" id="finalBest">0</div>
-                    <div class="result-label">BEST SCORE</div>
+                    <div class="result-label">Best score</div>
                 </div>
                 <div class="result-stat">
                     <div class="result-value" id="finalTime">0s</div>
-                    <div class="result-label">TIME</div>
+                    <div class="result-label">Time</div>
                 </div>
                 <div class="result-stat">
                     <div class="result-value" id="obstaclesPassed">0</div>
-                    <div class="result-label">OBSTACLES</div>
+                    <div class="result-label">Obstacles</div>
                 </div>
                 <div class="result-stat">
                     <div class="result-value" id="maxCombo">0x</div>
-                    <div class="result-label">MAX COMBO</div>
+                    <div class="result-label">Max combo</div>
                 </div>
                 <div class="result-stat">
                     <div class="result-value" id="powerUpsCollected">0</div>
-                    <div class="result-label">POWER-UPS</div>
+                    <div class="result-label">Power-ups</div>
                 </div>
             </div>
 
             <div class="action-buttons">
                 <button class="menu-button play" id="restartGame">
-                    <i>🔄</i> TRY AGAIN
+                    Try again
                 </button>
                 <button class="menu-button" id="menuGame">
-                    <i>🏠</i> MAIN MENU
+                    Main menu
                 </button>
                 <button class="menu-button" id="shopFromGameOver">
-                    <i>⚡</i> UPGRADES
+                    Upgrades
                 </button>
             </div>
         </div>
@@ -1000,16 +995,16 @@
             style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(20px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 40px; z-index: 40;">
             <div
                 style="font-family: 'Orbitron', serif; font-size: 72px; background: linear-gradient(45deg, var(--warning), var(--accent)); background-clip: text; -webkit-text-fill-color: transparent;">
-                PAUSED</div>
+                Paused</div>
             <div style="display: flex; gap: 25px;">
                 <button class="menu-button" id="resumeGame">
-                    <i>▶</i> RESUME
+                    Resume
                 </button>
                 <button class="menu-button" id="restartFromPause">
-                    <i>🔄</i> RESTART
+                    Restart
                 </button>
                 <button class="menu-button" id="menuFromPause">
-                    <i>🏠</i> MENU
+                    Menu
                 </button>
             </div>
         </div>
@@ -1019,32 +1014,29 @@
 
         <!-- Achievement Popup -->
         <div id="achievementPopup" class="achievement-popup hidden">
-            <div style="font-size: 36px;">🏆</div>
+            <div style="font-size: 36px;">&starf;</div>
             <div>
-                <div style="font-family: 'Orbitron', serif; font-weight: 700; font-size: 18px;">ACHIEVEMENT
-                    UNLOCKED!</div>
-                <div style="font-size: 14px; opacity: 0.9;" id="achievementText">Master of Shapes</div>
+                <div style="font-family: 'Orbitron', serif; font-weight: 700; font-size: 18px;">Achievement unlocked</div>
+                <div style="font-size: 14px; opacity: 0.9;" id="achievementText">Master of shapes</div>
             </div>
         </div>
     </div>
 
     <script>
-        // ========== GAME CONFIGURATION ==========
         const CONFIG = {
             CANVAS_WIDTH: 1200,
             CANVAS_HEIGHT: 700,
             PLAYER_START_X: 200,
             GROUND_HEIGHT: 80,
-            MIN_OBSTACLE_GAP: 350,
-            MAX_OBSTACLE_GAP: 600,
-            POWER_UP_SPAWN_CHANCE: 0.004,
-            INITIAL_SPEED: 6,
+            MIN_OBSTACLE_GAP: 400,
+            MAX_OBSTACLE_GAP: 700,
+            POWER_UP_SPAWN_CHANCE: 0.006,
+            INITIAL_SPEED: 5,
             SPEED_INCREASE_INTERVAL: 30,
             SPEED_INCREASE_AMOUNT: 0.5,
-            MAX_SPEED: 15
+            MAX_SPEED: 13
         };
 
-        // ========== GRAPHICS ENHANCEMENTS ==========
         const GRADIENTS = {
             square: ['#ff4757', '#ff3838'],
             triangle: ['#0099ff', '#0066cc'],
@@ -1060,7 +1052,6 @@
             collect: '#9b59b6'
         };
 
-        // ========== GAME STATE ==========
         let gameState = {
             score: 0,
             bestScore: parseInt(localStorage.getItem('geometricDashBest')) || 0,
@@ -1087,7 +1078,6 @@
             }
         };
 
-        // ========== GAME OBJECTS ==========
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
 
@@ -1126,7 +1116,6 @@
         let animationId = null;
         let groundPatternOffset = 0;
 
-        // ========== SHAPE ABILITIES ==========
         const shapes = {
             square: {
                 color: PARTICLE_COLORS.square,
@@ -1136,7 +1125,6 @@
                 baseJump: 16,
                 special: 'CRUSH',
                 ability: function () {
-                    // Square can break obstacles
                     createAbilityEffect();
                     player.invincible = true;
                     setTimeout(() => player.invincible = false, 1000);
@@ -1150,7 +1138,6 @@
                 baseJump: 14,
                 special: 'DASH',
                 ability: function () {
-                    // Speed boost
                     createAbilityEffect();
                     gameState.scrollSpeed *= 1.5;
                     setTimeout(() => {
@@ -1168,7 +1155,6 @@
                 baseJump: 18,
                 special: 'FLOAT',
                 ability: function () {
-                    // Float ability
                     createAbilityEffect();
                     gravity = 0.3;
                     setTimeout(() => gravity = 0.8, 2000);
@@ -1176,26 +1162,21 @@
             }
         };
 
-        // ========== INITIALIZATION ==========
         function init() {
-            // Initialize graphics
             initStars();
             initBackgroundLayers();
 
-            // Load saved data
             loadGameData();
             updateHomeStats();
 
-            // Setup event listeners
             setupEventListeners();
 
-            // Start animation
             gameLoop();
         }
 
         function initStars() {
             stars = [];
-            for (let i = 0; i < 200; i++) {
+            for (let i = 0; i < 80; i++) {
                 stars.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height * 0.8,
@@ -1216,7 +1197,7 @@
                     offset: 0,
                     scale: 0.5 + i * 0.1,
                     opacity: 0.1 + i * 0.1,
-                    shapes: Array.from({ length: 20 }, () => ({
+                    shapes: Array.from({ length: 10 }, () => ({
                         x: Math.random() * canvas.width,
                         y: Math.random() * canvas.height * 0.7,
                         size: Math.random() * 40 + 20,
@@ -1245,7 +1226,6 @@
             localStorage.setItem('gamesPlayed', gameState.gamesPlayed);
         }
 
-        // ========== GAME LOGIC ==========
         function spawnObstacle() {
             const now = Date.now();
             const minGap = CONFIG.MIN_OBSTACLE_GAP;
@@ -1256,16 +1236,13 @@
 
             lastObstacleTime = now;
 
-            // Choose obstacle type
             const types = ['square', 'triangle', 'circle'];
             const type = types[Math.floor(Math.random() * types.length)];
 
-            // Calculate position
             const height = shapes[type].height;
             const gap = minGap + Math.random() * (maxGap - minGap);
             const y = canvas.height - CONFIG.GROUND_HEIGHT - height;
 
-            // Create obstacle with intelligent positioning
             const obstacle = {
                 x: canvas.width + gap,
                 y: y,
@@ -1284,7 +1261,6 @@
                 obstacle.speedX = (Math.random() - 0.5) * 3;
             }
 
-            // Ensure obstacles aren't too close to each other
             const lastObstacle = obstacles[obstacles.length - 1];
             if (lastObstacle && obstacle.x - lastObstacle.x < minGap * 0.7) {
                 obstacle.x = lastObstacle.x + minGap * 0.7;
@@ -1292,7 +1268,6 @@
 
             obstacles.push(obstacle);
 
-            // Limit obstacles array size
             if (obstacles.length > 25) obstacles.shift();
         }
 
@@ -1302,7 +1277,6 @@
 
             lastPowerUpTime = now;
 
-            // Only spawn power-ups if there's enough space
             const minDistanceFromObstacles = 200;
             let validPosition = false;
             let attempts = 0;
@@ -1312,7 +1286,6 @@
                 x = canvas.width + 100;
                 y = canvas.height - CONFIG.GROUND_HEIGHT - 150 - Math.random() * 300;
 
-                // Check distance from obstacles
                 let tooClose = false;
                 for (const obstacle of obstacles) {
                     const dx = obstacle.x - x;
@@ -1370,50 +1343,36 @@
         function update() {
             if (gameState.gameOver || gameState.isPaused) return;
 
-            // Update time
             gameState.timeElapsed += 1 / 60;
 
-            // Update player
             updatePlayer();
 
-            // Update obstacles
             updateObstacles();
 
-            // Update power-ups with magnet effect
             updatePowerUps();
 
-            // Update particles
             updateParticles();
 
-            // Update trail
             updateTrail();
 
-            // Update shield and abilities
             updatePlayerEffects();
 
-            // Spawn objects
-            if (Math.random() < 0.02) spawnObstacle();
+            spawnObstacle();
             if (Math.random() < CONFIG.POWER_UP_SPAWN_CHANCE) spawnPowerUp();
 
-            // Update difficulty
             updateDifficulty();
 
-            // Update power-up timer
             updatePowerUpTimer();
 
-            // Update UI
             updateGameUI();
 
-            // Update wave system
             updateWaves();
         }
 
         function updatePlayer() {
-            // Apply gravity
             player.vy += gravity;
             player.y += player.vy;
 
-            // Ground collision
             if (player.y + player.height >= canvas.height - CONFIG.GROUND_HEIGHT) {
                 player.y = canvas.height - CONFIG.GROUND_HEIGHT - player.height;
                 player.vy = 0;
@@ -1422,17 +1381,14 @@
                 player.onGround = false;
             }
 
-            // Apply jump upgrades
             const jumpHeight = shapes[player.shape].baseJump * (1 + gameState.upgrades.jump * 0.25);
 
-            // Jump input
             if ((keys['Space'] || keys['KeyW'] || keys['ArrowUp']) && player.onGround) {
                 player.vy = -jumpHeight;
                 player.onGround = false;
                 createJumpEffect();
             }
 
-            // Apply ability cooldown
             if (player.abilityCooldown > 0) {
                 player.abilityCooldown--;
                 if (player.abilityCooldown <= 0) {
@@ -1440,7 +1396,6 @@
                 }
             }
 
-            // Ability activation
             if (keys['KeyE'] && player.canUseAbility) {
                 shapes[player.shape].ability();
                 player.canUseAbility = false;
@@ -1452,27 +1407,22 @@
             for (let i = obstacles.length - 1; i >= 0; i--) {
                 const obstacle = obstacles[i];
 
-                // Move obstacle
                 obstacle.x -= gameState.scrollSpeed;
                 if (obstacle.isMoving) {
                     obstacle.x += obstacle.speedX;
-                    // Bounce off screen edges
                     if (obstacle.x < 50 || obstacle.x > canvas.width - obstacle.width - 50) {
                         obstacle.speedX *= -1;
                     }
                 }
 
-                // Update glow
                 obstacle.glow = Math.sin(Date.now() * 0.005 + obstacle.x * 0.01) * 0.3 + 0.7;
                 obstacle.rotation += 0.02;
 
-                // Check if passed
                 if (!obstacle.passed && obstacle.x + obstacle.width < player.x) {
                     obstacle.passed = true;
                     gameState.obstaclesPassed++;
                     gameState.combo++;
 
-                    // Calculate score with combo multiplier
                     const comboBonus = 1 + (gameState.combo - 1) * 0.1 * (1 + gameState.upgrades.combo * 0.5);
                     const waveBonus = 1 + (gameState.currentWave - 1) * 0.2;
                     gameState.score += Math.floor(10 * gameState.multiplier * comboBonus * waveBonus);
@@ -1489,15 +1439,12 @@
                     createPassEffect(obstacle);
                 }
 
-                // Check collision
                 if (!obstacle.passed && checkCollision(player, obstacle)) {
                     if (player.shape === obstacle.type && !player.invincible) {
-                        // Matching shape - pass through
                         if (!obstacle.isDangerous) {
                             obstacle.passed = true;
                             createPassEffect(obstacle);
                         } else {
-                            // Dangerous obstacle requires shield
                             if (player.hasShield) {
                                 player.hasShield = false;
                                 player.isFlashing = true;
@@ -1511,7 +1458,6 @@
                             }
                         }
                     } else if (!player.invincible) {
-                        // Wrong shape - collision
                         if (player.hasShield) {
                             player.hasShield = false;
                             player.isFlashing = true;
@@ -1526,7 +1472,6 @@
                     }
                 }
 
-                // Remove off-screen obstacles
                 if (obstacle.x + obstacle.width < -100) {
                     obstacles.splice(i, 1);
                 }
@@ -1537,13 +1482,11 @@
             for (let i = powerUps.length - 1; i >= 0; i--) {
                 const powerUp = powerUps[i];
 
-                // Update position with floating animation
                 powerUp.x -= gameState.scrollSpeed;
                 powerUp.rotation += 0.05;
                 powerUp.glow = Math.sin(Date.now() * 0.003) * 0.5 + 0.5;
                 powerUp.y += Math.sin(Date.now() * 0.001 + powerUp.floatOffset) * powerUp.bobSpeed;
 
-                // Magnet effect
                 if (gameState.upgrades.magnet > 0) {
                     const dx = player.x - powerUp.x;
                     const dy = player.y - powerUp.y;
@@ -1557,7 +1500,6 @@
                     }
                 }
 
-                // Check collection
                 if (!powerUp.collected && checkCollision(player, powerUp)) {
                     powerUp.collected = true;
                     gameState.powerUpsCollected++;
@@ -1566,7 +1508,6 @@
                     createCollectionEffect(powerUp);
                 }
 
-                // Remove off-screen or collected power-ups
                 if (powerUp.collected || powerUp.x + powerUp.width < -100) {
                     powerUps.splice(i, 1);
                 }
@@ -1589,7 +1530,7 @@
                     CONFIG.MAX_SPEED,
                     CONFIG.INITIAL_SPEED +
                     Math.floor(gameState.timeElapsed / CONFIG.SPEED_INCREASE_INTERVAL) * CONFIG.SPEED_INCREASE_AMOUNT +
-                    (gameState.upgrades.speed * 0.75)
+                    (gameState.upgrades.speed * 0.5)
                 );
             }
         }
@@ -1599,53 +1540,40 @@
             if (newWave > gameState.currentWave) {
                 gameState.currentWave = newWave;
                 gameState.scoreMultiplier = 1 + (gameState.currentWave - 1) * 0.2;
-                showNotification(`WAVE ${gameState.currentWave}! ${Math.round(gameState.scoreMultiplier * 100)}% BONUS`, 'success');
+                showNotification(`Wave ${gameState.currentWave} bonus`, 'success');
             }
         }
 
-        // ========== GRAPHICS ==========
         function draw() {
-            // Clear canvas with fade effect
             ctx.fillStyle = 'rgba(10, 10, 26, 0.1)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Draw background
             drawBackground();
 
-            // Draw stars
             drawStars();
 
-            // Draw ground
             drawGround();
 
-            // Draw particles
             drawParticles();
 
-            // Draw trail
             drawTrail();
 
-            // Draw obstacles
             drawObstacles();
 
-            // Draw power-ups
             drawPowerUps();
 
-            // Draw player
             drawPlayer();
 
-            // Draw shield
             if (player.hasShield) {
                 drawShield();
             }
 
-            // Draw ability indicator
             if (player.canUseAbility) {
                 drawAbilityIndicator();
             }
         }
 
         function drawBackground() {
-            // Gradient background
             const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
             gradient.addColorStop(0, '#050510');
             gradient.addColorStop(0.5, '#0a0a1a');
@@ -1653,7 +1581,6 @@
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Parallax layers
             const time = Date.now() * 0.001;
             backgroundLayers.forEach((layer, index) => {
                 ctx.globalAlpha = layer.opacity;
@@ -1709,14 +1636,12 @@
         }
 
         function drawGround() {
-            // Main ground
             const groundGradient = ctx.createLinearGradient(0, canvas.height - CONFIG.GROUND_HEIGHT, 0, canvas.height);
             groundGradient.addColorStop(0, '#1a1a2e');
             groundGradient.addColorStop(1, '#0f0f1f');
             ctx.fillStyle = groundGradient;
             ctx.fillRect(0, canvas.height - CONFIG.GROUND_HEIGHT, canvas.width, CONFIG.GROUND_HEIGHT);
 
-            // Ground pattern
             ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
             ctx.lineWidth = 2;
             groundPatternOffset -= gameState.scrollSpeed * 0.5;
@@ -1728,7 +1653,6 @@
                 ctx.stroke();
             }
 
-            // Ground highlight
             ctx.fillStyle = 'rgba(255, 255, 255, 0.02)';
             ctx.fillRect(0, canvas.height - CONFIG.GROUND_HEIGHT, canvas.width, 2);
         }
@@ -1739,13 +1663,11 @@
                 ctx.translate(obstacle.x + obstacle.width / 2, obstacle.y + obstacle.height / 2);
                 ctx.rotate(obstacle.rotation);
 
-                // Glow effect
                 if (obstacle.glow > 0) {
                     ctx.shadowColor = GRADIENTS[obstacle.type][0];
-                    ctx.shadowBlur = 30 * obstacle.glow;
+                    ctx.shadowBlur = 12 * obstacle.glow;
                 }
 
-                // Dangerous obstacle effect
                 if (obstacle.isDangerous) {
                     const pulse = Math.sin(Date.now() * 0.01) * 0.2 + 0.8;
                     const dangerGradient = ctx.createLinearGradient(
@@ -1766,7 +1688,6 @@
                     ctx.fillStyle = gradient;
                 }
 
-                // Draw shape
                 switch (obstacle.type) {
                     case 'triangle':
                         ctx.beginPath();
@@ -1816,11 +1737,9 @@
                 ctx.translate(powerUp.x + powerUp.width / 2, powerUp.y + powerUp.height / 2);
                 ctx.rotate(powerUp.rotation);
 
-                // Outer glow
                 ctx.shadowColor = powerUp.color;
-                ctx.shadowBlur = 30 * powerUp.glow;
+                ctx.shadowBlur = 10 * powerUp.glow;
 
-                // Outer circle
                 const outerGradient = ctx.createRadialGradient(0, 0, 0, 0, 0, powerUp.width / 2);
                 outerGradient.addColorStop(0, powerUp.color + 'ff');
                 outerGradient.addColorStop(1, powerUp.color + '00');
@@ -1829,7 +1748,6 @@
                 ctx.arc(0, 0, powerUp.width / 2, 0, Math.PI * 2);
                 ctx.fill();
 
-                // Inner orb
                 ctx.shadowBlur = 0;
                 const innerGradient = ctx.createRadialGradient(0, 0, 0, 0, 0, powerUp.width / 3);
                 innerGradient.addColorStop(0, '#ffffff');
@@ -1839,7 +1757,6 @@
                 ctx.arc(0, 0, powerUp.width / 3, 0, Math.PI * 2);
                 ctx.fill();
 
-                // Symbol
                 ctx.fillStyle = '#ffffff';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
@@ -1847,19 +1764,19 @@
 
                 switch (powerUp.type) {
                     case 'shield':
-                        ctx.fillText('🛡️', 0, 0);
+                        ctx.fillText('S', 0, 0);
                         break;
                     case 'doublePoints':
-                        ctx.fillText('2×', 0, 0);
+                        ctx.fillText('2x', 0, 0);
                         break;
                     case 'magnet':
-                        ctx.fillText('🧲', 0, 0);
+                        ctx.fillText('M', 0, 0);
                         break;
                     case 'abilityCharge':
-                        ctx.fillText('⚡', 0, 0);
+                        ctx.fillText('A', 0, 0);
                         break;
                     default:
-                        ctx.fillText('⏱️', 0, 0);
+                        ctx.fillText('T', 0, 0);
                 }
 
                 ctx.restore();
@@ -1869,16 +1786,13 @@
         function drawPlayer() {
             ctx.save();
 
-            // Flashing effect
             if (player.isFlashing && Math.floor(Date.now() / 100) % 2 === 0) {
                 ctx.globalAlpha = 0.3;
             }
 
-            // Glow effect
             ctx.shadowColor = GRADIENTS[player.shape][0];
-            ctx.shadowBlur = 40;
+            ctx.shadowBlur = 18;
 
-            // Player gradient
             const gradient = ctx.createLinearGradient(
                 player.x, player.y,
                 player.x, player.y + player.height
@@ -1887,16 +1801,13 @@
             gradient.addColorStop(1, GRADIENTS[player.shape][1]);
             ctx.fillStyle = gradient;
 
-            // Draw player shape with animation
             ctx.translate(player.x + player.width / 2, player.y + player.height / 2);
 
-            // Bounce animation when on ground
             if (player.onGround) {
                 const bounce = Math.sin(Date.now() * 0.01) * 2;
                 ctx.translate(0, bounce);
             }
 
-            // Rotation when jumping
             if (!player.onGround) {
                 ctx.rotate(player.vy * 0.01);
             }
@@ -1922,7 +1833,6 @@
                     ctx.fillRect(-player.width / 2, -player.height / 2, player.width, player.height);
             }
 
-            // Draw shape indicator
             ctx.fillStyle = '#ffffff';
             ctx.font = 'bold 20px Arial';
             ctx.textAlign = 'center';
@@ -1961,13 +1871,12 @@
             }
         }
 
-        // ========== PARTICLE SYSTEM ==========
         function createParticles(x, y, count, color, type = 'circle') {
             for (let i = 0; i < count; i++) {
                 const angle = Math.random() * Math.PI * 2;
-                const speed = Math.random() * 8 + 2;
-                const size = Math.random() * 6 + 2;
-                const life = Math.random() * 40 + 30;
+                const speed = Math.random() * 6 + 1;
+                const size = Math.random() * 5 + 1;
+                const life = Math.random() * 30 + 20;
 
                 particles.push({
                     x: x,
@@ -1982,6 +1891,10 @@
                     rotation: Math.random() * Math.PI * 2,
                     rotationSpeed: (Math.random() - 0.5) * 0.2
                 });
+            }
+
+            if (particles.length > 150) {
+                particles.splice(0, particles.length - 150);
             }
         }
 
@@ -2023,7 +1936,6 @@
             ctx.globalAlpha = 1;
         }
 
-        // ========== TRAIL SYSTEM ==========
         function updateTrail() {
             if (!player.onGround) {
                 player.trail.push({
@@ -2034,7 +1946,6 @@
                 });
             }
 
-            // Update and remove old trail segments
             player.trail.forEach(t => t.size *= 0.9);
             player.trail = player.trail.filter(t => t.size > 1);
         }
@@ -2048,7 +1959,6 @@
             });
         }
 
-        // ========== EFFECTS ==========
         function createJumpEffect() {
             createParticles(player.x + player.width / 2, player.y + player.height, 15, GRADIENTS[player.shape][0]);
         }
@@ -2092,7 +2002,6 @@
             );
         }
 
-        // ========== POWER-UP SYSTEM ==========
         function applyPowerUp(type) {
             powerUpActive = true;
             powerUpType = type;
@@ -2142,12 +2051,11 @@
                 powerUpActive = false;
                 document.getElementById('powerUpTimer').classList.add('hidden');
 
-                // Reset effects
                 if (powerUpType === 'shield') player.hasShield = false;
                 if (powerUpType === 'doublePoints') gameState.multiplier = 1;
                 if (powerUpType === 'magnet') player.magnetRadius = 200;
 
-                showNotification('POWER-UP ENDED', 'warning');
+                showNotification('Power-up ended', 'warning');
             } else {
                 document.getElementById('powerUpBar').style.transform = `scaleX(${percentage})`;
             }
@@ -2169,12 +2077,10 @@
             }
         }
 
-        // ========== UI UPDATES ==========
         function updateGameUI() {
             document.getElementById('score').textContent = gameState.score.toLocaleString();
             document.getElementById('bestScore').textContent = `BEST: ${gameState.bestScore.toLocaleString()}`;
 
-            // Update shape indicators
             document.querySelectorAll('.shape-icon').forEach(icon => {
                 icon.classList.remove('active');
                 if (icon.dataset.shape === player.shape) {
@@ -2188,7 +2094,6 @@
             document.getElementById('homeTotalPoints').textContent = gameState.totalPoints.toLocaleString();
             document.getElementById('homeGamesPlayed').textContent = gameState.gamesPlayed.toLocaleString();
 
-            // Update shop UI
             document.getElementById('shopTotalPoints').textContent = gameState.totalPoints.toLocaleString();
             document.getElementById('jumpLevel').textContent = gameState.upgrades.jump;
             document.getElementById('speedLevel').textContent = gameState.upgrades.speed;
@@ -2197,7 +2102,6 @@
             document.getElementById('comboLevel').textContent = gameState.upgrades.combo;
             document.getElementById('abilityLevel').textContent = gameState.upgrades.ability;
 
-            // Update upgrade costs
             document.querySelectorAll('.upgrade-card').forEach(card => {
                 const upgrade = card.dataset.upgrade;
                 const level = gameState.upgrades[upgrade];
@@ -2205,7 +2109,6 @@
                 const cost = baseCost + (level * 250);
                 card.querySelector('.upgrade-price').textContent = cost.toLocaleString();
 
-                // Disable if not enough points or max level
                 const maxLevel = upgrade === 'jump' || upgrade === 'speed' || upgrade === 'shield' ? 5 : 3;
                 if (gameState.totalPoints < cost || level >= maxLevel) {
                     card.classList.add('locked');
@@ -2215,7 +2118,6 @@
             });
         }
 
-        // ========== GAME FLOW ==========
         function startGame() {
             document.getElementById('homeScreen').classList.add('hidden');
             resetGame();
@@ -2224,7 +2126,6 @@
         }
 
         function resetGame() {
-            // Reset player
             player = {
                 x: CONFIG.PLAYER_START_X,
                 y: canvas.height - 150,
@@ -2244,11 +2145,10 @@
                 magnetRadius: 200
             };
 
-            // Reset game state
             gameState.score = 0;
             gameState.timeElapsed = 0;
             gameState.multiplier = 1;
-            gameState.scrollSpeed = CONFIG.INITIAL_SPEED + (gameState.upgrades.speed * 0.75);
+            gameState.scrollSpeed = CONFIG.INITIAL_SPEED + (gameState.upgrades.speed * 0.5);
             gameState.gameOver = false;
             gameState.isPaused = false;
             gameState.obstaclesPassed = 0;
@@ -2258,26 +2158,21 @@
             gameState.currentWave = 1;
             gameState.scoreMultiplier = 1;
 
-            // Clear objects
             obstacles = [];
             powerUps = [];
             particles = [];
 
-            // Reset timers
             lastObstacleTime = 0;
             lastPowerUpTime = 0;
             difficultyTimer = 0;
             groundPatternOffset = 0;
 
-            // Change to square shape
             changeShape('square');
 
-            // Hide screens
             document.getElementById('gameOverScreen').classList.add('hidden');
             document.getElementById('pauseScreen').classList.add('hidden');
             document.getElementById('powerUpTimer').classList.add('hidden');
 
-            // Start game loop
             if (animationId) cancelAnimationFrame(animationId);
             gameLoop();
         }
@@ -2285,19 +2180,16 @@
         function gameOver() {
             gameState.gameOver = true;
 
-            // Update best score
             if (gameState.score > gameState.bestScore) {
                 gameState.bestScore = gameState.score;
                 localStorage.setItem('geometricDashBest', gameState.bestScore);
-                showAchievement('NEW HIGH SCORE!', `You scored ${gameState.score.toLocaleString()} points!`);
+                showAchievement('New high score', `You scored ${gameState.score.toLocaleString()} points`);
             }
 
-            // Add points to total
             const earnedPoints = Math.floor(gameState.score / 10);
             gameState.totalPoints += earnedPoints;
             saveGameData();
 
-            // Update game over screen
             document.getElementById('finalScore').textContent = gameState.score.toLocaleString();
             document.getElementById('finalBest').textContent = gameState.bestScore.toLocaleString();
             document.getElementById('obstaclesPassed').textContent = gameState.obstaclesPassed;
@@ -2305,10 +2197,8 @@
             document.getElementById('maxCombo').textContent = gameState.maxCombo + 'x';
             document.getElementById('finalTime').textContent = Math.floor(gameState.timeElapsed) + 's';
 
-            // Show game over screen
             document.getElementById('gameOverScreen').classList.remove('hidden');
 
-            // Explosion effect
             createParticles(
                 player.x + player.width / 2,
                 player.y + player.height / 2,
@@ -2317,7 +2207,6 @@
                 'circle'
             );
 
-            // Update home stats
             updateHomeStats();
         }
 
@@ -2335,23 +2224,19 @@
             }
         }
 
-        // ========== SHAPE CHANGING ==========
         function changeShape(shape) {
             if (player.shape === shape && player.canUseAbility) {
-                // Use ability
                 shapes[shape].ability();
                 player.canUseAbility = false;
                 player.abilityCooldown = 180 * (1 - gameState.upgrades.ability * 0.3);
                 return;
             }
 
-            // Change shape
             createShapeChangeEffect();
             player.shape = shape;
             player.width = shapes[shape].width;
             player.height = shapes[shape].height;
 
-            // Update UI
             document.querySelectorAll('.shape-icon').forEach(icon => {
                 icon.classList.remove('active');
                 if (icon.dataset.shape === shape) {
@@ -2359,7 +2244,7 @@
                 }
             });
 
-            showNotification(`SHAPE: ${shape.toUpperCase()}`, 'info');
+            showNotification(`Shape: ${shape.charAt(0).toUpperCase() + shape.slice(1)}`, 'info');
         }
 
         function createShapeChangeEffect() {
@@ -2372,26 +2257,24 @@
             );
         }
 
-        // ========== ACHIEVEMENTS ==========
         function checkAchievements() {
             if (gameState.combo >= 10) {
-                showAchievement('COMBO MASTER!', 'Reached 10x combo!');
+                showAchievement('Combo master', 'Reached 10x combo');
             }
             if (gameState.combo >= 25) {
-                showAchievement('COMBO GOD!', 'Reached 25x combo!');
+                showAchievement('Combo expert', 'Reached 25x combo');
             }
             if (gameState.score >= 5000) {
-                showAchievement('SCORE CHAMPION', 'Scored over 5,000 points!');
+                showAchievement('Score champion', 'Scored over 5,000 points');
             }
             if (gameState.timeElapsed >= 120) {
-                showAchievement('SURVIVOR', 'Survived for 2 minutes!');
+                showAchievement('Survivor', 'Survived for 2 minutes');
             }
         }
 
-        // ========== UI HELPERS ==========
         function showNotification(message, type = 'info') {
             const notification = document.getElementById('notification');
-            notification.textContent = message;
+            notification.innerHTML = message;
             notification.style.borderLeftColor =
                 type === 'error' ? '#ff4757' :
                     type === 'success' ? '#00ff88' :
@@ -2415,7 +2298,7 @@
 
         function showCombo(combo) {
             const comboDisplay = document.getElementById('comboDisplay');
-            comboDisplay.textContent = `${combo}x COMBO!`;
+            comboDisplay.textContent = `${combo}x combo`;
             comboDisplay.style.opacity = '1';
             comboDisplay.style.color =
                 combo >= 25 ? '#ff0000' :
@@ -2427,41 +2310,35 @@
             }, 1500);
         }
 
-        // ========== UPGRADE SYSTEM ==========
         function purchaseUpgrade(upgrade) {
             const card = document.querySelector(`[data-upgrade="${upgrade}"]`);
             const level = gameState.upgrades[upgrade];
             const baseCost = parseInt(card.querySelector('.upgrade-price').dataset.cost);
             const cost = baseCost + (level * 250);
 
-            // Check max level
             const maxLevel = upgrade === 'jump' || upgrade === 'speed' || upgrade === 'shield' ? 5 : 3;
             if (level >= maxLevel) {
-                showNotification('MAX LEVEL REACHED!', 'warning');
+                showNotification('Max level reached', 'warning');
                 return;
             }
 
-            // Check if player has enough points
             if (gameState.totalPoints >= cost) {
                 gameState.totalPoints -= cost;
                 gameState.upgrades[upgrade]++;
                 saveGameData();
                 updateHomeStats();
-                showNotification(`${upgrade.toUpperCase()} UPGRADED TO LEVEL ${gameState.upgrades[upgrade]}!`, 'success');
+                showNotification(`${upgrade.charAt(0).toUpperCase() + upgrade.slice(1)} upgraded to level ${gameState.upgrades[upgrade]}`, 'success');
 
-                // Visual feedback
                 card.style.animation = 'none';
                 setTimeout(() => {
                     card.style.animation = 'pulse 0.5s ease';
                 }, 10);
             } else {
-                showNotification('NOT ENOUGH POINTS!', 'error');
+                showNotification('Not enough points', 'error');
             }
         }
 
-        // ========== EVENT LISTENERS ==========
         function setupEventListeners() {
-            // Keyboard controls
             document.addEventListener('keydown', (e) => {
                 keys[e.code] = true;
 
@@ -2484,7 +2361,6 @@
                 }
                 if (e.code === 'KeyP' || e.code === 'Escape') togglePause();
 
-                // Start game from home screen
                 if (e.code === 'Space' && !document.getElementById('homeScreen').classList.contains('hidden')) {
                     startGame();
                 }
@@ -2494,7 +2370,6 @@
                 keys[e.code] = false;
             });
 
-            // Mouse/Touch controls
             canvas.addEventListener('click', (e) => {
                 if (gameState.gameOver || gameState.isPaused) return;
                 if (player.onGround) {
@@ -2514,7 +2389,6 @@
                 }
             });
 
-            // Shape selector clicks
             document.querySelectorAll('.shape-icon').forEach(icon => {
                 icon.addEventListener('click', (e) => {
                     if (gameState.gameOver || gameState.isPaused) return;
@@ -2523,7 +2397,6 @@
                 });
             });
 
-            // Menu buttons
             document.getElementById('startGame').addEventListener('click', startGame);
             document.getElementById('shopBtn').addEventListener('click', () => {
                 document.getElementById('homeScreen').classList.add('hidden');
@@ -2540,7 +2413,6 @@
                 updateHomeStats();
             });
 
-            // Upgrade purchases
             document.querySelectorAll('.upgrade-card').forEach(card => {
                 card.addEventListener('click', () => {
                     if (!card.classList.contains('locked')) {
@@ -2550,7 +2422,6 @@
                 });
             });
 
-            // Game over buttons
             document.getElementById('restartGame').addEventListener('click', resetGame);
             document.getElementById('menuGame').addEventListener('click', () => {
                 document.getElementById('gameOverScreen').classList.add('hidden');
@@ -2558,7 +2429,6 @@
                 updateHomeStats();
             });
 
-            // Pause buttons
             document.getElementById('resumeGame').addEventListener('click', togglePause);
             document.getElementById('restartFromPause').addEventListener('click', () => {
                 togglePause();
@@ -2571,22 +2441,20 @@
                 updateHomeStats();
             });
 
-            // Settings button
             document.getElementById('settingsBtn').addEventListener('click', () => {
                 showNotification('Settings will be available in the next update!', 'info');
             });
 
-            // How to play button
             document.getElementById('howToPlay').addEventListener('click', () => {
                 const instructions = `
-                    <strong>HOW TO PLAY:</strong><br><br>
+                    <strong>How to play:</strong><br><br>
                     1. Press SPACE or CLICK to jump<br>
                     2. Press 1, 2, or 3 to change shapes<br>
                     3. Match your shape with obstacles to pass<br>
                     4. Collect power-ups for special abilities<br>
                     5. Use E key for shape abilities<br>
                     6. Survive as long as possible!<br><br>
-                    <em>Earn points to buy upgrades in the shop!</em>
+                    <em>Earn points to buy upgrades in the shop.</em>
                 `;
                 showNotification(instructions, 'info');
                 setTimeout(() => {
@@ -2595,7 +2463,6 @@
             });
         }
 
-        // ========== GAME LOOP ==========
         function gameLoop() {
             if (!gameState.gameOver && !gameState.isPaused) {
                 update();
@@ -2604,7 +2471,6 @@
             }
         }
 
-        // ========== START THE GAME ==========
         window.addEventListener('load', init);
     </script>
 </body>

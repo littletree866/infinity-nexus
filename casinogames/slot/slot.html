@@ -284,7 +284,6 @@
 </div>
 
 <script>
-    // ---------- SLOT CONFIGURATION ----------
     const SYMBOLS = [
         { name: '🪙', payout: 5,   color: 'red' },
         { name: '🏅', payout: 8,   color: 'yellow' },
@@ -302,7 +301,6 @@
     let lastWinAmount = 0;
     let gridState = Array(9).fill('A');  // 3x3 grid as flat array
 
-    // DOM Elements
     const balanceSpan = document.getElementById('balanceValue');
     const betSpan = document.getElementById('betValue');
     const lastWinSpan = document.getElementById('lastWinDisplay');
@@ -312,7 +310,6 @@
     const betChips = document.querySelectorAll('.bet-chip-btn');
     const paytableDiv = document.getElementById('paytableList');
 
-    // Helper: update UI
     function updateUI() {
         balanceSpan.innerText = Math.floor(balance);
         betSpan.innerText = currentBet;
@@ -325,7 +322,6 @@
         }
     }
 
-    // Build paytable display
     function buildPaytable() {
         paytableDiv.innerHTML = '';
         SYMBOLS.forEach(sym => {
@@ -336,7 +332,6 @@
         });
     }
 
-    // refresh paytable when bet changes
     function refreshPaytableMultiplier() {
         const items = paytableDiv.querySelectorAll('.pay-item');
         items.forEach((item, idx) => {
@@ -347,7 +342,6 @@
         });
     }
 
-    // simulate spinning animation and final result
     async function spinSlots() {
         if (spinning) return;
         if (balance < currentBet) {
@@ -365,16 +359,13 @@
         resultDiv.innerHTML = 'Spinning...';
         resultDiv.classList.remove('win-text', 'lose-text');
         
-        // start rolling animation
         reels.forEach(reel => reel.classList.add('spinning'));
         
-        // generate final 3x3 grid
         gridState = Array(9).fill(null).map(() => {
             const randIdx = Math.floor(Math.random() * SYMBOLS.length);
             return SYMBOLS[randIdx].name;
         });
         
-        // rolling effect duration
         let rollSteps = 16;
         let step = 0;
         const rollInterval = setInterval(() => {
@@ -385,7 +376,6 @@
             step++;
             if (step >= rollSteps) {
                 clearInterval(rollInterval);
-                // apply final results
                 reels.forEach((reel, idx) => {
                     reel.innerText = gridState[idx];
                 });
@@ -398,13 +388,11 @@
         }, 70);
     }
 
-    // evaluate win lines: rows, columns, diagonals
     function evaluateWin() {
         let winAmount = 0;
         let winLines = [];
         const grid = gridState;
 
-        // Check rows (0-1-2, 3-4-5, 6-7-8)
         for (let row = 0; row < 3; row++) {
             const start = row * 3;
             if (grid[start] === grid[start+1] && grid[start+1] === grid[start+2]) {
@@ -416,7 +404,6 @@
             }
         }
 
-        // Check columns (0-3-6, 1-4-7, 2-5-8)
         for (let col = 0; col < 3; col++) {
             if (grid[col] === grid[col+3] && grid[col+3] === grid[col+6]) {
                 const found = SYMBOLS.find(s => s.name === grid[col]);
@@ -427,7 +414,6 @@
             }
         }
 
-        // Check diagonals (0-4-8, 2-4-6)
         if (grid[0] === grid[4] && grid[4] === grid[8]) {
             const found = SYMBOLS.find(s => s.name === grid[0]);
             if (found) {
@@ -450,7 +436,6 @@
             const lineCount = winLines.length;
             resultDiv.innerHTML = `Win! ${lineCount} line(s): +$${winAmount}`;
             resultDiv.classList.add('win-text');
-            // highlight winning positions
             const winningIndices = new Set(winLines.flat());
             reels.forEach((reel, idx) => {
                 if (winningIndices.has(idx)) {
@@ -468,7 +453,6 @@
         lastWinSpan.innerText = lastWinAmount;
         if (balance <= 0) updateUI();
         
-        // clean result text after some seconds
         setTimeout(() => {
             if (!spinning && resultDiv.innerHTML !== 'Spinning...') {
                 resultDiv.innerHTML = 'Ready to spin';
@@ -520,7 +504,6 @@
         } catch(e) {}
     }
     
-    // change bet and update paytable multiplier
     function setBet(amount) {
         if (spinning) return;
         if (balance > 0 && balance < amount && amount > balance) return;
@@ -534,7 +517,6 @@
         refreshPaytableMultiplier();
     }
     
-    // reset game (only if bankrupt)
     function resetBankruptcy() {
         if (balance <= 0) {
             balance = 500;
@@ -548,7 +530,6 @@
         }
     }
 
-    // manual reset from message
     function tryReset() {
         if (balance <= 0) resetBankruptcy();
         else {
@@ -557,7 +538,6 @@
         updateUI();
     }
     
-    // keyboard support: space/enter spin, 1-5 for bet
     document.addEventListener('keydown', (e) => {
         if (spinning) return;
         if (e.code === 'Space' || e.key === 'Enter') {
@@ -572,10 +552,8 @@
         if (e.code === 'KeyR') tryReset();
     });
     
-    // add event listeners
     function init() {
         buildPaytable();
-        // set default active bet chip
         setBet(10);
         updateUI();
         spinBtn.addEventListener('click', spinSlots);
@@ -586,7 +564,6 @@
                 setBet(betVal);
             });
         });
-        // reset on bankrupt
         if (balance <= 0) resetBankruptcy();
     }
     

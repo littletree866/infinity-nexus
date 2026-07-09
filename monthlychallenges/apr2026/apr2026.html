@@ -301,13 +301,11 @@
     </div>
 
     <script>
-        // ----- GAME DATA : 8 unique pairs (total 16 cards) with APRIL / spring theme
         const ICON_SET = [
             "🌸", "🌼", "🌷", "🦋",
             "🐝", "☔", "🌈", "🌱"
         ];
 
-        // pair mapping for clarity (each icon appears twice)
         let gameCards = [];       // stores { id, icon, isMatched, isRevealed, element, cardIndex }
         let cardElements = [];
         let moves = 0;
@@ -319,7 +317,6 @@
         let firstCard = null;
         let secondCard = null;
 
-        // DOM elements
         const gridContainer = document.getElementById("gameGrid");
         const matchesSpan = document.getElementById("matchesCount");
         const movesSpan = document.getElementById("movesCount");
@@ -327,7 +324,6 @@
         const messageDiv = document.getElementById("gameMessage");
         const resetBtn = document.getElementById("resetGameBtn");
 
-        // Helper: format mm:ss
         function formatTime(sec) {
             let mins = Math.floor(sec / 60);
             let remainSec = sec % 60;
@@ -340,7 +336,6 @@
             timerDisplaySpan.innerText = formatTime(timerSeconds);
         }
 
-        // stop timer when game finished or reset
         function stopTimer() {
             if (timerInterval) {
                 clearInterval(timerInterval);
@@ -355,16 +350,13 @@
                     timerSeconds++;
                     updateUI();
                 } else if (matchedPairs >= ICON_SET.length) {
-                    // game completed but keep timer from incrementing? actually we can stop when win
                     if (timerInterval && gameActive === false) {
-                        // do nothing, but we'll stop on win condition
                     }
                 }
                 updateUI();
             }, 1000);
         }
 
-        // reset timer (stops, sets to 0, optionally restarts)
         function resetTimerAndStart() {
             stopTimer();
             timerSeconds = 0;
@@ -374,16 +366,13 @@
             }
         }
 
-        // check win condition
         function checkWin() {
             if (matchedPairs === ICON_SET.length) {
-                // game completed!
                 gameActive = false;
                 stopTimer();
                 messageDiv.innerHTML = "🎉✨ You found all the pairs! ✨🎉<br>🌸 Congrats! 🌸";
                 messageDiv.style.background = "#f9e0a0dd";
                 messageDiv.style.fontSize = "1.2rem";
-                // add glow effect to container
                 document.querySelector('.game-container').classList.add('win-glow');
                 setTimeout(() => {
                     if (document.querySelector('.game-container'))
@@ -394,33 +383,27 @@
             return false;
         }
 
-        // clear selected cards (without resetting lock, but after comparison)
         function clearSelected() {
             firstCard = null;
             secondCard = null;
             lockBoard = false;
         }
 
-        // hide unmatched cards (flip back)
         function resetUnmatched() {
             if (!firstCard || !secondCard) return;
-            // if both are not matched and are revealed, flip them back to hidden
             const cardA = gameCards[firstCard];
             const cardB = gameCards[secondCard];
             if (!cardA.isMatched && !cardB.isMatched) {
                 cardA.isRevealed = false;
                 cardB.isRevealed = false;
-                // update DOM visuals
                 updateCardDisplay(firstCard);
                 updateCardDisplay(secondCard);
             }
             clearSelected();
         }
 
-        // compare two selected cards
         function compareCards(idxA, idxB) {
             if (idxA === idxB) {
-                // same card clicked? should not happen but safety
                 clearSelected();
                 return;
             }
@@ -429,7 +412,6 @@
             const isMatch = (card1.icon === card2.icon);
 
             if (isMatch) {
-                // match success
                 card1.isMatched = true;
                 card2.isMatched = true;
                 card1.isRevealed = true;   // stays revealed
@@ -439,7 +421,6 @@
                 updateCardDisplay(idxA);
                 updateCardDisplay(idxB);
 
-                // show matching message
                 messageDiv.innerHTML = `🎉 Match found! +1 point (${card1.icon}) 🎉`;
                 setTimeout(() => {
                     if (messageDiv && matchedPairs < ICON_SET.length)
@@ -447,71 +428,56 @@
                 }, 1200);
 
                 clearSelected();
-                // check win after match
                 const won = checkWin();
                 if (won) {
-                    // disable further moves, gameActive already false
                     lockBoard = true; // block any further clicks
                 }
             } else {
-                // mismatch: show briefly then flip back
                 messageDiv.innerHTML = `❌ Not a match... (${card1.icon} & ${card2.icon}) ❌`;
                 lockBoard = true;   // block any new clicks until flip back
                 setTimeout(() => {
                     if (!gameActive) return;
                     resetUnmatched();
                     lockBoard = false;
-                    // after resetting, if game still active allow new clicks
                     if (messageDiv.innerHTML.includes("Not a match")) {
                         if (matchedPairs < ICON_SET.length)
                             messageDiv.innerHTML = "🌱 Try again! Find the pairs! 🌱";
                     }
                 }, 800);
             }
-            // increment moves
             moves++;
             updateUI();
         }
 
-        // handle card click
         function onCardClick(clickedIdx) {
-            // validation conditions
             if (!gameActive) return;
             if (lockBoard) return;
             const card = gameCards[clickedIdx];
             if (card.isMatched) return;
             if (card.isRevealed && !card.isMatched) return; // already face up and waiting?
-            // Prevent selecting same card twice in a turn
             if (firstCard !== null && secondCard !== null) return; // should not happen but safe
 
-            // if firstCard is null -> open first card
             if (firstCard === null) {
-                // reveal current card
                 card.isRevealed = true;
                 updateCardDisplay(clickedIdx);
                 firstCard = clickedIdx;
                 return;
             }
 
-            // second card selection
             if (firstCard !== null && secondCard === null) {
-                // avoid clicking same exact card again
                 if (firstCard === clickedIdx) return;
                 card.isRevealed = true;
                 updateCardDisplay(clickedIdx);
                 secondCard = clickedIdx;
-                // now compare both cards
                 compareCards(firstCard, secondCard);
             }
         }
 
-        // update single card DOM based on game state
         function updateCardDisplay(index) {
             const cardData = gameCards[index];
             const cardDiv = cardData.element;
             if (!cardDiv) return;
 
-            // clear classes
             cardDiv.classList.remove("hidden", "revealed", "matched");
 
             if (cardData.isMatched) {
@@ -531,11 +497,8 @@
             }
         }
 
-        // build fresh game board (shuffle)
         function initGame() {
-            // stop ongoing timer before resetting
             stopTimer();
-            // reset global state
             moves = 0;
             matchedPairs = 0;
             gameActive = true;
@@ -543,19 +506,16 @@
             firstCard = null;
             secondCard = null;
 
-            // create card deck: each icon appears twice
             let deck = [];
             for (let i = 0; i < ICON_SET.length; i++) {
                 deck.push({ icon: ICON_SET[i], isMatched: false, isRevealed: false });
                 deck.push({ icon: ICON_SET[i], isMatched: false, isRevealed: false });
             }
-            // Fisher-Yates shuffle
             for (let i = deck.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [deck[i], deck[j]] = [deck[j], deck[i]];
             }
 
-            // rebuild gameCards array
             gameCards = [];
             gridContainer.innerHTML = "";
 
@@ -571,7 +531,6 @@
                 };
                 gameCards.push(cardObj);
 
-                // create DOM element
                 const cardDiv = document.createElement("div");
                 cardDiv.className = "card hidden";
                 cardDiv.innerText = "?";
@@ -587,31 +546,24 @@
                 updateCardDisplay(idx);
             }
 
-            // reset timer display
             timerSeconds = 0;
             updateUI();
-            // start timer if game active (which is true)
             startTimer();
             messageDiv.innerHTML = "🌷 Match all the April icons! Good luck! 🌷";
-            // remove win glow class if present
             document.querySelector('.game-container')?.classList.remove('win-glow');
             messageDiv.style.background = "#efe3cdb3";
         }
 
-        // reset button handler
         function resetGame() {
             initGame();
         }
 
-        // event binding
         resetBtn.addEventListener("click", () => {
             resetGame();
         });
 
-        // initial game start
         initGame();
 
-        // additional style fix for mobile tap highlight
         const style = document.createElement('style');
         style.textContent = `
         .card {

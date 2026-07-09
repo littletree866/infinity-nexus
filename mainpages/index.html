@@ -10,12 +10,9 @@
     <link rel="icon" href="../icon.jpg" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
-
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
 
     <style>
-        /* Modern Color Themes - CSS Variables */
         :root[data-theme="dark"] {
             --primary: #3a8eed;
             --secondary: #ec4899;
@@ -65,7 +62,7 @@
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Lexend', sans-serif;
             line-height: 1.6;
             color: var(--text-primary);
             background: var(--bg-primary);
@@ -323,16 +320,13 @@
             font-weight: bold;
         }
 
-
-
-
         .category-header {
             margin: 32px 0 20px 0;
             padding: 16px 24px;
             border-radius: var(--border-radius);
             background: var(--card-bg);
             backdrop-filter: blur(10px);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            font-family: 'Lexend', sans-serif;
             box-shadow: var(--shadow);
             border: 1px solid var(--border-color);
             transition: all 0.2s ease;
@@ -1470,21 +1464,21 @@
                 <div class="footer-section">
                     <h4 class="footer-title">Game Categories</h4>
                     <ul class="footer-links">
-                        <li><a href="mainpages/casino.html">Casino Games</a></li>
-                        <li><a href="mainpages/gamecorner.html">Game Corner</a></li>
-                        <li><a href="mainpages/sims.html">Simulations</a></li>
-                       <!-- <li><a href="mainpages/monthly.html">Monthly Challenges</a></li>-->
+                        <li><a href="casino.html">Casino Games</a></li>
+                        <li><a href="gamecorner.html">Game Corner</a></li>
+                        <li><a href="sims.html">Simulations</a></li>
+                       <!-- <li><a href="monthly.html">Monthly Challenges</a></li>-->
                     </ul>
                 </div>
-                <div class="footer-section">
+               <!--<div class="footer-section">
                     <h4 class="footer-title">Information</h4>
                     <ul class="footer-links">
-                        <li><a href="info/updateinfo/updateinfo.html">News & Updates</a></li>
-                        <li><a href="info/docs/documentation.html">Documentation</a></li>
-                        <li><a href="info/privacy/privacypolicy.html">Privacy Policy</a></li>
-                        <li><a href="info/archives/archives.html">Archives</a></li>
+                        <li><a href="../info/updateinfo/updateinfo.html">News & Updates</a></li>
+                        <li><a href="../info/docs/documentation.html">Documentation</a></li>
+                        <li><a href="../info/privacy/privacypolicy.html">Privacy Policy</a></li>
+                        <li><a href="../info/archives/archives.html">Archives</a></li>
                     </ul>
-                </div>
+                </div>--> 
                 <div class="footer-section">
                     <h4 class="footer-title">Connect</h4>
                     <p class="footer-desc" style="font-size: 0.9rem;">v1.26.26 | Last Updated: June 28, 2026</p>
@@ -1502,7 +1496,6 @@
     </footer>
 
     <script>
-        // Game Data and Search/Filter Functionality
         const gamesData = [
             { title: 'FireRed Hack', link: 'https://fireredhack.pages.dev/', icon: '🔥', tags: ['new', 'featured'] },
             { title: 'Monthly Challenges', link: 'mainpages/mainpage6.html', icon: '🏆', tags: ['popular', 'featured'] },
@@ -1518,14 +1511,12 @@
         function filterGames(query = '', filterTag = 'all') {
             let filtered = gamesData;
             
-            // Filter by search query
             if (query) {
                 filtered = filtered.filter(game =>
                     game.title.toLowerCase().includes(query.toLowerCase())
                 );
             }
             
-            // Filter by tag
             if (filterTag !== 'all') {
                 filtered = filtered.filter(game =>
                     game.tags.includes(filterTag)
@@ -1534,7 +1525,6 @@
             
         }
 
-        // Safe localStorage wrapper
         const StorageManager = {
             get: (key) => {
                 try {
@@ -1560,26 +1550,21 @@
             }
         };
 
-        // Announcement System
-        const CURRENT_VERSION = "1.25.26";
-        const LATEST_UPDATE_DATE = "June 7, 2026";
+        const CURRENT_VERSION = "1.26.27";
+        const LATEST_UPDATE_DATE = "July 15, 2026";
 
         function checkAndShowAnnouncement() {
             try {
                 const lastSeenVersion = StorageManager.get('lastSeenVersion');
                 const userFirstVisit = StorageManager.get('userFirstVisit');
 
-                // Determine if user is new or returning
                 if (!userFirstVisit) {
-                    // New user
                     StorageManager.set('userFirstVisit', new Date().toISOString());
                     showAnnouncement(true, lastSeenVersion);
                 } else if (lastSeenVersion !== CURRENT_VERSION) {
-                    // Returning user with new version
                     showAnnouncement(false, lastSeenVersion);
                 }
 
-                // Update the last seen version
                 StorageManager.set('lastSeenVersion', CURRENT_VERSION);
             } catch (e) {
                 console.error('Announcement check error:', e);
@@ -1588,7 +1573,6 @@
 
         function showAnnouncement(isNewUser, previousVersion) {
             try {
-                // Create modal elements
                 const overlay = document.createElement('div');
                 overlay.className = 'announcement-overlay active';
                 overlay.id = 'announcementOverlay';
@@ -1605,13 +1589,13 @@
                         <div class="announcement-content">
                             <h3>What's New in v${CURRENT_VERSION}</h3>
                             <p><strong>Released:</strong> ${LATEST_UPDATE_DATE}</p>
-                            <p>This update brings major improvements to gameplay and system performance!</p>
+                            <p>This update brings major improvements to games!</p>
                             
                             <h3>Major Updates Include:</h3>
                             <ul>
-                                <li>Overhaul of Casino games</li>
-                                <li>Improved most games with new features and optimizations</li>
-                                <li>Slight improvements to overall performance</li>
+                                <li>Improved performance and stability</li>
+                                <li>Fixed several bugs and issues</li>
+                                <li>Remake of Clicker Quest and Geometry Runner</li>
                             </ul>
 
                             <p style="margin-top: 16px; font-size: 0.95rem; color: var(--text-muted);">
@@ -1632,13 +1616,13 @@
                         </div>
                         <div class="announcement-content">
                             <h3>What's New</h3>
-                            <p>Check out this major update with lots of improvements!</p>
+                            <p>Check out this update with lots of improvements!</p>
                             
                             <h3>Key Improvements:</h3>
                             <ul>
-                                <li>Overhaul of Casino games</li>
-                                <li>Improved most games with new features and optimizations</li>
-                                <li>Slight improvements to overall performance</li>
+                                <li>Improved performance and stability</li>
+                                <li>Fixed several bugs and issues</li>
+                                <li>Remake of Clicker Quest and Geometry Runner</li>
                             </ul>
 
                             <p style="margin-top: 16px; font-size: 0.95rem; color: var(--text-muted);">
@@ -1662,7 +1646,6 @@
                 overlay.appendChild(modal);
                 document.body.appendChild(overlay);
 
-                // Close announcement
                 const closeBtn = document.getElementById('closeAnnouncement');
                 if (closeBtn) {
                     closeBtn.addEventListener('click', () => {
@@ -1670,7 +1653,6 @@
                     });
                 }
 
-                // Allow closing with Escape key
                 const closeOnEscape = (e) => {
                     if (e.key === 'Escape') {
                         overlay.remove();
@@ -1684,7 +1666,6 @@
             }
         }
 
-        // Theme Toggle Functionality with safe storage
         function initTheme() {
             try {
                 const savedTheme = StorageManager.get('theme') || 'dark';
@@ -1721,10 +1702,8 @@
         }
 
         document.addEventListener('DOMContentLoaded', function () {
-            // Initialize games grid
 
             
-            // Search functionality
             const searchInput = document.getElementById('gameSearch');
             if (searchInput) {
                 searchInput.addEventListener('input', (e) => {
@@ -1733,7 +1712,6 @@
                 });
             }
             
-            // Filter buttons
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -1759,12 +1737,10 @@
                 themeToggleBtn.addEventListener('click', toggleTheme);
             }
             
-            // Show announcement on page load (with small delay to ensure DOM is ready)
             setTimeout(() => {
                 checkAndShowAnnouncement();
             }, 100);
 
-            // Debug utility
             window.testAnnouncement = function(forceNew = false) {
                 if (forceNew) {
                     StorageManager.remove('userFirstVisit');
@@ -1785,7 +1761,6 @@
                 console.log('Theme reset to dark.');
             };
             
-            // READ MORE FUNCTIONALITY
             document.querySelectorAll('.read-more-btn').forEach(button => {
                 button.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -1800,7 +1775,6 @@
                     }
                 });
                 
-                // Keyboard support
                 button.addEventListener('keypress', function(e) {
                     if (e.key === 'Enter' || e.key === ' ') {
                         e.preventDefault();

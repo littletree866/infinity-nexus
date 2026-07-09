@@ -1,5 +1,5 @@
 # Infinity Nexus
-**Version 1.26.26** | Next Release: v1.26.27 (TBD)
+**Version 1.26.27** | Next Release: v1.26.28 (TBD)
 
 A comprehensive collection of HTML5-based games featuring diverse genres, engaging gameplay mechanics, and persistent progress tracking.
 

@@ -411,52 +411,42 @@
 </div>
 
 <script>
-    // ===== EXPANDED CARD DATABASE =====
     const CARD_DB = {
-        // Basic Damage
         "Strike": { cost: 1, effects: [{ type: "damage", value: 6, target: "enemy" }], desc: "Deal 6 damage" },
         "Slash": { cost: 1, effects: [{ type: "damage", value: 8, target: "enemy" }], desc: "Deal 8 damage" },
         "Power Attack": { cost: 2, effects: [{ type: "damage", value: 15, target: "enemy" }], desc: "Deal 15 damage" },
         
-        // Defense
         "Shield Bash": { cost: 1, effects: [{ type: "block", value: 8, target: "player" }], desc: "Gain 8 armor" },
         "Defend": { cost: 1, effects: [{ type: "block", value: 6, target: "player" }], desc: "Gain 6 armor" },
         "Fortress": { cost: 2, effects: [{ type: "block", value: 16, target: "player" }], desc: "Gain 16 armor" },
         
-        // DoT Effects
         "Poison Dart": { cost: 1, effects: [{ type: "status", target: "enemy", status: "poison", value: 3 }], desc: "Inflict 3 poison" },
         "Toxic Strike": { cost: 2, effects: [{ type: "damage", value: 8, target: "enemy" }, { type: "status", target: "enemy", status: "poison", value: 4 }], desc: "8 dmg + poison" },
         "Flame Burst": { cost: 2, effects: [{ type: "damage", value: 10, target: "enemy" }, { type: "status", target: "enemy", status: "burn", value: 3 }], desc: "10 dmg + burn" },
         
-        // Summons
         "Summon Imp": { cost: 2, effects: [{ type: "summon", name: "Imp" }], desc: "Summon fiery Imp" },
         "Summon Knight": { cost: 3, effects: [{ type: "summon", name: "Knight" }], desc: "Summon armored Knight" },
         "Summon Golem": { cost: 4, effects: [{ type: "summon", name: "Golem" }], desc: "Summon tanky Golem" },
         "Twin Imps": { cost: 4, effects: [{ type: "summon", name: "Imp" }, { type: "summon", name: "Imp" }], desc: "Summon 2 Imps" },
         
-        // Utility
         "Draw Cards": { cost: 1, effects: [{ type: "draw", value: 2 }], desc: "Draw 2 cards" },
         "Focused Study": { cost: 2, effects: [{ type: "draw", value: 3 }, { type: "energyGain", value: 1 }], desc: "Draw 3 + energy" },
         "Soul Drain": { cost: 2, effects: [{ type: "damage", value: 6, target: "enemy" }, { type: "heal", value: 8, target: "player" }], desc: "6 dmg + heal 8" },
         "Second Wind": { cost: 1, effects: [{ type: "heal", value: 10, target: "player" }], desc: "Heal 10 HP" },
         
-        // Buffs
         "Empower": { cost: 1, effects: [{ type: "strengthBuff", value: 2, target: "player" }], desc: "Gain +2 STR" },
         "Adrenaline": { cost: 1, effects: [{ type: "energyGain", value: 2 }], desc: "Gain 2 energy" },
         
-        // Combo Cards
         "Execute": { cost: 3, effects: [{ type: "damage", value: 20, target: "enemy" }], desc: "Deal 20 damage" },
         "Holy Strike": { cost: 3, effects: [{ type: "damage", value: 12, target: "enemy" }, { type: "heal", value: 6, target: "player" }], desc: "12 dmg + heal 6" },
     };
 
-    // ===== MINION DATABASE =====
     const SUMMON_DB = {
         "Imp": { hp: 10, attack: 4, effect: "burn", effectValue: 1, desc: "Small fiery attacker" },
         "Knight": { hp: 18, attack: 5, effect: "none", effectValue: 0, desc: "Balanced warrior" },
         "Golem": { hp: 25, attack: 4, effect: "none", effectValue: 0, desc: "Tanky defender" },
     };
 
-    // ===== GAME STATE =====
     let game = {
         state: {
             player: { hp: 50, maxHp: 50, energy: 3, block: 0, strength: 0, poison: 0, burn: 0 },
@@ -494,7 +484,6 @@
                 div.textContent = msg;
                 logEl.appendChild(div);
                 logEl.scrollTop = logEl.scrollHeight;
-                // Keep only last 8 messages
                 while (logEl.children.length > 8) {
                     logEl.removeChild(logEl.firstChild);
                 }
@@ -514,7 +503,6 @@
                 turn: 0,
                 battleActive: true
             };
-            // Start with enemy minion for challenge
             this.state.enemyMinions.push({ name: "Shadow Scout", hp: 12, attack: 3, effect: "none", effectValue: 0 });
             this.drawHand(5);
             this.log("⚔️ Battle started! Defeat the enemy to win!");
@@ -628,7 +616,6 @@
         },
 
         minionCombat() {
-            // Player minions attack
             for (let m of this.state.playerMinions) {
                 let dmg = m.attack;
                 let blocked = Math.min(this.state.enemy.block, dmg);
@@ -637,7 +624,6 @@
                 if (m.effect === "burn" && dmg > blocked) this.state.enemy.burn += 1;
             }
             
-            // Enemy minions attack
             for (let m of this.state.enemyMinions) {
                 let dmg = m.attack;
                 let blocked = Math.min(this.state.player.block, dmg);
@@ -645,7 +631,6 @@
                 this.state.player.hp -= (dmg - blocked);
             }
             
-            // Remove dead minions
             this.state.playerMinions = this.state.playerMinions.filter(m => (m.currentHp || m.hp) > 0);
             this.state.enemyMinions = this.state.enemyMinions.filter(m => m.hp > 0);
             this.state.player.hp = Math.max(0, this.state.player.hp);
@@ -659,7 +644,6 @@
             let enemyHP = this.state.enemy.hp;
             let hpPercent = enemyHP / this.state.enemy.maxHp;
             
-            // Choose strategy based on health
             if (hpPercent > 0.7) {
                 this.state.enemy.strategy = "aggressive";
             } else if (hpPercent > 0.4) {
@@ -670,7 +654,6 @@
             
             let action = "";
             
-            // Summon logic
             if (this.state.enemyMinions.length === 0 && Math.random() < 0.5) {
                 let summoned = ["Shadow Scout", "Fire Elemental"][Math.floor(Math.random() * 2)];
                 if (summoned === "Shadow Scout") {
@@ -680,7 +663,6 @@
                 }
                 action = `summoned ${summoned}!`;
             } else {
-                // Direct attack with scaling
                 let baseDmg = 7;
                 if (this.state.enemy.strength) baseDmg += this.state.enemy.strength;
                 let actualDmg = Math.max(0, baseDmg - this.state.player.block);
@@ -719,7 +701,6 @@
                 return;
             }
             
-            // Start new turn
             this.state.player.energy = 3;
             this.state.player.strength = Math.max(0, this.state.player.strength);
             this.state.turnActive = true;
@@ -737,7 +718,6 @@
             document.getElementById("turnCount").textContent = this.state.turn;
             document.getElementById("endTurnBtn").disabled = !this.state.battleActive;
             
-            // Status bars
             let pStat = [];
             if (this.state.player.poison > 0) pStat.push(`☠️ Poison(${this.state.player.poison})`);
             if (this.state.player.burn > 0) pStat.push(`🔥 Burn(${this.state.player.burn})`);
@@ -750,7 +730,6 @@
             eStat.push(`[${this.state.enemy.strategy.toUpperCase()}]`);
             document.getElementById("enemyStatus").textContent = eStat.join(" | ");
             
-            // Hand
             const handDiv = document.getElementById("hand");
             handDiv.innerHTML = "";
             for (let i = 0; i < this.state.hand.length; i++) {
@@ -765,7 +744,6 @@
                 handDiv.appendChild(cardDiv);
             }
             
-            // Player minions
             const pMinDiv = document.getElementById("playerMinions");
             pMinDiv.innerHTML = "";
             for (let m of this.state.playerMinions) {
@@ -775,7 +753,6 @@
                 pMinDiv.appendChild(div);
             }
             
-            // Enemy minions
             const eMinDiv = document.getElementById("enemyMinions");
             eMinDiv.innerHTML = "";
             for (let m of this.state.enemyMinions) {

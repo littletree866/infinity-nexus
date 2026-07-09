@@ -254,7 +254,6 @@
     const damageEffect = document.getElementById('damageEffect');
     const waveIndicator = document.getElementById('waveIndicator');
 
-    // Sound effects
     const sounds = {
       shoot: new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA=='),
       explode: new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA=='),
@@ -271,7 +270,6 @@
     window.addEventListener('keydown', e => keys[e.key.toLowerCase()] = true);
     window.addEventListener('keyup', e => keys[e.key.toLowerCase()] = false);
 
-    // Game state
     const player = {
       x: canvas.width / 2,
       y: canvas.height / 2,
@@ -285,7 +283,6 @@
       shootDelay: 200
     };
 
-    // Game objects
     let bullets = [];
     let zombies = [];
     let humans = [];
@@ -300,7 +297,6 @@
     let isAbilityActive = false;
     let abilityDuration = 0;
 
-    // Zombie types with more variety
     const ZOMBIE_TYPES = {
       normal: { emoji: '🧟', speed: 1.2, health: 1, color: '#44ff44', points: 10 },
       fast: { emoji: '🧟‍♂️', speed: 2.5, health: 1, color: '#ff8844', points: 15 },
@@ -309,7 +305,6 @@
       cure: { emoji: '💉', speed: 1.5, health: 1, color: '#00ccff', points: 30 }
     };
 
-    // Power-up types
     const POWERUP_TYPES = {
       health: { emoji: '❤️', color: '#ff4444', duration: 0 },
       speed: { emoji: '⚡', color: '#ffcc00', duration: 600 },
@@ -318,7 +313,6 @@
       damage: { emoji: '💥', color: '#ff8800', duration: 500 }
     };
 
-    // Mouse control
     canvas.addEventListener('mousedown', (e) => {
       const now = Date.now();
       if (now - player.lastShot >= player.shootDelay) {
@@ -328,7 +322,6 @@
     });
 
     canvas.addEventListener('mousemove', (e) => {
-      // Auto-shoot when mouse button is held
       if (e.buttons === 1) {
         const now = Date.now();
         if (now - player.lastShot >= player.shootDelay) {
@@ -365,7 +358,6 @@
       sounds.shoot.play();
     }
 
-    // Special ability
     window.activateSpecialAbility = function () {
       if (specialAbilityCooldown > 0 || isAbilityActive) return;
 
@@ -373,7 +365,6 @@
       abilityDuration = 120;
       specialAbilityCooldown = 600;
 
-      // Kill all zombies on screen
       zombies.forEach(z => {
         createParticles(z.x, z.y, 20, '#ff44ff');
         kills++;
@@ -388,7 +379,6 @@
       document.getElementById('specialAbility').innerHTML = '<i class="fas fa-bolt"></i> ACTIVATED!';
     };
 
-    // Spawn functions
     function spawnZombie() {
       const edge = Math.floor(Math.random() * 4);
       let x, y;
@@ -442,7 +432,6 @@
       });
     }
 
-    // Particle effects
     function createParticles(x, y, count, color) {
       for (let i = 0; i < count; i++) {
         particles.push({
@@ -456,11 +445,9 @@
       }
     }
 
-    // Update game state
     function update() {
       frame++;
 
-      // Spawn logic
       if (frame % Math.max(20, spawnRate - wave * 2) === 0) {
         spawnZombie();
       }
@@ -469,19 +456,16 @@
         spawnPowerUp(Math.random() * canvas.width, Math.random() * canvas.height);
       }
 
-      // Player movement with speed boost
       let speedMultiplier = player.powerUps.has('speed') ? 1.5 : 1;
       if (keys['arrowup'] || keys['w']) player.y -= player.speed * speedMultiplier;
       if (keys['arrowleft'] || keys['a']) player.x -= player.speed * speedMultiplier;
       if (keys['arrowdown'] || keys['s']) player.y += player.speed * speedMultiplier;
       if (keys['arrowright'] || keys['d']) player.x += player.speed * speedMultiplier;
 
-      // Special ability activation with spacebar
       if (keys[' '] && specialAbilityCooldown === 0 && !isAbilityActive) {
         activateSpecialAbility();
       }
 
-      // Ability cooldown
       if (specialAbilityCooldown > 0) {
         specialAbilityCooldown--;
         document.getElementById('cooldown').textContent =
@@ -492,7 +476,6 @@
         document.getElementById('specialAbility').innerHTML = '<i class="fas fa-fire"></i> NUCLEAR BLAST';
       }
 
-      // Ability duration
       if (isAbilityActive) {
         abilityDuration--;
         if (abilityDuration <= 0) {
@@ -500,16 +483,13 @@
         }
       }
 
-      // Keep player in bounds
       player.x = Math.max(player.r, Math.min(canvas.width - player.r, player.x));
       player.y = Math.max(player.r, Math.min(canvas.height - player.r, player.y));
 
-      // Update bullets
       bullets.forEach(b => {
         b.x += b.vx;
         b.y += b.vy;
 
-        // Trail particles
         if (frame % 3 === 0) {
           createParticles(b.x, b.y, 1, b.color);
         }
@@ -519,19 +499,16 @@
         b.y > -50 && b.y < canvas.height + 50
       );
 
-      // Update zombies
       zombies.forEach(z => {
         const angle = Math.atan2(player.y - z.y, player.x - z.x);
         z.x += Math.cos(angle) * z.speed;
         z.y += Math.sin(angle) * z.speed;
 
-        // Zombie collision with player
         const dist = Math.hypot(player.x - z.x, player.y - z.y);
         if (dist < player.r + z.r) {
           if (!player.powerUps.has('shield')) {
             player.health -= z.type === 'virus' ? 2 : 1;
 
-            // Damage effect
             damageEffect.style.opacity = '0.7';
             damageEffect.style.background = 'radial-gradient(circle at 50% 50%, rgba(255,0,0,0.3) 0%, transparent 70%)';
             setTimeout(() => {
@@ -541,16 +518,13 @@
             sounds.hit.play();
           }
 
-          // Knockback
           const knockback = 10;
           player.x += Math.cos(angle) * knockback;
           player.y += Math.sin(angle) * knockback;
         }
       });
 
-      // Update humans
       humans.forEach(h => {
-        // Find nearest zombie
         let nearestDist = Infinity;
         let nearestZombie = null;
 
@@ -567,7 +541,6 @@
           h.x += Math.cos(angle) * 1.8;
           h.y += Math.sin(angle) * 1.8;
 
-          // Human shoots
           if (frame % 60 === 0 && nearestDist < 400) {
             bullets.push({
               x: h.x,
@@ -580,31 +553,24 @@
             });
           }
         } else {
-          // Follow player if no zombies
           const angle = Math.atan2(player.y - h.y, player.x - h.x);
           h.x += Math.cos(angle) * 1.2;
           h.y += Math.sin(angle) * 1.2;
         }
       });
 
-      // Bullet collisions
       bullets.forEach((b, bi) => {
         zombies.forEach((z, zi) => {
           if (Math.hypot(b.x - z.x, b.y - z.y) < b.r + z.r) {
-            // Damage zombie
             z.health -= b.damage;
 
-            // Hit effect
             createParticles(b.x, b.y, 10, '#ffffff');
 
-            // Remove bullet
             bullets.splice(bi, 1);
 
             if (z.health <= 0) {
-              // Death effect
               createParticles(z.x, z.y, 15, z.color);
 
-              // Check for power-up drop
               if (z.type === 'cure') {
                 if (Math.random() < 0.3) {
                   spawnHuman(z.x, z.y);
@@ -619,17 +585,14 @@
               kills++;
               player.power = Math.min(100, player.power + (z.points / 10));
 
-              // Remove zombie
               zombies.splice(zi, 1);
             }
           }
         });
       });
 
-      // Power-up collisions
       powerUps.forEach((p, pi) => {
         if (Math.hypot(player.x - p.x, player.y - p.y) < player.r + p.r) {
-          // Apply power-up
           switch (p.type) {
             case 'health':
               player.health = Math.min(player.maxHealth, player.health + 30);
@@ -645,16 +608,13 @@
               break;
           }
 
-          // Effect
           createParticles(p.x, p.y, 20, p.color);
           sounds.powerup.play();
 
-          // Remove power-up
           powerUps.splice(pi, 1);
         }
       });
 
-      // Update particles
       particles.forEach((p, pi) => {
         p.x += p.vx;
         p.y += p.vy;
@@ -666,33 +626,28 @@
         }
       });
 
-      // Wave system
       if (kills >= waveKillsRequired) {
         wave++;
         waveKillsRequired = wave * 15;
         spawnRate = Math.max(10, 80 - wave * 5);
 
-        // Show wave indicator
         waveIndicator.textContent = `WAVE ${wave} INCOMING!`;
         waveIndicator.style.display = 'block';
         setTimeout(() => {
           waveIndicator.style.display = 'none';
         }, 2000);
 
-        // Spawn bonus zombies for new wave
         for (let i = 0; i < wave * 3; i++) {
           setTimeout(() => spawnZombie(), i * 100);
         }
       }
 
-      // Update HUD
       document.getElementById('health').textContent = Math.max(0, Math.floor(player.health));
       document.getElementById('score').textContent = kills;
       document.getElementById('helpers').textContent = humans.length;
       document.getElementById('wave').textContent = wave;
       document.getElementById('power').textContent = Math.floor(player.power);
 
-      // Update power-ups list
       const powerupsList = document.getElementById('powerups-list');
       if (player.powerUps.size > 0) {
         powerupsList.innerHTML = Array.from(player.powerUps)
@@ -702,19 +657,15 @@
         powerupsList.textContent = 'None';
       }
 
-      // Regenerate health slowly
       if (frame % 60 === 0 && player.health < player.maxHealth) {
         player.health = Math.min(player.maxHealth, player.health + 0.5);
       }
     }
 
-    // Draw game
     function draw() {
-      // Background with grid
       ctx.fillStyle = '#0a0a0a';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Grid
       ctx.strokeStyle = 'rgba(255, 0, 0, 0.05)';
       ctx.lineWidth = 1;
       for (let x = 0; x < canvas.width; x += 50) {
@@ -730,7 +681,6 @@
         ctx.stroke();
       }
 
-      // Draw particles
       particles.forEach(p => {
         ctx.fillStyle = p.color;
         ctx.globalAlpha = p.life / 30;
@@ -740,9 +690,7 @@
         ctx.globalAlpha = 1;
       });
 
-      // Draw bullets with glow
       bullets.forEach(b => {
-        // Glow effect
         ctx.shadowColor = b.color;
         ctx.shadowBlur = 15;
         ctx.fillStyle = b.color;
@@ -752,7 +700,6 @@
         ctx.shadowBlur = 0;
       });
 
-      // Draw power-ups with animation
       powerUps.forEach(p => {
         const pulse = Math.sin(frame * 0.1) * 3;
 
@@ -763,7 +710,6 @@
         ctx.arc(p.x, p.y, p.r + pulse, 0, Math.PI * 2);
         ctx.fill();
 
-        // Draw emoji
         ctx.font = '24px Trebuchet MS';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
@@ -772,9 +718,7 @@
         ctx.shadowBlur = 0;
       });
 
-      // Draw zombies with health bars
       zombies.forEach(z => {
-        // Health bar
         if (z.health > 1) {
           ctx.fillStyle = '#ff0000';
           ctx.fillRect(z.x - 20, z.y - z.r - 15, 40, 5);
@@ -782,7 +726,6 @@
           ctx.fillRect(z.x - 20, z.y - z.r - 15, 40 * (z.health / 3), 5);
         }
 
-        // Zombie body with shadow
         ctx.shadowColor = z.color;
         ctx.shadowBlur = 15;
         ctx.fillStyle = z.color;
@@ -790,7 +733,6 @@
         ctx.arc(z.x, z.y, z.r, 0, Math.PI * 2);
         ctx.fill();
 
-        // Draw emoji
         ctx.font = '32px Trebuchet MS';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
@@ -799,9 +741,7 @@
         ctx.shadowBlur = 0;
       });
 
-      // Draw humans
       humans.forEach(h => {
-        // Shield effect if player has shield
         if (player.powerUps.has('shield')) {
           ctx.strokeStyle = '#00ccff';
           ctx.lineWidth = 3;
@@ -822,10 +762,8 @@
         ctx.fillText(h.emoji, h.x, h.y);
       });
 
-      // Draw player with effects
       const playerEffect = Math.sin(frame * 0.2) * 2;
 
-      // Shield effect
       if (player.powerUps.has('shield')) {
         ctx.strokeStyle = '#00ccff';
         ctx.lineWidth = 4;
@@ -834,7 +772,6 @@
         ctx.stroke();
       }
 
-      // Player body
       ctx.shadowColor = '#ff4444';
       ctx.shadowBlur = 20;
       ctx.fillStyle = isAbilityActive ? '#ff44ff' : '#ff4444';
@@ -842,7 +779,6 @@
       ctx.arc(player.x, player.y, player.r + playerEffect, 0, Math.PI * 2);
       ctx.fill();
 
-      // Player emoji
       ctx.font = '36px Trebuchet MS';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
@@ -850,7 +786,6 @@
       ctx.fillText(isAbilityActive ? '💥' : '🧑‍🚀', player.x, player.y);
       ctx.shadowBlur = 0;
 
-      // Power meter
       if (player.power > 0) {
         ctx.fillStyle = '#ff44ff';
         ctx.fillRect(20, canvas.height - 40, (player.power / 100) * 200, 20);
@@ -864,10 +799,8 @@
       }
     }
 
-    // Game loop
     function loop() {
       if (player.health <= 0) {
-        // Game over screen
         ctx.fillStyle = 'rgba(0, 0, 0, 0.9)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -893,7 +826,6 @@
       requestAnimationFrame(loop);
     }
 
-    // Start game
     waveIndicator.style.display = 'block';
     setTimeout(() => {
       waveIndicator.style.display = 'none';

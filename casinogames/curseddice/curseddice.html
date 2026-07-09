@@ -470,13 +470,11 @@
 </div>
 
 <script>
-    // ------------------- CURSED DICE ENGINE -------------------
     let balance = 500;
     let currentBet = 0;
     let isRolling = false;
     let gameActive = false;     // true only when bet placed and awaiting roll / result shown after roll locks
 
-    // DOM elements
     const balanceSpan = document.getElementById('balanceValue');
     const betAmountSpan = document.getElementById('betAmount');
     const betInput = document.getElementById('betInput');
@@ -488,22 +486,18 @@
     const die2Elem = document.getElementById('die2');
     const resultContainer = document.getElementById('resultContainer');
 
-    // Visual die value update (clean crisp numbers)
     function updateDieUI(dieElement, value, highlightType = null) {
         const span = dieElement.querySelector('.die-value');
         if (value === null || value === undefined) {
             span.textContent = '🎲';
         } else {
-            // show nice number style
             span.textContent = value;
         }
-        // remove highlight classes
         dieElement.classList.remove('highlight-win', 'highlight-lose');
         if (highlightType === 'win') dieElement.classList.add('highlight-win');
         if (highlightType === 'lose') dieElement.classList.add('highlight-lose');
     }
 
-    // reset dice visuals to neutral
     function resetDiceNeutral() {
         updateDieUI(die1Elem, null);
         updateDieUI(die2Elem, null);
@@ -523,17 +517,14 @@
         }
     }
 
-    // Store roll result values for final animation
     function displayFinalRoll(val1, val2, highlightOutcome) {
         updateDieUI(die1Elem, val1, highlightOutcome);
         updateDieUI(die2Elem, val2, highlightOutcome);
     }
 
-    // update UI (balance, bet, buttons)
     function refreshUI() {
         balanceSpan.innerText = Math.floor(balance);
         betAmountSpan.innerText = currentBet;
-        // enable/disable bet actions
         const canPlaceBet = (!isRolling && !gameActive && currentBet === 0 && balance > 0);
         placeBetBtn.disabled = !canPlaceBet;
         clearBetBtn.disabled = (gameActive || isRolling || currentBet === 0);
@@ -562,7 +553,6 @@
         resultContainer.innerHTML = '';
     }
 
-    // Core: evaluate and apply bet outcome
     function evaluateRoll(total, roll1, roll2) {
         let outcomeType = '';
         let winnings = 0;
@@ -570,8 +560,6 @@
         let highlightType = 'lose';
 
         if (total >= 13) {
-            // HIGH ROLL: win 1.5x bet (total win = bet*1.5 + original bet removed before)
-            // bet already subtracted from balance, we add back (bet + profit)
             const profit = Math.floor(currentBet * 1.5);
             const totalReturn = currentBet + profit;
             balance += totalReturn;
@@ -589,13 +577,11 @@
             highlightType = 'win';
         }
         else if (total >= 7 && total <= 9) {
-            // LOSE bet fully (already deducted)
             message = `💀 Low roll (${total})! You lost $${currentBet}. 💀`;
             outcomeType = 'lose';
             highlightType = 'lose';
         }
         else if (total >= 2 && total <= 6) {
-            // CURSE: lose 1.5x bet
             const curseLoss = Math.floor(currentBet * 1.5);
             balance = Math.max(0, balance - curseLoss);
             message = `⚠️ Cursed roll (${total})! You lost an extra $${curseLoss} (1.5x penalty)! ⚠️`;
@@ -603,7 +589,6 @@
             highlightType = 'lose';
         }
         else if (total === 1) {
-            // SNAKE EYES → lose everything (balance zero)
             balance = 0;
             message = `☠️☠️ Snake eyes (1)!! Your balance is obliterated! ☠️☠️`;
             outcomeType = 'lose';
@@ -617,20 +602,17 @@
         return outcomeType;
     }
 
-    // random dice simulator with clean animation
     async function performRoll() {
         if (isRolling) return;
         isRolling = true;
         clearResult();
         setDiceRolling(true);
         
-        // final values
         let finalVal1 = 0, finalVal2 = 0;
         let rollsCount = 0;
         const MAX_SPINS = 15;
         
         const spinInterval = setInterval(() => {
-            // fake random values for flickering (showing digits)
             const fake1 = Math.floor(Math.random() * 6) + 1;
             const fake2 = Math.floor(Math.random() * 6) + 1;
             updateDieUI(die1Elem, fake1);
@@ -638,17 +620,13 @@
             rollsCount++;
             if (rollsCount >= MAX_SPINS) {
                 clearInterval(spinInterval);
-                // actual roll values
                 finalVal1 = Math.floor(Math.random() * 6) + 1;
                 finalVal2 = Math.floor(Math.random() * 6) + 1;
                 const total = finalVal1 + finalVal2;
                 setDiceRolling(false);
-                // final evaluation
                 evaluateRoll(total, finalVal1, finalVal2);
-                // after evaluation lock gameActive ended
                 gameActive = false;
                 isRolling = false;
-                // show new game button if needed (bankrupt or not)
                 if (balance <= 0) {
                     newGameBtn.style.display = 'flex';
                     clearBetBtn.style.display = 'none';
@@ -657,7 +635,6 @@
                     clearBetBtn.style.display = 'flex';
                 }
                 refreshUI();
-                // allow new bet after rolling done
                 if (balance > 0 && !gameActive && currentBet === 0) {
                     placeBetBtn.disabled = false;
                 } else {
@@ -667,7 +644,6 @@
         }, 80);
     }
 
-    // Place bet function: validates, subtracts balance, activates game
     function placeBet() {
         if (isRolling || gameActive) return;
         let betAmount = parseInt(betInput.value);
@@ -683,7 +659,6 @@
             showResultMessage("You are bankrupt! Press new game.", "lose");
             return;
         }
-        // commit bet
         currentBet = betAmount;
         balance -= currentBet;
         gameActive = true;
@@ -691,7 +666,6 @@
         clearResult();
         resetDiceNeutral();
         betInput.value = '';
-        // perform dice rolling and final outcome
         performRoll().catch(e => console.warn(e));
     }
 
@@ -734,8 +708,6 @@
             return;
         }
         betInput.value = amount;
-        // optional: place instantly? according to polish we can make it direct bet or just fill. Better UX: fill & enable.
-        // but to speed up we can also call placeBet automatically? makes it fluid.
         placeBet();
     }
 
@@ -754,7 +726,6 @@
         refreshUI();
     }
 
-    // Event listeners
     placeBetBtn.addEventListener('click', placeBet);
     clearBetBtn.addEventListener('click', clearBet);
     newGameBtn.addEventListener('click', resetFullGame);
@@ -768,7 +739,6 @@
         });
     });
 
-    // initial load
     loadBalanceFromStorage();
     resetDiceNeutral();
     refreshUI();
@@ -781,13 +751,11 @@
         newGameBtn.style.display = 'none';
         clearBetBtn.style.display = 'flex';
     }
-    // Allow pressing Enter to place bet
     betInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter' && !isRolling && !gameActive) {
             placeBet();
         }
     });
-    // remove any glitch: dice never show broken emojis, only numbers after roll.
     updateDieUI(die1Elem, null);
     updateDieUI(die2Elem, null);
 </script>

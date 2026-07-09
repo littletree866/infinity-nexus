@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The World's Dumbest Game</title>
-  <link rel="icon" type="image/png" href="../../icon.jpg">
-
+  <title>A simple game</title>
+  <link rel="icon" type="image/x-icon" href="../../icon.jpg">
   <style>
     * {
       box-sizing: border-box;
@@ -14,1027 +12,378 @@
       padding: 0;
     }
 
-    :root {
-      --primary: #7c3aed;
-      --primary-dark: #5b21b6;
-      --secondary: #10b981;
-      --danger: #ef4444;
-      --warning: #f59e0b;
-      --bg-dark: #0f172a;
-      --bg-darker: #020617;
-      --surface: #1e293b;
-      --surface-light: #334155;
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
-    }
-
     body {
-      font-family: 'Segoe UI', system-ui, -apple-system, serif;
-      background: linear-gradient(135deg, var(--bg-darker), var(--bg-dark));
-      color: var(--text);
+      background: #0b1120;
       min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* Screens */
-    .screen {
-      position: absolute;
-      inset: 0;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      justify-content: center;
-      gap: 2rem;
-      padding: 2rem;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      padding: 1.5rem;
+      margin: 0;
+    }
+
+    .card {
+      max-width: 580px;
+      width: 100%;
+      background: #131e2f;
+      border-radius: 2.5rem;
+      padding: 2.5rem 2rem 2rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      border: 1px solid #2a3a52;
+      transition: all 0.2s;
       text-align: center;
-      opacity: 1;
-      transition: opacity 0.5s ease;
     }
 
-    .hidden {
-      display: none !important;
-      opacity: 0;
+    h1 {
+      font-weight: 400;
+      font-size: 1.8rem;
+      letter-spacing: 0.5px;
+      color: #d6e3f0;
+      margin-top: 0;
+      margin-bottom: 0.35rem;
     }
 
-    /* Home Screen */
-    #home {
-      background: radial-gradient(circle at 50% 20%, rgba(124, 58, 237, 0.1), transparent 50%);
+    .sub {
+      color: #7e92ab;
+      font-size: 0.95rem;
+      border-bottom: 1px solid #253446;
+      padding-bottom: 1rem;
+      margin-bottom: 1.8rem;
     }
 
-    .title {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 800;
-      background: linear-gradient(to right, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 0.5rem;
-      text-shadow: 0 0 30px rgba(124, 58, 237, 0.3);
-    }
-
-    .subtitle {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      max-width: 600px;
-      line-height: 1.6;
-    }
-
-    /* Buttons */
-    .btn {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: white;
+    /* ONE BIG BUTTON */
+    .big-btn {
+      background: #2b4b6f;
       border: none;
-      padding: 1rem 2rem;
-      font-size: 1.1rem;
-      font-weight: 600;
-      border-radius: 12px;
+      border-radius: 6rem;
+      padding: 2rem 1.5rem;
+      width: 100%;
+      font-size: 2.2rem;
+      font-weight: 500;
+      color: white;
+      letter-spacing: 2px;
+      box-shadow: 0 10px 0 #0f1a2b, 0 8px 20px rgba(0, 0, 0, 0.5);
       cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
-      position: relative;
-      overflow: hidden;
+      transition: all 0.07s ease;
+      margin: 1.2rem 0 2rem;
+      text-transform: uppercase;
+      border: 1px solid #4b7299;
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 25px rgba(124, 58, 237, 0.4);
+    .big-btn:active {
+      transform: translateY(6px);
+      box-shadow: 0 4px 0 #0f1a2b;
     }
 
-    .btn:active {
-      transform: translateY(0);
+    .big-btn:hover {
+      background: #32628a;
     }
 
-    .btn-secondary {
-      background: var(--surface);
-      color: var(--text);
-      border: 1px solid var(--surface-light);
-    }
-
-    .btn-secondary:hover {
-      background: var(--surface-light);
-    }
-
-    .btn-group {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    /* Game Screen */
-    #game {
-      padding-top: 100px;
-      padding-bottom: 150px;
-    }
-
-    /* HUD */
-    #hud {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: rgba(15, 23, 42, 0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--surface);
-      padding: 1rem 2rem;
+    /* stats grid – clean & calm */
+    .stats {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      z-index: 100;
-    }
-
-    #stats {
-      display: flex;
-      gap: 2rem;
       flex-wrap: wrap;
+      gap: 0.8rem 0.5rem;
+      margin: 1.8rem 0 1.2rem;
     }
 
     .stat-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .stat-value {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--primary);
+      background: #0d1727;
+      border-radius: 2rem;
+      padding: 0.5rem 1.2rem;
+      border: 1px solid #253a52;
+      flex: 1 0 auto;
+      min-width: 80px;
     }
 
     .stat-label {
-      font-size: 0.9rem;
-      color: var(--text-muted);
+      display: block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #7f96b3;
     }
 
-    /* Main Game Button */
-    #btn {
-      font-size: clamp(2rem, 4vw, 3rem);
-      padding: 2rem 4rem;
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: white;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: all 0.1s ease;
-      box-shadow: 0 10px 40px rgba(124, 58, 237, 0.4),
-        0 0 60px rgba(124, 58, 237, 0.2);
-      position: relative;
-      overflow: hidden;
-      font-weight: 800;
-    }
-
-    #btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 15px 50px rgba(124, 58, 237, 0.5),
-        0 0 80px rgba(124, 58, 237, 0.3);
-    }
-
-    #btn:active {
-      transform: scale(0.95);
-    }
-
-    #btn:before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    #btn:hover:before {
-      opacity: 1;
-    }
-
-    /* Message Display */
-    #message {
-      font-size: 1.2rem;
-      min-height: 2.5rem;
-      padding: 0.5rem 1rem;
-      border-radius: 10px;
-      background: rgba(30, 41, 59, 0.5);
-      max-width: 600px;
-      transition: all 0.3s ease;
-    }
-
-    #message.critical {
-      background: rgba(239, 68, 68, 0.2);
-      color: #fecaca;
-      animation: pulse 0.5s ease infinite;
-    }
-
-    #message.level-up {
-      background: rgba(16, 185, 129, 0.2);
-      color: #a7f3d0;
-      animation: bounce 0.5s ease;
-    }
-
-    @keyframes pulse {
-
-      0%,
-      100% {
-        transform: scale(1);
-      }
-
-      50% {
-        transform: scale(1.05);
-      }
-    }
-
-    @keyframes bounce {
-
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-
-    /* Log */
-    #log {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 120px;
-      background: rgba(2, 6, 23, 0.95);
-      border-top: 1px solid var(--surface);
-      padding: 1rem;
-      overflow-y: auto;
-      font-size: 0.9rem;
-    }
-
-    .log-entry {
-      padding: 0.25rem 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      color: var(--text-muted);
-    }
-
-    .log-entry.critical {
-      color: var(--danger);
-    }
-
-    .log-entry.success {
-      color: var(--secondary);
-    }
-
-    .log-entry.warning {
-      color: var(--warning);
-    }
-
-    /* Modals */
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      backdrop-filter: blur(5px);
-      pointer-events: none;
-    }
-
-    .modal.active {
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    .modalBox {
-      background: linear-gradient(135deg, var(--surface), var(--bg-dark));
-      border: 1px solid var(--surface-light);
-      border-radius: 20px;
-      padding: 2rem;
-      width: 95%;
-      max-width: 500px;
-      max-height: 80vh;
-      overflow-y: auto;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-      transform: translateY(20px);
-      transition: transform 0.3s ease;
-    }
-
-    .modal.active .modalBox {
-      transform: translateY(0);
-    }
-
-    .modal h2 {
-      margin-bottom: 1.5rem;
-      color: var(--primary);
-    }
-
-    .modal-buttons {
-      display: grid;
-      gap: 0.8rem;
-      margin: 1.5rem 0;
-    }
-
-    .modal-btn {
-      width: 100%;
-      text-align: left;
-      padding: 1rem;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--surface-light);
-      border-radius: 10px;
-      color: var(--text);
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .modal-btn:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: var(--primary);
-    }
-
-    .modal-btn .cost {
-      color: var(--secondary);
+    .stat-value {
       font-weight: 600;
+      font-size: 1.3rem;
+      color: #e2edfc;
+      line-height: 1.4;
     }
 
-    /* Particles */
-    .particle {
-      position: fixed;
-      pointer-events: none;
-      border-radius: 50%;
-      z-index: 999;
+    .stat-value.global {
+      color: #9fc5ff;
     }
 
-    /* Progress Bars */
-    .progress-container {
-      width: 300px;
-      height: 8px;
-      background: var(--surface);
-      border-radius: 4px;
-      margin: 1rem 0;
-      overflow: hidden;
+    hr {
+      border: none;
+      border-top: 1px solid #253a52;
+      margin: 1.2rem 0;
     }
 
-    .progress-bar {
-      height: 100%;
-      background: linear-gradient(to right, var(--primary), var(--secondary));
-      border-radius: 4px;
-      width: 0%;
-      transition: width 0.3s ease;
+    .footer-note {
+      font-size: 0.75rem;
+      color: #5e748d;
+      margin-top: 1.5rem;
+      letter-spacing: 0.3px;
     }
 
-    /* Combo Display */
-    #combo-display {
-      position: absolute;
-      top: -50px;
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: var(--warning);
-      opacity: 0;
-      pointer-events: none;
+    .badge {
+      display: inline-block;
+      background: #1f3147;
+      padding: 0.2rem 1rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: #b6cee8;
     }
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      .btn-group {
-        flex-direction: column;
-        width: 100%;
-        max-width: 300px;
-      }
-
-      .btn {
-        width: 100%;
-      }
-
-      #hud {
-        padding: 0.8rem;
-      }
-
-      #stats {
-        gap: 1rem;
-        font-size: 0.9rem;
-      }
-
-      #btn {
-        padding: 1.5rem 3rem;
-        font-size: 1.5rem;
-      }
-    }
-
-    .small {
-      font-size: 12px;
-      opacity: .6;
-      margin: 1rem 0;
+    .click-feedback {
+      min-height: 2.4rem;
+      font-size: 0.95rem;
+      color: #b6d0ea;
+      background: #0d1a2b;
+      border-radius: 40px;
+      padding: 0.4rem 1.2rem;
+      display: inline-block;
+      margin-bottom: 0.5rem;
     }
   </style>
 </head>
-
 <body>
 
-  <!-- Home Screen -->
-  <div id="home" class="screen">
-    <div>
-      <h1 class="title">🎮 The World's Dumbest Game 🎮</h1>
-      <p class="subtitle">Click button. Get bored. Regret life choices. Fun!</p>
+<div class="card">
+
+  <h1>a simple game</h1>
+  <div class="sub">let's see how far this goes</div>
+
+  <!-- main action -->
+  <button class="big-btn" id="clickButton">click</button>
+
+  <!-- local stats (left) + cloud stats (right) -->
+  <div class="stats">
+    <div class="stat-item">
+      <span class="stat-label">your clicks</span>
+      <span class="stat-value" id="localClicks">0</span>
     </div>
-    <div class="btn-group">
-      <button class="btn" onclick="startGame()">🚀 START SIMULATION</button>
-      <button class="btn btn-secondary" onclick="openSettings()">⚙️ SETTINGS</button>
+    <div class="stat-item">
+      <span class="stat-label">🌍 global clicks</span>
+      <span class="stat-value global" id="globalClicks">0</span>
     </div>
-  </div>
-
-  <!-- Game Screen -->
-  <div id="game" class="screen hidden">
-    <div id="hud">
-      <div id="stats">
-        <div class="stat-item">
-          <span class="stat-value" id="score">0</span>
-          <span class="stat-label">SCORE</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-value" id="level">1</span>
-          <span class="stat-label">LEVEL</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-value" id="skillPoints">0</span>
-          <span class="stat-label">SKILL POINTS</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-value" id="time">0s</span>
-          <span class="stat-label">TIME WASTED</span>
-        </div>
-      </div>
-      <div class="btn-group">
-        <button class="btn btn-secondary" onclick="openShop()">SHOP</button>
-        <button class="btn btn-secondary" onclick="openSettings()">SETTINGS</button>
-        <button class="btn btn-secondary" onclick="goHome()">HOME</button>
-      </div>
-    </div>
-
-    <div style="position: relative;">
-      <div id="combo-display"></div>
-      <button id="btn">CLICK FOR GLORY</button>
-    </div>
-
-    <div class="progress-container">
-      <div id="xp-bar" class="progress-bar"></div>
-    </div>
-
-    <div id="message">Click the button. Feel important.</div>
-
-    <div id="log"></div>
-  </div>
-
-  <!-- Shop Modal -->
-  <div id="shopModal" class="modal">
-    <div class="modalBox">
-      <h2>💎 Upgrade Shop (May Cause Regret)</h2>
-      <div class="modal-buttons">
-        <button class="modal-btn" onclick="buy('power')">
-          <span>💪 Stronger Clicks<br><small>+0.5 power per level | More points per click</small></span>
-          <span class="cost">1 SP</span>
-        </button>
-        <button class="modal-btn" onclick="buy('crit')">
-          <span>🎯 Critical Chance<br><small>+4% crit per level | 3x damage on critical</small></span>
-          <span class="cost">1 SP</span>
-        </button>
-        <button class="modal-btn" onclick="buy('auto')">
-          <span>🤖 Auto Clicker<br><small>Automated clicking for passive income</small></span>
-          <span class="cost">2 SP</span>
-        </button>
-        <button class="modal-btn" onclick="buy('chaos')">
-          <span>🌀 Chaos Engine<br><small>Increases random events & rewards</small></span>
-          <span class="cost">1 SP</span>
-        </button>
-        <button class="modal-btn" onclick="buy('multiplier')">
-          <span>✨ Score Multiplier<br><small>1.2x permanent multiplier boost</small></span>
-          <span class="cost">3 SP</span>
-        </button>
-        <button class="modal-btn" onclick="buy('frenzy')">
-          <span>⚡ Click Frenzy<br><small>Increased combo multipliers & rewards</small></span>
-          <span class="cost">2 SP</span>
-        </button>
-      </div>
-      <div class="small">⚠️ Warning: Upgrades may have unintended consequences.</div>
-      <button class="btn btn-secondary" onclick="closeShop()" style="margin-top: 1rem;">✖️ Close</button>
+    <div class="stat-item">
+      <span class="stat-label">👁️ page views</span>
+      <span class="stat-value global" id="pageViews">0</span>
     </div>
   </div>
 
-  <!-- Settings Modal -->
-  <div id="settingsModal" class="modal">
-    <div class="modalBox">
-      <h2>⚙️ Settings</h2>
-      <div class="modal-buttons">
-        <button class="modal-btn" onclick="toggleSetting('particles')">
-          <span>✨ Particle Effects<br><small>Fill the screen with sparkly chaos</small></span>
-          <span id="particles-status">ON</span>
-        </button>
-        <button class="modal-btn" onclick="toggleSetting('sound')">
-          <span>🔊 Sound Effects<br><small>Satisfying click noises</small></span>
-          <span id="sound-status">ON</span>
-        </button>
-        <button class="modal-btn" onclick="toggleSetting('chaosMode')">
-          <span>😈 Chaos Mode<br><small>Everything is unpredictable and glitchy</small></span>
-          <span id="chaos-status">OFF</span>
-        </button>
-        <button class="modal-btn" onclick="fakeSetting()">
-          <span>🌌 Raytraced Button<br><small>Extremely realistic button shadows</small></span>
-        </button>
-        <button class="modal-btn" onclick="fakeSetting()">
-          <span>⚡ Performance Mode<br><small>For computers with commitment issues</small></span>
-        </button>
-      </div>
-      <button class="btn btn-secondary" onclick="closeSettings()" style="margin-top: 1rem;">✖️ Close</button>
-    </div>
+  <!-- feedback message (simple) -->
+  <div class="click-feedback" id="feedback">click the button</div>
+
+  <hr>
+  <div class="footer-note">
+    <a href="https://infinity-nexus.pages.dev/" target="_blank" rel="noopener noreferrer"><span class="badge">made by infinity nexus</span></a> &nbsp; | &nbsp; <span id="connectionStatus">● live</span>
   </div>
+</div>
 
-  <script>
-    // DOM Elements
-    const el = id => document.getElementById(id);
+<script>
+  (function() {
+    "use strict";
 
-    // Game State
-    const game = {
-      score: 0,
-      level: 1,
-      xp: 0,
-      maxXp: 100,
-      combo: 0,
-      maxCombo: 0,
-      skillPoints: 0,
-      crit: 0.05,
-      power: 1,
-      auto: 0,
-      chaos: 0,
-      frenzy: 0,
-      multiplier: 1,
-      clickCount: 0,
-      upgrades: {
-        power: 0,
-        crit: 0,
-        auto: 0,
-        chaos: 0,
-        multiplier: 0,
-        frenzy: 0
-      }
-    };
+    // ----- DOM refs -----
+    const clickBtn = document.getElementById('clickButton');
+    const localClicksEl = document.getElementById('localClicks');
+    const globalClicksEl = document.getElementById('globalClicks');
+    const pageViewsEl = document.getElementById('pageViews');
+    const feedbackEl = document.getElementById('feedback');
+    const statusEl = document.getElementById('connectionStatus');
 
-    // Settings
-    const settings = {
-      particles: true,
-      sound: true,
-      chaosMode: false
-    };
+    // ----- STATE (local) -----
+    let localClickCount = 0;             // total clicks by this user
+    let globalClickCount = 0;            // cached cloud value
+    let pageViewCount = 0;               // cached cloud value
 
-    let startTime = null;
-    let lastClick = 0;
-    let comboTimeout = null;
+    // ----- cloud variable keys (simulated) -----
+    // in a real server environment these would be database keys.
+    // we simulate cloud storage using localStorage + broadcast.
+    const CLOUD_KEY_CLICKS = 'cloud_global_clicks';
+    const CLOUD_KEY_VIEWS = 'cloud_page_views';
 
-    // Initialize
-    function init() {
-      updateUI();
-      startAutoClicker();
-      startGameLoop();
-
-      // Set initial button event
-      el("btn").onclick = handleClick;
-    }
-
-    // Start Game
-    function startGame() {
-      el("home").classList.add("hidden");
-      el("game").classList.remove("hidden");
-      startTime = Date.now();
-      addLog("🎮 GAME STARTED. THE BUTTON AWAITS YOUR DEVOTION.", "success");
-    }
-
-    function goHome() {
-      closeShop();
-      closeSettings();
-      el("game").classList.add("hidden");
-      el("home").classList.remove("hidden");
-      addLog("👋 Returned to menu. The button misses you already...", "normal");
-    }
-
-    // Game Loop
-    function startGameLoop() {
-      setInterval(() => {
-        if (startTime) {
-          const t = Math.floor((Date.now() - startTime) / 1000);
-          el("time").textContent = `${t}s`;
-        }
-
-        // Random events
-        if (Math.random() < 0.001 + (game.chaos * 0.002)) {
-          triggerRandomEvent();
-        }
-      }, 1000);
-    }
-
-    // Update UI
-    function updateUI() {
-      el("score").textContent = Math.floor(game.score).toLocaleString();
-      el("level").textContent = game.level;
-      el("skillPoints").textContent = game.skillPoints;
-
-      // XP Bar
-      const xpPercent = (game.xp / game.maxXp) * 100;
-      el("xp-bar").style.width = `${Math.min(xpPercent, 100)}%`;
-    }
-
-    // Log System
-    function addLog(message, type = "normal") {
-      const log = el("log");
-      const entry = document.createElement("div");
-      entry.className = `log-entry ${type}`;
-      entry.textContent = `[${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}] ${message}`;
-      log.prepend(entry);
-
-      // Keep log at reasonable size
-      if (log.children.length > 50) {
-        log.removeChild(log.lastChild);
-      }
-    }
-
-    // Main Click Function
-    function handleClick() {
-      const now = Date.now();
-      const delta = now - lastClick;
-
-      // Combo system
-      if (delta < 300) {
-        game.combo = game.combo + 1;
-        showCombo(game.combo);
-        clearTimeout(comboTimeout);
-        comboTimeout = setTimeout(() => {
-          if (game.combo >= 3) {
-            addLog(`Combo of ${game.combo} lost!`, "warning");
-          }
-          game.combo = 0;
-        }, 500);
-      } else {
-        game.combo = 1;
-      }
-
-      lastClick = now;
-      game.clickCount++;
-
-      // Calculate gain with improved combo multiplier
-      let comboMult = 1 + (game.combo * 0.1) + (game.frenzy * 0.05);
-      let gain = (game.combo * game.power * game.level * game.multiplier * comboMult) / 10;
-
-      // Critical hit
-      const isCrit = Math.random() < game.crit;
-      if (isCrit) {
-        gain *= 3;
-        showMessage("🎯 CRITICAL HIT!", "critical");
-        addLog(`Critical hit! +${Math.floor(gain)} points`, "success");
-        createParticles(15);
-      }
-
-      game.score += gain;
-      game.xp += gain * 0.5;
-
-      // Update max combo
-      if (game.combo > game.maxCombo) {
-        game.maxCombo = game.combo;
-        if (game.combo >= 10) {
-          addLog(`NEW PERSONAL RECORD! ${game.combo}x combo!`, "success");
-          createParticles(20);
-        }
-      }
-
-      // Level up check
-      if (game.xp >= game.maxXp) {
-        levelUp();
-      }
-
-      // Visual feedback
-      createParticles(10);
-      animateButton();
-
-      // Random bad event
-      if (Math.random() < 0.08 + (game.chaos * 0.03)) {
-        triggerBadEvent();
-      }
-
-      updateUI();
-      playClickSound();
-    }
-
-    // Auto Clicker
-    function startAutoClicker() {
-      setInterval(() => {
-        if (game.auto > 0 && startTime) {
-          const autoGain = (game.auto * game.power * game.multiplier) / 20;
-          game.score += autoGain;
-          game.xp += autoGain * 0.25;
-
-          if (game.xp >= game.maxXp) {
-            levelUp();
-          }
-
-          updateUI();
-
-          // Occasional auto clicker log
-          if (Math.random() < 0.01) {
-            addLog(`Auto-clicker working... +${autoGain.toFixed(1)}`, "normal");
-          }
-        }
-      }, 1000);
-    }
-
-    // Level Up
-    function levelUp() {
-      game.level++;
-      game.skillPoints++;
-      game.xp = 0;
-      game.maxXp = Math.floor(game.maxXp * 1.5);
-
-      const messages = [
-        `🎉 LEVEL ${game.level}! You're unstoppable!`,
-        `⭐ LEVEL UP TO ${game.level}! Keep clicking!`,
-        `🚀 LEVEL ${game.level}! The button is pleased.`,
-        `💫 BREAKTHROUGH! You reached level ${game.level}!`
-      ];
-
-      const randomMsg = messages[Math.floor(Math.random() * messages.length)];
-      showMessage(randomMsg, "level-up");
-      addLog(`Reached level ${game.level}. Gained 1 skill point. Max XP: ${game.maxXp}`, "success");
-
-      // Track badge progress
-      BadgeSystem.updateProgress('worlds_dumbest', game.level, 30);
-
-      // Level milestone bonuses
-      if (game.level % 5 === 0) {
-        game.score *= 1.5;
-        addLog(`🏆 LEVEL ${game.level} MILESTONE! Score increased by 50%!`, "success");
-        createParticles(30);
-      }
-
-      createParticles(20);
-      updateUI();
-    }
-
-    // Shop Functions
-    function openShop() {
-      el("shopModal").classList.add("active");
-    }
-
-    function closeShop() {
-      el("shopModal").classList.remove("active");
-    }
-
-    function buy(type) {
-      let cost = 1;
-      if (type === 'auto') cost = 2;
-      if (type === 'multiplier') cost = 3;
-      if (type === 'frenzy') cost = 2;
-
-      if (game.skillPoints >= cost) {
-        game.skillPoints -= cost;
-        game.upgrades[type]++;
-
-        switch (type) {
-          case 'power':
-            game.power += 0.5;
-            addLog(`💪 Muscles grown! Click power: ${game.power.toFixed(1)}`, "success");
-            break;
-          case 'crit':
-            game.crit += 0.04;
-            addLog(`🎯 Aiming improved! Crit chance: ${(game.crit * 100).toFixed(1)}%`, "success");
-            break;
-          case 'auto':
-            game.auto++;
-            addLog(`🤖 Hired robot #${game.upgrades.auto}. It seems unhappy.`, "normal");
-            break;
-          case 'chaos':
-            game.chaos++;
-            addLog(`🌀 Chaos +1. Reality glitches more often now.`, "warning");
-            break;
-          case 'multiplier':
-            game.multiplier *= 1.2;
-            addLog(`✨ MULTIPLIER NOW ${game.multiplier.toFixed(2)}x! THINGS GET SERIOUS!`, "success");
-            createParticles(25);
-            break;
-          case 'frenzy':
-            game.frenzy++;
-            addLog(`⚡ FRENZY MODE ACTIVATED! Combo multiplier increased!`, "success");
-            break;
-        }
-
-        updateUI();
-      } else {
-        showMessage("❌ Not enough skill points!", "critical");
-        addLog("Attempted to buy upgrade without enough points. Shame.", "warning");
-      }
-    }
-
-    // Settings Functions
-    function openSettings() {
-      updateSettingsDisplay();
-      el("settingsModal").classList.add("active");
-    }
-
-    function closeSettings() {
-      el("settingsModal").classList.remove("active");
-    }
-
-    function toggleSetting(setting) {
-      settings[setting] = !settings[setting];
-      updateSettingsDisplay();
-      addLog(`${setting} ${settings[setting] ? 'enabled' : 'disabled'}`, "normal");
-    }
-
-    function updateSettingsDisplay() {
-      el("particles-status").textContent = settings.particles ? "ON" : "OFF";
-      el("sound-status").textContent = settings.sound ? "ON" : "OFF";
-      el("chaos-status").textContent = settings.chaosMode ? "ON" : "OFF";
-    }
-
-    function fakeSetting() {
-      addLog("Feature not implemented. Please purchase DLC.", "warning");
-      showMessage("This does absolutely nothing.", "critical");
-    }
-
-    // Visual Effects
-    function createParticles(count) {
-      if (!settings.particles) return;
-
-      for (let i = 0; i < count; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.style.width = `${Math.random() * 10 + 5}px`;
-        particle.style.height = particle.style.width;
-        particle.style.background = `hsl(${Math.random() * 60 + 200}, 100%, 70%)`;
-        particle.style.left = `${Math.random() * 100}vw`;
-        particle.style.top = `${Math.random() * 100}vh`;
-
-        document.body.appendChild(particle);
-
-        // Animate and remove
-        particle.animate([
-          { transform: 'translate(0, 0) scale(1)', opacity: 1 },
-          { transform: `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) scale(0)`, opacity: 0 }
-        ], {
-          duration: 1000 + Math.random() * 1000,
-          easing: 'cubic-bezier(0.2, 0, 0.8, 1)'
-        }).onfinish = () => particle.remove();
-      }
-    }
-
-    function showCombo(combo) {
-      const display = el("combo-display");
-      display.textContent = `${combo}x COMBO!`;
-      display.style.opacity = '1';
-      display.style.color = combo >= 10 ? '#f59e0b' : combo >= 5 ? '#10b981' : '#94a3b8';
-
-      display.animate([
-        { transform: 'translateY(0) scale(1)', opacity: 1 },
-        { transform: 'translateY(-100px) scale(1.5)', opacity: 0 }
-      ], {
-        duration: 1000,
-        easing: 'cubic-bezier(0.2, 0, 0.8, 1)'
-      });
-    }
-
-    function showMessage(message, type = "normal") {
-      const msg = el("message");
-      msg.textContent = message;
-      msg.className = type;
-
-      setTimeout(() => {
-        msg.className = '';
-      }, 2000);
-    }
-
-    function animateButton() {
-      const btn = el("btn");
-      btn.animate([
-        { transform: 'scale(1)' },
-        { transform: 'scale(0.95)' },
-        { transform: 'scale(1)' }
-      ], {
-        duration: 200,
-        easing: 'cubic-bezier(0.2, 0, 0.8, 1)'
-      });
-    }
-
-    // Sound Effects
-    function playClickSound() {
-      if (!settings.sound) return;
-
-      // Create click sound
+    // ----- helper: read cloud values from storage -----
+    function fetchCloudValues() {
       try {
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
-
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-
-        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-        oscillator.frequency.exponentialRampToValueAtTime(200, audioContext.currentTime + 0.1);
-
-        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-
-        oscillator.start(audioContext.currentTime);
-        oscillator.stop(audioContext.currentTime + 0.1);
-      } catch (e) {
-        // Audio context not supported, silently fail
+        const storedClicks = localStorage.getItem(CLOUD_KEY_CLICKS);
+        const storedViews = localStorage.getItem(CLOUD_KEY_VIEWS);
+        globalClickCount = storedClicks ? parseInt(storedClicks, 10) : 0;
+        pageViewCount = storedViews ? parseInt(storedViews, 10) : 0;
+        // if NaN, fallback to 0
+        if (isNaN(globalClickCount)) globalClickCount = 0;
+        if (isNaN(pageViewCount)) pageViewCount = 0;
+      } catch (_) {
+        globalClickCount = 0;
+        pageViewCount = 0;
       }
     }
 
-    // Random Events
-    function triggerRandomEvent() {
-      const events = [
-        () => {
-          const bonus = game.level * 100;
-          game.score += bonus;
-          addLog(`💰 Found ${bonus} bonus points in the code!`, "success");
-          showMessage("BONUS POINTS!", "level-up");
-          createParticles(15);
-        },
-        () => {
-          game.skillPoints++;
-          addLog(`🎁 A mysterious benefactor granted you a skill point!`, "success");
-          showMessage("FREE SKILL POINT!", "level-up");
-          createParticles(15);
-        },
-        () => {
-          const oldPower = game.power;
-          game.power *= 1.1;
-          addLog(`⚡ Button feels more powerful! Power: ${oldPower.toFixed(1)} → ${game.power.toFixed(1)}`, "normal");
-          createParticles(10);
-        },
-        () => {
-          const bonusXp = game.maxXp * 0.25;
-          game.xp += bonusXp;
-          addLog(`📊 Lucky event! Gained ${Math.floor(bonusXp)} bonus XP!`, "success");
-          createParticles(10);
-        },
-        () => {
-          const bonusCombo = Math.floor(Math.random() * 5) + 3;
-          game.combo += bonusCombo;
-          addLog(`🔥 Unexpected bonus combo! +${bonusCombo} combo!`, "success");
-          createParticles(12);
-        }
-      ];
-
-      events[Math.floor(Math.random() * events.length)]();
-      updateUI();
+    // ----- persist cloud values (simulate server update) -----
+    function pushCloudClicks(value) {
+      try {
+        localStorage.setItem(CLOUD_KEY_CLICKS, String(value));
+      } catch (_) { /* ignore */ }
     }
 
-    function triggerBadEvent() {
-      const events = [
-        () => {
-          const loss = game.score * 0.1;
-          game.score -= loss;
-          addLog(`💥 System glitch! Lost ${Math.floor(loss)} points.`, "warning");
-          showMessage("⚠️ GLITCH DETECTED!", "critical");
-        },
-        () => {
-          const btn = el("btn");
-          btn.style.filter = 'hue-rotate(180deg)';
-          addLog("🌀 Button colors inverted. This is fine.", "warning");
-          setTimeout(() => btn.style.filter = '', 2000);
-        },
-        () => {
-          game.combo = 0;
-          addLog("❌ Combo breaker! Combo reset to zero.", "warning");
-          showMessage("COMBO BROKEN!", "critical");
-        },
-        () => {
-          if (game.auto > 0) {
-            game.auto--;
-            addLog(`🤖 Auto-clicker #${game.auto + 1} unionized and left.`, "warning");
+    function pushCloudViews(value) {
+      try {
+        localStorage.setItem(CLOUD_KEY_VIEWS, String(value));
+      } catch (_) { /* ignore */ }
+    }
+
+    // ----- increment global clicks (atomic simulation) -----
+    function incrementGlobalClicks() {
+      // read fresh
+      let current = 0;
+      try {
+        const raw = localStorage.getItem(CLOUD_KEY_CLICKS);
+        current = raw ? parseInt(raw, 10) : 0;
+        if (isNaN(current)) current = 0;
+      } catch (_) { current = 0; }
+      const newVal = current + 1;
+      pushCloudClicks(newVal);
+      globalClickCount = newVal;
+      return newVal;
+    }
+
+    // ----- increment page views (called once per session) -----
+    function incrementPageViews() {
+      let current = 0;
+      try {
+        const raw = localStorage.getItem(CLOUD_KEY_VIEWS);
+        current = raw ? parseInt(raw, 10) : 0;
+        if (isNaN(current)) current = 0;
+      } catch (_) { current = 0; }
+      const newVal = current + 1;
+      pushCloudViews(newVal);
+      pageViewCount = newVal;
+      return newVal;
+    }
+
+    // ----- update UI (local + cloud) -----
+    function refreshUI() {
+      localClicksEl.textContent = localClickCount;
+      globalClicksEl.textContent = globalClickCount;
+      pageViewsEl.textContent = pageViewCount;
+    }
+
+    // ----- handle click (one button) -----
+    function handleMainClick() {
+      // 1. increment local
+      localClickCount += 1;
+      // 2. increment global cloud (simulated server)
+      const newGlobal = incrementGlobalClicks();
+      // 3. update UI
+      refreshUI();
+      // 4. feedback
+      feedbackEl.textContent = `✅ +1  (global: ${newGlobal})`;
+      // quick animation / pulse
+      clickBtn.style.transform = 'scale(0.97)';
+      setTimeout(() => { clickBtn.style.transform = ''; }, 100);
+    }
+
+    // ----- init: page view tracking (cloud var #2) -----
+    function initPageView() {
+      // check if we already counted this session (sessionStorage flag)
+      let counted = false;
+      try {
+        counted = sessionStorage.getItem('pageViewCounted') === 'true';
+      } catch (_) { /* ignore */ }
+
+      if (!counted) {
+        const newViews = incrementPageViews();
+        // set flag so we don't count again in this session
+        try {
+          sessionStorage.setItem('pageViewCounted', 'true');
+        } catch (_) { /* ignore */ }
+        // update UI
+        refreshUI();
+        feedbackEl.textContent = `👋 page view #${newViews}`;
+        statusEl.textContent = '● live';
+      } else {
+        // still fetch latest views from cloud
+        fetchCloudValues();
+        refreshUI();
+        feedbackEl.textContent = 'welcome back';
+      }
+    }
+
+    // ----- sync with other tabs (simulate server broadcast) -----
+    // when another tab changes cloud values, we reflect them.
+    function storageListener(e) {
+      if (e.key === CLOUD_KEY_CLICKS) {
+        const val = e.newValue ? parseInt(e.newValue, 10) : 0;
+        if (!isNaN(val)) {
+          globalClickCount = val;
+          refreshUI();
+        }
+      }
+      if (e.key === CLOUD_KEY_VIEWS) {
+        const val = e.newValue ? parseInt(e.newValue, 10) : 0;
+        if (!isNaN(val)) {
+          pageViewCount = val;
+          refreshUI();
+        }
+      }
+    }
+    window.addEventListener('storage', storageListener);
+
+    // ----- attach click event -----
+    clickBtn.addEventListener('click', handleMainClick);
+
+    // ----- start: fetch cloud, init page view, render -----
+    fetchCloudValues();
+    initPageView();  // increments views if not counted
+    refreshUI();
+
+    // extra: if page view count was 0 after init, we already incremented.
+    // but if it failed, we show fallback.
+    // also ensure that pageViewCount is at least 1 if sessionStorage flag is set.
+    // but we already called initPageView, which handles it.
+
+    // ----- small status indicator (optional) -----
+    // show if storage is available (it always is in modern browsers)
+    try {
+      if (!window.localStorage) {
+        statusEl.textContent = '⚠️ storage unavailable';
+      }
+    } catch (_) {
+      statusEl.textContent = '⚠️ error';
+    }
+
+    // ----- one more sync after 2s (for safety) -----
+    setTimeout(() => {
+      fetchCloudValues();
+      refreshUI();
+      // if page views still zero but session flag says counted, force correct.
+      try {
+        if (sessionStorage.getItem('pageViewCounted') === 'true' && pageViewCount === 0) {
+          // re-fetch
+          const storedViews = localStorage.getItem(CLOUD_KEY_VIEWS);
+          if (storedViews) {
+            const v = parseInt(storedViews, 10);
+            if (!isNaN(v) && v > 0) {
+              pageViewCount = v;
+              refreshUI();
+            }
           }
-        },
-        () => {
-          const lossXp = game.maxXp * 0.1;
-          game.xp = Math.max(0, game.xp - lossXp);
-          addLog(`📉 XP malfunction! Lost ${Math.floor(lossXp)} XP.`, "warning");
-        },
-        () => {
-          const btn = el("btn");
-          btn.textContent = "CLICK FOR WHATEVER";
-          setTimeout(() => btn.textContent = "CLICK FOR GLORY", 3000);
-          addLog("🎭 Button feels confused.", "warning");
         }
-      ];
+      } catch (_) { /* ignore */ }
+    }, 300);
 
-      events[Math.floor(Math.random() * events.length)]();
-      updateUI();
-    }
+    // ----- expose for debugging (optional) -----
+    console.log('🔘 one-button game · cloud vars: clicks & views');
+    console.log('   global clicks:', globalClickCount, 'page views:', pageViewCount);
 
-    // Initialize game
-    init();
-  </script>
+  })();
+</script>
+
 </body>
-
 </html>

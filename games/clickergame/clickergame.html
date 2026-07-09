@@ -278,7 +278,8 @@
 
         .stat-label {
             font-size: 0.75rem;
-            color: #e6def8;
+            color: #f0e8ff;
+            font-weight: 600;
         }
 
         /* Click button */
@@ -381,6 +382,7 @@
 
         .upgrade-name {
             font-weight: 700;
+            color: white;
             display: flex;
             gap: 10px;
             align-items: center;
@@ -395,7 +397,8 @@
 
         .upgrade-stats {
             font-size: 0.7rem;
-            color: #bfb7f0;
+            color: #e6d9ff;
+            font-weight: 500;
             display: flex;
             gap: 12px;
             margin-top: 5px;
@@ -403,12 +406,12 @@
 
         .upgrade-btn {
             background: linear-gradient(135deg, #7c3aed, #6d28d9);
-            border: none;
+            border: 2px solid rgba(196, 181, 253, 0.4);
             padding: 8px 18px;
             border-radius: 60px;
             font-weight: 700;
             cursor: pointer;
-            color: #f5e6b2;
+            color: #fef5ff;
             transition: all 0.2s ease;
             box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
         }
@@ -457,17 +460,17 @@
         }
 
         .prestige-btn {
-            background: linear-gradient(135deg, #84cc16, #65a30d);
-            border: none;
+            background: linear-gradient(135deg, #a3e635, #84cc16);
+            border: 2px solid rgba(163, 230, 53, 0.5);
             padding: 0.9rem;
             width: 100%;
             border-radius: 60px;
             font-weight: 800;
-            color: #1a1a1a;
+            color: #0a0a0a;
             margin-top: 10px;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 6px 16px rgba(132, 204, 22, 0.3);
+            box-shadow: 0 6px 20px rgba(163, 230, 53, 0.4);
         }
 
         .prestige-btn:hover:not(:disabled) {
@@ -554,21 +557,24 @@
         }
 
         .energy-label {
-            font-size: 0.7rem;
-            color: #06b6d4;
-            font-weight: 600;
+            font-size: 0.75rem;
+            color: #00e5ff;
+            font-weight: 700;
             margin-bottom: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         /* Combo counter */
         .combo-display {
             text-align: center;
-            font-size: 1rem;
-            font-weight: 700;
-            color: #84cc16;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #ffed4e;
             min-height: 24px;
-            text-shadow: 0 0 10px rgba(132, 204, 22, 0.5);
+            text-shadow: 0 0 15px rgba(255, 237, 78, 0.8);
             margin: 0.5rem 0;
+            letter-spacing: 1px;
         }
 
         .combo-pulse {
@@ -586,25 +592,27 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            background: linear-gradient(135deg, #84cc16, #65a30d);
-            border-radius: 12px;
-            padding: 16px 20px;
-            color: #1a1a1a;
-            font-weight: 700;
-            box-shadow: 0 10px 30px rgba(132, 204, 22, 0.4);
-            animation: slideInRight 0.5s ease, slideOutRight 0.5s ease 2.5s forwards;
+            background: linear-gradient(135deg, #ff006e, #d60067);
+            border-radius: 16px;
+            padding: 20px 28px;
+            color: #fff;
+            font-weight: 800;
+            font-size: 1rem;
+            box-shadow: 0 15px 40px rgba(255, 0, 110, 0.5), 0 0 30px rgba(255, 0, 110, 0.3);
+            animation: slideInRight 0.5s ease, slideOutRight 0.5s ease 3.5s forwards;
             z-index: 2500;
-            max-width: 280px;
+            max-width: 320px;
+            border: 2px solid rgba(255, 100, 200, 0.6);
         }
 
         @keyframes slideInRight {
-            from { transform: translateX(400px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+            from { transform: translateX(400px) scale(0.8); opacity: 0; }
+            to { transform: translateX(0) scale(1); opacity: 1; }
         }
 
         @keyframes slideOutRight {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(400px); opacity: 0; }
+            from { transform: translateX(0) scale(1); opacity: 1; }
+            to { transform: translateX(400px) scale(0.8); opacity: 0; }
         }
 
         /* Progress bars for upgrades */
@@ -666,8 +674,9 @@
         }
 
         .slot.active {
-            background: #84cc16;
+            background: #ffed4e;
             color: #1a1a1a;
+            box-shadow: 0 0 12px rgba(255, 237, 78, 0.8);
         }
 
         /* Level up animation */
@@ -725,9 +734,9 @@
 
         @media (max-width: 550px) {
             .game-container { padding: 1rem; }
-            .upgrade-row { flex-direction: column; align-items: stretch; }
-            .upgrade-btn { align-self: flex-end; }
-            .stat-value { font-size: 1.1rem; }
+            .upgrade-row { flex-direction: column; align-items: stretch; color: white;}
+            .upgrade-btn { align-self: flex-end; color: white;}
+            .stat-value { font-size: 1.1rem; color: white;}
             .achievement-popup { right: 10px; left: 10px; max-width: none; }
         }
     </style>
@@ -762,7 +771,7 @@
         <div class="game-title">Clicker Quest</div>
         <div style="display:flex;gap:8px;align-items:center;">
             <button class="home-icon-btn" id="backHomeBtn" title="Back to home"><i class="fas fa-home"></i></button>
-            <a class="home-icon-btn" href="../../index.html" title="Back to site" style="display:flex;align-items:center;justify-content:center;text-decoration:none;">←</a>
+            <a class="home-icon-btn" href="../../mainpages/index.html" title="Back" style="display:flex;align-items:center;justify-content:center;text-decoration:none;">←</a>
         </div>
     </div>
 
@@ -797,7 +806,6 @@
 <div id="toastMsg" class="toast-msg"></div>
 
 <script>
-    // ---------- GAME STATE ----------
     let gold = 0;
     let clickPower = 1;
     let passiveIncome = 0;
@@ -820,18 +828,15 @@
     let critChanceBase = 8;
     let critDamage = 5;
 
-    // NEW: Energy system
     let maxEnergy = 100;
     let currentEnergy = 100;
-    let energyRegenRate = 0.5; // per second
+    let energyRegenRate = 0.5; 
     let energyCost = 1;
 
-    // NEW: Combo system
     let comboCount = 0;
     let lastClickTime = 0;
-    let comboTimeout = 3000; // 3 seconds to maintain combo
+    let comboTimeout = 500; 
     
-    // NEW: Achievements
     let achievements = {};
     const achievementsList = {
         'first_100': { name: 'Golden Start', desc: 'Earn 100 gold', reward: 50 },
@@ -844,15 +849,12 @@
         'crit_hit': { name: 'Precision', desc: 'Land a critical hit', reward: 30 },
     };
 
-    // NEW: Daily bonus
     let lastDailyBonusDate = localStorage.getItem('daily_bonus_date') || '';
     let dailyBonusActive = false;
 
-    // NEW: Random events
     let eventActive = false;
     let eventType = '';
     
-    // helper multipliers
     function getGlobalMult() {
         let mult = 1 + (ascensionCount * 0.15) + (magnetUpgradeLevel * 0.15);
         if (boostActive) mult *= 3;
@@ -863,7 +865,6 @@
     function getCritChance() { return critChanceBase + (critUpgradeLevel * 4); }
     function getCritDamage() { return critDamage + (critUpgradeLevel * 1.2); }
 
-    // format numbers
     function formatMoney(val) {
         if (val >= 1e9) return (val/1e9).toFixed(2).replace(/\.00$/,'') + 'B';
         if (val >= 1e6) return (val/1e6).toFixed(2).replace(/\.00$/,'') + 'M';
@@ -880,11 +881,9 @@
         document.getElementById('clickCountDisplay').innerHTML = formatMoney(totalClicks);
         document.getElementById('prestigeBonusSpan').innerHTML = ascensionCount * 15;
         
-        // Update energy bar
         const energyPercent = (currentEnergy / maxEnergy) * 100;
         document.getElementById('energyBar').style.width = energyPercent + '%';
 
-        // Update combo display
         const comboDiv = document.getElementById('comboDisplay');
         if (comboCount > 1) {
             comboDiv.textContent = `${comboCount}x COMBO!`;
@@ -892,7 +891,6 @@
             comboDiv.textContent = '';
         }
         
-        // upgrade buttons rendering dynamically
         const upgradesDiv = document.getElementById('upgradesList');
         upgradesDiv.innerHTML = `
             <div class="upgrade-row">
@@ -924,11 +922,9 @@
             document.getElementById('mainClickBtn').classList.remove('boost-active');
         }
         
-        // prestige button state
         const prestigeBtn = document.getElementById('prestigeActionBtn');
         prestigeBtn.disabled = gold < 10000;
         
-        // attach events after re-render
         document.getElementById('buyClickUpg')?.addEventListener('click', () => buyUpgrade('click'));
         document.getElementById('buyAutoUpg')?.addEventListener('click', () => buyUpgrade('auto'));
         document.getElementById('buyCritUpg')?.addEventListener('click', () => buyUpgrade('crit'));
@@ -951,13 +947,14 @@
         const achv = achievementsList[achvKey];
         if (!achv) return;
 
-        // Show popup
         const popup = document.createElement('div');
         popup.className = 'achievement-popup';
-        popup.innerHTML = `🏆 ${achv.name}<br><span style="font-size: 0.85rem; opacity: 0.9;">+${achv.reward} gold</span>`;
+        popup.innerHTML = `🏆 <strong>${achv.name}</strong><br><span style="font-size: 0.9rem; opacity: 0.95; display: block; margin-top: 6px;">+${achv.reward} gold</span>`;
         document.body.appendChild(popup);
         gold += achv.reward;
-        setTimeout(() => popup.remove(), 3000);
+        triggerConfetti(window.innerWidth - 100, 80);
+        showToast(`Achievement Unlocked: ${achv.name}`, false);
+        setTimeout(() => popup.remove(), 4000);
         saveGame();
     }
 
@@ -1003,9 +1000,7 @@
         }
     }
 
-    // click handler
     function handleClick(e) {
-        // Energy check
         if (currentEnergy < energyCost) {
             showToast('No energy left', true);
             return;
@@ -1013,7 +1008,6 @@
 
         currentEnergy -= energyCost;
 
-        // Combo system
         const now = Date.now();
         if (now - lastClickTime > comboTimeout) {
             comboCount = 0;
@@ -1021,7 +1015,6 @@
         comboCount++;
         lastClickTime = now;
 
-        // Bonus multiplier for combo
         let comboMult = 1 + (comboCount * 0.05);
 
         let value = clickPower * getGlobalMult() * comboMult;
@@ -1041,7 +1034,6 @@
         gold += value;
         totalClicks++;
 
-        // Milestone achievements
         if (gold >= 100 && gold - value < 100) showAchievement('first_100');
         if (gold >= 1000 && gold - value < 1000) showAchievement('first_1k');
         if (gold >= 10000 && gold - value < 10000) showAchievement('first_10k');
@@ -1083,9 +1075,9 @@
             upgraded = true;
         } else if (type === 'auto' && gold >= autoCost) {
             gold -= autoCost;
-            passiveIncome += 1.5;
+            passiveIncome += 1;
             autoUpgradeLevel++;
-            autoCost = Math.floor(autoCost * 1.3);
+            autoCost = Math.floor(autoCost * 1.35);
             showToast('Passive income increased');
             upgraded = true;
         } else if (type === 'crit' && gold >= critCost) {
@@ -1153,7 +1145,6 @@
         saveGame();
     }
 
-    // Energy regeneration
     let energyRegenInterval;
     function startEnergyRegen() {
         if (energyRegenInterval) clearInterval(energyRegenInterval);
@@ -1165,7 +1156,6 @@
         }, 100);
     }
 
-    // passive income tick
     let passiveInterval;
     function startPassive() {
         if (passiveInterval) clearInterval(passiveInterval);
@@ -1178,7 +1168,6 @@
         }, 1000);
     }
 
-    // Trigger random events
     function triggerRandomEvent() {
         if (Math.random() < 0.3 && !eventActive) {
             eventActive = true;
@@ -1196,7 +1185,6 @@
         }
     }
 
-    // bonus orb spawn
     function spawnOrb() {
         if (document.getElementById('gameContainer').style.display !== 'none') {
             const orb = document.createElement('div');
@@ -1220,7 +1208,6 @@
         }
     }
 
-    // Save / Load
     function saveGame() {
         const data = { 
             gold, clickPower, passiveIncome, clickUpgradeLevel, autoUpgradeLevel, 
@@ -1253,7 +1240,6 @@
             } catch(e) {}
         }
 
-        // Daily bonus check
         const today = new Date().toDateString();
         if (lastDailyBonusDate !== today) {
             dailyBonusActive = true;
@@ -1267,7 +1253,6 @@
         updateUI();
     }
 
-    // keyboard
     function onKey(e) {
         if (document.getElementById('gameContainer').style.display === 'none') return;
         const key = e.key;
@@ -1283,10 +1268,9 @@
         if (key === '5') document.getElementById('buyBoostUpg')?.click();
     }
 
-    // Home/Screen toggles
     const homeDiv = document.getElementById('homeScreen');
     const gameDiv = document.getElementById('gameContainer');
-    document.getElementById('startGameBtn').onclick = () => { homeDiv.style.display = 'none'; gameDiv.style.display = 'block'; loadGame(); startPassive(); startEnergyRegen(); setInterval(() => spawnOrb(), 12000); setInterval(() => triggerRandomEvent(), 60000); };
+    document.getElementById('startGameBtn').onclick = () => { homeDiv.style.display = 'none'; gameDiv.style.display = 'block'; loadGame(); startPassive(); startEnergyRegen(); setInterval(() => spawnOrb(), 18000); setInterval(() => triggerRandomEvent(), 75000); };
     document.getElementById('backHomeBtn').onclick = () => { saveGame(); gameDiv.style.display = 'none'; homeDiv.style.display = 'flex'; };
     document.getElementById('prestigeActionBtn').onclick = ascension;
     document.getElementById('mainClickBtn').onclick = handleClick;

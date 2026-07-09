@@ -1596,23 +1596,18 @@
 	</div>
 
 	<script>
-		// Toggle card expansion
 		function toggleCard(header) {
 			const card = header.closest('.game-card');
 			const content = card.querySelector('.game-content');
 
-			// Toggle active classes
 			header.classList.toggle('active');
 			content.classList.toggle('active');
 			card.classList.toggle('expanded');
 		}
 
-		// Set year in footer
 		document.getElementById('year').textContent = new Date().getFullYear();
 	</script>
 	<script>
-		// Theme Toggle Functionality
-		// Storage Manager for safe localStorage access
 		const StorageManager = {
 			get: (key) => {
 				try {

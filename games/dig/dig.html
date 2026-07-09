@@ -443,7 +443,6 @@
         }
       }
 
-      // update HUD
       document.getElementById('depthDisplay').textContent = Math.floor(depth);
       document.getElementById('scoreDisplay').textContent = Math.floor(score);
       document.getElementById('comboDisplay').textContent = combo;
@@ -456,7 +455,6 @@
       const hf = document.getElementById('healthFill');
       hf.style.width = Math.max(0, Math.min(100, (health/maxHealth)*100)) + '%';
 
-      // update probabilities
       const w = getWeights(depth);
       const sum = w.reduce((a,b) => a+b, 0);
       const ids = ['p_grass','p_dirt','p_stone','p_coal','p_iron','p_gold','p_diamond','p_emerald','p_obsidian'];
@@ -473,7 +471,6 @@
       const block = world[y]?.[x];
       if (!block) return;
 
-      // energy cost
       energy -= 5;
       if (energy < 0) {
         health += energy;  // energy deficit hurts health
@@ -486,7 +483,6 @@
       const pts = Math.floor(block.pts * depthMul * comboMul);
       score += pts;
 
-      // combo logic
       const isValuable = (block.name !== 'Grass' && block.name !== 'Dirt');
       if (isValuable) {
         combo++;
@@ -500,7 +496,6 @@
         streak = 0;
       }
 
-      // remove block, move player
       world[y][x] = null;
       playerX = x;
       playerY = y;
@@ -508,10 +503,8 @@
 
       applyGravity();
 
-      // ensure enough rows
       while (playerY + 5 >= world.length) addRow();
 
-      // health check
       if (health <= 0) {
         gameActive = false;
         showMessage('💀 GAME OVER · depth ' + Math.floor(depth), 4000);
@@ -521,7 +514,6 @@
       draw();
     }
 
-    // passive healing
     setInterval(() => {
       if (!gameActive) return;
       const now = Date.now();
@@ -532,12 +524,9 @@
       }
     }, 1000);
 
-    // initial draw
     draw();
 
-    // extra: click on player tile does nothing (but we block via mine logic)
     window.addEventListener('load', () => {
-      // small tutorial
       setTimeout(() => {
         showMessage('⛏ mine adjacent blocks · combos boost score!', 2800);
       }, 400);

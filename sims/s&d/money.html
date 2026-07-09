@@ -885,7 +885,6 @@
     </footer>
 
     <script>
-        // Game state
         let money = 100;
         let loan = 0;
         let day = 1;
@@ -900,14 +899,12 @@
         let questCompleted = false;
         let moneyEarnedSinceQuestStart = 0;
 
-        // Game constants
         const DAY_DURATION = 15; // seconds per day
         const CUSTOMER_PATIENCE = 7000; // ms before customer leaves
         const LOAN_AMOUNT = 250;
         const LOAN_REPAYMENT = 300;
         const LOAN_TERM_DAYS = 30;
 
-        // Shop items
         const shopItems = [
             {
                 id: 1,
@@ -948,7 +945,6 @@
             }
         ];
 
-        // Quests
         const quests = [
             {
                 description: "Sell 3 coffees",
@@ -987,7 +983,6 @@
             }
         ];
 
-        // Customer data
         const customerMessages = [
             "I'll have the usual!",
             "This place is great!",
@@ -999,29 +994,22 @@
             "Love the ambiance here!"
         ];
 
-        // Initialize game
         function initGame() {
-            // Load saved game if available
             loadGame();
 
-            // Start day cycle
             startDayCycle();
 
-            // Render initial UI
             updateUI();
             renderShop();
             renderInventory();
 
-            // Setup keyboard shortcuts
             setupKeyboardShortcuts();
 
-            // Show tutorial on first load
             if (!localStorage.getItem('snd_tutorial_shown')) {
                 showTutorial();
                 localStorage.setItem('snd_tutorial_shown', 'true');
             }
 
-            // Add some initial customers
             setTimeout(() => {
                 for (let i = 0; i < 2; i++) {
                     addCustomer();
@@ -1029,7 +1017,6 @@
             }, 1000);
         }
 
-        // Start the day timer
         function startDayCycle() {
             clearInterval(dayInterval);
             timeLeft = DAY_DURATION;
@@ -1042,17 +1029,14 @@
                     nextDay();
                 }
 
-                // Update customer patience indicators
                 updateCustomerTimers();
 
-                // Auto-save every 10 seconds
                 if (timeLeft % 10 === 0) {
                     saveGame();
                 }
             }, 1000);
         }
 
-        // Update timer display
         function updateTimerUI() {
             const timeLeftEl = document.getElementById('time-left');
             const timerFillEl = document.getElementById('timer-fill');
@@ -1062,7 +1046,6 @@
                 const percentage = (timeLeft / DAY_DURATION) * 100;
                 timerFillEl.style.width = `${percentage}%`;
 
-                // Change color based on time remaining
                 if (percentage < 25) {
                     timerFillEl.style.background = 'linear-gradient(to right, #ff9800, #f44336)';
                 } else if (percentage < 50) {
@@ -1071,18 +1054,15 @@
             }
         }
 
-        // Move to next day
         function nextDay() {
             clearInterval(dayInterval);
             day++;
 
-            // Clear any existing customers
             activeCustomers.forEach(customer => {
                 clearTimeout(customer.timeout);
             });
             activeCustomers = [];
 
-            // Add new customers based on reputation
             const newCustomerCount = Math.floor(reputation / 20) + Math.floor(Math.random() * 3);
             customersWaiting = newCustomerCount;
 
@@ -1090,7 +1070,6 @@
                 setTimeout(() => addCustomer(), i * 1000);
             }
 
-            // Check for loan repayment
             if (loan > 0 && day % LOAN_TERM_DAYS === 0) {
                 if (money >= loan) {
                     money -= loan;
@@ -1102,19 +1081,15 @@
                 }
             }
 
-            // Show day notification
             showNotification(`Day ${day} has begun! ${newCustomerCount} customers arrived.`, "info");
 
-            // Update UI and restart timer
             updateUI();
             renderCustomers();
             startDayCycle();
 
-            // Reset daily money earned for quest
             moneyEarnedSinceQuestStart = 0;
         }
 
-        // Borrow money
         function borrowMoney() {
             if (loan > 0) {
                 showNotification("You already have an outstanding loan!", "warning");
@@ -1128,7 +1103,6 @@
             updateUI();
         }
 
-        // Buy item from shop
         function buyItem(itemId) {
             const item = shopItems.find(i => i.id === itemId);
             if (!item) return;
@@ -1145,10 +1119,8 @@
                 document.getElementById('art-studio').style.display = 'block';
                 showNotification("Art studio unlocked! You can now create paintings.", "success");
 
-                // Update shop item to show it's purchased
                 renderShop();
             } else {
-                // Add to inventory
                 inventory.push({
                     id: item.id,
                     name: item.name,
@@ -1165,7 +1137,6 @@
             updateUI();
         }
 
-        // Sell item to customer
         function sellItem(itemIndex) {
             if (customersWaiting <= 0) {
                 showNotification("No customers to serve!", "warning");
@@ -1183,15 +1154,12 @@
             reputation = Math.min(100, reputation + 2);
             customersWaiting--;
 
-            // Update quest progress
             updateQuestProgress(item.name, amountEarned);
 
-            // Remove customer if any are waiting
             if (activeCustomers.length > 0) {
                 const servedCustomer = activeCustomers.shift();
                 clearTimeout(servedCustomer.timeout);
 
-                // Show customer feedback
                 const feedbackMessages = [
                     "Thanks, that was delicious!",
                     "Perfect, just what I needed!",
@@ -1203,16 +1171,13 @@
                 showNotification(`Sold ${item.name} for $${amountEarned}. ${randomFeedback}`, "success");
             }
 
-            // Remove item from inventory
             inventory.splice(itemIndex, 1);
 
-            // Update UI
             updateUI();
             renderInventory();
             renderCustomers();
         }
 
-        // Create art (if unlocked)
         function createArt() {
             if (!artUnlocked) return;
 
@@ -1229,14 +1194,12 @@
                 color: "#a777e3"
             });
 
-            // Update quest progress
             updateQuestProgress("Painting");
 
             showNotification(`Created a ${paintingType} painting worth $${artValue}!`, "success");
             renderInventory();
         }
 
-        // Add a new customer
         function addCustomer() {
             if (activeCustomers.length >= 8) return;
 
@@ -1244,7 +1207,6 @@
             const messageIndex = Math.floor(Math.random() * customerMessages.length);
             const customerMessage = customerMessages[messageIndex];
 
-            // Assign a random icon/avatar
             const customerIcons = ["fas fa-user", "fas fa-user-tie", "fas fa-user-graduate", "fas fa-user-ninja",
                 "fas fa-user-astronaut", "fas fa-user-md", "fas fa-user-secret"];
             const customerIcon = customerIcons[Math.floor(Math.random() * customerIcons.length)];
@@ -1255,7 +1217,6 @@
                 message: customerMessage,
                 patience: 100,
                 timeout: setTimeout(() => {
-                    // Customer leaves if not served
                     activeCustomers = activeCustomers.filter(c => c.id !== customerId);
                     customersWaiting = Math.max(0, customersWaiting - 1);
                     reputation = Math.max(0, reputation - 1);
@@ -1271,7 +1232,6 @@
             renderCustomers();
         }
 
-        // Update customer patience indicators
         function updateCustomerTimers() {
             activeCustomers.forEach(customer => {
                 if (customer.startTime) {
@@ -1282,16 +1242,13 @@
                 }
             });
 
-            // Re-render customers to update timers
             if (activeCustomers.length > 0) {
                 renderCustomers();
             }
         }
 
-        // Quest system
         function interactWithQuestGiver() {
             if (!currentQuest) {
-                // Filter available quests (don't show painting quest if art not unlocked)
                 const availableQuests = quests.filter(q =>
                     (q.targetItem !== "Painting" || artUnlocked)
                 );
@@ -1307,7 +1264,6 @@
                     showNotification("No quests available right now. Come back later!", "warning");
                 }
             } else if (questCompleted) {
-                // Complete quest
                 money += currentQuest.reward;
                 showNotification(`Quest completed! You received $${currentQuest.reward}`, "success");
 
@@ -1318,12 +1274,10 @@
                 updateQuestUI();
                 updateUI();
             } else {
-                // Show current quest progress
                 showNotification(`Current Quest: ${currentQuest.description}\nProgress: ${currentQuest.progress}/${currentQuest.targetCount}`, "info");
             }
         }
 
-        // Update quest progress
         function updateQuestProgress(itemName, amountEarned = 0) {
             if (!currentQuest || questCompleted) return;
 
@@ -1342,7 +1296,6 @@
             updateQuestUI();
         }
 
-        // Update quest UI
         function updateQuestUI() {
             const questTitle = document.getElementById('quest-title');
             const questDescription = document.getElementById('quest-description');
@@ -1367,13 +1320,11 @@
             }
         }
 
-        // Show notification
         function showNotification(message, type = "info") {
             const container = document.getElementById('notification-container');
             const notification = document.createElement('div');
             notification.className = `notification ${type}`;
 
-            // Set icon based on type
             let icon = "fas fa-info-circle";
             if (type === "success") icon = "fas fa-check-circle";
             if (type === "warning") icon = "fas fa-exclamation-triangle";
@@ -1386,7 +1337,6 @@
 
             container.appendChild(notification);
 
-            // Remove notification after 5 seconds
             setTimeout(() => {
                 if (notification.parentNode) {
                     notification.style.opacity = '0';
@@ -1400,7 +1350,6 @@
             }, 5000);
         }
 
-        // Render shop items
         function renderShop() {
             const shopContainer = document.getElementById('shop-items');
             const emptyState = document.getElementById('shop-empty');
@@ -1414,7 +1363,6 @@
                 itemElement.className = `shop-item ${item.unlocksArt && artUnlocked ? 'disabled' : ''}`;
                 itemElement.onclick = () => !(item.unlocksArt && artUnlocked) && buyItem(item.id);
 
-                // Check if painting supplies already purchased
                 const alreadyPurchased = item.unlocksArt && artUnlocked;
 
                 itemElement.innerHTML = `
@@ -1435,11 +1383,9 @@
                 shopContainer.appendChild(itemElement);
             });
 
-            // Show empty state if no items
             emptyState.style.display = shopItems.length === 0 ? 'block' : 'none';
         }
 
-        // Render inventory
         function renderInventory() {
             const inventoryContainer = document.getElementById('inventory-items');
             const emptyState = document.getElementById('inventory-empty');
@@ -1477,7 +1423,6 @@
             });
         }
 
-        // Render customers
         function renderCustomers() {
             const customersContainer = document.getElementById('customers-container');
             const emptyState = document.getElementById('customers-empty');
@@ -1501,7 +1446,6 @@
                 customerElement.className = `customer ${customer.patience < 30 ? 'impatient' : ''}`;
                 customerElement.id = `customer-${customer.id}`;
 
-                // Determine if customer is about to leave
                 const isLeavingSoon = customer.patience < 15;
 
                 customerElement.innerHTML = `
@@ -1519,18 +1463,14 @@
             });
         }
 
-        // Update main UI
         function updateUI() {
-            // Update stat values
             document.getElementById('day').textContent = day;
             document.getElementById('money').textContent = `$${money}`;
             document.getElementById('loan').textContent = `$${loan}`;
             document.getElementById('reputation').textContent = `${reputation}/100`;
 
-            // Update timer
             updateTimerUI();
 
-            // Update reputation color indicator
             const reputationEl = document.getElementById('reputation');
             if (reputation >= 80) {
                 reputationEl.style.color = '#2ecc71';
@@ -1540,7 +1480,6 @@
                 reputationEl.style.color = '#e74c3c';
             }
 
-            // Show loan badge if loan exists
             const loanStat = document.querySelector('.stat-card:nth-child(3)');
             const existingBadge = loanStat.querySelector('.loan-badge');
 
@@ -1556,7 +1495,6 @@
             }
         }
 
-        // Save game to localStorage
         function saveGame() {
             const gameState = {
                 money,
@@ -1578,7 +1516,6 @@
             }
         }
 
-        // Load game from localStorage
         function loadGame() {
             try {
                 const saved = localStorage.getItem('snd_save');
@@ -1597,7 +1534,6 @@
                 questCompleted = gameState.questCompleted || questCompleted;
                 moneyEarnedSinceQuestStart = gameState.moneyEarnedSinceQuestStart || moneyEarnedSinceQuestStart;
 
-                // Show art studio if unlocked
                 if (artUnlocked) {
                     document.getElementById('art-studio').style.display = 'block';
                 }
@@ -1608,10 +1544,8 @@
             }
         }
 
-        // Setup keyboard shortcuts
         function setupKeyboardShortcuts() {
             document.addEventListener('keydown', (e) => {
-                // Don't trigger if user is typing in an input field
                 if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
                 switch (e.key.toLowerCase()) {
@@ -1639,7 +1573,6 @@
                         break;
                     case 's':
                         e.preventDefault();
-                        // Sell first item in inventory if available
                         if (inventory.length > 0) {
                             sellItem(0);
                         }
@@ -1652,7 +1585,6 @@
                         break;
                     case 'r':
                         e.preventDefault();
-                        // Reset game confirmation
                         if (confirm('Reset game? All progress will be lost.')) {
                             localStorage.removeItem('snd_save');
                             localStorage.removeItem('snd_tutorial_shown');
@@ -1663,7 +1595,6 @@
             });
         }
 
-        // Show tutorial
         function showTutorial() {
             const tutorial = document.createElement('div');
             tutorial.className = 'tutorial-overlay';
@@ -1702,12 +1633,10 @@
             document.body.appendChild(tutorial);
         }
 
-        // Home screen function
         function startSupplyDemand() {
             document.getElementById('homeScreen').style.display = 'none';
         }
 
-        // Initialize game when page loads
         window.onload = initGame;
     </script>
     </div>

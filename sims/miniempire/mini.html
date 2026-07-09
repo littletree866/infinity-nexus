@@ -311,7 +311,6 @@
           grid: Array.from(document.querySelectorAll('.tile')).map(t => ({ terrain: t.dataset.terrain, built: t.dataset.built || null }))
         };
         localStorage.setItem(MINI_SAVE_KEY, JSON.stringify(snap));
-        // show subtle UI save notice
         alertBox.textContent = '💾 Game saved';
         setTimeout(() => { if (alertBox) alertBox.textContent = ''; }, 1200);
       } catch (e) {
@@ -330,7 +329,6 @@
         pop = obj.pop || 0;
         level = obj.level || 1;
         defense = obj.defense || 0;
-        // restore tiles
         const tiles = document.querySelectorAll('.tile');
         if (tiles && tiles.length && obj.grid) {
           tiles.forEach((t, i) => {
@@ -359,7 +357,6 @@
     }
 
     if (loadMiniState()) {
-      // subtle indicator only
       console.log('Autosave restored.');
     }
     setInterval(() => { if (running) saveMiniState(); }, 5000);
@@ -494,7 +491,6 @@
         }
         pop = Math.max(0, pop - Math.floor(Math.random() * 5));
         food = Math.max(0, food - Math.floor(Math.random() * 10));
-        // reputation optional: keep if exists
         if (typeof reputation !== 'undefined') reputation = Math.max(0, reputation - 5);
       }
       updateStats();
@@ -520,12 +516,10 @@
     }
 
 
-    // Home screen function
     function startMiniEmpire() {
       document.getElementById('homeScreen').style.display = 'none';
     }
 
-    // ensure single game loop interval and start handler
     let gameLoopInterval = null;
     startBtn.onclick = () => {
       tutorial.style.display = "none";

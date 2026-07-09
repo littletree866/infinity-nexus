@@ -838,7 +838,6 @@
         </div>
 
         <script>
-            // Game State
             const state = {
                 tiles: [],
                 moves: 0,
@@ -871,7 +870,6 @@
                 }
             };
 
-            // DOM Elements
             const grid = document.getElementById('puzzleGrid');
             const winMessage = document.getElementById('winMessage');
             const moveDisplay = document.getElementById('moveCount');
@@ -880,14 +878,12 @@
             const stats = document.getElementById('stats');
             const timeContainer = document.getElementById('timeContainer');
 
-            // Storage Keys
             const PUZZLE_BEST_KEY = 'puzzle_best_laststand';
             const ACHIEVEMENTS_KEY = 'puzzle_achievements';
             const ENDLESS_RECORDS_KEY = 'puzzle_endless_records';
             const SOUND_KEY = 'puzzle_sound';
             const THEME_KEY = 'puzzle_theme';
 
-            // Initialize from storage
             let bestLevel = Number(localStorage.getItem(PUZZLE_BEST_KEY) || 1);
             document.getElementById('bestLevel').textContent = bestLevel;
 
@@ -901,7 +897,6 @@
                 state.records.endless = JSON.parse(savedRecords);
             }
 
-            // Sound effects
             const sounds = {
                 move: () => beep(440, 100),
                 win: () => beep(880, 300),
@@ -933,7 +928,6 @@
                 }
             }
 
-            // Theme Management
             const themeToggle = document.getElementById('themeToggle');
             const savedTheme = localStorage.getItem(THEME_KEY) || 'light';
 
@@ -953,7 +947,6 @@
                 }
             };
 
-            // Sound Toggle
             const soundToggle = document.getElementById('soundToggle');
             state.soundEnabled = localStorage.getItem(SOUND_KEY) !== 'false';
 
@@ -969,7 +962,6 @@
                     '<i class="fas fa-volume-mute"></i>';
             };
 
-            // Help Panel
             const helpBtn = document.getElementById('helpBtn');
             const howToPlay = document.getElementById('howToPlay');
             const closeHelp = document.getElementById('closeHelp');
@@ -983,7 +975,6 @@
                 howToPlay.style.display = 'none';
             };
 
-            // Achievements Panel
             const achievementsBtn = document.getElementById('achievementsBtn');
             const achievementsPanel = document.getElementById('achievementsPanel');
             const achievementsList = document.getElementById('achievementsList');
@@ -1015,7 +1006,6 @@
                     state.achievements[key].unlocked = true;
                     localStorage.setItem(ACHIEVEMENTS_KEY, JSON.stringify(state.achievements));
 
-                    // Show notification
                     showNotification(`Achievement Unlocked: ${state.achievements[key].desc}`);
                     updateAchievementsDisplay();
                 }
@@ -1044,7 +1034,6 @@
                 }, 3000);
             }
 
-            // Add CSS for notification animations
             const style = document.createElement('style');
             style.textContent = `
             @keyframes slideIn {
@@ -1058,7 +1047,6 @@
         `;
             document.head.appendChild(style);
 
-            // Mode Selection
             document.getElementById('endlessModeBtn').onclick = () => {
                 startMode('endless');
                 sounds.click();
@@ -1091,7 +1079,6 @@
                 document.getElementById('controls').style.display = 'flex';
                 document.getElementById('hintCount').textContent = mode === 'practice' ? '∞' : state.hints;
 
-                // Show mobile controls on mobile
                 if (window.innerWidth <= 768) {
                     document.getElementById('mobileControls').style.display = 'grid';
                     setupMobileControls();
@@ -1248,7 +1235,6 @@
 
                         if (canMove(index)) btn.classList.add('movable');
 
-                        // Check if tile is in correct position
                         if (tile === index + 1) {
                             btn.classList.add('correct-pos');
                         }
@@ -1260,7 +1246,6 @@
 
                 moveDisplay.textContent = state.moves;
 
-                // Update moves display style based on limit
                 if (state.mode === 'laststand') {
                     const movesLeft = state.moveLimit - state.moves;
                     moveDisplay.classList.remove('near-limit', 'at-limit');
@@ -1291,7 +1276,6 @@
                 [state.tiles[index], state.tiles[emptyIndex]] = [state.tiles[emptyIndex], state.tiles[index]];
                 state.moves++;
 
-                // Add animation
                 const tile = grid.children[index];
                 tile.classList.add('moving');
                 setTimeout(() => tile.classList.remove('moving'), 300);
@@ -1320,7 +1304,6 @@
                 winMessage.style.display = "block";
                 sounds.win();
 
-                // Achievement checks
                 if (!state.achievements.firstWin.unlocked) {
                     unlockAchievement('firstWin');
                 }
@@ -1351,7 +1334,6 @@
                         initializePuzzle();
                     }, 2000);
                 } else if (state.mode === 'practice') {
-                    // Practice mode: show congratulations and allow continue
                     setTimeout(() => {
                         if (confirm(`✅ Puzzle Solved in ${state.timer}s with ${state.moves} moves!\n\nContinue practicing?`)) {
                             winMessage.style.display = "none";
@@ -1361,7 +1343,6 @@
                         }
                     }, 500);
                 } else {
-                    // Endless mode win
                     setTimeout(() => {
                         showConfetti();
                         setTimeout(() => {
@@ -1414,7 +1395,6 @@
                 const emptyIndex = state.tiles.indexOf(null);
                 let possibleMoves = [];
 
-                // Find all movable tiles
                 state.tiles.forEach((tile, index) => {
                     if (tile !== null && canMove(index)) {
                         possibleMoves.push(index);
@@ -1422,15 +1402,12 @@
                 });
 
                 if (possibleMoves.length > 0) {
-                    // Find the tile that should be in the empty spot
                     const correctTile = emptyIndex + 1;
                     const tileIndex = state.tiles.indexOf(correctTile);
 
-                    // If the correct tile is movable and would make progress, highlight it
                     if (tileIndex !== -1 && possibleMoves.includes(tileIndex)) {
                         highlightTile(tileIndex);
                     } else {
-                        // Otherwise highlight a random movable tile
                         const randomIndex = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
                         highlightTile(randomIndex);
                     }
@@ -1469,7 +1446,6 @@
                 sounds.click();
             }
 
-            // Game Over Modal
             const gameOverModal = document.getElementById('gameOver');
             const gameOverTitle = document.getElementById('gameOverTitle');
             const gameOverMessage = document.getElementById('gameOverMessage');
@@ -1505,7 +1481,6 @@
                 winMessage.style.display = 'none';
             }
 
-            // Pause Functionality
             const pauseBtn = document.getElementById('pauseBtn');
             pauseBtn.onclick = () => {
                 if (state.mode) {
@@ -1523,7 +1498,6 @@
                 }
             };
 
-            // Keyboard Controls
             document.addEventListener('keydown', (e) => {
                 if (state.solved || state.isPaused || !state.mode) return;
 
@@ -1561,10 +1535,8 @@
                 }
             });
 
-            // Initialize achievements display
             updateAchievementsDisplay();
 
-            // Initialize controls
             document.getElementById('newGameBtn').onclick = () => {
                 sounds.click();
                 initializePuzzle();
@@ -1573,12 +1545,10 @@
             document.getElementById('hintBtn').onclick = useHint;
             document.getElementById('undoBtn').onclick = undo;
 
-            // Check for mobile
             if ('ontouchstart' in window) {
                 document.body.classList.add('touch-device');
             }
 
-            // Home screen and initialization functions
             function startFromHome() {
                 document.getElementById('homeScreen').style.display = 'none';
                 document.getElementById('gameContainer').style.display = 'block';
@@ -1589,12 +1559,10 @@
                 help.style.display = help.style.display === 'none' ? 'block' : 'none';
             }
 
-            // Initialize with saved sound preference
             document.addEventListener('DOMContentLoaded', () => {
                 updateAchievementsDisplay();
             });
 
-            // Keyboard support - Escape to return home
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     window.location.href = '../../index.html';

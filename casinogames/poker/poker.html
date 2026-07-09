@@ -364,7 +364,6 @@
 </div>
 
 <script>
-    // --------------------- GLOBALS -------------------------
     let balance = 1000;
     let pot = 0;
     let currentBetSize = 100;        // base bet amount
@@ -382,7 +381,6 @@
     let gameActive = true;            // if folded or finished, disables actions
     let playerFolded = false;
 
-    // DOM elements
     const bankSpan = document.getElementById('bankAmount');
     const potSpan = document.getElementById('potAmount');
     const currentBetSpan = document.getElementById('currentBetDisplay');
@@ -398,7 +396,6 @@
     const foldAction = document.getElementById('foldActionBtn');
     const newGameBtn = document.getElementById('newGameBtn');
 
-    // helper: create fresh deck
     function buildDeck() {
         const suits = ['♠', '♥', '♦', '♣'];
         const ranks = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
@@ -418,12 +415,10 @@
         return deckArr;
     }
 
-    // draw n cards from deck
     function drawCards(n) {
         return deck.splice(0, n);
     }
 
-    // render cards
     function renderCard(card, hidden = false) {
         const div = document.createElement('div');
         div.className = 'playing-card';
@@ -444,13 +439,10 @@
         bankSpan.innerText = Math.floor(balance);
         potSpan.innerText = pot;
         currentBetSpan.innerText = currentBetSize;
-        // render community
         communityDiv.innerHTML = '';
         community.forEach(c => communityDiv.appendChild(renderCard(c, false)));
-        // render player hand
         playerCardsDiv.innerHTML = '';
         playerHand.forEach(c => playerCardsDiv.appendChild(renderCard(c, false)));
-        // dealer hand : hide if stage < 4 and not showdown
         dealerCardsDiv.innerHTML = '';
         dealerHand.forEach((c, idx) => {
             if (stage < 4 && !playerFolded && gameActive && idx === 1) {
@@ -459,13 +451,11 @@
                 dealerCardsDiv.appendChild(renderCard(c, false));
             }
         });
-        // update stage indicator styling
         document.querySelectorAll('.stage').forEach(el => {
             const s = parseInt(el.dataset.stage);
             if (s === stage) el.classList.add('active');
             else el.classList.remove('active');
         });
-        // hand strengths
         if (stage > 0 && !playerFolded && gameActive) {
             const playerEval = evaluateBestHand([...playerHand, ...community]);
             playerStrengthSpan.innerText = playerEval.name;
@@ -485,7 +475,6 @@
         }
     }
 
-    // Poker ranking evaluator (returns rank index + readable name)
     function evaluateBestHand(cards) {
         if (cards.length < 5) return { rank: 0, name: 'High Card', score: 0 };
         const allCombos = getCombinations(cards, 5);
@@ -549,19 +538,15 @@
         return { rank: 0, score: Math.max(...values) };
     }
 
-    // game flow: next round (deal community accordingly)
     function advanceStage() {
         if (!gameActive || playerFolded) return;
         
-        // Dealer AI response
         setTimeout(() => {
             if (!gameActive) return;
             
-            // Dealer makes a decision based on simple AI
             const dealerStrength = Math.random();
             
             if (dealerStrength < 0.25) {
-                // Dealer folds 25% of time
                 gameActive = false;
                 gamesPlayed++;
                 gamesWon++;
@@ -574,7 +559,6 @@
                 return;
             }
             
-            // Dealer calls/continues - advance to next stage
             if (stage === 0) {
                 community = drawCards(3);
                 stage = 1;
@@ -640,7 +624,6 @@
         modal.classList.add('show');
     }
 
-    // betting actions
     function placeBet() {
         if (!gameActive || playerFolded || stage > 0) return;
         if (balance < currentBetSize) { alert('Insufficient chips!'); return; }
@@ -730,7 +713,6 @@
         }
     }
 
-    // event listeners
     function init() {
         newGameReset();
         document.getElementById('betActionBtn').onclick = placeBet;
@@ -751,7 +733,6 @@
                 updateUI();
             });
         });
-        // keyboard shortcuts
         window.addEventListener('keydown', (e) => {
             if (document.getElementById('resultModal').classList.contains('show')) {
                 if (e.key === 'Enter') document.getElementById('closeModalBtn').click();

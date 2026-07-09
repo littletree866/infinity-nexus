@@ -1481,22 +1481,18 @@
     </div>
 
     <script>
-        // ===== ENHANCED POKEMON DATABASE =====
         const POKEMON_DB = [
-            // Basic Pokémon (Routes 1-3)
             { id: 'pidgey', name: 'Pidgey', emoji: '🐦', type: ['normal', 'flying'], base: { hp: 40, atk: 45, def: 40, spd: 56, spAtk: 35, spDef: 35 }, moves: ['tackle', 'gust', 'quickattack', 'sandattack'], catchRate: 0.65, rarity: 'common', evolution: { level: 18, into: 'pidgeotto' } },
             { id: 'rattata', name: 'Rattata', emoji: '🐀', type: ['normal'], base: { hp: 30, atk: 56, def: 35, spd: 72, spAtk: 25, spDef: 35 }, moves: ['tackle', 'quickattack', 'bite', 'focusenergy'], catchRate: 0.7, rarity: 'common', evolution: { level: 20, into: 'raticate' } },
             { id: 'caterpie', name: 'Caterpie', emoji: '🐛', type: ['bug'], base: { hp: 45, atk: 30, def: 35, spd: 45, spAtk: 20, spDef: 20 }, moves: ['tackle', 'stringshot'], catchRate: 0.75, rarity: 'common', evolution: { level: 7, into: 'metapod' } },
             { id: 'weedle', name: 'Weedle', emoji: '🐛', type: ['bug', 'poison'], base: { hp: 40, atk: 35, def: 30, spd: 50, spAtk: 20, spDef: 20 }, moves: ['poisonsting', 'stringshot'], catchRate: 0.75, rarity: 'common', evolution: { level: 7, into: 'kakuna' } },
             { id: 'spearow', name: 'Spearow', emoji: '🐥', type: ['normal', 'flying'], base: { hp: 40, atk: 60, def: 30, spd: 70, spAtk: 31, spDef: 31 }, moves: ['peck', 'growl', 'leer', 'furyattack'], catchRate: 0.7, rarity: 'common', evolution: { level: 20, into: 'fearow' } },
 
-            // Starter Pokémon
             { id: 'bulbasaur', name: 'Bulbasaur', emoji: '🌱', type: ['grass', 'poison'], base: { hp: 45, atk: 49, def: 49, spd: 45, spAtk: 65, spDef: 65 }, moves: ['tackle', 'vinewhip', 'poisonpowder', 'growth', 'razorleaf'], catchRate: 0.45, rarity: 'starter', evolution: { level: 16, into: 'ivysaur' } },
             { id: 'charmander', name: 'Charmander', emoji: '🔥', type: ['fire'], base: { hp: 39, atk: 52, def: 43, spd: 65, spAtk: 60, spDef: 50 }, moves: ['scratch', 'ember', 'smokescreen', 'flamewheel', 'firespin'], catchRate: 0.45, rarity: 'starter', evolution: { level: 16, into: 'charmeleon' } },
             { id: 'squirtle', name: 'Squirtle', emoji: '🐢', type: ['water'], base: { hp: 44, atk: 48, def: 65, spd: 43, spAtk: 50, spDef: 64 }, moves: ['tackle', 'watergun', 'withdraw', 'bubble', 'waterpulse'], catchRate: 0.45, rarity: 'starter', evolution: { level: 16, into: 'wartortle' } },
             { id: 'pikachu', name: 'Pikachu', emoji: '⚡', type: ['electric'], base: { hp: 35, atk: 55, def: 40, spd: 90, spAtk: 50, spDef: 50 }, moves: ['thundershock', 'quickattack', 'growl', 'thunderbolt', 'thunderwave'], catchRate: 0.5, rarity: 'starter', evolution: { item: 'thunderstone', into: 'raichu' } },
 
-            // Route 4-6 Pokémon
             { id: 'meowth', name: 'Meowth', emoji: '🐱', type: ['normal'], base: { hp: 40, atk: 45, def: 35, spd: 90, spAtk: 40, spDef: 40 }, moves: ['scratch', 'bite', 'growl', 'fury', 'payday'], catchRate: 0.6, rarity: 'uncommon', evolution: { level: 28, into: 'persian' } },
             { id: 'sandshrew', name: 'Sandshrew', emoji: '🦔', type: ['ground'], base: { hp: 50, atk: 75, def: 85, spd: 40, spAtk: 20, spDef: 30 }, moves: ['scratch', 'sandattack', 'dig', 'slash'], catchRate: 0.6, rarity: 'uncommon', evolution: { level: 22, into: 'sandslash' } },
             { id: 'jigglypuff', name: 'Jigglypuff', emoji: '🎤', type: ['normal', 'fairy'], base: { hp: 115, atk: 45, def: 20, spd: 20, spAtk: 45, spDef: 25 }, moves: ['pound', 'sing', 'defensecurl', 'disarmingvoice'], catchRate: 0.6, rarity: 'uncommon', evolution: { item: 'moonstone', into: 'wigglytuff' } },
@@ -1504,7 +1500,6 @@
             { id: 'mankey', name: 'Mankey', emoji: '🐒', type: ['fighting'], base: { hp: 40, atk: 80, def: 35, spd: 70, spAtk: 35, spDef: 45 }, moves: ['scratch', 'lowkick', 'leer', 'karatechop'], catchRate: 0.6, rarity: 'uncommon', evolution: { level: 28, into: 'primeape' } },
             { id: 'psyduck', name: 'Psyduck', emoji: '🦆', type: ['water'], base: { hp: 50, atk: 52, def: 48, spd: 55, spAtk: 65, spDef: 50 }, moves: ['scratch', 'watergun', 'confusion', 'waterpulse'], catchRate: 0.65, rarity: 'uncommon', evolution: { level: 33, into: 'golduck' } },
 
-            // Advanced Pokémon (Routes 7-9)
             { id: 'growlithe', name: 'Growlithe', emoji: '🐕', type: ['fire'], base: { hp: 55, atk: 70, def: 45, spd: 60, spAtk: 70, spDef: 50 }, moves: ['bite', 'ember', 'leer', 'flamethrower', 'fireblast'], catchRate: 0.5, rarity: 'rare', evolution: { item: 'firestone', into: 'arcanine' } },
             { id: 'abra', name: 'Abra', emoji: '🌀', type: ['psychic'], base: { hp: 25, atk: 20, def: 15, spd: 90, spAtk: 105, spDef: 55 }, moves: ['teleport', 'confusion', 'psybeam'], catchRate: 0.4, rarity: 'rare', evolution: { level: 16, into: 'kadabra' } },
             { id: 'machop', name: 'Machop', emoji: '💪', type: ['fighting'], base: { hp: 70, atk: 80, def: 50, spd: 35, spAtk: 35, spDef: 35 }, moves: ['karatechop', 'lowkick', 'leer', 'submission'], catchRate: 0.5, rarity: 'rare', evolution: { level: 28, into: 'machoke' } },
@@ -1512,22 +1507,18 @@
             { id: 'gastly', name: 'Gastly', emoji: '👻', type: ['ghost', 'poison'], base: { hp: 30, atk: 35, def: 30, spd: 80, spAtk: 100, spDef: 35 }, moves: ['lick', 'confuseray', 'nightshade', 'shadowball'], catchRate: 0.4, rarity: 'rare', evolution: { level: 25, into: 'haunter' } },
             { id: 'eevee', name: 'Eevee', emoji: '🦊', type: ['normal'], base: { hp: 55, atk: 55, def: 50, spd: 55, spAtk: 45, spDef: 65 }, moves: ['tackle', 'tailwhip', 'quickattack', 'bite', 'swift'], catchRate: 0.35, rarity: 'rare', evolution: { item: ['waterstone', 'firestone', 'thunderstone'], into: ['vaporeon', 'flareon', 'jolteon'] } },
 
-            // Rare Pokémon
             { id: 'dratini', name: 'Dratini', emoji: '🐉', type: ['dragon'], base: { hp: 41, atk: 64, def: 45, spd: 50, spAtk: 50, spDef: 50 }, moves: ['wrap', 'leer', 'thunderwave', 'dragonrage', 'dragontail'], catchRate: 0.3, rarity: 'epic', evolution: { level: 30, into: 'dragonair' } },
             { id: 'lapras', name: 'Lapras', emoji: '🐋', type: ['water', 'ice'], base: { hp: 130, atk: 85, def: 80, spd: 60, spAtk: 85, spDef: 95 }, moves: ['watergun', 'sing', 'mist', 'icebeam', 'surf'], catchRate: 0.25, rarity: 'epic', evolution: null },
             { id: 'scyther', name: 'Scyther', emoji: '🦗', type: ['bug', 'flying'], base: { hp: 70, atk: 110, def: 80, spd: 105, spAtk: 55, spDef: 80 }, moves: ['quickattack', 'leer', 'furycutter', 'wingattack', 'slash'], catchRate: 0.25, rarity: 'epic', evolution: { item: 'metalcoat', into: 'scizor' } },
             { id: 'porygon', name: 'Porygon', emoji: '💾', type: ['normal'], base: { hp: 65, atk: 60, def: 70, spd: 40, spAtk: 85, spDef: 75 }, moves: ['tackle', 'conversion', 'psybeam', 'triattack'], catchRate: 0.2, rarity: 'epic', evolution: { item: 'upgrade', into: 'porygon2' } },
 
-            // Legendary Pokémon (Very Rare)
             { id: 'articuno', name: 'Articuno', emoji: '🧊', type: ['ice', 'flying'], base: { hp: 90, atk: 85, def: 100, spd: 85, spAtk: 95, spDef: 125 }, moves: ['icebeam', 'hurricane', 'roost', 'blizzard', 'freezedry'], catchRate: 0.05, rarity: 'legendary', evolution: null },
             { id: 'zapdos', name: 'Zapdos', emoji: '⚡', type: ['electric', 'flying'], base: { hp: 90, atk: 90, def: 85, spd: 100, spAtk: 125, spDef: 90 }, moves: ['thunderbolt', 'drillpeck', 'roost', 'thunder', 'zapcannon'], catchRate: 0.05, rarity: 'legendary', evolution: null },
             { id: 'moltres', name: 'Moltres', emoji: '🔥', type: ['fire', 'flying'], base: { hp: 90, atk: 100, def: 90, spd: 90, spAtk: 125, spDef: 85 }, moves: ['flamethrower', 'skyattack', 'roost', 'fireblast', 'overheat'], catchRate: 0.05, rarity: 'legendary', evolution: null },
             { id: 'mewtwo', name: 'Mewtwo', emoji: '👽', type: ['psychic'], base: { hp: 106, atk: 110, def: 90, spd: 130, spAtk: 154, spDef: 90 }, moves: ['confusion', 'swift', 'psychic', 'recover', 'psystrike'], catchRate: 0.03, rarity: 'legendary', evolution: null }
         ];
 
-        // ===== ENHANCED MOVE DATABASE =====
         const MOVE_DB = {
-            // Normal moves
             tackle: { name: 'Tackle', power: 40, acc: 100, type: 'normal', priority: 0, pp: 35, category: 'physical' },
             quickattack: { name: 'Quick Attack', power: 40, acc: 100, type: 'normal', priority: 1, pp: 30, category: 'physical' },
             bite: { name: 'Bite', power: 60, acc: 100, type: 'dark', critRate: 0.125, pp: 25, category: 'physical', effect: 'flinch-30' },
@@ -1538,7 +1529,6 @@
             hyperbeam: { name: 'Hyper Beam', power: 150, acc: 90, type: 'normal', recharge: true, pp: 5, category: 'special' },
             triattack: { name: 'Tri Attack', power: 80, acc: 100, type: 'normal', pp: 10, category: 'special', effect: 'status-20' },
 
-            // Grass moves
             vinewhip: { name: 'Vine Whip', power: 45, acc: 100, type: 'grass', pp: 25, category: 'physical' },
             razorleaf: { name: 'Razor Leaf', power: 55, acc: 95, type: 'grass', critRate: 0.125, pp: 25, category: 'physical' },
             poisonpowder: { name: 'Poison Powder', power: 0, acc: 75, type: 'poison', effect: 'poison', pp: 35, category: 'status' },
@@ -1546,7 +1536,6 @@
             megadrain: { name: 'Mega Drain', power: 40, acc: 100, type: 'grass', effect: 'drain', drain: 0.5, pp: 15, category: 'special' },
             stunspore: { name: 'Stun Spore', power: 0, acc: 75, type: 'grass', effect: 'paralyze', pp: 30, category: 'status' },
 
-            // Fire moves
             ember: { name: 'Ember', power: 40, acc: 100, type: 'fire', pp: 25, category: 'special', effect: 'burn-10' },
             flamethrower: { name: 'Flamethrower', power: 90, acc: 100, type: 'fire', effect: 'burn-10', pp: 15, category: 'special' },
             fireblast: { name: 'Fire Blast', power: 110, acc: 85, type: 'fire', effect: 'burn-30', pp: 5, category: 'special' },
@@ -1554,14 +1543,12 @@
             firespin: { name: 'Fire Spin', power: 35, acc: 85, type: 'fire', effect: 'trap', pp: 15, category: 'special' },
             overheat: { name: 'Overheat', power: 130, acc: 90, type: 'fire', pp: 5, category: 'special', effect: 'self-lower-spatk-2' },
 
-            // Water moves
             watergun: { name: 'Water Gun', power: 40, acc: 100, type: 'water', pp: 25, category: 'special' },
             hydropump: { name: 'Hydro Pump', power: 110, acc: 80, type: 'water', pp: 5, category: 'special' },
             bubble: { name: 'Bubble', power: 40, acc: 100, type: 'water', pp: 30, category: 'special', effect: 'lower-spd-10' },
             waterpulse: { name: 'Water Pulse', power: 60, acc: 100, type: 'water', pp: 20, category: 'special', effect: 'confuse-20' },
             surf: { name: 'Surf', power: 90, acc: 100, type: 'water', pp: 15, category: 'special' },
 
-            // Electric moves
             thundershock: { name: 'Thunder Shock', power: 40, acc: 100, type: 'electric', pp: 30, category: 'special', effect: 'paralyze-10' },
             thunderbolt: { name: 'Thunderbolt', power: 90, acc: 100, type: 'electric', effect: 'paralyze-10', pp: 15, category: 'special' },
             thunder: { name: 'Thunder', power: 110, acc: 70, type: 'electric', effect: 'paralyze-30', pp: 10, category: 'special' },
@@ -1569,7 +1556,6 @@
             thunderwave: { name: 'Thunder Wave', power: 0, acc: 90, type: 'electric', effect: 'paralyze', pp: 20, category: 'status' },
             zapcannon: { name: 'Zap Cannon', power: 120, acc: 50, type: 'electric', effect: 'paralyze-100', pp: 5, category: 'special' },
 
-            // Status moves
             growl: { name: 'Growl', power: 0, acc: 100, type: 'normal', effect: 'lower-atk', pp: 40, category: 'status', target: 'all-opponents' },
             tailwhip: { name: 'Tail Whip', power: 0, acc: 100, type: 'normal', effect: 'lower-def', pp: 30, category: 'status', target: 'all-opponents' },
             smokescreen: { name: 'Smokescreen', power: 0, acc: 100, type: 'normal', effect: 'lower-acc', pp: 20, category: 'status' },
@@ -1581,7 +1567,6 @@
             hypnosis: { name: 'Hypnosis', power: 0, acc: 60, type: 'psychic', effect: 'sleep', pp: 20, category: 'status' },
             focusenergy: { name: 'Focus Energy', power: 0, acc: 100, type: 'normal', effect: 'boost-crit', pp: 30, category: 'status' },
 
-            // Special moves
             gust: { name: 'Gust', power: 40, acc: 100, type: 'flying', pp: 35, category: 'special' },
             poisonsting: { name: 'Poison Sting', power: 15, acc: 100, type: 'poison', effect: 'poison-30', pp: 35, category: 'physical' },
             stringshot: { name: 'String Shot', power: 0, acc: 95, type: 'bug', effect: 'lower-spd', pp: 40, category: 'status', target: 'all-opponents' },
@@ -1621,7 +1606,6 @@
             furycutter: { name: 'Fury Cutter', power: 40, acc: 95, type: 'bug', pp: 20, category: 'physical', effect: 'consecutive' }
         };
 
-        // ===== ENHANCED TYPE EFFECTIVENESS =====
         const TYPE_CHART = {
             normal: { strong: [], weak: ['fighting'], immune: ['ghost'] },
             fire: { strong: ['grass', 'ice', 'bug', 'steel'], weak: ['water', 'ground', 'rock'] },
@@ -1643,7 +1627,6 @@
             fairy: { strong: ['fighting', 'dragon', 'dark'], weak: ['poison', 'steel'] }
         };
 
-        // ===== GAME STATE =====
         let gameState = {
             playerName: 'Ash',
             playerLevel: 1,
@@ -1668,7 +1651,6 @@
             gameTime: 0
         };
 
-        // ===== ENHANCED ROUTE SYSTEM =====
         const ROUTES = {
             1: {
                 name: 'Route 1', encounterRate: 0.15, pokemon: [
@@ -1745,7 +1727,6 @@
             }
         };
 
-        // ===== UTILITY FUNCTIONS =====
         function randint(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
@@ -1770,7 +1751,6 @@
             return Math.max(a, Math.min(b, v));
         }
 
-        // ===== ACHIEVEMENT SYSTEM =====
         const ACHIEVEMENTS = {
             first_catch: { title: "First Catch!", desc: "Catch your first Pokémon", reward: 50 },
             pokemon_master: { title: "Pokémon Master", desc: "Catch 10 different Pokémon", reward: 200 },
@@ -1786,14 +1766,12 @@
             gameState.achievements.add(id);
             const achievement = ACHIEVEMENTS[id];
 
-            // Show achievement toast
             document.getElementById('achievementTitle').textContent = achievement.title;
             document.getElementById('achievementDesc').textContent = achievement.desc;
 
             const toast = document.getElementById('achievementToast');
             toast.classList.add('show');
 
-            // Add gold reward
             gameState.gold += achievement.reward;
 
             setTimeout(() => {
@@ -1803,7 +1781,6 @@
             addBattleLog(`Achievement Unlocked: ${achievement.title}! (+${achievement.reward} gold)`, 'special');
         }
 
-        // ===== INITIALIZE GAME =====
         function initializeGame() {
             const saved = localStorage.getItem('pk_arcane_enhanced_save');
             if (saved) {
@@ -1813,7 +1790,6 @@
                     loaded.achievements = new Set(loaded.achievements);
                     gameState = loaded;
 
-                    // Ensure party exists
                     if (!gameState.party || gameState.party.length === 0) {
                         giveStarterPokemon();
                     }
@@ -1826,7 +1802,6 @@
                 gameState.achievements = new Set();
             }
 
-            // Set player name from prompt if new game
             if (!saved) {
                 const name = prompt("Enter your trainer name:", "Ash");
                 if (name && name.trim()) {
@@ -1853,7 +1828,6 @@
             const routeData = ROUTES[gameState.currentRoute];
             const actualLevel = level || randint(routeData.minLevel, routeData.maxLevel);
 
-            // Calculate stats with level scaling
             const hp = Math.floor(dbEntry.base.hp * 2 * actualLevel / 100) + actualLevel + 10;
             const atk = Math.floor(dbEntry.base.atk * 2 * actualLevel / 100) + 5;
             const def = Math.floor(dbEntry.base.def * 2 * actualLevel / 100) + 5;
@@ -1894,11 +1868,9 @@
         }
 
         function selectMovesForLevel(availableMoves, level) {
-            // Select up to 4 moves based on level
             const maxMoves = Math.min(4, Math.floor(level / 10) + 2);
             const selectedMoves = [];
 
-            // Always include basic moves
             const basicMoves = ['tackle', 'scratch', 'pound', 'growl', 'leer'];
             const basics = availableMoves.filter(m => basicMoves.includes(m));
 
@@ -1906,7 +1878,6 @@
                 selectedMoves.push(randomChoice(basics));
             }
 
-            // Add other moves based on level
             const otherMoves = availableMoves.filter(m => !basicMoves.includes(m));
             while (selectedMoves.length < maxMoves && otherMoves.length > 0) {
                 const move = randomChoice(otherMoves);
@@ -1918,7 +1889,6 @@
             return selectedMoves.slice(0, 4);
         }
 
-        // ===== ENHANCED MAP SYSTEM =====
         const TILE_SIZE = 50;
         const MAP_WIDTH = 16;
         const MAP_HEIGHT = 10;
@@ -1932,7 +1902,6 @@
             const routeData = ROUTES[route];
             gameState.location = routeData.name;
 
-            // Update encounter rate display
             document.getElementById('encRate').textContent = `${Math.round(routeData.encounterRate * 100)}%`;
 
             mapTiles = Array.from({ length: MAP_HEIGHT }, (_, y) =>
@@ -1954,18 +1923,15 @@
                 })
             );
 
-            // Add special tiles
             mapTiles[5][1] = 'heal';
             mapTiles[4][1] = 'shop';
             mapTiles[3][MAP_WIDTH - 2] = 'gate';
 
-            // Add legendary shrine on route 11
             if (route === 11) {
                 mapTiles[5][8] = 'shrine';
             }
         }
 
-        // ===== ENHANCED CANVAS RENDERING =====
         const canvas = document.getElementById('map');
         const ctx = canvas.getContext('2d');
         let renderX = gameState.pos.x * TILE_SIZE + TILE_SIZE / 2;
@@ -1974,7 +1940,6 @@
         function draw() {
             const now = Date.now();
 
-            // Smooth camera follow
             const targetX = gameState.pos.x * TILE_SIZE + TILE_SIZE / 2;
             const targetY = gameState.pos.y * TILE_SIZE + TILE_SIZE / 2;
             cameraX += (targetX - canvas.width / 2 - cameraX) * 0.1;
@@ -1982,7 +1947,6 @@
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Draw tiles with camera offset
             const tileColors = {
                 path: '#5a5240',
                 tallgrass: '#2a8b2a',
@@ -2014,7 +1978,6 @@
                     ctx.fillStyle = color;
                     ctx.fillRect(screenX, screenY, TILE_SIZE, TILE_SIZE);
 
-                    // Add details with improved graphics
                     if (tile === 'tallgrass') {
                         ctx.fillStyle = 'rgba(40, 180, 40, 0.8)';
                         for (let i = 0; i < 6; i++) {
@@ -2081,18 +2044,15 @@
                 }
             }
 
-            // Draw player with enhanced graphics
             const playerScreenX = renderX - cameraX;
             const playerScreenY = renderY - cameraY;
             const bob = Math.sin(now / 200) * 3;
 
-            // Draw player shadow
             ctx.fillStyle = 'rgba(0,0,0,0.4)';
             ctx.beginPath();
             ctx.ellipse(playerScreenX, playerScreenY + 25, 20, 8, 0, 0, Math.PI * 2);
             ctx.fill();
 
-            // Draw player sprite with better design
             ctx.fillStyle = '#4cc9f0';
             ctx.beginPath();
             ctx.arc(playerScreenX, playerScreenY - 5 + bob, 15, 0, Math.PI * 2);
@@ -2108,14 +2068,12 @@
             ctx.arc(playerScreenX, playerScreenY - 15 + bob, 10, 0, Math.PI * 2);
             ctx.fill();
 
-            // Draw eyes
             ctx.fillStyle = '#000';
             ctx.beginPath();
             ctx.arc(playerScreenX - 4, playerScreenY - 17 + bob, 2, 0, Math.PI * 2);
             ctx.arc(playerScreenX + 4, playerScreenY - 17 + bob, 2, 0, Math.PI * 2);
             ctx.fill();
 
-            // Draw particles with enhanced effects
             for (let i = particles.length - 1; i >= 0; i--) {
                 const p = particles[i];
                 const age = now - p.t;
@@ -2136,7 +2094,6 @@
                 ctx.arc(particleScreenX, particleScreenY, p.size || 3, 0, Math.PI * 2);
                 ctx.fill();
 
-                // Add glow effect
                 ctx.fillStyle = p.color ? p.color.replace('0.8', '0.3') : `rgba(150, 200, 150, ${0.3 * a})`;
                 ctx.beginPath();
                 ctx.arc(particleScreenX, particleScreenY, (p.size || 3) * 2, 0, Math.PI * 2);
@@ -2180,15 +2137,12 @@
             }
         }
 
-        // ===== ENHANCED MOVEMENT CONTROLS =====
         const keysDown = {};
 
-        // Enhanced keyboard controls
         document.addEventListener('keydown', (e) => {
             const key = e.key.toLowerCase();
             keysDown[key] = true;
 
-            // Prevent default for arrow keys and WASD
             if (['arrowup', 'arrowdown', 'arrowleft', 'arrowright', 'w', 'a', 's', 'd'].includes(key)) {
                 e.preventDefault();
             }
@@ -2198,7 +2152,6 @@
             keysDown[e.key.toLowerCase()] = false;
         });
 
-        // On-screen control buttons
         document.getElementById('upBtn').addEventListener('click', () => movePlayer(0, -1));
         document.getElementById('downBtn').addEventListener('click', () => movePlayer(0, 1));
         document.getElementById('leftBtn').addEventListener('click', () => movePlayer(-1, 0));
@@ -2227,14 +2180,12 @@
             if (now - lastMoveTime >= moveCooldown && !gameState.inBattle) {
                 let dx = 0, dy = 0;
 
-                // Keyboard controls with proper priority
                 if (keysDown['arrowup'] || keysDown['w']) dy = -1;
                 else if (keysDown['arrowdown'] || keysDown['s']) dy = 1;
 
                 if (keysDown['arrowleft'] || keysDown['a']) dx = -1;
                 else if (keysDown['arrowright'] || keysDown['d']) dx = 1;
 
-                // Only move if one direction is pressed (prevents diagonal)
                 if (dx !== 0 && dy === 0) {
                     movePlayer(dx, 0);
                     lastMoveTime = now;
@@ -2282,13 +2233,11 @@
             gameState.steps++;
             spawnStepParticles();
 
-            // Smooth player position for rendering
             renderX = gameState.pos.x * TILE_SIZE + TILE_SIZE / 2;
             renderY = gameState.pos.y * TILE_SIZE + TILE_SIZE / 2;
 
             updateHUD();
 
-            // Check for encounters
             const routeData = ROUTES[gameState.currentRoute];
             if ((tile === 'tallgrass' || tile === 'cave') && Math.random() < routeData.encounterRate) {
                 triggerEncounter();
@@ -2310,10 +2259,8 @@
 
         function addLogMessage(msg) {
             console.log('[LOG]', msg);
-            // Could add to an on-screen log in the future
         }
 
-        // ===== ENHANCED BATTLE SYSTEM WITH TURN-BASED FIX =====
         function triggerEncounter() {
             if (gameState.inBattle) return;
 
@@ -2335,7 +2282,6 @@
             gameState.battleLock = false; // Reset battle lock
             gameState.movePP = {};
 
-            // Check for shiny chance (1 in 4096)
             if (Math.random() < 1 / 4096) {
                 gameState.wild.isShiny = true;
                 gameState.wild.emoji = '✨' + gameState.wild.emoji;
@@ -2353,7 +2299,6 @@
             renderBattleUI();
             updateBattleButtons();
 
-            // Check achievements
             if (gameState.battleCount >= 20) unlockAchievement('battle_expert');
         }
 
@@ -2366,7 +2311,6 @@
                 return;
             }
 
-            // Enemy Pokémon
             document.getElementById('enemy-name').textContent = wildPoke.name + (wildPoke.isShiny ? ' ✨' : '');
             document.getElementById('enemy-level').textContent = wildPoke.level;
             document.getElementById('enemy-max-hp').textContent = wildPoke.maxHp;
@@ -2396,7 +2340,6 @@
                 enemyTypes.appendChild(span);
             });
 
-            // Player Pokémon
             document.getElementById('player-active-name').textContent = playerPoke.name;
             document.getElementById('player-level').textContent = playerPoke.level;
             document.getElementById('player-max-hp').textContent = playerPoke.maxHp;
@@ -2408,7 +2351,6 @@
             if (playerHpPercent < 25) playerHpBar.classList.add('low');
             else playerHpBar.classList.remove('low');
 
-            // EXP
             const expNeeded = playerPoke.level * 100;
             const expPercent = (playerPoke.exp / expNeeded) * 100;
             document.getElementById('player-exp-text').textContent = playerPoke.exp;
@@ -2451,11 +2393,9 @@
                 btn.className = 'move-btn';
                 btn.disabled = disabled;
 
-                // Set type color for move
                 const typeColor = `var(--${move.type})`;
                 btn.style.borderLeft = `5px solid ${typeColor}`;
 
-                // Add move type indicator
                 const moveType = document.createElement('span');
                 moveType.className = 'move-type';
                 moveType.textContent = move.type;
@@ -2478,7 +2418,6 @@
                 container.appendChild(btn);
             });
 
-            // Update action buttons state
             const battleLock = gameState.battleLock || !gameState.playerTurn;
             document.getElementById('runBtn').disabled = battleLock;
             document.getElementById('catchBtn').disabled = battleLock;
@@ -2486,11 +2425,9 @@
             document.getElementById('switchBtn').disabled = battleLock;
         }
 
-        // ===== FIXED BATTLE MECHANICS - NO SPAM ATTACKS =====
         function performMove(moveId) {
             if (gameState.battleLock || !gameState.playerTurn) return;
 
-            // Lock battle to prevent spam
             gameState.battleLock = true;
 
             const playerPoke = gameState.party[0];
@@ -2507,18 +2444,15 @@
                 return;
             }
 
-            // Use PP
             playerPoke.movePP[moveId]--;
 
             addBattleLog(`${playerPoke.name} used ${move.name}!`);
 
-            // Check accuracy
             if (!move.neverMiss && Math.random() * 100 > move.acc) {
                 addBattleLog(`${playerPoke.name}'s attack missed!`, 'enemy');
                 gameState.playerTurn = false;
                 updateBattleButtons();
 
-                // Wait then enemy turn
                 setTimeout(() => {
                     gameState.battleLock = false;
                     enemyTurn();
@@ -2526,12 +2460,10 @@
                 return;
             }
 
-            // Handle damage
             if (move.power > 0) {
                 const damage = calculateDamage(playerPoke, wildPoke, move);
                 wildPoke.hp = Math.max(0, wildPoke.hp - damage);
 
-                // Check effectiveness
                 const effectiveness = calculateTypeEffectiveness(move.type, wildPoke.type);
                 let msg = `It dealt ${damage} damage!`;
 
@@ -2548,15 +2480,12 @@
                     addBattleLog(msg);
                 }
 
-                // Visual effect
                 createEffectAnimation(move.type, wildPoke.emoji, damage);
 
-                // Handle special effects
                 if (move.effect) {
                     handleMoveEffect(move.effect, wildPoke, playerPoke);
                 }
             } else {
-                // Status move
                 if (move.effect) {
                     handleMoveEffect(move.effect, wildPoke, playerPoke);
                 }
@@ -2575,7 +2504,6 @@
                 gameState.playerTurn = false;
                 updateBattleButtons();
 
-                // Wait then enemy turn
                 setTimeout(() => {
                     gameState.battleLock = false;
                     enemyTurn();
@@ -2638,7 +2566,6 @@
         }
 
         function handleMoveEffect(effect, target, user) {
-            // Simplified effect handling for brevity
             switch (effect) {
                 case 'poison':
                 case 'poison-30':
@@ -2679,10 +2606,8 @@
                 return;
             }
 
-            // Apply status effects at start of turn
             applyStatusDamage(wildPoke);
 
-            // Check if enemy can move
             if (!canPokemonMove(wildPoke)) {
                 addBattleLog(`${wildPoke.name} is unable to move!`, 'enemy');
                 gameState.playerTurn = true;
@@ -2691,14 +2616,12 @@
                 return;
             }
 
-            // Enemy AI: Choose move
             const availableMoves = wildPoke.moves.filter(moveId => {
                 const move = MOVE_DB[moveId];
                 return move && (!wildPoke.movePP[moveId] || wildPoke.movePP[moveId] > 0);
             });
 
             if (availableMoves.length === 0) {
-                // Struggle if no PP left
                 addBattleLog(`${wildPoke.name} has no moves left!`, 'enemy');
                 const damage = Math.floor(wildPoke.level * 0.4);
                 playerPoke.hp = Math.max(0, playerPoke.hp - damage);
@@ -2717,7 +2640,6 @@
 
                 addBattleLog(`${wildPoke.name} used ${move.name}!`, 'enemy');
 
-                // Check accuracy
                 if (!move.neverMiss && Math.random() * 100 > move.acc) {
                     addBattleLog(`${wildPoke.name}'s attack missed!`);
                     gameState.playerTurn = true;
@@ -2726,7 +2648,6 @@
                     return;
                 }
 
-                // Handle damage
                 if (move.power > 0) {
                     const damage = calculateDamage(wildPoke, playerPoke, move);
                     playerPoke.hp = Math.max(0, playerPoke.hp - damage);
@@ -2823,24 +2744,19 @@
 
             if (!playerPoke || !wildPoke) return;
 
-            // Calculate EXP gain
             const expGain = Math.floor(wildPoke.level * 10 * (wildPoke.baseStats.hp / 100) * (wildPoke.rarity === 'legendary' ? 5 : 1));
             playerPoke.exp += expGain;
 
-            // Check for level up
             const expNeeded = playerPoke.level * 100;
             if (playerPoke.exp >= expNeeded) {
                 levelUpPokemon(playerPoke);
             }
 
-            // Gold reward
             const goldReward = 10 + wildPoke.level * 2 * (wildPoke.rarity === 'legendary' ? 10 : wildPoke.rarity === 'epic' ? 5 : 1);
             gameState.gold += goldReward;
 
-            // Update Pokédex
             gameState.pokedex.add(wildPoke.id);
 
-            // Check achievements
             if (gameState.pokedex.size >= 10) unlockAchievement('pokemon_master');
             if (gameState.gold >= 1000) unlockAchievement('rich_trainer');
             if (wildPoke.rarity === 'legendary') unlockAchievement('legendary_hunter');
@@ -2848,7 +2764,6 @@
             addBattleLog(`Victory! Earned ${expGain} EXP and ${goldReward} gold.`, 'special');
             addBattleLog(`${wildPoke.name} was added to the Pokédex!`, 'special');
 
-            // Chance to find item
             if (Math.random() < 0.1) {
                 const items = ['pokeball', 'potion', 'revive', 'rarecandy'];
                 const foundItem = randomChoice(items);
@@ -2958,7 +2873,6 @@
             updateHUD();
         }
 
-        // ===== ENHANCED UI FUNCTIONS =====
         function addBattleLog(msg, type = '') {
             const log = document.getElementById('battle-log');
             const p = document.createElement('p');
@@ -2969,7 +2883,6 @@
         }
 
         function createEffectAnimation(type, emoji, damage) {
-            // Enhanced visual effects
             const effect = document.createElement('div');
             effect.className = 'spell-effect';
             effect.textContent = emoji;
@@ -3002,7 +2915,6 @@
             effect.style.filter = `drop-shadow(0 0 15px ${typeColors[type] || '#ffffff'})`;
             document.body.appendChild(effect);
 
-            // Damage indicator with enhanced graphics
             if (damage > 0) {
                 const damageIndicator = document.createElement('div');
                 damageIndicator.className = 'damage-indicator';
@@ -3033,7 +2945,6 @@
             document.getElementById('revives').textContent = gameState.items.revive;
             document.getElementById('rareCandies').textContent = gameState.items.rarecandy;
 
-            // Update team display
             const team = document.getElementById('teamDisplay');
             team.innerHTML = '';
             gameState.party.forEach((poke, index) => {
@@ -3091,7 +3002,6 @@
             }
         }
 
-        // ===== SHOP SYSTEM =====
         function openShop() {
             const shopHTML = `
                 <div style="text-align: center; margin-bottom: 20px;">
@@ -3224,7 +3134,6 @@
             });
         }
 
-        // ===== ITEM USAGE =====
         document.getElementById('bagBtn').onclick = () => {
             if (!gameState.inBattle || !gameState.playerTurn || gameState.battleLock) return;
 
@@ -3477,7 +3386,6 @@
             renderBattleUI();
         }
 
-        // ===== BUTTON EVENT LISTENERS =====
         document.getElementById('saveBtn').onclick = () => {
             try {
                 localStorage.setItem('pk_arcane_enhanced_save', JSON.stringify({
@@ -3633,7 +3541,6 @@
             document.getElementById('bagBtn').click();
         };
 
-        // ===== INITIALIZE =====
         window.addEventListener('load', () => {
             let progress = 0;
             const progressInterval = setInterval(() => {

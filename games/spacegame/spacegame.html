@@ -723,14 +723,12 @@
             scoreDisplay.textContent = gameState.score;
             levelDisplay.textContent = gameState.level;
 
-            // Display hearts for lives
             let hearts = '';
             for (let i = 0; i < gameState.maxLives; i++) {
                 hearts += i < gameState.lives ? '❤️' : '🩶';
             }
             livesDisplay.textContent = hearts;
 
-            // Display combo counter
             if (gameState.combo > 0) {
                 document.getElementById('comboCounter').style.display = 'block';
                 document.getElementById('comboValue').textContent = gameState.combo;
@@ -801,7 +799,6 @@
 
                         if (Math.random() < 0.75) { // Slightly increased chance for powerups
                             if (Math.random() < 0.3 && gameState.lives < gameState.maxLives) {
-                                // Spawn health pickup when player is not at full health
                                 spawnHealthPickup(enemy.x, enemy.y);
                             } else {
                                 spawnPowerup(enemy.x, enemy.y);
@@ -827,20 +824,17 @@
 
         function checkLevelProgression() {
 
-            // Check if wave is complete
             if (enemies.length === 0 && enemiesDestroyedInWave >= enemiesInCurrentWave) {
                 currentWave++;
                 enemiesDestroyedInWave = 0;
                 enemiesInCurrentWave = enemiesPerWave + Math.floor(currentWave / 2); // Increase enemies per wave
 
-                // Spawn new wave
                 setTimeout(() => {
                     for (let i = 0; i < enemiesInCurrentWave; i++) {
                         setTimeout(() => spawnEnemy(), i * (enemySpawnRate / enemiesInCurrentWave));
                     }
                 }, 1000);
 
-                // Award points for clearing wave
                 if (gameState.lives === gameState.maxLives) {
                     gameState.score += 200;
                     unlockAchievement('perfectRound');
@@ -985,7 +979,6 @@
                     case 'falling':
                         pickup.y += pickup.speed * (deltaTime / 16);
 
-                        // Check collision with player
                         if (checkCollision(player, pickup)) {
                             pickup.animationStage = 'movingToBar';
                         }
@@ -996,7 +989,6 @@
                         break;
 
                     case 'movingToBar':
-                        // Move toward health bar position
                         const dx = pickup.targetX - pickup.x;
                         const dy = pickup.targetY - pickup.y;
                         const distance = Math.sqrt(dx * dx + dy * dy);
@@ -1030,7 +1022,6 @@
         function drawHealthPickups() {
             healthPickups.forEach(pickup => {
                 if (pickup.animationStage === 'turningRed') {
-                    // Animate color change from green to red
                     const progress = Math.min(1, (Date.now() - pickup.animationStart) / 500);
                     const red = Math.floor(255 * progress);
                     const green = Math.floor(255 * (1 - progress));
@@ -1201,7 +1192,6 @@
             updateHUD();
 
 
-            // Start first wave
             currentWave = 1;
             enemiesInCurrentWave = enemiesPerWave;
             enemiesDestroyedInWave = 0;
@@ -1247,7 +1237,6 @@
 
 
         window.addEventListener('load', init);
-        // Keyboard support - Escape to exit
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 window.location.href = '../../index.html';

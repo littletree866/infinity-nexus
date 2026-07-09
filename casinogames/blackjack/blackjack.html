@@ -497,7 +497,6 @@
 </div>
 
 <script>
-    // ------------------- GAME STATE --------------------
     let balance = 1000;
     let currentBet = 0;
     let playerCards = [];
@@ -507,7 +506,6 @@
     let deck = [];
     let cardsUsed = 0;
 
-    // DOM elements
     const balanceSpan = document.getElementById('balanceValue');
     const betSpan = document.getElementById('betAmount');
     const dealerScoreSpan = document.getElementById('dealerScore');
@@ -525,7 +523,6 @@
     const gameStateLabel = document.getElementById('gameStateLabel');
     const chipElements = document.querySelectorAll('.chip');
 
-    // Helper: Card generation
     const suits = ['♥', '♦', '♠', '♣'];
     const ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 
@@ -576,7 +573,6 @@
         return sum;
     }
 
-    // Render card with modern design
     function renderCardElement(card, hidden = false) {
         const div = document.createElement('div');
         div.className = 'card';
@@ -604,12 +600,10 @@
     function updateUI() {
         balanceSpan.innerText = Math.floor(balance);
         betSpan.innerText = currentBet;
-        // Render player cards always
         playerContainer.innerHTML = '';
         playerCards.forEach(card => {
             playerContainer.appendChild(renderCardElement(card, false));
         });
-        // Render dealer according to reveal
         dealerContainer.innerHTML = '';
         dealerCards.forEach((card, idx) => {
             if (!dealerRevealed && idx === 1 && gameActive) {
@@ -618,7 +612,6 @@
                 dealerContainer.appendChild(renderCardElement(card, false));
             }
         });
-        // update scores and card counts
         const playerTotal = computeHandTotal(playerCards);
         playerScoreSpan.innerText = playerTotal;
         playerCardCount.innerText = playerCards.length + ' card' + (playerCards.length !== 1 ? 's' : '');
@@ -635,7 +628,6 @@
             }
         }
         dealerCardCount.innerText = dealerCards.length + ' card' + (dealerCards.length !== 1 ? 's' : '');
-        // button states
         chipElements.forEach(chip => {
             const betVal = parseInt(chip.getAttribute('data-bet'));
             chip.style.opacity = (gameActive || balance < betVal) ? '0.5' : '1';
@@ -691,7 +683,6 @@
         gameStateLabel.style.color = '#ffaa66';
         saveBalanceToLocal();
         updateUI();
-        // show New round button
         hitBtn.style.display = 'none';
         standBtn.style.display = 'none';
         newRoundBtn.style.display = 'inline-block';
@@ -763,16 +754,13 @@
         gameStateLabel.innerText = '● In play';
         gameStateLabel.style.color = '#ffd966';
         updateUI();
-        // Check for instant blackjack
         const hasBJ = checkNaturalBlackjack();
         if (hasBJ) {
             gameActive = false;
             updateUI();
             return;
         }
-        // if player has 21 after check it still allowed to stand? but normally they'd choose stand anyway.
         if (computeHandTotal(playerCards) === 21) {
-            // optional auto-stand
             dealerTurn();
         }
     }
@@ -846,7 +834,6 @@
         updateUI();
     }
 
-    // Event listeners
     chipElements.forEach(chip => {
         chip.addEventListener('click', () => {
             const val = parseInt(chip.getAttribute('data-bet'));
@@ -859,7 +846,6 @@
     standBtn.addEventListener('click', playerStand);
     newRoundBtn.addEventListener('click', newRound);
 
-    // Initial
     initializeDeck();
     loadBalance();
     resetGameUIForNewRound();

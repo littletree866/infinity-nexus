@@ -7,9 +7,7 @@ const BadgeSystem = (() => {
     const STORAGE_KEY = 'infinityNexus_gameBadges';
     const STORAGE_PROGRESS = 'infinityNexus_badgeProgress';
 
-    // All 29 games with their badges
     const BADGES = [
-        // Games Section (17 games)
         {
             id: 'click_me',
             name: 'Reality Bender',
@@ -219,7 +217,6 @@ const BadgeSystem = (() => {
             reward: { description: 'Chaos Embraced', points: 30 }
         },
 
-        // Casino Section (5 games)
         {
             id: 'blackjack_plus',
             name: 'Card Sharp',
@@ -286,7 +283,6 @@ const BadgeSystem = (() => {
             reward: { description: 'Slot Master', points: 60 }
         },
 
-        // Simulations Section (5 games)
         {
             id: 'great_empire',
             name: 'Empire Builder',
@@ -353,7 +349,6 @@ const BadgeSystem = (() => {
             reward: { description: 'Financial Genius', points: 100 }
         },
 
-        // Monthly Challenges (2 games)
         {
             id: 'january_challenge',
             name: 'January Victor',
@@ -381,7 +376,6 @@ const BadgeSystem = (() => {
             reward: { description: 'Monthly Legend', points: 50 }
         },
 
-        // Special Badges
         {
             id: 'completionist',
             name: '🌟 True Nexus Master',
@@ -455,7 +449,6 @@ const BadgeSystem = (() => {
             unlockBadge(badgeId);
         }
 
-        // Check completionist badge
         const allEarned = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
         if (allEarned.length === 29) {
             unlockBadge('completionist');

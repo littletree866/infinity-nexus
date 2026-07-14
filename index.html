@@ -1,674 +1,1789 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Infinity Nexus</title>
-  <link rel="icon" href="icon.jpg" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinity Nexus</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="icon.jpg" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #fafcff;
-      color: #1a2c3e;
-      line-height: 1.5;
-      scroll-behavior: smooth;
-    }
+    <style>
+        :root[data-theme="dark"] {
+            --primary: #3a8eed;
+            --secondary: #ec4899;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border-color: #475569;
+            --border-radius: 12px;
+            --card-bg: #1e293b;
+            --header-bg: #1a1f35;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            --shadow-hover: 0 12px 32px rgba(124, 58, 237, 0.2);
+        }
 
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 32px;
-    }
+        :root[data-theme="light"],
+        :root {
+            --primary: #3a8eed;
+            --secondary: #ec4899;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #e2e8f0;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --border-color: #cbd5e1;
+            --border-radius: 12px;
+            --card-bg: #ffffff;
+            --header-bg: #f8fafc;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 12px 32px rgba(63, 51, 83, 0.15);
+        }
 
-    header {
-      background: rgba(255,255,255,0.96);
-      backdrop-filter: blur(2px);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.03), 0 2px 6px rgba(0,0,0,0.02);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      border-bottom: 1px solid #e9edf2;
-    }
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .navbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 0;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
+        html,
+        body {
+            height: 100%;
+            scroll-behavior: smooth;
+        }
 
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      background: linear-gradient(135deg, #1f6e8c, #2c3e66);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      text-decoration: none;
-    }
-    .logo span {
-      color: #2c3e66;
-      background: none;
-      background-clip: unset;
-      -webkit-background-clip: unset;
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            transition: "background" 0.3s ease, "color" 0.3s ease;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            display: flex;
+            flex-direction: column;
+        }
 
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-    }
+        /* Container */
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
 
-    .nav-links a {
-      text-decoration: none;
-      font-weight: 500;
-      color: #2c3e50;
-      transition: color 0.2s;
-      font-size: 1rem;
-    }
+        /* Main Layout Wrapper */
+        .main-wrapper {
+            display: flex;
+            gap: 24px;
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 5px 0px;
+        }
 
-    .nav-links a:hover {
-      color: #1f6e8c;
-    }
+        /* Navbar/Header Top */
+        .navbar {
+            background: var(--header-bg);
+            padding: 16px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-    .nav-buttons {
-      display: flex;
-      gap: 12px;
-    }
+        .navbar-brand {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
 
-    .btn-outline {
-      border: 1px solid #cbd5e1;
-      background: transparent;
-      padding: 8px 20px;
-      border-radius: 40px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s;
-      color: #1f2e3a;
-    }
+        .theme-toggle {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-primary);
+        }
 
-    .btn-outline:hover {
-      background: #f1f5f9;
-      border-color: #94a3b8;
-    }
+        .theme-toggle:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+            transform: scale(1.05);
+        }
 
-    .btn-primary {
-      background: #1f6e8c;
-      color: white;
-      border: none;
-      padding: 8px 24px;
-      border-radius: 40px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
-    }
+        /* Sidebar Styles */
+        .sidebar {
+            flex-shrink: 0;
+            width: 300px;
+            max-height: fit-content;
+            position: sticky;
+            top: 28px;
+            margin-left: -28px;
+        }
 
-    .btn-primary:hover {
-      background: #0e5a75;
-    }
+        .sidebar-content {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
 
-    .hero {
-      padding: 80px 0 64px;
-      text-align: center;
-    }
+        .sidebar-content h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-    .hero-badge {
-      display: inline-block;
-      background: #e9f0f5;
-      padding: 6px 16px;
-      border-radius: 40px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: #1f6e8c;
-      margin-bottom: 24px;
-    }
+        .sidebar-content p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
 
-    .hero h1 {
-      font-size: 3.8rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-      max-width: 900px;
-      margin: 0 auto 20px;
-      color: #0a2b3b;
-    }
+        .sidebar-content p:last-child {
+            margin-bottom: 0;
+        }
 
-    .hero-highlight {
-      background: linear-gradient(120deg, #e0f2fe, #b9e2f0);
-      padding: 0 8px;
-      border-radius: 20px;
-      display: inline-block;
-    }
+        .sidebar-announcement {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(236, 72, 153, 0.1));
+            border-left: 4px solid var(--primary);
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+        }
 
-    .hero p {
-      font-size: 1.2rem;
-      color: #3a546d;
-      max-width: 650px;
-      margin: 0 auto 32px;
-    }
+        .sidebar-announcement p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
 
-    .hero-actions {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+        /* Main Content Area */
+        .content-wrapper {
+            flex: 1;
+            min-width: 0;
+        }
 
-    .btn-large {
-      padding: 14px 32px;
-      font-size: 1rem;
-    }
+        /* Typography */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--text-primary);
+        }
 
-    .section-title {
-      text-align: center;
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-      color: #0f2e3f;
-    }
+        .main-title {
+            font-size: clamp(2.5rem, 6.0vw, 4.0rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            text-align: center;
+            color: white;
+            margin: 0;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
 
-    .section-sub {
-      text-align: center;
-      color: #527a9b;
-      max-width: 700px;
-      margin: 0 auto 48px;
-    }
+        /* Header */
+        header {
+            padding: 50px 20px;
+            margin: 32px auto;
+            max-width: 800px;
+            text-align: center;
+            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-hover);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: -0.01em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 32px;
-      margin: 48px 0 32px;
-    }
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: shimmer 3s ease-in-out infinite;
+            z-index: 0;
+        }
 
-    .feature-card {
-      background: white;
-      border-radius: 32px;
-      padding: 32px 24px;
-      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.03), 0 8px 10px -6px rgba(0,0,0,0.02);
-      border: 1px solid #eef2f8;
-      transition: all 0.25s;
-    }
+        @keyframes shimmer {
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
 
-    .feature-card:hover {
-      transform: translateY(-5px);
-      border-color: #cbdde9;
-      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.08);
-    }
+            50% {
+                transform: translate(-20px, -20px);
+            }
+        }
 
-    .feature-icon {
-      font-size: 2.5rem;
-      background: #e4f0f5;
-      width: 64px;
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 24px;
-      margin-bottom: 24px;
-      color: #1f6e8c;
-    }
+        header h1 {
+            font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+            position: relative;
+            z-index: 1;
+        }
 
-    .feature-card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 12px;
-      font-weight: 600;
-    }
+        header p {
+            font-size: 1.05rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            font-weight: 400;
+        }
 
-    .feature-card p {
-      color: #4b6b85;
-      margin-bottom: 20px;
-    }
+        header a {
+            color: #ffffff;
+            font-weight: 700;
+            text-decoration: none;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.2s ease;
+        }
 
-    .placeholder-link {
-      color: #1f6e8c;
-      font-weight: 500;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
+        header a:hover {
+            border-bottom-color: rgba(255, 255, 255, 0.8);
+            opacity: 0.85;
+        }
 
-    .placeholder-link i {
-      transition: transform 0.2s;
-    }
-    .placeholder-link:hover i {
-      transform: translateX(4px);
-    }
+        .description {
+            margin-top: 20px;
+            /* space below main title */
+            max-width: 700px;
+            /* limit width, so it doesn’t stretch too far */
+            text-align: center;
+            /* center text */
+            color: white;
+            /* default text color */
+            font-family: 'Trebuchet MS', serif;
+            font-weight: 400;
+            line-height: 1.6;
+            background: none;
+            /* remove purple block */
+            border-radius: 12px;
+            /* optional: make it feel like a floating block */
+            padding: 0;
+            /* remove extra padding */
+        }
 
-    .stats-section {
-      background: #eef3f8;
-      border-radius: 48px;
-      margin: 72px 0;
-      padding: 48px 24px;
-    }
+        .description p {
+            margin: 4px 0;
+            /* spacing between paragraphs */
+        }
 
-    .stats-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      text-align: center;
-      gap: 32px;
-    }
+        .description p.warning {
+            color: red;
+            font-weight: bold;
+        }
 
-    .stat-item h4 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: #1f6e8c;
-    }
-    .stat-item p {
-      color: #2c4d6e;
-      font-weight: 500;
-    }
+        .category-header {
+            margin: 32px 0 20px 0;
+            padding: 16px 24px;
+            border-radius: var(--border-radius);
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            font-family: ' Inter', sans-serif;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
 
-    .showcase-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      margin: 48px 0 40px;
-    }
+        .category-header:hover {
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
 
-    .project-card {
-      background: white;
-      border-radius: 28px;
-      overflow: hidden;
-      border: 1px solid #e2e8f0;
-      transition: all 0.2s;
-    }
+        /* Section Header */
+        .section-header {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 48px 0 24px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-    .project-img-placeholder {
-      background: linear-gradient(145deg, #d9e2ec, #cbdae6);
-      height: 200px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #31647e;
-      font-weight: 500;
-      font-size: 1rem;
-    }
+        /* Grid Layout */
+        .archive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 28px;
+            margin-bottom: 48px;
+        }
 
-    .project-card h4 {
-      font-size: 1.3rem;
-      padding: 20px 20px 8px;
-    }
+        /* Cards */
+        .archive-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            animation: cardFadeUp 0.5s ease forwards;
+            opacity: 0;
+            border: 1px solid var(--border-color);
+        }
 
-    .project-card p {
-      padding: 0 20px 20px;
-      color: #54738f;
-    }
+        @keyframes cardFadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
 
-    .testimonial-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 28px;
-      margin: 48px 0;
-    }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+        }
 
-    .testimonial {
-      background: white;
-      border-radius: 28px;
-      padding: 28px;
-      border: 1px solid #eef2f6;
-    }
+        .archive-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
 
-    .quote-icon {
-      color: #bcd3e2;
-      font-size: 2rem;
-      margin-bottom: 16px;
-    }
+        .archive-card:nth-child(1) {
+            animation-delay: 0.05s;
+        }
 
-    .testimonial p {
-      font-style: normal;
-      font-weight: 400;
-      color: #2c4a66;
-      margin-bottom: 20px;
-    }
+        .archive-card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
 
-    .client {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
+        .archive-card:nth-child(3) {
+            animation-delay: 0.15s;
+        }
 
-    .avatar-placeholder {
-      width: 48px;
-      height: 48px;
-      background: #cbdde9;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      color: #1f5e7a;
-    }
+        .archive-card:nth-child(4) {
+            animation-delay: 0.2s;
+        }
 
-    .cta-section {
-      background: linear-gradient(115deg, #173e50 0%, #1f6e8c 100%);
-      border-radius: 48px;
-      padding: 56px 40px;
-      text-align: center;
-      color: white;
-      margin: 60px 0;
-    }
+        .archive-card:nth-child(5) {
+            animation-delay: 0.25s;
+        }
 
-    .cta-section h2 {
-      font-size: 2rem;
-      margin-bottom: 12px;
-    }
+        .archive-card:nth-child(6) {
+            animation-delay: 0.3s;
+        }
 
-    .cta-section p {
-      opacity: 0.9;
-      max-width: 500px;
-      margin: 0 auto 28px;
-    }
+        .card-header {
+            height: 160px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            justify-content: center;
+        }
 
-    .cta-form {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .cta-form input {
-      padding: 14px 24px;
-      border-radius: 60px;
-      border: none;
-      width: 280px;
-      font-size: 1rem;
-      outline: none;
-    }
-    .cta-form button {
-      background: #f7c35c;
-      color: #1e3a4a;
-      border: none;
-      font-weight: 700;
-      padding: 0 28px;
-      border-radius: 60px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .cta-form button:hover {
-      background: #f5b336;
-    }
+        .card-image-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 80px;
+            opacity: 0.7;
+            z-index: 1;
+            line-height: 1;
+        }
 
-    footer {
-      border-top: 1px solid #e2edf5;
-      padding: 48px 0 32px;
-      margin-top: 40px;
-    }
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.2) 100%);
+        }
 
-    .footer-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 40px;
-      margin-bottom: 40px;
-    }
+        .card-header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: shimmer 4s ease-in-out infinite;
+            z-index: 1;
+        }
 
-    .footer-col p {
-      max-width: 260px;
-      color: #54718b;
-      margin-top: 12px;
-    }
+        .archive-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(6px);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
 
-    .footer-col h4 {
-      margin-bottom: 20px;
-      font-weight: 600;
-    }
+        .archive-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            padding: 16px 16px 0 16px;
+        }
 
-    .footer-col ul {
-      list-style: none;
-    }
-    .footer-col li {
-      margin-bottom: 12px;
-    }
-    .footer-col a {
-      text-decoration: none;
-      color: #4a6f8c;
-    }
-    .social-icons i {
-      font-size: 1.4rem;
-      margin-right: 16px;
-      color: #547e9c;
-      transition: color 0.2s;
-    }
-    .copyright {
-      text-align: center;
-      padding-top: 24px;
-      color: #6f8da8;
-      font-size: 0.85rem;
-    }
+        .archive-meta {
+            display: flex;
+            gap: 12px;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            padding: 0 16px;
+            margin-bottom: 12px;
+        }
 
-    /* responsive */
-    @media (max-width: 780px) {
-      .container {
-        padding: 0 24px;
-      }
-      .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .nav-links {
-        flex-wrap: wrap;
-        gap: 20px;
-      }
-      .hero h1 {
-        font-size: 2.4rem;
-      }
-      .section-title {
-        font-size: 1.8rem;
-      }
-    }
-  </style>
+        .read-more-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-weight: 700;
+            text-decoration: underline;
+            padding: 0;
+            font-family: inherit;
+            font-size: inherit;
+            transition: opacity 0.2s ease;
+        }
+
+        .read-more-btn:hover {
+            opacity: 0.8;
+        }
+
+        .read-more-btn:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        .read-more-content {
+            display: inline;
+            margin-left: 4px;
+        }
+
+        .content-link {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            padding: 0 16px 16px 16px;
+        }
+
+        /* Badges - Professional & Refined */
+        .badge-base {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+            border: none;
+            line-height: 1;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        .badge-base:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .status-pill:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .status-available,
+        .status-pill.status-available {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .new-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .status-popular,
+        .popular-badge {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .status-revamped,
+        .revamped-badge {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .status-unavailable,
+        .unavailable-badge {
+            background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(107, 114, 128, 0.3);
+        }
+
+        .beta-badge {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+
+        .coming-soon-badge {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+
+        /* Announcement Modal Styles */
+        .announcement-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            animation: announcementFadeIn 0.3s ease;
+        }
+
+        .announcement-overlay.active {
+            display: flex;
+        }
+
+        @keyframes announcementFadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .announcement-modal {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 32px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: announcementSlideIn 0.3s ease;
+            border: 2px solid var(--primary);
+            position: relative;
+        }
+
+        @keyframes announcementSlideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .announcement-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            gap: 16px;
+        }
+
+        .announcement-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .announcement-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .announcement-badge.returning {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .announcement-user-status {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            padding: 12px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .announcement-content {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .announcement-content h3 {
+            color: var(--text-primary);
+            margin: 16px 0 8px 0;
+            font-size: 1.1rem;
+        }
+
+        .announcement-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 8px 0 16px 0;
+        }
+
+        .announcement-content li {
+            padding: 6px 0 6px 24px;
+            position: relative;
+            color: var(--text-secondary);
+        }
+
+        .announcement-content li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .announcement-content a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .announcement-content a:hover {
+            text-decoration: underline;
+        }
+
+        .announcement-close-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+            margin-top: 12px;
+        }
+
+        .announcement-close-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+        }
+
+        .announcement-close-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--header-bg);
+            color: var(--text-primary);
+            padding: 60px 0;
+            text-align: center;
+            margin-top: 100px;
+            border-top: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+            text-align: left;
+        }
+
+        .footer-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            transform: translateX(4px);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .footer-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 32px 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .footer-author {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 12px;
+        }
+
+        footer a {
+            color: var(--primary);
+            transition: color 0.2s ease;
+        }
+
+        footer a:hover {
+            color: var(--secondary);
+        }
+
+        .copyright {
+            margin: 0;
+            opacity: 0.8;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Utility Classes */
+        .header-pattern {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-alt {
+            background: linear-gradient(135deg,
+                    rgba(255, 255, 255, 0.9) 0%,
+                    rgba(248, 250, 252, 0.95) 100%);
+            border-bottom: 1px solid rgba(67, 97, 238, 0.1);
+        }
+
+        /* Statistics Section */
+        .stats-section {
+            padding: 40px 20px;
+            background: linear-gradient(135deg, rgba(58, 142, 237, 0.1), rgba(236, 72, 153, 0.1));
+            margin: 32px 0;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 24px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Search Section */
+        .search-section {
+            padding: 32px 20px;
+            margin: 40px 0;
+        }
+
+        .search-bar-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .game-search-input {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            margin-bottom: 16px;
+            font-family: inherit;
+        }
+
+        .game-search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(58, 142, 237, 0.1);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-family: inherit;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Featured Section */
+        .featured-section {
+            margin: 50px 0 40px 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title::before {
+            content: '✨';
+            font-size: 1.8rem;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .featured-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow);
+        }
+
+        .featured-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+
+        .featured-card-large {
+            grid-column: span 2;
+        }
+
+        .featured-image {
+            height: 180px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: shimmer 4s ease-in-out infinite;
+        }
+
+        .featured-icon {
+            font-size: 80px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--primary);
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 3;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .featured-badge.new {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+
+        .featured-content {
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .featured-content h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .featured-content p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            flex: 1;
+        }
+
+        .featured-link {
+            display: inline-block;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 0;
+            border-bottom: 2px solid var(--primary);
+            transition: all 0.3s ease;
+            width: fit-content;
+        }
+
+        .featured-link:hover {
+            color: var(--secondary);
+            border-bottom-color: var(--secondary);
+            transform: translateX(4px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .main-wrapper {
+                flex-direction: column;
+                padding: 0 20px;
+            }
+
+            .sidebar {
+                width: 100%;
+                max-height: none;
+                position: static;
+            }
+
+            .archive-grid {
+                gap: 20px;
+            }
+
+            .featured-card-large {
+                grid-column: span 1;
+            }
+
+            .featured-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 48px 20px;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            .category-header {
+                font-size: 1.25rem;
+                padding: 14px 20px;
+            }
+
+            .archive-grid {
+                gap: 20px;
+            }
+
+            .section-header {
+                font-size: 1.5rem;
+                margin: 32px 0 20px 0;
+            }
+
+            .archive-card {
+                animation: cardFadeUp 0.5s ease forwards;
+            }
+
+            .card-header {
+                height: 140px;
+            }
+
+            .announcement-modal {
+                padding: 24px;
+            }
+
+            .announcement-title {
+                font-size: 1.2rem;
+            }
+
+            .announcement-header {
+                flex-direction: column;
+            }
+
+            .announcement-badge {
+                align-self: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+
+            header {
+                padding: 40px 16px;
+            }
+
+            .main-wrapper {
+                padding: 0 16px;
+            }
+
+            body> :not(footer) {
+                padding: 0;
+            }
+
+            .archive-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .badge-base,
+            .coming-soon-badge,
+            .popular-badge,
+            .revamped-badge,
+            .unavailable-badge,
+            .beta-badge,
+            .new-badge,
+            .status-available {
+                padding: 6px 12px;
+                font-size: 0.7rem;
+            }
+
+            .announcement-modal {
+                padding: 24px;
+                width: 95%;
+            }
+
+            .announcement-title {
+                font-size: 1.1rem;
+            }
+
+            .announcement-header {
+                flex-direction: column;
+            }
+
+            .announcement-badge {
+                align-self: flex-start;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .petals {
+                display: none;
+            }
+
+            body {
+                background: white;
+            }
+        }
+    </style>
+
 </head>
+
 <body>
 
-<header>
-  <div class="container">
-    <div class="navbar">
-      <a href="mainpages/index.html" class="logo">INFINITY<span>NEXUS</span></a>
-      <ul class="nav-links">
-        <li><a href="mainpages/index.html">Home</a></li>
+    <nav class="navbar">
+        <div class="navbar-brand">Infinity Nexus</div>
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+            <span id="themeIcon">🌙</span>
+        </button>
+    </nav>
 
-  <!--REMAINING links from template (unused)-->
-
-     <!-- <li><a href="mainpages/features.html">Features</a></li>
-        <li><a href="mainpages/solutions.html">Solutions</a></li>
-        <li><a href="mainpages/resources.html">Resources</a></li>
-        <li><a href="mainpages/contact.html">Contact</a></li>
-     -->  
-
-      </ul>
-      <div class="nav-buttons">
-      </div>
-    </div>
-  </div>
-</header>
-
-<main>
-  <div class="container">
-    <div class="hero">
-      <h1>
-        <span class="hero-highlight">Infinity Nexus</span> <br>
-
-      </h1>
-      <p>
-        This is my website, where you can find all of my projects and creations. Explore the fun and exciting world of gaming, entertainment, and more!
-      </p>
-      <div class="hero-actions">
-        <a href="mainpages/index.html" class="btn-primary btn-large" style="text-decoration: none;">Explore <i class="fas fa-arrow-right"></i></a>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- Features section (Learn more coming soon)-->
-  <div class="container">
-    <h2 class="section-title">Core features</h2>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon"><i class="fas fa-bolt"></i></div>
-        <h3>Lightning fast</h3>
-        <p>Very fast and can work in any type of network speed.</p>
-       <!-- <a href="#" class="placeholder-link">Learn more <i class="fas fa-chevron-right"></i></a> -->
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon"><i class="fas fa-clock"></i></div>
-        <h3>Updates regularly</h3>
-        <p>Updates can come as often as 1-2 weeks. Enjoy the latest features and improvements.</p>
-       <!---<a href="#" class="placeholder-link">Learn more <i class="fas fa-chevron-right"></i></a>--> 
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon"><i class="fas fa-cloud-upload-alt"></i></div>
-        <h3>Share</h3>
-        <p>Share the site!</p>
-        <!--<a href="#" class="placeholder-link">Learn more <i class="fas fa-chevron-right"></i></a>-->
-      </div>
-    </div>
-  </div>
-  <!-- Showcase-->
-  <div class="container">
-    <h2 class="section-title">Featured</h2>
-    <div class="showcase-grid">
-    <!--Videos are not working so code will be updated later-->
-      <div class="project-card">
-        <a href="mainpages/gamecorner.html" style="text-decoration: none;">
-          <video width="100%" height="200" autoplay muted loop playsinline style="object-fit: cover;">
-            <source src="info/gamehub.zip" type="video/mp4">
-          </video>
-          <h4 style="color:#2c3e66">Game Hub</h4>
-          <p style="color:#2c3e66">Really fun and engaging gaming experience!</p>
-        </a>
-      </div>
-
-      <div class="project-card">
-        <a href="https://pokemonromhacks.pages.dev/fr/" style="text-decoration: none;">
-          <video width="100%" height="200" autoplay muted loop playsinline style="object-fit: cover;">
-            <source src="info/fr.zip" type="video/mp4">
-          </video>
-          <h4 style="color:#2c3e66">FireRed Hack</h4>
-          <p style="color:#2c3e66">A firered rom hack created by me!</p>
-        </a>
-      </div>
-
-      <div class="project-card">
-        <a href="mainpages/casino.html" style="text-decoration: none;">
-          <video width="100%" height="200" autoplay muted loop playsinline style="object-fit: cover;">
-            <source src="info/casino.zip" type="video/mp4">
-          </video>
-          <h4 style="color:#2c3e66">Casino Games</h4>
-          <p style="color:#2c3e66">Exciting casino games with multiple betting options!</p>
-        </a>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Coming Soon
-  <div class="container">
-    <h2 class="section-title">What people say</h2>
-  
-    <div class="testimonial-grid">
-      <div class="testimonial">
-        <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
-        <p>“This website is so fun!”</p>
-        <div class="client">
-          <div class="avatar-placeholder">K</div>
-          <div><strong>Anonymous</strong><br>User</div>
+    <header>
+        <div class="container">
+            <div style="text-align: center;">
+                <h1 style="font-weight: 700; font-size: 3.5rem; font-family: 'Trebuchet MS', sans-serif; margin-bottom: 20px; letter-spacing: -0.5px;" class="main-title">
+                    Infinity Nexus
+                </h1>
+                <div style="margin-top: 20px; font-size: 0.95rem; opacity: 0.85;">v1.26.26 | Last Updated: June 28, 2026</div>
+            </div>
         </div>
-      </div>
-      <div class="testimonial">
-        <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
-        <p>“Love the clean layout, everything is so easy to read!”</p>
-        <div class="client">
-          <div class="avatar-placeholder">T</div>
-          <div><strong>Anonymous</strong><br>User</div>
+    </header>
+
+   
+    <!-- Main Content -->
+    <main class="content-wrapper">
+        <div class="container" id="main">
+
+            <div class="links-section">
+                <div class="archive-grid" id="gamesGrid">
+
+                    <div class="archive-card">
+                        <div class="card-header">
+                            <div class="card-image-placeholder" aria-hidden="true">🔥</div>
+                        </div>
+                        <h3 class="archive-title">FireRed Hack</h3>
+                        <p class="content-link">A work in progress Pokémon FireRed hack that adds new features, 
+                            quality of life improvements, and more! 
+                            This is a pre-release and major changes may break your save file. You may have to restart your game if you encounter any issues.</p>
+                        <div style="padding: 0 16px 16px 16px;">
+                            <a href="https://pokemonromhacks.pages.dev/" target="_blank" class="status-pill status-available">View→</a>
+                        </div>
+                    </div>    
+
+
+<!--
+                    <div class="archive-card">
+                        <div class="card-header">
+                            <div class="card-image-placeholder" aria-hidden="true">🏆</div>
+                        </div>
+                        <h3 class="archive-title">Monthly Challenges</h3>
+                        <p class="content-link">Test your skills against special monthly challenges! Enjoy challenging
+                            games that can keep you playing! New monthly challenges will be added regularly, so check back often!</p>
+                        <div style="padding: 0 16px 16px 16px;">
+                            <a href="month.html" class="status-pill status-available">Explore →</a>
+                        </div>
+                    </div>-->
+
+
+                    <div class="archive-card">
+                        <div class="card-header">
+                            <div class="card-image-placeholder" aria-hidden="true">👍</div>
+                        </div>
+                        <h3 class="archive-title">Must Play Games</h3>
+                        <p class="content-link">Some of my favorite games that are definitely worth playing! Includes
+                            classics like Tower Defense, but also some other games. Basically, some of the best games on the site.</p>
+                        <div style="padding: 0 16px 16px 16px;">
+                            <a href="must.html" class="status-pill status-available">Explore →</a>
+                        </div>
+                    </div>
+
+
+                    <div class="archive-card">
+
+                        <div class="card-header">
+                            <div class="card-image-placeholder" aria-hidden="true">🎮</div>
+                        </div>
+                        <h3 class="archive-title">Game Corner</h3>
+
+                        <p class="content-link">All the good stuff, puzzles, grinding, parkour, lots of fun stuff!</p>
+                        <div style="padding: 0 16px 16px 16px;">
+                            <a href="gamecorner.html" class="status-pill status-available">Explore →</a>
+                        </div>
+                    </div>
+
+
+                    <div class="archive-card">
+                        <div class="card-header">
+                            <div class="card-image-placeholder" aria-hidden="true">🎰</div>
+                        </div>
+                        <h3 class="archive-title">Casino Games</h3>
+                        <p class="content-link">Test your luck with classic casino games like Slots, Blackjack,
+                            Poker, and
+                            more!</p>
+                        <div style="padding: 0 16px 16px 16px;">
+                            <a href="casino.html" class="status-pill status-available">Play Now →</a>
+                        </div>
+                    </div>
+
+
+
+                    <div class="archive-card">
+                        <div class="card-header">
+                            <div class="card-image-placeholder" aria-hidden="true">💡</div>
+                        </div>
+                        <h3 class="archive-title">Simulation Games</h3>
+                        <p class="content-link">Build empires, manage cities, and learn economics through
+                            interactive
+                            simulations!</p>
+                        <div style="padding: 0 16px 16px 16px;">
+                            <a href="sims.html" class="status-pill status-available">Explore →</a>
+                        </div>
+                    </div>
+
+                    <!-- Information & Guides -->
+                    <div class="archive-card">
+                        <div class="card-header">
+                            <div class="card-image-placeholder" aria-hidden="true">📚</div>
+                        </div>
+                        <h3 class="archive-title">Information & Guides</h3>
+                        <p class="content-link">Access comprehensive guides, documentation, updates, and archives
+                            for all
+                            games.</p>
+                        <div style="padding: 0 16px 16px 16px;">
+                            <a href="mainpages/info.html" class="status-pill status-available">Explore →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="testimonial">
-        <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
-        <p>“The modern design and flexibility are top-notch.”</p>
-        <div class="client">
-          <div class="avatar-placeholder">P</div>
-          <div><strong>Anonymous</strong><br>User</div>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 class="footer-title">Infinity Nexus</h4>
+                    <p class="footer-desc">Your ultimate collection of premium web games. Play free games anytime, anywhere.</p>
+                    <div class="footer-socials">
+                        <a href="https://forms.gle/X8p7jkC74MFG9Evj7" title="Report Issues" class="social-link">Bug Report</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Game Categories</h4>
+                    <ul class="footer-links">
+                        <li><a href="casino.html">Casino Games</a></li>
+                        <li><a href="gamecorner.html">Game Corner</a></li>
+                        <li><a href="sims.html">Simulations</a></li>
+                       <!-- <li><a href="monthly.html">Monthly Challenges</a></li>-->
+                    </ul>
+                </div>
+               <!--<div class="footer-section">
+                    <h4 class="footer-title">Information</h4>
+                    <ul class="footer-links">
+                        <li><a href="../info/updateinfo/updateinfo.html">News & Updates</a></li>
+                        <li><a href="../info/docs/documentation.html">Documentation</a></li>
+                        <li><a href="../info/privacy/privacypolicy.html">Privacy Policy</a></li>
+                        <li><a href="../info/archives/archives.html">Archives</a></li>
+                    </ul>
+                </div>--> 
+                <div class="footer-section">
+                    <h4 class="footer-title">Connect</h4>
+                    <p class="footer-desc" style="font-size: 0.9rem;">v1.26.26 | Last Updated: June 28, 2026</p>
+                    <p class="footer-desc" style="font-size: 0.9rem; margin-top: 8px;">
+                        <a href="https://infinity-nexus.pages.dev/" target="_blank">Deploy Link →</a>
+                    </p>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p class="copyright">© <span id="copyright-year"></span> Infinity Nexus. All rights reserved.</p>
+                <p class="footer-author">Built by <strong>Littletree866</strong></p>
+            </div>
         </div>
-      </div>
-    </div>
-  </div> -->
+    </footer>
+    <meta name="google-site-verification" content="t1ZCxWl0-L92ruNIdoojdHGPZI5hKRCkr30vlMjkW-k" />
+    <script>
+        const gamesData = [
+            { title: 'FireRed Hack', link: 'https://fireredhack.pages.dev/', icon: '🔥', tags: ['new', 'featured'] },
+            { title: 'Monthly Challenges', link: 'mainpages/mainpage6.html', icon: '🏆', tags: ['popular', 'featured'] },
+            { title: 'Must Play Games', link: 'mainpages/mainpage2.html', icon: '👍', tags: ['popular'] },
+            { title: 'Game Corner', link: 'mainpages/mainpage3.html', icon: '🎮', tags: ['popular'] },
+            { title: 'Casino Games', link: 'mainpages/mainpage1.html', icon: '🎰', tags: ['popular'] },
+            { title: 'Simulation Games', link: 'mainpages/mainpage4.html', icon: '💡', tags: ['popular'] },
+            { title: 'Information & Guides', link: 'mainpages/mainpage5.html', icon: '📚', tags: ['featured'] }
+        ];
 
-  <!-- Newsletter (unused)
-  <div class="container">
-    <div class="cta-section">
-      <h2>Stay in the loop</h2>
-      <p>Be the first to know about updates, resources, and new features. (Placeholder form)</p>
-      <div class="cta-form">
-        <input type="email" placeholder="Your email address" value="">
-        <button>Subscribe</button>
-      </div>
-      <p style="font-size:0.8rem; margin-top: 20px;">No spam, unsubscribe anytime.</p>
-    </div>
-  </div>
-</main>
--->
+    
 
+        function filterGames(query = '', filterTag = 'all') {
+            let filtered = gamesData;
+            
+            if (query) {
+                filtered = filtered.filter(game =>
+                    game.title.toLowerCase().includes(query.toLowerCase())
+                );
+            }
+            
+            if (filterTag !== 'all') {
+                filtered = filtered.filter(game =>
+                    game.tags.includes(filterTag)
+                );
+            }
+            
+        }
 
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-col">
-        <h3 style="font-size:1.5rem; margin-bottom: 8px;">INFINITY<span style="color:#1f6e8c;">NEXUS</span></h3>
-        <p>Have fun. Anytime. Anywhere.</p>
-        <div class="social-icons" style="margin-top: 20px;">
-          <i class="fab fa-github"></i>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Coming Soon!</h4>
-        <ul>
-         <!-- <li><a href="#">Features</a></li>
-          <li><a href="#">Pricing</a></li>
-          <li><a href="#">Integrations</a></li>
-          <li><a href="#">FAQ</a></li> -->
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Coming Soon!</h4>
-        <ul>
-          <!-- <li><a href="#">About us</a></li>
-          <li><a href="#">Careers</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Press</a></li> -->
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Coming Soon!</h4>
-        <ul>
-         <!---<li><a href="#">Documentation</a></li>
-          <li><a href="#">Guides</a></li>
-          <li><a href="#">Support</a></li>
-          <li><a href="#">Status</a></li>--> 
-        </ul>
-      </div>
-    </div>
-    <div class="copyright">
-      © 2026 Infinity Nexus — created by Littletree866. All rights reserved.
-    </div>
-  </div>
-</footer>
-<!-- Cloudflare Web Analytics -->
- <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b19778e9947c49d3ad4f7a2ecdd1e5a6"}'></script>
- <!-- End Cloudflare Web Analytics -->
+        const StorageManager = {
+            get: (key) => {
+                try {
+                    return localStorage.getItem(key);
+                } catch (e) {
+                    console.warn('Storage get error:', e);
+                    return null;
+                }
+            },
+            set: (key, value) => {
+                try {
+                    localStorage.setItem(key, value);
+                } catch (e) {
+                    console.warn('Storage set error:', e);
+                }
+            },
+            remove: (key) => {
+                try {
+                    localStorage.removeItem(key);
+                } catch (e) {
+                    console.warn('Storage remove error:', e);
+                }
+            }
+        };
 
+        const CURRENT_VERSION = "1.26.27";
+        const LATEST_UPDATE_DATE = "July 15, 2026";
+
+        function checkAndShowAnnouncement() {
+            try {
+                const lastSeenVersion = StorageManager.get('lastSeenVersion');
+                const userFirstVisit = StorageManager.get('userFirstVisit');
+
+                if (!userFirstVisit) {
+                    StorageManager.set('userFirstVisit', new Date().toISOString());
+                    showAnnouncement(true, lastSeenVersion);
+                } else if (lastSeenVersion !== CURRENT_VERSION) {
+                    showAnnouncement(false, lastSeenVersion);
+                }
+
+                StorageManager.set('lastSeenVersion', CURRENT_VERSION);
+            } catch (e) {
+                console.error('Announcement check error:', e);
+            }
+        }
+
+        function showAnnouncement(isNewUser, previousVersion) {
+            try {
+                const overlay = document.createElement('div');
+                overlay.className = 'announcement-overlay active';
+                overlay.id = 'announcementOverlay';
+
+                let content = '';
+                let badgeText = '';
+
+                if (isNewUser) {
+                    badgeText = 'Welcome!';
+                    content = `
+                        <div class="announcement-user-status">
+                            <strong>Welcome to Infinity Nexus!</strong> 
+                        </div>
+                        <div class="announcement-content">
+                            <h3>What's New in v${CURRENT_VERSION}</h3>
+                            <p><strong>Released:</strong> ${LATEST_UPDATE_DATE}</p>
+                            <p>This update brings major improvements to games!</p>
+                            
+                            <h3>Major Updates Include:</h3>
+                            <ul>
+                                <li>Improved performance and stability</li>
+                                <li>Fixed several bugs and issues</li>
+                                <li>Remake of Clicker Quest and Geometry Runner</li>
+                            </ul>
+
+                            <p style="margin-top: 16px; font-size: 0.95rem; color: var(--text-muted);">
+                                For detailed release notes, visit the <a href="info/updateinfo/updateinfo.html" style="color: var(--primary); text-decoration: none;">News & Updates</a> page.
+                            </p>
+                        </div>
+                    `;
+                } else {
+                    badgeText = 'Update Available';
+                    let updateMessage = previousVersion 
+                        ? `Updated from v${previousVersion} to v${CURRENT_VERSION}`
+                        : `Updated to v${CURRENT_VERSION}`;
+
+                    content = `
+                        <div class="announcement-user-status">
+                            <strong>${updateMessage}</strong><br>
+                            <small>Released: ${LATEST_UPDATE_DATE}</small>
+                        </div>
+                        <div class="announcement-content">
+                            <h3>What's New</h3>
+                            <p>Check out this update with lots of improvements!</p>
+                            
+                            <h3>Key Improvements:</h3>
+                            <ul>
+                                <li>Improved performance and stability</li>
+                                <li>Fixed several bugs and issues</li>
+                                <li>Remake of Clicker Quest and Geometry Runner</li>
+                            </ul>
+
+                            <p style="margin-top: 16px; font-size: 0.95rem; color: var(--text-muted);">
+                                <a href="info/updateinfo/updateinfo.html" style="color: var(--primary); text-decoration: none; font-weight: 600;">View Full Changelog →</a>
+                            </p>
+                        </div>
+                    `;
+                }
+
+                const modal = document.createElement('div');
+                modal.className = 'announcement-modal';
+                modal.innerHTML = `
+                    <div class="announcement-header">
+                        <h2 class="announcement-title">${isNewUser ? 'Welcome to Infinity Nexus!' : 'What\'s New'}</h2>
+                        <span class="announcement-badge ${isNewUser ? '' : 'returning'}">${badgeText}</span>
+                    </div>
+                    ${content}
+                    <button class="announcement-close-btn" id="closeAnnouncement">Get Started →</button>
+                `;
+
+                overlay.appendChild(modal);
+                document.body.appendChild(overlay);
+
+                const closeBtn = document.getElementById('closeAnnouncement');
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', () => {
+                        overlay.remove();
+                    });
+                }
+
+                const closeOnEscape = (e) => {
+                    if (e.key === 'Escape') {
+                        overlay.remove();
+                        document.removeEventListener('keydown', closeOnEscape);
+                    }
+                };
+
+                document.addEventListener('keydown', closeOnEscape);
+            } catch (e) {
+                console.error('Error showing announcement:', e);
+            }
+        }
+
+        function initTheme() {
+            try {
+                const savedTheme = StorageManager.get('theme') || 'dark';
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                updateThemeIcon(savedTheme);
+            } catch (e) {
+                console.warn('Theme init error:', e);
+                document.documentElement.setAttribute('data-theme', 'dark');
+                updateThemeIcon('dark');
+            }
+        }
+
+        function updateThemeIcon(theme) {
+            try {
+                const icon = document.getElementById('themeIcon');
+                if (icon) {
+                    icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+                }
+            } catch (e) {
+                console.warn('Theme icon update error:', e);
+            }
+        }
+
+        function toggleTheme() {
+            try {
+                const current = document.documentElement.getAttribute('data-theme') || 'dark';
+                const newTheme = current === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                StorageManager.set('theme', newTheme);
+                updateThemeIcon(newTheme);
+            } catch (e) {
+                console.error('Theme toggle error:', e);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+
+            
+            const searchInput = document.getElementById('gameSearch');
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    const currentFilter = document.querySelector('.filter-btn.active')?.dataset.filter || 'all';
+                    filterGames(e.target.value, currentFilter);
+                });
+            }
+            
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const searchQuery = searchInput?.value || '';
+                    filterGames(searchQuery, btn.dataset.filter);
+                });
+            });
+
+            initTheme();
+            
+            try {
+                const yearEl = document.getElementById('copyright-year');
+                if (yearEl) {
+                    yearEl.textContent = new Date().getFullYear();
+                }
+            } catch (e) {
+                console.warn('Year update error:', e);
+            }
+
+            const themeToggleBtn = document.getElementById('themeToggle');
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', toggleTheme);
+            }
+            
+            setTimeout(() => {
+                checkAndShowAnnouncement();
+            }, 100);
+
+            window.testAnnouncement = function(forceNew = false) {
+                if (forceNew) {
+                    StorageManager.remove('userFirstVisit');
+                    StorageManager.remove('lastSeenVersion');
+                }
+                checkAndShowAnnouncement();
+            };
+
+            window.resetAnnouncement = function() {
+                StorageManager.remove('userFirstVisit');
+                StorageManager.remove('lastSeenVersion');
+                console.log('Announcement reset. Reload page to see it again.');
+            };
+
+            window.resetTheme = function() {
+                StorageManager.remove('theme');
+                initTheme();
+                console.log('Theme reset to dark.');
+            };
+            
+            document.querySelectorAll('.read-more-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('data-target');
+                    const targetElement = document.querySelector(targetId);
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                    
+                    if (targetElement) {
+                        targetElement.style.display = isExpanded ? 'none' : 'inline';
+                        this.setAttribute('aria-expanded', !isExpanded);
+                        this.textContent = isExpanded ? 'Read More...' : 'Read Less';
+                    }
+                });
+                
+                button.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.click();
+                    }
+                });
+            });
+        });
+    </script>
 </body>
+
 </html>

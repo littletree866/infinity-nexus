@@ -1,7 +1,6 @@
 MIT License
 
 Copyright © 2026 Littletree866
-Copyright  © 2026 Infinity Nexus
 
 All rights reserved
 

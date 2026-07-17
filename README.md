@@ -1,5 +1,5 @@
 # Infinity Nexus
-**Version 1.26.27** | Next Release: v1.26.28 (TBD)
+**Version 1.26.28** | Next Release: v1.27.28 (TBD)
 
 A comprehensive collection of HTML5-based games featuring diverse genres, engaging gameplay mechanics, and persistent progress tracking.
 
@@ -31,29 +31,9 @@ The platform includes games across multiple categories:
 
 ## Release Information
 
-**Current Version:** 1.26.26  
-**Next Update:** v1.26.27 (TBD)  
+**Current Version:** 1.26.28  
+**Next Update:** v1.27.28 (TBD)  
 **Update Cycle:** Releases every 1–3 weeks (subject to variation)
-
-### Version History
-
-| Version | Release Date |
-|---------|--------------|
-| 1.26.26 | June 28, 2026|
-| 1.25.26 | June 7, 2026 |
-| 1.24.26 | May 12, 2026 |
-| 1.23.26 | May 1, 2026 |
-| 1.22.26 | April 14, 2026 |
-| 1.21.26 | April 4, 2026 |
-| 1.21.25 | March 26, 2026 |
-| 1.21.24 | March 16, 2026 |
-| 1.20.24 | March 6, 2026 |
-| 1.19.24 | February 24, 2026 |
-| 1.18.24 | February 7, 2026 & February 16, 2026 |
-| 1.18.22 | February 2, 2026 |
-| 1.17.20 | January 15, 2026 |
-| 1.16.19 | January 1, 2026 |
-| 1.15.18 | December 10, 2025 |
 
 ## Bug Reporting & Support
 

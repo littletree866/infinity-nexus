@@ -158,10 +158,10 @@
   <h1>a simple game</h1>
   <div class="sub">let's see how far this goes</div>
 
-  <!-- main action -->
+  
   <button class="big-btn" id="clickButton">click</button>
 
-  <!-- local stats (left) + cloud stats (right) -->
+  
   <div class="stats">
     <div class="stat-item">
       <span class="stat-label">your clicks</span>
@@ -177,7 +177,7 @@
     </div>
   </div>
 
-  <!-- feedback message (simple) -->
+  
   <div class="click-feedback" id="feedback">click the button</div>
 
   <hr>
@@ -190,7 +190,6 @@
   (function() {
     "use strict";
 
-    // ----- DOM refs -----
     const clickBtn = document.getElementById('clickButton');
     const localClicksEl = document.getElementById('localClicks');
     const globalClicksEl = document.getElementById('globalClicks');
@@ -198,25 +197,19 @@
     const feedbackEl = document.getElementById('feedback');
     const statusEl = document.getElementById('connectionStatus');
 
-    // ----- STATE (local) -----
     let localClickCount = 0;             // total clicks by this user
     let globalClickCount = 0;            // cached cloud value
     let pageViewCount = 0;               // cached cloud value
 
-    // ----- cloud variable keys (simulated) -----
-    // in a real server environment these would be database keys.
-    // we simulate cloud storage using localStorage + broadcast.
     const CLOUD_KEY_CLICKS = 'cloud_global_clicks';
     const CLOUD_KEY_VIEWS = 'cloud_page_views';
 
-    // ----- helper: read cloud values from storage -----
     function fetchCloudValues() {
       try {
         const storedClicks = localStorage.getItem(CLOUD_KEY_CLICKS);
         const storedViews = localStorage.getItem(CLOUD_KEY_VIEWS);
         globalClickCount = storedClicks ? parseInt(storedClicks, 10) : 0;
         pageViewCount = storedViews ? parseInt(storedViews, 10) : 0;
-        // if NaN, fallback to 0
         if (isNaN(globalClickCount)) globalClickCount = 0;
         if (isNaN(pageViewCount)) pageViewCount = 0;
       } catch (_) {
@@ -225,7 +218,6 @@
       }
     }
 
-    // ----- persist cloud values (simulate server update) -----
     function pushCloudClicks(value) {
       try {
         localStorage.setItem(CLOUD_KEY_CLICKS, String(value));
@@ -238,9 +230,7 @@
       } catch (_) { /* ignore */ }
     }
 
-    // ----- increment global clicks (atomic simulation) -----
     function incrementGlobalClicks() {
-      // read fresh
       let current = 0;
       try {
         const raw = localStorage.getItem(CLOUD_KEY_CLICKS);
@@ -253,7 +243,6 @@
       return newVal;
     }
 
-    // ----- increment page views (called once per session) -----
     function incrementPageViews() {
       let current = 0;
       try {
@@ -267,31 +256,22 @@
       return newVal;
     }
 
-    // ----- update UI (local + cloud) -----
     function refreshUI() {
       localClicksEl.textContent = localClickCount;
       globalClicksEl.textContent = globalClickCount;
       pageViewsEl.textContent = pageViewCount;
     }
 
-    // ----- handle click (one button) -----
     function handleMainClick() {
-      // 1. increment local
       localClickCount += 1;
-      // 2. increment global cloud (simulated server)
       const newGlobal = incrementGlobalClicks();
-      // 3. update UI
       refreshUI();
-      // 4. feedback
       feedbackEl.textContent = `✅ +1  (global: ${newGlobal})`;
-      // quick animation / pulse
       clickBtn.style.transform = 'scale(0.97)';
       setTimeout(() => { clickBtn.style.transform = ''; }, 100);
     }
 
-    // ----- init: page view tracking (cloud var #2) -----
     function initPageView() {
-      // check if we already counted this session (sessionStorage flag)
       let counted = false;
       try {
         counted = sessionStorage.getItem('pageViewCounted') === 'true';
@@ -299,24 +279,19 @@
 
       if (!counted) {
         const newViews = incrementPageViews();
-        // set flag so we don't count again in this session
         try {
           sessionStorage.setItem('pageViewCounted', 'true');
         } catch (_) { /* ignore */ }
-        // update UI
         refreshUI();
         feedbackEl.textContent = `👋 page view #${newViews}`;
         statusEl.textContent = '● live';
       } else {
-        // still fetch latest views from cloud
         fetchCloudValues();
         refreshUI();
         feedbackEl.textContent = 'welcome back';
       }
     }
 
-    // ----- sync with other tabs (simulate server broadcast) -----
-    // when another tab changes cloud values, we reflect them.
     function storageListener(e) {
       if (e.key === CLOUD_KEY_CLICKS) {
         const val = e.newValue ? parseInt(e.newValue, 10) : 0;
@@ -335,21 +310,13 @@
     }
     window.addEventListener('storage', storageListener);
 
-    // ----- attach click event -----
     clickBtn.addEventListener('click', handleMainClick);
 
-    // ----- start: fetch cloud, init page view, render -----
     fetchCloudValues();
     initPageView();  // increments views if not counted
     refreshUI();
 
-    // extra: if page view count was 0 after init, we already incremented.
-    // but if it failed, we show fallback.
-    // also ensure that pageViewCount is at least 1 if sessionStorage flag is set.
-    // but we already called initPageView, which handles it.
 
-    // ----- small status indicator (optional) -----
-    // show if storage is available (it always is in modern browsers)
     try {
       if (!window.localStorage) {
         statusEl.textContent = '⚠️ storage unavailable';
@@ -358,14 +325,11 @@
       statusEl.textContent = '⚠️ error';
     }
 
-    // ----- one more sync after 2s (for safety) -----
     setTimeout(() => {
       fetchCloudValues();
       refreshUI();
-      // if page views still zero but session flag says counted, force correct.
       try {
         if (sessionStorage.getItem('pageViewCounted') === 'true' && pageViewCount === 0) {
-          // re-fetch
           const storedViews = localStorage.getItem(CLOUD_KEY_VIEWS);
           if (storedViews) {
             const v = parseInt(storedViews, 10);
@@ -378,7 +342,6 @@
       } catch (_) { /* ignore */ }
     }, 300);
 
-    // ----- expose for debugging (optional) -----
     console.log('🔘 one-button game · cloud vars: clicks & views');
     console.log('   global clicks:', globalClickCount, 'page views:', pageViewCount);
 
@@ -387,3 +350,5 @@
 
 </body>
 </html>
+
+

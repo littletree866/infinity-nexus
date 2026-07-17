@@ -1,1575 +1,821 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Puzzle Master</title>
-    <link rel="icon" href="../../icon.jpg" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Trebuchet MS:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .back-button {
-            position: fixed; 
-            top: 20px;
-            left: 20px;
-            background: #6e8efb;
-            border: none;
-            color: white;
-            padding: 12px 18px;
-            border-radius: 8px;
-            cursor: pointer;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-            transition: all 0.3s;
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-family: inherit;
-        }
-
-        .back-button:hover {
-            background: #5669d8;
-            transform: scale(1.05);
-        }
-
-        .back-button:focus {
-            outline: 2px solid #ec4899;
-            outline-offset: 2px;
-        }
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Puzzle Master</title>
+  <link rel="icon" href="../../icon.jpg" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
         body {
-            font-family: 'Trebuchet MS', serif;
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            transition: background 0.5s;
+        font-family: 'Inter', sans-serif;
+        background: linear-gradient(145deg, #f0f2f8 0%, #e6e9f4 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        transition: background 0.3s, color 0.2s;
         }
+        body.dark {
+        background: linear-gradient(145deg, #1e1e2f 0%, #2a2a40 100%);
+        color: #eee;
+        }
+        /* back button – clean & non-overlapping */
+        .back-btn {
+        position: fixed;
+        top: 24px;
+        left: 24px;
+        background: rgba(255,255,255,0.6);
+        backdrop-filter: blur(6px);
+        border: 1px solid rgba(255,255,255,0.3);
+        color: #1e1e2f;
+        padding: 10px 18px;
+        border-radius: 40px;
+        font-weight: 600;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+        transition: 0.25s;
+        z-index: 999;
+        text-decoration: none;
+        font-family: inherit;
+        }
+        .back-btn:hover { background: white; transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,0.12); }
+        body.dark .back-btn { background: rgba(40,40,60,0.7); color: #eaeaea; border-color: #444466; }
 
-        body.dark-theme {
-            background: linear-gradient(135deg, #2c3e50, #4a235a);
+        .game-wrapper {
+        max-width: 600px;
+        width: 100%;
+        margin: 0 auto;
+        background: rgba(255,255,255,0.7);
+        backdrop-filter: blur(10px);
+        border-radius: 40px;
+        padding: 30px 28px 35px;
+        box-shadow: 0 25px 60px rgba(0,0,0,0.12);
+        border: 1px solid rgba(255,255,255,0.4);
+        transition: 0.3s;
         }
-
-        .game-container {
-            background: white;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            width: 450px;
-            max-width: 95%;
-            transition: all 0.3s;
-        }
-
-        .dark-theme .game-container {
-            background: #1a1a2e;
-            color: #fff;
-        }
+        body.dark .game-wrapper { background: rgba(30,30,50,0.75); border-color: #3a3a5a; }
 
         .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+        flex-wrap: wrap;
+        gap: 8px;
         }
-
-        h1 {
-            margin: 0;
-            color: #333;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .header h1 {
+        font-size: 26px;
+        font-weight: 700;
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        display: flex;
+        align-items: center;
+        gap: 8px;
         }
+        body.dark .header h1 { background: linear-gradient(135deg, #a78bfa, #8b5cf6); background-clip: text; -webkit-text-fill-color: transparent; }
 
-        .dark-theme h1 {
-            color: #fff;
+        .toolbar {
+        display: flex;
+        gap: 6px;
+        align-items: center;
         }
-
-        .settings {
-            display: flex;
-            gap: 10px;
+        .icon-btn {
+        width: 42px;
+        height: 42px;
+        border-radius: 30px;
+        border: none;
+        background: rgba(200,200,220,0.3);
+        backdrop-filter: blur(4px);
+        font-size: 18px;
+        color: #1e1e2f;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: 0.2s;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         }
+        .icon-btn:hover { background: rgba(200,200,220,0.6); transform: scale(1.04); }
+        body.dark .icon-btn { background: rgba(60,60,90,0.5); color: #ddd; }
+        body.dark .icon-btn:hover { background: rgba(80,80,120,0.7); }
 
-        .theme-toggle,
-        .sound-toggle,
-        .pause-btn {
-            background: #f0f0f0;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
+        .mode-selector {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 16px 0 12px;
+        justify-content: center;
         }
-
-        .dark-theme .theme-toggle,
-        .dark-theme .sound-toggle,
-        .dark-theme .pause-btn {
-            background: #333;
-            color: #fff;
-        }
-
-        .theme-toggle:hover,
-        .sound-toggle:hover,
-        .pause-btn:hover {
-            transform: scale(1.1);
-            background: #6e8efb;
-            color: white;
-        }
-
-        .mode-select {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
         .mode-btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 10px;
-            background: #6e8efb;
-            color: white;
-            cursor: pointer;
-            font-family: inherit;
-            font-weight: 700;
-            font-size: 16px;
-            transition: all 0.3s;
-            min-width: 140px;
+        flex: 1 1 100px;
+        padding: 12px 6px;
+        border: none;
+        border-radius: 24px;
+        font-weight: 600;
+        background: rgba(220,220,240,0.4);
+        backdrop-filter: blur(4px);
+        color: #1e1e2f;
+        cursor: pointer;
+        transition: 0.2s;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.02);
         }
+        .mode-btn.active { background: #4f46e5; color: white; box-shadow: 0 8px 18px rgba(79,70,229,0.3); }
+        body.dark .mode-btn { background: rgba(50,50,80,0.5); color: #ddd; }
+        body.dark .mode-btn.active { background: #6d5df0; color: white; }
+        .mode-btn i { font-size: 16px; }
 
-        .mode-btn:hover {
-            background: #5669d8;
-            transform: translateY(-2px);
+        .size-selector {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        margin: 14px 0 18px;
+        flex-wrap: wrap;
         }
-
-        .difficulty-select {
-            margin: 20px 0;
-            display: none;
+        .size-btn {
+        padding: 8px 20px;
+        border-radius: 40px;
+        border: 2px solid #cbd5e1;
+        background: transparent;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.2s;
+        color: #1e1e2f;
         }
-
-        select {
-            padding: 10px 15px;
-            border-radius: 8px;
-            border: 2px solid #6e8efb;
-            font-family: inherit;
-            font-size: 16px;
-            background: white;
-            width: 100%;
-            max-width: 200px;
-        }
-
-        .dark-theme select {
-            background: #333;
-            color: white;
-            border-color: #a777e3;
-        }
+        .size-btn.active { border-color: #4f46e5; background: #4f46e5; color: white; }
+        body.dark .size-btn { border-color: #4a4a6a; color: #ddd; }
+        body.dark .size-btn.active { border-color: #7c6df0; background: #7c6df0; color: white; }
 
         .puzzle-grid {
-            display: grid;
-            gap: 6px;
-            margin: 25px auto;
-            transition: all 0.3s;
+        display: grid;
+        gap: 8px;
+        margin: 18px auto;
+        max-width: 420px;
+        aspect-ratio: 1/1;
+        padding: 12px;
+        background: rgba(230,230,245,0.3);
+        border-radius: 28px;
+        backdrop-filter: blur(4px);
         }
+        body.dark .puzzle-grid { background: rgba(40,40,65,0.5); }
 
-        .puzzle-tile {
-            background: linear-gradient(145deg, #0e0f0f, #2d2f2f);
-            border: none;
-            border-radius: 10px;
-            font-size: 28px;
-            cursor: pointer;
-            color: white;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            position: relative;
-            overflow: hidden;
+        .tile {
+        border-radius: 18px;
+        border: none;
+        background: linear-gradient(145deg, #6d5df0, #5b4bdb);
+        color: white;
+        font-weight: 700;
+        font-size: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: 0.18s cubic-bezier(0.34, 1.2, 0.64, 1);
+        box-shadow: 0 6px 16px rgba(79,70,229,0.25);
+        aspect-ratio: 1/1;
+        position: relative;
         }
+        .tile.empty { background: linear-gradient(145 def, #ddd, #888); box-shadow: none; border: 2px dashed #b0b0d0; cursor: default; }
+        .tile.correct { background: linear-gradient(145deg, #2ecc71, #27ae60); box-shadow: 0 6px 18px rgba(46,204,113,0.3); }
+        .tile.movable { cursor: pointer; }
+        .tile.movable:hover { transform: scale(0.94); filter: brightness(1.1); }
+        body.dark .tile { background: linear-gradient(145deg, #6c5ce7, #5a4bd1); }
+        body.dark .tile.empty { border-color: #555577; }
+        body.dark .tile.correct { background: linear-gradient(145deg, #2ecc71, #1fa85b); }
 
-        .puzzle-tile::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(110, 142, 251, 0.1);
-            opacity: 0;
-            transition: opacity 0.3s;
+        .stats-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 20px;
+        justify-content: center;
+        margin: 12px 0 8px;
+        font-size: 15px;
+        font-weight: 500;
         }
-
-        .puzzle-tile.movable {
-            box-shadow: 0 0 15px rgba(110, 142, 251, 0.7);
-        }
-
-        .puzzle-tile:hover.movable {
-            transform: scale(0.97);
-        }
-
-        .puzzle-tile:hover.movable::after {
-            opacity: 1;
-        }
-
-        .puzzle-tile.correct-pos {
-            background: linear-gradient(145deg, #27ae60, #2ecc71);
-        }
-
-        .puzzle-tile.empty {
-            background: #f0f0f0;
-            cursor: default;
-            box-shadow: none;
-        }
-
-        .dark-theme .puzzle-tile.empty {
-            background: #444;
-        }
-
-        .puzzle-tile.moving {
-            animation: slideTile 0.3s ease-in-out;
-        }
-
-        @keyframes slideTile {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(0.9);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        @keyframes tileGlow {
-            0% {
-                box-shadow: 0 0 15px rgba(110, 142, 251, 0.7);
-            }
-
-            50% {
-                box-shadow: 0 0 30px rgba(110, 142, 251, 1);
-            }
-
-            100% {
-                box-shadow: 0 0 15px rgba(110, 142, 251, 0.7);
-            }
-        }
-
-        .puzzle-tile.movable:hover {
-            animation: tileGlow 0.6s ease-in-out infinite;
-        }
+        .stats-row span { background: rgba(200,200,220,0.2); padding: 6px 16px; border-radius: 40px; backdrop-filter: blur(4px); }
+        body.dark .stats-row span { background: rgba(60,60,90,0.3); }
 
         .controls {
-            margin-top: 25px;
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            flex-wrap: wrap;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        margin: 14px 0 8px;
         }
-
-        button {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 10px;
-            background: #6e8efb;
-            color: white;
-            cursor: pointer;
-            font-family: inherit;
-            font-weight: 700;
-            font-size: 16px;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .ctrl-btn {
+        padding: 10px 20px;
+        border-radius: 40px;
+        border: none;
+        background: rgba(220,220,240,0.5);
+        backdrop-filter: blur(4px);
+        font-weight: 600;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        transition: 0.2s;
+        color: #1e1e2f;
         }
+        .ctrl-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+        .ctrl-btn:hover:not(:disabled) { background: rgba(200,200,230,0.7); transform: translateY(-2px); }
+        body.dark .ctrl-btn { background: rgba(60,60,90,0.4); color: #ddd; }
+        body.dark .ctrl-btn:hover:not(:disabled) { background: rgba(80,80,120,0.6); }
 
-        button:hover {
-            background: #5669d8;
-            transform: translateY(-2px);
+        .win-banner {
+        margin: 16px 0 0;
+        padding: 14px;
+        border-radius: 40px;
+        background: rgba(46,204,113,0.15);
+        border: 1px solid rgba(46,204,113,0.3);
+        font-weight: 700;
+        font-size: 20px;
+        color: #27ae60;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        backdrop-filter: blur(4px);
         }
+        body.dark .win-banner { background: rgba(46,204,113,0.1); border-color: #2ecc71; color: #58d68d; }
 
-        button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
+        /* POPUP help — overlay style, pauses game */
+        .popup-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.4);
+        backdrop-filter: blur(6px);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        padding: 20px;
         }
-
-        .dark-theme button:disabled {
-            background: #666;
+        .popup-card {
+        background: white;
+        border-radius: 40px;
+        padding: 32px 28px;
+        max-width: 440px;
+        width: 100%;
+        box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+        position: relative;
+        animation: popIn 0.25s ease;
         }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-            text-align: left;
+        body.dark .popup-card { background: #26263f; color: #eee; }
+        .popup-card h2 { margin-bottom: 14px; display: flex; gap: 10px; align-items: center; }
+        .popup-card ul { padding-left: 22px; line-height: 1.8; }
+        .popup-card .close-popup {
+        position: absolute;
+        top: 16px;
+        right: 20px;
+        font-size: 28px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #888;
         }
+        body.dark .popup-card .close-popup { color: #aaa; }
+        @keyframes popIn { from { opacity:0; transform: scale(0.94); } to { opacity:1; transform: scale(1); } }
 
-        .stat-box {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        .home-screen {
+        text-align: center;
+        padding: 20px 0 10px;
         }
-
-        .dark-theme .stat-box {
-            background: #2d3748;
+        .home-screen h2 { font-size: 38px; margin-bottom: 8px; background: linear-gradient(135deg, #4f46e5, #7c3aed); background-clip: text; -webkit-text-fill-color: transparent; }
+        .home-screen p { color: #555; margin-bottom: 28px; }
+        body.dark .home-screen p { color: #b0b0cc; }
+        .home-btn {
+        padding: 14px 40px;
+        border-radius: 60px;
+        border: none;
+        background: #4f46e5;
+        color: white;
+        font-weight: 700;
+        font-size: 18px;
+        cursor: pointer;
+        transition: 0.2s;
+        box-shadow: 0 8px 20px rgba(79,70,229,0.3);
+        margin: 6px;
         }
+        .home-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(79,70,229,0.4); }
+        .home-btn.secondary { background: rgba(200,200,220,0.3); color: #1e1e2f; box-shadow: none; }
+        body.dark .home-btn.secondary { background: rgba(60,60,90,0.4); color: #ddd; }
 
-        .stat-box h3 {
-            margin: 0 0 8px 0;
-            font-size: 14px;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .hidden { display: none !important; }
+
+        @media (max-width: 500px) {
+        .game-wrapper { padding: 20px 16px; }
+        .header h1 { font-size: 20px; }
+        .tile { font-size: 20px; border-radius: 14px; }
+        .mode-btn { flex: 1 1 80px; font-size: 12px; }
         }
-
-        .dark-theme .stat-box h3 {
-            color: #aaa;
-        }
-
-        .stat-value {
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .dark-theme .stat-value {
-            color: #fff;
-        }
-
-        .moves.near-limit {
-            color: #f39c12 !important;
-        }
-
-        .moves.at-limit {
-            color: #e74c3c !important;
-            animation: pulse 1s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.7;
-            }
-
-            100% {
-                opacity: 1;
-            }
-        }
-
-        .time-container {
-            margin: 20px 0;
-            position: relative;
-        }
-
-        .time-bar {
-            width: 100%;
-            height: 12px;
-            background: #e0e0e0;
-            border-radius: 6px;
-            overflow: hidden;
-            margin-top: 5px;
-        }
-
-        .dark-theme .time-bar {
-            background: #444;
-        }
-
-        .time-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #2ecc71, #27ae60);
-            width: 100%;
-            transition: width 1s linear;
-        }
-
-        .time-fill.warning {
-            background: linear-gradient(90deg, #f39c12, #e67e22);
-        }
-
-        .time-fill.danger {
-            background: linear-gradient(90deg, #e74c3c, #c0392b);
-            animation: pulse 0.5s infinite;
-        }
-
-        .win-message {
-            font-size: 24px;
-            font-weight: bold;
-            color: #27ae60;
-            margin: 20px 0;
-            padding: 15px;
-            background: rgba(39, 174, 96, 0.1);
-            border-radius: 10px;
-            display: none;
-        }
-
-        .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            pointer-events: none;
-            opacity: 0;
-        }
-
-        .achievements-panel {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            max-width: 300px;
-            display: none;
-            z-index: 1000;
-        }
-
-        .dark-theme .achievements-panel {
-            background: #2d3748;
-            color: white;
-        }
-
-        .achievement {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 8px;
-            background: #f8f9fa;
-        }
-
-        .dark-theme .achievement {
-            background: #4a5568;
-        }
-
-        .achievement.unlocked {
-            background: rgba(39, 174, 96, 0.2);
-        }
-
-        .achievement i {
-            font-size: 24px;
-            color: #f1c40f;
-        }
-
-        .achievement.unlocked i {
-            color: #27ae60;
-        }
-
-        .mobile-controls {
-            display: none;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .mobile-btn {
-            height: 60px;
-            font-size: 24px;
-            background: #6e8efb;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
-            .game-container {
-                padding: 15px;
-                width: 95%;
-            }
-
-            .puzzle-tile {
-                font-size: 20px;
-            }
-
-            .mobile-controls {
-                display: grid;
-            }
-
-            .mode-btn {
-                min-width: 120px;
-                padding: 10px 15px;
-                font-size: 14px;
-            }
-
-            .achievements-panel {
-                position: static;
-                max-width: 100%;
-                margin-top: 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .puzzle-grid {
-                gap: 4px;
-            }
-
-            .puzzle-tile {
-                font-size: 18px;
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            .controls {
-                flex-direction: column;
-            }
-
-            button {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-
-        .how-to-play {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            max-width: 300px;
-            display: none;
-            z-index: 1000;
-            text-align: left;
-        }
-
-        .dark-theme .how-to-play {
-            background: #2d3748;
-            color: white;
-        }
-
-        .how-to-play h3 {
-            margin-top: 0;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: none;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-            color: #666;
-            padding: 5px;
-        }
-
-        .dark-theme .close-btn {
-            color: #aaa;
-        }
-
-        .game-over {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-        }
-
-        .game-over-content {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
-        }
-
-        .dark-theme .game-over-content {
-            background: #1a1a2e;
-            color: white;
-        }
-
-        .modal-buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .modal-buttons button {
-            min-width: 120px;
-        }
-
-        /* Home Screen Styles */
-        #homeScreen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-        }
-
-        .home-card-puzzle {
-            background: white;
-            border-radius: 20px;
-            padding: 2.5rem;
-            max-width: 600px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-
-        .home-card-puzzle h2 {
-            color: #6e8efb;
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .home-card-puzzle p {
-            color: #666;
-            font-size: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .home-buttons-puzzle {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .puzzle-home-btn {
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            font-size: 1.1rem;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .puzzle-home-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(110, 142, 251, 0.4);
-        }
-    </style>
+  </style>
 </head>
-
 <body>
-    <a href="../../index.html" class="back-button" title="Return to Infinity Nexus" aria-label="Return to home">← Back</a>
-    <div id="homeScreen">
-        <div class="home-card-puzzle">
-            <h2>🧩 Puzzle Master</h2>
-            <p>Solve sliding puzzles and test your logic skills!</p>
-            <div class="home-buttons-puzzle">
-                <button class="puzzle-home-btn" onclick="startFromHome()">🎮 Start Game</button>
-                <button class="puzzle-home-btn" onclick="togglePuzzleHelp()"
-                    style="background: rgba(110, 142, 251, 0.2); color: #6e8efb; border: 2px solid #6e8efb;">📖 How to
-                    Play</button>
-            </div>
-            <div id="puzzleHomeHelp"
-                style="display: none; margin-top: 1.5rem; text-align: left; background: #f8f9fa; padding: 1rem; border-radius: 10px; font-size: 0.9rem; color: #333;">
-                <strong style="color: #6e8efb;">How to Play:</strong>
-                <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
-                    <li><strong>Endless:</strong> Solve puzzles with no time or move limits</li>
-                    <li><strong>Last Stand:</strong> Beat levels with time &amp; move challenges</li>
-                    <li>Click tiles to move them into the empty space</li>
-                    <li>Use hints strategically to complete harder puzzles</li>
-                </ul>
-            </div>
-        </div>
+  
+  <button class="back-btn" onclick="window.location.href='../../index.html'"><i class="fas fa-arrow-left"></i> Back</button>
+
+  
+  <div class="popup-overlay" id="helpPopup">
+    <div class="popup-card">
+      <button class="close-popup" id="closeHelpPopup">&times;</button>
+      <h2><i class="fas fa-book-open" style="color:#4f46e5;"></i> How to Play</h2>
+      <p style="margin-bottom:10px;"><strong>Goal:</strong> arrange tiles in order (1,2,3…), empty tile at bottom-right.</p>
+      <ul>
+        <li><strong>Click</strong> a tile next to the empty space to slide it.</li>
+        <li>Use <strong>arrow keys</strong> or on-screen buttons.</li>
+        <li><strong>H</strong> hint · <strong>U</strong> undo · <strong>R</strong> restart.</li>
+        <li><strong>Endless:</strong> free play · <strong>Challenge:</strong> move &amp; time limits per level.</li>
+        <li><strong>Practice:</strong> unlimited hints, no limits.</li>
+        <li>Choose <strong>3×3</strong> (easy), <strong>4×4</strong> (medium), or <strong>5×5</strong> (hard).</li>
+      </ul>
+      <p style="margin-top:12px; font-size:14px; opacity:0.7;">Press ESC or click × to close and resume.</p>
+    </div>
+  </div>
+
+  
+  <div class="game-wrapper" id="gameWrapper">
+    
+    <div id="homeScreen" class="home-screen">
+      <h2>🧩 Puzzle Master</h2>
+      <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:12px;">
+        <button class="home-btn" id="startHomeBtn"><i class="fas fa-play"></i> Start</button>
+        <button class="home-btn secondary" id="helpHomeBtn"><i class="fas fa-question-circle"></i> Help</button>
+      </div>
     </div>
 
-    <div id="gameContainer" style="display: none;">
-        <div class="game-over" id="gameOver">
-            <div class="game-over-content">
-                <h2 id="gameOverTitle">Game Over</h2>
-                <p id="gameOverMessage"></p>
-                <div class="modal-buttons">
-                    <button id="retryBtn"><i class="fas fa-redo"></i> Retry</button>
-                    <button id="menuBtn"><i class="fas fa-home"></i> Menu</button>
-                </div>
-            </div>
+    
+    <div id="gameUI" class="hidden">
+      <div class="header">
+        <h1><i class="fas fa-puzzle-piece"></i> Puzzle</h1>
+        <div class="toolbar">
+          <button class="icon-btn" id="themeToggle" title="Toggle theme"><i class="fas fa-moon"></i></button>
+          <button class="icon-btn" id="pauseBtn" title="Pause"><i class="fas fa-pause"></i></button>
+          <button class="icon-btn" id="helpBtn" title="Help"><i class="fas fa-question"></i></button>
         </div>
+      </div>
 
-        <div class="how-to-play" id="howToPlay">
-            <button class="close-btn" id="closeHelp">&times;</button>
-            <h3>🎮 How to Play</h3>
-            <p><strong>Goal:</strong> Arrange tiles in numerical order with the empty space at the bottom-right.</p>
-            <p><strong>Modes:</strong></p>
-            <ul>
-                <li><strong>Endless:</strong> Solve puzzles with no limits</li>
-                <li><strong>Last Stand:</strong> Beat levels with time & move limits</li>
-            </ul>
-            <p><strong>Controls:</strong></p>
-            <ul>
-                <li>Click tiles next to empty space to move</li>
-                <li>Use arrow keys or mobile controls</li>
-                <li>Press H for hint</li>
-                <li>Press U to undo</li>
-            </ul>
+      
+      <div id="modeSizeArea">
+        <div class="mode-selector">
+          <button class="mode-btn" data-mode="endless"><i class="fas fa-infinity"></i> Endless</button>
+          <button class="mode-btn" data-mode="challenge"><i class="fas fa-flame"></i> Challenge</button>
+          <button class="mode-btn" data-mode="practice"><i class="fas fa-graduation-cap"></i> Practice</button>
         </div>
-
-        <div class="achievements-panel" id="achievementsPanel">
-            <h3><i class="fas fa-trophy"></i> Achievements</h3>
-            <div id="achievementsList"></div>
+        <div class="size-selector" id="sizeSelector">
+          <button class="size-btn" data-size="3">3×3</button>
+          <button class="size-btn active" data-size="4">4×4</button>
+          <button class="size-btn" data-size="5">5×5</button>
         </div>
+      </div>
 
-        <div class="game-container">
-            <div class="header">
-                <h1><i class="fas fa-puzzle-piece"></i> 🧩 Puzzle Master   🧩</h1>
-                <div class="settings">
-                    <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                    <button class="sound-toggle" id="soundToggle" title="Toggle Sound">
-                        <i class="fas fa-volume-up"></i>
-                    </button>
-                    <button class="pause-btn" id="pauseBtn" title="Pause Game">
-                        <i class="fas fa-pause"></i>
-                    </button>
-                    <button class="theme-toggle" id="helpBtn" title="How to Play">
-                        <i class="fas fa-question"></i>
-                    </button>
-                    <button class="theme-toggle" id="achievementsBtn" title="Achievements">
-                        <i class="fas fa-trophy"></i>
-                    </button>
-                </div>
-            </div>
+      
+      <div class="puzzle-grid" id="puzzleGrid"></div>
 
-            <div id="modeSelect">
-                <p style="font-size: 14px; color: #666; margin-bottom: 15px;">Select your challenge:</p>
-                <div class="mode-select">
-                    <button class="mode-btn" id="endlessModeBtn" title="Solve puzzles at your own pace">
-                        <i class="fas fa-infinity"></i> Endless Mode
-                    </button>
-                    <button class="mode-btn" id="lastStandBtn" title="Race against time and moves!">
-                        <i class="fas fa-shield-alt"></i> Last Stand
-                    </button>
-                    <button class="mode-btn" id="practiceModeBtn" title="Unlimited hints, no limits">
-                        <i class="fas fa-graduation-cap"></i> Practice
-                    </button>
-                </div>
-                <div class="difficulty-select" id="difficultySelect">
-                    <select id="difficulty">
-                        <option value="3">3×3 (Easy)</option>
-                        <option value="4">4×4 (Medium)</option>
-                        <option value="5">5×5 (Hard)</option>
-                    </select>
-                </div>
-            </div>
+      
+      <div class="stats-row" id="statsRow">
+        <span><i class="fas fa-arrows-alt-h"></i> Moves: <strong id="moveCount">0</strong></span>
+        <span><i class="fas fa-clock"></i> <span id="timerDisplay">0</span>s</span>
+        <span><i class="fas fa-lightbulb"></i> Hints: <strong id="hintDisplay">3</strong></span>
+        <span id="levelDisplayWrap"><i class="fas fa-layer-group"></i> Lv.<span id="levelDisplay">1</span></span>
+      </div>
 
-            <div class="puzzle-grid" id="puzzleGrid" style="display:none;"></div>
+      
+      <div class="controls">
+        <button class="ctrl-btn" id="restartBtn"><i class="fas fa-undo-alt"></i> Restart</button>
+        <button class="ctrl-btn" id="hintBtn"><i class="fas fa-lightbulb"></i> Hint</button>
+        <button class="ctrl-btn" id="undoBtn" disabled><i class="fas fa-arrow-left"></i> Undo</button>
+      </div>
 
-            <div class="mobile-controls" id="mobileControls" style="display:none;">
-                <button class="mobile-btn" data-direction="up">↑</button>
-                <button class="mobile-btn" data-direction="left">←</button>
-                <button class="mobile-btn" data-direction="right">→</button>
-                <button class="mobile-btn" data-direction="down">↓</button>
-                <button class="mobile-btn" id="hintMobile">💡</button>
-                <button class="mobile-btn" id="undoMobile">↶</button>
-            </div>
+      
+      <div class="win-banner" id="winBanner"><i class="fas fa-check-circle"></i> Solved!</div>
+    </div>
+  </div>
 
-            <div class="time-container" id="timeContainer" style="display:none;">
-                <div>Time: <span id="timer">0</span>s</div>
-                <div class="time-bar">
-                    <div class="time-fill" id="timeFill"></div>
-                </div>
-            </div>
+  <script>
+    (function() {
+      const state = {
+        gridSize: 4,
+        tiles: [],
+        emptyIndex: -1,
+        moves: 0,
+        hints: 3,
+        mode: null,      // 'endless','challenge','practice'
+        level: 1,
+        moveLimit: null,
+        timeLimit: null,
+        timer: 0,
+        timerInterval: null,
+        isPaused: false,
+        solved: false,
+        history: [],
+        sound: true,
+        dark: false,
+        challengeBest: Number(localStorage.getItem('puzzleBestLevel')) || 1,
+      };
 
-            <div class="stats" id="stats" style="display:none;">
-                <div class="stat-box">
-                    <h3>Moves</h3>
-                    <div class="stat-value moves" id="moveCount">0</div>
-                </div>
-                <div class="stat-box">
-                    <h3>Level</h3>
-                    <div class="stat-value" id="levelDisplay">1</div>
-                </div>
-                <div class="stat-box">
-                    <h3>Best Level</h3>
-                    <div class="stat-value" id="bestLevel">1</div>
-                </div>
-                <div class="stat-box">
-                    <h3>Hints Left</h3>
-                    <div class="stat-value" id="hintCount">3</div>
-                </div>
-            </div>
+      const grid = document.getElementById('puzzleGrid');
+      const moveCount = document.getElementById('moveCount');
+      const timerDisplay = document.getElementById('timerDisplay');
+      const hintDisplay = document.getElementById('hintDisplay');
+      const levelDisplay = document.getElementById('levelDisplay');
+      const winBanner = document.getElementById('winBanner');
+      const homeScreen = document.getElementById('homeScreen');
+      const gameUI = document.getElementById('gameUI');
+      const modeSizeArea = document.getElementById('modeSizeArea');
+      const helpPopup = document.getElementById('helpPopup');
+      const closeHelpPopup = document.getElementById('closeHelpPopup');
 
-            <div class="controls" id="controls" style="display:none;">
-                <button id="newGameBtn">
-                    <i class="fas fa-redo"></i> Restart
-                </button>
-                <button id="hintBtn" disabled>
-                    <i class="fas fa-lightbulb"></i> Hint
-                </button>
-                <button id="undoBtn" disabled>
-                    <i class="fas fa-undo"></i> Undo
-                </button>
-            </div>
+      function shuffleArray(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
 
-            <div class="win-message" id="winMessage">
-                <i class="fas fa-trophy"></i> 🎉 Level Complete! 🎉
-            </div>
-        </div>
+      function isSolvable(tiles, size) {
+        let inv = 0;
+        const flat = tiles.filter(v => v !== null);
+        for (let i = 0; i < flat.length; i++) {
+          for (let j = i + 1; j < flat.length; j++) {
+            if (flat[i] > flat[j]) inv++;
+          }
+        }
+        if (size % 2 === 1) return inv % 2 === 0;
+        const emptyRow = Math.floor(tiles.indexOf(null) / size);
+        return (inv + emptyRow) % 2 === 1;
+      }
 
-        <script>
-            const state = {
-                tiles: [],
-                moves: 0,
-                solved: false,
-                timer: 0,
-                timerInterval: null,
-                mode: null,
-                level: 1,
-                moveLimit: null,
-                timeLimit: null,
-                countdownInterval: null,
-                moveHistory: [],
-                soundEnabled: true,
-                isPaused: false,
-                gridSize: 3,
-                hints: 3,
-                achievements: {
-                    firstWin: { unlocked: false, desc: "Solve your first puzzle" },
-                    speedster: { unlocked: false, desc: "Solve in under 30 seconds" },
-                    perfectionist: { unlocked: false, desc: "Solve in minimum moves" },
-                    master: { unlocked: false, desc: "Reach level 10 in Last Stand" },
-                    sizeMaster: { unlocked: false, desc: "Complete a 5×5 puzzle" }
-                },
-                records: {
-                    endless: {
-                        fastest: 0,
-                        leastMoves: Infinity,
-                        bestScore: 0
-                    }
-                }
-            };
+      function generateSolvable(size) {
+        let arr = Array.from({ length: size * size - 1 }, (_, i) => i + 1);
+        arr.push(null);
+        let tries = 0;
+        do {
+          shuffleArray(arr);
+          tries++;
+        } while (!isSolvable(arr, size) && tries < 200);
+        return arr;
+      }
 
-            const grid = document.getElementById('puzzleGrid');
-            const winMessage = document.getElementById('winMessage');
-            const moveDisplay = document.getElementById('moveCount');
-            const timerDisplay = document.getElementById('timer');
-            const timeFill = document.getElementById('timeFill');
-            const stats = document.getElementById('stats');
-            const timeContainer = document.getElementById('timeContainer');
+      function getEmptyNeighbors(idx, size) {
+        const row = Math.floor(idx / size);
+        const col = idx % size;
+        const neighbors = [];
+        if (row > 0) neighbors.push(idx - size);
+        if (row < size - 1) neighbors.push(idx + size);
+        if (col > 0) neighbors.push(idx - 1);
+        if (col < size - 1) neighbors.push(idx + 1);
+        return neighbors;
+      }
 
-            const PUZZLE_BEST_KEY = 'puzzle_best_laststand';
-            const ACHIEVEMENTS_KEY = 'puzzle_achievements';
-            const ENDLESS_RECORDS_KEY = 'puzzle_endless_records';
-            const SOUND_KEY = 'puzzle_sound';
-            const THEME_KEY = 'puzzle_theme';
-
-            let bestLevel = Number(localStorage.getItem(PUZZLE_BEST_KEY) || 1);
-            document.getElementById('bestLevel').textContent = bestLevel;
-
-            const savedAchievements = localStorage.getItem(ACHIEVEMENTS_KEY);
-            if (savedAchievements) {
-                state.achievements = { ...state.achievements, ...JSON.parse(savedAchievements) };
+      function render() {
+        const size = state.gridSize;
+        const tiles = state.tiles;
+        grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+        grid.innerHTML = '';
+        tiles.forEach((val, idx) => {
+          const tile = document.createElement('button');
+          tile.className = 'tile';
+          if (val === null) {
+            tile.classList.add('empty');
+          } else {
+            tile.textContent = val;
+            if (val === idx + 1) tile.classList.add('correct');
+            const emptyIdx = tiles.indexOf(null);
+            if (getEmptyNeighbors(idx, size).includes(emptyIdx)) {
+              tile.classList.add('movable');
             }
+            tile.addEventListener('click', () => handleTileClick(idx));
+          }
+          grid.appendChild(tile);
+        });
+        moveCount.textContent = state.moves;
+        timerDisplay.textContent = state.timer;
+        hintDisplay.textContent = state.mode === 'practice' ? '∞' : state.hints;
+        levelDisplay.textContent = state.level;
+        if (state.solved) {
+          winBanner.style.display = 'flex';
+        } else {
+          winBanner.style.display = 'none';
+        }
+        document.getElementById('undoBtn').disabled = state.history.length === 0;
+        document.getElementById('hintBtn').disabled = (state.hints === 0 && state.mode !== 'practice') || state.solved;
+      }
 
-            const savedRecords = localStorage.getItem(ENDLESS_RECORDS_KEY);
-            if (savedRecords) {
-                state.records.endless = JSON.parse(savedRecords);
+      function handleTileClick(idx) {
+        if (state.solved || state.isPaused) return;
+        const emptyIdx = state.tiles.indexOf(null);
+        if (!getEmptyNeighbors(idx, state.gridSize).includes(emptyIdx)) return;
+
+        state.history.push([...state.tiles]);
+        state.tiles[emptyIdx] = state.tiles[idx];
+        state.tiles[idx] = null;
+        state.moves++;
+        if (checkWin()) {
+          state.solved = true;
+          clearInterval(state.timerInterval);
+          winBanner.style.display = 'flex';
+          if (state.mode === 'challenge') {
+            state.level++;
+            if (state.level > state.challengeBest) {
+              state.challengeBest = state.level;
+              localStorage.setItem('puzzleBestLevel', String(state.challengeBest));
             }
+            setTimeout(() => {
+              winBanner.style.display = 'none';
+              startChallengeLevel();
+            }, 1000);
+          } else {
+            setTimeout(() => {
+              winBanner.style.display = 'none';
+              initPuzzle();
+            }, 1200);
+          }
+        } else {
+          if (state.mode === 'challenge' && state.moveLimit !== null && state.moves >= state.moveLimit) {
+            clearInterval(state.timerInterval);
+            state.solved = true;
+            alert('💥 Move limit reached! Level ' + state.level);
+            initPuzzle(); // restart same level
+            return;
+          }
+        }
+        render();
+        playSound('move');
+      }
 
-            const sounds = {
-                move: () => beep(440, 100),
-                win: () => beep(880, 300),
-                click: () => beep(220, 50),
-                error: () => beep(110, 200)
-            };
+      function checkWin() {
+        const size = state.gridSize;
+        const tiles = state.tiles;
+        for (let i = 0; i < tiles.length - 1; i++) {
+          if (tiles[i] !== i + 1) return false;
+        }
+        return tiles[tiles.length - 1] === null;
+      }
 
-            function beep(freq, duration) {
-                if (!state.soundEnabled) return;
-
-                try {
-                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                    const oscillator = audioContext.createOscillator();
-                    const gainNode = audioContext.createGain();
-
-                    oscillator.connect(gainNode);
-                    gainNode.connect(audioContext.destination);
-
-                    oscillator.frequency.value = freq;
-                    oscillator.type = 'sine';
-
-                    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration / 1000);
-
-                    oscillator.start(audioContext.currentTime);
-                    oscillator.stop(audioContext.currentTime + duration / 1000);
-                } catch (e) {
-                    console.log('Audio not supported');
-                }
-            }
-
-            const themeToggle = document.getElementById('themeToggle');
-            const savedTheme = localStorage.getItem(THEME_KEY) || 'light';
-
-            if (savedTheme === 'dark') {
-                document.body.classList.add('dark-theme');
-                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-            }
-
-            themeToggle.onclick = () => {
-                document.body.classList.toggle('dark-theme');
-                if (document.body.classList.contains('dark-theme')) {
-                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-                    localStorage.setItem(THEME_KEY, 'dark');
-                } else {
-                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-                    localStorage.setItem(THEME_KEY, 'light');
-                }
-            };
-
-            const soundToggle = document.getElementById('soundToggle');
-            state.soundEnabled = localStorage.getItem(SOUND_KEY) !== 'false';
-
-            if (!state.soundEnabled) {
-                soundToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
-            }
-
-            soundToggle.onclick = () => {
-                state.soundEnabled = !state.soundEnabled;
-                localStorage.setItem(SOUND_KEY, state.soundEnabled);
-                soundToggle.innerHTML = state.soundEnabled ?
-                    '<i class="fas fa-volume-up"></i>' :
-                    '<i class="fas fa-volume-mute"></i>';
-            };
-
-            const helpBtn = document.getElementById('helpBtn');
-            const howToPlay = document.getElementById('howToPlay');
-            const closeHelp = document.getElementById('closeHelp');
-
-            helpBtn.onclick = () => {
-                howToPlay.style.display = 'block';
-                sounds.click();
-            };
-
-            closeHelp.onclick = () => {
-                howToPlay.style.display = 'none';
-            };
-
-            const achievementsBtn = document.getElementById('achievementsBtn');
-            const achievementsPanel = document.getElementById('achievementsPanel');
-            const achievementsList = document.getElementById('achievementsList');
-
-            function updateAchievementsDisplay() {
-                achievementsList.innerHTML = '';
-                for (const [key, achievement] of Object.entries(state.achievements)) {
-                    const div = document.createElement('div');
-                    div.className = `achievement ${achievement.unlocked ? 'unlocked' : ''}`;
-                    div.innerHTML = `
-                    <i class="fas ${achievement.unlocked ? 'fa-check-circle' : 'fa-lock'}"></i>
-                    <div>
-                        <strong>${achievement.desc}</strong>
-                        <div style="font-size:12px;color:#666;">${achievement.unlocked ? 'Unlocked!' : 'Locked'}</div>
-                    </div>
-                `;
-                    achievementsList.appendChild(div);
-                }
-            }
-
-            achievementsBtn.onclick = () => {
-                updateAchievementsDisplay();
-                achievementsPanel.style.display = achievementsPanel.style.display === 'block' ? 'none' : 'block';
-                sounds.click();
-            };
-
-            function unlockAchievement(key) {
-                if (!state.achievements[key].unlocked) {
-                    state.achievements[key].unlocked = true;
-                    localStorage.setItem(ACHIEVEMENTS_KEY, JSON.stringify(state.achievements));
-
-                    showNotification(`Achievement Unlocked: ${state.achievements[key].desc}`);
-                    updateAchievementsDisplay();
-                }
-            }
-
-            function showNotification(message) {
-                const notification = document.createElement('div');
-                notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: #27ae60;
-                color: white;
-                padding: 15px;
-                border-radius: 8px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-                z-index: 1000;
-                animation: slideIn 0.3s ease-out;
-            `;
-                notification.innerHTML = `<i class="fas fa-trophy"></i> ${message}`;
-                document.body.appendChild(notification);
-
-                setTimeout(() => {
-                    notification.style.animation = 'slideOut 0.3s ease-out';
-                    setTimeout(() => notification.remove(), 300);
-                }, 3000);
-            }
-
-            const style = document.createElement('style');
-            style.textContent = `
-            @keyframes slideIn {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
-            }
-            @keyframes slideOut {
-                from { transform: translateX(0); opacity: 1; }
-                to { transform: translateX(100%); opacity: 0; }
-            }
-        `;
-            document.head.appendChild(style);
-
-            document.getElementById('endlessModeBtn').onclick = () => {
-                startMode('endless');
-                sounds.click();
-            };
-            document.getElementById('lastStandBtn').onclick = () => {
-                startMode('laststand');
-                sounds.click();
-            };
-            document.getElementById('practiceModeBtn').onclick = () => {
-                startMode('practice');
-                sounds.click();
-            };
-
-            function startMode(mode) {
-                state.mode = mode;
-                state.level = 1;
-                state.hints = mode === 'practice' ? Infinity : 3;
-
-                document.getElementById('modeSelect').style.display = 'none';
-                document.getElementById('difficultySelect').style.display = (mode === 'endless' || mode === 'practice') ? 'block' : 'none';
-
-                if (mode === 'endless' || mode === 'practice') {
-                    const size = parseInt(document.getElementById('difficulty').value);
-                    state.gridSize = size;
-                }
-
-                grid.style.display = 'grid';
-                stats.style.display = 'grid';
-                timeContainer.style.display = mode !== 'practice' ? 'block' : 'none';
-                document.getElementById('controls').style.display = 'flex';
-                document.getElementById('hintCount').textContent = mode === 'practice' ? '∞' : state.hints;
-
-                if (window.innerWidth <= 768) {
-                    document.getElementById('mobileControls').style.display = 'grid';
-                    setupMobileControls();
-                }
-
-                initializePuzzle();
-            }
-
-            function setupMobileControls() {
-                document.querySelectorAll('.mobile-btn[data-direction]').forEach(btn => {
-                    btn.onclick = () => {
-                        const direction = btn.dataset.direction;
-                        const emptyIndex = state.tiles.indexOf(null);
-                        let targetIndex = -1;
-
-                        switch (direction) {
-                            case 'up': targetIndex = emptyIndex + state.gridSize; break;
-                            case 'down': targetIndex = emptyIndex - state.gridSize; break;
-                            case 'left': targetIndex = emptyIndex + 1; break;
-                            case 'right': targetIndex = emptyIndex - 1; break;
-                        }
-
-                        if (targetIndex >= 0 && targetIndex < state.tiles.length) {
-                            moveTile(targetIndex);
-                        }
-                    };
-                });
-
-                document.getElementById('hintMobile').onclick = () => useHint();
-                document.getElementById('undoMobile').onclick = () => undo();
-            }
-
-            function initializePuzzle() {
-                const totalTiles = state.gridSize * state.gridSize;
-                state.tiles = Array.from({ length: totalTiles - 1 }, (_, i) => i + 1);
-                state.tiles.push(null);
-                state.moves = 0;
-                state.solved = false;
-                state.moveHistory = [];
-                winMessage.style.display = "none";
-
-                document.getElementById('hintBtn').disabled = state.hints === 0;
-                document.getElementById('undoBtn').disabled = true;
-
-                shufflePuzzle();
-                setupTimerAndLimits();
-                updateGridSize();
-                updateUI();
-            }
-
-            function updateGridSize() {
-                const tileSize = Math.min(100, 380 / state.gridSize - 10);
-                grid.style.gridTemplateColumns = `repeat(${state.gridSize}, ${tileSize}px)`;
-                grid.style.width = `${state.gridSize * (tileSize + 6)}px`;
-
-                document.querySelectorAll('.puzzle-tile').forEach(tile => {
-                    tile.style.width = `${tileSize}px`;
-                    tile.style.height = `${tileSize}px`;
-                    tile.style.fontSize = `${tileSize / 3}px`;
-                });
-            }
-
-            function shufflePuzzle() {
-                let attempts = 0;
-                do {
-                    for (let i = state.tiles.length - 1; i > 0; i--) {
-                        const j = Math.floor(Math.random() * (i + 1));
-                        [state.tiles[i], state.tiles[j]] = [state.tiles[j], state.tiles[i]];
-                    }
-                    attempts++;
-                } while (!isSolvable() && attempts < 100);
-            }
-
-            function isSolvable() {
-                if (state.gridSize % 2 === 1) {
-                    let inversions = 0;
-                    const tiles = state.tiles.filter(t => t !== null);
-                    for (let i = 0; i < tiles.length - 1; i++) {
-                        for (let j = i + 1; j < tiles.length; j++) {
-                            if (tiles[i] > tiles[j]) inversions++;
-                        }
-                    }
-                    return inversions % 2 === 0;
-                }
-                return true; // For even grids, always solvable with proper shuffling
-            }
-
-            function setupTimerAndLimits() {
-                stopAllTimers();
-
-                if (state.mode === 'endless') {
-                    state.timer = 0;
-                    state.timerInterval = setInterval(() => {
-                        state.timer++;
-                        timerDisplay.textContent = state.timer;
-                        updateTimeBar();
-                    }, 1000);
-                } else if (state.mode === 'practice') {
-                    state.timer = 0;
-                    state.timerInterval = setInterval(() => {
-                        state.timer++;
-                        timerDisplay.textContent = state.timer;
-                    }, 1000);
-                } else if (state.mode === 'laststand') {
-                    const baseTime = Math.max(180 - (state.level - 1) * 15, 30);
-                    state.timeLimit = baseTime;
-                    state.timer = baseTime;
-                    state.moveLimit = Math.max(100 - (state.level - 1) * 10, 20);
-
-                    document.getElementById('levelDisplay').textContent = state.level;
-                    timerDisplay.textContent = state.timer;
-
-                    state.countdownInterval = setInterval(() => {
-                        state.timer--;
-                        timerDisplay.textContent = state.timer;
-                        updateTimeBar();
-
-                        if (state.timer <= 0) {
-                            gameOver("⏰ Time's up! You reached Level " + state.level);
-                        }
-                    }, 1000);
-                }
-            }
-
-            function updateTimeBar() {
-                if (state.mode === 'laststand') {
-                    const percentage = (state.timer / state.timeLimit) * 100;
-                    timeFill.style.width = percentage + '%';
-
-                    timeFill.classList.remove('warning', 'danger');
-                    if (percentage < 30) timeFill.classList.add('warning');
-                    if (percentage < 15) timeFill.classList.add('danger');
-                }
-            }
-
-            function stopAllTimers() {
+      function initPuzzle() {
+        state.tiles = generateSolvable(state.gridSize);
+        state.emptyIndex = state.tiles.indexOf(null);
+        state.moves = 0;
+        state.solved = false;
+        state.history = [];
+        clearInterval(state.timerInterval);
+        state.timer = 0;
+        if (state.mode === 'challenge') {
+          state.timeLimit = Math.max(30, 80 - state.level * 2);
+          state.moveLimit = Math.max(10, 50 - state.level * 2);
+          state.timer = state.timeLimit;
+          state.timerInterval = setInterval(() => {
+            if (!state.isPaused && !state.solved) {
+              state.timer--;
+              timerDisplay.textContent = state.timer;
+              if (state.timer <= 0) {
                 clearInterval(state.timerInterval);
-                clearInterval(state.countdownInterval);
-            }
-
-            function updateUI() {
-                grid.innerHTML = '';
-                state.tiles.forEach((tile, index) => {
-                    const btn = document.createElement('button');
-                    btn.className = 'puzzle-tile';
-
-                    if (tile === null) {
-                        btn.classList.add('empty');
-                    } else {
-                        btn.textContent = tile;
-                        if (state.mode === 'laststand' && state.level >= 5) {
-                            btn.textContent = tile; // Show numbers on higher levels
-                        }
-
-                        if (canMove(index)) btn.classList.add('movable');
-
-                        if (tile === index + 1) {
-                            btn.classList.add('correct-pos');
-                        }
-
-                        btn.onclick = () => moveTile(index);
-                    }
-                    grid.appendChild(btn);
-                });
-
-                moveDisplay.textContent = state.moves;
-
-                if (state.mode === 'laststand') {
-                    const movesLeft = state.moveLimit - state.moves;
-                    moveDisplay.classList.remove('near-limit', 'at-limit');
-                    if (movesLeft <= 10) moveDisplay.classList.add('near-limit');
-                    if (movesLeft <= 3) moveDisplay.classList.add('at-limit');
-                }
-            }
-
-            function canMove(index) {
-                if (state.tiles[index] === null) return false;
-                const row = Math.floor(index / state.gridSize);
-                const col = index % state.gridSize;
-                const emptyIndex = state.tiles.indexOf(null);
-                const emptyRow = Math.floor(emptyIndex / state.gridSize);
-                const emptyCol = emptyIndex % state.gridSize;
-                return (Math.abs(row - emptyRow) + Math.abs(col - emptyCol)) === 1;
-            }
-
-            function moveTile(index, isUndo = false) {
-                if (state.isPaused || !canMove(index) || state.solved) return;
-
-                if (!isUndo) {
-                    state.moveHistory.push([...state.tiles]);
-                    document.getElementById('undoBtn').disabled = false;
-                }
-
-                const emptyIndex = state.tiles.indexOf(null);
-                [state.tiles[index], state.tiles[emptyIndex]] = [state.tiles[emptyIndex], state.tiles[index]];
-                state.moves++;
-
-                const tile = grid.children[index];
-                tile.classList.add('moving');
-                setTimeout(() => tile.classList.remove('moving'), 300);
-
-                moveDisplay.textContent = state.moves;
-                sounds.move();
-
-                if (state.mode === 'laststand' && state.moves > state.moveLimit) {
-                    return gameOver("🚫 Move limit reached! You made it to Level " + state.level);
-                }
-
-                if (checkWin()) handleWin();
-                updateUI();
-            }
-
-            function checkWin() {
-                for (let i = 0; i < state.tiles.length - 1; i++) {
-                    if (state.tiles[i] !== i + 1) return false;
-                }
-                return state.tiles[state.tiles.length - 1] === null;
-            }
-
-            function handleWin() {
                 state.solved = true;
-                stopAllTimers();
-                winMessage.style.display = "block";
-                sounds.win();
-
-                if (!state.achievements.firstWin.unlocked) {
-                    unlockAchievement('firstWin');
-                }
-
-                if (state.mode === 'endless' && state.timer < 30) {
-                    unlockAchievement('speedster');
-                }
-
-                if (state.gridSize === 5) {
-                    unlockAchievement('sizeMaster');
-                }
-
-                if (state.mode === 'laststand') {
-                    setTimeout(() => {
-                        state.level++;
-
-                        if (state.level > bestLevel) {
-                            bestLevel = state.level;
-                            localStorage.setItem(PUZZLE_BEST_KEY, String(bestLevel));
-                            document.getElementById('bestLevel').textContent = bestLevel;
-
-                            if (bestLevel >= 10) {
-                                unlockAchievement('master');
-                            }
-                        }
-
-                        winMessage.style.display = "none";
-                        initializePuzzle();
-                    }, 2000);
-                } else if (state.mode === 'practice') {
-                    setTimeout(() => {
-                        if (confirm(`✅ Puzzle Solved in ${state.timer}s with ${state.moves} moves!\n\nContinue practicing?`)) {
-                            winMessage.style.display = "none";
-                            initializePuzzle();
-                        } else {
-                            resetToMenu();
-                        }
-                    }, 500);
-                } else {
-                    setTimeout(() => {
-                        showConfetti();
-                        setTimeout(() => {
-                            if (confirm("🎉 Puzzle Solved! Would you like to play again?")) {
-                                winMessage.style.display = "none";
-                                initializePuzzle();
-                            } else {
-                                resetToMenu();
-                            }
-                        }, 1000);
-                    }, 500);
-                }
+                alert('⏰ Time out! Level ' + state.level);
+                initPuzzle();
+              }
             }
+          }, 1000);
+        } else {
+          state.timerInterval = setInterval(() => {
+            if (!state.isPaused && !state.solved) {
+              state.timer++;
+              timerDisplay.textContent = state.timer;
+            }
+          }, 1000);
+        }
+        if (state.mode === 'practice') state.hints = 999;
+        else state.hints = 3;
+        render();
+        document.getElementById('levelDisplayWrap').style.display = (state.mode === 'challenge') ? 'inline' : 'none';
+      }
 
-            function showConfetti() {
-                const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+      function startChallengeLevel() {
+        state.solved = false;
+        state.moves = 0;
+        state.history = [];
+        state.tiles = generateSolvable(state.gridSize);
+        state.emptyIndex = state.tiles.indexOf(null);
+        clearInterval(state.timerInterval);
+        state.timeLimit = Math.max(30, 80 - state.level * 2);
+        state.moveLimit = Math.max(10, 50 - state.level * 2);
+        state.timer = state.timeLimit;
+        state.timerInterval = setInterval(() => {
+          if (!state.isPaused && !state.solved) {
+            state.timer--;
+            timerDisplay.textContent = state.timer;
+            if (state.timer <= 0) {
+              clearInterval(state.timerInterval);
+              state.solved = true;
+              alert('⏰ Time out! Level ' + state.level);
+              initPuzzle();
+            }
+          }
+        }, 1000);
+        render();
+      }
 
-                for (let i = 0; i < 100; i++) {
-                    const confetti = document.createElement('div');
-                    confetti.className = 'confetti';
-                    confetti.style.left = Math.random() * 100 + 'vw';
-                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+      function setMode(mode) {
+        state.mode = mode;
+        state.level = 1;
+        state.solved = false;
+        state.history = [];
+        clearInterval(state.timerInterval);
+        if (mode === 'challenge') {
+          state.hints = 3;
+          startChallengeLevel();
+        } else {
+          state.hints = (mode === 'practice') ? 999 : 3;
+          initPuzzle();
+        }
+        document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+        document.getElementById('sizeSelector').style.display = (mode === 'challenge') ? 'none' : 'flex';
+        modeSizeArea.style.display = 'none';
+        gameUI.classList.remove('hidden');
+        homeScreen.classList.add('hidden');
+      }
 
-                    document.body.appendChild(confetti);
+      function setSize(size) {
+        state.gridSize = size;
+        document.querySelectorAll('.size-btn').forEach(b => b.classList.toggle('active', parseInt(b.dataset.size) === size));
+        if (state.mode) initPuzzle();
+      }
 
-                    const animation = confetti.animate([
-                        {
-                            top: '-10px',
-                            opacity: 1,
-                            transform: `rotate(0deg) scale(1)`
-                        },
-                        {
-                            top: '100vh',
-                            opacity: 0,
-                            transform: `rotate(${Math.random() * 720}deg) scale(0.5)`
-                        }
-                    ], {
-                        duration: Math.random() * 3000 + 2000,
-                        easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
-                    });
+      function undoMove() {
+        if (state.history.length === 0 || state.solved || state.isPaused) return;
+        state.tiles = state.history.pop();
+        state.moves--;
+        render();
+        playSound('move');
+      }
 
-                    animation.onfinish = () => confetti.remove();
+      function useHint() {
+        if (state.solved || state.isPaused) return;
+        if (state.mode !== 'practice' && state.hints <= 0) return;
+        const size = state.gridSize;
+        const emptyIdx = state.tiles.indexOf(null);
+        const neighbors = getEmptyNeighbors(emptyIdx, size);
+        let target = null;
+        for (let idx of neighbors) {
+          if (state.tiles[idx] !== idx + 1) { target = idx; break; }
+        }
+        if (target === null && neighbors.length > 0) target = neighbors[0];
+        if (target !== null) {
+          const tileEl = grid.children[target];
+          if (tileEl) {
+            tileEl.style.boxShadow = '0 0 0 4px #fbbf24, 0 0 20px #f59e0b';
+            setTimeout(() => tileEl.style.boxShadow = '', 800);
+          }
+          if (state.mode !== 'practice') state.hints--;
+          hintDisplay.textContent = state.mode === 'practice' ? '∞' : state.hints;
+          document.getElementById('hintBtn').disabled = (state.hints === 0 && state.mode !== 'practice') || state.solved;
+          playSound('hint');
+        }
+      }
+
+      function playSound(type) {
+        if (!state.sound) return;
+        try {
+          const ctx = new (window.AudioContext || window.webkitAudioContext)();
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.type = 'sine';
+          const freq = type === 'move' ? 440 : type === 'hint' ? 660 : 880;
+          osc.frequency.value = freq;
+          gain.gain.setValueAtTime(0.15, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
+          osc.start(ctx.currentTime);
+          osc.stop(ctx.currentTime + 0.12);
+        } catch (e) {}
+      }
+
+      function togglePause() {
+        state.isPaused = !state.isPaused;
+        document.getElementById('pauseBtn').innerHTML = state.isPaused ? '<i class="fas fa-play"></i>' : '<i class="fas fa-pause"></i>';
+        if (state.isPaused) {
+          clearInterval(state.timerInterval);
+        } else {
+          if (state.mode === 'challenge') {
+            state.timerInterval = setInterval(() => {
+              if (!state.isPaused && !state.solved) {
+                state.timer--;
+                timerDisplay.textContent = state.timer;
+                if (state.timer <= 0) {
+                  clearInterval(state.timerInterval);
+                  state.solved = true;
+                  alert('⏰ Time out! Level ' + state.level);
+                  initPuzzle();
                 }
-            }
+              }
+            }, 1000);
+          } else {
+            state.timerInterval = setInterval(() => {
+              if (!state.isPaused && !state.solved) {
+                state.timer++;
+                timerDisplay.textContent = state.timer;
+              }
+            }, 1000);
+          }
+        }
+      }
 
-            function useHint() {
-                if (state.hints === 0 || state.solved) return;
+      function showHelp() {
+        if (!state.isPaused) togglePause(); // pause game
+        helpPopup.style.display = 'flex';
+      }
 
-                const emptyIndex = state.tiles.indexOf(null);
-                let possibleMoves = [];
+      function hideHelp() {
+        helpPopup.style.display = 'none';
+        if (state.isPaused) togglePause(); // resume
+      }
 
-                state.tiles.forEach((tile, index) => {
-                    if (tile !== null && canMove(index)) {
-                        possibleMoves.push(index);
-                    }
-                });
+      function toggleTheme() {
+        document.body.classList.toggle('dark');
+        state.dark = document.body.classList.contains('dark');
+        document.getElementById('themeToggle').innerHTML = state.dark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        localStorage.setItem('puzzleTheme', state.dark ? 'dark' : 'light');
+      }
 
-                if (possibleMoves.length > 0) {
-                    const correctTile = emptyIndex + 1;
-                    const tileIndex = state.tiles.indexOf(correctTile);
+      function startGame() {
+        homeScreen.classList.add('hidden');
+        gameUI.classList.remove('hidden');
+        modeSizeArea.style.display = 'block';
+        document.getElementById('sizeSelector').style.display = 'flex';
+        setMode('endless');
+      }
 
-                    if (tileIndex !== -1 && possibleMoves.includes(tileIndex)) {
-                        highlightTile(tileIndex);
-                    } else {
-                        const randomIndex = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
-                        highlightTile(randomIndex);
-                    }
+      function init() {
+        if (localStorage.getItem('puzzleTheme') === 'dark') {
+          document.body.classList.add('dark');
+          state.dark = true;
+          document.getElementById('themeToggle').innerHTML = '<i class="fas fa-sun"></i>';
+        }
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        document.getElementById('pauseBtn').addEventListener('click', togglePause);
+        document.getElementById('helpBtn').addEventListener('click', showHelp);
+        closeHelpPopup.addEventListener('click', hideHelp);
+        document.getElementById('helpHomeBtn').addEventListener('click', showHelp);
+        document.getElementById('startHomeBtn').addEventListener('click', startGame);
+        document.getElementById('restartBtn').addEventListener('click', () => { if (state.mode === 'challenge') startChallengeLevel(); else initPuzzle(); });
+        document.getElementById('hintBtn').addEventListener('click', useHint);
+        document.getElementById('undoBtn').addEventListener('click', undoMove);
 
-                    state.hints--;
-                    document.getElementById('hintCount').textContent = state.hints;
-                    document.getElementById('hintBtn').disabled = state.hints === 0;
-                    sounds.click();
-                }
-            }
+        document.querySelectorAll('.mode-btn').forEach(btn => {
+          btn.addEventListener('click', () => setMode(btn.dataset.mode));
+        });
+        document.querySelectorAll('.size-btn').forEach(btn => {
+          btn.addEventListener('click', () => setSize(parseInt(btn.dataset.size)));
+        });
 
-            function highlightTile(index) {
-                const tile = grid.children[index];
-                const originalColor = tile.style.backgroundColor;
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'h' || e.key === 'H') { e.preventDefault(); useHint(); }
+          if (e.key === 'u' || e.key === 'U') { e.preventDefault(); undoMove(); }
+          if (e.key === 'r' || e.key === 'R') { e.preventDefault(); if (state.mode === 'challenge') startChallengeLevel(); else initPuzzle(); }
+          if (e.key === 'Escape') { if (helpPopup.style.display === 'flex') hideHelp(); }
+          if (e.key === ' ' && !helpPopup.style.display) { e.preventDefault(); togglePause(); }
+          if (['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key) && !state.solved && !state.isPaused) {
+            e.preventDefault();
+            const emptyIdx = state.tiles.indexOf(null);
+            const size = state.gridSize;
+            let target = -1;
+            const row = Math.floor(emptyIdx / size);
+            const col = emptyIdx % size;
+            if (e.key === 'ArrowUp' && row < size-1) target = emptyIdx + size;
+            else if (e.key === 'ArrowDown' && row > 0) target = emptyIdx - size;
+            else if (e.key === 'ArrowLeft' && col < size-1) target = emptyIdx + 1;
+            else if (e.key === 'ArrowRight' && col > 0) target = emptyIdx - 1;
+            if (target !== -1) handleTileClick(target);
+          }
+        });
 
-                tile.style.backgroundColor = '#f1c40f';
-                tile.style.animation = 'pulse 0.5s infinite';
+        homeScreen.classList.remove('hidden');
+        gameUI.classList.add('hidden');
+        helpPopup.style.display = 'none';
+      }
 
-                setTimeout(() => {
-                    tile.style.backgroundColor = originalColor;
-                    tile.style.animation = '';
-                }, 2000);
-            }
-
-            function undo() {
-                if (state.moveHistory.length === 0 || state.solved) return;
-
-                state.tiles = state.moveHistory.pop();
-                state.moves--;
-
-                if (state.moveHistory.length === 0) {
-                    document.getElementById('undoBtn').disabled = true;
-                }
-
-                updateUI();
-                sounds.click();
-            }
-
-            const gameOverModal = document.getElementById('gameOver');
-            const gameOverTitle = document.getElementById('gameOverTitle');
-            const gameOverMessage = document.getElementById('gameOverMessage');
-
-            function gameOver(message) {
-                state.solved = true;
-                stopAllTimers();
-
-                gameOverTitle.textContent = 'Game Over';
-                gameOverMessage.textContent = message;
-                gameOverModal.style.display = 'flex';
-                sounds.error();
-            }
-
-            document.getElementById('retryBtn').onclick = () => {
-                gameOverModal.style.display = 'none';
-                initializePuzzle();
-            };
-
-            document.getElementById('menuBtn').onclick = () => {
-                gameOverModal.style.display = 'none';
-                resetToMenu();
-            };
-
-            function resetToMenu() {
-                stopAllTimers();
-                grid.style.display = 'none';
-                stats.style.display = 'none';
-                timeContainer.style.display = 'none';
-                document.getElementById('controls').style.display = 'none';
-                document.getElementById('mobileControls').style.display = 'none';
-                document.getElementById('modeSelect').style.display = 'block';
-                winMessage.style.display = 'none';
-            }
-
-            const pauseBtn = document.getElementById('pauseBtn');
-            pauseBtn.onclick = () => {
-                if (state.mode) {
-                    state.isPaused = !state.isPaused;
-                    pauseBtn.innerHTML = state.isPaused ?
-                        '<i class="fas fa-play"></i>' :
-                        '<i class="fas fa-pause"></i>';
-
-                    if (state.isPaused) {
-                        stopAllTimers();
-                    } else {
-                        setupTimerAndLimits();
-                    }
-                    sounds.click();
-                }
-            };
-
-            document.addEventListener('keydown', (e) => {
-                if (state.solved || state.isPaused || !state.mode) return;
-
-                const emptyIndex = state.tiles.indexOf(null);
-                let targetIndex = -1;
-
-                switch (e.key) {
-                    case 'ArrowUp': targetIndex = emptyIndex + state.gridSize; break;
-                    case 'ArrowDown': targetIndex = emptyIndex - state.gridSize; break;
-                    case 'ArrowLeft': targetIndex = emptyIndex + 1; break;
-                    case 'ArrowRight': targetIndex = emptyIndex - 1; break;
-                    case 'u':
-                    case 'U':
-                        e.preventDefault();
-                        undo();
-                        break;
-                    case 'h':
-                    case 'H':
-                        e.preventDefault();
-                        useHint();
-                        break;
-                    case 'r':
-                    case 'R':
-                        e.preventDefault();
-                        initializePuzzle();
-                        break;
-                    case ' ':
-                        e.preventDefault();
-                        pauseBtn.click();
-                        break;
-                }
-
-                if (targetIndex >= 0 && targetIndex < state.tiles.length) {
-                    moveTile(targetIndex);
-                }
-            });
-
-            updateAchievementsDisplay();
-
-            document.getElementById('newGameBtn').onclick = () => {
-                sounds.click();
-                initializePuzzle();
-            };
-
-            document.getElementById('hintBtn').onclick = useHint;
-            document.getElementById('undoBtn').onclick = undo;
-
-            if ('ontouchstart' in window) {
-                document.body.classList.add('touch-device');
-            }
-
-            function startFromHome() {
-                document.getElementById('homeScreen').style.display = 'none';
-                document.getElementById('gameContainer').style.display = 'block';
-            }
-
-            function togglePuzzleHelp() {
-                const help = document.getElementById('puzzleHomeHelp');
-                help.style.display = help.style.display === 'none' ? 'block' : 'none';
-            }
-
-            document.addEventListener('DOMContentLoaded', () => {
-                updateAchievementsDisplay();
-            });
-
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    window.location.href = '../../index.html';
-                }
-            });
-        </script>
-    </div>
+      init();
+    })();
+  </script>
 </body>
-
 </html>
+
+

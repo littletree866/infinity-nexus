@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Walkthrough - Part 1</title>
+  <link rel="icon" href="../../icon.jpg" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #f0f7f0;
+      font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+      color: #1e2b1e;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 24px 30px 20px 30px;
+      border-left: 1px solid #7bbf7b;
+      border-right: 1px solid #7bbf7b;
+      border-radius: 4px;
+      box-shadow: 0 2px 12px rgba(0,40,0,0.06);
+    }
+    a { color: #1f6b1f; text-decoration: none; transition: color 0.2s; }
+    a:hover { text-decoration: underline; color: #0f4a0f; }
+    .bold { font-weight: bold; }
+    .italic { font-style: italic; }
+    h1 {
+      font-family: 'Merriweather', 'Times New Roman', serif;
+      font-size: 1.9rem;
+      font-weight: 700;
+      border-bottom: 2px solid #8fc98f;
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+      color: #1f4a1f;
+    }
+    h2 {
+      font-family: 'Merriweather', 'Times New Roman', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      border-bottom: 1px solid #8fc98f;
+      padding-bottom: 6px;
+      margin: 32px 0 18px 0;
+      color: #1f4a1f;
+    }
+    h3 {
+      font-family: 'Merriweather', 'Times New Roman', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin: 20px 0 12px 0;
+      color: #1f4a1f;
+    }
+    p { margin: 0 0 10px 0; }
+    ul, ol { padding-left: 25px; margin: 6px 0 14px 0; }
+    li { margin-bottom: 3px; }
+    .toc {
+      background: #f2faf2;
+      border: 1px solid #8fc98f;
+      padding: 14px 22px 18px 22px;
+      margin: 0 0 24px 0;
+      display: inline-block;
+      min-width: 220px;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,60,0,0.04);
+    }
+    .toc-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 6px;
+      font-family: 'Inter', sans-serif;
+      color: #1f4a1f;
+    }
+    .toc ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+      counter-reset: toc-counter;
+    }
+    .toc ul li {
+      margin: 3px 0;
+      padding-left: 26px;
+      position: relative;
+      font-size: 0.92rem;
+    }
+    .toc ul li::before {
+      counter-increment: toc-counter;
+      content: counter(toc-counter) ".";
+      position: absolute;
+      left: 2px;
+      color: #1f4a1f;
+      font-weight: 500;
+    }
+    .toc a { color: #1f6b1f; }
+    .toc ul ul {
+      padding-left: 22px;
+      counter-reset: sub-counter;
+    }
+    .toc ul ul li {
+      padding-left: 26px;
+    }
+    .toc ul ul li::before {
+      counter-increment: sub-counter;
+      content: counter(toc-counter) "." counter(sub-counter) ".";
+      position: absolute;
+      left: 2px;
+    }
+    .infobox {
+      float: right;
+      clear: right;
+      border: 1px solid #8fc98f;
+      background: #f2faf2;
+      padding: 4px;
+      margin: 0 0 14px 18px;
+      width: 270px;
+      text-align: center;
+      font-size: 0.9rem;
+      border-radius: 6px;
+      box-shadow: 0 1px 4px rgba(0,40,0,0.04);
+    }
+    .infobox img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-bottom: 1px solid #8fc98f;
+      background: #e6f2e6;
+      border-radius: 4px 4px 0 0;
+    }
+    .infobox-caption {
+      background: #f2faf2;
+      padding: 6px 0;
+      font-weight: 500;
+      color: #1f4a1f;
+    }
+    .clearfix::after { content: ""; clear: both; display: table; }
+    .table-green {
+      background: #e6f2e6;
+      border: 1px solid #6faf6f;
+      border-collapse: collapse;
+      margin: 8px 0 14px 0;
+      width: 100%;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .table-green th, .table-green td {
+      border: 1px solid #5f9f5f;
+      padding: 5px 10px;
+      text-align: center;
+    }
+    .table-green th {
+      background: #9fd09f;
+      font-weight: 700;
+      color: #0f3f0f;
+    }
+    .table-green td {
+      background: #eef9ee;
+    }
+    .table-green-small {
+      width: 480px;
+      margin: 6px auto 14px auto;
+    }
+    .shop-box {
+      border: 1px solid #6faf6f;
+      background: #f2faf2;
+      padding: 6px;
+      margin: 8px 0 14px 0;
+      max-width: 340px;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,40,0,0.04);
+    }
+    .shop-box-header {
+      background: #7fbf7f;
+      color: #0f3f0f;
+      text-align: center;
+      font-weight: 700;
+      border-bottom: 1px solid #5f9f5f;
+      padding: 4px;
+      border-radius: 6px 6px 0 0;
+    }
+    .shop-item-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 3px 8px;
+      border-bottom: 1px solid #bfdfbf;
+    }
+    .shop-item-row:last-child { border-bottom: none; }
+    .shop-item-row .name { flex: 1; font-size: 0.9rem; }
+    .shop-item-row .price { font-weight: 700; font-size: 0.9rem; color: #1f6b1f; }
+    .table-item-effects {
+      border-collapse: collapse;
+      margin: 8px 0 14px 0;
+      width: 100%;
+      border: 1px solid #6faf6f;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .table-item-effects th, .table-item-effects td {
+      border: 1px solid #5f9f5f;
+      padding: 5px 10px;
+      text-align: center;
+    }
+    .table-item-effects th { background: #9fd09f; font-weight: 700; color: #0f3f0f; }
+    .table-item-effects td { background: #eef9ee; }
+    .color-red { background: #f0c0c0; font-weight: bold; }
+    .color-blue { background: #90c0f0; font-weight: bold; }
+    .color-grey { background: #c0c8c0; font-weight: bold; }
+    .color-yellow { background: #f0e080; font-weight: bold; }
+    .color-cyan { background: #80d0d0; font-weight: bold; }
+    .hidden { display: none !important; }
+    .footer-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 2px solid #8fc98f;
+      padding-top: 14px;
+      margin-top: 24px;
+      font-size: 0.95rem;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .footer-nav a {
+      font-weight: 500;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+    .footer-nav a:hover {
+      background: #e6f2e6;
+      text-decoration: none;
+    }
+    .footer-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 6px;
+      font-size: 0.8rem;
+      color: #4f7f4f;
+    }
+    @media (max-width: 700px) {
+      body { padding: 12px; }
+      .page { padding: 16px 18px 12px 18px; }
+      .infobox { float: none; margin: 10px auto; width: 100%; max-width: 300px; }
+      .table-green-small { width: 100%; }
+      .toc { display: block; }
+    }
+
+    .wiki-card {
+      width: 45%;
+      min-width: 380px;
+      margin: 14px 0 18px 0;
+      border-radius: 18px;
+      background: #90d76d;
+      border: 2px solid #72b151;
+      font-family: 'Inter', sans-serif;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: box-shadow 0.2s;
+    }
+    .wiki-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+    .wiki-card .wiki-header {
+      background: transparent;
+      padding: 10px 18px 6px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      color: #1a1a1a;
+    }
+    .wiki-card .wiki-header .title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0d1f0d;
+    }
+    .wiki-card .wiki-header .toggle-btn {
+      background: transparent;
+      border: none;
+      color: #0055aa;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 0;
+      transition: color 0.2s;
+    }
+    .wiki-card .wiki-header .toggle-btn:hover {
+      color: #003377;
+    }
+    .wiki-card .wiki-body {
+      padding: 0 10px 10px 10px;
+      border-top: none;
+    }
+    .wiki-card table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 1px;
+      background: #7ac35c;
+      border-radius: 12px;
+      overflow: hidden;
+      font-size: 0.85rem;
+    }
+    .wiki-card table th {
+      background: #c6eca9;
+      font-weight: 700;
+      color: #0d1f0d;
+      padding: 6px 8px;
+      text-align: center;
+    }
+    .wiki-card table td {
+      background: #ffffff;
+      padding: 6px 8px;
+      text-align: center;
+      color: #1a1a1a;
+      vertical-align: middle;
+    }
+    .wiki-card table td .pkmn-mini-icon {
+      width: 100%;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: visible;
+    }
+    .wiki-card table td .pkmn-mini-icon img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      display: block;
+    }
+    .wiki-card table td .item-mini-icon {
+      width: 30px;
+      height: 30px;
+      display: inline-block;
+    }
+    .wiki-card table td .item-mini-icon img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+    .wiki-card .footer-note {
+      background: #c6eca9;
+      padding: 6px 10px;
+      margin-top: 6px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #0d1f0d;
+      text-align: center;
+    }
+
+    .type-icon {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-align: center;
+      line-height: 18px;
+      color: #fff;
+      margin-right: 2px;
+      flex-shrink: 0;
+    }
+    .type-icon.normal { background: #a8a878; }
+    .type-icon.fire { background: #f08030; }
+    .type-icon.water { background: #6890f0; }
+    .type-icon.grass { background: #78c850; }
+    .type-icon.electric { background: #f8d030; }
+    .type-icon.ice { background: #98d8d8; }
+    .type-icon.fighting { background: #c03028; }
+    .type-icon.poison { background: #a040a0; }
+    .type-icon.ground { background: #e0c068; }
+    .type-icon.flying { background: #a890f0; }
+    .type-icon.psychic { background: #f85888; }
+    .type-icon.bug { background: #a8b820; }
+    .type-icon.rock { background: #b8a038; }
+    .type-icon.ghost { background: #705898; }
+    .type-icon.dragon { background: #7038f8; }
+    .type-icon.dark { background: #705848; }
+    .type-icon.steel { background: #b8b8d0; }
+    .type-icon.fairy { background: #ee99ac; }
+
+    .type-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      background: #a1a1a1;
+      color: #fff;
+      padding: 1px 8px 1px 4px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.7rem;
+    }
+
+    .battle-card {
+      width: 45%;
+      min-width: 380px;
+      margin: 14px 0 18px 0;
+      border-radius: 18px;
+      background: #90d76d;
+      border: 2px solid #72b151;
+      font-family: 'Inter', sans-serif;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: box-shadow 0.2s;
+    }
+    .battle-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+    .battle-card .card-header {
+      background: transparent;
+      padding: 10px 18px 6px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      color: #1a1a1a;
+    }
+    .battle-card .card-header .title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0d1f0d;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .battle-card .card-header .title .trainer-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: #c6eca9;
+      border-radius: 50%;
+      font-size: 0.9rem;
+    }
+    .battle-card .card-header .toggle-btn {
+      background: transparent;
+      border: none;
+      color: #0055aa;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 0;
+      transition: color 0.2s;
+    }
+    .battle-card .card-header .toggle-btn:hover {
+      color: #003377;
+    }
+    .battle-card .card-body {
+      padding: 0 10px 10px 10px;
+      border-top: none;
+    }
+    .battle-card table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 1px;
+      background: #7ac35c;
+      border-radius: 12px;
+      overflow: hidden;
+      font-size: 0.85rem;
+    }
+    .battle-card table th {
+      background: #c6eca9;
+      font-weight: 700;
+      color: #0d1f0d;
+      padding: 6px 8px;
+      text-align: center;
+    }
+    .battle-card table td {
+      background: #ffffff;
+      padding: 6px 8px;
+      text-align: center;
+      color: #1a1a1a;
+      vertical-align: middle;
+    }
+    .battle-card table td .pkmn-mini-icon {
+      width: 100%;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: visible;
+    }
+    .battle-card table td .pkmn-mini-icon img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      display: block;
+    }
+    .battle-card table td .reward-cell {
+      font-weight: 700;
+      color: #1f6b1f;
+    }
+    .battle-card table td .move-list {
+      font-size: 0.8rem;
+      line-height: 1.4;
+    }
+    .battle-card table td .move-list .move-item {
+      display: inline-block;
+      background: #eef9ee;
+      padding: 1px 6px;
+      border-radius: 4px;
+      margin: 1px 2px;
+      font-size: 0.7rem;
+      border: 1px solid #bfdfbf;
+    }
+    .battle-card .footer-note {
+      background: #c6eca9;
+      padding: 6px 10px;
+      margin-top: 6px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #0d1f0d;
+      text-align: center;
+    }
+
+    @media (max-width: 820px) {
+      .battle-card {
+        min-width: unset;
+        width: 100%;
+      }
+      .wiki-card {
+        min-width: unset;
+        width: 100%;
+      }
+    }
+    @media (max-width: 500px) {
+      .battle-card table td .move-list .move-item {
+        display: block;
+        margin: 2px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <h1>Walkthrough - Part 1</h1>
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <ul>
+      <li><a href="#intro">Introduction</a></li>
+      <li><a href="#pallet-town">Pallet Town</a>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#oak-appears">Oak Appears!</a></li>
+        </ul>
+      </li>
+      <li><a href="#route-1">Route 1</a></li>
+      <li><a href="#viridian-city">Viridian City</a></li>
+      <li><a href="#route-22">Route 22</a></li>
+      <li><a href="#route-2-south">Route 2 (South)</a></li>
+    </ul>
+  </div>
+  <h2 id="intro">Introduction</h2>
+  <p>After the title screen, press the <b>A Button</b> or <b>Start</b>. A brief introduction to the world of Pokémon will be presented. Professor Oak, the region's leading researcher, appears and welcomes you to the world of Pokémon.</p>
+  <p>First, select your character's gender and enter a name (up to seven characters). Use the Control Pad to move the cursor and press <b>A</b> to confirm a letter; press <b>B</b> to erase the previous letter. After that, you will name your rival – the character who will challenge you throughout your journey. Once both names are set, you will receive your first Pokémon from Professor Oak's laboratory.</p>
+  <h2 id="pallet-town">Pallet Town</h2>
+  <p>Your journey begins in Pallet Town, a quiet village in the southern Kanto region. It has only a few buildings: your home to the west, your rival's house to the east, and Professor Oak's Laboratory to the south. The path north leads to Route 1, and the water to the south connects to Cinnabar Island.</p>
+  <div class="clearfix">
+    <div>
+    </div>
+    <h3 id="home">Home</h3>
+    <p>You start in your bedroom, standing in front of the Nintendo DS or 3DS. Use the following controls to move and interact:</p>
+    <table class="table-green" style="width:50%;">
+      <tr>
+        <th style="width:100px;">Input</th>
+        <th>Effect</th>
+      </tr>
+      <tr><td><b>Control Pad</b></td><td>Move the character</td></tr>
+      <tr><td><b>A Button</b></td><td>Interact / select / confirm</td></tr>
+      <tr><td><b>B Button</b></td><td>Cancel / go back</td></tr>
+      <tr><td><b>Start</b></td><td>Open the main menu</td></tr>
+      <tr><td><b>Select</b></td><td>Use registered key item</td></tr>
+      <tr><td><b>L / R Button</b></td><td>Help system</td></tr>
+    </table>
+    
+    <p>When you head downstairs, your mom is sitting at the table. She tells you Professor Oak has been looking for you. 
+      To leave the house, step on the floor mat by the south wall.</p>
+    <h3 id="oak-appears">Oak Appears!</h3>
+    <p>Pallet Town is small. Professor Oak is not in the lab yet, so head north toward the tall grass. Suddenly, Oak stops you - it is dangerous to go alone! He takes you to his lab and offers you a choice of your first Pokémon. Each has strengths and weaknesses. Pick the one that fits your style.</p>
+    <ul>
+      <li><b>Charmander (Fire)</b>: Strong against Grass, Bug, Ice, and Steel; weak to Water, Rock, and Ground. Its final form, Charizard, gains the Flying type, granting it Ground immunity but a Rock weakness.</li>
+      <li><b>Squirtle (Water)</b>: Excellent against Fire, Ground, and Rock. Weak to Electric and Grass. It is considered the best starter of the three. Its final form, Blastoise, has even better defenses and a wider movepool.</li>
+      <li><b>Bulbasaur (Grass/Poison)</b>: Although having the most weaknesses, it has a strong movepool and good stats. Its final form, Venusaur, is a powerful special attacker with excellent defenses.</li>
+    </ul>
+    <p>After choosing, you may give your Pokémon a nickname. Your rival will choose the Pokémon that has a type advantage over yours. He then immediately challenges you to a battle.</p>
+    <p><b>Rival Battle 1</b></p>
+    <p>Professor Oak explains the basics: each Trainer sends out one Pokémon at a time, and they attack in turns until one faints. You can switch out, use items, or attack. Choose <b>Fight</b> to use a move; each Pokémon has two moves at this point. If your Pokémon's HP gets low, use a Potion from your Bag. Keep attacking until your rival's Pokémon faints.</p>
+  </div>
+  <h2 id="route-1">Route 1</h2>
+  <div class="clearfix">
+    <p>Route 1 is a peaceful road connecting Pallet Town to Viridian City. 
+      It is a straight path with no twists or curves, but it is a good place to encounter your first wild Pokémon.</p>
+  </div>
+
+  <div class="wiki-card" data-collapsed="true">
+    <div class="wiki-header" onclick="toggleWikiCard(this)">
+      <span class="title">Available Pokémon</span>
+      <button class="toggle-btn" onclick="event.stopPropagation(); toggleWikiCard(this.parentElement)">[show]</button>
+    </div>
+    <div class="wiki-body hidden">
+      <table>
+        <tr>
+          <th style="width:30px;"></th>
+          <th>Pokémon</th>
+          <th>Location</th>
+          <th>Levels</th>
+          <th>Rate</th>
+        </tr>
+        <tr>
+          <td><div class="pkmn-mini-icon"><img src="https://img.pokemondb.net/artwork/pidgey.jpg" alt="Pidgey"></div></td>
+          <td>Pidgey</td>
+          <td>Tall Grass</td>
+          <td>2-3</td>
+          <td>40%</td>
+        </tr>
+        <tr>
+          <td><div class="pkmn-mini-icon"><img src="https://img.pokemondb.net/artwork/rattata.jpg" alt="Rattata"></div></td>
+          <td>Rattata</td>
+          <td>Tall Grass</td>
+          <td>3-4</td>
+          <td>24%</td>
+        </tr>
+        <tr>
+          <td><div class="pkmn-mini-icon"><img src="https://img.pokemondb.net/artwork/purrloin.jpg" alt="Purrloin"></div></td>
+          <td>Purrloin</td>
+          <td>Tall Grass</td>
+          <td>2-3</td>
+          <td>20%</td>
+        </tr>
+        <tr>
+          <td><div class="pkmn-mini-icon"><img src="https://img.pokemondb.net/artwork/spearow.jpg" alt="Spearow"></div></td>
+          <td>Spearow</td>
+          <td>Tall Grass</td>
+          <td>3-4</td>
+          <td>9%</td>
+        </tr>
+        <tr>
+          <td><div class="pkmn-mini-icon"><img src="https://img.pokemondb.net/artwork/caterpie.jpg" alt="Caterpie"></div></td>
+          <td>Caterpie</td>
+          <td>Tall Grass</td>
+          <td>3-5</td>
+          <td>7%</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="wiki-card" data-collapsed="true">
+    <div class="wiki-header" onclick="toggleWikiCard(this)">
+      <span class="title">Items</span>
+      <button class="toggle-btn" onclick="event.stopPropagation(); toggleWikiCard(this.parentElement)">[show]</button>
+    </div>
+    <div class="wiki-body hidden">
+      <table>
+        <tr>
+          <th style="width:30px;"></th>
+          <th>Item</th>
+          <th>Location</th>
+        </tr>
+        <tr>
+          <td><div class="item-mini-icon"><img src="https://img.pokemondb.net/sprites/items/potion.png" alt="Potion"></div></td>
+          <td>Potion</td>
+          <td>From the Viridian Poké Mart clerk (see below).</td>
+        </tr>
+      </table>
+      
+    </div>
+  </div>
+
+  <h3>Free Sample</h3>
+  <p>Near the south end of Route 1, a man mentions the Poké Mart in Viridian City. When you visit, the clerk gives you a free Potion.</p>
+  <h2 id="viridian-city">Viridian City</h2>
+  <p>Viridian City is a small, verdant town. It features a Pokémon Center, a Poké Mart, and a Pokémon Gym (which is currently closed).</p>
+
+  <div class="wiki-card" data-collapsed="true">
+    <div class="wiki-header" onclick="toggleWikiCard(this)">
+      <span class="title">Items</span>
+      <button class="toggle-btn" onclick="event.stopPropagation(); toggleWikiCard(this.parentElement)">[show]</button>
+    </div>
+    <div class="wiki-body hidden">
+      <table>
+        <tr>
+          <th style="width:30px;"></th>
+          <th>Item</th>
+          <th>Location</th>
+        </tr>
+        <tr>
+          <td><div class="item-mini-icon"><img src="https://img.pokemondb.net/sprites/items/potion.png" alt="Potion"></div></td>
+          <td>Potion</td>
+          <td>North side, near the cut tree.</td>
+        </tr>
+        <tr>
+          <td><div class="item-mini-icon"><img src="https://img.pokemondb.net/sprites/items/quick-ball.png" alt="Quick Ball"></div></td>
+          <td>Quick Ball</td>
+          <td>From the man who demonstrates catching.</td>
+        </tr>
+        <tr>
+          <td><div class="item-mini-icon"><img src="https://img.pokemondb.net/sprites/items/exp-share.png" alt="Exp. Share"></div></td>
+          <td>Exp. Share</td>
+          <td>From Nurse Joy, the first time you speak to her.</td>
+        </tr>
+        <tr>
+          <td><div class="item-mini-icon"><img src="https://img.pokemondb.net/sprites/items/tm-ground.png" alt="TM26"></div></td>
+          <td>TM26 Earthquake</td>
+          <td>Reward from the Gym Leader (later).</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <h3>Pokémon Center</h3>
+  <p>The Pokémon Center heals your team to full health and removes any status conditions. 
+    The nurse at the counter will heal your Pokémon for free. Speak to her for the 
+    first time to receive an Exp. Share. 
+    There is also a PC to access your storage.</p>
+  <h3>Poké Mart</h3>
+  <p>South of the Pokémon Center, this Mart sells essential items. Stock up before heading out.</p>
+  <div class="shop-box">
+    <div class="shop-box-header">Poké Mart</div>
+    <div class="shop-item-row"><span class="name">Poké Ball</span><span class="price">₽200</span></div>
+    <div class="shop-item-row"><span class="name">Potion</span><span class="price">₽200</span></div>
+    <div class="shop-item-row"><span class="name">Antidote</span><span class="price">₽50</span></div>
+    <div class="shop-item-row"><span class="name">Parlyz Heal</span><span class="price">₽50</span></div>
+  </div>
+  <h3>Delivery</h3>
+  <p>When you enter the Poké Mart, the clerk recognizes you from Pallet Town. Professor Oak's delivery arrived, and it's up to you to give the parcel to him.</p>
+  
+  <h3>Pokémon Academy</h3>
+  <p>The Academy in the city center teaches new Trainers about battle basics. A blackboard explains the five status conditions:</p>
+  <table class="table-item-effects" style="max-width:600px;">
+    <tr><th>Status</th><th>Effect</th></tr>
+    <tr><td class="color-red">Burn</td><td>Attack drops to 50%; loses 1/8 max HP each turn.</td></tr>
+    <tr><td class="color-blue">Paralysis</td><td>Speed drops to 25%; 25% chance to not attack.</td></tr>
+    <tr><td class="color-grey">Poison</td><td>Loses 1/8 max HP each turn; persists outside battle.</td></tr>
+    <tr><td class="color-yellow">Sleep</td><td>Cannot attack; lasts 1-7 turns.</td></tr>
+    <tr><td class="color-cyan">Freeze</td><td>Cannot attack until thawed (20% each turn).</td></tr>
+  </table>
+  <h3>Oak's Lab (after delivering the Parcel)</h3>
+  <div class="clearfix">
+    <p>After delivering Oak's Parcel, he gives you a Pokédex – a device that records data on every Pokémon you encounter. 
+      He also gives you five Poké Balls so you can start catching Pokémon. He wishes you luck and now you can officially start your journey.</p>
+  </div>
+  <h3>Rival's House</h3>
+  <p>Before leaving Pallet Town, visit your rival's house. His sister will give you a Town Map, useful for finding your way.</p>
+  <h3>Back to Viridian City</h3>
+  <p>With the Parcel delivered, the old man blocking the north path is now feeling better. He gives you a <strong>Quick Ball</strong>, 
+    and he will let you pass to Route 2. You can also head west to Route 22 for an optional rival battle.</p>
+  <h2 id="route-22">Route 22</h2>
+  <div class="clearfix">
+    <p>Route 22 is a short route west of Viridian City. It is not fully accessible yet, but you can encounter wild Pokémon and face your rival again.</p>
+  </div>
+
+  <div class="wiki-card" data-collapsed="true">
+    <div class="wiki-header" onclick="toggleWikiCard(this)">
+      <span class="title">Available Pokémon</span>
+      <button class="toggle-btn" onclick="event.stopPropagation(); toggleWikiCard(this.parentElement)">[show]</button>
+    </div>
+    <div class="wiki-body hidden">
+      <table>
+        <tr>
+          <th style="width:30px;"></th>
+          <th>Pokémon</th>
+          <th>Location</th>
+          <th>Levels</th>
+          <th>Rate</th>
+        </tr>
+        <tr>
+          <td><div class="pkmn-mini-icon"><img src="https://img.pokemondb.net/artwork/starly.jpg" alt="Starly"></div></td>
+          <td>Starly</td>
+          <td>Tall Grass</td>
+          <td>2-5</td>
+          <td>50%</td>
+        </tr>
+        <tr>
+          <td><div class="pkmn-mini-icon"><img src="https://img.pokemondb.net/artwork/mankey.jpg" alt="Mankey"></div></td>
+          <td>Mankey</td>
+          <td>Tall Grass</td>
+          <td>2-4</td>
+          <td>20%</td>
+        </tr>
+        <tr>
+          <td><div class="pkmn-mini-icon"><img src="https://img.pokemondb.net/artwork/sentret.jpg" alt="Sentret"></div></td>
+          <td>Sentret</td>
+          <td>Tall Grass</td>
+          <td>3-5</td>
+          <td>15%</td>
+        </tr>
+        <tr>
+          <td><div class="pkmn-mini-icon"><img src="https://img.pokemondb.net/artwork/poochyena.jpg" alt="Poochyena"></div></td>
+          <td>Poochyena</td>
+          <td>Tall Grass</td>
+          <td>3-5</td>
+          <td>9%</td>
+        </tr>
+        <tr>
+          <td><div class="pkmn-mini-icon"><img src="https://img.pokemondb.net/artwork/spearow.jpg" alt="Spearow"></div></td>
+          <td>Spearow</td>
+          <td>Tall Grass</td>
+          <td>3-5</td>
+          <td>6%</td>
+        </tr>
+      </table>
+      
+    </div>
+  </div>
+
+  <div class="wiki-card" data-collapsed="true">
+    <div class="wiki-header" onclick="toggleWikiCard(this)">
+      <span class="title">Items</span>
+      <button class="toggle-btn" onclick="event.stopPropagation(); toggleWikiCard(this.parentElement)">[show]</button>
+    </div>
+    <div class="wiki-body hidden">
+      <table>
+        <tr>
+          <th style="width:30px;"></th>
+          <th>Item</th>
+          <th>Location</th>
+        </tr>
+        <tr>
+          <td><div class="item-mini-icon"><img src="https://img.pokemondb.net/sprites/items/tm-grass.png" alt="TM26"></div></td>
+          <td>TM53 Energy Ball</td>
+          <td><strong>(Requires HM06 Rock Smash) </strong>Behind the smash rock on the east side of the route.</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <h3>Rival Battle 2</h3>
+
+  <p>Your rival has trained and added a Starly to his team. If you chose Bulbasaur, beware of Gust, which is super effective against Grass types. Use the same tactics as before – attack hard and heal when needed.</p>
+  
+  <div style="margin-top:12px; font-style:italic; font-size:0.9rem; margin-bottom:6px;">If the player chose Bulbasaur:</div>
+  <div class="battle-card" id="battle1">
+    <div class="card-header" onclick="toggleBattle('battle1')">
+      <span class="title">
+        <span class="trainer-icon">⚔️</span> Rival Battle 2
+      </span>
+      <button class="toggle-btn" onclick="event.stopPropagation(); toggleBattle('battle1')">[show]</button>
+    </div>
+    <div class="card-body hidden" id="battle1-body">
+      <table>
+        <tr>
+          <th style="width:30px;"></th>
+          <th>Pokémon</th>
+          <th>Type</th>
+          <th>Level</th>
+          <th>Held Item</th>
+          <th>Moves</th>
+        </tr>
+        <tr>
+          <td><div class="pkmn-mini-icon"><img src="https://img.pokemondb.net/artwork/pidgey.jpg" alt="Pidgey"></div></td>
+          <td><b>Pidgey</b></td>
+          <td><span class="type-icon normal"></span><span class="type-icon flying"></span></td>
+          <td>9</td>
+          <td>—</td>
+          <td><div class="move-list"><span class="move-item">Tackle</span> <span class="move-item">Sand-Attack</span> <span class="move-item">Gust</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="pkmn-mini-icon"><img src="https://img.pokemondb.net/artwork/charmander.jpg" alt="Charmander"></div></td>
+          <td><b>Charmander</b></td>
+          <td><span class="type-icon fire"></span></td>
+          <td>9</td>
+          <td>—</td>
+          <td><div class="move-list"><span class="move-item">Scratch</span> <span class="move-item">Growl</span></div></td>
+        </tr>
+        <tr>
+          <td colspan="6" style="text-align:left; background:#c6eca9; font-weight:700;">Reward: ₽144</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div style="margin-top:12px; font-style:italic; font-size:0.9rem; margin-bottom:6px;">If the player chose Charmander:</div>
+  <div class="battle-card" id="battle2">
+    <div class="card-header" onclick="toggleBattle('battle2')">
+      <span class="title">
+        <span class="trainer-icon">⚔️</span> Rival Battle 2
+      </span>
+      <button class="toggle-btn" onclick="event.stopPropagation(); toggleBattle('battle2')">[show]</button>
+    </div>
+    <div class="card-body hidden" id="battle2-body">
+      <table>
+        <tr>
+          <th style="width:30px;"></th>
+          <th>Pokémon</th>
+          <th>Type</th>
+          <th>Level</th>
+          <th>Held Item</th>
+          <th>Moves</th>
+        </tr>
+        <tr>
+          <td><div class="pkmn-mini-icon"><img src="https://img.pokemondb.net/artwork/pidgey.jpg" alt="Pidgey"></div></td>
+          <td><b>Pidgey</b></td>
+          <td><span class="type-icon normal"></span><span class="type-icon flying"></span></td>
+          <td>9</td>
+          <td>—</td>
+          <td><div class="move-list"><span class="move-item">Tackle</span> <span class="move-item">Sand-Attack</span> <span class="move-item">Gust</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="pkmn-mini-icon"><img src="https://img.pokemondb.net/artwork/squirtle.jpg" alt="Squirtle"></div></td>
+          <td><b>Squirtle</b></td>
+          <td><span class="type-icon water"></span></td>
+          <td>9</td>
+          <td>—</td>
+          <td><div class="move-list"><span class="move-item">Scratch</span> <span class="move-item">Growl</span></div></td>
+        </tr>
+        <tr>
+          <td colspan="6" style="text-align:left; background:#c6eca9; font-weight:700;">Reward: ₽144</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div style="margin-top:12px; font-style:italic; font-size:0.9rem; margin-bottom:6px;">If the player chose Squirtle:</div>
+  <div class="battle-card" id="battle3">
+    <div class="card-header" onclick="toggleBattle('battle3')">
+      <span class="title">
+        <span class="trainer-icon">⚔️</span> Rival Battle 2
+      </span>
+      <button class="toggle-btn" onclick="event.stopPropagation(); toggleBattle('battle3')">[show]</button>
+    </div>
+    <div class="card-body hidden" id="battle3-body">
+      <table>
+        <tr>
+          <th style="width:30px;"></th>
+          <th>Pokémon</th>
+          <th>Type</th>
+          <th>Level</th>
+          <th>Held Item</th>
+          <th>Moves</th>
+        </tr>
+        <tr>
+          <td><div class="pkmn-mini-icon"><img src="https://img.pokemondb.net/artwork/pidgey.jpg" alt="Pidgey"></div></td>
+          <td><b>Pidgey</b></td>
+          <td><span class="type-icon normal"></span><span class="type-icon flying"></span></td>
+          <td>9</td>
+          <td>—</td>
+          <td><div class="move-list"><span class="move-item">Tackle</span> <span class="move-item">Sand-Attack</span> <span class="move-item">Gust</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="pkmn-mini-icon"><img src="https://img.pokemondb.net/artwork/bulbasaur.jpg" alt="Bulbasaur"></div></td>
+          <td><b>Bulbasaur</b></td>
+          <td><span class="type-icon grass"></span><span class="type-icon poison"></span></td>
+          <td>9</td>
+          <td>—</td>
+          <td><div class="move-list"><span class="move-item">Scratch</span> <span class="move-item">Growl</span></div></td>
+        </tr>
+        <tr>
+          <td colspan="6" style="text-align:left; background:#c6eca9; font-weight:700;">Reward: ₽144</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <p>After the battle, heal your team and stock up on Potions, then head north to Route 2. 
+    If you beat your rival without catching any other Pokémon, you may 
+    go back to Pallet Town to receive 5 Poké Balls for Professor Oak.</p>
+
+  <h2 id="route-2-south">Route 2 (South)</h2>
+  <div class="clearfix">
+    <p>Route 2 connects Viridian City to Pewter City. The center of the route is occupied by Viridian Forest, but the perimeter is accessible.</p>
+  </div>
+
+  <div class="wiki-card" data-collapsed="true">
+    <div class="wiki-header" onclick="toggleWikiCard(this)">
+      <span class="title">Available Pokémon</span>
+      <button class="toggle-btn" onclick="event.stopPropagation(); toggleWikiCard(this.parentElement)">[show]</button>
+    </div>
+
+    <div class="wiki-body hidden">
+      <table>
+        <tr>
+          <th style="width:30px;"></th>
+          <th>Pokémon</th>
+          <th>Location</th>
+          <th>Levels</th>
+          <th>Rate</th>
+        </tr>
+        <tr>
+          <td><div class="pkmn-mini-icon"><img src="https://img.pokemondb.net/artwork/starly.jpg" alt="Starly"></div></td>
+          <td>Starly</td>
+          <td>Tall Grass</td>
+          <td>3-5</td>
+          <td>40%</td>
+        </tr>
+        <tr>
+          <td><div class="pkmn-mini-icon"><img src="https://img.pokemondb.net/artwork/vulpix.jpg" alt="Vulpix"></div></td>
+          <td>Vulpix</td>
+          <td>Tall Grass</td>
+          <td>4-5</td>
+          <td>20%</td>
+        </tr>
+        <tr>
+          <td><div class="pkmn-mini-icon"><img src="https://img.pokemondb.net/artwork/pikipek.jpg" alt="Pikipek"></div></td>
+          <td>Pikipek</td>
+          <td>Tall Grass</td>
+          <td>3-5</td>
+          <td>20%</td>
+        </tr>
+        <tr>
+          <td><div class="pkmn-mini-icon"><img src="https://img.pokemondb.net/artwork/rattata.jpg" alt="Rattata"></div></td>
+          <td>Rattata</td>
+          <td>Tall Grass</td>
+          <td>4-7</td>
+          <td>15%</td>
+        </tr>
+        <tr>
+          <td><div class="pkmn-mini-icon"><img src="https://img.pokemondb.net/artwork/budew.jpg" alt="Budew"></div></td>
+          <td>Budew</td>
+          <td>Tall Grass</td>
+          <td>5-7</td>
+          <td>5%</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer-nav">
+    <div><p>Pokémon FireRed Infinity ROM Walkthrough, Part 1: Pallet Town, Route 1, and Viridian City</p></div>
+    <div><a href="#">Part 2: Viridian Forest, Route 2 (North), and Pewter City</a> →</div>
+  </div>
+</div>
+<script>
+  function toggleWikiCard(headerEl) {
+    const card = headerEl.closest('.wiki-card');
+    const body = card.querySelector('.wiki-body');
+    const btn = headerEl.querySelector('.toggle-btn');
+    if (body.classList.contains('hidden')) {
+      body.classList.remove('hidden');
+      btn.textContent = '[hide]';
+    } else {
+      body.classList.add('hidden');
+      btn.textContent = '[show]';
+    }
+  }
+  function toggleBattle(id) {
+    const body = document.getElementById(id + '-body');
+    const header = document.getElementById(id).querySelector('.card-header');
+    const btn = header.querySelector('.toggle-btn');
+    if (body.classList.contains('hidden')) {
+      body.classList.remove('hidden');
+      btn.textContent = '[hide]';
+    } else {
+      body.classList.add('hidden');
+      btn.textContent = '[show]';
+    }
+  }
+</script>
+</body>
+</html>

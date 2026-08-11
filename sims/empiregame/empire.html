@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Empire Builder - Advanced Strategy Empire Simulation</title>
+    <title>Empire Builder - Strategy Simulation</title>
+    <link rel="icon" href="../../icon.jpg" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,598 +16,1133 @@
         }
 
         :root {
-            --primary: #7c3aed;
-            --secondary: #ec4899;
-            --success: #10b981;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-            --info: #3b82f6;
-            --gold: #FFD700;
-            --cyan: #00c6ff;
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
+            --gold: #f0c040;
+            --gold-dim: rgba(240, 192, 64, 0.15);
+            --gold-glow: rgba(240, 192, 64, 0.3);
+            --primary: #7c5cbf;
+            --primary-dim: rgba(124, 92, 191, 0.15);
+            --success: #4ade80;
+            --danger: #f87171;
+            --warning: #fbbf24;
+            --info: #60a5fa;
+            --bg-deep: #0a0e1a;
+            --bg-card: #111827;
+            --bg-panel: #1a2332;
             --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
-            --border-color: #334155;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border-color: #1e293b;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            --radius: 12px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body {
-            font-family: 'Trebuchet MS', sans-serif;
-            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-deep);
             color: var(--text-primary);
-            overflow-x: hidden;
             min-height: 100vh;
-            padding: 10px;
+            padding: 16px;
+            background-image:
+                radial-gradient(ellipse at 20% 80%, rgba(124, 92, 191, 0.05) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(240, 192, 64, 0.03) 0%, transparent 60%);
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            background: rgba(15, 23, 42, 0.95);
-            border-radius: 12px;
-            border: 2px solid var(--border-color);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            overflow: hidden;
         }
 
         .header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            padding: 30px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 24px 32px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .header-left h1 {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--gold), #f59e0b);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.5px;
+        }
+
+        .header-left .era {
+            background: var(--bg-panel);
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: var(--gold);
+            border: 1px solid var(--gold-dim);
+            -webkit-text-fill-color: var(--gold);
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .header-stat {
             text-align: center;
-            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
         }
 
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 5px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        .header-stat .value {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
         }
 
-        .header p {
-            font-size: 0.95em;
-            opacity: 0.95;
+        .header-stat .label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .controls {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
-            padding: 20px;
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border-color);
+        .header-stat .value.gold {
+            color: var(--gold);
+        }
+        .header-stat .value.pop {
+            color: var(--info);
+        }
+        .header-stat .value.mil {
+            color: var(--danger);
+        }
+        .header-stat .value.sci {
+            color: var(--success);
         }
 
-        button {
-            padding: 10px 15px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.9em;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.5);
-        }
-
-        button:active {
-            transform: translateY(0);
-        }
-
-        .content {
+        .grid-2col {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            padding: 20px;
+            gap: 16px;
+            margin-bottom: 16px;
         }
 
         .card {
-            background: var(--bg-secondary);
-            padding: 20px;
-            border-radius: 10px;
+            background: var(--bg-card);
             border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            box-shadow: var(--shadow);
+            transition: all var(--transition);
         }
 
         .card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.2);
+            border-color: rgba(255, 255, 255, 0.05);
         }
 
         .card-title {
-            font-size: 1.3em;
-            margin-bottom: 15px;
-            color: var(--gold);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .stat-row {
+        .card-title .badge {
+            background: var(--primary-dim);
+            color: var(--primary);
+            padding: 0 10px;
+            border-radius: 12px;
+            font-size: 11px;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .resource-item {
+            background: var(--bg-panel);
+            padding: 12px 16px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid transparent;
+            transition: all var(--transition);
+        }
+
+        .resource-item:hover {
+            border-color: var(--border-color);
+        }
+
+        .resource-item .icon {
+            font-size: 24px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .resource-item .r-value {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .resource-item .r-label {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .resource-item .r-value.gold {
+            color: var(--gold);
+        }
+        .resource-item .r-value.pop {
+            color: var(--info);
+        }
+        .resource-item .r-value.mil {
+            color: var(--danger);
+        }
+        .resource-item .r-value.sci {
+            color: var(--success);
+        }
+
+        .progress-container {
+            margin-top: 12px;
+        }
+
+        .progress-label {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(124, 58, 237, 0.2);
-            font-size: 0.95em;
-        }
-
-        .stat-label {
+            font-size: 13px;
             color: var(--text-secondary);
-        }
-
-        .stat-value {
-            color: var(--cyan);
-            font-weight: 600;
+            margin-bottom: 4px;
         }
 
         .progress-bar {
             width: 100%;
-            height: 8px;
-            background: rgba(124, 58, 237, 0.2);
-            border-radius: 4px;
-            margin: 10px 0;
+            height: 6px;
+            background: var(--bg-panel);
+            border-radius: 3px;
             overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 4px;
-            transition: width 0.3s ease;
+            border-radius: 3px;
+            transition: width 0.6s ease;
+        }
+
+        .progress-fill.happiness {
+            background: linear-gradient(90deg, var(--warning), var(--gold));
+        }
+
+        .progress-fill.military {
+            background: linear-gradient(90deg, var(--danger), #fca5a5);
         }
 
         .buildings-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 10px;
-            margin-top: 15px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
         }
 
         .building-btn {
-            padding: 12px;
-            background: var(--bg-primary);
-            border: 2px solid var(--border-color);
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
+            padding: 12px 10px;
             color: var(--text-primary);
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.85em;
+            transition: all var(--transition);
             text-align: center;
+            font-family: inherit;
+            font-size: 13px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .building-btn:hover {
-            border-color: var(--primary);
-            background: rgba(124, 58, 237, 0.1);
+        .building-btn:hover:not(.disabled) {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px var(--gold-glow);
+        }
+
+        .building-btn:active:not(.disabled) {
+            transform: translateY(0);
+        }
+
+        .building-btn .icon {
+            font-size: 28px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .building-btn .name {
+            font-weight: 500;
+            font-size: 12px;
+        }
+
+        .building-btn .cost {
+            font-size: 11px;
+            color: var(--gold);
+        }
+
+        .building-btn .effect {
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        .building-btn .count {
+            position: absolute;
+            top: 6px;
+            right: 8px;
+            background: var(--primary-dim);
+            color: var(--primary);
+            font-size: 10px;
+            font-weight: 700;
+            padding: 1px 8px;
+            border-radius: 10px;
         }
 
         .building-btn.disabled {
-            opacity: 0.5;
+            opacity: 0.4;
             cursor: not-allowed;
         }
 
-        .achievements {
+        .building-btn.owned {
+            border-color: var(--primary-dim);
+        }
+
+        .building-btn.owned .count {
+            background: var(--gold-dim);
+            color: var(--gold);
+        }
+
+        .upgrades-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 8px;
+        }
+
+        .upgrade-btn {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 14px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all var(--transition);
+            text-align: left;
+            font-family: inherit;
+            font-size: 13px;
+        }
+
+        .upgrade-btn:hover:not(.purchased) {
+            border-color: var(--success);
+            box-shadow: 0 4px 20px rgba(74, 222, 128, 0.15);
+        }
+
+        .upgrade-btn .u-name {
+            font-weight: 500;
+        }
+
+        .upgrade-btn .u-cost {
+            font-size: 12px;
+            color: var(--gold);
+        }
+
+        .upgrade-btn .u-desc {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .upgrade-btn.purchased {
+            border-color: var(--success);
+            opacity: 0.6;
+            cursor: default;
+        }
+
+        .upgrade-btn.purchased .u-cost {
+            color: var(--success);
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .ach-item {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            transition: all var(--transition);
+            opacity: 0.5;
+        }
+
+        .ach-item.unlocked {
+            opacity: 1;
+            border-color: var(--gold);
+            box-shadow: 0 0 30px var(--gold-glow);
+        }
+
+        .ach-item .icon {
+            font-size: 32px;
+            display: block;
+        }
+
+        .ach-item .a-name {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .ach-item.locked .icon {
+            filter: grayscale(1);
+        }
+
+        .events-container {
+            margin-top: 12px;
+            max-height: 120px;
+            overflow-y: auto;
+        }
+
+        .events-container::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .events-container::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 2px;
+        }
+
+        .event-item {
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            margin-bottom: 4px;
+            border-left: 3px solid var(--text-muted);
+            animation: slideIn 0.3s ease;
+        }
+
+        .event-item.good {
+            border-left-color: var(--success);
+            background: rgba(74, 222, 128, 0.05);
+        }
+
+        .event-item.bad {
+            border-left-color: var(--danger);
+            background: rgba(248, 113, 113, 0.05);
+        }
+
+        .event-item.neutral {
+            border-left-color: var(--info);
+            background: rgba(96, 165, 250, 0.05);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .controls-bar {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
             margin-top: 12px;
         }
 
-        .achievement {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 80px;
-            height: 80px;
-            background: var(--bg-primary);
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 2em;
+        .ctrl-btn {
+            padding: 8px 16px;
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-secondary);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all var(--transition);
+            font-family: inherit;
+            font-size: 13px;
         }
 
-        .achievement.unlocked {
+        .ctrl-btn:hover {
+            border-color: var(--text-muted);
+            color: var(--text-primary);
+        }
+
+        .ctrl-btn.active {
             border-color: var(--gold);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
-        }
-
-        .achievement:hover {
-            transform: scale(1.1);
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: var(--bg-secondary);
-            padding: 30px;
-            border-radius: 12px;
-            border: 2px solid var(--primary);
-            max-width: 400px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
-
-        .modal-content h2 {
             color: var(--gold);
-            margin-bottom: 15px;
+            background: var(--gold-dim);
         }
 
-        .modal-content p {
-            margin-bottom: 20px;
-            line-height: 1.6;
+        .ctrl-btn.danger:hover {
+            border-color: var(--danger);
+            color: var(--danger);
         }
 
-        @media (max-width: 768px) {
-            .content {
+        .footer {
+            margin-top: 20px;
+            padding: 16px 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .footer .nav-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 13px;
+            transition: color var(--transition);
+        }
+
+        .footer .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .footer .version {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 1024px) {
+            .grid-2col {
                 grid-template-columns: 1fr;
             }
-
-            .header h1 {
-                font-size: 1.8em;
-            }
-
-            .controls {
+            .resources-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+            .buildings-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .achievements-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
 
-        .nav-buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            padding: 10px;
+        @media (max-width: 600px) {
+            .header {
+                padding: 16px;
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .header-stats {
+                justify-content: space-between;
+            }
+            .resources-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .buildings-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .upgrades-grid {
+                grid-template-columns: 1fr;
+            }
+            .achievements-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .container {
+                padding: 0;
+            }
+            body {
+                padding: 8px;
+            }
         }
 
-        .nav-buttons a {
-            padding: 8px 15px;
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            transition: all 0.3s ease;
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 14px 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            font-size: 14px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+            max-width: 360px;
         }
 
-        .nav-buttons a:hover {
-            background: var(--secondary);
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .toast .t-icon {
+            margin-right: 8px;
+        }
+
+        .toast.good {
+            border-left: 4px solid var(--success);
+        }
+
+        .toast.bad {
+            border-left: 4px solid var(--danger);
+        }
+
+        .toast.info {
+            border-left: 4px solid var(--info);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>⚔️ Empire Builder</h1>
-            <p>Strategic Empire Management - Build Your Civilization</p>
-        </div>
 
-        <div class="controls">
-            <button onclick="addGold(500)">💰 Add Gold</button>
-            <button onclick="addPopulation(100)">👥 Add Citizens</button>
-            <button onclick="autoIncome()">⚡ Auto Income</button>
-            <button onclick="resetGame()">🔄 Reset</button>
-            <button onclick="exportSave()">💾 Export</button>
-            <button onclick="importSave()">📂 Import</button>
-        </div>
+        <header class="header">
+            <div class="header-left">
+                <h1>Empire Builder</h1>
+                <span class="era" id="eraDisplay">Medieval</span>
+            </div>
+            <div class="header-stats">
+                <div class="header-stat">
+                    <div class="value gold" id="goldDisplay">0</div>
+                    <div class="label">Gold</div>
+                </div>
+                <div class="header-stat">
+                    <div class="value pop" id="popDisplay">0</div>
+                    <div class="label">Population</div>
+                </div>
+                <div class="header-stat">
+                    <div class="value mil" id="milDisplay">0</div>
+                    <div class="label">Military</div>
+                </div>
+                <div class="header-stat">
+                    <div class="value sci" id="sciDisplay">0</div>
+                    <div class="label">Science</div>
+                </div>
+            </div>
+        </header>
 
-        <div class="content">
-            
+        <div class="grid-2col">
+
             <div class="card">
-                <div class="card-title">🏰 Empire Overview</div>
-                <div class="stat-row">
-                    <span class="stat-label">Realm Name:</span>
-                    <span class="stat-value" id="realmName">Your Kingdom</span>
+                <div class="card-title">Resources</div>
+                <div class="resources-grid">
+                    <div class="resource-item">
+                        <span class="icon">💰</span>
+                        <div class="r-value gold" id="goldDetail">0</div>
+                        <div class="r-label">Gold</div>
+                    </div>
+                    <div class="resource-item">
+                        <span class="icon">👥</span>
+                        <div class="r-value pop" id="popDetail">0</div>
+                        <div class="r-label">Population</div>
+                    </div>
+                    <div class="resource-item">
+                        <span class="icon">⚔️</span>
+                        <div class="r-value mil" id="milDetail">0</div>
+                        <div class="r-label">Military</div>
+                    </div>
+                    <div class="resource-item">
+                        <span class="icon">🔬</span>
+                        <div class="r-value sci" id="sciDetail">0</div>
+                        <div class="r-label">Science</div>
+                    </div>
                 </div>
-                <div class="stat-row">
-                    <span class="stat-label">Population:</span>
-                    <span class="stat-value" id="population">0</span>
+
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>😊 Happiness</span>
+                        <span id="hapDisplay">50%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill happiness" id="hapBar" style="width:50%"></div>
+                    </div>
                 </div>
-                <div class="stat-row">
-                    <span class="stat-label">Gold:</span>
-                    <span class="stat-value" id="gold">0</span>
+
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>🏛️ Empire Growth</span>
+                        <span id="growthDisplay">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="growthBar" style="width:0%;background:linear-gradient(90deg,var(--primary),var(--gold));"></div>
+                    </div>
                 </div>
-                <div class="stat-row">
-                    <span class="stat-label">Territory:</span>
-                    <span class="stat-value" id="territory">0 sq mi</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">Happiness:</span>
-                    <span class="stat-value" id="happiness">50%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="happinessBar" style="width: 50%"></div>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">Military Power:</span>
-                    <span class="stat-value" id="military">0</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">Age:</span>
-                    <span class="stat-value" id="age">Medieval</span>
+
+                <div class="controls-bar">
+                    <button class="ctrl-btn" onclick="collectTaxes()">💰 Collect Taxes</button>
+                    <button class="ctrl-btn" onclick="trainSoldiers()">⚔️ Train Soldiers</button>
+                    <button class="ctrl-btn" onclick="researchScience()">🔬 Research</button>
+                    <button class="ctrl-btn danger" onclick="resetGame()">↺ Reset</button>
                 </div>
             </div>
 
-            
             <div class="card">
-                <div class="card-title">🏠 Buildings</div>
-                <div class="buildings-grid">
-                    <button class="building-btn" onclick="buildBuilding('farm')">🌾 Farm</button>
-                    <button class="building-btn" onclick="buildBuilding('barracks')">🛡️ Barracks</button>
-                    <button class="building-btn" onclick="buildBuilding('library')">📚 Library</button>
-                    <button class="building-btn" onclick="buildBuilding('market')">🛒 Market</button>
-                    <button class="building-btn" onclick="buildBuilding('temple')">⛪ Temple</button>
-                    <button class="building-btn" onclick="buildBuilding('castle')">🏰 Castle</button>
-                </div>
-                <div class="stat-row" style="margin-top: 15px;">
-                    <span class="stat-label">Building Count:</span>
-                    <span class="stat-value" id="buildingCount">0</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">Income/Sec:</span>
-                    <span class="stat-value" id="incomeRate">0</span>
-                </div>
+                <div class="card-title">Income <span class="badge" id="incomeDisplay">+0/s</span></div>
+                <div class="buildings-grid" id="buildingsContainer"></div>
             </div>
 
-            
-            <div class="card">
-                <div class="card-title">⚡ Upgrades</div>
-                <button class="building-btn" onclick="buyUpgrade('agriculture')">🌱 Agriculture (+5 Farm)</button>
-                <button class="building-btn" onclick="buyUpgrade('military')">⚔️ Military (+5 Soldiers)</button>
-                <button class="building-btn" onclick="buyUpgrade('education')">🎓 Education (+10 Science)</button>
-                <button class="building-btn" onclick="buyUpgrade('trade')">💱 Trade (+20% Gold)</button>
-                <div class="stat-row" style="margin-top: 15px;">
-                    <span class="stat-label">Science Points:</span>
-                    <span class="stat-value" id="science">0</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">Tech Level:</span>
-                    <span class="stat-value" id="techLevel">1</span>
-                </div>
-            </div>
-
-            
-            <div class="card">
-                <div class="card-title">🏆 Achievements</div>
-                <div class="achievements" id="achievements"></div>
-                <div class="stat-row" style="margin-top: 15px;">
-                    <span class="stat-label">Unlocked:</span>
-                    <span class="stat-value" id="achievementCount">0/12</span>
-                </div>
-            </div>
         </div>
 
-        <div class="nav-buttons">
-            <a href="../../index.html">← Home</a>
-            <a href="../../mainpages/mainpage3.html">← Back to Sims</a>
+        <div class="grid-2col">
+
+            <div class="card">
+                <div class="card-title">Upgrades</div>
+                <div class="upgrades-grid" id="upgradesContainer"></div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Achievements <span class="badge" id="achCount">0/12</span></div>
+                <div class="achievements-grid" id="achievementsContainer"></div>
+                <div class="events-container" id="eventsContainer"></div>
+            </div>
+
         </div>
+
+        <footer class="footer">
+            <div class="nav-links">
+                <a href="../../index.html">← Home</a>
+            </div>
+        </footer>
+
     </div>
 
+    <div class="toast" id="toast"></div>
+
     <script>
-        const STORAGE_KEY = 'empireBuilderGame';
-        const ACHIEVEMENT_LIST = [
-            { id: 'starter', name: 'New Ruler', icon: '👑', requirement: () => game.gold >= 1000 },
-            { id: 'wealthy', name: 'Wealthy', icon: '💰', requirement: () => game.gold >= 50000 },
-            { id: 'populous', name: 'Growing', icon: '👥', requirement: () => game.population >= 10000 },
-            { id: 'builder', name: 'Builder', icon: '🏗️', requirement: () => game.totalBuildings >= 50 },
-            { id: 'warrior', name: 'Warrior', icon: '⚔️', requirement: () => game.military >= 500 },
-            { id: 'scholar', name: 'Scholar', icon: '🎓', requirement: () => game.science >= 1000 },
-            { id: 'merchant', name: 'Merchant', icon: '🛒', requirement: () => game.buildings.market >= 10 },
-            { id: 'emperor', name: 'Emperor', icon: '👨‍👦‍👦', requirement: () => game.population >= 100000 },
-            { id: 'millionaire', name: 'Millionaire', icon: '💎', requirement: () => game.gold >= 1000000 },
-            { id: 'expansionist', name: 'Expansionist', icon: '🌍', requirement: () => game.territory >= 10000 },
-            { id: 'diplomat', name: 'Diplomat', icon: '🤝', requirement: () => game.happiness >= 90 },
-            { id: 'conqueror', name: 'Conqueror', icon: '🏆', requirement: () => game.military >= 5000 }
+        const STORAGE_KEY = 'empireBuilder_v2';
+
+        const BUILDINGS = [
+            { id: 'farm', icon: '🌾', name: 'Farm', cost: 80, effect: 'food', income: 2, pop: 5, desc: '+2 gold, +5 pop' },
+            { id: 'house', icon: '🏠', name: 'House', cost: 120, effect: 'housing', income: 1, pop: 15, desc: '+1 gold, +15 pop' },
+            { id: 'market', icon: '🏪', name: 'Market', cost: 200, effect: 'trade', income: 8, pop: 0, desc: '+8 gold' },
+            { id: 'barracks', icon: '🏰', name: 'Barracks', cost: 300, effect: 'military', income: 0, pop: 0, military: 10, desc: '+10 military' },
+            { id: 'temple', icon: '⛪', name: 'Temple', cost: 400, effect: 'faith', income: 3, pop: 0, happiness: 5, desc: '+3 gold, +5% happiness' },
+            { id: 'university', icon: '🎓', name: 'University', cost: 500, effect: 'science', income: 0, pop: 0, science: 15, desc: '+15 science' }
         ];
 
-        let game = {
-            gold: 1000,
-            population: 100,
-            territory: 100,
-            happiness: 50,
-            military: 0,
+        const UPGRADES = [
+            { id: 'agriculture', name: 'Agriculture', cost: 1000, desc: '+50% farm income', effect: 'farmBoost' },
+            { id: 'trade', name: 'Trade Routes', cost: 1500, desc: '+30% all income', effect: 'tradeBoost' },
+            { id: 'military', name: 'Military Tech', cost: 2000, desc: '+50% military power', effect: 'milBoost' },
+            { id: 'education', name: 'Education', cost: 2500, desc: '+40% science gain', effect: 'sciBoost' }
+        ];
+
+        const ACHIEVEMENTS = [
+            { id: 'first_gold', name: 'First Gold', icon: '🪙', check: s => s.gold >= 1000 },
+            { id: 'pop_1000', name: 'Growing Town', icon: '🏘️', check: s => s.population >= 1000 },
+            { id: 'pop_10000', name: 'City', icon: '🌆', check: s => s.population >= 10000 },
+            { id: 'gold_10000', name: 'Wealthy', icon: '💰', check: s => s.gold >= 10000 },
+            { id: 'gold_100000', name: 'Rich', icon: '💎', check: s => s.gold >= 100000 },
+            { id: 'mil_100', name: 'Militia', icon: '⚔️', check: s => s.military >= 100 },
+            { id: 'mil_1000', name: 'Army', icon: '🏹', check: s => s.military >= 1000 },
+            { id: 'sci_100', name: 'Scholar', icon: '📖', check: s => s.science >= 100 },
+            { id: 'sci_1000', name: 'Academy', icon: '🏛️', check: s => s.science >= 1000 },
+            { id: 'all_buildings', name: 'Diverse', icon: '🏗️', check: s => Object.values(s.buildings).every(v => v > 0) },
+            { id: 'happiness_90', name: 'Utopia', icon: '😊', check: s => s.happiness >= 90 },
+            { id: 'empire', name: 'Empire', icon: '👑', check: s => s.population >= 50000 && s.military >= 5000 }
+        ];
+
+        let state = {
+            gold: 500,
+            population: 50,
+            military: 10,
             science: 0,
-            techLevel: 1,
-            buildings: {
-                farm: 0,
-                barracks: 0,
-                library: 0,
-                market: 0,
-                temple: 0,
-                castle: 0
-            },
-            totalBuildings: 0,
+            happiness: 50,
+            buildings: {},
+            upgrades: {},
             achievements: [],
-            age: 'Medieval',
-            autoIncomeActive: false
+            events: [],
+            tickCount: 0,
+            income: 0,
+            era: 'Medieval',
+            goldMultiplier: 1,
+            sciMultiplier: 1,
+            milMultiplier: 1,
+            farmMultiplier: 1
         };
 
+        let gameLoop = null;
+        let toastTimeout = null;
+
+        function initState() {
+            BUILDINGS.forEach(b => { state.buildings[b.id] = 0; });
+            UPGRADES.forEach(u => { state.upgrades[u.id] = false; });
+        }
+        initState();
+
         function load() {
-            const saved = localStorage.getItem(STORAGE_KEY);
-            if (saved) game = JSON.parse(saved);
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    Object.assign(state, data);
+                }
+            } catch (e) {}
             render();
         }
 
         function save() {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(game));
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        }
+
+        function toast(message, type = 'info') {
+            const el = document.getElementById('toast');
+            clearTimeout(toastTimeout);
+            el.className = `toast ${type} show`;
+            el.innerHTML = `<span class="t-icon">${type === 'good' ? '✅' : type === 'bad' ? '❌' : 'ℹ️'}</span> ${message}`;
+            toastTimeout = setTimeout(() => el.classList.remove('show'), 3000);
+        }
+
+        function addEvent(text, type = 'neutral') {
+            state.events.unshift({ text, type, time: Date.now() });
+            if (state.events.length > 20) state.events.pop();
+            renderEvents();
         }
 
         function render() {
-            document.getElementById('gold').textContent = game.gold.toLocaleString();
-            document.getElementById('population').textContent = game.population.toLocaleString();
-            document.getElementById('territory').textContent = (game.territory).toLocaleString() + ' sq mi';
-            document.getElementById('happiness').textContent = game.happiness + '%';
-            document.getElementById('happinessBar').style.width = game.happiness + '%';
-            document.getElementById('military').textContent = game.military.toLocaleString();
-            document.getElementById('science').textContent = game.science.toLocaleString();
-            document.getElementById('techLevel').textContent = game.techLevel;
-            document.getElementById('buildingCount').textContent = game.totalBuildings;
-            document.getElementById('incomeRate').textContent = (game.totalBuildings * 2.5).toFixed(1) + ' gold/s';
-            document.getElementById('age').textContent = game.age;
-            updateAchievements();
+            const fmt = n => n.toLocaleString();
+
+            document.getElementById('goldDisplay').textContent = fmt(Math.floor(state.gold));
+            document.getElementById('popDisplay').textContent = fmt(state.population);
+            document.getElementById('milDisplay').textContent = fmt(state.military);
+            document.getElementById('sciDisplay').textContent = fmt(state.science);
+
+            document.getElementById('goldDetail').textContent = fmt(Math.floor(state.gold));
+            document.getElementById('popDetail').textContent = fmt(state.population);
+            document.getElementById('milDetail').textContent = fmt(state.military);
+            document.getElementById('sciDetail').textContent = fmt(state.science);
+
+            document.getElementById('hapDisplay').textContent = Math.min(100, Math.floor(state.happiness)) + '%';
+            document.getElementById('hapBar').style.width = Math.min(100, state.happiness) + '%';
+
+            const growth = Math.min(100, Math.floor((state.population / 100000) * 100));
+            document.getElementById('growthDisplay').textContent = growth + '%';
+            document.getElementById('growthBar').style.width = growth + '%';
+
+            const income = calcIncome();
+            state.income = income;
+            document.getElementById('incomeDisplay').textContent = `+${fmt(income)}/s`;
+
+            // Era
+            let era = 'Medieval';
+            if (state.population >= 50000 && state.military >= 5000) era = 'Imperial';
+            else if (state.population >= 20000 && state.military >= 2000) era = 'Renaissance';
+            else if (state.population >= 10000) era = 'Feudal';
+            else if (state.population >= 5000) era = 'Kingdom';
+            else if (state.population >= 1000) era = 'Duchy';
+            state.era = era;
+            document.getElementById('eraDisplay').textContent = era;
+
+            renderBuildings();
+            renderUpgrades();
+            renderAchievements();
+            renderEvents();
+
+            const totalAch = ACHIEVEMENTS.length;
+            const unlocked = state.achievements.length;
+            document.getElementById('achCount').textContent = `${unlocked}/${totalAch}`;
         }
 
-        function addGold(amount) {
-            game.gold += amount;
-            checkHappiness();
-            save();
-            render();
+        function calcIncome() {
+            let total = 0;
+            BUILDINGS.forEach(b => {
+                const count = state.buildings[b.id] || 0;
+                let income = b.income * count;
+                if (b.id === 'farm') income *= state.farmMultiplier;
+                total += income;
+            });
+            total *= state.goldMultiplier;
+            return Math.floor(total);
         }
 
-        function addPopulation(amount) {
-            game.population += amount;
-            game.territory += amount * 0.1;
-            checkHappiness();
-            save();
-            render();
-        }
-
-        function buildBuilding(type) {
-            const costs = { farm: 500, barracks: 2000, library: 3000, market: 2500, temple: 4000, castle: 10000 };
-            const cost = costs[type];
-            if (game.gold >= cost) {
-                game.gold -= cost;
-                game.buildings[type]++;
-                game.totalBuildings++;
-                game.happiness -= 2;
-                checkHappiness();
-                checkAge();
-                save();
-                render();
-            }
-        }
-
-        function buyUpgrade(type) {
-            const costs = { agriculture: 5000, military: 7000, education: 6000, trade: 8000 };
-            if (game.gold >= costs[type]) {
-                game.gold -= costs[type];
-                if (type === 'agriculture') game.buildings.farm += 5;
-                if (type === 'military') game.military += 500;
-                if (type === 'education') game.science += 500;
-                if (type === 'trade') game.gold = Math.floor(game.gold * 1.2);
-                game.totalBuildings += 5;
-                game.science += 100;
-                game.techLevel = Math.floor(game.science / 500) + 1;
-                save();
-                render();
-            }
-        }
-
-        function autoIncome() {
-            game.autoIncomeActive = !game.autoIncomeActive;
-            if (game.autoIncomeActive) {
-                setInterval(() => {
-                    if (game.autoIncomeActive) {
-                        game.gold += game.totalBuildings * 2.5;
-                        save();
-                        render();
-                    }
-                }, 1000);
-            }
-        }
-
-        function checkHappiness() {
-            const baseHappiness = Math.min(90, Math.floor((game.gold / 10000) + (game.population / 500)));
-            game.happiness = Math.max(10, baseHappiness);
-        }
-
-        function checkAge() {
-            if (game.totalBuildings >= 100) game.age = 'Renaissance';
-            if (game.totalBuildings >= 200) game.age = 'Industrial';
-            if (game.totalBuildings >= 300) game.age = 'Modern';
-            if (game.totalBuildings >= 500) game.age = 'Futuristic';
-        }
-
-        function updateAchievements() {
-            let unlockedCount = 0;
-            const container = document.getElementById('achievements');
+        function renderBuildings() {
+            const container = document.getElementById('buildingsContainer');
             container.innerHTML = '';
 
-            ACHIEVEMENT_LIST.forEach(ach => {
-                const unlocked = game.achievements.includes(ach.id);
-                if (unlocked) unlockedCount++;
+            BUILDINGS.forEach(b => {
+                const count = state.buildings[b.id] || 0;
+                const btn = document.createElement('button');
+                btn.className = `building-btn ${count > 0 ? 'owned' : ''}`;
+                if (state.gold < b.cost) btn.classList.add('disabled');
 
+                btn.innerHTML = `
+                    <span class="icon">${b.icon}</span>
+                    <span class="name">${b.name}</span>
+                    <span class="cost">💰${b.cost}</span>
+                    <span class="effect">${b.desc}</span>
+                    <span class="count">${count}</span>
+                `;
+
+                btn.addEventListener('click', () => buildBuilding(b.id));
+                container.appendChild(btn);
+            });
+        }
+
+        function renderUpgrades() {
+            const container = document.getElementById('upgradesContainer');
+            container.innerHTML = '';
+
+            UPGRADES.forEach(u => {
+                const purchased = state.upgrades[u.id];
+                const btn = document.createElement('button');
+                btn.className = `upgrade-btn ${purchased ? 'purchased' : ''}`;
+                if (!purchased && state.gold < u.cost) btn.disabled = true;
+
+                btn.innerHTML = `
+                    <div class="u-name">${u.name}</div>
+                    <div class="u-cost">${purchased ? '✅ Purchased' : '💰' + u.cost}</div>
+                    <div class="u-desc">${u.desc}</div>
+                `;
+
+                btn.addEventListener('click', () => buyUpgrade(u.id));
+                container.appendChild(btn);
+            });
+        }
+
+        function renderAchievements() {
+            const container = document.getElementById('achievementsContainer');
+            container.innerHTML = '';
+
+            ACHIEVEMENTS.forEach(a => {
+                const unlocked = state.achievements.includes(a.id);
                 const div = document.createElement('div');
-                div.className = 'achievement' + (unlocked ? ' unlocked' : '');
-                div.title = ach.name;
-                div.textContent = ach.icon;
+                div.className = `ach-item ${unlocked ? 'unlocked' : 'locked'}`;
+                div.innerHTML = `
+                    <span class="icon">${a.icon}</span>
+                    <div class="a-name">${unlocked ? a.name : '???'}</div>
+                `;
+                div.title = a.name;
                 container.appendChild(div);
+            });
+        }
 
-                if (!unlocked && ach.requirement()) {
-                    game.achievements.push(ach.id);
-                    game.gold += 1000;
-                    unlocked = true;
-                    save();
+        function renderEvents() {
+            const container = document.getElementById('eventsContainer');
+            container.innerHTML = '';
+            state.events.slice(0, 8).forEach(e => {
+                const div = document.createElement('div');
+                div.className = `event-item ${e.type}`;
+                div.textContent = e.text;
+                container.appendChild(div);
+            });
+        }
+
+        function buildBuilding(id) {
+            const b = BUILDINGS.find(x => x.id === id);
+            if (!b) return;
+            if (state.gold < b.cost) {
+                toast('Not enough gold!', 'bad');
+                return;
+            }
+
+            state.gold -= b.cost;
+            state.buildings[id] = (state.buildings[id] || 0) + 1;
+            state.population += b.pop || 0;
+            state.military += b.military || 0;
+            state.science += b.science || 0;
+            state.happiness = Math.min(100, state.happiness + (b.happiness || 0));
+
+            // Happiness decay for too many buildings
+            const total = Object.values(state.buildings).reduce((a, b) => a + b, 0);
+            if (total > 20 && total % 5 === 0) {
+                state.happiness = Math.max(10, state.happiness - 2);
+            }
+
+            checkAchievements();
+            save();
+            render();
+            toast(`Built ${b.name}!`, 'good');
+            addEvent(`Built a ${b.name}`, 'good');
+
+            // Random event chance
+            if (Math.random() < 0.05) triggerRandomEvent();
+        }
+
+        function buyUpgrade(id) {
+            const u = UPGRADES.find(x => x.id === id);
+            if (!u) return;
+            if (state.upgrades[u.id]) {
+                toast('Already purchased!', 'info');
+                return;
+            }
+            if (state.gold < u.cost) {
+                toast('Not enough gold!', 'bad');
+                return;
+            }
+
+            state.gold -= u.cost;
+            state.upgrades[u.id] = true;
+
+            switch (u.id) {
+                case 'agriculture': state.farmMultiplier = 1.5; break;
+                case 'trade': state.goldMultiplier = 1.3; break;
+                case 'military': state.milMultiplier = 1.5; break;
+                case 'education': state.sciMultiplier = 1.4; break;
+            }
+
+            checkAchievements();
+            save();
+            render();
+            toast(`Purchased ${u.name}!`, 'good');
+            addEvent(`Researched ${u.name}`, 'good');
+        }
+
+        function collectTaxes() {
+            const income = calcIncome();
+            const bonus = Math.floor(income * 2.5);
+            state.gold += bonus;
+            save();
+            render();
+            toast(`Collected $${bonus} in taxes!`, 'good');
+            addEvent(`Collected taxes: +$${bonus}`, 'good');
+        }
+
+        function trainSoldiers() {
+            const cost = Math.floor(state.population * 0.1);
+            if (state.gold < cost) {
+                toast('Not enough gold!', 'bad');
+                return;
+            }
+            const trained = Math.floor(state.population * 0.05) + 5;
+            state.gold -= cost;
+            state.military += trained;
+            state.happiness = Math.max(10, state.happiness - 3);
+            save();
+            render();
+            toast(`Trained ${trained} soldiers!`, 'good');
+            addEvent(`Trained ${trained} soldiers`, 'good');
+        }
+
+        function researchScience() {
+            const cost = 200 + state.science * 0.2;
+            if (state.gold < cost) {
+                toast('Not enough gold!', 'bad');
+                return;
+            }
+            const gained = Math.floor(10 + state.science * 0.05);
+            state.gold -= cost;
+            state.science += gained;
+            state.happiness = Math.min(100, state.happiness + 1);
+            save();
+            render();
+            toast(`Gained ${gained} science points!`, 'good');
+            addEvent(`Researched: +${gained} science`, 'good');
+        }
+
+        function checkAchievements() {
+            let newAch = false;
+            ACHIEVEMENTS.forEach(a => {
+                if (!state.achievements.includes(a.id) && a.check(state)) {
+                    state.achievements.push(a.id);
+                    const reward = Math.floor(500 + state.population * 0.1);
+                    state.gold += reward;
+                    newAch = true;
+                    toast(`🏆 Achievement: ${a.name}! +$${reward}`, 'good');
+                    addEvent(`Achievement unlocked: ${a.name}`, 'good');
                 }
             });
+            if (newAch) save();
+            render();
+        }
 
-            document.getElementById('achievementCount').textContent = game.achievements.length + '/' + ACHIEVEMENT_LIST.length;
+        function triggerRandomEvent() {
+            const events = [
+                { text: 'A plague sweeps through the land! Population decreased.', type: 'bad', effect: () => { state.population = Math.max(10, Math.floor(state.population * 0.8)); } },
+                { text: 'Bountiful harvest! Gold increased.', type: 'good', effect: () => { state.gold += 500; } },
+                { text: 'Trading caravan arrives! +200 gold.', type: 'good', effect: () => { state.gold += 200; } },
+                { text: 'Bandits raid the countryside! Military decreased.', type: 'bad', effect: () => { state.military = Math.max(0, Math.floor(state.military * 0.85)); } },
+                { text: 'Festival boosts happiness!', type: 'good', effect: () => { state.happiness = Math.min(100, state.happiness + 10); } },
+                { text: 'Drought reduces income temporarily.', type: 'bad', effect: () => { state.gold = Math.max(0, state.gold - 300); } },
+            ];
+
+            const evt = events[Math.floor(Math.random() * events.length)];
+            evt.effect();
+            addEvent(evt.text, evt.type);
+            toast(evt.text, evt.type);
+            save();
+            render();
         }
 
         function resetGame() {
-            if (confirm('Reset game? This cannot be undone!')) {
+            if (confirm('Reset your empire? This cannot be undone!')) {
                 localStorage.removeItem(STORAGE_KEY);
                 location.reload();
             }
         }
 
-        function exportSave() {
-            const dataStr = JSON.stringify(game);
-            const dataBlob = new Blob([dataStr], { type: 'application/json' });
-            const url = URL.createObjectURL(dataBlob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = 'empirebuilder_save.json';
-            link.click();
-        }
+        function gameTick() {
+            state.tickCount++;
 
-        function importSave() {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = '.json';
-            input.onchange = (e) => {
-                const file = e.target.files[0];
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    try {
-                        game = JSON.parse(event.target.result);
-                        save();
-                        render();
-                    } catch (err) {
-                        alert('Invalid save file!');
-                    }
-                };
-                reader.readAsText(file);
-            };
-            input.click();
-        }
+            // Income
+            const income = calcIncome();
+            state.gold += income;
 
-        load();
-        setInterval(() => {
-            if (game.autoIncomeActive) {
-                game.gold += game.totalBuildings * 2.5;
-                render();
-                save();
+            // Population growth
+            const growthRate = 0.002 + (state.happiness / 10000);
+            state.population += Math.floor(state.population * growthRate) + 1;
+
+            // Science passive gain
+            const sciGain = Math.floor(state.science * 0.01) + 1;
+            state.science += Math.floor(sciGain * state.sciMultiplier);
+
+            // Happiness drift
+            const targetHap = 50 + Math.floor(state.population / 1000) + Math.floor(state.gold / 10000);
+            state.happiness += (Math.min(95, targetHap) - state.happiness) * 0.005;
+
+            // Random events
+            if (state.tickCount % 30 === 0 && Math.random() < 0.02) {
+                triggerRandomEvent();
             }
-        }, 1000);
+
+            // Auto-check achievements
+            if (state.tickCount % 10 === 0) checkAchievements();
+
+            save();
+            render();
+        }
+
+        function startGame() {
+            load();
+            if (gameLoop) clearInterval(gameLoop);
+            gameLoop = setInterval(gameTick, 1000);
+            // Initial render
+            render();
+            addEvent('Welcome to Empire Builder! Build your civilization.', 'neutral');
+            toast('Build your empire!', 'info');
+        }
+
+        // Expose functions globally
+        window.buildBuilding = buildBuilding;
+        window.buyUpgrade = buyUpgrade;
+        window.collectTaxes = collectTaxes;
+        window.trainSoldiers = trainSoldiers;
+        window.researchScience = researchScience;
+        window.resetGame = resetGame;
+
+        startGame();
     </script>
 </body>
 </html>
-
-

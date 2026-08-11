@@ -1,303 +1,550 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../../icon.jpg" type="image/x-icon">
-    <title>The Box   </title>
-    <link href="https://fonts.googleapis.com/css2?family=Trebuchet MS:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>The Box</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #121212;
-            --container-bg: #1e1e1e;
-            --border-color: #333;
-            --text-color: #e0e0e0;
-            --highlight-color: #ff6;
-            --button-bg: #3a3a3a;
-            --button-hover: #4a4a4a;
-            --inventory-bg: #252525;
-            --ending-color: #ff9;
-            --danger-color: #f55;
-            --warning-color: #fd5;
-            --success-color: #5f5;
-            --timer-color: #a777e3;
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #141414;
+            --bg-card: #1a1a1a;
+            --border-subtle: #2a2a2a;
+            --border-active: #8b7355;
+            --text-primary: #d4c9b8;
+            --text-secondary: #a89888;
+            --text-accent: #c9b99a;
+            --gold: #b8a07a;
+            --gold-glow: rgba(184, 160, 122, 0.15);
+            --danger: #8b3a3a;
+            --danger-glow: rgba(139, 58, 58, 0.3);
+            --success: #4a7a5a;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Trebuchet MS', serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            max-width: 900px;
-            margin: 0 auto;
+            font-family: 'Cormorant Garamond', serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             padding: 20px;
-            line-height: 1.6;
+            background-image: 
+                radial-gradient(ellipse at 20% 50%, rgba(184, 160, 122, 0.03) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(184, 160, 122, 0.03) 0%, transparent 60%);
+        }
+
+        #homeScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #0a0a0a, #141414);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            backdrop-filter: blur(20px);
+        }
+
+        #homeScreen > div {
+            background: var(--bg-card);
+            border: 1px solid var(--border-active);
+            border-radius: 12px;
+            padding: 3rem 2.5rem;
+            max-width: 520px;
+            width: 90%;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #homeScreen > div::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        #homeScreen h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 6px;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        #homeScreen .subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 0.5rem;
+        }
+
+        #homeScreen .divider {
+            width: 60px;
+            height: 1px;
+            background: var(--border-active);
+            margin: 1.5rem auto;
+        }
+
+        #homeScreen p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+        }
+
+        #homeScreen button {
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--border-active);
+            padding: 14px 40px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            letter-spacing: 4px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        #homeScreen button:hover {
+            background: var(--gold);
+            color: var(--bg-primary);
+            border-color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(184, 160, 122, 0.15);
+        }
+
+        #app {
+            width: 100%;
+            max-width: 820px;
+            margin: 0 auto;
         }
 
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 10px;
+            padding: 20px 0 24px;
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: 28px;
         }
 
-        h1 {
-            margin: 0;
-            font-size: 2.2rem;
-            color: var(--highlight-color);
+        header h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        header h1 span {
+            font-weight: 300;
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            margin-left: 12px;
         }
 
         #game-info {
             display: flex;
-            gap: 20px;
+            gap: 24px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            letter-spacing: 1px;
         }
 
-        #timer,
-        #level {
-            background-color: var(--container-bg);
-            padding: 5px 10px;
+        #game-info > div {
+            padding: 6px 16px;
+            border: 1px solid var(--border-subtle);
             border-radius: 4px;
-            font-weight: bold;
+            background: rgba(255, 255, 255, 0.02);
         }
 
         #timer {
-            color: var(--timer-color);
+            color: var(--text-accent);
+            font-weight: 400;
+        }
+
+        #timer.warning {
+            color: var(--gold);
+            border-color: var(--gold);
+        }
+
+        #timer.danger {
+            color: var(--danger);
+            border-color: var(--danger);
+            animation: pulse 1.2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
         }
 
         #game-container {
-            background-color: var(--container-bg);
-            border: 1px solid var(--border-color);
-            padding: 25px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
             border-radius: 8px;
-            min-height: 400px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            padding: 32px 36px;
+            min-height: 420px;
+            box-shadow: var(--shadow);
+            position: relative;
         }
 
         #text-display {
-            margin-bottom: 25px;
-            min-height: 250px;
             font-size: 1.1rem;
+            line-height: 1.8;
+            min-height: 220px;
+            max-height: 50vh;
             overflow-y: auto;
-            max-height: 60vh;
-            padding-right: 10px;
+            padding-right: 8px;
+            color: var(--text-primary);
         }
 
         #text-display::-webkit-scrollbar {
-            width: 8px;
+            width: 4px;
+        }
+
+        #text-display::-webkit-scrollbar-track {
+            background: transparent;
         }
 
         #text-display::-webkit-scrollbar-thumb {
-            background-color: var(--button-bg);
+            background: var(--border-subtle);
+            border-radius: 2px;
+        }
+
+        #text-display ul {
+            list-style: none;
+            padding: 0;
+            margin: 12px 0;
+        }
+
+        #text-display ul li {
+            padding: 4px 0 4px 20px;
+            position: relative;
+            color: var(--text-secondary);
+        }
+
+        #text-display ul li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--border-active);
+        }
+
+        #text-display .important {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        #text-display .puzzle {
+            border-left: 2px solid var(--border-active);
+            padding: 16px 20px;
+            margin: 16px 0;
+            background: rgba(184, 160, 122, 0.04);
+            border-radius: 0 4px 4px 0;
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: 0.95rem;
+            line-height: 1.9;
+        }
+
+        #text-display .puzzle strong {
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        #text-display .puzzle ul {
+            margin: 8px 0 0 0;
+        }
+
+        #text-display .puzzle ul li::before {
+            content: '•';
+            color: var(--border-active);
+        }
+
+        #text-display .book {
+            color: var(--text-accent);
+            font-style: italic;
+        }
+
+        #text-display .ending {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: var(--gold);
+            margin: 24px 0 12px;
+            padding: 20px 24px;
+            border: 1px solid var(--border-active);
             border-radius: 4px;
+            text-align: center;
+            background: rgba(184, 160, 122, 0.04);
+            font-size: 0.95rem;
+        }
+
+        #text-display .ending.bad {
+            color: var(--danger);
+            border-color: var(--danger);
+            background: rgba(139, 58, 58, 0.06);
+        }
+
+        #text-display .ending.success {
+            color: var(--success);
+            border-color: var(--success);
+            background: rgba(74, 122, 90, 0.06);
         }
 
         #options-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 12px;
-            margin-top: 20px;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        @media (max-width: 600px) {
+            #options-container {
+                grid-template-columns: 1fr;
+            }
+            #game-container {
+                padding: 24px 20px;
+            }
+            header {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+            header h1 {
+                font-size: 1.3rem;
+            }
+            #homeScreen > div {
+                padding: 2rem 1.5rem;
+            }
+            #homeScreen h2 {
+                font-size: 2rem;
+            }
         }
 
         .option-btn {
-            background-color: var(--button-bg);
-            color: var(--text-color);
-            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-subtle);
             padding: 12px 18px;
             text-align: left;
             cursor: pointer;
-            transition: all 0.3s;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-family: "Trebuchet MS", serif;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+            position: relative;
         }
 
         .option-btn:hover {
-            background-color: var(--button-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background: rgba(184, 160, 122, 0.06);
+            border-color: var(--border-active);
+            color: var(--text-primary);
+            transform: translateY(-1px);
         }
 
-        .inventory {
-            margin-top: 25px;
-            padding: 15px;
-            background-color: var(--inventory-bg);
-            border: 1px dashed var(--border-color);
-            border-radius: 5px;
+        .option-btn:active {
+            transform: translateY(0);
         }
 
-        .hidden {
+        .option-btn::after {
+            content: '→';
+            position: absolute;
+            right: 16px;
+            color: var(--border-active);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .option-btn:hover::after {
+            opacity: 1;
+        }
+
+        #inventory-display {
+            margin-top: 24px;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px dashed var(--border-subtle);
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        #inventory-display.hidden {
             display: none;
         }
 
-        .ending {
-            color: var(--ending-color);
-            font-weight: bold;
-            margin-top: 25px;
-            font-size: 1.3rem;
-            padding: 15px;
-            border-radius: 5px;
-            background-color: rgba(0, 0, 0, 0.3);
+        #inventory-display strong {
+            color: var(--text-accent);
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-right: 4px;
         }
 
         .inventory-item {
             display: inline-block;
-            margin: 5px;
-            padding: 5px 10px;
-            background-color: var(--button-bg);
-            border-radius: 15px;
-            transition: all 0.3s;
+            padding: 4px 14px;
+            background: rgba(184, 160, 122, 0.08);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--text-accent);
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
         }
 
         .inventory-item:hover {
-            background-color: var(--button-hover);
-            transform: scale(1.05);
-        }
-
-        .important {
-            color: var(--highlight-color);
-            font-weight: bold;
-        }
-
-        .puzzle {
-            border-left: 3px solid var(--highlight-color);
-            padding: 10px 15px;
-            margin: 15px 0;
-            background-color: rgba(255, 255, 255, 0.05);
-            border-radius: 0 5px 5px 0;
-        }
-
-        .danger {
-            color: var(--danger-color);
-            animation: pulse 1.5s infinite;
-        }
-
-        .warning {
-            color: var(--warning-color);
-        }
-
-        .success {
-            color: var(--success-color);
-        }
-
-        @keyframes pulse {
-            0% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.6;
-            }
-
-            100% {
-                opacity: 1;
-            }
-        }
-
-        #level-indicator {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: var(--container-bg);
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            z-index: 100;
-        }
-
-        .flash {
-            animation: flash 0.5s;
-        }
-
-        @keyframes flash {
-            0% {
-                background-color: var(--highlight-color);
-            }
-
-            100% {
-                background-color: transparent;
-            }
+            background: rgba(184, 160, 122, 0.12);
+            border-color: var(--border-active);
         }
 
         #hint-button {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--button-bg);
-            color: var(--text-color);
-            border: none;
-            padding: 10px 15px;
-            border-radius: 50%;
+            bottom: 28px;
+            right: 28px;
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-subtle);
+            padding: 12px 16px;
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 1.2rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            letter-spacing: 1px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
             z-index: 100;
+            text-transform: uppercase;
         }
 
         #hint-button:hover {
-            background-color: var(--button-hover);
+            background: rgba(184, 160, 122, 0.06);
+            border-color: var(--border-active);
+            color: var(--text-primary);
+        }
+
+        #hint-button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        #hint-button.flash {
+            animation: flashHint 0.6s ease;
+        }
+
+        @keyframes flashHint {
+            0%, 100% { border-color: var(--border-subtle); }
+            50% { border-color: var(--gold); box-shadow: 0 0 30px rgba(184, 160, 122, 0.1); }
         }
 
         .fade-in {
-            animation: fadeIn 1s;
+            animation: fadeIn 0.6s ease;
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .book {
-            color: #aaf;
-            font-style: italic;
+        .badge {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-subtle);
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .scene-transition {
+            animation: sceneIn 0.5s ease;
+        }
+
+        @keyframes sceneIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 
 <body>
-    
-    <div id="homeScreen"
-        style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, #121212, #1e1e1e); display: flex; align-items: center; justify-content: center; z-index: 9999;">
-        <div
-            style="background: #252525; border-radius: 20px; border: 2px solid #ff6; padding: 2.5rem; max-width: 600px; width: 90%; text-align: center; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);">
-            <h2 style="color: #ff6; font-size: 2.5rem; margin-bottom: 0.5rem;">📦 The Box</h2>
-            <p style="color: #ddd; font-size: 1rem; margin-bottom: 2rem;">Escape the chamber! Solve puzzles, uncover
-                secrets, and find your way out as the clock ticks down.</p>
-            <div style="display: flex; flex-direction: column; gap: 1rem;">
-                <button onclick="startTheBox()"
-                    style="background: linear-gradient(135deg, #ff6, #ffaa00); color: #000; border: none; padding: 12px 30px; font-size: 1.1rem; border-radius: 10px; cursor: pointer; font-weight: 600;">🎮
-                    Start Escape</button>
+
+    <div id="homeScreen">
+        <div>
+            <h2>The Box</h2>
+            <div class="subtitle">An Escape</div>
+            <div class="divider"></div>
+            <p>
+                You wake in a cold stone chamber with no memory of how you arrived.<br>
+                The only object of note is an ornate box upon a wooden table.<br>
+                <span style="color: var(--text-accent);">Find your way out.</span>
+            </p>
+            <button onclick="startGame()">Begin</button>
+        </div>
+    </div>
+
+    <div id="app">
+        <header>
+            <h1>The Box <span id="level-indicator">Level 1: The Chamber</span></h1>
+            <div id="game-info">
+                <div id="timer">Time: 15:00</div>
+                <div id="level">Level 1 of 5</div>
+            </div>
+        </header>
+
+        <div id="game-container" class="fade-in">
+            <div id="text-display"></div>
+            <div id="options-container"></div>
+            <div id="inventory-display" class="hidden">
+                <strong>Inventory</strong>
+                <span id="inventory-items"></span>
             </div>
         </div>
     </div>
 
-    <header>
-        <h1>The Box <span id="level-indicator">Level 1: The Chamber</span></h1>
-        <div id="game-info">
-            <div id="timer">Time: 15:00</div>
-            <div id="level">Level: 1/5</div>
-        </div>
-    </header>
-
-    <div id="game-container" class="fade-in">
-        <div id="text-display"></div>
-        <div id="options-container"></div>
-        <div id="inventory-display" class="inventory hidden">
-            <strong>Inventory:</strong> <span id="inventory-items"></span>
-        </div>
-    </div>
-
-    <button id="hint-button" title="Get a hint">?</button>
+    <button id="hint-button" title="Request a clue">Clue</button>
 
     <script>
-
         const gameState = {
             currentScene: 'start',
             inventory: [],
@@ -320,24 +567,22 @@
             hasFinalClue: false
         };
 
-
         const hints = {
-            start: "Look around the room carefully. Everything might be important.",
-            examineBox: "The symbols on the box seem significant. Maybe they can be interacted with?",
-            searchRoom: "Check the floor carefully. Sometimes things are hidden in plain sight.",
-            examineKey: "That serial number looks important. Where might it be used?",
-            readNote: "The triangles mentioned in the note correspond to positions on the box.",
-            studySymbols: "The Roman numerals might form a code you can enter on the box.",
-            lightCandle: "The candle reveals hidden messages. Check the walls and ceiling.",
-            pressSequence: "The order matters: left (past), up (present), right (future).",
-            examineBoxL2: "The books mentioned symbols that might relate to this box.",
-            searchLibrary: "Ancient books often have hidden compartments.",
-            inspectBooks: "The red book seems out of place among all these old tomes.",
-            examineLeftBox: "The inscription mentions 'truth lies in the middle' - is that a clue?",
-            examineCenterBox: "This box has the same symbols as the first one you encountered.",
-            examineRightBox: "The right box seems slightly warmer than the others."
+            start: "Observe your surroundings carefully. The chamber holds more than it first reveals.",
+            examineBox: "The symbols on the box may be more than decoration. They could be a mechanism.",
+            searchRoom: "Check the floorboards. One of them may be loose.",
+            examineKey: "The serial number on the key might correspond to something else in the room.",
+            readNote: "The previous occupant left clues about triangles and order.",
+            studySymbols: "The symbols correspond to Roman numerals. Look for a sequence.",
+            lightCandle: "Candlelight can reveal things invisible in darkness.",
+            pressSequence: "The order of pressing matters. Past, present, future.",
+            examineBoxL2: "This box has three keyholes. Each may require a different key.",
+            searchLibrary: "The books on the desk may hold important information.",
+            inspectBooks: "The red book stands out. It may contain a journal or notes.",
+            examineLeftBox: "The inscription mentions 'truth lies in the middle'.",
+            examineCenterBox: "This box shares symbols with the first one you encountered.",
+            examineRightBox: "The right box feels slightly warmer than the others."
         };
-
 
         const levels = {
             1: {
@@ -345,145 +590,147 @@
                 timer: 900,
                 scenes: {
                     start: {
-                        text: `You wake up in a dimly lit stone chamber with no memory of how you got here. 
-                        The air is damp and cold. The only furnishings are a wooden table in the center with a small ornate box,
-                        and an old wooden chair in the corner. The heavy door beTrebuchet MS you is locked with no visible handle.
-                        
-                        <span class="important">The box</span> catches your eye immediately. It's about 10 inches square, made of dark wood 
-                        with intricate carvings covering every surface. A small keyhole glints in the faint light.`,
+                        text: `You wake in a dimly lit stone chamber. The air is cold and damp, carrying the scent of old stone and dust. Your memory offers nothing — only the present moment exists.
+
+                        A wooden table stands at the center of the room. Upon it rests an ornate box, perhaps ten inches square, its surface covered in intricate carvings. In the corner, a simple wooden chair waits.
+
+                        The heavy door before you appears sealed, with no visible handle or lock. The only way forward may lie with the box.`,
                         options: [
-                            { text: "Examine the box closely", next: "examineBox" },
-                            { text: "Search the room systematically", next: "searchRoom" },
-                            { text: "Inspect the wooden chair", next: "inspectChair" },
-                            { text: "Try to force the box open", next: "tryOpenBox" }
+                            { text: "Examine the box", next: "examineBox" },
+                            { text: "Search the room", next: "searchRoom" },
+                            { text: "Inspect the chair", next: "inspectChair" },
+                            { text: "Attempt to force the box open", next: "tryOpenBox" }
                         ]
                     },
                     examineBox: {
-                        text: `The box is beautifully crafted but shows signs of age. The carvings depict strange symbols 
-                        in an alphabet you don't recognize. On the front panel, barely visible beneath the patina, is an 
-                        inscription that reads: <span class="important">"The truth lies within, but at what cost?"</span>
-                        
-                        The keyhole looks like it would take a small, ornate key. Some of the symbols appear slightly raised, 
-                        as if they might be pressed.`,
+                        text: `The box is beautifully crafted from dark wood, its surface a tapestry of carved symbols in an unfamiliar script. Age has darkened the wood, but the detail remains sharp.
+
+                        A small inscription on the front panel reads: <span class="important">"The truth lies within, but at what cost?"</span>
+
+                        A keyhole, small and intricate, is set into the front. Some of the symbols appear slightly raised, as if they might be pressed.`,
                         options: [
                             { text: "Search the room more thoroughly", next: "searchRoom" },
-                            { text: "Try pressing some of the symbols", next: "examineSymbols" },
+                            { text: "Try pressing the raised symbols", next: "examineSymbols" },
                             { text: "Attempt to open the box without a key", next: "tryOpenBox" },
                             { text: "Look for hidden compartments", next: "checkBoxCompartments" }
                         ]
                     },
                     searchRoom: {
-                        text: `You methodically examine the chamber:
+                        text: `You conduct a systematic search of the chamber:
+
                         <ul>
-                            <li>The <span class="important">walls</span> are made of rough-hewn stone with occasional strange markings</li>
-                            <li>A small <span class="important">ventilation grate</span> is set high in one wall</li>
-                            <li>The <span class="important">floorboards</span> are old wood - one near the table feels slightly loose</li>
-                            <li>The <span class="important">ceiling</span> has strange shadows that might be carvings</li>
+                            <li>The walls are rough-hewn stone with occasional markings that may be deliberate</li>
+                            <li>A ventilation grate is set high in one wall, beyond easy reach</li>
+                            <li>The floorboards are old and worn — one near the table feels slightly loose</li>
+                            <li>Shadows on the ceiling suggest carvings or patterns</li>
                         </ul>`,
                         options: [
                             { text: "Pry up the loose floorboard", next: "findItems" },
-                            { text: "Examine the wall markings more closely", next: "examineWalls" },
-                            { text: "Try to reach the ventilation grate", next: "reachGrate" },
-                            { text: "Look at the ceiling carvings", next: "examineCeiling" },
-                            { text: "Return to examining the box", next: "examineBox" }
+                            { text: "Examine the wall markings", next: "examineWalls" },
+                            { text: "Attempt to reach the ventilation grate", next: "reachGrate" },
+                            { text: "Study the ceiling shadows", next: "examineCeiling" },
+                            { text: "Return to the box", next: "examineBox" }
                         ]
                     },
                     inspectChair: {
-                        text: `The wooden chair is surprisingly sturdy despite its age. As you examine it, you notice:
+                        text: `The chair is simple but sturdy, clearly old yet well-made. A closer inspection reveals:
+
                         <ul>
-                            <li>One leg is slightly shorter than the others</li>
-                            <li>The back has faint carvings matching some symbols on the box</li>
-                            <li>There's a small hole drilled in one armrest</li>
+                            <li>One leg is slightly shorter than the others, causing a subtle wobble</li>
+                            <li>The backrest bears faint carvings that echo the symbols on the box</li>
+                            <li>A small hole, barely visible, is drilled into the right armrest</li>
                         </ul>`,
                         options: [
-                            { text: "Break the chair to see if it hides anything", next: "breakChair" },
+                            { text: "Break the chair to search for hidden objects", next: "breakChair" },
                             { text: "Use the chair to reach higher areas", next: "useChair" },
-                            { text: "Return to examining the room", next: "searchRoom" }
+                            { text: "Return to searching the room", next: "searchRoom" }
                         ]
                     },
                     findItems: {
-                        text: `You carefully pry up the loose floorboard. Beneath it, hidden in a shallow compartment, you find:
+                        text: `You carefully pry up the loose floorboard. Beneath it, hidden in a shallow compartment, you discover:
+
                         <ul>
-                            <li>A small <span class="important">ornate key</span> made of tarnished silver</li>
-                            <li>A folded piece of <span class="important">aged paper</span> with writing</li>
-                            <li>A <span class="important">magnifying lens</span> in a leather pouch</li>
+                            <li>An <span class="important">ornate silver key</span> with intricate detailing</li>
+                            <li>A folded piece of <span class="important">aged parchment</span> covered in handwriting</li>
+                            <li>A <span class="important">magnifying lens</span> in a worn leather pouch</li>
                         </ul>`,
                         onEnter: () => {
                             gameState.hasKey = true;
                             gameState.hasNote = true;
                             gameState.hasLens = true;
-                            gameState.inventory.push('Ornate Key', 'Folded Note', 'Magnifying Lens');
+                            gameState.inventory.push('Silver Key', 'Aged Parchment', 'Magnifying Lens');
                             updateInventory();
                             document.getElementById('inventory-display').classList.remove('hidden');
                         },
                         options: [
-                            { text: "Examine the ornate key", next: "examineKey" },
-                            { text: "Read the folded note", next: "readNote" },
+                            { text: "Examine the silver key", next: "examineKey" },
+                            { text: "Read the parchment", next: "readNote" },
                             { text: "Inspect the magnifying lens", next: "examineLens" },
-                            { text: "Try the key on the box", next: "useKey" }
+                            { text: "Try the key in the box", next: "useKey" }
                         ]
                     },
                     examineKey: {
-                        text: `The key is beautifully crafted with intricate patterns along its shaft. Using the magnifying lens, you see:
+                        text: `The key is finely crafted, its shaft adorned with patterns that seem to mirror the box's carvings. Through the magnifying lens, you notice:
+
                         <ul>
-                            <li>Tiny symbols matching those on the box are engraved along the handle</li>
-                            <li>The teeth form a complex pattern that looks like it would interact with multiple mechanisms</li>
-                            <li>There's a serial number: <span class="important">VII-IX-XIII</span></li>
+                            <li>Tiny symbols along the handle correspond to some on the box</li>
+                            <li>The teeth form a complex pattern suggesting multiple locking mechanisms</li>
+                            <li>A serial number is etched into the base: <span class="important">VII-IX-XIII</span></li>
                         </ul>`,
                         options: [
-                            { text: "Read the folded note", next: "readNote" },
-                            { text: "Try the key on the box", next: "useKey" },
-                            { text: "Look at the box's symbols with the lens", next: "examineBoxWithLens" }
+                            { text: "Read the parchment", next: "readNote" },
+                            { text: "Try the key in the box", next: "useKey" },
+                            { text: "Examine the box's symbols with the lens", next: "examineBoxWithLens" }
                         ]
                     },
                     readNote: {
                         text: `<div class="puzzle">
-                        The note reads in shaky handwriting:
-                        
-                        "If you're reading this, you're like me - trapped. 
-                        The box holds the way out, but be warned - not all exits are equal. 
-                        The symbols hold the secret. <span class="important">Look to the triangle when the time is right.</span>
-                        
-                        Remember:
-                        - <span class="important">Three before one</span>
-                        - <span class="important">The mirror shows what eyes cannot see</span>
-                        - <span class="important">Light reveals the hidden path</span>
-                        
-                        The previous occupant left these clues before disappearing..."
+                        The parchment is written in a careful, deliberate hand:
+
+                        <p><em>"If you are reading this, you are like me — trapped. The box holds the way out, but not all exits are equal. The symbols are the key. <span class="important">Look to the triangle when the time is right.</span></em></p>
+
+                        <p><em>Remember:<br>
+                        — <span class="important">Three before one</span><br>
+                        — <span class="important">The mirror reveals what eyes cannot see</span><br>
+                        — <span class="important">Light uncovers the hidden path</span></em></p>
+
+                        <p><em>The previous occupant left these clues before disappearing..."</em></p>
                         </div>`,
                         options: [
-                            { text: "Examine the box's symbols again", next: "examineBox2" },
-                            { text: "Try the key on the box now", next: "useKey" },
-                            { text: "Search for more clues in the room", next: "searchRoom2" }
+                            { text: "Re-examine the box's symbols", next: "examineBox2" },
+                            { text: "Try the key in the box now", next: "useKey" },
+                            { text: "Search the room for more clues", next: "searchRoom2" }
                         ]
                     },
                     examineBox2: {
-                        text: `Looking again at the box's carvings with the note in mind, you notice new details:
+                        text: `With the note's guidance, you study the box anew:
+
                         <ul>
-                            <li>The symbols are arranged in concentric circles</li>
-                            <li>There are three small triangles among the symbols pointing in different directions</li>
-                            <li>Some symbols appear slightly different under closer inspection</li>
+                            <li>The symbols are arranged in concentric circles around the keyhole</li>
+                            <li>Three small triangles are positioned among the symbols, each pointing in a different direction</li>
+                            <li>Under closer inspection, some symbols seem slightly different from others</li>
                         </ul>`,
                         options: [
                             { text: "Press the upward-pointing triangle", next: "pressUp" },
                             { text: "Press the left-pointing triangle", next: "pressLeft" },
                             { text: "Press the right-pointing triangle", next: "pressRight" },
                             { text: "Use the key to unlock the box", next: "useKey" },
-                            { text: "Study the symbols more carefully", next: "studySymbols" }
+                            { text: "Study the symbols carefully", next: "studySymbols" }
                         ]
                     },
                     studySymbols: {
-                        text: `Using the magnifying lens, you spend time deciphering the symbols:
-                        <div class="puzzle">
-                        <p>You realize the symbols correspond to Roman numerals:</p>
+                        text: `<div class="puzzle">
+                        Using the magnifying lens, you decipher the symbol system:
+
                         <ul>
-                            <li>Circle with dot = I</li>
-                            <li>Two parallel lines = V</li>
-                            <li>Triangle = X</li>
-                            <li>Square = L</li>
+                            <li>Circle with dot = <strong>I</strong></li>
+                            <li>Two parallel lines = <strong>V</strong></li>
+                            <li>Triangle = <strong>X</strong></li>
+                            <li>Square = <strong>L</strong></li>
                         </ul>
-                        <p>The sequence around the keyhole reads: <span class="important">X - V - I - I</span> (7)</p>
-                        <p>The triangles are positioned at positions corresponding to 3, 9, and 12</p>
+
+                        <p>The sequence around the keyhole reads: <span class="important">X — V — I — I</span> (which is 7)</p>
+                        <p>The triangles are positioned at what correspond to positions 3, 9, and 12</p>
                         </div>`,
                         onEnter: () => {
                             gameState.symbolsDeciphered = true;
@@ -496,8 +743,9 @@
                         ]
                     },
                     enterCode: {
-                        text: `You press the symbols in sequence: V (two lines), I (circle with dot), I.
-                        A hidden compartment clicks open revealing a small <span class="important">candle</span> and <span class="important">matchbox</span>.`,
+                        text: `You press the symbols in sequence: V (two lines), I (circle with dot), I (circle with dot).
+
+                        A hidden compartment clicks open, revealing a <span class="important">beeswax candle</span> and a small <span class="important">matchbox</span>.`,
                         onEnter: () => {
                             gameState.hasCandle = true;
                             gameState.hasMatchbox = true;
@@ -511,59 +759,65 @@
                         ]
                     },
                     lightCandle: {
-                        text: `You light the candle. As it burns, you notice:
+                        text: `You strike a match and light the candle. The flame burns steadily, casting warm light across the chamber. As it does, you notice:
+
                         <ul>
-                            <li>The flame casts strange shadows from the box's carvings</li>
-                            <li>The wax smells faintly of lavender</li>
+                            <li>The flame creates shifting shadows from the box's carvings</li>
+                            <li>The wax carries a faint scent of lavender and beeswax</li>
                             <li>On the wall, the candlelight reveals previously invisible writing</li>
                         </ul>`,
                         onEnter: () => {
                             gameState.candleLit = true;
                         },
                         options: [
-                            { text: "Read the newly revealed wall writing", next: "readWallWriting" },
+                            { text: "Read the wall writing", next: "readWallWriting" },
                             { text: "Examine the box in candlelight", next: "examineBoxByCandle" },
-                            { text: "Look at the ceiling in this light", next: "examineCeilingLight" }
+                            { text: "Study the ceiling in this light", next: "examineCeilingLight" }
                         ]
                     },
                     readWallWriting: {
-                        text: `The wall writing becomes visible in the candlelight:
-                        <div class="puzzle">
-                        "The order matters:
-                        First the past (left),
-                        Then the present (up),
-                        Finally the future (right).
-                        Only then will the way be open."
+                        text: `<div class="puzzle">
+                        The candlelight reveals a message etched into the stone:
+
+                        <p><em>"The order matters:<br>
+                        First the past (left),<br>
+                        Then the present (up),<br>
+                        Finally the future (right).<br>
+                        Only then will the way be open."</em></p>
                         </div>`,
                         onEnter: () => {
                             gameState.hiddenMessageSeen = true;
                         },
                         options: [
                             { text: "Press the triangles in order: left, up, right", next: "pressSequence" },
-                            { text: "Examine the box with this new information", next: "examineBoxFinal" }
+                            { text: "Examine the box with this new understanding", next: "examineBoxFinal" }
                         ]
                     },
                     pressSequence: {
                         text: `Following the instructions, you press the triangles in sequence:
+
                         <ol>
                             <li>Left-pointing triangle (past)</li>
                             <li>Upward-pointing triangle (present)</li>
                             <li>Right-pointing triangle (future)</li>
                         </ol>
-                        The box emits a series of clicks. The carvings rearrange themselves to form a map of the room, 
-                        highlighting a previously invisible seam in the wall.`,
+
+                        The box emits a series of clicks. The carvings rearrange themselves, forming a map of the room with a previously invisible seam in the wall highlighted.`,
                         options: [
-                            { text: "Use the key on the box now", next: "useKeyFinal" },
+                            { text: "Use the key on the box", next: "useKeyFinal" },
                             { text: "Investigate the wall seam", next: "wallSeam" }
                         ]
                     },
                     useKeyFinal: {
-                        text: `You insert the key and turn it. The box opens smoothly, revealing:
+                        text: `You insert the key and turn it. The mechanism moves smoothly, and the box opens.
+
+                        Inside, you find:
                         <ul>
                             <li>A small mirror that seems to reflect things not visible to the naked eye</li>
                             <li>A second note: "The exit was within you all along. The door is now unlocked."</li>
                         </ul>
-                        As you read this, you hear a click from the chamber door.`,
+
+                        As you read, you hear a heavy click from the chamber door.`,
                         options: [
                             { text: "Use the mirror to examine the room", next: "useMirror" },
                             { text: "Check the chamber door", next: "checkDoor" }
@@ -571,10 +825,11 @@
                     },
                     useMirror: {
                         text: `Looking through the mirror, you see:
+
                         <ul>
-                            <li>The wall markings form a complete message: "The way out is through understanding"</li>
+                            <li>The wall markings form a coherent message: "The way out is through understanding"</li>
                             <li>The box's interior has hidden engravings matching the key's serial number</li>
-                            <li>Your reflection shows you holding a different object than you actually are</li>
+                            <li>Your reflection appears to be holding an object that you are not</li>
                         </ul>`,
                         options: [
                             { text: "Proceed to the door", next: "goodEnding" },
@@ -582,27 +837,22 @@
                         ]
                     },
                     goodEnding: {
-                        text: `You approach the door, which now opens easily. As you step through, you're overwhelmed 
-                        by a bright light. When your vision clears, you find yourself in an ancient library, surrounded by towering bookshelves.
-                        A larger version of the box sits on a pedestal in the center of the room.
-                        
-                        <div class="ending">LEVEL COMPLETE: The Library Awaits</div>`,
+                        text: `You approach the door. It swings open silently, revealing a corridor that leads to a vast, ancient library. Towering bookshelves stretch into shadow, and in the center of the room, a larger version of the box sits on a pedestal.
+
+                        <div class="ending success">Level Complete: The Library Awaits</div>`,
                         options: [
-                            { text: "Continue to the Library", next: "startL2" }
+                            { text: "Proceed to the Library", next: "startL2" }
                         ]
                     },
-
                     tryOpenBox: {
-                        text: `You try to force the box open. It won't budge. There must be another way.`,
+                        text: `You attempt to force the box open. It resists, its mechanism seemingly sealed by more than just a lock.`,
                         onEnter: () => {
                             gameState.attempts++;
                             if (gameState.attempts > 2) {
                                 return {
-                                    text: `After several attempts to force the box open, you hear a strange clicking sound. 
-                                    The room begins to fill with a strange gas. As you lose consciousness, your last thought is that 
-                                    you should have been more careful.`,
+                                    text: `After several attempts to force the box open, you hear a strange clicking sound. The room begins to fill with a faint, acrid gas. As consciousness fades, you realize the cost of impatience.`,
                                     options: [],
-                                    ending: "BAD ENDING: Too Impatient"
+                                    ending: "Bad Ending: Impatience"
                                 };
                             }
                         },
@@ -612,44 +862,34 @@
                         ]
                     },
                     pressUp: {
-                        text: `You press the upward-pointing triangle. The box emits a strange humming sound. 
-                        Suddenly, the walls of the room begin to close in. Before you can react, everything goes black.`,
+                        text: `You press the upward-pointing triangle. The box hums, and the walls of the room begin to close in. Before you can react, everything goes dark.`,
                         options: [],
-                        ending: "BAD ENDING: Crushed"
+                        ending: "Bad Ending: Crushed"
                     },
                     pressLeft: {
-                        text: `You press the left-pointing triangle. The carvings on the box begin to glow faintly. 
-                        A hidden compartment slides open revealing a small vial of liquid and a note: 
-                        
-                        "Drink to forget." 
-                        
-                        As you drink the liquid, your memories fade and you collapse. 
-                        You wake up in an unfamiliar place with no recollection of the box or the room.`,
+                        text: `You press the left-pointing triangle. The carvings on the box glow faintly, and a hidden compartment slides open, revealing a small vial and a note: "Drink to forget."
+
+                        As you drink the liquid, your memories begin to fade. You collapse, and when you wake, you are elsewhere, with no recollection of the box or the chamber.`,
                         options: [],
-                        ending: "NEUTRAL ENDING: Forgotten"
+                        ending: "Neutral Ending: Forgotten"
                     },
                     pressRight: {
-                        text: `You press the right-pointing triangle. The box vibrates slightly and the carvings rearrange themselves 
-                        to form a map of the room. A previously hidden panel in the wall slides open, revealing an exit. 
-                        As you step through, you find yourself back in the real world, but the experience has changed you forever.`,
+                        text: `You press the right-pointing triangle. The box vibrates, and the carvings rearrange to form a map of the room. A panel in the wall slides open, revealing an exit.
+
+                        As you step through, you find yourself back in the world, but the experience has left its mark. You are no longer quite the same.`,
                         options: [],
-                        ending: "SECRET ENDING: The Seeker"
+                        ending: "Secret Ending: The Seeker"
                     },
                     reachGrate: {
-                        text: `You try to reach the ventilation grate but it's too high up. As you jump to try to reach it, 
-                        you accidentally knock over the table with the box. The box falls to the floor with a loud crack. 
-                        When you pick it up, it's broken beyond repair, and the mechanism inside seems to be jammed. 
-                        You're trapped forever.`,
+                        text: `You try to reach the ventilation grate but it is too high. As you leap, you knock over the table. The box falls, cracking upon the stone floor. Its mechanism is broken beyond repair. You are trapped.`,
                         options: [],
-                        ending: "BAD ENDING: Careless"
+                        ending: "Bad Ending: Carelessness"
                     },
                     examineSymbols: {
-                        text: `You press some random symbols on the box. Nothing happens at first, but then you hear a faint click. 
-                        A small needle emerges from the box and pricks your finger. Suddenly, you feel very drowsy...`,
+                        text: `You press several symbols at random. For a moment, nothing happens. Then you hear a faint click, and a needle emerges from the box, pricking your finger. A wave of drowsiness overtakes you.`,
                         options: [],
-                        ending: "BAD ENDING: Poisoned"
+                        ending: "Bad Ending: Poisoned"
                     },
-
                     startL2: {
                         onEnter: () => {
                             loadLevel(2);
@@ -663,49 +903,52 @@
                 timer: 720,
                 scenes: {
                     start: {
-                        text: `You find yourself in an ancient library. Dusty tomes line the walls, 
-                        and in the center stands a pedestal with a larger version of the box you just escaped.
-                        This one has multiple keyholes and more complex carvings. The air smells of old parchment and wax.
-                        
+                        text: `You stand in an ancient library. Dust motes dance in shafts of light that fall from high windows. The air smells of old paper, leather, and wax.
+
+                        At the center of the room, a pedestal supports a larger version of the box you encountered before. This one has three keyholes arranged in a triangle pattern, and its carvings are more complex than the first.
+
                         Three books lie open on a reading desk nearby.`,
                         options: [
                             { text: "Examine the new box", next: "examineBoxL2" },
-                            { text: "Search the library for clues", next: "searchLibrary" },
+                            { text: "Search the library", next: "searchLibrary" },
                             { text: "Inspect the open books", next: "inspectBooks" }
                         ]
                     },
                     examineBoxL2: {
-                        text: `This box is about twice the size of the previous one, with more intricate carvings. 
-                        It has three keyholes arranged in a triangle pattern. The symbols are similar but more complex, 
-                        and there are several movable parts. A small plaque on the pedestal reads: 
-                        <span class="important">"Knowledge is the key to all doors."</span>`,
+                        text: `This box is larger and more intricate than the first. Its carvings are deeper, more detailed, and its three keyholes suggest a more complex locking mechanism. A plaque on the pedestal reads:
+
+                        <span class="important">"Knowledge is the key to all doors."</span>
+
+                        The symbols are similar to before but with additional variations.`,
                         options: [
                             { text: "Try the key from the previous box", next: "tryOldKey" },
-                            { text: "Examine the symbols more closely", next: "examineSymbolsL2" },
-                            { text: "Search for another key", next: "searchLibrary" }
+                            { text: "Examine the symbols closely", next: "examineSymbolsL2" },
+                            { text: "Search the library for another key", next: "searchLibrary" }
                         ]
                     },
                     searchLibrary: {
-                        text: `You search through the library:
+                        text: `You explore the library:
+
                         <ul>
-                            <li>The <span class="important">bookshelves</span> contain ancient texts in languages you don't recognize</li>
+                            <li>Rows of <span class="important">bookshelves</span> contain ancient texts in unfamiliar languages</li>
                             <li>A <span class="important">red leather-bound book</span> stands out among the others</li>
-                            <li>The <span class="important">reading desk</span> has three open books with marked pages</li>
-                            <li>There's a <span class="important">cabinet</span> with small drawers in one corner</li>
+                            <li>The <span class="important">reading desk</span> holds three open books with marked pages</li>
+                            <li>A <span class="important">cabinet</span> with small drawers sits in one corner</li>
                         </ul>`,
                         options: [
                             { text: "Examine the red book", next: "examineRedBook" },
                             { text: "Check the cabinet drawers", next: "checkCabinet" },
-                            { text: "Look at the open books on the desk", next: "inspectBooks" },
-                            { text: "Return to examining the box", next: "examineBoxL2" }
+                            { text: "Study the open books", next: "inspectBooks" },
+                            { text: "Return to the box", next: "examineBoxL2" }
                         ]
                     },
                     inspectBooks: {
-                        text: `You examine the three open books on the reading desk:
+                        text: `You examine the three open books:
+
                         <ol>
-                            <li><span class="book">"Symbols of the Ancients"</span> - Shows symbols matching those on the box with translations</li>
-                            <li><span class="book">"Mechanisms of Power"</span> - Diagrams of complex locking mechanisms</li>
-                            <li><span class="book">"The Trials of Knowledge"</span> - A story about three challenges to gain wisdom</li>
+                            <li><span class="book">Symbols of the Ancients</span> — A comprehensive guide to the symbols found on the boxes</li>
+                            <li><span class="book">Mechanisms of Power</span> — Diagrams of complex locking mechanisms and their operation</li>
+                            <li><span class="book">The Trials of Knowledge</span> — A narrative about three challenges that must be overcome to gain wisdom</li>
                         </ol>`,
                         options: [
                             { text: "Study the symbols book", next: "studySymbolBook" },
@@ -715,10 +958,11 @@
                         ]
                     },
                     examineRedBook: {
-                        text: `The red book is titled <span class="book">"The Keeper's Journal"</span>. Inside you find:
+                        text: `The red book is titled <span class="book">The Keeper's Journal</span>. Inside, you find:
+
                         <ul>
-                            <li>Notes about previous "test subjects" who attempted the boxes</li>
-                            <li>A diagram showing the correct order to insert keys</li>
+                            <li>Notes about previous individuals who attempted to pass through the boxes</li>
+                            <li>A diagram showing the correct order for inserting keys</li>
                             <li>A loose page with the numbers <span class="important">7, 9, 13</span> circled</li>
                         </ul>`,
                         onEnter: () => {
@@ -734,12 +978,13 @@
                     },
                     studySymbolBook: {
                         text: `<div class="puzzle">
-                        <p>The book reveals:</p>
+                        The book reveals:
+
                         <ul>
                             <li>The triangle symbol means "truth"</li>
                             <li>The circle with dot means "knowledge"</li>
                             <li>The three lines mean "power"</li>
-                            <li>The sequence VII-IX-XIII appears frequently</li>
+                            <li>The sequence VII-IX-XIII appears repeatedly throughout the text</li>
                         </ul>
                         </div>`,
                         options: [
@@ -748,8 +993,9 @@
                         ]
                     },
                     enterLibraryCode: {
-                        text: `You find corresponding symbols on the box and press them in sequence (VII-IX-XIII). 
-                        A compartment opens revealing a <span class="important">silver key</span>.`,
+                        text: `You locate the corresponding symbols on the box and press them in sequence (VII-IX-XIII).
+
+                        A compartment opens, revealing a <span class="important">silver key</span>.`,
                         onEnter: () => {
                             gameState.inventory.push('Silver Key');
                             updateInventory();
@@ -760,35 +1006,29 @@
                         ]
                     },
                     useSilverKey: {
-                        text: `You insert the silver key into the top keyhole and turn it. The box makes a series of mechanical sounds, 
-                        and one of the carvings slides aside to reveal a small compartment containing a <span class="important">golden key</span>
-                        and a note that reads: "The final test awaits."`,
+                        text: `You insert the silver key into the top keyhole and turn it. The box responds with a series of mechanical sounds, and one of the carvings slides aside to reveal a compartment containing a <span class="important">golden key</span> and a note that reads: "The final test awaits."`,
                         onEnter: () => {
                             gameState.inventory.push('Golden Key');
                             updateInventory();
                         },
                         options: [
                             { text: "Take the golden key", next: "takeGoldenKey" },
-                            { text: "Read the note more carefully", next: "readFinalNote" }
+                            { text: "Read the note carefully", next: "readFinalNote" }
                         ]
                     },
                     takeGoldenKey: {
-                        text: `As you hold the golden key, the library begins to fade around you. The bookshelves dissolve into mist,
-                        and when it clears, you find yourself in a circular chamber with three identical boxes.
-                        
-                        <div class="ending">LEVEL COMPLETE: The Final Test</div>`,
+                        text: `As you hold the golden key, the library begins to dissolve around you. The bookshelves fade into mist, and when it clears, you find yourself in a circular chamber with three identical boxes.
+
+                        <div class="ending success">Level Complete: The Final Test</div>`,
                         options: [
                             { text: "Face the final challenge", next: "startL3" }
                         ]
                     },
-
                     tryOldKey: {
-                        text: `You try the key from the previous box, but it doesn't fit any of the keyholes. 
-                        As you force it, you hear a snapping sound - the key breaks in the lock!`,
+                        text: `You try the key from the previous box, but it does not fit any of the keyholes. As you attempt to force it, the key snaps in the lock.`,
                         options: [],
-                        ending: "BAD ENDING: Broken Key"
+                        ending: "Bad Ending: Broken Key"
                     },
-
                     startL3: {
                         onEnter: () => {
                             loadLevel(3);
@@ -802,47 +1042,45 @@
                 timer: 600,
                 scenes: {
                     start: {
-                        text: `You stand in a circular chamber with three identical boxes on pedestals. 
-                        An inscription on the wall reads: 
+                        text: `You stand in a circular chamber with three identical boxes on pedestals. An inscription on the wall reads:
+
                         <span class="important">"Only one leads to freedom, the others to oblivion. Choose wisely."</span>
-                        
+
                         Each box has a single keyhole and faintly glowing symbols.`,
                         options: [
                             { text: "Examine the left box", next: "examineLeftBox" },
                             { text: "Examine the center box", next: "examineCenterBox" },
                             { text: "Examine the right box", next: "examineRightBox" },
-                            { text: "Look for more clues", next: "searchFinalRoom" }
+                            { text: "Search for more clues", next: "searchFinalRoom" }
                         ]
                     },
                     examineLeftBox: {
-                        text: `The left box has symbols that glow blue. The carvings depict a mountain under a starry sky. 
-                        The keyhole is shaped like a crescent moon.`,
+                        text: `The left box glows with a blue light. Its carvings depict a mountain under a starry sky. The keyhole is shaped like a crescent moon.`,
                         options: [
                             { text: "Try the golden key", next: "useKeyLeftBox" },
                             { text: "Examine the other boxes", next: "start" }
                         ]
                     },
                     examineCenterBox: {
-                        text: `The center box glows with a golden light. Its carvings show a sun rising over a field of wheat. 
-                        The keyhole is circular with radiating lines.`,
+                        text: `The center box emanates a warm golden glow. Its carvings show a sun rising over a field of wheat. The keyhole is circular with radiating lines.`,
                         options: [
                             { text: "Try the golden key", next: "useKeyCenterBox" },
                             { text: "Examine the other boxes", next: "start" }
                         ]
                     },
                     examineRightBox: {
-                        text: `The right box pulses with a red glow. Its carvings depict a stormy sea with a lone ship. 
-                        The keyhole is shaped like a wave.`,
+                        text: `The right box pulses with a red glow. Its carvings depict a stormy sea with a lone ship. The keyhole is shaped like a wave.`,
                         options: [
                             { text: "Try the golden key", next: "useKeyRightBox" },
                             { text: "Examine the other boxes", next: "start" }
                         ]
                     },
                     searchFinalRoom: {
-                        text: `You search the chamber and find:
+                        text: `You search the chamber:
+
                         <ul>
-                            <li>The <span class="important">floor tiles</span> have barely visible inscriptions</li>
-                            <li>The <span class="important">walls</span> have three murals matching the box carvings</li>
+                            <li>The <span class="important">floor tiles</span> have faint inscriptions</li>
+                            <li>The <span class="important">walls</span> feature three murals matching the box carvings</li>
                             <li>A <span class="important">small alcove</span> contains a note: "Truth lies in the middle"</li>
                         </ul>`,
                         onEnter: () => {
@@ -851,44 +1089,38 @@
                         options: [
                             { text: "Examine the floor inscriptions", next: "examineFloor" },
                             { text: "Study the wall murals", next: "studyMurals" },
-                            { text: "Return to the boxes with this information", next: "start" }
+                            { text: "Return to the boxes", next: "start" }
                         ]
                     },
                     useKeyCenterBox: {
-                        text: `You insert the golden key into the center box and turn it. The box opens with a brilliant light, 
-                        revealing a mirror that shows your reflection holding a door key. As you reach in, you find yourself 
-                        holding that very key. The chamber door unlocks with a loud click.
-                        
-                        <div class="ending">TRUE ENDING: Enlightenment Achieved</div>`,
+                        text: `You insert the golden key into the center box and turn it. The box opens with a brilliant light, revealing a mirror that shows your reflection holding a door key. As you reach in, you find that key in your hand. The chamber door unlocks with a loud click.
+
+                        <div class="ending success">True Ending: Enlightenment</div>`,
                         options: [
                             { text: "Continue", next: "startL4" }
                         ]
                     },
-
+                    startL4: {
+                        onEnter: () => {
+                            loadLevel(4);
+                            return levels[4].scenes.start;
+                        }
+                    },
                     restartGame: {
                         onEnter: () => {
                             resetGame();
                             loadLevel(1);
                             return levels[1].scenes.start;
                         }
-                    },
-
-                    startL4: {
-                        onEnter: () => {
-                            loadLevel(4);
-                            return levels[4].scenes.start;
-                        }
                     }
                 }
             },
-
             4: {
                 name: "The Vault",
                 timer: 480,
                 scenes: {
                     start: {
-                        text: `You arrive in a metal-lined vault. Dozens of tumblers and pressure plates line the floor and ceiling.
-                        In the center rests an obsidian box covered in shifting runes. A projection on the wall cycles strange glyphs.`,
+                        text: `You enter a metal-lined vault. Tumblers and pressure plates cover the floor and ceiling. At the center rests an obsidian box covered in shifting runes. A projection on the wall cycles through strange glyphs.`,
                         options: [
                             { text: "Examine the obsidian box", next: "examineVault" },
                             { text: "Study the wall projection", next: "studyProjection" },
@@ -896,52 +1128,47 @@
                         ]
                     },
                     examineVault: {
-                        text: `The obsidian box's runes shift when you look directly at them. There are four small pedestals around it,
-                        each with a socket that seems to accept a small item. A warning plaque reads: "Balance is required."`,
+                        text: `The obsidian box's runes shift when you look directly at them. Four small pedestals surround it, each with a socket that seems to accept a small item. A plaque warns: "Balance is required."`,
                         options: [
                             { text: "Inspect the pedestals", next: "inspectPedestals" },
-                            { text: "Return to projection", next: "studyProjection" },
+                            { text: "Return to the projection", next: "studyProjection" },
                             { text: "Try to open the box directly", next: "forceVault" }
                         ]
                     },
                     studyProjection: {
-                        text: `The projection cycles patterns that correspond to pedestal states: filled, empty, inverted. 
-                        You realize it's a ternary puzzle: pedestals must be set to a pattern (0,1,2) matching the sequence on the wall.`,
+                        text: `The projection cycles through patterns that correspond to pedestal states: filled, empty, inverted. You realize it is a ternary puzzle — the pedestals must be set to a pattern matching the sequence on the wall.`,
                         options: [
-                            { text: "Attempt to set pedestals to 0-1-2-1", next: "solvePedestals" },
+                            { text: "Set pedestals to 0-1-2-1", next: "solvePedestals" },
                             { text: "Search the vault for objects", next: "searchVault" }
                         ]
                     },
                     inspectPedestals: {
-                        text: `Each pedestal accepts either a key-like token or a pressure tap. There's a small etched riddle: 
-                        "Not all openings are taken; invert the middle to reveal the truth."`,
+                        text: `Each pedestal accepts either a key-like token or a pressure tap. A small riddle is etched nearby: "Not all openings are taken; invert the middle to reveal the truth."`,
                         options: [
                             { text: "Invert the middle pedestal", next: "invertMiddle" },
                             { text: "Return to the box", next: "examineVault" }
                         ]
                     },
                     invertMiddle: {
-                        text: `You flip the middle pedestal. The runes flicker. You hear a distant clunk — something in the vault shifted.`,
+                        text: `You flip the middle pedestal. The runes flicker, and you hear a distant clunk — something in the vault has shifted.`,
                         options: [
-                            { text: "Try the pedestal pattern shown earlier", next: "solvePedestals" },
+                            { text: "Set the pedestals to 0-1-2-1", next: "solvePedestals" },
                             { text: "Search the floor for loose tiles", next: "searchVault" }
                         ]
                     },
                     searchVault: {
-                        text: `You find a set of four metallic chips hidden beneath tiles — each chip is numbered and worn.
-                        Their shapes hint how they might orient in the pedestal sockets.`,
+                        text: `You find a set of four metallic chips hidden beneath tiles. Each chip is numbered and worn, their shapes suggesting how they might orient in the pedestal sockets.`,
                         onEnter: () => {
-                            gameState.inventory.push('Set of Vault Chips');
+                            gameState.inventory.push('Vault Chips');
                             updateInventory();
                         },
                         options: [
-                            { text: "Place the chips according to the projection (0-1-2-1)", next: "solvePedestals" },
+                            { text: "Place the chips according to the projection", next: "solvePedestals" },
                             { text: "Keep the chips and examine the box", next: "examineVault" }
                         ]
                     },
                     solvePedestals: {
-                        text: `You set the pedestals to the sequence. The runes go still; a seam opens in the obsidian and reveals a small crystalline key.
-                        As you take it, the vault's timer accelerates — it seems the box allowed you access but at a cost.`,
+                        text: `You set the pedestals to the correct sequence. The runes go still, and a seam opens in the obsidian, revealing a small crystalline key. As you take it, the vault's timer accelerates — the box granted you access, but at a cost.`,
                         onEnter: () => {
                             gameState.inventory.push('Crystalline Key');
                             updateInventory();
@@ -952,41 +1179,38 @@
                         ]
                     },
                     useCrystallineKey: {
-                        text: `The crystalline key turns smoothly. Inside is an hourglass sealed with a lock and a note: 
-                        "Two minutes remain to choose: pass the test of light or the test of silence."`,
+                        text: `The crystalline key turns smoothly. Inside, you find an hourglass sealed with a lock and a note: "Two minutes remain to choose: pass the test of light or the test of silence."`,
                         options: [
                             { text: "Choose the Test of Light", next: "testLight" },
                             { text: "Choose the Test of Silence", next: "testSilence" }
                         ]
                     },
                     testLight: {
-                        text: `Light refracts inside the hourglass to reveal a micro-etching: a sequence of symbols. You must reproduce it on the box's face.
-                        Reproducing it correctly opens the north gate. The box sings as the gate slides open.`,
+                        text: `Light refracts through the hourglass, revealing a micro-etching: a sequence of symbols. You must reproduce it on the box's face. Reproducing it correctly opens the north gate. The box sings as the gate slides open.`,
                         options: [
-                            { text: "Replicate the sequence (careful)", next: "vaultSuccess" },
+                            { text: "Replicate the sequence", next: "vaultSuccess" },
                             { text: "Fail purposely", next: "vaultFail" }
                         ]
                     },
                     testSilence: {
-                        text: `A pressure-sensitive plate demands absolute stillness. You barely breathe and the plate accepts you. A section of the wall glides open revealing a corridor.`,
+                        text: `A pressure-sensitive plate demands absolute stillness. You hold your breath, and the plate accepts you. A section of the wall glides open, revealing a corridor.`,
                         options: [
                             { text: "Proceed through the corridor", next: "vaultSuccess" },
                             { text: "Step back", next: "examineVault" }
                         ]
                     },
                     vaultSuccess: {
-                        text: `A heavy iron gate opens and a stairwell descends into a deeper, colder chamber.
-                        <div class="ending">LEVEL COMPLETE: The Gate Opens</div>`,
+                        text: `A heavy iron gate opens, revealing a stairwell descending into a colder, deeper chamber.
+
+                        <div class="ending success">Level Complete: The Gate Opens</div>`,
                         options: [
-                            { text: "Descend to the Deeper Chamber", next: "startL5" }
+                            { text: "Descend deeper", next: "startL5" }
                         ]
                     },
                     vaultFail: {
-                        text: `An alarm erupts and sharp needles release from the ceiling. You stumble backward as the room fills with smoke.
-                        <div class="ending">BAD ENDING: Vault's Retribution</div>`,
-                        options: [
-                            { text: "Restart Vault", next: "start" }
-                        ]
+                        text: `An alarm sounds, and needles descend from the ceiling. You stumble backward as the room fills with smoke.`,
+                        options: [],
+                        ending: "Bad Ending: Vault's Retribution"
                     },
                     startL5: {
                         onEnter: () => {
@@ -996,60 +1220,58 @@
                     }
                 }
             },
-
             5: {
                 name: "The Ascension",
                 timer: 360,
                 scenes: {
                     start: {
-                        text: `You arrive in a vertical chamber with rotating rings and suspended platforms. At the apex sits a final box, small and featureless.
-                        An inscription reads: "To ascend, relinquish what anchors you."`,
+                        text: `You arrive in a vertical chamber with rotating rings and suspended platforms. At the apex sits a final box — small, dark, and featureless. An inscription reads: "To ascend, relinquish what anchors you."`,
                         options: [
                             { text: "Examine the rotating rings", next: "examineRings" },
-                            { text: "Survey the platforms below", next: "surveyPlatforms" },
+                            { text: "Survey the platforms", next: "surveyPlatforms" },
                             { text: "Approach the apex box", next: "apexBox" }
                         ]
                     },
                     examineRings: {
-                        text: `The rings rotate in relation to each other. Each ring accepts a token that changes its rotation speed and direction.
-                        The right configuration aligns a bridge of light to the apex.`,
+                        text: `The rings rotate in relation to one another. Each ring accepts a token that changes its speed and direction. The correct configuration will align a bridge of light to the apex.`,
                         options: [
                             { text: "Attempt to align the rings", next: "alignRings" },
-                            { text: "Look for tokens around the chamber", next: "searchAscension" }
+                            { text: "Search the chamber for tokens", next: "searchAscension" }
                         ]
                     },
                     searchAscension: {
-                        text: `You find three unique tokens: a Weight, a Mirror shard, and a Whisper-stone. The tokens interact differently with the rings.`,
+                        text: `You find three tokens: a Weight, a Mirror Shard, and a Whisper-stone. Each interacts with the rings differently.`,
                         onEnter: () => {
                             gameState.inventory.push('Weight Token', 'Mirror Shard', 'Whisper-stone');
                             updateInventory();
                         },
                         options: [
-                            { text: "Use Weight + Mirror to slow and reflect", next: "alignRings" },
+                            { text: "Use Weight and Mirror to slow and reflect", next: "alignRings" },
                             { text: "Use Whisper-stone to stabilize", next: "stabilize" }
                         ]
                     },
                     alignRings: {
-                        text: `After delicate adjustments the rings click into a harmonic rhythm. The platforms form a ladder of light but you must decide what to sacrifice: an item, a memory, or time.`,
+                        text: `After careful adjustment, the rings click into a harmonic rhythm. The platforms form a ladder of light. But you must choose what to sacrifice: an item, time, or nothing.`,
                         options: [
-                            { text: "Sacrifice an item from inventory", next: "sacrificeItem" },
-                            { text: "Sacrifice time (reduce timer by 60s)", next: "sacrificeTime" },
+                            { text: "Sacrifice an inventory item", next: "sacrificeItem" },
+                            { text: "Sacrifice time", next: "sacrificeTime" },
                             { text: "Sacrifice nothing", next: "refuseSacrifice" }
                         ]
                     },
                     sacrificeItem: {
-                        text: `You drop an item into a slot. The rings flare and a path of light blooms to the apex.`,
+                        text: `You place an item into the slot. The rings flare, and a path of light blooms to the apex.`,
                         onEnter: () => {
-
-                            if (gameState.inventory.length > 0) gameState.inventory.pop();
-                            updateInventory();
+                            if (gameState.inventory.length > 0) {
+                                gameState.inventory.pop();
+                                updateInventory();
+                            }
                         },
                         options: [
                             { text: "Climb the ladder of light", next: "climbToApex" }
                         ]
                     },
                     sacrificeTime: {
-                        text: `You turn an hourglass and let go of a minute of your life. The chamber hums; you feel slightly older but the ladder forms.`,
+                        text: `You turn an hourglass and release a minute of your remaining time. The chamber hums; you feel slightly older, but the ladder forms.`,
                         onEnter: () => {
                             gameState.timeLeft = Math.max(0, gameState.timeLeft - 60);
                             updateTimerDisplay();
@@ -1059,90 +1281,87 @@
                         ]
                     },
                     refuseSacrifice: {
-                        text: `The rings shudder and a gust blows you back. Without sacrifice the ladder cannot fully form.`,
+                        text: `The rings shudder, and a gust of wind pushes you back. Without sacrifice, the ladder cannot fully form.`,
                         options: [
                             { text: "Try sacrificing something else", next: "alignRings" },
                             { text: "Wait and observe the rings", next: "examineRings" }
                         ]
                     },
                     stabilize: {
-                        text: `The Whisper-stone calms the mechanism and temporarily grants a moment of clarity. A sequence of glyphs flashes: left-right-center-left.`,
+                        text: `The Whisper-stone calms the mechanism, granting a moment of clarity. A sequence of glyphs flashes: left-right-center-left.`,
                         options: [
                             { text: "Replicate the glyph sequence on the apex box", next: "apexUnlock" },
                             { text: "Ignore and climb manually", next: "climbToApex" }
                         ]
                     },
                     climbToApex: {
-                        text: `You climb the ladder of light and stand before the final box. Its surface feels warm and alive.`,
+                        text: `You climb the ladder of light and stand before the final box. Its surface is warm and seems to pulse with a quiet life.`,
                         options: [
                             { text: "Open the box", next: "openFinalBox" },
-                            { text: "Examine the box for traps", next: "trapCheck" }
+                            { text: "Check for traps", next: "trapCheck" }
                         ]
                     },
                     apexBox: {
-                        text: `The apex box is deceptively plain. Tiny markings become visible only when you align the rings correctly.`,
+                        text: `The apex box is deceptively plain, but tiny markings become visible when the rings are aligned correctly.`,
                         options: [
-                            { text: "Align rings first", next: "examineRings" },
+                            { text: "Align the rings first", next: "examineRings" },
                             { text: "Try to open the box directly", next: "openFinalBox" }
                         ]
                     },
                     apexUnlock: {
-                        text: `You trace the glyph sequence. The box hums and a lid pops open revealing an ornate key and a mirror shard that fits your previous piece.`,
+                        text: `You trace the glyph sequence. The box hums, and a lid pops open, revealing an ornate key and a mirror shard that fits your previous piece.`,
                         onEnter: () => {
                             gameState.inventory.push('Apex Key');
                             updateInventory();
                         },
                         options: [
                             { text: "Take the key and use it", next: "useApexKey" },
-                            { text: "Combine mirror shards first", next: "combineMirror" }
+                            { text: "Combine the mirror shards", next: "combineMirror" }
                         ]
                     },
                     combineMirror: {
-                        text: `You fit the mirror shard to the shard you found earlier; together they form a small looking-glass. The box reacts to the reflection.`,
-                        onEnter: () => {
-
-                        },
+                        text: `You fit the mirror shard to the one you found earlier. Together, they form a small looking-glass. The box responds to the reflection.`,
                         options: [
                             { text: "Open the box now", next: "openFinalBox" }
                         ]
                     },
                     useApexKey: {
-                        text: `The key opens an inner compartment. Light pours out and you feel weightless as a doorway appears above you.`,
+                        text: `The key opens an inner compartment. Light pours out, and you feel weightless as a doorway appears above you.`,
                         options: [
                             { text: "Step through the doorway", next: "trueAscension" },
                             { text: "Step back", next: "climbToApex" }
                         ]
                     },
                     openFinalBox: {
-                        text: `You open the final box. The chamber dissolves into a stairway of stars. A single message: 
-                        "You rose by letting go."`,
+                        text: `You open the final box. The chamber dissolves into a stairway of stars. A single message appears: "You rose by letting go."`,
                         options: [
                             { text: "Embrace the Ascension", next: "trueAscension" },
                             { text: "Refuse and stay", next: "finalRefuse" }
                         ]
                     },
                     finalRefuse: {
-                        text: `You refuse. The chamber locks you in a loop of the same trials.`,
+                        text: `You refuse. The chamber locks you in a loop of the same trials, repeating endlessly.`,
                         options: [
                             { text: "Try again", next: "start" }
                         ]
                     },
                     trueAscension: {
-                        text: `You step into the stairway and feel everything fall away. A brilliant peace surrounds you.
-                        <div class="ending">TRUE ENDING: Ascension Achieved</div>`,
+                        text: `You step onto the stairway. Everything falls away — the chamber, the boxes, the memories of the trials. A brilliant peace surrounds you.
+
+                        <div class="ending success">True Ending: Ascension</div>`,
                         options: [
-                            { text: "Play Again", next: "restartGame" }
+                            { text: "Play again", next: "restartGame" }
                         ]
                     },
                     trapCheck: {
-                        text: `You detect a faint pressure lattice under the box. Disarming it reveals a hidden compartment with a final inscription.`,
+                        text: `You detect a faint pressure lattice beneath the box. Disarming it reveals a hidden compartment with a final inscription.`,
                         options: [
                             { text: "Read the inscription", next: "readInscription" },
                             { text: "Open the box carefully", next: "openFinalBox" }
                         ]
                     },
                     readInscription: {
-                        text: `"Those who climb must sometimes leave parts of themselves beTrebuchet MS. The key is within."`,
+                        text: `"Those who climb must sometimes leave parts of themselves behind. The key is within."`,
                         options: [
                             { text: "Open the box", next: "openFinalBox" }
                         ]
@@ -1158,7 +1377,6 @@
             }
         };
 
-
         const textDisplay = document.getElementById('text-display');
         const optionsContainer = document.getElementById('options-container');
         const inventoryItems = document.getElementById('inventory-items');
@@ -1167,25 +1385,22 @@
         const levelIndicator = document.getElementById('level-indicator');
         const hintButton = document.getElementById('hint-button');
 
-
         function initGame() {
             loadLevel(1);
             startTimer();
             hintButton.addEventListener('click', showHint);
         }
 
-
         function loadLevel(levelNum) {
             gameState.currentLevel = levelNum;
             gameState.currentScene = 'start';
-            gameState.timeLeft = levels[levelNum].timer;
+            gameState.timeLeft = levels[levelNum].timer || 600;
             updateTimerDisplay();
             const totalLevels = Object.keys(levels).length;
-            levelDisplay.textContent = `Level: ${levelNum}/${totalLevels}`;
+            levelDisplay.textContent = `Level ${levelNum} of ${totalLevels}`;
             levelIndicator.textContent = `Level ${levelNum}: ${levels[levelNum].name}`;
             displayScene('start');
         }
-
 
         function startTimer() {
             clearInterval(gameState.timerInterval);
@@ -1213,18 +1428,11 @@
 
         function timeUp() {
             clearInterval(gameState.timerInterval);
-            const endingText = gameState.currentLevel === 1 ?
-                "TIME'S UP! The chamber begins to fill with gas as you lose consciousness..." :
-                gameState.currentLevel === 2 ?
-                    "TIME'S UP! The library walls begin to collapse inward..." :
-                    "TIME'S UP! The final chamber starts to dissolve around you...";
-
-            textDisplay.innerHTML += `<div class="ending">${endingText}</div>`;
+            textDisplay.innerHTML += `<div class="ending bad">Time has run out. The chamber consumes you.</div>`;
             optionsContainer.innerHTML = '';
-
             const restartBtn = document.createElement('button');
             restartBtn.className = 'option-btn';
-            restartBtn.textContent = 'Try Again';
+            restartBtn.textContent = 'Try again';
             restartBtn.addEventListener('click', () => {
                 resetGame();
                 loadLevel(gameState.currentLevel);
@@ -1232,32 +1440,27 @@
             optionsContainer.appendChild(restartBtn);
         }
 
-
         function showHint() {
             if (hints[gameState.currentScene]) {
                 gameState.usedHints++;
                 const hintElement = document.createElement('div');
                 hintElement.className = 'puzzle';
-                hintElement.innerHTML = `<strong>HINT #${gameState.usedHints}:</strong> ${hints[gameState.currentScene]}`;
+                hintElement.innerHTML = `<strong>Clue:</strong> ${hints[gameState.currentScene]}`;
                 textDisplay.appendChild(hintElement);
                 textDisplay.scrollTop = textDisplay.scrollHeight;
-
-
                 hintButton.classList.add('flash');
                 setTimeout(() => hintButton.classList.remove('flash'), 500);
-
-
                 hintButton.disabled = true;
+                setTimeout(() => { hintButton.disabled = false; }, 3000);
             }
         }
-
 
         function displayScene(sceneId) {
             const currentLevel = levels[gameState.currentLevel];
             const scene = currentLevel.scenes[sceneId];
 
             if (!scene) {
-                console.error(`Scene ${sceneId} not found in current level`);
+                console.error(`Scene ${sceneId} not found`);
                 return;
             }
 
@@ -1265,9 +1468,7 @@
             let sceneOptions = scene.options || [];
             let ending = scene.ending;
 
-
             hintButton.disabled = false;
-
 
             if (scene.onEnter) {
                 const result = scene.onEnter();
@@ -1278,44 +1479,45 @@
                 }
             }
 
-
             textDisplay.innerHTML = sceneText;
             textDisplay.scrollTop = 0;
-
-
             optionsContainer.innerHTML = '';
-
 
             if (ending) {
                 const endingElement = document.createElement('div');
-                endingElement.className = 'ending';
+                const isBad = ending.toLowerCase().includes('bad');
+                const isSuccess = ending.toLowerCase().includes('true') || ending.toLowerCase().includes('complete');
+                endingElement.className = `ending${isBad ? ' bad' : ''}${isSuccess ? ' success' : ''}`;
                 endingElement.textContent = ending;
                 textDisplay.appendChild(endingElement);
 
-                if (ending.includes("ENDING")) {
-                    const totalLevels = Object.keys(levels).length;
-                    if (gameState.currentLevel < totalLevels && (ending.includes("TRUE") || ending.includes("SECRET") || ending.includes("COMPLETE"))) {
-                        const nextLevelBtn = document.createElement('button');
-                        nextLevelBtn.className = 'option-btn';
-                        nextLevelBtn.textContent = 'Continue to Next Level';
-                        nextLevelBtn.addEventListener('click', () => {
-                            loadLevel(gameState.currentLevel + 1);
-                        });
-                        optionsContainer.appendChild(nextLevelBtn);
-                    }
-
-                    const restartBtn = document.createElement('button');
-                    restartBtn.className = 'option-btn';
-                    restartBtn.textContent = 'Play Again';
-                    restartBtn.addEventListener('click', () => {
-                        resetGame();
-                        loadLevel(1);
+                // Add Continue or Restart options
+                if (ending.includes("Level Complete") || ending.includes("True Ending") || ending.includes("Secret Ending")) {
+                    const nextBtn = document.createElement('button');
+                    nextBtn.className = 'option-btn';
+                    nextBtn.textContent = 'Continue';
+                    nextBtn.addEventListener('click', () => {
+                        const nextLevel = gameState.currentLevel + 1;
+                        if (levels[nextLevel]) {
+                            loadLevel(nextLevel);
+                        } else {
+                            resetGame();
+                            loadLevel(1);
+                        }
                     });
-                    optionsContainer.appendChild(restartBtn);
+                    optionsContainer.appendChild(nextBtn);
                 }
+
+                const restartBtn = document.createElement('button');
+                restartBtn.className = 'option-btn';
+                restartBtn.textContent = 'Start over';
+                restartBtn.addEventListener('click', () => {
+                    resetGame();
+                    loadLevel(1);
+                });
+                optionsContainer.appendChild(restartBtn);
                 return;
             }
-
 
             sceneOptions.forEach(option => {
                 const btn = document.createElement('button');
@@ -1329,11 +1531,10 @@
             });
         }
 
-
         function updateInventory() {
             inventoryItems.innerHTML = '';
             if (gameState.inventory.length === 0) {
-                inventoryItems.textContent = 'Nothing';
+                inventoryItems.textContent = 'Empty';
                 document.getElementById('inventory-display').classList.add('hidden');
             } else {
                 gameState.inventory.forEach(item => {
@@ -1345,7 +1546,6 @@
                 document.getElementById('inventory-display').classList.remove('hidden');
             }
         }
-
 
         function resetGame() {
             clearInterval(gameState.timerInterval);
@@ -1369,16 +1569,15 @@
             gameState.hasFinalClue = false;
             document.getElementById('inventory-display').classList.add('hidden');
             timerDisplay.classList.remove('danger', 'warning');
+            updateTimerDisplay();
         }
 
-        function startTheBox() {
+        function startGame() {
             document.getElementById('homeScreen').style.display = 'none';
+            initGame();
         }
 
-        initGame();
     </script>
 </body>
 
 </html>
-
-

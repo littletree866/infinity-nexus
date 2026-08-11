@@ -1,5 +1,5 @@
 # Infinity Nexus
-**Version 1.26.28** | Next Release: v1.27.28 (TBD)
+**Version 1.27.28** | Next Release: v1.28.28 (mid-September)
 
 A comprehensive collection of HTML5-based games featuring diverse genres, engaging gameplay mechanics, and persistent progress tracking.
 
@@ -27,7 +27,6 @@ The platform includes games across multiple categories:
 - **Casino Games** – Traditional gambling
 - **Game Corner** – Classic gameplay patterns and mechanics
 - **Simulation Games** – City building, empire management, and lifestyle simulations
-- **Monthly Challenges (discontinued)** – Limited games. No longer updated and may be removed in a future update
 
 ## Release Information
 

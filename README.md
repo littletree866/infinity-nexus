@@ -28,12 +28,6 @@ The platform includes games across multiple categories:
 - **Game Corner** – Classic gameplay patterns and mechanics
 - **Simulation Games** – City building, empire management, and lifestyle simulations
 
-## Release Information
-
-**Current Version:** 1.26.28  
-**Next Update:** v1.27.28 (TBD)  
-**Update Cycle:** Releases every 1–3 weeks (subject to variation)
-
 ## Bug Reporting & Support
 
 Issues and bugs can be reported via the feedback form located at the bottom of the main page. I encourage you to provide detailed information regarding any encountered problems to facilitate resolution.

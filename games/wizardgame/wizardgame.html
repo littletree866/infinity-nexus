@@ -390,13 +390,13 @@
     </div>
 </div>
 <script>
-    // ----------------------------------------------
-    //  COMPLETE REMAKE — advanced combat, new graphics, maps, mechanics
-    // ----------------------------------------------
+    
+    
+    
     (function() {
         "use strict";
 
-        // ---------- STATE ----------
+        
         const state = {
             player: {
                 name: 'Mage',
@@ -408,7 +408,7 @@
                 xp: 0,
                 xpNeeded: 100,
                 gold: 0,
-                potions: 2,  // health potions
+                potions: 2,  
                 spells: {
                     fireball: { level: 1, cost: 12, damage: 22 },
                     frostbolt: { level: 1, cost: 8, damage: 16, slow: true },
@@ -422,8 +422,8 @@
             map: {
                 size: 10,
                 px: 5, py: 5,
-                enemies: [],   // [{x,y}]
-                treasures: []  // [{x,y}]
+                enemies: [],   
+                treasures: []  
             },
             inBattle: false,
             turnLock: false,
@@ -437,7 +437,7 @@
             inventory: { scrolls: [] }
         };
 
-        // enemy templates (scaling with player level)
+        
         function generateEnemy(level) {
             const templates = [
                 { name: 'Goblin Scavenger', emoji: '👺', baseHp: 45, baseAtk: 7, xp: 18, gold: 8 },
@@ -464,7 +464,7 @@
             };
         }
 
-        // DOM refs
+        
         const $ = id => document.getElementById(id);
         const pLevel = $('player-level-display');
         const pGold = $('gold-display');
@@ -493,7 +493,7 @@
         const potionBtn = $('potion-btn');
         const returnMapBtn = $('return-map-btn');
 
-        // ---------- UI UPDATE ----------
+        
         function updateUI() {
             const p = state.player;
             pLevel.textContent = p.level;
@@ -509,7 +509,7 @@
             pXpBar.style.width = (p.xp / p.xpNeeded * 100) + '%';
             potionCount.textContent = p.potions;
 
-            // enemy
+            
             if (state.enemy) {
                 const e = state.enemy;
                 eName.textContent = e.name;
@@ -532,7 +532,7 @@
             }
             playerEmoji.textContent = p.hp <= 0 ? '💀' : '🧙‍♂️';
 
-            // spell buttons mana costs
+            
             for (const [key, btn] of Object.entries(spellBtns)) {
                 if (!btn) continue;
                 const sp = p.spells[key];
@@ -545,14 +545,14 @@
                 btn.innerHTML = `${emojiMap[key]} ${label} <span style="font-size:0.8rem;opacity:0.8;">(${cost} MP)</span>`;
                 btn.disabled = (p.mana < cost || state.inBattle === false || state.enemy === null || state.enemy.hp <= 0 || p.hp <= 0);
             }
-            // potion btn
+            
             potionBtn.disabled = (p.potions <= 0 || p.hp >= p.maxHp || state.inBattle === false);
-            // next enemy
+            
             nextEnemyBtn.disabled = (state.inBattle === true && state.enemy && state.enemy.hp > 0);
             restBtn.disabled = (state.inBattle === false || p.hp <= 0);
-            // map coords
+            
             mapCoords.textContent = `${state.map.px},${state.map.py}`;
-            // inventory
+            
             updateInventoryUI();
             updateShopUI();
         }
@@ -568,12 +568,12 @@
             logBox.scrollTop = logBox.scrollHeight;
         }
 
-        // ---------- MAP ----------
+        
         function generateMap() {
             const size = state.map.size;
             state.map.enemies = [];
             state.map.treasures = [];
-            // place enemies (3-6)
+            
             const enemyCount = 4 + Math.floor(Math.random() * 4);
             for (let i = 0; i < enemyCount; i++) {
                 let x, y, ok;
@@ -588,7 +588,7 @@
                 } while (!ok && attempts < 40);
                 if (ok) state.map.enemies.push({x, y});
             }
-            // treasures (1-3)
+            
             const treasureCount = 2 + Math.floor(Math.random() * 3);
             for (let i = 0; i < treasureCount; i++) {
                 let x, y, ok;
@@ -633,9 +633,9 @@
             if (state.inBattle) { addLog('⚔️ You are in battle! Finish it first.', 'enemy'); return; }
             const dx = Math.abs(x - state.map.px), dy = Math.abs(y - state.map.py);
             if ((dx === 1 && dy === 0) || (dx === 0 && dy === 1)) {
-                // valid move
+                
                 state.map.px = x; state.map.py = y;
-                // check enemy
+                
                 const enemyIdx = state.map.enemies.findIndex(e => e.x === x && e.y === y);
                 if (enemyIdx !== -1) {
                     state.map.enemies.splice(enemyIdx, 1);
@@ -644,7 +644,7 @@
                     updateUI();
                     return;
                 }
-                // check treasure
+                
                 const tresIdx = state.map.treasures.findIndex(t => t.x === x && t.y === y);
                 if (tresIdx !== -1) {
                     state.map.treasures.splice(tresIdx, 1);
@@ -659,7 +659,7 @@
             }
         }
 
-        // ---------- BATTLE ----------
+        
         function startBattle() {
             if (state.inBattle) return;
             state.inBattle = true;
@@ -693,7 +693,7 @@
             let healAmt = sp.heal || 0;
             let msg = '';
 
-            // effects
+            
             if (spellKey === 'heal') {
                 const actual = Math.min(healAmt, state.player.maxHp - state.player.hp);
                 state.player.hp += actual;
@@ -705,19 +705,19 @@
                 return;
             }
 
-            // damage spells
+            
             if (damage > 0) {
-                // bonuses from level
+                
                 const lvBonus = 1 + (sp.level - 1) * 0.18;
                 let finalDamage = Math.floor(damage * lvBonus);
-                // enemy resist / weakness? just for flavor
+                
                 if (state.enemy.frozen) finalDamage = Math.floor(finalDamage * 1.2);
                 state.enemy.hp = Math.max(0, state.enemy.hp - finalDamage);
                 msg = `💥 ${spellKey} deals ${finalDamage} damage!`;
                 if (sp.slow) { state.enemy.slow = true; msg += ' 🐌 Slowed!'; }
                 if (sp.frozen) { state.enemy.frozen = true; msg += ' ❄️ Frozen!'; }
                 addLog(msg, 'special');
-                // visual feedback
+                
                 enemyEmoji.style.transform = 'scale(1.2)';
                 setTimeout(() => enemyEmoji.style.transform = '', 200);
             }
@@ -762,7 +762,7 @@
             state.player.gold += goldGain;
             state.enemiesDefeated++;
             addLog(`🏆 ${e.name} defeated! +${xpGain} XP, +${goldGain} gold.`, 'special');
-            // level up?
+            
             while (state.player.xp >= state.player.xpNeeded) {
                 state.player.xp -= state.player.xpNeeded;
                 state.player.level++;
@@ -771,16 +771,16 @@
                 state.player.hp = state.player.maxHp;
                 state.player.maxMana += 14;
                 state.player.mana = state.player.maxMana;
-                // upgrade random spell
+                
                 upgradeRandomSpell();
                 addLog(`🎉 Level up! Now level ${state.player.level}.`, 'special');
-                // unlock meteor & blizzard at lvl 5
+                
                 if (state.player.level >= 5) {
                     state.player.spells.meteor.unlocked = true;
                     state.player.spells.blizzard.unlocked = true;
                 }
             }
-            // extra potion drop
+            
             if (Math.random() < 0.35) {
                 state.player.potions++;
                 addLog('🧪 You found a health potion!', 'special');
@@ -790,7 +790,7 @@
             state.inBattle = false;
             renderMap();
             updateUI();
-            // if map has no enemies, generate new ones
+            
             if (state.map.enemies.length === 0) {
                 addLog('🗺️ The land is clear! New enemies appear...', 'special');
                 generateMap();
@@ -812,7 +812,7 @@
             addLog(`✨ ${key} upgraded to level ${sp.level}!`, 'special');
         }
 
-        // ---------- ACTIONS ----------
+        
         function rest() {
             if (!state.inBattle) { addLog('🧘 You meditate in peace.', 'special'); }
             const hpRec = Math.min(40, state.player.maxHp - state.player.hp);
@@ -838,7 +838,7 @@
             }
         }
 
-        // ---------- INVENTORY & SHOP ----------
+        
         function updateInventoryUI() {
             invList.innerHTML = `<div class="item-row">🧪 Health Potions: <span>${state.player.potions}</span></div>
                                  <div class="item-row">📜 Scrolls: ${state.inventory.scrolls.length}</div>`;
@@ -874,7 +874,7 @@
             updateUI();
         }
 
-        // ---------- SAVE / LOAD ----------
+        
         function saveGame() {
             const data = {
                 player: state.player,
@@ -907,14 +907,14 @@
             } catch(e) { addLog('❌ Load failed.', 'enemy'); }
         }
 
-        // ---------- INIT ----------
+        
         function init() {
-            // reset map
+            
             state.map.px = 5; state.map.py = 5;
             generateMap();
             state.inBattle = false;
             state.enemy = null;
-            // event listeners
+            
             for (const [key, btn] of Object.entries(spellBtns)) {
                 if (btn) btn.addEventListener('click', () => playerCast(key));
             }
@@ -933,13 +933,13 @@
             $('save-btn').addEventListener('click', saveGame);
             $('load-btn').addEventListener('click', loadGame);
 
-            // start with a battle
+            
             startBattle();
             updateUI();
             addLog('⚡ Arcane Duel reworked: explore, fight, and master spells!', 'special');
         }
 
-        // expose for debugging
+        
         window.__state = state;
         init();
     })();

@@ -1066,7 +1066,7 @@
                 gridEl.innerHTML = '';
                 state.grid = [];
 
-                // Create empty grid
+                
                 for (let y = 0; y < GRID_SIZE; y++) {
                     const row = [];
                     for (let x = 0; x < GRID_SIZE; x++) {
@@ -1093,7 +1093,7 @@
                     state.grid.push(row);
                 }
 
-                // Place initial roads in a cross pattern
+                
                 const center = Math.floor(GRID_SIZE / 2);
                 for (let i = 0; i < GRID_SIZE; i++) {
                     state.grid[center][i].type = 'road';
@@ -1102,11 +1102,11 @@
                     state.grid[i][center].connected = true;
                 }
 
-                // Place one residential zone
+                
                 state.grid[center - 1][center - 1].type = 'residential';
                 state.grid[center - 1][center - 1].level = 1;
 
-                // Place one commercial zone
+                
                 state.grid[center + 1][center + 1].type = 'commercial';
                 state.grid[center + 1][center + 1].level = 1;
 

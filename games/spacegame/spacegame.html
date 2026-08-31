@@ -236,12 +236,12 @@
       const gameOverScreen = document.getElementById('gameOver');
       const pauseScreen = document.getElementById('pauseScreen');
 
-      // ---- GAME STATE ----
+      
       const state = {
         score: 0,
         lives: 5,
         maxLives: 5,
-        wave: 0,          // 0 = before first wave; increments when wave starts
+        wave: 0,          
         combo: 0,
         maxCombo: 0,
         running: false,
@@ -267,7 +267,7 @@
         lastTime: 0,
         messageTimer: 0,
         messageText: '',
-        // Swarm Waves
+        
         isSwarm: false,
         swarmActive: false,    
         bossActive: false,
@@ -276,7 +276,7 @@
         waveCount: 0,          
       };
 
-      // ---- PLAYER ----
+      
       const player = {
         x: W/2, y: H-70,
         w: 24, h: 28,
@@ -319,7 +319,7 @@
         }
       };
 
-      // ---- INPUT ----
+      
       const keys = { ArrowLeft:false, ArrowRight:false, ArrowUp:false, ArrowDown:false, ' ':false };
       window.addEventListener('keydown', e => {
         if (e.key === 'Escape') { e.preventDefault(); togglePause(); return; }
@@ -331,7 +331,7 @@
         if (keys.hasOwnProperty(e.key)) keys[e.key] = false;
       });
 
-      // ---- UTILITY ----
+      
       function rand(min,max) { return Math.random()*(max-min)+min; }
       function randInt(min,max) { return Math.floor(rand(min,max+1)); }
       function rectCollide(a,b) {
@@ -339,7 +339,7 @@
                a.y - a.h/2 < b.y + b.h/2 && a.y + a.h/2 > b.y - b.h/2;
       }
 
-      // ---- STARS ----
+      
       function initStars() {
         state.stars = [];
         for (let i=0; i<280; i++) {
@@ -368,7 +368,7 @@
         ctx.globalAlpha = 1;
       }
 
-      // ---- PLANETS (spawn less frequently, no overlap) ----
+      
       function planetsOverlap(newPlanet) {
         for (let p of state.planets) {
           const dx = p.x - newPlanet.x;
@@ -408,7 +408,7 @@
         for (let p of state.planets) {
           p.y += p.speed * dt/16;
           if (p.y > H + p.size) {
-            // respawn at top with new position, avoid overlap
+            
             let attempts = 0;
             let placed = false;
             let newX = rand(50,W-50);
@@ -450,10 +450,10 @@
         ctx.shadowBlur = 0;
       }
 
-      // ---- ENEMIES ----
+      
       function spawnEnemy() {
         if (!state.running || state.gameOver || state.paused) return;
-        // Don't spawn if boss is active (boss spawns its own minions)
+        
         if (state.bossActive) return;
 
         const types = [
@@ -463,7 +463,7 @@
         ];
         let t = types[randInt(0,2)];
 
-        // Swarm modifiers
+        
         if (state.isSwarm) {
           t.hp = Math.ceil(t.hp * 1.25);
           t.pts = Math.ceil(t.pts * 1.3);
@@ -489,7 +489,7 @@
         state.enemiesSpawned++;
       }
 
-      // ---- BOSS ----
+      
       function spawnBoss() {
         state.bossActive = true;
         state.boss = {
@@ -497,7 +497,7 @@
           y: 80,
           w: 70,
           h: 60,
-          hp: 9,  // equivalent to 3 big ships (3*3)
+          hp: 9,  
           maxHp: 9,
           speed: 1.8,
           pts: 500,
@@ -517,7 +517,7 @@
         if (!state.bossActive || !state.boss) return;
         const b = state.boss;
 
-        // Move like player: left-right with some up-down
+        
         b.moveTimer += dt;
         if (b.moveTimer > 2000) {
           b.moveDir *= -1;
@@ -526,14 +526,14 @@
         b.x += b.speed * b.moveDir * dt/16;
         b.x = Math.max(b.w/2 + 20, Math.min(W - b.w/2 - 20, b.x));
 
-        // Slight up-down oscillation
+        
         b.y += Math.sin(b.moveTimer * 0.002) * 0.3;
 
-        // Shoot at player
+        
         b.shootTimer += dt;
         if (b.shootTimer > b.shootDelay) {
           b.shootTimer = 0;
-          // Spread shot
+          
           for (let angle = -0.3; angle <= 0.3; angle += 0.15) {
             const dx = player.x - b.x;
             const dy = player.y - b.y;
@@ -550,11 +550,11 @@
           }
         }
 
-        // Spawn minion ships
+        
         b.minionTimer += dt;
         if (b.minionTimer > b.minionDelay) {
           b.minionTimer = 0;
-          // Spawn a small ship
+          
           const side = Math.random() > 0.5 ? 1 : -1;
           state.enemies.push({
             x: b.x + side * 60,
@@ -575,7 +575,7 @@
           });
         }
 
-        // Check collision with player
+        
         if (rectCollide(player, b)) {
           if (!state.shieldActive) {
             state.lives -= 2;
@@ -589,7 +589,7 @@
           updateHUD();
         }
 
-        // Check if boss hp <= 0
+        
         if (b.hp <= 0) {
           bossDefeated();
         }
@@ -599,7 +599,7 @@
         if (!state.boss) return;
         state.score += state.boss.pts;
         createExplosion(state.boss.x, state.boss.y, 80);
-        // Bonus drops
+        
         for (let i=0; i<3; i++) {
           setTimeout(() => {
             if (Math.random() < 0.5) spawnPowerup(state.boss.x + rand(-40,40), state.boss.y + rand(-20,20));
@@ -611,7 +611,7 @@
         state.isSwarm = false;
         state.swarmActive = false;
         showMessage('💥 BOSS DEFEATED!');
-        // Start next wave after a delay
+        
         setTimeout(() => {
           if (state.running) {
             startWave();
@@ -624,7 +624,7 @@
         const b = state.boss;
         ctx.shadowColor = '#f44'; ctx.shadowBlur = 50;
         ctx.fillStyle = b.color;
-        // Draw a menacing shape
+        
         ctx.beginPath();
         ctx.moveTo(b.x, b.y - b.h/2);
         ctx.lineTo(b.x - b.w/2, b.y - b.h/4);
@@ -636,7 +636,7 @@
         ctx.lineTo(b.x + b.w/2, b.y - b.h/4);
         ctx.closePath();
         ctx.fill();
-        // Eyes
+        
         ctx.shadowBlur = 5;
         ctx.fillStyle = '#fff';
         ctx.beginPath();
@@ -648,7 +648,7 @@
         ctx.arc(b.x-14, b.y-8, 4, 0, Math.PI*2);
         ctx.arc(b.x+10, b.y-8, 4, 0, Math.PI*2);
         ctx.fill();
-        // HP bar
+        
         ctx.shadowBlur = 0;
         ctx.fillStyle = '#333';
         ctx.fillRect(b.x-40, b.y-b.h/2-16, 80, 8);
@@ -657,7 +657,7 @@
         ctx.shadowBlur = 0;
       }
 
-      // ---- UPDATE ENEMIES ----
+      
       function updateEnemies(dt) {
         for (let i=state.enemies.length-1; i>=0; i--) {
           const e = state.enemies[i];
@@ -680,7 +680,7 @@
           if (e.y > H + 30) { state.enemies.splice(i,1); continue; }
           if (rectCollide(player, e)) {
             if (!state.shieldActive) {
-              // Swarm: lose 2 hearts
+              
               state.lives -= state.isSwarm ? 2 : 1;
               if (state.lives <= 0) { gameOver(); return; }
             }
@@ -727,7 +727,7 @@
         ctx.shadowBlur = 0;
       }
 
-      // ---- BULLETS ----
+      
       function updateBullets(dt) {
         for (let i=state.bullets.length-1; i>=0; i--) {
           const b = state.bullets[i];
@@ -738,9 +738,9 @@
             continue;
           }
           if (!b.enemy) {
-            // Player bullets: check enemies and boss
+            
             let hit = false;
-            // Check boss
+            
             if (state.bossActive && state.boss && rectCollide(b, state.boss)) {
               state.boss.hp--;
               state.bullets.splice(i,1);
@@ -761,7 +761,7 @@
                     if (state.combo > state.maxCombo) state.maxCombo = state.combo;
                     createExplosion(e.x, e.y, 30);
                     state.enemies.splice(j,1);
-                    // Drop rate: triple in swarm
+                    
                     const dropChance = state.isSwarm ? 0.6 : 0.28;
                     if (Math.random() < dropChance) {
                       if (Math.random() < 0.35 && state.lives < state.maxLives) spawnHealthPickup(e.x,e.y);
@@ -775,7 +775,7 @@
               }
             }
           } else {
-            // Enemy bullets hit player
+            
             if (rectCollide(player, b)) {
               if (!state.shieldActive) {
                 state.lives -= state.isSwarm ? 2 : 1;
@@ -799,7 +799,7 @@
         ctx.shadowBlur = 0;
       }
 
-      // ---- POWERUPS ----
+      
       function spawnPowerup(x,y) {
         const types = ['shield','rapid','freeze','bomb'];
         const type = types[randInt(0,3)];
@@ -859,7 +859,7 @@
         showMessage(`${p.icon} ${p.type.toUpperCase()}!`);
       }
 
-      // ---- HEALTH PICKUPS ----
+      
       function spawnHealthPickup(x,y) {
         state.healthPickups.push({
           x, y, w:26, h:26,
@@ -894,7 +894,7 @@
         ctx.shadowBlur = 0;
       }
 
-      // ---- EXPLOSIONS ----
+      
       function createExplosion(x,y,size) {
         state.explosions.push({
           x, y, maxR: size,
@@ -928,7 +928,7 @@
         ctx.globalAlpha = 1; ctx.shadowBlur = 0;
       }
 
-      // ---- BONUS SHIPS ----
+      
       function spawnBonus() {
         if (!state.running || state.gameOver) return;
         state.bonusShips.push({
@@ -975,17 +975,17 @@
         ctx.shadowBlur = 0;
       }
 
-      // ---- WAVE MANAGEMENT ----
+      
       function startWave() {
         if (!state.running || state.gameOver) return;
         state.wave++;
         state.waveCount++;
         state.enemiesSpawned = 0;
 
-        // Check for special waves
-        // Every 3 waves: clear all enemies on screen (before wave 4, 7, 10, etc.)
+        
+        
         if (state.waveCount > 0 && state.waveCount % 3 === 0) {
-          // Clear all enemies and boss
+          
           for (let e of state.enemies) {
             createExplosion(e.x, e.y, 30);
           }
@@ -996,10 +996,10 @@
             state.boss = null;
           }
           showMessage('💥 ENEMIES CLEARED!');
-          // Brief delay then continue
+          
           setTimeout(() => {
             if (state.running) {
-              // After clear, check if next wave is swarm (every 4th wave)
+              
               if (state.waveCount % 4 === 0) {
                 startSwarmWave();
               } else {
@@ -1010,7 +1010,7 @@
           return;
         }
 
-        // Every 4th wave: Swarm (after the clear wave, so wave 4, 8, 12, etc.)
+        
         if (state.waveCount % 4 === 0) {
           startSwarmWave();
         } else {
@@ -1041,7 +1041,7 @@
         updateHUD();
         showMessage(`SWARM!`);
 
-        // Spawn boss at the end of the swarm wave
+        
         const bossDelay = (count * delay) + 2000;
         setTimeout(() => {
           if (state.running && !state.gameOver) {
@@ -1051,17 +1051,17 @@
       }
 
       function checkWaveComplete() {
-        // Don't check if boss is active or wave clear pending
+        
         if (state.bossActive || state.waveClearPending) return;
 
         if (state.enemies.length === 0 && state.enemiesSpawned > 0) {
           const totalExpected = state.enemiesPerWave + Math.floor((state.wave-2)*1.5);
-          // For swarm, we expect more
+          
           const expected = state.isSwarm ? Math.floor(totalExpected * 1.3) : totalExpected;
           if (state.enemiesSpawned >= expected) {
-            // Wave complete!
+            
             state.waveClearPending = true;
-            // Check if we need to start next wave
+            
             setTimeout(() => {
               state.waveClearPending = false;
               if (state.running && !state.gameOver && !state.bossActive) {
@@ -1072,7 +1072,7 @@
         }
       }
 
-      // ---- HUD ----
+      
       function updateHUD() {
         scoreSpan.textContent = state.score;
         levelSpan.textContent = state.wave || 1;
@@ -1088,9 +1088,9 @@
           comboCounter.style.display = 'none';
           comboDisplay.classList.remove('show');
         }
-        // Swarm indicator
+        
         if (state.isSwarm) {
-          // could add visual cue
+          
         }
       }
 
@@ -1118,7 +1118,7 @@
         }
       }
 
-      // ---- MAIN LOOP ----
+      
       function gameLoop(timestamp) {
         if (!state.running || state.paused || state.gameOver) {
           if (!state.gameOver && !state.paused) requestAnimationFrame(gameLoop);
@@ -1194,7 +1194,7 @@
         }
         updateHUD();
 
-        // ---- DRAW ----
+        
         ctx.clearRect(0,0,W,H);
         drawStars();
         drawPlanets();
@@ -1224,7 +1224,7 @@
         requestAnimationFrame(gameLoop);
       }
 
-      // ---- RESET ----
+      
       function resetGame() {
         state.score = 0;
         state.lives = state.maxLives;
@@ -1270,7 +1270,7 @@
 
         setTimeout(spawnBonus, 2000);
 
-        // Start first wave
+        
         setTimeout(() => {
           if (state.running) {
             startWave();
@@ -1281,7 +1281,7 @@
         requestAnimationFrame(gameLoop);
       }
 
-      // ---- INIT ----
+      
       document.getElementById('startButton').addEventListener('click', resetGame);
       document.getElementById('restartButton').addEventListener('click', resetGame);
       document.getElementById('resumeButton').addEventListener('click', togglePause);

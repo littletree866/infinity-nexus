@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" rel="stylesheet">
     <style>
-        /* Modern Color Themes - CSS Variables */
+        
           :root[data-theme="dark"] {
             --primary: #3a8eed;
             --secondary: #ec4899;
@@ -46,7 +46,7 @@
             --shadow-hover: 0 12px 32px rgba(63, 51, 83, 0.15);
         }
 
-        /* Reset & Base */
+        
         * {
             margin: 0;
             padding: 0;
@@ -77,14 +77,14 @@
             padding: 28px;
         }
 
-        /* Container */
+        
         .container {
             max-width: 1200px;
             width: 100%;
             margin: 0 auto;
         }
 
-        /* Main Layout Wrapper */
+        
         .main-wrapper {
             display: flex;
             gap: 24px;
@@ -94,7 +94,7 @@
             padding: 5px 0px;
         }
 
-        /* Navbar/Header Top */
+        
         .navbar {
             background: var(--header-bg);
             padding: 16px 28px;
@@ -135,7 +135,7 @@
             transform: scale(1.05);
         }
 
-        /* Sidebar Styles */
+        
         .sidebar {
             flex-shrink: 0;
             width: 300px;
@@ -189,13 +189,13 @@
             color: var(--text-primary);
         }
 
-        /* Main Content Area */
+        
         .content-wrapper {
             flex: 1;
             min-width: 0;
         }
 
-        /* Typography */
+        
         h1,
         h2,
         h3,
@@ -215,19 +215,19 @@
             color: white;
 
             margin: 0;
-            /* remove weird tiny top margin */
+            
             z-index: 1;
 
             display: flex;
             justify-content: center;
-            /* horizontal centering, already handled by text-align too */
+            
             align-items: center;
-            /* vertical centering */
+            
             height: 100%;
-            /* make it fill the header's height */
+            
         }
 
-        /* Header */
+        
         header {
             padding: 50px 20px;
             margin: 32px auto;
@@ -242,7 +242,7 @@
             letter-spacing: -0.01em;
 
             display: flex;
-            /* allows vertical centering */
+            
             justify-content: center;
             align-items: center;
         }
@@ -306,27 +306,27 @@
 
         .description {
             margin-top: 20px;
-            /* space below main title */
+            
             max-width: 700px;
-            /* limit width, so it doesn’t stretch too far */
+            
             text-align: center;
-            /* center text */
+            
             color: white;
-            /* default text color */
+            
             font-family: 'Segoe UI', sans-serif;
             font-weight: 400;
             line-height: 1.6;
             background: none;
-            /* remove purple block */
+            
             border-radius: 12px;
-            /* optional: make it feel like a floating block */
+            
             padding: 0;
-            /* remove extra padding */
+            
         }
 
         .description p {
             margin: 4px 0;
-            /* spacing between paragraphs */
+            
             color:white;
         }
 
@@ -359,7 +359,7 @@
             border-color: var(--primary);
         }
 
-        /* Section Header */
+        
         .section-header {
             font-size: 1.75rem;
             font-weight: 600;
@@ -370,7 +370,7 @@
             gap: 12px;
         }
 
-        /* Grid Layout */
+        
         .archive-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -378,7 +378,7 @@
             margin-bottom: 48px;
         }
 
-        /* Cards */
+        
         .archive-card {
             background: var(--card-bg);
             border-radius: var(--border-radius);
@@ -520,7 +520,7 @@
             padding: 0 16px 16px 16px;
         }
 
-        /* Badges - Professional & Refined */
+        
         .badge-base {
             display: inline-flex;
             align-items: center;
@@ -605,7 +605,7 @@
             box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
         }
 
-        /* Featured/Classic Badge */
+        
         .featured-badge,
         .classic-badge {
             background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
@@ -627,7 +627,7 @@
             content: "❤️ ";
         }
 
-        /* Badge Animations */
+        
         @keyframes badgePulse {
             0% {
                 box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -664,7 +664,7 @@
             animation: badgeFloat 2.5s ease-in-out infinite;
         }
 
-        /* Enhanced Card Description */
+        
         .card-description {
             font-size: 0.9rem;
             color: var(--text-secondary);
@@ -673,7 +673,7 @@
             min-height: 2.7em;
         }
 
-        /* Status Badge Container */
+        
         .badge-container {
             display: flex;
             gap: 8px;
@@ -696,45 +696,94 @@
             gap: 4px;
         }
 
-        /* Card Header with Better Gradient */
+        
         .card-header.premium {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, rgba(58, 142, 237, 0.18), rgba(59, 130, 246, 0.1));
         }
 
         .card-header.classic {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.16), rgba(168, 85, 247, 0.10));
         }
 
         .card-header.modern {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.15), rgba(45, 212, 191, 0.10));
         }
 
-        /* Footer */
+        
         footer {
-            background: var(--header-bg);
+            background: var(--bg-secondary);
             color: var(--text-primary);
-            padding: 48px 0;
-            text-align: center;
+            padding: 36px 0 24px;
             margin-top: 80px;
             border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr;
+            gap: 24px;
+            align-items: start;
+            text-align: left;
+        }
+
+        .footer-section {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-title {
+            font-size: 0.95rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .footer-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
         }
 
         footer a {
             transition: color 0.2s ease;
         }
 
-        footer a:hover {
+        footer a:hover,
+        .footer-links a:hover {
             color: var(--primary);
         }
 
-        .copyright {
-            margin-top: 20px;
-            opacity: 0.8;
-            font-size: 0.9rem;
-            color: var(--light-gray);
+        .footer-divider {
+            width: 100%;
+            height: 1px;
+            background: var(--border-color);
+            margin: 22px 0 18px;
         }
 
-        /* Utility Classes */
+        .copyright {
+            margin-top: 0;
+            opacity: 0.8;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        
         .header-pattern {
             position: relative;
             z-index: 1;
@@ -747,7 +796,7 @@
             border-bottom: 1px solid rgba(67, 97, 238, 0.1);
         }
 
-        /* Responsive Design */
+        
         @media (max-width: 1024px) {
             .container {
                 padding: 0 20px;
@@ -843,7 +892,7 @@
             }
         }
 
-        /* Accessibility */
+        
         @media (prefers-reduced-motion: reduce) {
 
             *,
@@ -856,7 +905,7 @@
             }
         }
 
-        /* Print Styles */
+        
         @media print {
             .petals {
                 display: none;
@@ -969,8 +1018,30 @@
     </div>
 
     <footer>
-        <p>Infinity Nexus &copy; <span id="footer-year">2026</span></p>
-        <p>All rights reserved</p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 class="footer-title">Must Play</h4>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="gamecorner.html">Game Corner</a></li>
+                        <li><a href="sims.html">Simulation Games</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="../info/updateinfo/updateinfo.html">Updates</a></li>
+                        <li><a href="https://forms.gle/X8p7jkC74MFG9Evj7">Report Issue</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <p class="copyright">© <span id="footer-year">2026</span> Infinity Nexus | Created by Littletree866</p>
+        </div>
     </footer>
 
     <script>

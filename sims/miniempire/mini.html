@@ -5,7 +5,7 @@
   <title>Mini Empire  </title>
   <link rel="icon" href="../../icon.jpg" type="image/x-icon">
   <style>
-    /* Home Screen */
+    
     #homeScreen {
       position: fixed;
       top: 0;
@@ -76,7 +76,7 @@
     }
 
 
-    /* ==== GRID ==== */
+    
     #game {
       display: grid;
       grid-template-columns: repeat(10, 45px);
@@ -142,7 +142,7 @@
       background: #9b1d1d;
     }
 
-    /* ==== INFO ==== */
+    
     #info {
       margin-top: 15px;
       text-align: center;
@@ -174,7 +174,7 @@
       font-weight: bold;
     }
 
-    /* ==== TECH TREE ==== */
+    
     #techTree {
       margin-top: 15px;
       border: 1px solid #444;
@@ -194,7 +194,7 @@
       font-size: 14px;
     }
 
-    /* ==== TUTORIAL ==== */
+    
     #tutorial {
       position: fixed;
       inset: 0;
@@ -475,7 +475,7 @@
 
     function resolveRaid(tile) {
       const alertEl = alertBox;
-      const enemyStrength = Math.floor(Math.random() * 6) + 1; // 1..6
+      const enemyStrength = Math.floor(Math.random() * 6) + 1; 
       if (defense >= enemyStrength) {
         alertEl.textContent = "🛡️ Forts repelled the enemy!";
         defense = Math.max(0, defense - Math.floor(enemyStrength / 2));

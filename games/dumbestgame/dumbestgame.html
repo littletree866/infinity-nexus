@@ -52,7 +52,7 @@
       margin-bottom: 1.8rem;
     }
 
-    /* ONE BIG BUTTON */
+    
     .big-btn {
       background: #2b4b6f;
       border: none;
@@ -80,7 +80,7 @@
       background: #32628a;
     }
 
-    /* stats grid – clean & calm */
+    
     .stats {
       display: flex;
       justify-content: space-between;
@@ -221,13 +221,13 @@
     function pushCloudClicks(value) {
       try {
         localStorage.setItem(CLOUD_KEY_CLICKS, String(value));
-      } catch (_) { /* ignore */ }
+      } catch (_) {  }
     }
 
     function pushCloudViews(value) {
       try {
         localStorage.setItem(CLOUD_KEY_VIEWS, String(value));
-      } catch (_) { /* ignore */ }
+      } catch (_) {  }
     }
 
     function incrementGlobalClicks() {
@@ -275,13 +275,13 @@
       let counted = false;
       try {
         counted = sessionStorage.getItem('pageViewCounted') === 'true';
-      } catch (_) { /* ignore */ }
+      } catch (_) {  }
 
       if (!counted) {
         const newViews = incrementPageViews();
         try {
           sessionStorage.setItem('pageViewCounted', 'true');
-        } catch (_) { /* ignore */ }
+        } catch (_) {  }
         refreshUI();
         feedbackEl.textContent = `👋 page view #${newViews}`;
         statusEl.textContent = '● live';
@@ -339,7 +339,7 @@
             }
           }
         }
-      } catch (_) { /* ignore */ }
+      } catch (_) {  }
     }, 300);
 
     console.log('🔘 one-button game · cloud vars: clicks & views');

@@ -28,7 +28,7 @@
             position: relative;
         }
 
-        /* Home button */
+        
         .home-btn {
             position: fixed;
             top: 1rem;
@@ -50,7 +50,7 @@
         }
         .home-btn:hover { transform: translateY(-1px); background: rgba(30, 35, 64, 0.96); }
 
-        /* Main slot container */
+        
         .slot-mansion {
             max-width: 900px;
             width: 100%;
@@ -62,7 +62,7 @@
             box-shadow: 0 30px 45px rgba(0,0,0,0.7);
         }
 
-        /* Header stats */
+        
         .jackpot-stats {
             display: flex;
             justify-content: space-between;
@@ -89,7 +89,7 @@
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
-        /* Slot Reels */
+        
         .reels-area {
             background: linear-gradient(145deg, #0e1428, #030614);
             border-radius: 40px;
@@ -135,7 +135,7 @@
             transform: scale(1.05);
         }
 
-        /* Bet selector */
+        
         .bet-panel {
             display: flex;
             justify-content: center;
@@ -182,7 +182,7 @@
         .spin-gold:hover:not(:disabled) { transform: scale(1.02); }
         .spin-gold:disabled { opacity: 0.5; cursor: default; }
 
-        /* result message */
+        
         .result-area {
             background: rgba(12, 15, 26, 0.9);
             border-radius: 28px;
@@ -201,7 +201,7 @@
             color: #ffa098;
         }
 
-        /* paytable */
+        
         .paytable-mini {
             background: rgba(16, 18, 31, 0.8);
             border-radius: 30px;
@@ -299,7 +299,7 @@
     let currentBet = 10;
     let spinning = false;
     let lastWinAmount = 0;
-    let gridState = Array(9).fill('A');  // 3x3 grid as flat array
+    let gridState = Array(9).fill('A');  
 
     const balanceSpan = document.getElementById('balanceValue');
     const betSpan = document.getElementById('betValue');

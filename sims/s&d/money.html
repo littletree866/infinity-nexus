@@ -696,7 +696,7 @@
             opacity: 0.8;
         }
 
-        /* Responsive adjustments */
+        
         @media (max-width: 768px) {
             .game-header h1 {
                 font-size: 2rem;
@@ -898,8 +898,8 @@
         let questCompleted = false;
         let moneyEarnedSinceQuestStart = 0;
 
-        const DAY_DURATION = 15; // seconds per day
-        const CUSTOMER_PATIENCE = 7000; // ms before customer leaves
+        const DAY_DURATION = 15; 
+        const CUSTOMER_PATIENCE = 7000; 
         const LOAN_AMOUNT = 250;
         const LOAN_REPAYMENT = 300;
         const LOAN_TERM_DAYS = 30;
@@ -1180,7 +1180,7 @@
         function createArt() {
             if (!artUnlocked) return;
 
-            const artValue = Math.floor(Math.random() * 101) + 50; // $50-$150
+            const artValue = Math.floor(Math.random() * 101) + 50; 
             const paintingTypes = ["Abstract", "Portrait", "Landscape", "Modern", "Classic"];
             const paintingType = paintingTypes[Math.floor(Math.random() * paintingTypes.length)];
 

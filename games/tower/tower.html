@@ -21,7 +21,7 @@
       color: #f0e6d2;
       overflow: hidden;
     }
-    /* ----- home screen ----- */
+    
     #homeScreen {
       position: fixed;
       inset: 0;
@@ -61,7 +61,7 @@
     }
     .home-button:hover { transform: translateY(-4px); box-shadow: 0 12px 0 #1a4f44, 0 18px 35px #00000077; }
     .home-button:active { transform: translateY(6px); box-shadow: 0 2px 0 #1a4f44; }
-    /* ----- map selection ----- */
+    
     #mapSelection {
       position: fixed;
       inset: 0;
@@ -106,7 +106,7 @@
       background-position: center;
     }
     .map-name { text-align: center; margin-top: 8px; font-size: 1.2rem; font-weight: 600; color: #f0e6d2; }
-    /* ----- game container + ui ----- */
+    
     #gameContainer {
       display: none;
       position: relative;
@@ -213,7 +213,7 @@
       cursor: pointer;
     }
     .checkbox-label input { accent-color: #7ae9d6; width: 18px; height: 18px; }
-    /* tower buttons */
+    
     .towerButton {
       width: 100%;
       padding: 12px 14px;
@@ -256,7 +256,7 @@
     }
     .back-button:hover { background: #7a5a5a; transform: translateY(-2px); }
     .back-button:active { transform: translateY(4px); box-shadow: 0 1px 0 #3a2a2a; }
-    /* overlays */
+    
     .game-overlay {
       position: absolute;
       top: 50%;
@@ -427,7 +427,7 @@
     const COLS = Math.floor(canvas.width / TILE);
     const ROWS = Math.floor(canvas.height / TILE);
 
-    // paths (two lanes)
+    
     const pathTiles1 = [
       {x:0,y:2},{x:1,y:2},{x:2,y:2},{x:3,y:2},{x:4,y:2},{x:5,y:2},{x:6,y:2},{x:7,y:2},{x:8,y:2},{x:9,y:2},
       {x:9,y:3},{x:10,y:3},{x:11,y:3},{x:12,y:3},{x:13,y:3},{x:14,y:3},{x:15,y:3},{x:16,y:3},{x:17,y:3},
@@ -468,9 +468,9 @@
     }
     initTileMap();
 
-    // ============================================================
-    //  TOWER STATS (level 0 only, upgrade-ready)
-    // ============================================================
+    
+    
+    
     const TOWER_STATS = {
       basic: [{ range:140, dmg:12, firerate:1.0, cost:30, color:'#b0c4de' }],
       sniper: [{ range:280, dmg:45, firerate:0.7, cost:70, color:'#8a9aaa' }],
@@ -480,9 +480,9 @@
       tesla: [{ range:145, dmg:12, firerate:1.8, chain:4, chainRange:80, cost:200, color:'#b080d0' }]
     };
 
-    // ============================================================
-    //  CLASSES
-    // ============================================================
+    
+    
+    
     class Enemy {
       constructor(type, pathIdx=0) {
         const base = { normal:{hp:40,speed:80,gold:5,color:'#8B6B4A',size:16},
@@ -522,7 +522,7 @@
         if(dist<4){ this.index++; return; }
         this.x += (dx/dist)*this.speed*dt; this.y += (dy/dist)*this.speed*dt;
         if(this.hp<=0){ this.dead=true; spawnParticles(this.x,this.y,'#ffef9e',14); game.money += this.gold; game.totalMoneyEarned += this.gold; game.enemiesDefeated++; }
-        // dots
+        
         for(let i=this._dots.length-1;i>=0;i--){ const d=this._dots[i]; d.tickTimer-=dt; d.time-=dt; if(d.tickTimer<=0){ this.hp-=d.amt; d.tickTimer=d.tickInterval; spawnParticles(this.x,this.y-8,'#ff8f66',2); } if(d.time<=0) this._dots.splice(i,1); }
       }
       healNearby(){
@@ -628,7 +628,7 @@
             spawnParticles(this.target.x,this.target.y,this.color,6);
           }
         }
-        // damage numbers
+        
         showDamageNumber(this.x, this.y-16, this.dmg);
       }
       draw(){
@@ -637,12 +637,12 @@
       }
     }
 
-    // helpers
+    
     function applyDot(enemy, amt, dur){ enemy._dots.push({amt, time:dur, tickInterval:0.3, tickTimer:0}); }
     function drawLightningFromTower(tower, target){ if(!tower||!target) return; const pts=[{x:tower.x,y:tower.y}]; for(let i=1;i<6;i++){ const t=i/6; pts.push({x:tower.x+(target.x-tower.x)*t+(Math.random()-0.5)*8, y:tower.y+(target.y-tower.y)*t+(Math.random()-0.5)*8}); } pts.push({x:target.x,y:target.y}); ctx.strokeStyle='#b080d0'; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(pts[0].x,pts[0].y); for(let i=1;i<pts.length;i++) ctx.lineTo(pts[i].x,pts[i].y); ctx.stroke(); ctx.strokeStyle='#fff'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(pts[0].x,pts[0].y); for(let i=1;i<pts.length;i++) ctx.lineTo(pts[i].x,pts[i].y); ctx.stroke(); }
     function drawLightning(a,b){ const pts=[{x:a.x,y:a.y}]; for(let i=1;i<6;i++){ const t=i/6; pts.push({x:a.x+(b.x-a.x)*t+(Math.random()-0.5)*10, y:a.y+(b.y-a.y)*t+(Math.random()-0.5)*10}); } pts.push({x:b.x,y:b.y}); ctx.strokeStyle='#b080d0'; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(pts[0].x,pts[0].y); for(let i=1;i<pts.length;i++) ctx.lineTo(pts[i].x,pts[i].y); ctx.stroke(); ctx.strokeStyle='#fff'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(pts[0].x,pts[0].y); for(let i=1;i<pts.length;i++) ctx.lineTo(pts[i].x,pts[i].y); ctx.stroke(); }
 
-    // damage numbers
+    
     const damageNumbers=[];
     function showDamageNumber(x,y,amount,color=null){ damageNumbers.push({x,y,value:amount,life:1.2,velocity:{x:(Math.random()-0.5)*40,y:-50},color:color||(amount>40?'#ff4444':amount>20?'#ffaa44':'#ffffff')}); }
     function updateDamageNumbers(dt){ for(let i=damageNumbers.length-1;i>=0;i--){ const n=damageNumbers[i]; n.x+=n.velocity.x*dt; n.y+=n.velocity.y*dt; n.life-=dt; n.velocity.y+=80*dt; if(n.life<=0) damageNumbers.splice(i,1); } }
@@ -652,9 +652,9 @@
     function updateParticles(dt){ for(const p of game.particles){ p.x+=p.dx; p.y+=p.dy; p.life-=dt; p.rotation+=p.rotationSpeed*dt; p.dy+=98*dt; } game.particles=game.particles.filter(p=>p.life>0); }
     function drawParticles(){ for(const p of game.particles){ ctx.save(); ctx.globalAlpha=p.life; ctx.fillStyle=p.color; ctx.translate(p.x,p.y); ctx.rotate(p.rotation); ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size); ctx.restore(); } ctx.globalAlpha=1; }
 
-    // ============================================================
-    //  MAP & UI
-    // ============================================================
+    
+    
+    
     function getCurrentMapStyle(){ return game.mapStyles[game.currentMap] || game.mapStyles.forest; }
     function drawTiles(){
       const style=getCurrentMapStyle();
@@ -671,9 +671,9 @@
       [pathTiles1,pathTiles2].forEach(path=>{ path.forEach(t=>{ const xp=t.x*TILE, yp=t.y*TILE; ctx.strokeRect(xp,yp,TILE,TILE); }); });
     }
 
-    // ============================================================
-    //  GAME LOGIC
-    // ============================================================
+    
+    
+    
     function startWave(){
       if(game.waveInProgress||game.gameOver||game.victory) return;
       let base=8+Math.floor(game.wave*0.8);
@@ -739,12 +739,12 @@
       if(game.placing){ const b=document.getElementById(`towerBtn-${game.placing}`); if(b) b.classList.add('tower-button-active'); }
     }
 
-    // canvas interactions
+    
     canvas.addEventListener('click', e=>{
       if(game.gameOver||game.victory) return;
       const rect=canvas.getBoundingClientRect(), x=e.clientX-rect.left, y=e.clientY-rect.top;
       if(game.placing){ placeTower(x,y); return; }
-      // select existing
+      
       for(const t of game.towers){ if(Math.hypot(x-t.x,y-t.y)<24){ game.selectedTower=t; game.placing=null; updateTowerButtons(); return; } }
       game.selectedTower=null;
     });
@@ -774,9 +774,9 @@
     function loop(now){
       const dt=Math.min((now-lastTime)/1000, 0.033); lastTime=now;
       if(!game.paused && !game.gameOver && !game.victory){
-        // spawn
+        
         if(game.toSpawn>0){ game.spawnTimer-=dt; if(game.spawnTimer<=0){ game.spawnTimer=game.spawnInterval; spawnEnemy(); game.toSpawn--; } }
-        // update
+        
         for(const e of game.enemies) e.update(dt);
         game.enemies=game.enemies.filter(e=>!e.dead&&!e.reachedEnd);
         for(const t of game.towers) t.update(dt);
@@ -784,7 +784,7 @@
         for(const p of game.projectiles) p.update(dt);
         game.projectiles=game.projectiles.filter(p=>!p.dead);
         updateParticles(dt); updateDamageNumbers(dt);
-        // wave complete
+        
         if(game.waveInProgress && game.enemies.length===0 && game.toSpawn===0){
           game.waveInProgress=false;
           const bonus=30+game.wave*5;
@@ -792,11 +792,11 @@
           showDamageNumber(canvas.width/2, canvas.height/2-40, `+$${bonus}`, '#7ae9d6');
           if(game.autoNext && game.wave<=game.totalWaves) setTimeout(()=>startWave(), 1200);
         }
-        // health / gameover
+        
         if(game.health<=0 && !game.gameOver){ game.gameOver=true; document.getElementById('finalScore').textContent=`Wave ${game.wave}`; document.getElementById('finalEnemies').textContent=game.enemiesDefeated; document.getElementById('finalMoney').textContent=game.totalMoneyEarned; document.getElementById('gameOver').style.display='block'; }
         if(game.wave>game.totalWaves && !game.victory){ game.victory=true; const score=game.wave*100+game.enemiesDefeated+game.totalMoneyEarned; document.getElementById('finalScoreVictory').textContent=score; document.getElementById('victoryScreen').style.display='block'; }
       }
-      // draw
+      
       ctx.clearRect(0,0,canvas.width,canvas.height);
       drawTiles();
       for(const t of game.towers) t.draw();
@@ -804,7 +804,7 @@
       for(const e of game.enemies) e.draw();
       drawParticles(); drawDamageNumbers();
 
-      // placement preview
+      
       if(game.placing){
         const pos=game.placingPos, tx=Math.floor(pos.x/TILE), ty=Math.floor(pos.y/TILE);
         const valid=ty<ROWS&&tx<COLS&&tileMap[ty]?.[tx]?.type==='grass'&&tileMap[ty][tx].walkable;
@@ -816,7 +816,7 @@
         ctx.globalAlpha=1;
       }
 
-      // UI
+      
       document.getElementById('waveDisp').textContent=game.wave;
       document.getElementById('enemyDisp').textContent=`${game.enemies.length} +${game.toSpawn}`;
       document.getElementById('moneyDisp').textContent=`$${game.money}`;
@@ -825,7 +825,7 @@
       requestAnimationFrame(loop);
     }
 
-    // keyboard shortcuts
+    
     document.addEventListener('keydown', e=>{
       if(e.key==='p'||e.key==='P') togglePause();
       if(e.key==='Escape'){ game.placing=null; game.selectedTower=null; updateTowerButtons(); }
@@ -834,7 +834,7 @@
     });
     document.getElementById('autoNext').addEventListener('change', e=>game.autoNext=e.target.checked);
 
-    // start
+    
     selectMap('forest', {currentTarget:document.querySelector('.map-option')});
     loop(performance.now());
   </script>

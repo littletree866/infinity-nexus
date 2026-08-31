@@ -29,7 +29,7 @@
             overflow-x: hidden;
         }
 
-        /* mystic smoke animation */
+        
         body::before {
             content: '';
             position: fixed;
@@ -42,7 +42,7 @@
             z-index: 0;
         }
 
-        /* Main Game Container */
+        
         .game-portal {
             position: relative;
             z-index: 2;
@@ -50,7 +50,7 @@
             width: 100%;
         }
 
-        /* Home button */
+        
         .home-btn {
             position: fixed;
             top: 20px;
@@ -82,7 +82,7 @@
             transition: all 0.2s;
         }
 
-        /* Header with cursed energy */
+        
         .occult-header {
             text-align: center;
             margin-bottom: 1.8rem;
@@ -112,7 +112,7 @@
             letter-spacing: 1px;
         }
 
-        /* stat cards */
+        
         .stat-row {
             display: flex;
             gap: 1rem;
@@ -146,7 +146,7 @@
             line-height: 1;
         }
 
-        /* BET ZONE */
+        
         .bet-ritual {
             background: rgba(79, 31, 113, 0.2);
             border-radius: 2rem;
@@ -237,7 +237,7 @@
             transform: translateY(-2px);
         }
 
-        /* DICE ARENA */
+        
         .dice-arena {
             margin: 2rem 0;
             background: radial-gradient(ellipse at center, #0e001f, #020005);
@@ -265,7 +265,7 @@
             margin: 1rem 0;
         }
 
-        /* recreated dice with real SVG look & no glitch */
+        
         .cursed-die {
             width: 110px;
             height: 110px;
@@ -309,7 +309,7 @@
             box-shadow: 0 0 20px #ff3860;
         }
 
-        /* result card */
+        
         .result-card {
             background: rgba(0, 0, 0, 0.7);
             border-radius: 2rem;
@@ -473,7 +473,7 @@
     let balance = 500;
     let currentBet = 0;
     let isRolling = false;
-    let gameActive = false;     // true only when bet placed and awaiting roll / result shown after roll locks
+    let gameActive = false;     
 
     const balanceSpan = document.getElementById('balanceValue');
     const betAmountSpan = document.getElementById('betAmount');

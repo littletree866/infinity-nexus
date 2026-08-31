@@ -23,7 +23,7 @@
         background: linear-gradient(145deg, #1e1e2f 0%, #2a2a40 100%);
         color: #eee;
         }
-        /* back button – clean & non-overlapping */
+        
         .back-btn {
         position: fixed;
         top: 24px;
@@ -254,7 +254,7 @@
         }
         body.dark .win-banner { background: rgba(46,204,113,0.1); border-color: #2ecc71; color: #58d68d; }
 
-        /* POPUP help — overlay style, pauses game */
+        
         .popup-overlay {
         position: fixed;
         inset: 0;
@@ -415,7 +415,7 @@
         emptyIndex: -1,
         moves: 0,
         hints: 3,
-        mode: null,      // 'endless','challenge','practice'
+        mode: null,      
         level: 1,
         moveLimit: null,
         timeLimit: null,
@@ -552,7 +552,7 @@
             clearInterval(state.timerInterval);
             state.solved = true;
             alert('💥 Move limit reached! Level ' + state.level);
-            initPuzzle(); // restart same level
+            initPuzzle(); 
             return;
           }
         }
@@ -739,13 +739,13 @@
       }
 
       function showHelp() {
-        if (!state.isPaused) togglePause(); // pause game
+        if (!state.isPaused) togglePause(); 
         helpPopup.style.display = 'flex';
       }
 
       function hideHelp() {
         helpPopup.style.display = 'none';
-        if (state.isPaused) togglePause(); // resume
+        if (state.isPaused) togglePause(); 
       }
 
       function toggleTheme() {

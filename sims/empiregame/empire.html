@@ -846,7 +846,7 @@
             state.income = income;
             document.getElementById('incomeDisplay').textContent = `+${fmt(income)}/s`;
 
-            // Era
+            
             let era = 'Medieval';
             if (state.population >= 50000 && state.military >= 5000) era = 'Imperial';
             else if (state.population >= 20000 && state.military >= 2000) era = 'Renaissance';
@@ -965,7 +965,7 @@
             state.science += b.science || 0;
             state.happiness = Math.min(100, state.happiness + (b.happiness || 0));
 
-            // Happiness decay for too many buildings
+            
             const total = Object.values(state.buildings).reduce((a, b) => a + b, 0);
             if (total > 20 && total % 5 === 0) {
                 state.happiness = Math.max(10, state.happiness - 2);
@@ -977,7 +977,7 @@
             toast(`Built ${b.name}!`, 'good');
             addEvent(`Built a ${b.name}`, 'good');
 
-            // Random event chance
+            
             if (Math.random() < 0.05) triggerRandomEvent();
         }
 
@@ -1096,28 +1096,28 @@
         function gameTick() {
             state.tickCount++;
 
-            // Income
+            
             const income = calcIncome();
             state.gold += income;
 
-            // Population growth
+            
             const growthRate = 0.002 + (state.happiness / 10000);
             state.population += Math.floor(state.population * growthRate) + 1;
 
-            // Science passive gain
+            
             const sciGain = Math.floor(state.science * 0.01) + 1;
             state.science += Math.floor(sciGain * state.sciMultiplier);
 
-            // Happiness drift
+            
             const targetHap = 50 + Math.floor(state.population / 1000) + Math.floor(state.gold / 10000);
             state.happiness += (Math.min(95, targetHap) - state.happiness) * 0.005;
 
-            // Random events
+            
             if (state.tickCount % 30 === 0 && Math.random() < 0.02) {
                 triggerRandomEvent();
             }
 
-            // Auto-check achievements
+            
             if (state.tickCount % 10 === 0) checkAchievements();
 
             save();
@@ -1128,13 +1128,13 @@
             load();
             if (gameLoop) clearInterval(gameLoop);
             gameLoop = setInterval(gameTick, 1000);
-            // Initial render
+            
             render();
             addEvent('Welcome to Empire Builder! Build your civilization.', 'neutral');
             toast('Build your empire!', 'info');
         }
 
-        // Expose functions globally
+        
         window.buildBuilding = buildBuilding;
         window.buyUpgrade = buyUpgrade;
         window.collectTaxes = collectTaxes;

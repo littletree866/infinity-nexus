@@ -1,1439 +1,935 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Wealth Builder  </title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Neon City Empire</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" href="../../icon.jpg" type="image/x-icon">
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Trebuchet MS:wght@300;400;500;600;700;800&display=swap"
-    rel="stylesheet">
   <style>
     :root {
-      --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      --secondary-gradient: linear-gradient(to bottom right, #f093fb 0%, #f5576c 100%);
-      --accent-green: #10b981;
-      --accent-blue: #3b82f6;
-      --accent-gold: #f59e0b;
-      --accent-red: #ef4444;
-      --accent-purple: #8b5cf6;
-      --card-bg: rgba(255, 255, 255, 0.95);
-      --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      --hover-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-      --text-primary: #1f2937;
-      --text-secondary: #6b7280;
-      --success-color: #10b981;
-      --warning-color: #f59e0b;
-      --danger-color: #ef4444;
+      --bg-1: #0d1021;
+      --bg-2: #111827;
+      --panel: rgba(17, 24, 39, 0.85);
+      --panel-strong: rgba(15, 23, 42, 0.92);
+      --glass: rgba(255,255,255,0.08);
+      --line: rgba(148, 163, 184, 0.18);
+      --text: #e5eefb;
+      --muted: #96a3ba;
+      --gold: #fbbf24;
+      --green: #34d399;
+      --cyan: #38bdf8;
+      --purple: #a78bfa;
+      --red: #fb7185;
+      --orange: #f59e0b;
+      --shadow: 0 20px 40px rgba(15, 23, 42, 0.5);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(167, 139, 250, 0.25), transparent 25%),
+        radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.18), transparent 30%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      color: var(--text);
+    }
+
+    body {
+      padding: 22px;
+      overflow-x: hidden;
     }
 
     .back-button {
       position: fixed;
-      top: 20px;
-      left: 20px;
-      background: rgba(255, 255, 255, 0.15);
-      border: 2px solid white;
+      top: 18px;
+      left: 18px;
+      background: rgba(17, 24, 39, 0.7);
+      border: 1px solid rgba(255,255,255,0.15);
       color: white;
-      padding: 12px 18px;
-      border-radius: 8px;
+      padding: 10px 16px;
+      border-radius: 12px;
       cursor: pointer;
+      font-weight: 700;
+      z-index: 50;
       text-decoration: none;
-      font-weight: bold;
-      font-size: 14px;
-      transition: all 0.3s;
-      z-index: 10000;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-family: inherit;
+      transition: transform .2s ease, background .2s ease;
     }
 
     .back-button:hover {
-      background: rgba(255, 255, 255, 0.25);
-      transform: scale(1.05);
+      background: rgba(30, 41, 59, 0.9);
+      transform: translateY(-1px);
     }
 
-    .back-button:focus {
-      outline: 2px solid white;
-      outline-offset: 2px;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: var(--primary-gradient);
-      color: var(--text-primary);
-      min-height: 100vh;
-      margin: 0;
-      padding: 30px 20px;
-      overflow-x: hidden;
-    }
-
-    
-    .bg-particles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      overflow: hidden;
-    }
-
-    .bg-particle {
-      position: absolute;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-      animation: float 20s infinite linear;
-    }
-
-    @keyframes float {
-      0% {
-        transform: translateY(100vh) rotate(0deg);
-      }
-
-      100% {
-        transform: translateY(-100px) rotate(360deg);
-      }
-    }
-
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .main-card {
-      background: var(--card-bg);
-      padding: 30px;
-      border-radius: 24px;
-      box-shadow: var(--card-shadow);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 30px;
-    }
-
-    .main-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 6px;
-      background: linear-gradient(90deg, var(--accent-green), var(--accent-blue), var(--accent-gold));
-    }
-
-    .stats-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 30px;
-      padding-bottom: 20px;
-      border-bottom: 2px solid rgba(0, 0, 0, 0.05);
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 5px;
-    }
-
-    .subtitle {
-      color: var(--text-secondary);
-      font-size: 1rem;
-      margin-bottom: 10px;
-    }
-
-    #money {
-      font-family: 'Segoe UI', sans-serif;
-      font-size: 2.8rem;
-      font-weight: 700;
-      color: var(--accent-green);
-      text-shadow: 0 2px 10px rgba(16, 185, 129, 0.2);
-      animation: money-pulse 3s infinite;
-    }
-
-    @keyframes money-pulse {
-
-      0%,
-      100% {
-        transform: scale(1);
-      }
-
-      50% {
-        transform: scale(1.02);
-      }
-    }
-
-    .income-display {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1));
-      padding: 15px;
-      border-radius: 16px;
-      margin-bottom: 25px;
-      text-align: center;
-    }
-
-    .income-display h3 {
-      color: var(--accent-green);
-      margin-bottom: 8px;
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-
-    #incomePerSec {
-      font-family: 'Segoe UI', sans-serif;
-      font-size: 1.8rem;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .action-buttons {
+    .app {
+      max-width: 1500px;
+      margin: 50px auto 0;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 15px;
-      margin-bottom: 30px;
-    }
-
-    .btn {
-      padding: 16px 20px;
-      border: none;
-      border-radius: 14px;
-      font-family: 'Segoe UI', sans-serif;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      position: relative;
-      overflow: hidden;
-      min-height: 80px;
-    }
-
-    .btn::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
-    }
-
-    .btn:hover::after {
-      width: 300px;
-      height: 300px;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-      color: white;
-      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-    }
-
-    .btn-primary:hover:not(:disabled) {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
-    }
-
-    .btn-success {
-      background: linear-gradient(135deg, var(--accent-green), #34d399);
-      color: white;
-      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-    }
-
-    .btn-success:hover:not(:disabled) {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
-    }
-
-    .btn-warning {
-      background: linear-gradient(135deg, var(--accent-gold), #fbbf24);
-      color: white;
-      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
-    }
-
-    .btn-warning:hover:not(:disabled) {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
-    }
-
-    .btn-danger {
-      background: linear-gradient(135deg, var(--accent-red), #f87171);
-      color: white;
-      box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
-    }
-
-    .btn-danger:hover:not(:disabled) {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
-    }
-
-    .btn:disabled {
-      background: linear-gradient(135deg, #9ca3af, #6b7280);
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
-    }
-
-    .btn:disabled:hover {
-      transform: none;
-      box-shadow: none;
-    }
-
-    .btn-cooldown {
-      font-size: 0.85rem;
-      font-weight: 500;
-      opacity: 0.9;
-    }
-
-    .opportunities-section {
-      margin-top: 25px;
-      padding: 20px;
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(59, 130, 246, 0.05));
-      border-radius: 18px;
-      border: 1px solid rgba(139, 92, 246, 0.1);
-    }
-
-    .opportunities-section h3 {
-      color: var(--accent-purple);
-      margin-bottom: 15px;
-      font-size: 1.3rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .opportunities-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px;
-      margin-top: 15px;
-    }
-
-    
-    .panels-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
-      margin-top: 20px;
+      grid-template-columns: 310px minmax(0, 1fr) 330px;
+      gap: 20px;
+      align-items: start;
     }
 
     .panel {
-      background: var(--card-bg);
-      padding: 25px;
-      border-radius: 20px;
-      box-shadow: var(--card-shadow);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      display: block;
-      max-height: 500px;
-      overflow-y: auto;
-      transition: all 0.3s;
     }
 
-    .panel:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--hover-shadow);
+    .sidebar {
+      padding: 20px;
     }
 
-    .panel h3 {
-      color: var(--accent-blue);
-      margin-bottom: 15px;
-      font-size: 1.4rem;
-      font-weight: 600;
-      padding-bottom: 10px;
-      border-bottom: 2px solid rgba(59, 130, 246, 0.1);
+    .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      justify-content: space-between;
+      margin-bottom: 20px;
     }
 
-    .grid {
+    .brand h1 {
+      font-size: 1.6rem;
+      margin: 0;
+      letter-spacing: 0.04em;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .day-chip {
+      background: rgba(52, 211, 153, 0.12);
+      border: 1px solid rgba(52, 211, 153, 0.4);
+      color: var(--green);
+      font-size: 0.78rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .stat-grid {
       display: grid;
-      gap: 15px;
-      margin-top: 15px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
     }
 
-    .grid-item {
-      background: rgba(255, 255, 255, 0.7);
-      padding: 18px;
+    .stat-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px 10px;
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: var(--text);
+    }
+
+    .cash { color: var(--green); }
+    .rep { color: var(--gold); }
+    .energy { color: var(--cyan); }
+    .vibe { color: var(--purple); }
+
+    .action-list {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .action-btn, .build-card button, .mini-btn {
+      border: 0;
       border-radius: 14px;
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      transition: all 0.3s;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: transform .18s ease, filter .18s ease, box-shadow .18s ease;
     }
 
-    .grid-item:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-      border-color: var(--accent-blue);
+    .action-btn {
+      width: 100%;
+      padding: 13px 14px;
+      color: white;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(167, 139, 250, 0.22));
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
     }
 
-    .grid-header {
+    .action-btn:hover, .build-card button:hover, .mini-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    .action-btn.primary {
+      background: linear-gradient(135deg, #1d4ed8, #7c3aed);
+    }
+
+    .action-btn.success {
+      background: linear-gradient(135deg, #059669, #10b981);
+    }
+
+    .action-btn.warn {
+      background: linear-gradient(135deg, #d97706, #f59e0b);
+    }
+
+    .action-btn.rose {
+      background: linear-gradient(135deg, #be123c, #fb7185);
+    }
+
+    .mission-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px 12px;
+      margin-bottom: 18px;
+    }
+
+    .mission-card h3 {
+      margin: 0 0 8px;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .mission-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--gold);
+    }
+
+    .mission-bar {
+      height: 9px;
+      width: 100%;
+      background: rgba(255,255,255,0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 8px 0 12px;
+    }
+
+    .mission-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--green), var(--cyan));
+      border-radius: inherit;
+      transition: width .25s ease;
+    }
+
+    .inventory-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 12px;
+    }
+
+    .inventory-box h3 {
+      margin: 0 0 8px;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .inventory-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .inventory-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      font-size: 0.9rem;
+      color: var(--text);
     }
 
-    .grid-name {
-      font-weight: 600;
-      color: var(--text-primary);
-      font-size: 1.1rem;
+    .main-panel {
+      padding: 18px;
     }
 
-    .grid-price {
-      font-family: 'Segoe UI', sans-serif;
-      font-weight: 600;
-      color: var(--accent-green);
-      font-size: 1.1rem;
-    }
-
-    .grid-details {
+    .header-row {
       display: flex;
       justify-content: space-between;
-      margin-top: 10px;
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-      font-weight: 500;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding: 4px 8px 0;
     }
 
-    .grid-actions {
-      margin-top: 15px;
+    .header-row h2 {
+      margin: 0;
+      font-size: clamp(1.6rem, 2vw, 2.4rem);
+      letter-spacing: 0.04em;
+    }
+
+    .status-pill {
+      background: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      color: var(--cyan);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-weight: 700;
+    }
+
+    .top-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .city-card, .mini-game-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 16px;
+    }
+
+    .city-card h3, .mini-game-card h3, .right-panel h3 {
+      margin: 0 0 12px;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .city-board {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      min-height: 360px;
+    }
+
+    .tile {
+      position: relative;
+      min-height: 110px;
+      border-radius: 18px;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      background: linear-gradient(180deg, rgba(15,23,42,0.95), rgba(30,41,59,0.85));
+      padding: 10px;
       display: flex;
-      gap: 10px;
-    }
-
-    .small-btn {
-      padding: 8px 16px;
-      border-radius: 10px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      border: none;
+      align-items: flex-end;
+      justify-content: center;
       cursor: pointer;
-      transition: all 0.2s;
-      flex: 1;
-      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
     }
 
-    .buy-btn {
-      background: var(--accent-green);
-      color: white;
-    }
-
-    .buy-btn:hover:not(:disabled) {
-      background: #0da271;
+    .tile:hover {
       transform: translateY(-2px);
+      border-color: rgba(56, 189, 248, 0.6);
+      box-shadow: 0 8px 18px rgba(59,130,246,0.16);
     }
 
-    .sell-btn {
-      background: var(--accent-red);
-      color: white;
+    .tile.empty::before {
+      content: "+";
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: rgba(148, 163, 184, 0.4);
+      font-weight: 700;
     }
 
-    .sell-btn:hover:not(:disabled) {
-      background: #dc2626;
-      transform: translateY(-2px);
+    .tile.occupied {
+      border-color: rgba(52, 211, 153, 0.4);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
     }
 
-    .small-btn:disabled {
-      background: #9ca3af;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    #message {
-      min-height: 24px;
-      font-weight: 600;
-      margin-top: 15px;
-      padding: 12px;
-      border-radius: 12px;
+    .tile-inner {
+      position: relative;
+      z-index: 2;
       text-align: center;
-      transition: all 0.3s;
-      opacity: 0;
-      transform: translateY(-10px);
-      font-size: 1rem;
-    }
-
-    .message-success {
-      background: rgba(16, 185, 129, 0.1);
-      color: var(--accent-green);
-      opacity: 1;
-      transform: translateY(0);
-      border: 1px solid rgba(16, 185, 129, 0.2);
-    }
-
-    .message-error {
-      background: rgba(239, 68, 68, 0.1);
-      color: var(--accent-red);
-      opacity: 1;
-      transform: translateY(0);
-      border: 1px solid rgba(239, 68, 68, 0.2);
-    }
-
-    .message-info {
-      background: rgba(59, 130, 246, 0.1);
-      color: var(--accent-blue);
-      opacity: 1;
-      transform: translateY(0);
-      border: 1px solid rgba(59, 130, 246, 0.2);
-    }
-
-    .progress-bar {
       width: 100%;
-      height: 8px;
-      background: rgba(0, 0, 0, 0.1);
-      border-radius: 4px;
-      margin-top: 10px;
+      background: rgba(15, 23, 42, 0.22);
+      border-radius: 12px;
+      padding: 8px 6px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .tile-icon {
+      font-size: 1.8rem;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .tile-name {
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.03em;
+      color: var(--text);
+    }
+
+    .tile-lvl {
+      display: block;
+      font-size: 0.68rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .mini-game-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 210px;
+    }
+
+    .mini-game {
+      position: relative;
+      flex: 1;
+      min-height: 160px;
+      border-radius: 16px;
+      background:
+        linear-gradient(180deg, rgba(15,23,42,0.4), rgba(30,41,59,0.72)),
+        repeating-linear-gradient(
+          0deg,
+          rgba(255,255,255,0.02),
+          rgba(255,255,255,0.02) 12px,
+          transparent 12px,
+          transparent 24px
+        );
+      border: 1px solid var(--line);
       overflow: hidden;
     }
 
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
-      border-radius: 4px;
-      width: 0%;
-      transition: width 0.3s;
-    }
-
-    
-    #taskArea {
-      margin-top: 20px;
-      padding: 20px;
-      background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), rgba(234, 179, 8, 0.05));
-      border-radius: 16px;
-      border: 1px solid rgba(245, 158, 11, 0.1);
-    }
-
-    .task-instruction {
-      font-size: 1.1rem;
-      margin-bottom: 15px;
-      color: var(--accent-gold);
-      text-align: center;
-      font-weight: 600;
-    }
-
-    .task-input {
-      width: 100%;
-      padding: 14px;
-      border: 2px solid #e5e7eb;
-      border-radius: 12px;
-      font-size: 1rem;
-      font-family: 'Segoe UI', sans-serif;
-      font-weight: 500;
-      transition: border-color 0.3s;
-    }
-
-    .task-input:focus {
-      outline: none;
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-    }
-
-    .task-submit {
-      width: 100%;
-      margin-top: 15px;
-    }
-
-    
-    .stats-overlay {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: rgba(0, 0, 0, 0.8);
-      color: white;
-      padding: 15px;
-      border-radius: 12px;
-      font-size: 0.9rem;
-      z-index: 1000;
-      backdrop-filter: blur(10px);
-      font-family: 'Segoe UI', sans-serif;
-      font-weight: 500;
-    }
-
-    
-    .cooldown-active {
-      position: relative;
-    }
-
-    .cooldown-active::before {
-      content: '';
+    .target {
       position: absolute;
-      top: 0;
-      left: 0;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #fef3c7, #f59e0b 45%, #b45309 100%);
+      box-shadow: 0 0 25px rgba(245, 158, 11, 0.9);
+      border: 2px solid rgba(255,255,255,0.8);
+      cursor: pointer;
+      animation: pulse 0.8s ease-in-out infinite alternate;
+      transition: transform .1s ease;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(0.92); }
+      to { transform: scale(1.12); }
+    }
+
+    .mini-btn {
+      background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
+      color: white;
+      padding: 12px 16px;
       width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 14px;
     }
 
-    
-    @media (max-width: 1200px) {
-      .panels-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+    .log-box {
+      margin-top: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px;
+      min-height: 90px;
     }
 
-    @media (max-width: 900px) {
-      .panels-grid {
+    .log-box h3 {
+      margin: 0 0 8px;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .log-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.88rem;
+      color: var(--text);
+    }
+
+    .log-item {
+      border-left: 2px solid rgba(56, 189, 248, 0.5);
+      padding-left: 10px;
+      color: var(--muted);
+    }
+
+    .log-item.success { color: var(--green); border-left-color: var(--green); }
+    .log-item.warning { color: var(--gold); border-left-color: var(--gold); }
+    .log-item.error { color: var(--red); border-left-color: var(--red); }
+
+    .right-panel {
+      padding: 18px;
+    }
+
+    .build-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .build-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .build-name {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+    }
+
+    .build-meta {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .build-card button {
+      padding: 8px 12px;
+      min-width: 92px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(52, 211, 153, 0.22));
+      color: var(--text);
+      border: 1px solid rgba(56, 189, 248, 0.18);
+    }
+
+    .build-card.selected {
+      border-color: rgba(167, 139, 250, 0.7);
+      box-shadow: 0 0 0 1px rgba(167, 139, 250, 0.28);
+    }
+
+    @media (max-width: 1100px) {
+      .app {
         grid-template-columns: 1fr;
       }
-
-      .action-buttons {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .opportunities-grid {
-        grid-template-columns: 1fr;
-      }
+      .main-panel, .sidebar, .right-panel { order: unset; }
     }
 
-    @media (max-width: 768px) {
-      .action-buttons {
-        grid-template-columns: 1fr;
-      }
-
-      .stats-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-      }
-
-      #money {
-        font-size: 2.2rem;
-      }
-
-      h1 {
-        font-size: 2rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .main-card {
-        padding: 20px;
-      }
-
-      .panel {
-        padding: 20px;
-      }
-
-      .btn {
-        padding: 14px 16px;
-        font-size: 0.95rem;
-      }
-    }
-
-    
-    .panel::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    .panel::-webkit-scrollbar-track {
-      background: rgba(0, 0, 0, 0.05);
-      border-radius: 4px;
-    }
-
-    .panel::-webkit-scrollbar-thumb {
-      background: var(--accent-blue);
-      border-radius: 4px;
-    }
-
-    .panel::-webkit-scrollbar-thumb:hover {
-      background: var(--accent-purple);
+    @media (max-width: 620px) {
+      body { padding: 16px; }
+      .header-row { flex-direction: column; align-items: flex-start; }
+      .city-board { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .top-grid { grid-template-columns: 1fr; }
+      .stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
   </style>
 </head>
-
 <body>
-  <a href="../../index.html" class="back-button" title="Return to Infinity Nexus" aria-label="Return to home">← Back</a>
-  
-  <div id="homeScreen"
-    style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--primary-gradient); display: flex; align-items: center; justify-content: center; z-index: 9999;">
-    <div
-      style="background: white; border-radius: 20px; padding: 2.5rem; max-width: 600px; width: 90%; text-align: center; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);">
-      <h2 style="color: #667eea; font-size: 2.5rem; margin-bottom: 0.5rem;">💰 Wealth Builder</h2>
-      <p style="color: #666; font-size: 1rem; margin-bottom: 2rem;">Build your financial empire through tasks,
-        investments, and smart trading!</p>
-      <div style="display: flex; flex-direction: column; gap: 1rem;">
-        <button onclick="startWealthBuilder()"
-          style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 12px 30px; font-size: 1.1rem; border-radius: 10px; cursor: pointer; font-weight: 600; transition: all 0.3s;"
-          onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">🎮
-          Start Game</button>
-        <button onclick="toggleWealthHelp()"
-          style="background: rgba(102, 126, 234, 0.2); color: #667eea; border: 2px solid #667eea; padding: 12px 30px; font-size: 1.1rem; border-radius: 10px; cursor: pointer; font-weight: 600; transition: all 0.3s;"
-          onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">📖 How
-          to Play</button>
+  <a class="back-button" href="../../index.html">← Back</a>
+
+  <div class="app">
+    <aside class="panel sidebar">
+      <div class="brand">
+        <h1>NEON CITY</h1>
+        <span class="day-chip" id="dayChip">Day 1</span>
       </div>
-      <div id="wealthHelp"
-        style="display: none; margin-top: 1.5rem; text-align: left; background: #f8f9fa; padding: 1rem; border-radius: 10px; font-size: 0.9rem; color: #333;">
-        <strong style="color: #667eea;">Quick Start:</strong>
-        <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
-          <li><strong>Do Tasks:</strong> Earn money by completing simple typing tasks</li>
-          <li><strong>Freelance:</strong> Higher earnings but used less frequently</li>
-          <li><strong>Invest:</strong> Grow your money passively over time</li>
-          <li><strong>Quick Trade:</strong> High-risk, high-reward money multiplication</li>
-          <li><strong>Upgrades:</strong> Purchase boosts to improve your income streams</li>
-        </ul>
-      </div>
-    </div>
-  </div>
 
-  
-  <div class="bg-particles" id="bgParticles"></div>
-
-  
-  <div class="stats-overlay">
-    <div>Investments: <span id="statsInvestments">0</span></div>
-    <div>Startups: <span id="statsStartups">0</span></div>
-    <div>Total Income/sec: <span id="statsTotalIncome">$0</span></div>
-  </div>
-
-  <div class="container">
-    
-    <div class="main-card">
-      <div class="stats-header">
-        <div>
-          <h1>💰 Wealth Builder</h1>
-          <div class="subtitle">Build Your Financial Empire • v2.0</div>
+      <div class="stat-grid">
+        <div class="stat-box">
+          <div class="stat-label">Cash</div>
+          <div class="stat-value cash" id="cashStat">$150</div>
         </div>
-        <div id="money">$1</div>
-      </div>
-
-      <div class="income-display">
-        <h3>📈 Passive Income</h3>
-        <div id="incomePerSec">+$0.00/sec</div>
-        <div class="progress-bar">
-          <div class="progress-fill" id="incomeProgress"></div>
+        <div class="stat-box">
+          <div class="stat-label">Reputation</div>
+          <div class="stat-value rep" id="repStat">1</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value energy" id="energyStat">100%</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Vibe</div>
+          <div class="stat-value vibe" id="vibeStat">0</div>
         </div>
       </div>
 
-      <div class="action-buttons">
-        <button id="taskBtn" class="btn btn-primary">
-          <span>💼 Do Task</span>
-          <span class="btn-cooldown" id="taskCooldown">Ready</span>
-        </button>
-        <button id="freelanceBtn" class="btn btn-success">
-          <span>🎯 Freelance</span>
-          <span class="btn-cooldown" id="freelanceCooldown">Ready</span>
-        </button>
-        <button id="investBtn" class="btn btn-primary" disabled>
-          <span>📊 Invest</span>
-          <span class="btn-cooldown">$10</span>
-        </button>
-        <button id="quickTradeBtn" class="btn btn-warning">
-          <span>⚡ Quick Trade</span>
-          <span class="btn-cooldown" id="tradeCooldown">Ready</span>
-        </button>
+      <div class="action-list">
+        <button class="action-btn primary" id="workBtn">Work Shift</button>
+        <button class="action-btn success" id="tradeBtn">Trade Goods</button>
+        <button class="action-btn warn" id="upgradeBtn">Upgrade District</button>
+        <button class="action-btn rose" id="restBtn">Rest & Recover</button>
       </div>
 
-      <div id="taskArea" style="display: none;">
-        <div class="task-instruction" id="taskInstruction">Type the word shown below:</div>
-        <input type="text" id="taskInput" class="task-input" placeholder="Type here...">
-        <button id="taskSubmit" class="btn btn-success task-submit">Submit Task</button>
+      <div class="mission-card">
+        <h3>Objective</h3>
+        <div class="mission-title" id="missionTitle">Open 2 businesses</div>
+        <div class="mission-bar"><div class="mission-fill" id="missionFill"></div></div>
+        <div id="missionText">0 / 2</div>
       </div>
 
-      <p id="message"></p>
+      <div class="inventory-box">
+        <h3>Inventory</h3>
+        <div class="inventory-list" id="inventoryList"></div>
+      </div>
+    </aside>
 
-      <div id="opportunities" class="opportunities-section">
-        <h3>🌟 Growth Opportunities</h3>
-        <div class="opportunities-grid">
-          <button id="partTimeBtn" class="btn btn-success">
-            <span>🕐 Part-Time Job</span>
-            <span class="btn-cooldown" id="partTimeCooldown">Ready</span>
-          </button>
-          <button id="stockBtn" class="btn btn-warning">
-            <span>📈 Stock Market</span>
-            <span class="btn-cooldown" id="stockCooldown">Ready</span>
-          </button>
-          <button id="consultingBtn" class="btn btn-primary">
-            <span>👔 Consulting</span>
-            <span class="btn-cooldown" id="consultingCooldown">Ready</span>
-          </button>
-          <button id="cryptoBtn" class="btn btn-danger">
-            <span>₿ Crypto Trading</span>
-            <span class="btn-cooldown" id="cryptoCooldown">Ready</span>
-          </button>
+    <main class="panel main-panel">
+      <div class="header-row">
+        <h2>City Growth</h2>
+        <div class="status-pill" id="incomePill">+$0 / sec</div>
+      </div>
+
+      <div class="top-grid">
+        <div class="city-card">
+          <h3>District map</h3>
+          <div id="cityBoard" class="city-board" aria-label="City map"></div>
+        </div>
+
+        <div class="mini-game-card">
+          <h3>Quick click rush</h3>
+          <div id="miniGame" class="mini-game" aria-label="Quick click game area"></div>
+          <button class="mini-btn" id="spawnTargetBtn">Spawn target</button>
         </div>
       </div>
 
-      <div id="highTierOpportunities" class="opportunities-section" style="display:none;">
-        <h3>💎 Premium Ventures</h3>
-        <div class="opportunities-grid">
-          <button id="startupBtn" class="btn btn-success">
-            <span>🚀 Launch Startup</span>
-            <span class="btn-cooldown">$50</span>
-          </button>
-        </div>
+      <div class="log-box">
+        <h3>City log</h3>
+        <div class="log-list" id="logList"></div>
       </div>
-    </div>
+    </main>
 
-    
-    <div class="panels-grid">
-      <div id="marketSection" class="panel">
-        <h3>🏪 Market Trading</h3>
-        <p style="color: var(--text-secondary); margin-bottom: 15px; font-weight: 500;">Buy low, sell high! Prices
-          change every 10 seconds.</p>
-        <div id="marketGrid" class="grid"></div>
-      </div>
-
-      <div id="craftingPanel" class="panel">
-        <h3>🛠️ Crafting Workshop</h3>
-        <p style="color: var(--text-secondary); margin-bottom: 15px; font-weight: 500;">Create valuable items from
-          resources</p>
-        <div id="recipeGrid" class="grid"></div>
-      </div>
-
-      <div id="buildingPanel" class="panel">
-        <h3>🏗️ Business Empire</h3>
-        <p style="color: var(--text-secondary); margin-bottom: 15px; font-weight: 500;">Build and manage your
-          enterprises</p>
-        <div id="buildingGrid" class="grid"></div>
-      </div>
-
-      <div id="investingPanel" class="panel">
-        <h3>💹 Long-term Assets</h3>
-        <p style="color: var(--text-secondary); margin-bottom: 15px; font-weight: 500;">Invest in appreciating assets
-        </p>
-        <div id="assetGrid" class="grid"></div>
-      </div>
-    </div>
+    <aside class="panel right-panel">
+      <h3>Build menu</h3>
+      <div id="buildList" class="build-list"></div>
+    </aside>
   </div>
 
   <script>
+    const catalog = [
+      { id: 'cafe', name: 'Cafe', icon: '☕', cost: 80, income: 8, output: 'coffee', color: '#fbbf24', desc: 'Coffee rush' },
+      { id: 'market', name: 'Market', icon: '🛒', cost: 110, income: 12, output: 'food', color: '#34d399', desc: 'Fresh produce' },
+      { id: 'studio', name: 'Studio', icon: '🎨', cost: 140, income: 15, output: 'design', color: '#60a5fa', desc: 'Creative work' },
+      { id: 'lab', name: 'Lab', icon: '🔬', cost: 200, income: 20, output: 'tech', color: '#a78bfa', desc: 'R&D' },
+      { id: 'yard', name: 'Workshop', icon: '🛠️', cost: 180, income: 18, output: 'goods', color: '#fb7185', desc: 'Repairs & builds' },
+      { id: 'club', name: 'Club', icon: '🎵', cost: 250, income: 26, output: 'vibe', color: '#f472b6', desc: 'Nightlife buzz' }
+    ];
+
     const state = {
-      money: 1,
-      investments: 0,
-      investmentCost: 10,
-      investmentsYieldPerSec: 0.5,
-      startups: 0,
-      startupCost: 50,
-      startupYieldPerSec: 2.5,
-      totalIncomePerSec: 0,
-      buildings: [
-        { name: "Coffee Shop", cost: 500, incomePerMin: 50, owned: 0, description: "A cozy cafe" },
-        { name: "Tech Store", cost: 1000, incomePerMin: 100, owned: 0, description: "Electronics retailer" },
-        { name: "Restaurant", cost: 2500, incomePerMin: 250, owned: 0, description: "Fine dining establishment" },
-        { name: "Hotel Chain", cost: 10000, incomePerMin: 1000, owned: 0, description: "Luxury hospitality" }
-      ],
-      assets: [
-        { name: "Stock Portfolio", cost: 1000, growthPerMin: 0.10, owned: 0, description: "Diverse stock holdings" },
-        { name: "Real Estate", cost: 5000, growthPerMin: 0.20, owned: 0, description: "Property investments" },
-        { name: "Gold Reserves", cost: 2500, growthPerMin: 0.15, owned: 0, description: "Precious metal storage" },
-        { name: "Tech Startup Shares", cost: 10000, growthPerMin: 0.30, owned: 0, description: "High-risk, high-reward" }
-      ],
-      market: {
-        items: [
-          { name: "Coffee Beans", basePrice: 15, volatility: 0.3, currentPrice: 15, owned: 0, description: "Basic commodity" },
-          { name: "Tech Gadgets", basePrice: 30, volatility: 0.5, currentPrice: 30, owned: 0, description: "Consumer electronics" },
-          { name: "Rare Gems", basePrice: 50, volatility: 0.7, currentPrice: 50, owned: 0, description: "Precious stones" },
-          { name: "Art Pieces", basePrice: 75, volatility: 0.4, currentPrice: 75, owned: 0, description: "Fine art" },
-          { name: "Gold Bars", basePrice: 100, volatility: 0.8, currentPrice: 100, owned: 0, description: "Bullion" },
-          { name: "Electronics", basePrice: 45, volatility: 0.4, currentPrice: 45, owned: 0, description: "Components" }
-        ],
-        lastUpdate: Date.now()
+      cash: 150,
+      reputation: 1,
+      energy: 100,
+      vibe: 0,
+      day: 1,
+      totalIncome: 0,
+      selectedBuild: 'cafe',
+      mission: {
+        title: 'Open 2 businesses',
+        progress: 0,
+        target: 2,
+        done: false
       },
-      crafting: {
-        recipes: [
-          { name: "Premium Coffee", ingredients: [{ name: "Coffee Beans", amount: 3 }], value: 60, description: "Artisanal blend" },
-          { name: "Tech Bundle", ingredients: [{ name: "Tech Gadgets", amount: 2 }, { name: "Electronics", amount: 1 }], value: 120, description: "Complete tech kit" },
-          { name: "Luxury Set", ingredients: [{ name: "Rare Gems", amount: 1 }, { name: "Gold Bars", amount: 1 }], value: 200, description: "High-end collection" }
-        ]
+      board: Array.from({ length: 16 }, () => ({ building: null, level: 0 })),
+      inventory: {
+        coffee: 0,
+        food: 0,
+        design: 0,
+        tech: 0,
+        goods: 0,
+        vibe: 0
       },
-      tasks: [
-        { word: "INVEST", reward: 5 },
-        { word: "TRADE", reward: 5 },
-        { word: "PROFIT", reward: 5 },
-        { word: "MARKET", reward: 5 },
-        { word: "WEALTH", reward: 5 },
-        { word: "CAPITAL", reward: 8 },
-        { word: "DIVIDEND", reward: 8 },
-        { word: "PORTFOLIO", reward: 8 }
-      ],
-      currentTask: null,
-      prestige: 0,
-      gameStartTime: Date.now(),
-      cooldowns: {
-        task: 0,
-        freelance: 0,
-        quickTrade: 0,
-        partTime: 0,
-        stock: 0,
-        consulting: 0,
-        crypto: 0
-      },
-      cooldownDurations: {
-        task: 10,
-        freelance: 15,
-        quickTrade: 5,
-        partTime: 30,
-        stock: 45,
-        consulting: 60,
-        crypto: 90
-      }
+      log: [
+        { text: 'Your first plot is ready for a fresh start.', tone: 'success' }
+      ]
     };
 
-    const moneyEl = document.getElementById('money');
-    const incomePerSecEl = document.getElementById('incomePerSec');
-    const incomeProgressEl = document.getElementById('incomeProgress');
-    const messageEl = document.getElementById('message');
-    const taskAreaEl = document.getElementById('taskArea');
-    const taskInstructionEl = document.getElementById('taskInstruction');
-    const taskInputEl = document.getElementById('taskInput');
-    const taskSubmitBtn = document.getElementById('taskSubmit');
+    const moneyStat = document.getElementById('cashStat');
+    const repStat = document.getElementById('repStat');
+    const energyStat = document.getElementById('energyStat');
+    const vibeStat = document.getElementById('vibeStat');
+    const cityBoardEl = document.getElementById('cityBoard');
+    const inventoryList = document.getElementById('inventoryList');
+    const buildList = document.getElementById('buildList');
+    const missionTitleEl = document.getElementById('missionTitle');
+    const missionFillEl = document.getElementById('missionFill');
+    const missionTextEl = document.getElementById('missionText');
+    const incomePill = document.getElementById('incomePill');
+    const logList = document.getElementById('logList');
+    const miniGameEl = document.getElementById('miniGame');
+    const targetBtn = document.getElementById('spawnTargetBtn');
+    const dayChip = document.getElementById('dayChip');
 
-    const statsInvestmentsEl = document.getElementById('statsInvestments');
-    const statsStartupsEl = document.getElementById('statsStartups');
-    const statsTotalIncomeEl = document.getElementById('statsTotalIncome');
-
-    const taskCooldownEl = document.getElementById('taskCooldown');
-    const freelanceCooldownEl = document.getElementById('freelanceCooldown');
-    const tradeCooldownEl = document.getElementById('tradeCooldown');
-    const partTimeCooldownEl = document.getElementById('partTimeCooldown');
-    const stockCooldownEl = document.getElementById('stockCooldown');
-    const consultingCooldownEl = document.getElementById('consultingCooldown');
-    const cryptoCooldownEl = document.getElementById('cryptoCooldown');
-
-    const taskBtn = document.getElementById('taskBtn');
-    const freelanceBtn = document.getElementById('freelanceBtn');
-    const investBtn = document.getElementById('investBtn');
-    const quickTradeBtn = document.getElementById('quickTradeBtn');
-    const partTimeBtn = document.getElementById('partTimeBtn');
-    const stockBtn = document.getElementById('stockBtn');
-    const consultingBtn = document.getElementById('consultingBtn');
-    const cryptoBtn = document.getElementById('cryptoBtn');
-    const startupBtn = document.getElementById('startupBtn');
-
-    function formatMoney(n) {
-      if (n >= 1000000) return '$' + (n / 1000000).toFixed(2) + 'M';
-      if (n >= 1000) return '$' + (n / 1000).toFixed(2) + 'K';
-      return '$' + Math.round(n).toLocaleString();
+    function currency(value) {
+      if (value >= 1000) return '$' + (value / 1000).toFixed(1) + 'k';
+      return '$' + Math.floor(value);
     }
 
-    function formatIncome(n) {
-      return '+' + formatMoney(n) + '/sec';
+    function addLog(text, tone = 'success') {
+      state.log.unshift({ text, tone });
+      state.log = state.log.slice(0, 5);
+      renderLog();
     }
 
-    function formatTime(seconds) {
-      if (seconds <= 0) return 'Ready';
-      if (seconds < 60) return seconds + 's';
-      const mins = Math.floor(seconds / 60);
-      const secs = seconds % 60;
-      return mins + 'm ' + secs + 's';
+    function renderLog() {
+      logList.innerHTML = state.log.map(item =>
+        `<div class="log-item ${item.tone}">${item.text}</div>`
+      ).join('');
     }
 
-    function createParticles() {
-      const container = document.getElementById('bgParticles');
-      for (let i = 0; i < 20; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'bg-particle';
+    function getSelectedBuild() {
+      return catalog.find(item => item.id === state.selectedBuild);
+    }
 
-        const size = Math.random() * 20 + 5;
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        particle.style.left = `${Math.random() * 100}%`;
-        particle.style.animationDelay = `${Math.random() * 20}s`;
-        particle.style.animationDuration = `${20 + Math.random() * 20}s`;
+    function calcIncome() {
+      let total = 0;
+      for (const tile of state.board) {
+        if (!tile.building) continue;
+        const build = catalog.find(item => item.id === tile.building);
+        total += build.income * tile.level * (1 + state.reputation * 0.12);
+      }
+      return total;
+    }
 
-        const colors = ['rgba(255, 255, 255, 0.2)', 'rgba(16, 185, 129, 0.1)', 'rgba(59, 130, 246, 0.1)'];
-        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+    function updateMission() {
+      const opened = state.board.filter(tile => tile.building).length;
+      state.mission.progress = opened;
+      const percent = Math.min(100, (opened / state.mission.target) * 100);
+      missionTitleEl.textContent = state.mission.title;
+      missionFillEl.style.width = percent + '%';
+      missionTextEl.textContent = `${opened} / ${state.mission.target}`;
 
-        container.appendChild(particle);
+      if (opened >= state.mission.target && !state.mission.done) {
+        state.mission.done = true;
+        state.reputation += 1;
+        state.vibe += 10;
+        addLog('Objective cleared: the district is buzzing.', 'warning');
       }
     }
 
-    function updateCooldowns() {
-      const now = Date.now();
-
-      taskCooldownEl.textContent = formatTime(state.cooldowns.task);
-      freelanceCooldownEl.textContent = formatTime(state.cooldowns.freelance);
-      tradeCooldownEl.textContent = formatTime(state.cooldowns.quickTrade);
-      partTimeCooldownEl.textContent = formatTime(state.cooldowns.partTime);
-      stockCooldownEl.textContent = formatTime(state.cooldowns.stock);
-      consultingCooldownEl.textContent = formatTime(state.cooldowns.consulting);
-      cryptoCooldownEl.textContent = formatTime(state.cooldowns.crypto);
-
-      taskBtn.disabled = state.cooldowns.task > 0;
-      freelanceBtn.disabled = state.cooldowns.freelance > 0;
-      quickTradeBtn.disabled = state.cooldowns.quickTrade > 0;
-      partTimeBtn.disabled = state.cooldowns.partTime > 0;
-      stockBtn.disabled = state.cooldowns.stock > 0 || state.money < 25;
-      consultingBtn.disabled = state.cooldowns.consulting > 0;
-      cryptoBtn.disabled = state.cooldowns.crypto > 0 || state.money < 50;
-
-      taskBtn.classList.toggle('cooldown-active', state.cooldowns.task > 0);
-      freelanceBtn.classList.toggle('cooldown-active', state.cooldowns.freelance > 0);
-      quickTradeBtn.classList.toggle('cooldown-active', state.cooldowns.quickTrade > 0);
-      partTimeBtn.classList.toggle('cooldown-active', state.cooldowns.partTime > 0);
-      stockBtn.classList.toggle('cooldown-active', state.cooldowns.stock > 0);
-      consultingBtn.classList.toggle('cooldown-active', state.cooldowns.consulting > 0);
-      cryptoBtn.classList.toggle('cooldown-active', state.cooldowns.crypto > 0);
+    function renderInventory() {
+      inventoryList.innerHTML = Object.entries(state.inventory)
+        .map(([key, val]) => `<div class="inventory-item"><span>${key}</span><strong>${val}</strong></div>`)
+        .join('');
     }
 
-    function updateUI() {
-      moneyEl.textContent = formatMoney(state.money);
-
-      state.totalIncomePerSec =
-        (state.investments * state.investmentsYieldPerSec) +
-        (state.startups * state.startupYieldPerSec) +
-        state.buildings.reduce((sum, b) => sum + (b.owned * b.incomePerMin / 60), 0);
-
-      incomePerSecEl.textContent = formatIncome(state.totalIncomePerSec);
-
-      statsInvestmentsEl.textContent = state.investments;
-      statsStartupsEl.textContent = state.startups;
-      statsTotalIncomeEl.textContent = formatMoney(state.totalIncomePerSec);
-
-      investBtn.disabled = state.money < state.investmentCost;
-      investBtn.innerHTML = `<span>📊 Invest</span><span class="btn-cooldown">${formatMoney(state.investmentCost)}</span>`;
-
-      startupBtn.disabled = state.money < state.startupCost;
-      startupBtn.innerHTML = `<span>🚀 Startup</span><span class="btn-cooldown">${formatMoney(state.startupCost)}</span>`;
-
-      document.getElementById('highTierOpportunities').style.display =
-        state.money > 100 ? 'block' : 'none';
-
-      renderMarket();
-      renderBuildings();
-      renderAssets();
-      renderRecipes();
-
-      updateCooldowns();
-    }
-
-    function showMessage(text, type = 'info') {
-      messageEl.textContent = text;
-      messageEl.className = `message-${type}`;
-
-      setTimeout(() => {
-        messageEl.style.opacity = '0';
-        messageEl.style.transform = 'translateY(-10px)';
-      }, 3000);
-    }
-
-    function setCooldown(type) {
-      state.cooldowns[type] = state.cooldownDurations[type];
-    }
-
-    function startTask() {
-      if (state.cooldowns.task > 0) return;
-
-      setCooldown('task');
-      state.currentTask = state.tasks[Math.floor(Math.random() * state.tasks.length)];
-      taskInstructionEl.textContent = `Type: "${state.currentTask.word}"`;
-      taskAreaEl.style.display = 'block';
-      taskInputEl.value = '';
-      taskInputEl.focus();
-      updateCooldowns();
-    }
-
-    taskSubmitBtn.addEventListener('click', () => {
-      if (!state.currentTask) return;
-
-      if (taskInputEl.value.toUpperCase() === state.currentTask.word) {
-        state.money += state.currentTask.reward;
-        showMessage(`Task completed! +${formatMoney(state.currentTask.reward)}`, 'success');
-        taskAreaEl.style.display = 'none';
-        updateUI();
-      } else {
-        showMessage('Incorrect! Try again.', 'error');
-      }
-    });
-
-    taskInputEl.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        taskSubmitBtn.click();
-      }
-    });
-
-    taskBtn.addEventListener('click', startTask);
-
-    freelanceBtn.addEventListener('click', () => {
-      if (state.cooldowns.freelance > 0) return;
-
-      setCooldown('freelance');
-      const reward = 15 + Math.floor(Math.random() * 10);
-      state.money += reward;
-      showMessage(`Freelance project completed! +${formatMoney(reward)}`, 'success');
-      updateUI();
-    });
-
-    investBtn.addEventListener('click', () => {
-      if (state.money >= state.investmentCost) {
-        state.money -= state.investmentCost;
-        state.investments++;
-        state.investmentCost = Math.floor(state.investmentCost * 1.15);
-        showMessage(`Investment purchased! Passive income increased.`, 'success');
-        updateUI();
-      }
-    });
-
-    quickTradeBtn.addEventListener('click', () => {
-      if (state.cooldowns.quickTrade > 0) return;
-
-      setCooldown('quickTrade');
-      if (state.money >= 5) {
-        const risk = Math.random();
-        if (risk > 0.3) {
-          const gain = Math.floor(Math.random() * 20) + 5;
-          state.money += gain;
-          showMessage(`Quick trade successful! +${formatMoney(gain)}`, 'success');
-        } else {
-          const loss = Math.floor(Math.random() * 15) + 5;
-          state.money = Math.max(0, state.money - loss);
-          showMessage(`Trade failed! -${formatMoney(loss)}`, 'error');
-        }
-        updateUI();
-      }
-    });
-
-    partTimeBtn.addEventListener('click', () => {
-      if (state.cooldowns.partTime > 0) return;
-
-      setCooldown('partTime');
-      state.money += 10;
-      showMessage(`Part-time shift completed! +${formatMoney(10)}`, 'success');
-      updateUI();
-    });
-
-    stockBtn.addEventListener('click', () => {
-      if (state.cooldowns.stock > 0) return;
-
-      setCooldown('stock');
-      if (state.money >= 25) {
-        const risk = Math.random();
-        if (risk > 0.4) {
-          const gain = Math.floor(Math.random() * 50) + 10;
-          state.money += gain;
-          showMessage(`Stock investment paid off! +${formatMoney(gain)}`, 'success');
-        } else {
-          const loss = Math.floor(Math.random() * 40) + 10;
-          state.money = Math.max(0, state.money - loss);
-          showMessage(`Stock market crash! -${formatMoney(loss)}`, 'error');
-        }
-        updateUI();
-      }
-    });
-
-    consultingBtn.addEventListener('click', () => {
-      if (state.cooldowns.consulting > 0) return;
-
-      setCooldown('consulting');
-      state.money += 30;
-      showMessage(`Consulting contract! +${formatMoney(30)}`, 'success');
-      updateUI();
-    });
-
-    cryptoBtn.addEventListener('click', () => {
-      if (state.cooldowns.crypto > 0) return;
-
-      setCooldown('crypto');
-      if (state.money >= 50) {
-        const risk = Math.random();
-        if (risk > 0.5) {
-          const gain = Math.floor(Math.random() * 100) + 50;
-          state.money += gain;
-          showMessage(`Crypto mooned! +${formatMoney(gain)}`, 'success');
-        } else {
-          const loss = Math.floor(Math.random() * 75) + 25;
-          state.money = Math.max(0, state.money - loss);
-          showMessage(`Crypto crashed! -${formatMoney(loss)}`, 'error');
-        }
-        updateUI();
-      }
-    });
-
-    startupBtn.addEventListener('click', () => {
-      if (state.money >= state.startupCost) {
-        state.money -= state.startupCost;
-        state.startups++;
-        state.startupCost = Math.floor(state.startupCost * 1.25);
-        showMessage(`Startup launched! +${formatMoney(state.startupYieldPerSec)}/sec passive income`, 'success');
-        updateUI();
-      }
-    });
-
-    function renderMarket() {
-      const grid = document.getElementById('marketGrid');
-      if (!grid) return;
-
-      grid.innerHTML = state.market.items.map(item => `
-        <div class="grid-item">
-          <div class="grid-header">
-            <div class="grid-name">${item.name}</div>
-            <div class="grid-price">${formatMoney(item.currentPrice)}</div>
+    function renderBuildMenu() {
+      buildList.innerHTML = catalog.map(build => `
+        <div class="build-card ${state.selectedBuild === build.id ? 'selected' : ''}">
+          <div>
+            <div class="build-name"><span>${build.icon}</span><span>${build.name}</span></div>
+            <div class="build-meta">${build.desc} • ${currency(build.cost)}</div>
           </div>
-          <div class="grid-details">
-            <div>${item.description}</div>
-            <div>Owned: ${item.owned}</div>
-          </div>
-          <div class="grid-actions">
-            <button class="small-btn buy-btn" onclick="buyMarketItem('${item.name}')" 
-              ${state.money < item.currentPrice ? 'disabled' : ''}>
-              Buy
-            </button>
-            <button class="small-btn sell-btn" onclick="sellMarketItem('${item.name}')" 
-              ${item.owned === 0 ? 'disabled' : ''}>
-              Sell
-            </button>
-          </div>
+          <button data-build="${build.id}">Build</button>
         </div>
       `).join('');
-    }
 
-    function buyMarketItem(name) {
-      const item = state.market.items.find(x => x.name === name);
-      if (!item || state.money < item.currentPrice) return;
-
-      state.money -= item.currentPrice;
-      item.owned++;
-      showMessage(`Bought ${item.name} for ${formatMoney(item.currentPrice)}`, 'success');
-      updateUI();
-    }
-
-    function sellMarketItem(name) {
-      const item = state.market.items.find(x => x.name === name);
-      if (!item || item.owned === 0) return;
-
-      state.money += item.currentPrice;
-      item.owned--;
-      showMessage(`Sold ${item.name} for ${formatMoney(item.currentPrice)}`, 'success');
-      updateUI();
-    }
-
-    function updateMarketPrices() {
-      const now = Date.now();
-      const timeDiff = (now - state.market.lastUpdate) / 1000;
-
-      if (timeDiff > 10) {
-        state.market.items.forEach(item => {
-          const change = (Math.random() - 0.5) * 2 * item.volatility;
-          item.currentPrice = Math.max(1, Math.floor(item.currentPrice * (1 + change)));
+      Array.from(document.querySelectorAll('[data-build]')).forEach(button => {
+        button.addEventListener('click', () => {
+          state.selectedBuild = button.dataset.build;
+          renderBuildMenu();
         });
-        state.market.lastUpdate = now;
-        renderMarket();
-      }
+      });
     }
 
-    function renderBuildings() {
-      const grid = document.getElementById('buildingGrid');
-      if (!grid) return;
+    function renderBoard() {
+      cityBoardEl.innerHTML = state.board.map((tile, index) => {
+        if (!tile.building) {
+          return `<div class="tile empty" data-index="${index}" title="Open tile"></div>`;
+        }
 
-      grid.innerHTML = state.buildings.map(building => `
-        <div class="grid-item">
-          <div class="grid-header">
-            <div class="grid-name">${building.name}</div>
-            <div class="grid-price">${formatMoney(building.cost)}</div>
-          </div>
-          <div class="grid-details">
-            <div>${building.description}</div>
-            <div>Income: ${formatMoney(building.incomePerMin)}/min</div>
-          </div>
-          <div class="grid-details">
-            <div>Owned: ${building.owned}</div>
-            <div>Total: ${formatMoney(building.owned * building.incomePerMin)}/min</div>
-          </div>
-          <div class="grid-actions">
-            <button class="small-btn buy-btn" onclick="buyBuilding('${building.name}')" 
-              ${state.money < building.cost ? 'disabled' : ''}>
-              Buy
-            </button>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function buyBuilding(name) {
-      const building = state.buildings.find(x => x.name === name);
-      if (!building || state.money < building.cost) return;
-
-      state.money -= building.cost;
-      building.owned++;
-      building.cost = Math.floor(building.cost * 1.2);
-      showMessage(`Built ${building.name}! +${formatMoney(building.incomePerMin)}/min income`, 'success');
-      updateUI();
-    }
-
-    function renderAssets() {
-      const grid = document.getElementById('assetGrid');
-      if (!grid) return;
-
-      grid.innerHTML = state.assets.map(asset => `
-        <div class="grid-item">
-          <div class="grid-header">
-            <div class="grid-name">${asset.name}</div>
-            <div class="grid-price">${formatMoney(asset.cost)}</div>
-          </div>
-          <div class="grid-details">
-            <div>${asset.description}</div>
-            <div>Growth: ${(asset.growthPerMin * 100).toFixed(1)}%/min</div>
-          </div>
-          <div class="grid-details">
-            <div>Owned: ${asset.owned}</div>
-            <div>Value: ${formatMoney(asset.owned * asset.cost)}</div>
-          </div>
-          <div class="grid-actions">
-            <button class="small-btn buy-btn" onclick="buyAsset('${asset.name}')" 
-              ${state.money < asset.cost ? 'disabled' : ''}>
-              Invest
-            </button>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function buyAsset(name) {
-      const asset = state.assets.find(x => x.name === name);
-      if (!asset || state.money < asset.cost) return;
-
-      state.money -= asset.cost;
-      asset.owned++;
-      asset.cost = Math.floor(asset.cost * 1.15);
-      showMessage(`Invested in ${asset.name}!`, 'success');
-      updateUI();
-    }
-
-    function renderRecipes() {
-      const grid = document.getElementById('recipeGrid');
-      if (!grid) return;
-
-      grid.innerHTML = state.crafting.recipes.map(recipe => {
-        const canCraft = recipe.ingredients.every(ing => {
-          const item = state.market.items.find(x => x.name === ing.name);
-          return item && item.owned >= ing.amount;
-        });
-
+        const build = catalog.find(item => item.id === tile.building);
         return `
-          <div class="grid-item">
-            <div class="grid-header">
-              <div class="grid-name">${recipe.name}</div>
-              <div class="grid-price">${formatMoney(recipe.value)}</div>
-            </div>
-            <div class="grid-details">
-              <div>${recipe.description}</div>
-            </div>
-            <div class="grid-details">
-              <div>Ingredients:</div>
-              <div>${recipe.ingredients.map(ing => `${ing.name} x${ing.amount}`).join(', ')}</div>
-            </div>
-            <div class="grid-actions">
-              <button class="small-btn buy-btn" onclick="craftItem('${recipe.name}')" 
-                ${!canCraft ? 'disabled' : ''}>
-                Craft
-              </button>
+          <div class="tile occupied" data-index="${index}" style="background: linear-gradient(180deg, rgba(15,23,42,0.9), ${build.color}33);">
+            <div class="tile-inner">
+              <span class="tile-icon">${build.icon}</span>
+              <span class="tile-name">${build.name}</span>
+              <span class="tile-lvl">Lvl ${tile.level}</span>
             </div>
           </div>
         `;
       }).join('');
+
+      cityBoardEl.querySelectorAll('.tile').forEach(tile => {
+        tile.addEventListener('click', () => handleTileClick(Number(tile.dataset.index)));
+      });
     }
 
-    function craftItem(name) {
-      const recipe = state.crafting.recipes.find(x => x.name === name);
-      if (!recipe) return;
+    function handleTileClick(index) {
+      const tile = state.board[index];
+      const selected = getSelectedBuild();
 
-      for (const ing of recipe.ingredients) {
-        const item = state.market.items.find(x => x.name === ing.name);
-        if (!item || item.owned < ing.amount) {
-          showMessage(`Not enough ${ing.name}!`, 'error');
+      if (!tile.building) {
+        if (state.cash < selected.cost) {
+          addLog('Not enough cash for that build.', 'error');
           return;
         }
+        state.cash -= selected.cost;
+        tile.building = selected.id;
+        tile.level = 1;
+        state.inventory[selected.output] += 2;
+        addLog(`${selected.name} opened on the block.`, 'success');
+      } else {
+        const build = catalog.find(item => item.id === tile.building);
+        const cost = Math.round(build.cost * 0.7 * tile.level);
+        if (state.cash < cost) {
+          addLog('This block still needs more money to upgrade.', 'error');
+          return;
+        }
+        state.cash -= cost;
+        tile.level += 1;
+        state.vibe += 2;
+        addLog(`${build.name} upgraded to level ${tile.level}.`, 'warning');
       }
 
-      for (const ing of recipe.ingredients) {
-        const item = state.market.items.find(x => x.name === ing.name);
-        item.owned -= ing.amount;
-      }
-
-      state.money += recipe.value;
-      showMessage(`Crafted ${recipe.name}! +${formatMoney(recipe.value)}`, 'success');
+      updateMission();
       updateUI();
     }
 
-    function cooldownLoop() {
-      const now = Date.now();
+    function spawnTarget() {
+      const target = document.createElement('button');
+      target.className = 'target';
 
-      Object.keys(state.cooldowns).forEach(key => {
-        if (state.cooldowns[key] > 0) {
-          state.cooldowns[key]--;
-        }
+      const gameW = miniGameEl.clientWidth;
+      const gameH = miniGameEl.clientHeight;
+      const x = Math.max(10, Math.random() * (gameW - 54));
+      const y = Math.max(10, Math.random() * (gameH - 54));
+
+      target.style.left = x + 'px';
+      target.style.top = y + 'px';
+      target.type = 'button';
+      target.setAttribute('aria-label', 'Hit target');
+
+      target.addEventListener('click', () => {
+        const bonus = 12 + Math.floor(Math.random() * 18);
+        state.cash += bonus;
+        state.energy = Math.min(100, state.energy + 4);
+        state.vibe += 1;
+        addLog(`Target hit! +${currency(bonus)} earned.`, 'success');
+        target.remove();
+        updateUI();
       });
 
-      updateCooldowns();
-      setTimeout(cooldownLoop, 1000);
+      miniGameEl.innerHTML = '';
+      miniGameEl.appendChild(target);
     }
 
-    function passiveIncomeLoop() {
-      const income = state.totalIncomePerSec;
-      if (income > 0) {
-        state.money += income;
-        const progress = Math.min(100, (income * 100) / 5);
-        incomeProgressEl.style.width = `${progress}%`;
+    function updateUI() {
+      const income = calcIncome();
+      state.totalIncome = income;
+
+      moneyStat.textContent = currency(state.cash);
+      repStat.textContent = state.reputation;
+      energyStat.textContent = Math.round(state.energy) + '%';
+      vibeStat.textContent = state.vibe;
+      incomePill.textContent = `+$${income.toFixed(1)} / sec`;
+      dayChip.textContent = `Day ${state.day}`;
+
+      renderBoard();
+      renderBuildMenu();
+      renderInventory();
+      updateMission();
+    }
+
+    document.getElementById('workBtn').addEventListener('click', () => {
+      if (state.energy < 15) {
+        addLog('You are too drained to work right now.', 'error');
+        return;
       }
+
+      const reward = 18 + state.reputation * 9 + Math.random() * 12;
+      state.cash += reward;
+      state.energy = Math.max(0, state.energy - 15);
+      state.vibe += 3;
+      addLog(`Shift complete. +${currency(reward)} earned.`, 'success');
       updateUI();
-      setTimeout(passiveIncomeLoop, 1000);
-    }
-
-    function marketUpdateLoop() {
-      updateMarketPrices();
-      setTimeout(marketUpdateLoop, 1000);
-    }
-
-    function assetGrowthLoop() {
-      state.assets.forEach(asset => {
-        if (asset.owned > 0) {
-          const growth = asset.owned * asset.cost * (asset.growthPerMin / 60);
-          state.money += growth;
-        }
-      });
-      setTimeout(assetGrowthLoop, 60000); 
-    }
-
-    function init() {
-      createParticles();
-      updateUI();
-      cooldownLoop();
-      passiveIncomeLoop();
-      marketUpdateLoop();
-      assetGrowthLoop();
-    }
-
-    function startWealthBuilder() {
-      document.getElementById('homeScreen').style.display = 'none';
-    }
-
-    function toggleWealthHelp() {
-      const help = document.getElementById('wealthHelp');
-      help.style.display = help.style.display === 'none' ? 'block' : 'none';
-    }
-
-    init();
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        window.location.href = '../../index.html';
-      }
     });
+
+    document.getElementById('tradeBtn').addEventListener('click', () => {
+      const goods = Object.values(state.inventory).reduce((sum, val) => sum + val, 0);
+      if (goods <= 0) {
+        addLog('No goods to move today.', 'error');
+        return;
+      }
+
+      const payout = goods * 2.5 + state.reputation * 5;
+      state.cash += payout;
+      state.inventory.coffee = 0;
+      state.inventory.food = 0;
+      state.inventory.design = 0;
+      state.inventory.tech = 0;
+      state.inventory.goods = 0;
+      state.inventory.vibe = 0;
+      addLog(`Market trade landed. +${currency(payout)} earned.`, 'warning');
+      updateUI();
+    });
+
+    document.getElementById('upgradeBtn').addEventListener('click', () => {
+      const populated = state.board.filter(tile => tile.building).length;
+      if (populated === 0) {
+        addLog('You need to open a business before upgrading the district.', 'error');
+        return;
+      }
+      const cost = 50 + populated * 20;
+      if (state.cash < cost) {
+        addLog('The block needs more capital to improve.', 'error');
+        return;
+      }
+      state.cash -= cost;
+      state.reputation += 1;
+      state.vibe += 4;
+      addLog('District upgrade complete. Everything looks sharper.', 'success');
+      updateUI();
+    });
+
+    document.getElementById('restBtn').addEventListener('click', () => {
+      state.energy = Math.min(100, state.energy + 30);
+      state.cash = Math.max(0, state.cash - 5);
+      addLog('You took a breather and recovered energy.', 'warning');
+      updateUI();
+    });
+
+    targetBtn.addEventListener('click', spawnTarget);
+
+    setInterval(() => {
+      const income = calcIncome();
+      state.cash += income;
+      state.energy = Math.max(0, state.energy - 0.8);
+      state.vibe = Math.min(100, state.vibe + (income > 0 ? 0.2 : 0));
+
+      for (const tile of state.board) {
+        if (!tile.building) continue;
+        const build = catalog.find(item => item.id === tile.building);
+        if (build && build.output) {
+          state.inventory[build.output] = (state.inventory[build.output] || 0) + tile.level;
+        }
+      }
+
+      state.day += 0.25;
+      if (state.day >= 30) {
+        state.reputation += 1;
+        state.day = 1;
+        addLog('A new day begins. Your city has momentum.', 'warning');
+      }
+
+      updateUI();
+    }, 1000);
+
+    renderBuildMenu();
+    renderInventory();
+    renderBoard();
+    updateUI();
+    addLog('Welcome to Neon City. Build your first business.', 'success');
+    spawnTarget();
   </script>
 </body>
-
 </html>
-
-

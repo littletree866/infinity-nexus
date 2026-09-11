@@ -1,15 +1,11 @@
 # Infinity Nexus
-**Version 1.27.28** | Next Release: v1.28.28 (mid-September)
+**Version 1.28.28** | Next Release: v1.29.0 (mid-September)
 
-A comprehensive collection of HTML5-based games featuring diverse genres, engaging gameplay mechanics, and persistent progress tracking.
+A collection of HTML-5 browser games that require no external dependecies or frameworks.
 
 ## Overview
 
-Infinity Nexus is a pure JavaScript gaming platform offering a wide variety of games without external dependencies or frameworks. The project prioritizes performance, accessibility, and user experience through lightweight implementation and responsive design.
-
-### Development Focus
-
-As of February 2, 2026, development priorities have shifted toward quality improvements across existing games rather than rapid expansion. Monthly challenges remain a core feature, with new game releases scheduled at a measured pace to ensure quality standards.
+Infinity Nexus is a pure HTML/JavaScript platform with many games in diverse genres.
 
 ## Key Features
 
@@ -20,17 +16,6 @@ As of February 2, 2026, development priorities have shifted toward quality impro
 - **Intuitive Interface** – Accessible controls and clear gameplay mechanics
 - **No External Dependencies** – Self-contained HTML files with zero build process requirements
 - **Diverse Game Library** – Comprehensive selection spanning multiple genres and difficulty levels
-
-## Game Categories
-
-The platform includes games across multiple categories:
-- **Casino Games** – Traditional gambling
-- **Game Corner** – Classic gameplay patterns and mechanics
-- **Simulation Games** – City building, empire management, and lifestyle simulations
-
-## Bug Reporting & Support
-
-Issues and bugs can be reported via the feedback form located at the bottom of the main page. I encourage you to provide detailed information regarding any encountered problems to facilitate resolution.
 
 ## Contributing
 

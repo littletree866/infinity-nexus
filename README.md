@@ -1,5 +1,5 @@
 # Infinity Nexus
-**Version 1.28.28** | Next Release: v1.29.0 (mid-September)
+**Version 1.28.28** | Next Release: v1.29.0 
 
 A collection of HTML-5 browser games that require no external dependecies or frameworks.
 

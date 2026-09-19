@@ -246,7 +246,7 @@
         .hotkey-item { background: rgba(0, 0, 0, 0.05); padding: 10px; border-radius: 5px; font-size: 0.9rem; }
         .hotkey-key { display: inline-block; background: var(--dark); color: white; padding: 2px 8px; border-radius: 4px; font-family: monospace; margin-right: 5px; }
 
-        /* NEW: Floating Text Animation */
+        
         .floating-text {
             position: fixed; font-weight: 800; font-size: 1.4rem; pointer-events: none;
             animation: floatUp 1.2s ease-out forwards; z-index: 9999;
@@ -417,7 +417,7 @@
                 money: 100,
                 loan: 0,
                 day: 1,
-                inventory: [], // Now supports { ..., quantity: 1 }
+                inventory: [], 
                 reputation: 20,
                 artUnlocked: false,
                 timeLeft: 15,
@@ -528,7 +528,7 @@
                 const newCustomerCount = Math.floor(this.state.reputation / 20) + Math.floor(Math.random() * 3) + 1;
                 this.state.customersWaiting = newCustomerCount;
 
-                // Daily Event Logic
+                
                 if (Math.random() < 0.4) {
                     const specialEvents = this.dailyEvents.filter(e => e.name !== "Normal Day");
                     this.state.dailyEvent = specialEvents[Math.floor(Math.random() * specialEvents.length)];
@@ -620,7 +620,7 @@
 
                 let revenue = item.sellPrice;
                 
-                // Apply daily event multiplier
+                
                 if (this.state.dailyEvent && this.state.dailyEvent.item === item.name) {
                     revenue = Math.floor(revenue * this.state.dailyEvent.multiplier);
                 }
@@ -632,7 +632,7 @@
                 const customerWantsThis = customer.desiredItem === item.name || (customer.desiredItem === "Painting" && isPainting);
 
                 if (customer && customerWantsThis) {
-                    revenue += 5; // Bonus for perfect match
+                    revenue += 5; 
                     repChange += 3;
                     isPerfectMatch = true;
                 }
@@ -996,7 +996,7 @@
                     existingBadge.remove();
                 }
 
-                // Update Event Panel
+                
                 const eventPanel = document.getElementById('event-panel');
                 const eventDesc = document.getElementById('event-description');
                 if (this.state.dailyEvent && this.state.dailyEvent.name !== "Normal Day") {
@@ -1106,7 +1106,7 @@
         };
 
         window.onload = () => {
-            // Game initializes when the user clicks "Start Business"
+            
         };
     </script>
 </body>

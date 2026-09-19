@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ Arcane Duel · Reworked</title>
+    <title>Wizard Battle</title>
     <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
     <style>
         * {
@@ -294,15 +294,15 @@
 </head>
 <body>
 <div class="game-wrapper" id="app">
-    <!-- header -->
+    
     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:10px;">
         <h1 style="color:#cfbeff; font-size:2.8rem; text-shadow:0 0 20px #7f68cf;">⚡ ARCANE DUEL</h1>
         <div><span class="badge">🧙 Lv.<span id="player-level-display">1</span></span> <span class="gold-badge">🪙 <span id="gold-display">0</span></span></div>
     </div>
 
-    <!-- main two panels: player & enemy -->
+    
     <div class="flex-row">
-        <!-- player panel -->
+        
         <div class="panel">
             <div class="panel-title">🧙‍♂️ <span>Mage</span></div>
             <div class="stat-block">
@@ -324,7 +324,7 @@
             </div>
         </div>
 
-        <!-- enemy panel -->
+        
         <div class="panel">
             <div class="panel-title">👹 <span id="enemy-name-display">Wandering Fiend</span></div>
             <div class="enemy-card">
@@ -340,14 +340,14 @@
         </div>
     </div>
 
-    <!-- battle stage -->
+    
     <div class="battle-stage">
         <div class="fighter" id="player-emoji">🧙‍♂️</div>
         <div style="font-size:2.2rem; color:#6e5aa7;">⚡</div>
         <div class="fighter enemy-fighter" id="enemy-emoji">👹</div>
     </div>
 
-    <!-- spell grid -->
+    
     <div class="spell-grid" id="spell-grid">
         <button class="spell-btn" id="spell-fireball">🔥 Fireball</button>
         <button class="spell-btn" id="spell-frostbolt">❄️ Frostbolt</button>
@@ -357,7 +357,7 @@
         <button class="spell-btn powerful hidden" id="spell-blizzard">🌨️ Blizzard</button>
     </div>
 
-    <!-- action bar -->
+    
     <div class="action-bar">
         <button class="action-btn" id="next-enemy-btn">⚔️ Next Enemy</button>
         <button class="action-btn" id="rest-btn">🧘 Meditate</button>
@@ -365,12 +365,12 @@
         <button class="action-btn" id="return-map-btn">🗺️ World Map</button>
     </div>
 
-    <!-- log -->
+    
     <div class="log-box" id="log-box">
         <p class="special">✨ Welcome, Archmage. Explore the map and crush your foes.</p>
     </div>
 
-    <!-- map section -->
+    
     <div class="map-section" id="map-section">
         <div style="display:flex; justify-content:space-between; align-items:center;">
             <span style="font-size:1.8rem; color:#bcadf0;">🗺️ Mystic Wilds</span>

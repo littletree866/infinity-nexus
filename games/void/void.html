@@ -164,7 +164,7 @@
   const W = 1200, H = 600;
   const alertEl = document.getElementById('alert');
 
-  // ---------- Input ----------
+  
   const keys = {};
   window.addEventListener('keydown', e => {
     keys[e.code] = true;
@@ -174,7 +174,7 @@
   });
   window.addEventListener('keyup', e => { keys[e.code] = false; });
 
-  // ---------- Utility ----------
+  
   const rand = (a, b) => a + Math.random() * (b - a);
   const clamp = (v, a, b) => v < a ? a : v > b ? b : v;
   const dist = (x1,y1,x2,y2) => Math.hypot(x2-x1, y2-y1);
@@ -189,7 +189,7 @@
     return dist(px, py, cx, cy) < r;
   }
 
-  // ---------- Ship ----------
+  
   const ship = {
     x: 60, y: 300,
     vx: 0, vy: 0,
@@ -212,19 +212,19 @@
     ship.invuln = 90;
   }
 
-  // ---------- Global effects state ----------
+  
   const effects = {
-    gravity: false,             // active gravity
+    gravity: false,             
     gravityStrength: 0.20,
-    meteorShowerTimer: 0,       // frames remaining
+    meteorShowerTimer: 0,       
     meteorSpeedMultiplier: 1,
     turretOverdriveTimer: 0,
     robotSwarmTimer: 0,
-    robots: [],                 // spawned robots
+    robots: [],                 
   };
 
-  // ---------- Level Data ----------
-  // Each sector has triggerX values that fire events when ship.x passes them.
+  
+  
   const SECTORS = [
     {
       name: "SECTOR 01 · DEBRIS FIELD",
@@ -253,13 +253,13 @@
       ],
       rotatingLasers: [],
       turrets: [],
-      // Event triggers — { x, type, duration, fired }
+      
       triggers: [
         { x: 320, type: 'meteorShower', duration: 300, fired: false },
         { x: 700, type: 'turretOverdrive', duration: 240, fired: false },
         { x: 960, type: 'robotSwarm', duration: 360, fired: false },
       ],
-      // Optional forced gravity trigger (null = none)
+      
       gravityTriggerX: null,
     },
     {
@@ -299,7 +299,7 @@
         { x: 400, type: 'meteorShower', duration: 300, fired: false },
         { x: 820, type: 'turretOverdrive', duration: 300, fired: false },
       ],
-      // <-- GRAVITY ACTIVATES AT x=650 (roughly halfway) -->
+      
       gravityTriggerX: 650,
     },
     {
@@ -348,7 +348,7 @@
         { x: 800, type: 'robotSwarm', duration: 420, fired: false },
         { x: 1000, type: 'meteorShower', duration: 300, fired: false },
       ],
-      gravityTriggerX: null, // gravity stays on from sector 2 (but we set active on load in sector 3)
+      gravityTriggerX: null, 
     }
   ];
 
@@ -388,13 +388,13 @@
     effects.turretOverdriveTimer = 0;
     effects.robotSwarmTimer = 0;
 
-    // Gravity persistence: sector 2 activates mid-way; sector 3 has it from the start
+    
     if (i === 2) {
       gravityActive = true;
     } else if (i === 0) {
       gravityActive = false;
     }
-    // Sector 1: no gravity. Sector 2: activated by trigger. Sector 3: on from start.
+    
 
     document.getElementById('sector').textContent = i + 1;
   }
@@ -419,9 +419,9 @@
   }
   pauseBtn.addEventListener('click', togglePause);
 
-  // ---------- Robots ----------
+  
   function spawnRobot() {
-    // Spawn at the green goal box (right side)
+    
     const g = sector;
     const spawnX = g.goalX + g.goalW / 2;
     const spawnY = g.goalY + g.goalH / 2;
@@ -439,24 +439,24 @@
     if (!ship.alive) return;
     for (let i = effects.robots.length - 1; i >= 0; i--) {
       const rb = effects.robots[i];
-      // Home toward ship
+      
       const dx = ship.x - rb.x;
       const dy = ship.y - rb.y;
       const d = Math.hypot(dx, dy) || 0.001;
       rb.vx = (dx / d) * rb.speed;
       rb.vy = (dy / d) * rb.speed;
-      // Add slight wobble
+      
       rb.phase += 0.1;
       rb.vx += Math.cos(rb.phase) * 0.3;
       rb.vy += Math.sin(rb.phase * 1.3) * 0.3;
       rb.x += rb.vx;
       rb.y += rb.vy;
 
-      // Bounce off walls a bit (simple)
+      
       for (const w of sector.walls) {
         if (rb.x + rb.r > w.x && rb.x - rb.r < w.x + w.w &&
             rb.y + rb.r > w.y && rb.y - rb.r < w.y + w.h) {
-          // push out
+          
           const cx = clamp(rb.x, w.x, w.x + w.w);
           const cy = clamp(rb.y, w.y, w.y + w.h);
           const ddx = rb.x - cx, ddy = rb.y - cy;
@@ -466,7 +466,7 @@
         }
       }
 
-      // Collide with ship
+      
       if (dist(rb.x, rb.y, ship.x, ship.y) < rb.r + ship.r) {
         killShip();
         return;
@@ -474,7 +474,7 @@
     }
   }
 
-  // ---------- Update ----------
+  
   function update(dt) {
     if (!gameRunning || paused) return;
     time += dt / 1000;
@@ -483,7 +483,7 @@
     if (!ship.alive) return;
     if (ship.invuln > 0) ship.invuln--;
 
-    // ----- Effect timers -----
+    
     if (effects.meteorShowerTimer > 0) {
       effects.meteorShowerTimer--;
       effects.meteorSpeedMultiplier = 2.4;
@@ -496,13 +496,13 @@
     }
     if (effects.robotSwarmTimer > 0) {
       effects.robotSwarmTimer--;
-      // Spawn robots periodically
+      
       if (effects.robotSwarmTimer % 40 === 0) {
         spawnRobot();
       }
     }
 
-    // ----- Trigger checks -----
+    
     for (const tr of sector.triggers) {
       if (!tr.fired && ship.x >= tr.x) {
         tr.fired = true;
@@ -520,20 +520,20 @@
       }
     }
 
-    // ----- Gravity trigger (mid sector 2) -----
+    
     if (sector.gravityTriggerX !== null && !gravityActive && ship.x >= sector.gravityTriggerX) {
       gravityActive = true;
       showAlert('⚠ GRAVITY FIELD ENGAGED ⚠', '#66ddff');
     }
 
-    // ----- Ship movement -----
+    
     const accel = ship.thrustPower;
     if (keys['ArrowLeft'])  ship.vx -= accel;
     if (keys['ArrowRight']) ship.vx += accel;
     if (keys['ArrowUp'])    ship.vy -= accel;
     if (keys['ArrowDown'])  ship.vy += accel;
 
-    // Gravity pulls down
+    
     if (gravityActive) {
       ship.vy += effects.gravityStrength;
     }
@@ -541,7 +541,7 @@
     ship.vx *= ship.drag;
     ship.vy *= ship.drag;
 
-    // Clamp speed (allow higher max when gravity pushing)
+    
     const sp = Math.hypot(ship.vx, ship.vy);
     const maxSp = ship.maxSpeed + (gravityActive ? 1.5 : 0);
     if (sp > maxSp) {
@@ -552,7 +552,7 @@
     ship.x += ship.vx;
     ship.y += ship.vy;
 
-    // rotation
+    
     if (sp > 0.3) {
       const targetAngle = Math.atan2(ship.vy, ship.vx);
       let diff = targetAngle - ship.angle;
@@ -570,16 +570,16 @@
     if (ship.trail.length > 20) ship.trail.shift();
     ship.trail.forEach(t => t.a *= 0.88);
 
-    // boundaries
+    
     if (ship.x < ship.r) { ship.x = ship.r; ship.vx *= -0.4; }
     if (ship.x > W - ship.r) { ship.x = W - ship.r; ship.vx *= -0.4; }
     if (ship.y < ship.r) { ship.y = ship.r; ship.vy *= -0.4; }
     if (ship.y > H - ship.r) { ship.y = H - ship.r; ship.vy *= -0.4; }
 
-    // wall collisions
+    
     for (const w of sector.walls) resolveCircleRect(ship, w);
 
-    // rotating lasers
+    
     for (const l of rotLasers) {
       l.angle += l.speed;
       const ex = l.cx + Math.cos(l.angle) * l.len;
@@ -589,7 +589,7 @@
       }
     }
 
-    // meteors
+    
     for (const m of sector.hazards) {
       if (m.type === 'meteor') {
         const vy = m.baseVy * effects.meteorSpeedMultiplier;
@@ -604,7 +604,7 @@
       }
     }
 
-    // turrets
+    
     for (const t of sector.turrets) {
       const rate = effects.turretOverdriveTimer > 0 ? Math.max(15, t.rate / 4) : t.rate;
       const bulletSpeed = effects.turretOverdriveTimer > 0 ? 5.0 : 3.4;
@@ -637,10 +637,10 @@
       }
     }
 
-    // robots
+    
     updateRobots(dt);
 
-    // Goal
+    
     const g = sector;
     if (ship.x + ship.r > g.goalX && ship.x - ship.r < g.goalX + g.goalW &&
         ship.y + ship.r > g.goalY && ship.y - ship.r < g.goalY + g.goalH) {
@@ -707,7 +707,7 @@
     }
   }
 
-  // ---------- Render ----------
+  
   let bgStars = [];
   for (let i = 0; i < 260; i++) {
     bgStars.push({
@@ -725,7 +725,7 @@
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, W, H);
 
-    // gravity visual: subtle downward streaks
+    
     if (gravityActive) {
       ctx.save();
       ctx.globalAlpha = 0.15;
@@ -752,7 +752,7 @@
 
     if (!sector) return;
 
-    // Goal
+    
     const g = sector;
     const pulse = 0.5 + 0.5 * Math.sin(t * 0.08);
     ctx.save();
@@ -774,7 +774,7 @@
     }
     ctx.restore();
 
-    // Walls
+    
     for (const w of sector.walls) {
       ctx.save();
       ctx.shadowBlur = 15;
@@ -789,7 +789,7 @@
       ctx.restore();
     }
 
-    // Rotating lasers
+    
     for (const l of rotLasers) {
       const ex = l.cx + Math.cos(l.angle) * l.len;
       const ey = l.cy + Math.sin(l.angle) * l.len;
@@ -813,12 +813,12 @@
       ctx.restore();
     }
 
-    // Meteors
+    
     const showerActive = effects.meteorShowerTimer > 0;
     for (const m of sector.hazards) {
       if (m.type !== 'meteor') continue;
       ctx.save();
-      // extra tail if shower
+      
       const tailMult = showerActive ? 4 : 2.5;
       const tailGrad = ctx.createRadialGradient(m.x, m.y - m.baseVy * 4, 0, m.x, m.y, m.r * tailMult);
       tailGrad.addColorStop(0, showerActive ? 'rgba(255, 100, 40, 0.8)' : 'rgba(255, 140, 60, 0.5)');
@@ -848,7 +848,7 @@
       ctx.restore();
     }
 
-    // Turrets (with overdrive visual)
+    
     const overdrive = effects.turretOverdriveTimer > 0;
     for (const t of sector.turrets) {
       ctx.save();
@@ -882,30 +882,30 @@
       }
     }
 
-    // Robots
+    
     for (const rb of effects.robots) {
       ctx.save();
       ctx.shadowBlur = 20;
       ctx.shadowColor = '#a060ff';
       ctx.translate(rb.x, rb.y);
       ctx.rotate(Math.sin(t * 0.05 + rb.phase) * 0.4);
-      // body
+      
       ctx.fillStyle = '#5a2a90';
       ctx.beginPath();
       ctx.arc(0, 0, rb.r, 0, Math.PI * 2);
       ctx.fill();
-      // inner ring
+      
       ctx.strokeStyle = '#c090ff';
       ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.arc(0, 0, rb.r * 0.7, 0, Math.PI * 2);
       ctx.stroke();
-      // eye
+      
       ctx.fillStyle = '#ffdd44';
       ctx.beginPath();
       ctx.arc(0, 0, 3.5, 0, Math.PI * 2);
       ctx.fill();
-      // spikes
+      
       ctx.strokeStyle = '#a060ff';
       ctx.lineWidth = 2;
       for (let k = 0; k < 4; k++) {
@@ -918,7 +918,7 @@
       ctx.restore();
     }
 
-    // Particles
+    
     for (const p of particles) {
       const alpha = p.life / p.maxLife;
       ctx.fillStyle = p.color;
@@ -929,7 +929,7 @@
     }
     ctx.globalAlpha = 1;
 
-    // Ship
+    
     if (ship.alive) {
       for (let i = 0; i < ship.trail.length; i++) {
         const tr = ship.trail[i];
@@ -990,7 +990,7 @@
       ctx.restore();
     }
 
-    // Effect timers (small bars top of screen)
+    
     drawEffectBar();
   }
 
@@ -1018,7 +1018,7 @@
     }
   }
 
-  // ---------- Overlay ----------
+  
   const overlay = document.getElementById('overlay');
   const ovTitle = document.getElementById('ovTitle');
   const ovSub = document.getElementById('ovSub');
@@ -1048,7 +1048,7 @@
     gameRunning = true;
   });
 
-  // ---------- Main loop ----------
+  
   let lastT = performance.now();
   function loop(now) {
     const dt = Math.min(now - lastT, 50);

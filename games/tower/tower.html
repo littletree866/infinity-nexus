@@ -62,7 +62,7 @@
     .home-button:hover { transform: translateY(-4px); box-shadow: 0 12px 0 #1a4f44, 0 18px 35px #00000077; }
     .home-button:active { transform: translateY(6px); box-shadow: 0 2px 0 #1a4f44; }
     
-    #mapSelection {
+    #mapSelection, #difficultyScreen {
       position: fixed;
       inset: 0;
       background: #0f1a2be0;
@@ -333,18 +333,66 @@
       pointer-events: none;
     }
     .tooltip:hover .tooltip-text { visibility: visible; opacity: 1; }
+
+    .diff-option {
+      width: 200px;
+      padding: 20px;
+      border-radius: 24px;
+      background: #1c2633;
+      border: 3px solid #3a4a5a;
+      cursor: pointer;
+      transition: 0.2s;
+      text-align: center;
+      font-weight: 600;
+      color: #e0e8f0;
+    }
+    .diff-option:hover { border-color: #7ae9d6; transform: scale(1.03); }
+    .diff-option.active { border-color: #ffd966; box-shadow: 0 0 25px #ffd96666; background: #2a3a4a; }
+    .diff-option small { display: block; font-size: 0.8rem; color: #9aaec0; margin-top: 6px; }
+
+    .sell-upgrade-panel {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    .sell-upgrade-panel .actionButton {
+      flex: 1 0 40%;
+      font-size: 0.8rem;
+      padding: 10px 6px;
+    }
+    #upgradeBtn { background: #4a8a6a; color: #0f1a1a; }
+    #sellBtn { background: #bf5a5a; color: #f0e6d2; }
   </style>
 </head>
 <body>
 
-  <!-- HOME -->
+  
   <div id="homeScreen">
     <h1 class="game-title">Tower Defense</h1>
-    <button class="home-button" onclick="showMapSelection()">▶ Play</button>
+    <button class="home-button" onclick="showDifficultySelection()">▶ Play</button>
     <button class="home-button" onclick="showInstructions()">Info</button>
   </div>
 
-  <!-- MAP SELECTION -->
+  
+  <div id="difficultyScreen">
+    <h2 class="map-selection-title">Select Difficulty</h2>
+    <div class="maps-container" style="gap:20px;">
+      <div class="diff-option" data-diff="easy" onclick="selectDifficulty('easy', event)">
+        🟢 Easy
+      </div>
+      <div class="diff-option active" data-diff="normal" onclick="selectDifficulty('normal', event)">
+        🟡 Normal
+      </div>
+      <div class="diff-option" data-diff="hard" onclick="selectDifficulty('hard', event)">
+        🔴 Hard
+      </div>
+    </div>
+    <button class="home-button" onclick="showMapSelectionFromDiff()" style="min-width:200px;">Next</button>
+    <button class="home-button" onclick="showHomeScreen()" style="min-width:200px; background:#6a4a4a; color:#f0e6d2; box-shadow:0 8px 0 #3a2a2a;">Back</button>
+  </div>
+
+  
   <div id="mapSelection">
     <h2 class="map-selection-title">Select A Map</h2>
     <div class="maps-container">
@@ -366,13 +414,14 @@
       </div>
     </div>
     <button class="home-button" onclick="startGameWithMap()" style="min-width:200px;">Start Game</button>
+    <button class="home-button" onclick="showDifficultySelection()" style="min-width:200px; background:#6a4a4a; color:#f0e6d2; box-shadow:0 8px 0 #3a2a2a;">Back</button>
   </div>
 
-  <!-- GAME -->
+  
   <div id="gameContainer">
     <canvas id="gameCanvas" width="1200" height="700"></canvas>
     <div id="tileInfo">Tile (0,0) | Selected: none</div>
-    <div id="instructions">1-6 towers · P pause · ESC cancel</div>
+    <div id="instructions">1-6 towers · P pause · ESC cancel · Click tower to sell/upgrade</div>
 
     <div id="gameOver" class="game-overlay">
       <h2>Game Over</h2>
@@ -389,9 +438,9 @@
     </div>
   </div>
 
-  <!-- UI -->
+  
   <div id="ui">
-    <h2><span id="currentMapName">Forest</span></h2>
+    <h2><span id="currentMapName">Forest</span> · <span id="currentDiffName">Normal</span></h2>
     <div class="panel">
       <div class="stats-grid">
         <div class="stat"><div class="label">Wave</div><div class="value" id="waveDisp">1</div></div>
@@ -410,13 +459,27 @@
 
     <div class="panel">
       <h3>Towers</h3>
-      <button class="towerButton" onclick="selectTower('basic')" id="towerBtn-basic">Basic <span class="tower-cost">$30</span></button>
-      <button class="towerButton" onclick="selectTower('sniper')" id="towerBtn-sniper">Sniper <span class="tower-cost">$70</span></button>
-      <button class="towerButton" onclick="selectTower('frost')" id="towerBtn-frost">Frost <span class="tower-cost">$70</span></button>
-      <button class="towerButton" onclick="selectTower('bomb')" id="towerBtn-bomb">Bomb <span class="tower-cost">$125</span></button>
-      <button class="towerButton" onclick="selectTower('flame')" id="towerBtn-flame">Flame <span class="tower-cost">$160</span></button>
-      <button class="towerButton" onclick="selectTower('tesla')" id="towerBtn-tesla">Tesla <span class="tower-cost">$200</span></button>
+      <button class="towerButton" onclick="selectTower('basic')" id="towerBtn-basic">Basic <span class="tower-cost" id="cost-basic">$30</span></button>
+      <button class="towerButton" onclick="selectTower('sniper')" id="towerBtn-sniper">Sniper <span class="tower-cost" id="cost-sniper">$70</span></button>
+      <button class="towerButton" onclick="selectTower('frost')" id="towerBtn-frost">Frost <span class="tower-cost" id="cost-frost">$70</span></button>
+      <button class="towerButton" onclick="selectTower('bomb')" id="towerBtn-bomb">Bomb <span class="tower-cost" id="cost-bomb">$125</span></button>
+      <button class="towerButton" onclick="selectTower('flame')" id="towerBtn-flame">Flame <span class="tower-cost" id="cost-flame">$160</span></button>
+      <button class="towerButton" onclick="selectTower('tesla')" id="towerBtn-tesla">Tesla <span class="tower-cost" id="cost-tesla">$200</span></button>
     </div>
+
+    <div class="panel" id="towerActionPanel" style="display:none;">
+      <h3>Selected Tower <span id="selectedTowerType"></span></h3>
+      <div class="stats-grid" style="grid-template-columns:1fr 1fr 1fr;">
+        <div class="stat"><div class="label">Level</div><div class="value" id="selLevel">1</div></div>
+        <div class="stat"><div class="label">DMG</div><div class="value" id="selDmg">0</div></div>
+        <div class="stat"><div class="label">Range</div><div class="value" id="selRange">0</div></div>
+      </div>
+      <div class="sell-upgrade-panel">
+        <button class="actionButton" id="upgradeBtn" onclick="upgradeSelectedTower()">⬆ Upgrade (<span id="upgradeCost">0</span>)</button>
+        <button class="actionButton" id="sellBtn" onclick="sellSelectedTower()">💰 Sell (<span id="sellValue">0</span>)</button>
+      </div>
+    </div>
+
     <button class="back-button" onclick="showHomeScreen()">Quit</button>
   </div>
 
@@ -447,12 +510,20 @@
     const path1 = pathTiles1.map(t => ({x:t.x*TILE+TILE/2, y:t.y*TILE+TILE/2}));
     const path2 = pathTiles2.map(t => ({x:t.x*TILE+TILE/2, y:t.y*TILE+TILE/2}));
 
+    
+    const DIFFICULTY = {
+      easy:   { towerCostMult: 0.75, enemyHpMult: 0.7, enemySpeedMult: 0.85, spawnRateMult: 0.75, startMoney: 150, bombWave: 30 },
+      normal: { towerCostMult: 1.0,  enemyHpMult: 1.0, enemySpeedMult: 1.0,  spawnRateMult: 1.0,  startMoney: 100, bombWave: 20 },
+      hard:   { towerCostMult: 1.3,  enemyHpMult: 1.5, enemySpeedMult: 1.2,  spawnRateMult: 1.3,  startMoney: 75,  bombWave: 1  }
+    };
+
     const game = {
       wave:1, money:100, health:20, enemies:[], towers:[], projectiles:[], particles:[],
       placing:null, selectedTower:null, toSpawn:0, spawnTimer:0, waveInProgress:false,
       paused:false, autoNext:false, spawnInterval:1.0, totalWaves:50,
       gameOver:false, victory:false, placingPos:{x:0,y:0},
       enemiesDefeated:0, totalMoneyEarned:0, currentMap:'forest',
+      difficulty:'normal',
       mapStyles: {
         forest: { grassPatterns:[['#3a7a4a','#4a8a5a','#5a9a6a'],['#2a6a3a','#3a7a4a','#4a8a5a']], pathPatterns:['#7a6a4a','#8a7a5a','#9a8a6a','#aa9a7a'], bgColor:'#1a3a2a', tileBorder:'#2a4a3a44', pathOutline:'#6a5a3a66' },
         desert: { grassPatterns:[['#c9a86a','#ddc08a','#f0dbb0'],['#b8985a','#c9a86a','#ddc08a']], pathPatterns:['#b8a080','#c8b090','#d8c0a0','#e8d0b0'], bgColor:'#eddcb7', tileBorder:'#b0886066', pathOutline:'#a0806066' },
@@ -469,19 +540,44 @@
     initTileMap();
 
     
-    
-    
     const TOWER_STATS = {
-      basic: [{ range:140, dmg:12, firerate:1.0, cost:30, color:'#b0c4de' }],
-      sniper: [{ range:280, dmg:45, firerate:0.7, cost:70, color:'#8a9aaa' }],
-      frost: [{ range:160, dmg:9, firerate:1.2, slow:0.45, cost:70, color:'#b0e8f0' }],
-      bomb: [{ range:130, dmg:28, firerate:1.0, aoe:75, cost:125, color:'#ffd966' }],
-      flame: [{ range:135, dmg:11, firerate:1.4, dot:6, dotDuration:3.0, cost:160, color:'#ff6a3a' }],
-      tesla: [{ range:145, dmg:12, firerate:1.8, chain:4, chainRange:80, cost:200, color:'#b080d0' }]
+      basic: [
+        { range:140, dmg:12, firerate:1.0, cost:30, color:'#b0c4de' },
+        { range:160, dmg:20, firerate:1.15, cost:35, color:'#c0d4ee' },
+        { range:180, dmg:32, firerate:1.3, cost:45, color:'#d0e4ff' }
+      ],
+      sniper: [
+        { range:280, dmg:45, firerate:0.7, cost:70, color:'#8a9aaa' },
+        { range:320, dmg:75, firerate:0.8, cost:80, color:'#9aaaba' },
+        { range:360, dmg:120, firerate:0.9, cost:100, color:'#aabbcc' }
+      ],
+      frost: [
+        { range:160, dmg:9, firerate:1.2, slow:0.45, cost:70, color:'#b0e8f0' },
+        { range:180, dmg:14, firerate:1.35, slow:0.55, cost:80, color:'#c0f0ff' },
+        { range:200, dmg:22, firerate:1.5, slow:0.65, cost:100, color:'#d0f8ff' }
+      ],
+      bomb: [
+        { range:130, dmg:28, firerate:1.0, aoe:75, cost:125, color:'#ffd966' },
+        { range:150, dmg:45, firerate:1.1, aoe:90, cost:140, color:'#ffe97a' },
+        { range:170, dmg:70, firerate:1.2, aoe:110, cost:170, color:'#fff08a' }
+      ],
+      flame: [
+        { range:135, dmg:11, firerate:1.4, dot:6, dotDuration:3.0, cost:160, color:'#ff6a3a' },
+        { range:155, dmg:18, firerate:1.55, dot:10, dotDuration:3.5, cost:180, color:'#ff7a4a' },
+        { range:175, dmg:28, firerate:1.7, dot:16, dotDuration:4.0, cost:210, color:'#ff8a5a' }
+      ],
+      tesla: [
+        { range:145, dmg:12, firerate:1.8, chain:4, chainRange:80, cost:200, color:'#b080d0' },
+        { range:165, dmg:20, firerate:2.0, chain:5, chainRange:95, cost:220, color:'#c090e0' },
+        { range:185, dmg:32, firerate:2.2, chain:6, chainRange:110, cost:260, color:'#d0a0f0' }
+      ]
     };
 
-    
-    
+    function getTowerCost(type) {
+      const base = TOWER_STATS[type][0].cost;
+      return Math.round(base * DIFFICULTY[game.difficulty].towerCostMult);
+    }
+
     
     class Enemy {
       constructor(type, pathIdx=0) {
@@ -490,15 +586,24 @@
                        tank:{hp:120,speed:50,gold:10,color:'#3A5A5A',size:18},
                        healer:{hp:60,speed:55,gold:15,color:'#4AC84A',size:16,heal:10,healRange:90},
                        boss:{hp:550,speed:90,gold:35,color:'#8A1A1A',size:20},
-                       flyer:{hp:55,speed:175,gold:20,color:'#b080d0',size:13,airborne:true} };
+                       flyer:{hp:55,speed:175,gold:20,color:'#b080d0',size:13,airborne:true},
+                       bomb:{hp:30,speed:380,gold:25,color:'#ff6600',size:18,bomb:true} };
         const st = {...base[type]};
         const w = game.wave;
+        const diff = DIFFICULTY[game.difficulty];
+        
         if(type==='normal'){ st.hp += w*1.5; st.gold += Math.floor(w/3); }
         else if(type==='runner'){ st.hp += w*1.2; st.gold += Math.floor(w/3); }
         else if(type==='tank'){ st.hp += w*5; st.gold += Math.floor(w/2); }
         else if(type==='healer'){ st.hp += w*1.3; st.gold += Math.floor(w/2); st.heal += Math.floor(w/5); }
         else if(type==='boss'){ st.hp += w*20; st.gold += w*2; }
         else if(type==='flyer'){ st.hp += w*1.4; st.gold += Math.floor(w/2); }
+        else if(type==='bomb'){ st.hp += w*2; st.gold += Math.floor(w/2); }
+        
+        st.hp = Math.round(st.hp * diff.enemyHpMult);
+        st.speed = Math.round(st.speed * diff.enemySpeedMult);
+        st.gold = Math.round(st.gold * (game.difficulty==='easy'?0.8:game.difficulty==='hard'?1.3:1));
+        
         this.type=type; this.pathIndex=pathIdx;
         const p = pathIdx===0 ? path1 : path2;
         this.x=p[0].x; this.y=p[0].y;
@@ -506,6 +611,7 @@
         this.index=0; this.dead=false; this.reachedEnd=false; this.gold=st.gold;
         this.color=st.color; this.size=st.size; this.healAmount=st.heal||0; this.healRange=st.healRange||0;
         this.airborne=st.airborne||false; this.slowEffects=[]; this.animation=0; this.rotation=0;
+        this.bomb=st.bomb||false; this.exploded=false;
         this.path=p; this._dots=[];
       }
       update(dt) {
@@ -515,6 +621,19 @@
         let mult=1;
         for(let i=this.slowEffects.length-1;i>=0;i--){ const s=this.slowEffects[i]; s.time-=dt; if(s.time<=0) this.slowEffects.splice(i,1); else mult*=(1-s.mult); }
         this.speed = this.baseSpeed * mult;
+        
+        if(this.bomb && !this.exploded) {
+          let nearestTower = null, nearestDist = Infinity;
+          for(const t of game.towers) {
+            const d = Math.hypot(t.x-this.x, t.y-this.y);
+            if(d < nearestDist) { nearestDist = d; nearestTower = t; }
+          }
+          if(nearestTower && nearestDist < 40) {
+            this.explode();
+            return;
+          }
+        }
+        
         const next = this.path[this.index+1];
         if(!next){ this.reachedEnd=true; this.dead=true; game.health = Math.max(0, game.health - (this.type==='boss'?5:1)); spawnParticles(this.x,this.y,'#ff9e88',12); return; }
         const dx=next.x-this.x, dy=next.y-this.y, dist=Math.hypot(dx,dy);
@@ -525,6 +644,42 @@
         
         for(let i=this._dots.length-1;i>=0;i--){ const d=this._dots[i]; d.tickTimer-=dt; d.time-=dt; if(d.tickTimer<=0){ this.hp-=d.amt; d.tickTimer=d.tickInterval; spawnParticles(this.x,this.y-8,'#ff8f66',2); } if(d.time<=0) this._dots.splice(i,1); }
       }
+      
+      explode() {
+        if(this.exploded) return;
+        this.exploded = true;
+        this.dead = true;
+        const blastRadius = 5 * TILE / 2;
+        spawnParticles(this.x, this.y, '#ff6600', 40);
+        spawnParticles(this.x, this.y, '#ffaa00', 25);
+        
+        for(let i=game.towers.length-1; i>=0; i--) {
+          const t = game.towers[i];
+          if(Math.hypot(t.x-this.x, t.y-this.y) < blastRadius) {
+            spawnParticles(t.x, t.y, '#ff4444', 15);
+            const tx = Math.floor(t.x/TILE), ty = Math.floor(t.y/TILE);
+            if(tileMap[ty]?.[tx]) tileMap[ty][tx] = {type:'grass', walkable:true, grassVariant:(tx+ty)%4};
+            game.towers.splice(i,1);
+          }
+        }
+        
+        for(let i=game.enemies.length-1; i>=0; i--) {
+          const e = game.enemies[i];
+          if(e === this || e.dead) continue;
+          if(Math.hypot(e.x-this.x, e.y-this.y) < blastRadius) {
+            e.hp -= 150;
+            if(e.hp <= 0) { e.dead = true; game.money += e.gold; game.enemiesDefeated++; spawnParticles(e.x, e.y, '#ffaa00', 10); }
+          }
+        }
+        
+        game.projectiles = game.projectiles.filter(p => Math.hypot(p.x-this.x, p.y-this.y) > blastRadius);
+        
+        if(game.selectedTower && !game.towers.includes(game.selectedTower)) {
+          game.selectedTower = null;
+          updateTowerActionPanel();
+        }
+      }
+      
       healNearby(){
         for(const e of game.enemies){
           if(e===this || e.dead) continue;
@@ -540,6 +695,7 @@
         else if(this.type==='healer'){ ctx.beginPath(); ctx.arc(0,0,this.size,0,Math.PI*2); ctx.fill(); ctx.fillStyle='#fff'; ctx.fillRect(-this.size/4,-this.size,this.size/2,this.size*2); ctx.fillRect(-this.size,-this.size/4,this.size*2,this.size/2); }
         else if(this.type==='boss'){ ctx.beginPath(); ctx.arc(0,0,this.size+8,0,Math.PI*2); ctx.fill(); ctx.fillStyle='#ffd700'; ctx.beginPath(); ctx.arc(-this.size/2,-this.size/2,this.size/4,0,Math.PI*2); ctx.arc(this.size/2,-this.size/2,this.size/4,0,Math.PI*2); ctx.fill(); ctx.fillStyle='#8a1a1a'; ctx.beginPath(); ctx.moveTo(-this.size,-this.size); ctx.lineTo(-this.size*1.5,-this.size*2); ctx.lineTo(-this.size/2,-this.size); ctx.closePath(); ctx.fill(); ctx.beginPath(); ctx.moveTo(this.size,-this.size); ctx.lineTo(this.size*1.5,-this.size*2); ctx.lineTo(this.size/2,-this.size); ctx.closePath(); ctx.fill(); }
         else if(this.type==='flyer'){ const wy=Math.sin(this.animation*8)*3; ctx.beginPath(); ctx.arc(0,0,this.size,0,Math.PI*2); ctx.fill(); ctx.fillStyle='#dda0dd'; ctx.fillRect(-this.size*1.5,wy,this.size*3,4); }
+        else if(this.type==='bomb'){ ctx.beginPath(); ctx.arc(0,0,this.size,0,Math.PI*2); ctx.fill(); ctx.fillStyle='#ff2200'; ctx.beginPath(); ctx.arc(0,0,this.size*0.5,0,Math.PI*2); ctx.fill(); ctx.fillStyle='#ffcc00'; for(let i=0;i<8;i++){ const a=i*Math.PI/4+this.animation*6; ctx.beginPath(); ctx.arc(Math.cos(a)*this.size*0.8,Math.sin(a)*this.size*0.8,3,0,Math.PI*2); ctx.fill(); } }
         else { ctx.beginPath(); ctx.arc(0,0,this.size,0,Math.PI*2); ctx.fill(); ctx.fillStyle='#a0522d'; ctx.beginPath(); ctx.arc(0,0,this.size/2,0,Math.PI*2); ctx.fill(); }
         ctx.restore();
         const bw=36, bh=6, by=this.y-this.size-12;
@@ -548,12 +704,15 @@
         ctx.fillStyle = hp>0.5?'#4caf50':hp>0.25?'#ffb300':'#e53935';
         ctx.fillRect(this.x-bw/2, by, bw*hp, bh);
         if(this.type==='boss'){ ctx.fillStyle='#fff'; ctx.font='bold 12px Inter'; ctx.textAlign='center'; ctx.fillText(`BOSS ${Math.ceil(this.hp)}`, this.x, by-6); }
+        if(this.type==='bomb'){ ctx.fillStyle='#ff6600'; ctx.font='bold 11px Inter'; ctx.textAlign='center'; ctx.fillText(`BOMB`, this.x, by-6); }
       }
     }
 
     class Tower {
-      constructor(x,y,type){ this.x=x; this.y=y; this.type=type; this.level=0; this.totalSpent=TOWER_STATS[type][0].cost; this.applyStats(); this.cooldown=0; this.deleted=false; this.animation=0; this.lastShot=0; }
-      applyStats(){ const s=TOWER_STATS[this.type][this.level]; this.range=s.range; this.dmg=s.dmg; this.firerate=s.firerate; this.slow=s.slow||0; this.aoe=s.aoe||0; this.dot=s.dot||0; this.dotDuration=s.dotDuration||0; this.chain=s.chain||0; this.chainRange=s.chainRange||0; this.cost=s.cost; this.color=s.color; }
+      constructor(x,y,type, level=0){ this.x=x; this.y=y; this.type=type; this.level=level; this.totalSpent=getTowerCost(type); this.applyStats(); this.cooldown=0; this.deleted=false; this.animation=0; this.lastShot=0; }
+      applyStats(){ const s=TOWER_STATS[this.type][this.level]; this.range=s.range; this.dmg=s.dmg; this.firerate=s.firerate; this.slow=s.slow||0; this.aoe=s.aoe||0; this.dot=s.dot||0; this.dotDuration=s.dotDuration||0; this.chain=s.chain||0; this.chainRange=s.chainRange||0; this.color=s.color; }
+      upgrade(){ if(this.level < 2){ this.level++; this.applyStats(); return true; } return false; }
+      sellValue(){ return Math.floor(this.totalSpent * 0.6); }
       update(dt){
         this.animation+=dt; this.lastShot+=dt;
         if(this.cooldown>0){ this.cooldown-=dt; return; }
@@ -677,15 +836,21 @@
     function startWave(){
       if(game.waveInProgress||game.gameOver||game.victory) return;
       let base=8+Math.floor(game.wave*0.8);
+      const diff = DIFFICULTY[game.difficulty];
       game.toSpawn=Math.min(base,40); game.spawnTimer=0; game.waveInProgress=true;
+      game.spawnInterval = 1.0 / diff.spawnRateMult;
     }
     function spawnEnemy(){
       let type='normal'; const r=Math.random(), w=game.wave;
-      if(w>=15 && r<0.05) type='boss';
+      const diff = DIFFICULTY[game.difficulty];
+      
+      if(w >= diff.bombWave && r < 0.08) type='bomb';
+      else if(w>=15 && r<0.05) type='boss';
       else if(w>=12 && r<0.15) type='flyer';
       else if(w>=8 && r<0.30) type='healer';
       else if(w>=4 && r<0.50) type='tank';
       else if(r<0.70) type='runner';
+      
       const pathIdx=Math.random()<0.5?0:1;
       game.enemies.push(new Enemy(type,pathIdx));
     }
@@ -695,12 +860,31 @@
     function showHomeScreen(){
       document.getElementById('homeScreen').style.display='flex';
       document.getElementById('mapSelection').style.display='none';
+      document.getElementById('difficultyScreen').style.display='none';
       document.getElementById('gameContainer').style.display='none';
       document.getElementById('ui').style.display='none';
       restartGame();
     }
+    function showDifficultySelection(){
+      document.getElementById('homeScreen').style.display='none';
+      document.getElementById('difficultyScreen').style.display='flex';
+      document.getElementById('mapSelection').style.display='none';
+      document.getElementById('gameContainer').style.display='none';
+      document.getElementById('ui').style.display='none';
+    }
+    function showMapSelectionFromDiff(){
+      document.getElementById('difficultyScreen').style.display='none';
+      document.getElementById('mapSelection').style.display='flex';
+    }
+    function selectDifficulty(diff, ev){
+      game.difficulty = diff;
+      document.querySelectorAll('.diff-option').forEach(o=>o.classList.remove('active'));
+      if(ev?.currentTarget) ev.currentTarget.classList.add('active');
+      document.getElementById('currentDiffName').textContent = diff.charAt(0).toUpperCase()+diff.slice(1);
+    }
     function showMapSelection(){
       document.getElementById('homeScreen').style.display='none';
+      document.getElementById('difficultyScreen').style.display='none';
       document.getElementById('mapSelection').style.display='flex';
       document.getElementById('gameContainer').style.display='none';
       document.getElementById('ui').style.display='none';
@@ -714,29 +898,103 @@
     function startGameWithMap(){
       document.getElementById('homeScreen').style.display='none';
       document.getElementById('mapSelection').style.display='none';
+      document.getElementById('difficultyScreen').style.display='none';
       document.getElementById('gameContainer').style.display='inline-block';
       document.getElementById('ui').style.display='block';
       const name=game.currentMap;
       document.getElementById('currentMapName').textContent=name.charAt(0).toUpperCase()+name.slice(1);
+      document.getElementById('currentDiffName').textContent = game.difficulty.charAt(0).toUpperCase()+game.difficulty.slice(1);
       initTileMap();
       restartGame();
+      updateTowerCostsDisplay();
     }
-    function showInstructions(){ alert("Tower Defense\n\n 1. Click a tower → click grass to build\n 2. P to pause, ESC to cancel\n 3. Start waves manually or auto\n 4. Earn money, upgrade via selection\n 5. 50 waves of increasing difficulty"); }
+    function showInstructions(){ alert("Tower Defense · Sell & Upgrade\n\n 1. Click a tower → click grass to build\n 2. Click a built tower to upgrade or sell\n 3. P to pause, ESC to cancel\n 4. Start waves manually or auto\n 5. 50 waves · difficulty changes costs & enemies\n 6. Bombs may destroy your towers."); }
+
+    function updateTowerCostsDisplay() {
+      for(const type of Object.keys(TOWER_STATS)) {
+        const el = document.getElementById('cost-'+type);
+        if(el) el.textContent = '$' + getTowerCost(type);
+      }
+    }
 
     function restartGame(){
-      game.wave=1; game.money=100; game.health=20; game.enemies=[]; game.towers=[]; game.projectiles=[]; game.particles=[]; game.placing=null; game.selectedTower=null; game.toSpawn=0; game.waveInProgress=false; game.paused=false; game.gameOver=false; game.victory=false; game.enemiesDefeated=0; game.totalMoneyEarned=0;
+      const diff = DIFFICULTY[game.difficulty];
+      game.wave=1; game.money=diff.startMoney; game.health=20; game.enemies=[]; game.towers=[]; game.projectiles=[]; game.particles=[]; game.placing=null; game.selectedTower=null; game.toSpawn=0; game.waveInProgress=false; game.paused=false; game.gameOver=false; game.victory=false; game.enemiesDefeated=0; game.totalMoneyEarned=0;
+      game.spawnInterval = 1.0 / diff.spawnRateMult;
       initTileMap();
       damageNumbers.length=0;
       document.getElementById('gameOver').style.display='none';
       document.getElementById('victoryScreen').style.display='none';
       updateTowerButtons();
       document.getElementById('pauseBtn').textContent='Pause';
+      updateTowerActionPanel();
+      updateTowerCostsDisplay();
     }
 
-    function selectTower(type){ game.placing=type; game.selectedTower=null; updateTowerButtons(); }
+    function selectTower(type){ game.placing=type; game.selectedTower=null; updateTowerButtons(); updateTowerActionPanel(); }
     function updateTowerButtons(){
       document.querySelectorAll('.towerButton').forEach(b=>b.classList.remove('tower-button-active'));
       if(game.placing){ const b=document.getElementById(`towerBtn-${game.placing}`); if(b) b.classList.add('tower-button-active'); }
+    }
+
+    function updateTowerActionPanel() {
+      const panel = document.getElementById('towerActionPanel');
+      const sel = game.selectedTower;
+      if(!sel || !game.towers.includes(sel)) {
+        panel.style.display = 'none';
+        return;
+      }
+      panel.style.display = 'block';
+      document.getElementById('selectedTowerType').textContent = sel.type.charAt(0).toUpperCase()+sel.type.slice(1);
+      document.getElementById('selLevel').textContent = sel.level + 1;
+      document.getElementById('selDmg').textContent = sel.dmg;
+      document.getElementById('selRange').textContent = sel.range;
+      
+      const upgradeBtn = document.getElementById('upgradeBtn');
+      const sellBtn = document.getElementById('sellBtn');
+      const upgradeCostSpan = document.getElementById('upgradeCost');
+      const sellValueSpan = document.getElementById('sellValue');
+      
+      if(sel.level >= 2) {
+        upgradeBtn.disabled = true;
+        upgradeBtn.style.opacity = 0.5;
+        upgradeCostSpan.textContent = 'MAX';
+      } else {
+        upgradeBtn.disabled = false;
+        upgradeBtn.style.opacity = 1;
+        const nextCost = Math.round(TOWER_STATS[sel.type][sel.level+1].cost * DIFFICULTY[game.difficulty].towerCostMult);
+        upgradeCostSpan.textContent = nextCost;
+      }
+      
+      sellValueSpan.textContent = sel.sellValue();
+    }
+
+    function upgradeSelectedTower() {
+      const sel = game.selectedTower;
+      if(!sel || sel.level >= 2) return;
+      const cost = Math.round(TOWER_STATS[sel.type][sel.level+1].cost * DIFFICULTY[game.difficulty].towerCostMult);
+      if(game.money < cost) return;
+      game.money -= cost;
+      sel.totalSpent += cost;
+      sel.upgrade();
+      spawnParticles(sel.x, sel.y, '#7ae9d6', 12);
+      updateTowerActionPanel();
+    }
+
+    function sellSelectedTower() {
+      const sel = game.selectedTower;
+      if(!sel) return;
+      const value = sel.sellValue();
+      game.money += value;
+      const idx = game.towers.indexOf(sel);
+      if(idx !== -1) {
+        const tx = Math.floor(sel.x/TILE), ty = Math.floor(sel.y/TILE);
+        if(tileMap[ty]?.[tx]) tileMap[ty][tx] = {type:'grass', walkable:true, grassVariant:(tx+ty)%4};
+        game.towers.splice(idx,1);
+        spawnParticles(sel.x, sel.y, '#ffaa44', 16);
+      }
+      game.selectedTower = null;
+      updateTowerActionPanel();
     }
 
     
@@ -745,8 +1003,9 @@
       const rect=canvas.getBoundingClientRect(), x=e.clientX-rect.left, y=e.clientY-rect.top;
       if(game.placing){ placeTower(x,y); return; }
       
-      for(const t of game.towers){ if(Math.hypot(x-t.x,y-t.y)<24){ game.selectedTower=t; game.placing=null; updateTowerButtons(); return; } }
+      for(const t of game.towers){ if(Math.hypot(x-t.x,y-t.y)<24){ game.selectedTower=t; game.placing=null; updateTowerButtons(); updateTowerActionPanel(); return; } }
       game.selectedTower=null;
+      updateTowerActionPanel();
     });
     canvas.addEventListener('mousemove', e=>{
       const rect=canvas.getBoundingClientRect(), x=e.clientX-rect.left, y=e.clientY-rect.top;
@@ -761,7 +1020,7 @@
       if(ty>=ROWS||tx>=COLS||ty<0||tx<0){ spawnParticles(x,y,'#ff6666',8); return; }
       const tile=tileMap[ty]?.[tx];
       if(!tile || tile.type!=='grass' || !tile.walkable){ spawnParticles(x,y,'#ff6666',8); return; }
-      const baseCost=TOWER_STATS[game.placing][0].cost;
+      const baseCost=getTowerCost(game.placing);
       if(game.money<baseCost){ game.placing=null; updateTowerButtons(); spawnParticles(x,y,'#ff6666',4); return; }
       const px=tx*TILE+TILE/2, py=ty*TILE+TILE/2;
       const t=new Tower(px,py,game.placing);
@@ -795,6 +1054,11 @@
         
         if(game.health<=0 && !game.gameOver){ game.gameOver=true; document.getElementById('finalScore').textContent=`Wave ${game.wave}`; document.getElementById('finalEnemies').textContent=game.enemiesDefeated; document.getElementById('finalMoney').textContent=game.totalMoneyEarned; document.getElementById('gameOver').style.display='block'; }
         if(game.wave>game.totalWaves && !game.victory){ game.victory=true; const score=game.wave*100+game.enemiesDefeated+game.totalMoneyEarned; document.getElementById('finalScoreVictory').textContent=score; document.getElementById('victoryScreen').style.display='block'; }
+        
+        if(game.selectedTower && !game.towers.includes(game.selectedTower)) {
+          game.selectedTower = null;
+          updateTowerActionPanel();
+        }
       }
       
       ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -828,7 +1092,7 @@
     
     document.addEventListener('keydown', e=>{
       if(e.key==='p'||e.key==='P') togglePause();
-      if(e.key==='Escape'){ game.placing=null; game.selectedTower=null; updateTowerButtons(); }
+      if(e.key==='Escape'){ game.placing=null; game.selectedTower=null; updateTowerButtons(); updateTowerActionPanel(); }
       const map={1:'basic',2:'sniper',3:'frost',4:'bomb',5:'flame',6:'tesla'};
       if(e.key>='1'&&e.key<='6'){ const t=map[e.key]; if(t) selectTower(t); }
     });
@@ -836,6 +1100,7 @@
 
     
     selectMap('forest', {currentTarget:document.querySelector('.map-option')});
+    selectDifficulty('normal', {currentTarget:document.querySelector('.diff-option.active')});
     loop(performance.now());
   </script>
 </body>

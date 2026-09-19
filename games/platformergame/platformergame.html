@@ -548,7 +548,7 @@
             <button onclick="showHomeScreen()">Home</button>
         </div>
 
-        <!-- LEVEL SELECT SCREEN -->
+        
         <div id="homeScreen" class="screen" style="display: block;">
             <h2>The Impossible Game</h2>
             <p>Select a level</p>
@@ -559,9 +559,9 @@
     </div>
 
     <script>
-        // ==================================================================
-        //  CORE SETUP
-        // ==================================================================
+        
+        
+        
         const canvas = document.getElementById("game");
         const ctx = canvas.getContext("2d");
         ctx.imageSmoothingEnabled = false;
@@ -622,9 +622,9 @@
         let fakePlatforms = [];
         let lastTime = performance.now();
 
-        // ==================================================================
-        //  HEART UI
-        // ==================================================================
+        
+        
+        
         function updateHeartsDisplay() {
             heartsDisplay.innerHTML = '';
             for (let i = 0; i < maxHealth; i++) {
@@ -635,9 +635,9 @@
             }
         }
 
-        // ==================================================================
-        //  FACTORY HELPERS
-        // ==================================================================
+        
+        
+        
         function makeEnemy(x, y, minX, maxX, speed = 1.5) {
             return {
                 x, y, w: 36, h: 44,
@@ -678,9 +678,9 @@
             };
         }
 
-        // ==================================================================
-        //  PLATFORM TYPES
-        // ==================================================================
+        
+        
+        
         function staticPlat(x, y, w, h) {
             return { x, y, w, h, type: 'static', color: '#4ECC88' };
         }
@@ -718,9 +718,9 @@
             fakePlatforms = [];
         }
 
-        // ==================================================================
-        //  LEVEL DATA
-        // ==================================================================
+        
+        
+        
         function loadLevel(n) {
             level = n;
             document.getElementById("levelText").innerHTML = `<span class="level-icon">🎯</span> Level: ${level}`;
@@ -1062,9 +1062,9 @@
             updateHeartsDisplay();
         }
 
-        // ==================================================================
-        //  INPUT
-        // ==================================================================
+        
+        
+        
         document.addEventListener("keydown", e => {
             if (!gameStarted) return;
 
@@ -1128,9 +1128,9 @@
             document.getElementById("pauseBtn").innerHTML = paused ? "▶️ Resume" : "⏸️ Pause";
         };
 
-        // ==================================================================
-        //  COLLISION & DAMAGE
-        // ==================================================================
+        
+        
+        
         function rectCollision(a, b) {
             return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
         }
@@ -1196,9 +1196,9 @@
             resetGame();
         }
 
-        // ==================================================================
-        //  SCREENS
-        // ==================================================================
+        
+        
+        
         function showHomeScreen() {
             gameStarted = false; paused = true;
             gameOverScreen.style.display = "none";
@@ -1218,9 +1218,9 @@
             }
         }
 
-        // ==================================================================
-        //  PARTICLES
-        // ==================================================================
+        
+        
+        
         function createParticles(x, y, count, color, speed = 3) {
             for (let i = 0; i < count; i++) {
                 particles.push({
@@ -1233,9 +1233,9 @@
             }
         }
 
-        // ==================================================================
-        //  UPDATE
-        // ==================================================================
+        
+        
+        
         function update(deltaTime) {
             if (paused || !gameStarted) return;
 
@@ -1249,7 +1249,7 @@
                 if (particles[i].life <= 0) particles.splice(i, 1);
             }
 
-            // Heart drops
+            
             for (let i = heartDrops.length - 1; i >= 0; i--) {
                 const heart = heartDrops[i];
                 if (!heart.collected) {
@@ -1401,23 +1401,23 @@
                 }
             }
 
-            // ============================================================
-            //  ENEMY UPDATE (with sword attacks)
-            // ============================================================
+            
+            
+            
             for (let i = enemies.length - 1; i >= 0; i--) {
                 const e = enemies[i];
                 e.x += e.vx;
                 e.anim += 0.15;
                 e.facing = e.vx > 0 ? 1 : -1;
 
-                // Patrol bounds
+                
                 if (e.x < e.minX) { e.vx = Math.abs(e.vx); e.x = e.minX; e.facing = 1; }
                 if (e.x > e.maxX) { e.vx = -Math.abs(e.vx); e.x = e.maxX; e.facing = -1; }
 
-                // Sword cooldown
+                
                 if (e.swordCooldown > 0) e.swordCooldown--;
 
-                // Sword swing animation (0 -> 1 -> 0 over ~30 frames)
+                
                 if (e.swordActive) {
                     e.swordSwing += 0.14;
                     if (e.swordSwing >= 1) {
@@ -1427,7 +1427,7 @@
                         e.swordCooldown = 90 + Math.random() * 90;
                     }
 
-                    // Hit check: sword hitbox is in front of the enemy
+                    
                     if (!e.swordHitDone && e.swordSwing > 0.35 && e.swordSwing < 0.7) {
                         const swordHitbox = {
                             x: e.facing > 0 ? e.x + e.w - 4 : e.x - 24,
@@ -1438,18 +1438,18 @@
                         if (rectCollision(player, swordHitbox) && player.invincible <= 0) {
                             e.swordHitDone = true;
                             damage(1);
-                            // Knockback
+                            
                             player.vx = e.facing * 6;
                             player.vy = -5;
                         }
                     }
                 } else if (e.swordCooldown <= 0) {
-                    // Check if player is close enough to start a swing
+                    
                     const dx = (player.x + player.w / 2) - (e.x + e.w / 2);
                     const dy = (player.y + player.h / 2) - (e.y + e.h / 2);
                     const dist = Math.sqrt(dx * dx + dy * dy);
                     if (dist < 90 && Math.abs(dy) < 50) {
-                        // Face the player when starting a swing
+                        
                         e.facing = dx > 0 ? 1 : -1;
                         e.swordActive = true;
                         e.swordSwing = 0;
@@ -1457,7 +1457,7 @@
                     }
                 }
 
-                // Stomp kill (player jumping on top)
+                
                 if (rectCollision(player, e) && player.invincible <= 0) {
                     if (player.vy > 0 && player.y + player.h < e.y + 20) {
                         enemies.splice(i, 1);
@@ -1552,9 +1552,9 @@
             scoreText.textContent = score;
         }
 
-        // ==================================================================
-        //  DRAWING
-        // ==================================================================
+        
+        
+        
         function drawParallax() {
             const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
             gradient.addColorStop(0, "#0a1628");
@@ -1865,7 +1865,7 @@
                         ctx.fillRect(sx + i, sy - grassH, 1, grassH);
                         ctx.fillStyle = "#88ffaa";
                     }
-                    // Edge caps
+                    
                     ctx.fillStyle = "#1a5a2a";
                     ctx.fillRect(sx, sy, 4, p.h);
                     ctx.fillRect(sx + p.w - 4, sy, 4, p.h);
@@ -1881,9 +1881,9 @@
             ctx.restore();
         }
 
-        // ==================================================================
-        //  ENEMY SPRITE (ORC-SKELETON WARRIOR with curved scimitar)
-        // ==================================================================
+        
+        
+        
         function drawEnemy(e) {
             const ex = e.x - camera.x;
             const ey = e.y - camera.y;
@@ -1893,55 +1893,55 @@
             const facing = e.facing || 1;
             const cx = ex + w / 2;
 
-            // ----- SHADOW -----
+            
             ctx.fillStyle = "rgba(0,0,0,0.4)";
             ctx.beginPath();
             ctx.ellipse(cx, ey + h + 2, w * 0.5, 5, 0, 0, Math.PI * 2);
             ctx.fill();
 
-            // ----- LEGS (bony, wrapped in brown pants/boots) -----
+            
             const legSwing = Math.sin(e.anim * 4) * 3;
-            // Back leg
+            
             ctx.fillStyle = "#4a3a2a";
             ctx.fillRect(cx - 7, ey + h - 14 + legSwing, 6, 14);
-            // Front leg
+            
             ctx.fillStyle = "#5a4a3a";
             ctx.fillRect(cx + 1, ey + h - 14 - legSwing, 6, 14);
-            // Boots
+            
             ctx.fillStyle = "#2a1a10";
             ctx.fillRect(cx - 8, ey + h - 4 + legSwing, 8, 4);
             ctx.fillRect(cx, ey + h - 4 - legSwing, 8, 4);
-            // Boot highlights
+            
             ctx.fillStyle = "#4a3a2a";
             ctx.fillRect(cx - 8, ey + h - 4 + legSwing, 8, 1);
             ctx.fillRect(cx, ey + h - 4 - legSwing, 8, 1);
 
-            // ----- BODY (leather brown armor with straps) -----
-            // Main torso
+            
+            
             ctx.fillStyle = "#6a4a2a";
             ctx.fillRect(cx - 9, ey + 20 + bob, 18, 14);
             ctx.fillStyle = "#7a5a3a";
             ctx.fillRect(cx - 8, ey + 21 + bob, 16, 12);
-            // Belt with buckle
+            
             ctx.fillStyle = "#3a2a1a";
             ctx.fillRect(cx - 9, ey + 30 + bob, 18, 3);
             ctx.fillStyle = "#c8a030";
             ctx.fillRect(cx - 2, ey + 30 + bob, 4, 3);
-            // Shoulder plates (leather with metal studs)
+            
             ctx.fillStyle = "#4a3a2a";
             ctx.fillRect(cx - 12, ey + 19 + bob, 5, 6);
             ctx.fillRect(cx + 7, ey + 19 + bob, 5, 6);
             ctx.fillStyle = "#8a7a5a";
             ctx.fillRect(cx - 12, ey + 19 + bob, 5, 2);
             ctx.fillRect(cx + 7, ey + 19 + bob, 5, 2);
-            // Studs
+            
             ctx.fillStyle = "#c8b080";
             ctx.fillRect(cx - 11, ey + 23 + bob, 1, 1);
             ctx.fillRect(cx - 9, ey + 23 + bob, 1, 1);
             ctx.fillRect(cx + 8, ey + 23 + bob, 1, 1);
             ctx.fillRect(cx + 10, ey + 23 + bob, 1, 1);
 
-            // ----- SPINE / RIBCAGE (visible bones) -----
+            
             ctx.fillStyle = "#e8dcc8";
             ctx.fillRect(cx - 2, ey + 22 + bob, 4, 8);
             ctx.fillStyle = "#c8bca8";
@@ -1949,41 +1949,41 @@
                 ctx.fillRect(cx - 3, ey + 23 + i * 3 + bob, 6, 1);
             }
 
-            // ----- ARMS (bony with leather wraps) -----
+            
             const armSwing = Math.sin(e.anim * 4 + 1) * 2;
-            // Back arm
+            
             ctx.fillStyle = "#5a4a3a";
             ctx.fillRect(cx - 13, ey + 22 + bob + armSwing, 5, 14);
             ctx.fillStyle = "#e8dcc8";
             ctx.fillRect(cx - 12, ey + 25 + bob + armSwing, 3, 8);
-            // Hand/claws
+            
             ctx.fillStyle = "#c8bca8";
             ctx.fillRect(cx - 13, ey + 35 + bob + armSwing, 5, 3);
 
-            // ----- HEAD / SKULL -----
+            
             const headY = ey + 4 + bob;
 
-            // Helmet (metal cap with horns)
+            
             ctx.fillStyle = "#8a8a9a";
             ctx.fillRect(cx - 10, headY - 4, 20, 6);
             ctx.fillStyle = "#b0b0c0";
             ctx.fillRect(cx - 9, headY - 3, 18, 3);
             ctx.fillStyle = "#6a6a7a";
             ctx.fillRect(cx - 10, headY - 1, 20, 1);
-            // Helmet rim (dark)
+            
             ctx.fillStyle = "#3a3a4a";
             ctx.fillRect(cx - 11, headY + 2, 22, 2);
 
-            // Horns (bone-colored, curved up and out)
+            
             ctx.fillStyle = "#e8dcc8";
-            // Left horn
+            
             ctx.fillRect(cx - 11, headY - 8, 3, 6);
             ctx.fillRect(cx - 13, headY - 11, 3, 4);
             ctx.fillRect(cx - 14, headY - 14, 2, 3);
             ctx.fillStyle = "#c8bca8";
             ctx.fillRect(cx - 11, headY - 8, 1, 6);
             ctx.fillRect(cx - 13, headY - 11, 1, 4);
-            // Right horn
+            
             ctx.fillStyle = "#e8dcc8";
             ctx.fillRect(cx + 8, headY - 8, 3, 6);
             ctx.fillRect(cx + 10, headY - 11, 3, 4);
@@ -1992,14 +1992,14 @@
             ctx.fillRect(cx + 10, headY - 8, 1, 6);
             ctx.fillRect(cx + 12, headY - 11, 1, 4);
 
-            // Red plume / hair between horns
+            
             ctx.fillStyle = "#8a1a10";
             ctx.fillRect(cx - 8, headY - 2, 16, 3);
             ctx.fillStyle = "#b02818";
             ctx.fillRect(cx - 7, headY - 1, 14, 2);
             ctx.fillStyle = "#d84028";
             ctx.fillRect(cx - 6, headY - 1, 4, 1);
-            // Spiky red plume top
+            
             for (let i = 0; i < 5; i++) {
                 const px = cx - 7 + i * 3;
                 const ph = 3 + Math.sin(i * 1.7) * 2;
@@ -2009,43 +2009,43 @@
                 ctx.fillRect(px, headY - 2 - ph, 1, ph);
             }
 
-            // Skull face (bone)
+            
             ctx.fillStyle = "#e8dcc8";
             ctx.fillRect(cx - 9, headY + 2, 18, 14);
             ctx.fillStyle = "#d0c4b0";
             ctx.fillRect(cx + 4, headY + 2, 5, 14);
 
-            // Eye sockets (dark)
+            
             ctx.fillStyle = "#1a1008";
             ctx.fillRect(cx - 7, headY + 4, 5, 5);
             ctx.fillRect(cx + 2, headY + 4, 5, 5);
 
-            // Glowing green eyes (like the reference)
+            
             ctx.fillStyle = "#44dd22";
             ctx.fillRect(cx - 6, headY + 5, 3, 3);
             ctx.fillRect(cx + 3, headY + 5, 3, 3);
             ctx.fillStyle = "#aaff88";
             ctx.fillRect(cx - 6, headY + 5, 2, 2);
             ctx.fillRect(cx + 3, headY + 5, 2, 2);
-            // Eye glow
+            
             ctx.fillStyle = "rgba(80, 255, 60, 0.3)";
             ctx.fillRect(cx - 7, headY + 4, 5, 5);
             ctx.fillRect(cx + 2, headY + 4, 5, 5);
 
-            // Nose cavity
+            
             ctx.fillStyle = "#3a2a1a";
             ctx.fillRect(cx - 1, headY + 9, 2, 2);
 
-            // Teeth / tusks
+            
             ctx.fillStyle = "#f0e8d8";
-            // Regular teeth row
+            
             ctx.fillRect(cx - 7, headY + 12, 14, 3);
-            // Bottom teeth (jagged)
+            
             ctx.fillStyle = "#d0c4b0";
             for (let i = 0; i < 5; i++) {
                 ctx.fillRect(cx - 6 + i * 3, headY + 14, 2, 2);
             }
-            // Tusks (larger, pointing up from lower jaw)
+            
             ctx.fillStyle = "#f0e8d8";
             ctx.fillRect(cx - 9, headY + 11, 3, 5);
             ctx.fillRect(cx + 7, headY + 11, 3, 5);
@@ -2053,56 +2053,56 @@
             ctx.fillRect(cx - 9, headY + 11, 1, 4);
             ctx.fillRect(cx + 7, headY + 11, 1, 4);
 
-            // ----- FRONT ARM (holds sword) -----
+            
             const frontArmX = facing > 0 ? cx + 8 : cx - 13;
             ctx.fillStyle = "#6a4a2a";
             ctx.fillRect(frontArmX, ey + 22 + bob - armSwing, 5, 14);
-            // Leather wrap
+            
             ctx.fillStyle = "#5a4a3a";
             ctx.fillRect(frontArmX, ey + 26 + bob - armSwing, 5, 2);
             ctx.fillRect(frontArmX, ey + 31 + bob - armSwing, 5, 2);
-            // Hand
+            
             ctx.fillStyle = "#e8dcc8";
             ctx.fillRect(frontArmX + 1, ey + 34 + bob - armSwing, 3, 3);
 
-            // ----- SWORD (curved scimitar) -----
+            
             const swordSwing = e.swordSwing || 0;
-            // Base of sword at hand
+            
             const swordBaseX = facing > 0 ? frontArmX + 4 : frontArmX;
             const swordBaseY = ey + 34 + bob - armSwing;
 
-            // Sword rotation based on swing
-            // Idle: blade points up-forward. Swing: blade sweeps down-forward.
-            const bladeAngle = -0.5 + swordSwing * 2.2; // radians-ish (as pixel offsets)
+            
+            
+            const bladeAngle = -0.5 + swordSwing * 2.2; 
 
-            // Hilt (dark metal crossguard)
+            
             ctx.fillStyle = "#3a3020";
             ctx.fillRect(swordBaseX - 3, swordBaseY - 1, 6, 3);
             ctx.fillStyle = "#8a7a5a";
             ctx.fillRect(swordBaseX - 3, swordBaseY - 1, 6, 1);
 
-            // Handle (going back from hilt)
+            
             ctx.fillStyle = "#5a3a1a";
             ctx.fillRect(swordBaseX - facing * 3, swordBaseY, 2 * facing, 2);
 
-            // Curved blade (scimitar shape — segments that curve)
-            // Blade goes up-forward at idle, sweeps to forward-down during swing
+            
+            
             const bladeLen = 9;
             for (let i = 0; i < bladeLen; i++) {
-                // Curve: the blade bends forward as it goes out
+                
                 const curveOffset = Math.sin(i / bladeLen * Math.PI * 0.6) * 3;
                 const bx = swordBaseX + facing * (i * 1.2 + curveOffset);
                 const by = swordBaseY - (Math.cos(bladeAngle) * i) + Math.sin(bladeAngle) * 0.5 * i;
 
-                // Blade body (silver)
+                
                 ctx.fillStyle = "#b0b8c8";
                 ctx.fillRect(bx, by, 2, 2);
-                // Highlight
+                
                 ctx.fillStyle = "#e8eef8";
                 ctx.fillRect(bx, by, 1, 1);
             }
 
-            // Blade edge highlight (blue tint)
+            
             for (let i = 1; i < bladeLen; i++) {
                 const curveOffset = Math.sin(i / bladeLen * Math.PI * 0.6) * 3;
                 const bx = swordBaseX + facing * (i * 1.2 + curveOffset) + facing;
@@ -2111,7 +2111,7 @@
                 ctx.fillRect(bx, by, 1, 1);
             }
 
-            // Sword swing glow
+            
             if (e.swordActive) {
                 const glowIntensity = Math.sin(swordSwing * Math.PI);
                 ctx.fillStyle = `rgba(120, 220, 255, ${0.4 * glowIntensity})`;
@@ -2122,16 +2122,16 @@
                 ctx.fill();
             }
 
-            // ----- OUTLINE (subtle dark edge) -----
+            
             ctx.strokeStyle = "#2a1a10";
             ctx.lineWidth = 1;
-            ctx.strokeRect(cx - 9, headY + 2, 18, 14); // skull
-            ctx.strokeRect(cx - 9, ey + 20 + bob, 18, 14); // torso
+            ctx.strokeRect(cx - 9, headY + 2, 18, 14); 
+            ctx.strokeRect(cx - 9, ey + 20 + bob, 18, 14); 
         }
 
-        // ==================================================================
-        //  PLAYER SPRITE (improved square character)
-        // ==================================================================
+        
+        
+        
         function drawPlayer() {
             const px = player.x - camera.x;
             const py = player.y - camera.y;
@@ -2139,7 +2139,7 @@
             const w = player.w;
             const h = player.h;
 
-            // Squash & stretch
+            
             const stretch = player.onGround ? 1.0 : Math.max(0.88, 1 - vy * 0.012);
             const squash = player.onGround ? 1.06 : Math.max(0.9, 1 + vy * 0.008);
 
@@ -2152,64 +2152,64 @@
 
             const alpha = player.invincible > 0 && Math.floor(player.invincible / 5) % 2 === 0 ? 0.5 : 1;
 
-            // Walk cycle
+            
             const walkSpeed = Math.abs(player.vx);
             const isWalking = walkSpeed > 0.5 && player.onGround;
             const walkCycle = isWalking ? Math.sin(gameTime * 0.02 * walkSpeed) : 0;
             const armCycle = isWalking ? Math.cos(gameTime * 0.02 * walkSpeed) : 0;
 
-            // ----- SHADOW -----
+            
             ctx.fillStyle = `rgba(0,0,0,${0.3 * alpha})`;
             ctx.beginPath();
             ctx.ellipse(centerX, feetY + 2, 12, 3, 0, 0, Math.PI * 2);
             ctx.fill();
 
-            // ----- LEGS (small, below the body) -----
+            
             const legSwing = walkCycle * 2;
             ctx.fillStyle = "#3a2a4a";
             ctx.fillRect(centerX - 8, feetY - 8 + legSwing, 6, 8);
             ctx.fillRect(centerX + 2, feetY - 8 - legSwing, 6, 8);
-            // Boots
+            
             ctx.fillStyle = "#1a1a2a";
             ctx.fillRect(centerX - 9, feetY - 2 + legSwing, 8, 3);
             ctx.fillRect(centerX + 1, feetY - 2 - legSwing, 8, 3);
-            // Boot highlights
+            
             ctx.fillStyle = "#4a4a6a";
             ctx.fillRect(centerX - 9, feetY - 2 + legSwing, 8, 1);
             ctx.fillRect(centerX + 1, feetY - 2 - legSwing, 8, 1);
 
-            // ----- BODY (main square with layered shading) -----
-            // Dark outline
+            
+            
             ctx.fillStyle = `rgba(30, 30, 60, ${alpha})`;
             ctx.fillRect(drawX - 1, drawY - 1, bodyW + 2, bodyH + 2);
 
-            // Main body base
+            
             ctx.fillStyle = `rgba(200, 210, 240, ${alpha})`;
             ctx.fillRect(drawX, drawY, bodyW, bodyH);
 
-            // Top highlight (light)
+            
             ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
             ctx.fillRect(drawX + 2, drawY + 2, bodyW - 4, 6);
 
-            // Upper mid-tone (blue-ish)
+            
             ctx.fillStyle = `rgba(220, 228, 255, ${alpha})`;
             ctx.fillRect(drawX + 2, drawY + 8, bodyW - 4, bodyH - 16);
 
-            // Side shading (right side darker)
+            
             ctx.fillStyle = `rgba(160, 170, 210, ${alpha})`;
             ctx.fillRect(drawX + bodyW - 6, drawY + 2, 4, bodyH - 4);
 
-            // Bottom shading
+            
             ctx.fillStyle = `rgba(150, 160, 200, ${alpha})`;
             ctx.fillRect(drawX + 2, drawY + bodyH - 6, bodyW - 4, 4);
 
-            // Center panel accent (chest area)
+            
             ctx.fillStyle = `rgba(120, 140, 220, ${alpha})`;
             ctx.fillRect(centerX - 5, drawY + 10, 10, 14);
             ctx.fillStyle = `rgba(80, 100, 180, ${alpha})`;
             ctx.fillRect(centerX - 4, drawY + 11, 8, 12);
 
-            // Chest emblem (small diamond)
+            
             ctx.fillStyle = `rgba(255, 220, 100, ${alpha})`;
             ctx.beginPath();
             ctx.moveTo(centerX, drawY + 14);
@@ -2221,76 +2221,76 @@
             ctx.fillStyle = `rgba(255, 255, 200, ${alpha})`;
             ctx.fillRect(centerX - 1, drawY + 16, 2, 2);
 
-            // Corner bolts (4 corners)
+            
             ctx.fillStyle = `rgba(90, 90, 130, ${alpha})`;
             ctx.fillRect(drawX + 2, drawY + 2, 2, 2);
             ctx.fillRect(drawX + bodyW - 4, drawY + 2, 2, 2);
             ctx.fillRect(drawX + 2, drawY + bodyH - 4, 2, 2);
             ctx.fillRect(drawX + bodyW - 4, drawY + bodyH - 4, 2, 2);
 
-            // ----- EYES (two square eyes with shine) -----
+            
             const eyeDir = player.facing;
             const eyeY = drawY + 8;
 
-            // Eye sockets (dark)
+            
             ctx.fillStyle = `rgba(30, 30, 60, ${alpha})`;
             ctx.fillRect(centerX - 8 + eyeDir * 2, eyeY, 7, 7);
             ctx.fillRect(centerX + 1 + eyeDir * 2, eyeY, 7, 7);
 
-            // Eye whites
+            
             ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
             ctx.fillRect(centerX - 7 + eyeDir * 2, eyeY + 1, 5, 5);
             ctx.fillRect(centerX + 2 + eyeDir * 2, eyeY + 1, 5, 5);
 
-            // Pupils (looking in facing direction)
+            
             ctx.fillStyle = `rgba(20, 20, 50, ${alpha})`;
             ctx.fillRect(centerX - 6 + eyeDir * 2 + eyeDir * 2, eyeY + 2, 3, 3);
             ctx.fillRect(centerX + 3 + eyeDir * 2 + eyeDir * 2, eyeY + 2, 3, 3);
 
-            // Eye shine
+            
             ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
             ctx.fillRect(centerX - 6 + eyeDir * 2 + eyeDir * 2, eyeY + 2, 1, 1);
             ctx.fillRect(centerX + 3 + eyeDir * 2 + eyeDir * 2, eyeY + 2, 1, 1);
 
-            // ----- MOUTH (small determined line) -----
+            
             ctx.fillStyle = `rgba(40, 40, 80, ${alpha})`;
             ctx.fillRect(centerX - 3 + eyeDir * 2, drawY + 18, 6, 2);
-            // Corner tick
+            
             ctx.fillRect(centerX - 4 + eyeDir * 2, drawY + 17, 1, 1);
             ctx.fillRect(centerX + 3 + eyeDir * 2, drawY + 17, 1, 1);
 
-            // ----- ARMS (small squares on the sides) -----
+            
             const armSwing = armCycle * 2;
 
-            // Back arm (no weapon)
+            
             ctx.fillStyle = `rgba(180, 190, 230, ${alpha})`;
             ctx.fillRect(drawX - 4, drawY + 12 + armSwing, 4, 10);
             ctx.fillStyle = `rgba(140, 150, 200, ${alpha})`;
             ctx.fillRect(drawX - 4, drawY + 12 + armSwing, 4, 3);
-            // Hand
+            
             ctx.fillStyle = `rgba(230, 200, 170, ${alpha})`;
             ctx.fillRect(drawX - 4, drawY + 22 + armSwing, 4, 3);
 
-            // Front arm
+            
             ctx.fillStyle = `rgba(200, 210, 245, ${alpha})`;
             ctx.fillRect(drawX + bodyW, drawY + 12 - armSwing, 4, 10);
             ctx.fillStyle = `rgba(160, 170, 220, ${alpha})`;
             ctx.fillRect(drawX + bodyW, drawY + 12 - armSwing, 4, 3);
-            // Hand
+            
             ctx.fillStyle = `rgba(230, 200, 170, ${alpha})`;
             ctx.fillRect(drawX + bodyW, drawY + 22 - armSwing, 4, 3);
 
-            // ----- PLAYER SWORD (small, held in front hand) -----
+            
             const swordHandX = drawX + bodyW + 3;
             const swordHandY = drawY + 20 - armSwing;
 
-            // Hilt
+            
             ctx.fillStyle = `rgba(120, 90, 50, ${alpha})`;
             ctx.fillRect(swordHandX - 2, swordHandY - 2, 4, 2);
             ctx.fillStyle = `rgba(200, 160, 60, ${alpha})`;
             ctx.fillRect(swordHandX - 2, swordHandY - 2, 4, 1);
 
-            // Blade (short, pointing up-out)
+            
             const bladeDir = player.facing;
             ctx.fillStyle = `rgba(200, 210, 230, ${alpha})`;
             for (let i = 0; i < 6; i++) {
@@ -2301,7 +2301,7 @@
                 ctx.fillRect(swordHandX + i * bladeDir * 0.8, swordHandY - 3 - i * 1.5, 1, 1);
             }
 
-            // ----- DOUBLE JUMP SPARKLE -----
+            
             if (player.canDoubleJump && !player.onGround) {
                 ctx.fillStyle = `rgba(0, 255, 255, ${alpha * 0.7})`;
                 const s = Math.sin(gameTime * 0.02) * 2;
@@ -2462,12 +2462,12 @@
                 ctx.fillRect(gx, gy + goal.h, 50, 3);
             }
 
-            // ============================================================
-            //  PLAYER
-            // ============================================================
+            
+            
+            
             drawPlayer();
 
-            // Particles
+            
             ctx.setTransform(1, 0, 0, 1, 0, 0);
             for (let p of particles) {
                 ctx.globalAlpha = p.life;
@@ -2478,9 +2478,9 @@
             ctx.setTransform(1, 0, 0, 1, 0, 0);
         }
 
-        // ==================================================================
-        //  LOOP
-        // ==================================================================
+        
+        
+        
         function loop(currentTime) {
             const deltaTime = Math.min((currentTime - lastTime) / 1000, 0.1);
             lastTime = currentTime;
@@ -2489,9 +2489,9 @@
             requestAnimationFrame(loop);
         }
 
-        // ==================================================================
-        //  BOOT
-        // ==================================================================
+        
+        
+        
         showHomeScreen();
         lastTime = performance.now();
         loop(lastTime);

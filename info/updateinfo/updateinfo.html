@@ -8,7 +8,6 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 	<link rel="icon" href="../../icon.jpg" type="image/x-icon">
 	<meta name="description" content="Release notes, changelog and upcoming releases for Infinity Nexus.">
-	
 	<style>
 
 		 :root[data-theme="dark"] {
@@ -196,22 +195,27 @@
 
 		.changelog {
 			margin-top: 12px;
-			padding-left: 20px;
+			padding-left: 22px;
 			color: var(--text-secondary);
-			list-style: none;
+			list-style: disc;
 		}
 
 		.changelog li {
 			margin: 6px 0;
 			line-height: 1.5;
+			padding-left: 4px;
+		}
+
+		.changelog li::marker {
+			color: var(--primary);
 		}
 
 		.changelog li.section-header {
-			font-weight: 600;
+			font-weight: 700;
 			color: var(--primary);
 			margin-top: 12px;
 			list-style: none;
-			padding: 0;
+			padding-left: 0;
 		}
 
 		.changelog li.section-header::before {
@@ -437,7 +441,7 @@
 
 
 			<div class="card">
-				<h3>v1.21.25 — 1st ANNIVERSARY UPDATE! </h3>
+				<h3>v1.21.25</h3>
 				<div class="small">Released March 26, 2026</div>
 				<ul class="changelog">
 					<li>Updated ROM to V2.3!</li>
@@ -484,7 +488,7 @@
 			</div>
 
 			<div class="card">
-				<h3>v1.18.24 — Dual Release</h3>
+				<h3>v1.18.24</h3>
 				<div class="small">Released February 7 & 16, 2026 (Two Parts)</div>
 				<ul class="changelog">
 					<li class="section-header">Part 1 (February 7, 2026)</li>
@@ -540,7 +544,7 @@
 
 
 			<div class="card">
-				<h3>v1.16.19 — New Year Update</h3>
+				<h3>v1.16.19</h3>
 				<div class="small">Released January 1, 2026</div>
 				<ul class="changelog">
 					<li>New Tower Defense 2 game</li>
@@ -685,5 +689,4 @@
 </body>
 
 </html>
-
 

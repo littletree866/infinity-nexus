@@ -9,8 +9,7 @@
     <link rel="icon" href="icon.jpg" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100..900&display=swap" rel="stylesheet">
     <style>
         :root[data-theme="dark"] {
             --primary: #3a8eed;
@@ -61,7 +60,7 @@
         }
 
         body {
-            font-family: 'Didact Gothic', sans-serif;
+            font-family: 'IBM Plex Sans', sans-serif;
             line-height: 1.6;
             color: var(--text-primary);
             background: var(--bg-primary);
@@ -78,16 +77,6 @@
             max-width: 1200px;
             width: 100%;
             margin: 0 auto;
-        }
-
-        
-        .main-wrapper {
-            display: flex;
-            gap: 24px;
-            max-width: 1400px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 5px 0px;
         }
 
         
@@ -138,7 +127,454 @@
             transform: scale(1.08) rotate(10deg);
         }
 
-        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .hero-shell {
+            display: grid;
+            grid-template-columns: 1fr;
+            justify-items: center;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+
+        .hero-copy {
+            width: 100%;
+            text-align: center;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            color: rgba(255, 255, 255, 0.9);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-size: 0.72rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-top: 22px;
+        }
+
+        .primary-btn,
+        .secondary-btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            border-radius: 999px;
+            padding: 12px 22px;
+            font-weight: 700;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .primary-btn {
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            color: #ffffff;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.2);
+        }
+
+        .secondary-btn {
+            background: rgba(15, 23, 42, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            color: #fff;
+        }
+
+        .primary-btn:hover,
+        .secondary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(15, 23, 42, 0.18);
+        }
+
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            padding: 8px 12px;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .hero-panel {
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-panel-card {
+            width: min(100%, 360px);
+            background: rgba(15, 23, 42, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(18px);
+            border-radius: 22px;
+            padding: 20px;
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.2);
+        }
+
+        .panel-label {
+            display: inline-block;
+            font-size: 0.73rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 14px;
+        }
+
+        .panel-highlight {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 14px;
+        }
+
+        .panel-list {
+            list-style: none;
+            display: grid;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.82);
+            font-size: 0.92rem;
+        }
+
+        .panel-list li::before {
+            content: '✦';
+            display: inline-block;
+            margin-right: 8px;
+            color: #fef3c7;
+        }
+
+        .info-strip {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin: 24px 0 28px;
+        }
+
+        .info-pill {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 18px 20px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .info-pill strong {
+            font-size: 1.12rem;
+            color: var(--text-primary);
+        }
+
+        .info-pill span {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .spotlight-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin: 24px 0 36px;
+        }
+
+        .spotlight-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 22px 20px;
+            box-shadow: var(--shadow);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .spotlight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+
+        .spotlight-icon {
+            width: 52px;
+            height: 52px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(58, 142, 237, 0.18), rgba(236, 72, 153, 0.18));
+            font-size: 1.7rem;
+            margin-bottom: 16px;
+        }
+
+        .spotlight-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .spotlight-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 14px;
+        }
+
+        .spotlight-card a {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .spotlight-card a:hover {
+            color: var(--secondary);
+        }
+
+        .announcement-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            animation: announcementFadeIn 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .announcement-overlay[hidden] {
+            display: none;
+        }
+
+        .announcement-overlay:not([hidden]) {
+            display: flex;
+        }
+
+        @keyframes announcementFadeIn {
+            from {
+                opacity: 0;
+                backdrop-filter: blur(0);
+            }
+            to {
+                opacity: 1;
+                backdrop-filter: blur(4px);
+            }
+        }
+
+        .announcement-modal {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 32px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: announcementSlideIn 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            border: 2px solid var(--primary);
+            position: relative;
+        }
+
+        @keyframes announcementSlideIn {
+            from {
+                transform: translateY(-60px) scale(0.95);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .announcement-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            gap: 16px;
+        }
+
+        .announcement-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .announcement-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .announcement-badge.returning {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .announcement-user-status {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            padding: 12px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .announcement-content {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .announcement-content h3 {
+            color: var(--text-primary);
+            margin: 16px 0 8px 0;
+            font-size: 1.1rem;
+        }
+
+        .announcement-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 8px 0 16px 0;
+        }
+
+        .announcement-content li {
+            padding: 6px 0 6px 24px;
+            position: relative;
+            color: var(--text-secondary);
+        }
+
+        .announcement-content li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .announcement-content a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .announcement-content a:hover {
+            text-decoration: underline;
+        }
+
+        .announcement-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .announcement-link,
+        .announcement-close-btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 42px;
+            padding: 10px 16px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 700;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+        }
+
+        .announcement-link {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .announcement-close-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            width: 100%;
+            margin-top: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .announcement-close-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.4s ease;
+            z-index: 0;
+        }
+
+        .announcement-close-btn:hover::before {
+            left: 100%;
+        }
+
+        .announcement-close-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4);
+        }
+
+        .announcement-close-btn:active {
+            transform: translateY(0);
+        }
+
         .sidebar {
             flex-shrink: 0;
             width: 300px;
@@ -211,17 +647,17 @@
         }
 
         .main-title {
-            font-size: clamp(2.5rem, 6.0vw, 4.0rem);
-            font-weight: 700;
-            letter-spacing: -0.02em;
+            font-size: clamp(2.7rem, 5vw, 4.4rem);
+            font-weight: 500;
+            letter-spacing: -0.05em;
             text-align: center;
             color: white;
-            margin: 0;
+            margin: 0 auto;
             z-index: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
+            line-height: 0.95;
+            font-family: 'IBM Plex Sans', sans-serif;
+            display: block;
+            width: 100%;
         }
 
         
@@ -308,69 +744,6 @@
             opacity: 0.85;
         }
 
-        .description {
-            margin-top: 20px;
-            
-            max-width: 700px;
-            
-            text-align: center;
-            
-            color: white;
-            
-            font-family: 'Inter', serif;
-            font-weight: 400;
-            line-height: 1.6;
-            background: none;
-            
-            border-radius: 12px;
-            
-            padding: 0;
-            
-        }
-
-        .description p {
-            margin: 4px 0;
-            
-        }
-
-        .description p.warning {
-            color: red;
-            font-weight: bold;
-        }
-
-        .category-header {
-            margin: 40px 0 24px 0;
-            padding: 20px 28px;
-            border-radius: var(--border-radius);
-            background: linear-gradient(135deg, rgba(58, 142, 237, 0.1), rgba(236, 72, 153, 0.1));
-            backdrop-filter: blur(10px);
-            font-family: 'Inter', sans-serif;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            border: 2px solid var(--primary);
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-            color: var(--text-primary);
-            font-size: 1.6rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-
-        .category-header:hover {
-            box-shadow: 0 8px 25px rgba(58, 142, 237, 0.2);
-            transform: translateX(4px);
-        }
-
-        
-        .section-header {
-            font-size: 1.75rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin: 48px 0 24px 0;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        
         .archive-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -521,71 +894,6 @@
             letter-spacing: -0.5px;
         }
 
-        .archive-meta {
-            display: flex;
-            gap: 12px;
-            font-size: 0.875rem;
-            color: var(--text-muted);
-            padding: 0 16px;
-            margin-bottom: 12px;
-        }
-
-        .read-more-btn {
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-            font-weight: 700;
-            text-decoration: underline;
-            padding: 0;
-            font-family: inherit;
-            font-size: inherit;
-            transition: opacity 0.2s ease;
-        }
-
-        .read-more-btn:hover {
-            opacity: 0.8;
-        }
-
-        .read-more-btn:focus {
-            outline: 2px solid var(--primary);
-            outline-offset: 2px;
-        }
-
-        .read-more-content {
-            display: inline;
-            margin-left: 4px;
-        }
-
-        .content-link {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: var(--text-secondary);
-            padding: 0 16px 16px 16px;
-            flex: 1;
-        }
-
-        
-        .badge-base {
-            display: inline-flex;
-            align-items: center;
-            padding: 8px 14px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.4px;
-            text-transform: uppercase;
-            border: none;
-            line-height: 1;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            transition: all 0.2s ease;
-        }
-
-        .badge-base:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
         .status-pill {
             display: inline-flex;
             align-items: center;
@@ -639,223 +947,6 @@
             box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
         }
 
-        .status-popular,
-        .popular-badge {
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
-        }
-
-        .status-revamped,
-        .revamped-badge {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-        }
-
-        .status-unavailable,
-        .unavailable-badge {
-            background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(107, 114, 128, 0.3);
-        }
-
-        .beta-badge {
-            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
-        }
-
-        .coming-soon-badge {
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
-        }
-
-        
-        .announcement-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 10000;
-            justify-content: center;
-            align-items: center;
-            animation: announcementFadeIn 0.3s ease;
-            backdrop-filter: blur(4px);
-        }
-
-        .announcement-overlay.active {
-            display: flex;
-        }
-
-        @keyframes announcementFadeIn {
-            from {
-                opacity: 0;
-                backdrop-filter: blur(0);
-            }
-            to {
-                opacity: 1;
-                backdrop-filter: blur(4px);
-            }
-        }
-
-        .announcement-modal {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 32px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: announcementSlideIn 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            border: 2px solid var(--primary);
-            position: relative;
-        }
-
-        @keyframes announcementSlideIn {
-            from {
-                transform: translateY(-60px) scale(0.95);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0) scale(1);
-                opacity: 1;
-            }
-        }
-
-        .announcement-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 20px;
-            gap: 16px;
-        }
-
-        .announcement-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin: 0;
-        }
-
-        .announcement-badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-            white-space: nowrap;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-        }
-
-        .announcement-badge.returning {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-        }
-
-        .announcement-user-status {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 16px;
-            padding: 12px;
-            background: var(--bg-secondary);
-            border-radius: 8px;
-            border-left: 3px solid var(--primary);
-        }
-
-        .announcement-content {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 24px;
-        }
-
-        .announcement-content h3 {
-            color: var(--text-primary);
-            margin: 16px 0 8px 0;
-            font-size: 1.1rem;
-        }
-
-        .announcement-content ul {
-            list-style: none;
-            padding: 0;
-            margin: 8px 0 16px 0;
-        }
-
-        .announcement-content li {
-            padding: 6px 0 6px 24px;
-            position: relative;
-            color: var(--text-secondary);
-        }
-
-        .announcement-content li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-            font-weight: bold;
-        }
-
-        .announcement-content a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        .announcement-content a:hover {
-            text-decoration: underline;
-        }
-
-        .announcement-close-btn {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            padding: 14px 28px;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-            width: 100%;
-            margin-top: 12px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .announcement-close-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transition: left 0.4s ease;
-            z-index: 0;
-        }
-
-        .announcement-close-btn:hover::before {
-            left: 100%;
-        }
-
-        .announcement-close-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4);
-        }
-
-        .announcement-close-btn:active {
-            transform: translateY(0);
-        }
-
-        
         footer {
             background: var(--header-bg);
             color: var(--text-primary);
@@ -982,307 +1073,6 @@
         }
 
         
-        .header-pattern {
-            position: relative;
-            z-index: 1;
-        }
-
-        .header-alt {
-            background: linear-gradient(135deg,
-                    rgba(255, 255, 255, 0.9) 0%,
-                    rgba(248, 250, 252, 0.95) 100%);
-            border-bottom: 1px solid rgba(67, 97, 238, 0.1);
-        }
-
-        
-        .stats-section {
-            padding: 40px 20px;
-            background: linear-gradient(135deg, rgba(58, 142, 237, 0.1), rgba(236, 72, 153, 0.1));
-            margin: 32px 0;
-            border-radius: var(--border-radius);
-            border: 1px solid var(--border-color);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .stat-card {
-            text-align: center;
-            padding: 24px;
-            background: var(--card-bg);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--primary);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 8px;
-        }
-
-        .stat-label {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        
-        .search-section {
-            padding: 40px 20px;
-            margin: 48px 0;
-            background: linear-gradient(135deg, rgba(58, 142, 237, 0.08), rgba(236, 72, 153, 0.08));
-            border-radius: var(--border-radius);
-            border: 2px solid var(--border-color);
-        }
-
-        .search-bar-wrapper {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .search-header {
-            text-align: center;
-            margin-bottom: 24px;
-        }
-
-        .search-header h2 {
-            font-size: 1.5rem;
-            color: var(--text-primary);
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-
-        .search-header p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .game-search-input {
-            width: 100%;
-            padding: 16px 20px;
-            font-size: 1rem;
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            background: var(--card-bg);
-            color: var(--text-primary);
-            transition: all 0.3s ease;
-            margin-bottom: 24px;
-            font-family: inherit;
-        }
-
-        .game-search-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(58, 142, 237, 0.15);
-            transform: translateY(-2px);
-        }
-
-        .game-search-input::placeholder {
-            color: var(--text-muted);
-            opacity: 0.7;
-        }
-
-        .filter-buttons {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .filter-btn {
-            padding: 10px 20px;
-            border: 2px solid var(--border-color);
-            background: var(--card-bg);
-            color: var(--text-primary);
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            font-weight: 600;
-            font-family: inherit;
-            font-size: 0.9rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .filter-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--primary);
-            transition: left 0.3s ease;
-            z-index: -1;
-        }
-
-        .filter-btn:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(58, 142, 237, 0.2);
-        }
-
-        .filter-btn.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-            box-shadow: 0 4px 15px rgba(58, 142, 237, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .filter-btn.active::before {
-            left: 0;
-        }
-
-        
-        .featured-section {
-            margin: 50px 0 40px 0;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 32px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .section-title::before {
-            content: '✨';
-            font-size: 1.8rem;
-        }
-
-        .featured-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-            margin-bottom: 48px;
-        }
-
-        .featured-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            box-shadow: var(--shadow);
-        }
-
-        .featured-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--primary);
-        }
-
-        .featured-card-large {
-            grid-column: span 2;
-        }
-
-        .featured-image {
-            height: 180px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .featured-image::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-            background-size: 40px 40px;
-            animation: shimmer 4s ease-in-out infinite;
-        }
-
-        .featured-icon {
-            font-size: 80px;
-            z-index: 2;
-            position: relative;
-        }
-
-        .featured-badge {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            background: rgba(255, 255, 255, 0.9);
-            color: var(--primary);
-            padding: 8px 14px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            z-index: 3;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .featured-badge.new {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-        }
-
-        .featured-content {
-            padding: 24px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .featured-content h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 12px;
-        }
-
-        .featured-content p {
-            color: var(--text-secondary);
-            margin-bottom: 16px;
-            flex: 1;
-        }
-
-        .featured-link {
-            display: inline-block;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            padding: 8px 0;
-            border-bottom: 2px solid var(--primary);
-            transition: all 0.3s ease;
-            width: fit-content;
-        }
-
-        .featured-link:hover {
-            color: var(--secondary);
-            border-bottom-color: var(--secondary);
-            transform: translateX(4px);
-        }
-
-        
         @media (max-width: 1024px) {
             .container {
                 padding: 0 20px;
@@ -1291,6 +1081,20 @@
             .main-wrapper {
                 flex-direction: column;
                 padding: 0 20px;
+            }
+
+            .hero-shell {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-copy {
+                text-align: center;
+            }
+
+            .hero-actions,
+            .hero-badges {
+                justify-content: center;
             }
 
             .sidebar {
@@ -1313,6 +1117,11 @@
 
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+
+            .info-strip,
+            .spotlight-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1385,6 +1194,10 @@
                 padding: 0;
             }
 
+            .nav-links {
+                display: none;
+            }
+
             .archive-grid {
                 grid-template-columns: 1fr;
             }
@@ -1454,23 +1267,46 @@
 
     <nav class="navbar">
         <div class="navbar-brand" style="font-weight: 900;">Infinity Nexus</div>
+        <div class="nav-links">
+            <a class="nav-link" href="#main">Home</a>
+            <a class="nav-link" href="mainpages/gamecorner.html">Game Corner</a>
+            <a class="nav-link" href="mainpages/casino.html">Casino</a>
+            <a class="nav-link" href="mainpages/info.html">Guides</a>
+        </div>
         <button class="theme-toggle" id="themeToggle" title="Toggle theme">
             <span id="themeIcon">🌙</span>
         </button>
     </nav>
 
     <header>
-        <div class="container">
-            <div style="text-align: center;">
-                <h1 style="font-weight: 300; font-size: 3.5rem; font-family: 'Didact Gothic', sans-serif; margin-bottom: 20px; letter-spacing: -0.5px;" class="main-title">Infinity Nexus</h1>
-                <div style="margin-top: 20px; font-size: 0.95rem; opacity: 0.85;">v1.28.28 | Last Updated: September 18, 2026</div>
+        <div class="container hero-shell">
+            <div class="hero-copy">
+                <h1 class="main-title">Infinity Nexus</h1>
             </div>
         </div>
     </header>
 
-   
     <main class="content-wrapper">
         <div class="container" id="main">
+
+            <div class="spotlight-grid">
+                <article class="spotlight-card">
+                    <div class="spotlight-icon">🎰</div>
+                    <h3>Casino</h3>
+                    <a href="mainpages/casino.html">Visit Casino →</a>
+                </article>
+                <article class="spotlight-card">
+                    <div class="spotlight-icon">🕹️</div>
+                    <h3>Game Corner</h3>
+                    <a href="mainpages/gamecorner.html">Play →</a>
+                </article>
+                <article class="spotlight-card">
+                    <div class="spotlight-icon">🔥</div>
+                    <h3>Pokémon Infinite Sun</h3>
+                    <a href="https://pokemonromhacks.pages.dev/fr/" target="_blank">Play →</a>
+                </article>
+            </div>
+
             <div class="links-section">
                 <div class="archive-grid" id="gamesGrid">
 
@@ -1478,7 +1314,7 @@
                         <div class="card-header">
                             <div class="card-image-placeholder" aria-hidden="true">🔥</div>
                         </div>
-                        <h3 class="archive-title">FireRed Hack</h3>
+                        <h3 class="archive-title">Pokémon Infinite Sun</h3>
                         <div style="padding: 0 16px 16px 16px;">
                             <a href="https://pokemonromhacks.pages.dev/fr/" target="_blank" class="status-pill status-available">Play Now →</a>
                         </div>
@@ -1578,46 +1414,9 @@
         </div>
     </footer>
 
+    <div class="announcement-overlay" id="announcementOverlay" hidden></div>
+
     <script>
-        const gamesData = [
-            { title: 'FireRed Hack', link: 'https://fireredhack.pages.dev/', icon: '🔥', tags: ['new', 'featured'] },
-            { title: 'Monthly Challenges', link: 'mainpages/mainpage6.html', icon: '🏆', tags: ['popular', 'featured'] },
-            { title: 'Must Play Games', link: 'mainpages/mainpage2.html', icon: '👍', tags: ['popular'] },
-            { title: 'Game Corner', link: 'mainpages/mainpage3.html', icon: '🎮', tags: ['popular'] },
-            { title: 'Casino Games', link: 'mainpages/mainpage1.html', icon: '🎰', tags: ['popular'] },
-            { title: 'Simulation Games', link: 'mainpages/mainpage4.html', icon: '💡', tags: ['popular'] },
-            { title: 'Information & Guides', link: 'mainpages/mainpage5.html', icon: '📚', tags: ['featured'] }
-        ];
-
-    
-
-        function filterGames(query = '', filterTag = 'all') {
-            const searchInput = document.getElementById('gameSearch');
-            const gamesGrid = document.getElementById('gamesGrid');
-            
-            if (!gamesGrid) return;
-            
-            let filtered = gamesData;
-            
-            if (query) {
-                filtered = filtered.filter(game =>
-                    game.title.toLowerCase().includes(query.toLowerCase())
-                );
-            }
-            
-            if (filterTag !== 'all') {
-                filtered = filtered.filter(game =>
-                    game.tags.includes(filterTag)
-                );
-            }
-            
-            gamesGrid.style.opacity = '0.5';
-            setTimeout(() => {
-                gamesGrid.style.opacity = '1';
-                gamesGrid.style.transition = 'opacity 0.3s ease';
-            }, 50);
-        }
-
         const StorageManager = {
             get: (key) => {
                 try {
@@ -1643,238 +1442,139 @@
             }
         };
 
-        const CURRENT_VERSION = "1.28.28";
-        const LATEST_UPDATE_DATE = "September 18, 2026";
-
-        function checkAndShowAnnouncement() {
-            try {
-                const lastSeenVersion = StorageManager.get('lastSeenVersion');
-                const userFirstVisit = StorageManager.get('userFirstVisit');
-
-                if (!userFirstVisit) {
-                    StorageManager.set('userFirstVisit', new Date().toISOString());
-                    showAnnouncement(true, lastSeenVersion);
-                } else if (lastSeenVersion !== CURRENT_VERSION) {
-                    showAnnouncement(false, lastSeenVersion);
-                }
-
-                StorageManager.set('lastSeenVersion', CURRENT_VERSION);
-            } catch (e) {
-                console.error('Announcement check error:', e);
-            }
-        }
-
-        function showAnnouncement(isNewUser, previousVersion) {
-            try {
-                const overlay = document.createElement('div');
-                overlay.className = 'announcement-overlay active';
-                overlay.id = 'announcementOverlay';
-
-                let content = '';
-                let badgeText = '';
-
-                if (isNewUser) {
-                    badgeText = 'Welcome!';
-                    content = `
-                        <div class="announcement-user-status">
-                            <strong>Welcome to Infinity Nexus!</strong> 
-                        </div>
-                        <div class="announcement-content">
-                            <h3>What's New in v${CURRENT_VERSION}</h3>
-                            <p><strong>Released:</strong> ${LATEST_UPDATE_DATE}</p>
-                            <p>This update brings major improvements to games!</p>
-                            
-                            <h3>Major Updates Include:</h3>
-                            <ul>
-                                <li>Code Cleanup</li>
-                                <li>Bug tweaks</li>
-                                <li>Game Improvements</li>
-                            </ul>
-
-                            <p style="margin-top: 16px; font-size: 0.95rem; color: var(--text-muted);">
-                                For detailed release notes, visit the <a href="info/updateinfo/updateinfo.html" style="color: var(--primary); text-decoration: none;">News & Updates</a> page.
-                            </p>
-                        </div>
-                    `;
-                } else {
-                    badgeText = 'Update Available';
-                    let updateMessage = previousVersion 
-                        ? `Updated from v${previousVersion} to v${CURRENT_VERSION}`
-                        : `Updated to v${CURRENT_VERSION}`;
-
-                    content = `
-                        <div class="announcement-user-status">
-                            <strong>${updateMessage}</strong><br>
-                            <small>Released: ${LATEST_UPDATE_DATE}</small>
-                        </div>
-                        <div class="announcement-content">
-                            <h3>What's New</h3>
-                            <p>Check out this update with lots of improvements!</p>
-                            
-                            <h3>Key Improvements:</h3>
-                            <ul>
-                                <li>Code Cleanup</li>
-                                <li>Bug tweaks</li>
-                                <li>Game Improvements</li>
-                            </ul>
-
-                            <p style="margin-top: 16px; font-size: 0.95rem; color: var(--text-muted);">
-                                <a href="info/updateinfo/updateinfo.html" style="color: var(--primary); text-decoration: none; font-weight: 600;">View Full Changelog →</a>
-                            </p>
-                        </div>
-                    `;
-                }
-
-                const modal = document.createElement('div');
-                modal.className = 'announcement-modal';
-                modal.innerHTML = `
-                    <div class="announcement-header">
-                        <h2 class="announcement-title">${isNewUser ? 'Welcome to Infinity Nexus!' : 'What\'s New'}</h2>
-                        <span class="announcement-badge ${isNewUser ? '' : 'returning'}">${badgeText}</span>
-                    </div>
-                    ${content}
-                    <button class="announcement-close-btn" id="closeAnnouncement" style="background-color: var(--primary); color: var(--text); font-family: 'Inter', sans-serif;">Get Started →</button>
-                `;
-
-                overlay.appendChild(modal);
-                document.body.appendChild(overlay);
-
-                const closeBtn = document.getElementById('closeAnnouncement');
-                if (closeBtn) {
-                    closeBtn.addEventListener('click', () => {
-                        overlay.remove();
-                    });
-                }
-
-                const closeOnEscape = (e) => {
-                    if (e.key === 'Escape') {
-                        overlay.remove();
-                        document.removeEventListener('keydown', closeOnEscape);
-                    }
-                };
-
-                document.addEventListener('keydown', closeOnEscape);
-            } catch (e) {
-                console.error('Error showing announcement:', e);
-            }
-        }
+        const CURRENT_VERSION = '1.3.0';
+        const LATEST_UPDATE_DATE = 'October 12, 2026';
 
         function initTheme() {
-            try {
-                const savedTheme = StorageManager.get('theme') || 'dark';
-                document.documentElement.setAttribute('data-theme', savedTheme);
-                updateThemeIcon(savedTheme);
-            } catch (e) {
-                console.warn('Theme init error:', e);
-                document.documentElement.setAttribute('data-theme', 'dark');
-                updateThemeIcon('dark');
-            }
+            const savedTheme = StorageManager.get('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
         }
 
         function updateThemeIcon(theme) {
-            try {
-                const icon = document.getElementById('themeIcon');
-                if (icon) {
-                    icon.textContent = theme === 'dark' ? '☀️' : '🌙';
-                }
-            } catch (e) {
-                console.warn('Theme icon update error:', e);
+            const icon = document.getElementById('themeIcon');
+            if (icon) {
+                icon.textContent = theme === 'dark' ? '☀️' : '🌙';
             }
         }
 
         function toggleTheme() {
-            try {
-                const current = document.documentElement.getAttribute('data-theme') || 'dark';
-                const newTheme = current === 'dark' ? 'light' : 'dark';
-                document.documentElement.setAttribute('data-theme', newTheme);
-                StorageManager.set('theme', newTheme);
-                updateThemeIcon(newTheme);
-            } catch (e) {
-                console.error('Theme toggle error:', e);
+            const current = document.documentElement.getAttribute('data-theme') || 'dark';
+            const nextTheme = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', nextTheme);
+            StorageManager.set('theme', nextTheme);
+            updateThemeIcon(nextTheme);
+        }
+
+        function showAnnouncement(isNewUser, previousVersion) {
+            const overlay = document.getElementById('announcementOverlay');
+            if (!overlay) return;
+
+            let badgeText = isNewUser ? 'Welcome!' : 'Update Available';
+            let title = isNewUser ? 'Welcome to Infinity Nexus!' : "What's New";
+            let statusHtml = isNewUser
+                ? '<strong>Welcome to Infinity Nexus!</strong>'
+                : `<strong>${previousVersion ? 'Updated from v' + previousVersion + ' to v' + CURRENT_VERSION : 'Updated to v' + CURRENT_VERSION}</strong><br><small>Released: ${LATEST_UPDATE_DATE}</small>`;
+
+            let contentHtml = isNewUser ? `
+                <div class="announcement-user-status">
+                    <strong>Welcome to Infinity Nexus!</strong>
+                </div>
+                <div class="announcement-content">
+                    <h3>What's New in v${CURRENT_VERSION}</h3>
+                    <p><strong>Released:</strong> ${LATEST_UPDATE_DATE}</p>
+                    <p>This update brings major improvements to games!</p>
+                    <h3>Major Updates Include:</h3>
+                    <ul>
+                        <li>Code Cleanup</li>
+                        <li>Version Fix</li>
+                        <li>Homepage fix</li>
+                    </ul>
+                    <p style="margin-top: 16px; font-size: 0.95rem; color: var(--text-muted);">
+                        For detailed release notes, visit the <a href="info/updateinfo/updateinfo.html">News & Updates</a> page.
+                    </p>
+                </div>
+            ` : `
+                <div class="announcement-user-status">
+                    ${statusHtml}
+                </div>
+                <div class="announcement-content">
+                    <h3>What's New</h3>
+                    <p>Check out this update with lots of improvements!</p>
+                    <h3>Key Improvements:</h3>
+                    <ul>
+                        <li>Code Cleanup</li>
+                        <li>Version Fix</li>
+                        <li>Homepage fix</li>
+                    </ul>
+                    <p style="margin-top: 16px; font-size: 0.95rem; color: var(--text-muted);">
+                        <a href="info/updateinfo/updateinfo.html" style="font-weight: 600;">View Full Changelog →</a>
+                    </p>
+                </div>
+            `;
+
+            overlay.innerHTML = `
+                <div class="announcement-modal" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
+                    <div class="announcement-header">
+                        <h2 class="announcement-title" id="welcomeTitle">${title}</h2>
+                        <span class="announcement-badge">${badgeText}</span>
+                    </div>
+                    ${contentHtml}
+                    <div class="announcement-actions">
+                        <button class="announcement-close-btn" type="button">Get Started →</button>
+                    </div>
+                </div>
+            `;
+
+            overlay.hidden = false;
+
+            const closeBtn = overlay.querySelector('.announcement-close-btn');
+            closeBtn?.addEventListener('click', () => {
+                overlay.hidden = true;
+                StorageManager.set('lastSeenVersion', CURRENT_VERSION);
+            });
+
+            overlay.addEventListener('click', (event) => {
+                if (event.target === overlay) {
+                    overlay.hidden = true;
+                    StorageManager.set('lastSeenVersion', CURRENT_VERSION);
+                }
+            }, { once: true });
+        }
+
+        function checkAndShowAnnouncement() {
+            const lastSeenVersion = StorageManager.get('lastSeenVersion');
+            const userFirstVisit = StorageManager.get('userFirstVisit');
+
+            if (!userFirstVisit) {
+                StorageManager.set('userFirstVisit', new Date().toISOString());
+                showAnnouncement(true, lastSeenVersion);
+            } else if (lastSeenVersion !== CURRENT_VERSION) {
+                showAnnouncement(false, lastSeenVersion);
             }
+
+            StorageManager.set('lastSeenVersion', CURRENT_VERSION);
+        }
+
+        function initWelcomeModal() {
+            requestAnimationFrame(() => {
+                checkAndShowAnnouncement();
+            });
         }
 
         document.addEventListener('DOMContentLoaded', function () {
-
-            
-            const searchInput = document.getElementById('gameSearch');
-            if (searchInput) {
-                searchInput.addEventListener('input', (e) => {
-                    const currentFilter = document.querySelector('.filter-btn.active')?.dataset.filter || 'all';
-                    filterGames(e.target.value, currentFilter);
-                });
-            }
-            
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    const searchQuery = searchInput?.value || '';
-                    filterGames(searchQuery, btn.dataset.filter);
-                });
-            });
-
             initTheme();
-            
-            try {
-                const yearEl = document.getElementById('copyright-year');
-                if (yearEl) {
-                    yearEl.textContent = new Date().getFullYear();
-                }
-            } catch (e) {
-                console.warn('Year update error:', e);
+            initWelcomeModal();
+
+            const yearEl = document.getElementById('copyright-year');
+            if (yearEl) {
+                yearEl.textContent = new Date().getFullYear();
             }
 
             const themeToggleBtn = document.getElementById('themeToggle');
             if (themeToggleBtn) {
                 themeToggleBtn.addEventListener('click', toggleTheme);
             }
-            
-            setTimeout(() => {
-                checkAndShowAnnouncement();
-            }, 100);
-
-            window.testAnnouncement = function(forceNew = false) {
-                if (forceNew) {
-                    StorageManager.remove('userFirstVisit');
-                    StorageManager.remove('lastSeenVersion');
-                }
-                checkAndShowAnnouncement();
-            };
-
-            window.resetAnnouncement = function() {
-                StorageManager.remove('userFirstVisit');
-                StorageManager.remove('lastSeenVersion');
-                console.log('Announcement reset. Reload page to see it again.');
-            };
-
-            window.resetTheme = function() {
-                StorageManager.remove('theme');
-                initTheme();
-                console.log('Theme reset to dark.');
-            };
-            
-            document.querySelectorAll('.read-more-btn').forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('data-target');
-                    const targetElement = document.querySelector(targetId);
-                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
-                    
-                    if (targetElement) {
-                        targetElement.style.display = isExpanded ? 'none' : 'inline';
-                        this.setAttribute('aria-expanded', !isExpanded);
-                        this.textContent = isExpanded ? 'Read More...' : 'Read Less';
-                    }
-                });
-                
-                button.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        this.click();
-                    }
-                });
-            });
         });
     </script>
 </body>

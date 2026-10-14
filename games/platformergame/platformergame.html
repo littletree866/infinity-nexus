@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>The Impossible Game</title>
     <link rel="icon" href="../../icon.jpg" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -17,10 +17,10 @@
         }
 
         body {
-            font-family: 'Didact Gothic', sans-serif;
+            font-family: 'IBM Plex Sans', sans-serif;
             margin: 0;
             overflow: hidden;
-            background: linear-gradient(145deg, #0b0e1a 0%, #1a1f33 100%);
+            background: #0b0e1a;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -34,11 +34,13 @@
             font-weight: 600;
         }
 
-        /* ---------- GAME VIEW ---------- */
         #gameContainer {
-            position: relative;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 0 2px rgba(80, 80, 180, 0.3);
-            border-radius: 20px;
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            box-shadow: none;
+            border-radius: 0;
             overflow: hidden;
             background: #12162a;
             display: none;
@@ -48,10 +50,11 @@
             display: block;
         }
 
-        canvas {
+        canvas#game {
             background: #0a1228;
             display: block;
-            border-radius: 18px;
+            width: 100%;
+            height: 100%;
             image-rendering: pixelated;
             image-rendering: crisp-edges;
         }
@@ -63,7 +66,7 @@
             color: #fff;
             font-size: 18px;
             text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
-            font-family: 'Inter', sans-serif;
+            font-family: 'IBM Plex Sans', sans-serif;
             background: rgba(10, 14, 30, 0.75);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
@@ -232,7 +235,7 @@
             border: 1px solid rgba(120, 140, 255, 0.25);
             border-radius: 40px;
             cursor: pointer;
-            font-family: 'Inter', sans-serif;
+            font-family: 'IBM Plex Sans', sans-serif;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
             transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
             letter-spacing: 0.5px;
@@ -268,7 +271,7 @@
             border-radius: 32px;
             text-align: center;
             display: none;
-            font-family: 'Inter', sans-serif;
+            font-family: 'IBM Plex Sans', sans-serif;
             font-weight: 600;
             box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8), 0 0 0 2px rgba(80, 100, 220, 0.2);
             min-width: 520px;
@@ -319,7 +322,7 @@
             border: none;
             border-radius: 60px;
             cursor: pointer;
-            font-family: 'Inter', sans-serif;
+            font-family: 'IBM Plex Sans', sans-serif;
             background: linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7);
             color: #fff;
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -340,9 +343,6 @@
             box-shadow: 0 6px 16px rgba(99, 102, 241, 0.3);
         }
 
-        /* ============================================================
-           HOME SCREEN (separate full-screen view)
-           ============================================================ */
         #homeScreen {
             position: fixed;
             inset: 0;
@@ -366,7 +366,6 @@
             to { opacity: 1; transform: scale(1); }
         }
 
-        /* Starfield background on home screen */
         #homeScreen::before {
             content: "";
             position: absolute;
@@ -392,7 +391,6 @@
             z-index: 1;
         }
 
-        /* Title banner */
         .home-title {
             font-size: 72px;
             font-weight: 800;
@@ -418,7 +416,6 @@
             text-align: center;
         }
 
-        /* Decorative pixel knight on home */
         .home-knight {
             image-rendering: pixelated;
             image-rendering: crisp-edges;
@@ -434,7 +431,6 @@
             50% { transform: translateY(-6px); }
         }
 
-        /* Level select panel */
         .level-select-panel {
             background: rgba(10, 14, 30, 0.7);
             backdrop-filter: blur(20px);
@@ -473,7 +469,7 @@
             color: #d0dcff;
             cursor: pointer;
             transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-            font-family: 'Inter', sans-serif;
+            font-family: 'Didact Gothic', sans-serif;
             position: relative;
             text-transform: uppercase;
             display: flex;
@@ -557,7 +553,6 @@
             margin: 0 2px;
         }
 
-        /* ---------- MOBILE ---------- */
         #mobileControls {
             position: absolute;
             bottom: 24px;
@@ -597,19 +592,6 @@
         }
 
         @media (max-width: 950px) {
-            canvas {
-                width: 100vw;
-                height: auto;
-                max-height: 100vh;
-            }
-
-            #gameContainer {
-                width: 100vw;
-                height: 100vh;
-                border-radius: 0;
-                box-shadow: none;
-            }
-
             .screen {
                 min-width: 85vw;
                 padding: 36px 28px;
@@ -697,69 +679,49 @@
     </style>
 </head>
 <body>
-    <!-- ============================================================
-         HOME SCREEN (separate full-page view)
-         ============================================================ -->
     <div id="homeScreen" class="active">
         <h1 class="home-title">The Impossible Game</h1>
-
         <canvas id="homeKnight" class="home-knight" width="24" height="28"></canvas>
-
         <div class="level-select-panel">
             <h3>Select a Level</h3>
             <div id="levelGrid" class="level-grid"></div>
         </div>
-
         <div class="home-footer">
             Beat a level to unlock the next<br>
             <span class="key">←</span> <span class="key">→</span> move &nbsp;·&nbsp;
             <span class="key">↑</span> / <span class="key">W</span> / <span class="key">Space</span> jump
         </div>
     </div>
-
-    <!-- ============================================================
-         GAME VIEW
-         ============================================================ -->
     <div id="gameContainer">
-        <canvas id="game" width="900" height="900"></canvas>
-
+        <canvas id="game"></canvas>
         <div id="ui">
             <div id="levelText"><span class="level-icon">🎯</span> Level: 1</div>
             <div id="scoreContainer"><span class="score-icon">⭐</span> Score: <span id="scoreText">0</span></div>
             <div id="healthContainer">
                 <div id="heartsDisplay"></div>
             </div>
+            <!-- <div id="doubleJumpIndicator"><span class="double-jump-icon">💨</span> Double Jump Ready</div> -->
         </div>
-
-        <div id="doubleJumpIndicator">✨ Double Jump Active</div>
-
         <div id="mobileControls">
             <div class="mobile-btn" id="leftBtn">←</div>
             <div class="mobile-btn" id="rightBtn">→</div>
             <div class="mobile-btn" id="jumpBtn">↑</div>
         </div>
-
         <button id="pauseBtn">⏸️ Pause</button>
         <button id="backBtn" style="right: 170px;">🏠 Home</button>
-
         <div id="gameOverScreen" class="screen">
             <h2>Game Over</h2>
             <p>Score: <span id="finalScore">0</span></p>
             <p>Level: <span id="finalLevel">1</span></p>
             <button onclick="resetGame()">Try Again</button>
         </div>
-
         <div id="winScreen" class="screen">
             <h2>Victory! 🎉</h2>
             <p>Final Score: <span id="winScore">0</span></p>
             <button onclick="showHomeScreen()">Home</button>
         </div>
     </div>
-
     <script>
-        // ============================================================
-        // DEBUG / TESTING FLAGS
-        // ============================================================
         const DEBUG_SKIP = true;
         const DEBUG_NO_ENEMY_DAMAGE = false;
 
@@ -783,10 +745,7 @@
         let heartDrops = [];
         let checkpoints = [];
         let lastCheckpoint = null;
-
-        // Floating heart animation (for the "totem" effect)
         let floatingHearts = [];
-
         let unlockedLevels = 1;
 
         const scoreText = document.getElementById("scoreText");
@@ -796,10 +755,10 @@
         const finalScore = document.getElementById("finalScore");
         const finalLevel = document.getElementById("finalLevel");
         const winScore = document.getElementById("winScore");
-        const doubleJumpIndicator = document.getElementById("doubleJumpIndicator");
+        // const doubleJumpIndicator = document.getElementById("doubleJumpIndicator");
 
-        const world = { width: 1200, height: 6000 };
-        let camera = { x: 0, y: 0, width: canvas.width, height: canvas.height, smooth: 0.08 };
+        let world = { width: 1400, height: 8000 };
+        let camera = { x: 0, y: 0, width: 800, height: 600, smooth: 0.08 };
 
         let player = {
             x: 50, y: 50, w: 36, h: 44,
@@ -808,18 +767,21 @@
             jumping: false,
             onGround: false,
             coyote: 0,
-            canDoubleJump: false,
+            canDoubleJump: true,
             facing: 1,
             dashCooldown: 0,
             invincible: 0,
             jumpBuffer: 0,
-            knockbackTimer: 0
+            knockbackTimer: 0,
+            lastJumpTap: 0,
+            jumpCount: 0
         };
 
         const gravity = 0.8;
         const jumpForce = -14;
         const COYOTE_TIME = 0.2;
         const JUMP_BUFFER = 0.1;
+        const DOUBLE_TAP_TIME = 0.5;
 
         let platforms = [];
         let enemies = [];
@@ -829,9 +791,20 @@
         let fakePlatforms = [];
         let lastTime = performance.now();
 
-        // ============================================================
-        // PIXEL ART SPRITE DATA
-        // ============================================================
+        function resizeCanvas() {
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            canvas.width = w;
+            canvas.height = h;
+            canvas.style.width = w + 'px';
+            canvas.style.height = h + 'px';
+            camera.width = w;
+            camera.height = h;
+            ctx.imageSmoothingEnabled = false;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
         function drawPixelSprite(ctx, spriteMap, palette, x, y, pixelSize, flipX) {
             const rows = spriteMap.length;
@@ -854,31 +827,13 @@
             }
         }
 
-        // ------------------------------------------------------------
-        // PLAYER SPRITE — KNIGHT / ADVENTURER (16x18)
-        // ------------------------------------------------------------
         const PLAYER_PALETTE = {
-            'k': '#1a1a2e',
-            'K': '#0e0e1c',
-            's': '#f0d8b8',
-            'S': '#c8a888',
-            'a': '#6a8cff',
-            'A': '#3a5ce0',
-            'h': '#a8c4ff',
-            'H': '#dde8ff',
-            'g': '#ffd700',
-            'G': '#cc9900',
-            'b': '#4a3a2a',
-            'B': '#2a1a0a',
-            'e': '#ffffff',
-            'p': '#1a1a2e',
-            'r': '#e63946',
-            'R': '#a41623',
-            'w': '#8b0000',
-            'W': '#5a0000',
-            'm': '#b8b8c8',
-            'M': '#707080',
-            'c': '#f5e6d3',
+            'k': '#1a1a2e', 'K': '#0e0e1c', 's': '#f0d8b8', 'S': '#c8a888',
+            'a': '#6a8cff', 'A': '#3a5ce0', 'h': '#a8c4ff', 'H': '#dde8ff',
+            'g': '#ffd700', 'G': '#cc9900', 'b': '#4a3a2a', 'B': '#2a1a0a',
+            'e': '#ffffff', 'p': '#1a1a2e', 'r': '#e63946', 'R': '#a41623',
+            'w': '#8b0000', 'W': '#5a0000', 'm': '#b8b8c8', 'M': '#707080',
+            'c': '#f5e6d3'
         };
 
         const PLAYER_IDLE = [
@@ -899,7 +854,7 @@
             "..kaakkkkaak....",
             "..kkbbbbbbkk....",
             "...kbbbbbbk.....",
-            "...kBBkkBBk.....",
+            "...kBBkkBBk....."
         ];
 
         const PLAYER_RUN1 = [
@@ -920,7 +875,7 @@
             "..kaakkkkaak....",
             "...kbbbbbbk.....",
             "...kbbbbkk......",
-            "...kBBk.kBBk....",
+            "...kBBk.kBBk...."
         ];
 
         const PLAYER_RUN2 = [
@@ -941,7 +896,7 @@
             "..kaakkkkaak....",
             "....kbbbbbbk....",
             ".....kkbbbbk....",
-            "....kBBk.kBBk...",
+            "....kBBk.kBBk..."
         ];
 
         const PLAYER_JUMP = [
@@ -962,27 +917,14 @@
             "..kaakkkkaak....",
             "...kbbbbbbk.....",
             "...kBBBBBBk.....",
-            "...kBBkkBBk.....",
+            "...kBBkkBBk....."
         ];
 
-        // ------------------------------------------------------------
-        // ENEMY SPRITE
-        // ------------------------------------------------------------
         const ENEMY_PALETTE = {
-            'k': '#0a0a14',
-            'g': '#4a8a3a',
-            'G': '#2a6a1a',
-            'h': '#7acc5a',
-            'e': '#ffcc00',
-            'p': '#ff2200',
-            't': '#5a4a3a',
-            'T': '#3a2a1a',
-            'b': '#3a2a1a',
-            's': '#b0b0c0',
-            'S': '#e8eef8',
-            'm': '#886644',
-            'r': '#cc3333',
-            'w': '#ffffff',
+            'k': '#0a0a14', 'g': '#4a8a3a', 'G': '#2a6a1a', 'h': '#7acc5a',
+            'e': '#ffcc00', 'p': '#ff2200', 't': '#5a4a3a', 'T': '#3a2a1a',
+            'b': '#3a2a1a', 's': '#b0b0c0', 'S': '#e8eef8', 'm': '#886644',
+            'r': '#cc3333', 'w': '#ffffff'
         };
 
         const ENEMY_IDLE = [
@@ -1001,7 +943,7 @@
             "..kbbbbbbk....",
             "..kBBBBBBk....",
             "...kk..kk.....",
-            "..............",
+            ".............."
         ];
 
         const ENEMY_WALK = [
@@ -1020,72 +962,22 @@
             "..kbbbbbbk....",
             ".kBBBBBBk.....",
             "..kk..kk......",
-            "..............",
+            ".............."
         ];
 
-        // ------------------------------------------------------------
-        // COIN SPRITE
-        // ------------------------------------------------------------
         const COIN_PALETTE = {
-            'k': '#8a6a00',
-            'g': '#ffd700',
-            'G': '#ffaa00',
-            'h': '#ffff88',
-            'w': '#ffffff',
+            'k': '#8a6a00', 'g': '#ffd700', 'G': '#ffaa00', 'h': '#ffff88', 'w': '#ffffff'
         };
 
         const COIN_FRAMES = [
-            [
-                "..kkkk..",
-                ".khgggk.",
-                "khgggggk",
-                "khgwwggk",
-                "khgwwggk",
-                "khgggggk",
-                ".khgggk.",
-                "..kkkk..",
-            ],
-            [
-                "...kk...",
-                "..khgk..",
-                ".khgggk.",
-                ".khgggk.",
-                ".khgggk.",
-                ".khgggk.",
-                "..khgk..",
-                "...kk...",
-            ],
-            [
-                "....k...",
-                "...khk..",
-                "...kgk..",
-                "...kgk..",
-                "...kgk..",
-                "...kgk..",
-                "...khk..",
-                "....k...",
-            ],
-            [
-                "...kk...",
-                "..khgk..",
-                ".khgggk.",
-                ".khgggk.",
-                ".khgggk.",
-                ".khgggk.",
-                "..khgk..",
-                "...kk...",
-            ],
+            ["..kkkk..", ".khgggk.", "khgggggk", "khgwwggk", "khgwwggk", "khgggggk", ".khgggk.", "..kkkk.."],
+            ["...kk...", "..khgk..", ".khgggk.", ".khgggk.", ".khgggk.", ".khgggk.", "..khgk..", "...kk..."],
+            ["....k...", "...khk..", "...kgk..", "...kgk..", "...kgk..", "...kgk..", "...khk..", "....k..."],
+            ["...kk...", "..khgk..", ".khgggk.", ".khgggk.", ".khgggk.", ".khgggk.", "..khgk..", "...kk..."]
         ];
 
-        // ------------------------------------------------------------
-        // HEART SPRITE
-        // ------------------------------------------------------------
         const HEART_PALETTE = {
-            'k': '#6a0011',
-            'r': '#ff3355',
-            'R': '#cc1133',
-            'h': '#ff8899',
-            'w': '#ffffff',
+            'k': '#6a0011', 'r': '#ff3355', 'R': '#cc1133', 'h': '#ff8899', 'w': '#ffffff'
         };
 
         const HEART_SPRITE = [
@@ -1095,7 +987,7 @@
             "khrrrrhk",
             ".krrrrk.",
             "..krrk..",
-            "...kk...",
+            "...kk..."
         ];
 
         const HEART_EMPTY_SPRITE = [
@@ -1105,19 +997,12 @@
             "k......k",
             ".k....k.",
             "..k..k..",
-            "...kk...",
+            "...kk..."
         ];
 
-        // ------------------------------------------------------------
-        // POWERUP SPRITE
-        // ------------------------------------------------------------
         const POWERUP_PALETTE = {
-            'k': '#003344',
-            'c': '#00aadd',
-            'C': '#0077aa',
-            'h': '#88ffff',
-            'w': '#ffffff',
-            'y': '#ffdd00',
+            'k': '#003344', 'c': '#00aadd', 'C': '#0077aa', 'h': '#88ffff',
+            'w': '#ffffff', 'y': '#ffdd00'
         };
 
         const POWERUP_SPRITE = [
@@ -1130,81 +1015,90 @@
             "kcccccccck",
             ".kCCCCCCk.",
             "..kkkkkk..",
-            "..........",
+            ".........."
         ];
 
-        // ------------------------------------------------------------
-        // CHECKPOINT FLAGS
-        // ------------------------------------------------------------
         const FLAG_PALETTE = {
-            'k': '#2a1a10',
-            'r': '#cc3333',
+            'k': '#1a1a1a',
+            'p': '#8a6a3a',
+            'P': '#5a4020',
+            'r': '#cc2222',
             'R': '#991111',
             'g': '#22cc44',
+            'G': '#119933',
             'h': '#88ffaa',
             'w': '#ffffff',
+            'y': '#ffd700',
+            'Y': '#cc9900'
         };
 
         const FLAG_INACTIVE = [
-            "..kkkkkkk...",
-            ".krrrrrrk...",
-            "krrrrrrrrk..",
-            "krrrrrrrrk..",
-            "krrrrrrrrk..",
-            ".krrrrrrk...",
-            "..kkkkkk....",
-            "...kk.......",
-            "...kk.......",
-            "...kk.......",
-            "...kk.......",
-            "...kk.......",
-            "...kk.......",
-            "...kk.......",
-            "...kk.......",
-            "...kk.......",
+            "..rrrrrrrrr...",
+            ".rrrrrrrrr....",
+            "rrrrrrrrr.....",
+            "rrrrrrrr......",
+            "rrrrrrr.......",
+            "rrrrrr........",
+            "rrrrr.........",
+            "rrrr..........",
+            "pp............",
+            "pp............",
+            "pp............",
+            "pp............",
+            "pp............",
+            "pp............",
+            "PP............",
+            "PP............"
         ];
 
         const FLAG_ACTIVE = [
-            "..kkkkkkk...",
-            ".kggggggk...",
-            "kghhhhhhgk..",
-            "kghwwwwhgk..",
-            "kghhhhhhgk..",
-            ".kggggggk...",
-            "..kkkkkk....",
-            "...kk.......",
-            "...kk.......",
-            "...kk.......",
-            "...kk.......",
-            "...kk.......",
-            "...kk.......",
-            "...kk.......",
-            "...kk.......",
-            "...kk.......",
+            "..ggggggggg...",
+            ".ggggggggg....",
+            "gggghhhhgg....",
+            "ggggghhgg.....",
+            "gggggggg......",
+            "ggggggg.......",
+            "gggggg........",
+            "ggggg.........",
+            "pp............",
+            "pp............",
+            "pp............",
+            "pp............",
+            "pp............",
+            "pp............",
+            "PP............",
+            "PP............"
         ];
+
+        const GOAL_PALETTE = {
+            'k': '#1a1a1a',
+            'y': '#ffd700',
+            'Y': '#cc9900',
+            'h': '#88ffaa',
+            'w': '#ffffff',
+            'p': '#8a6a3a',
+            'P': '#5a4020'
+        };
 
         const GOAL_FLAG = [
-            "..kkkkkkk...",
-            ".kyyyyyyk...",
-            "kyhwwwwhyk..",
-            "kyhwwwwhyk..",
-            "kyyyyyyyk...",
-            ".kyyyyyk....",
-            "..kkkkk.....",
-            "...kk.......",
-            "...kk.......",
-            "...kk.......",
-            "...kk.......",
-            "...kk.......",
-            "...kk.......",
-            "...kk.......",
-            "...kk.......",
-            "...kk.......",
+            "..yyyyyyyyy...",
+            ".yyyyyyyyy....",
+            "yyyhhhhhyy....",
+            "yyyyyhhhy.....",
+            "yyyyyyyy......",
+            "yyyyyyy.......",
+            "yyyyyy........",
+            "yyyyy.........",
+            "pp............",
+            "pp............",
+            "pp............",
+            "pp............",
+            "pp............",
+            "pp............",
+            "PP............",
+            "PP............"
         ];
 
-        // ============================================================
-        // HOME SCREEN — Draw the pixel knight preview
-        // ============================================================
         function drawHomeKnight() {
             const hk = document.getElementById("homeKnight");
             if (!hk) return;
@@ -1228,9 +1122,6 @@
             }
         }
 
-        // ============================================================
-        // UI HEARTS
-        // ============================================================
         function updateHeartsDisplay() {
             heartsDisplay.innerHTML = '';
             for (let i = 0; i < maxHealth; i++) {
@@ -1263,10 +1154,6 @@
             }
         }
 
-        // ============================================================
-        // GAME OBJECTS
-        // ============================================================
-
         function makeEnemy(x, y, minX, maxX, speed = 1.5) {
             return {
                 x, y, w: 42, h: 48,
@@ -1279,7 +1166,9 @@
                 swordCooldown: 40 + Math.random() * 40,
                 swordActive: false,
                 swordHitDone: false,
-                aggro: false
+                aggro: false,
+                dead: false,
+                stompCooldown: 0
             };
         }
 
@@ -1299,6 +1188,16 @@
                 vy: -3,
                 bounce: 0
             };
+        }
+
+        function spawnHeartFromEnemy(enemy) {
+            if (health >= maxHealth) return;
+            if (Math.random() < 0.6) {
+                heartDrops.push(makeHeartDrop(
+                    enemy.x + enemy.w / 2 - 12,
+                    enemy.y + enemy.h / 2 - 10
+                ));
+            }
         }
 
         function makeCheckpoint(x, y, isStart = false) {
@@ -1348,824 +1247,281 @@
             floatingHearts = [];
         }
 
-        // ============================================================
-        // LEVEL DATA — REBUILT FROM BOTTOM UP
-        // Every level starts at the very bottom (player spawns near
-        // the bottom of the world) and progresses upward.
-        // All platforms are horizontally non-overlapping (spaced apart).
-        // Vertical gaps are within jump reach (~110px up).
-        // Horizontal gaps are within jump reach (~135px).
-        // ============================================================
         function loadLevel(n) {
             level = n;
             document.getElementById("levelText").innerHTML = `<span class="level-icon">🎯</span> Level: ${level}`;
 
             initPlatforms();
 
-            // --------------------------------------------------------
-            // LEVEL 1 — "First Steps" (world 3400 tall)
-            // Spawn on wide ground platform at bottom.
-            // --------------------------------------------------------
             if (level === 1) {
-                world.width = 1100; world.height = 3400;
+                world.width = 2000; world.height = 4200;
+                const groundY = 4000;
 
-                // Ground floor (very bottom) — player spawns here
-                platforms.push(staticPlat(0, 3200, 1100, 40));
-                checkpoints.push(makeCheckpoint(60, 3136, true));
+                platforms.push(staticPlat(0, groundY, 2000, 40));
+                checkpoints.push(makeCheckpoint(120, groundY - 64, true));
                 lastCheckpoint = checkpoints[0];
 
-                // Row 1 (100px up): spaced stepping stones
-                platforms.push(staticPlat(150, 3100, 130, 20));
-                platforms.push(staticPlat(380, 3100, 130, 20));
-                platforms.push(staticPlat(610, 3100, 130, 20));
-                platforms.push(staticPlat(840, 3100, 130, 20));
+                platforms.push(staticPlat(80, groundY - 160, 200, 24));
+                platforms.push(staticPlat(420, groundY - 300, 200, 24));
+                platforms.push(staticPlat(160, groundY - 440, 200, 24));
+                platforms.push(staticPlat(480, groundY - 580, 200, 24));
+                platforms.push(staticPlat(780, groundY - 720, 200, 24));
+                platforms.push(staticPlat(1080, groundY - 860, 220, 24));
+                platforms.push(staticPlat(1360, groundY - 1000, 220, 24));
 
-                // Row 2 (100px up from row 1): off-grid positions
-                platforms.push(staticPlat(300, 3000, 130, 20));
-                platforms.push(staticPlat(560, 3000, 130, 20));
-                platforms.push(staticPlat(820, 3000, 130, 20));
+                coins.push(makeCoin(500, groundY - 350));
+                coins.push(makeCoin(240, groundY - 490));
+                coins.push(makeCoin(560, groundY - 630));
+                coins.push(makeCoin(860, groundY - 770));
+                coins.push(makeCoin(1160, groundY - 910));
 
-                // Row 3
-                platforms.push(staticPlat(150, 2900, 130, 20));
-                platforms.push(staticPlat(430, 2900, 130, 20));
-                platforms.push(staticPlat(700, 2900, 130, 20));
+                platforms.push(staticPlat(780, groundY - 1180, 420, 24));
+                enemies.push(makeEnemy(860, groundY - 1230, 780, 1180, 1.4));
 
-                // Enemy on a wide platform
-                platforms.push(staticPlat(200, 2800, 200, 20));
-                enemies.push(makeEnemy(280, 2750, 200, 400, 1.2));
-                coins.push(makeCoin(300, 2740));
+                platforms.push(staticPlat(300, groundY - 1320, 220, 24));
+                powerUps.push(makePowerUp(360, groundY - 1360, 'doubleJump'));
 
-                // Row 4
-                platforms.push(staticPlat(500, 2700, 130, 20));
-                platforms.push(staticPlat(760, 2700, 130, 20));
+                platforms.push(staticPlat(640, groundY - 1460, 220, 24));
+                platforms.push(staticPlat(980, groundY - 1600, 220, 24));
+                platforms.push(staticPlat(1300, groundY - 1740, 240, 24));
 
-                // Row 5
-                platforms.push(staticPlat(300, 2600, 130, 20));
-                platforms.push(staticPlat(580, 2600, 130, 20));
-                platforms.push(staticPlat(860, 2600, 130, 20));
-
-                // Bouncy pad section
-                platforms.push(bouncyPlat(150, 2500, 120, 20));
-                platforms.push(staticPlat(400, 2400, 140, 20));
-                platforms.push(staticPlat(660, 2400, 140, 20));
-
-                // Checkpoint mid-level
-                platforms.push(staticPlat(860, 2350, 160, 20));
-                checkpoints.push(makeCheckpoint(900, 2286, false));
-
-                // Moving platform
-                platforms.push(movingPlat(560, 2250, 130, 20, 500, 720, 1.6));
-                platforms.push(staticPlat(280, 2200, 140, 20));
-                coins.push(makeCoin(340, 2140));
-
-                // Conveyor section
-                platforms.push(conveyor(60, 2100, 160, 20, 1));
-                platforms.push(staticPlat(340, 2000, 140, 20));
-
-                // Bouncy + static
-                platforms.push(bouncyPlat(600, 1950, 120, 20));
-                platforms.push(staticPlat(840, 1900, 140, 20));
-
-                // Enemy section
-                platforms.push(staticPlat(500, 1800, 200, 20));
-                enemies.push(makeEnemy(580, 1750, 500, 700, 1.4));
-                coins.push(makeCoin(580, 1740));
-
-                // Coins
-                coins.push(makeCoin(500, 3040), makeCoin(700, 3040), makeCoin(400, 2840));
-
-                // Spike hazard
-                platforms.push(staticPlat(180, 1700, 200, 20));
-                platforms.push(spike(240, 1688, 60, 12));
-
-                // Powerup reward
-                platforms.push(staticPlat(480, 1600, 160, 20));
-                powerUps.push(makePowerUp(520, 1560, 'doubleJump'));
-
-                // Final climb
-                platforms.push(staticPlat(740, 1500, 140, 20));
-                platforms.push(staticPlat(500, 1400, 140, 20));
-                platforms.push(staticPlat(260, 1300, 140, 20));
-                platforms.push(staticPlat(60, 1200, 180, 20));
-
-                // Goal platform
-                platforms.push(staticPlat(300, 1100, 220, 20));
-                goal = { x: 360, y: 1030, w: 50, h: 70, anim: 0 };
+                goal = { x: 1400, y: groundY - 1810, w: 50, h: 70, anim: 0 };
             }
 
-            // --------------------------------------------------------
-            // LEVEL 2 — "Spike Alley" (world 4000 tall)
-            // --------------------------------------------------------
             if (level === 2) {
-                world.width = 1200; world.height = 4000;
-
-                // Ground
-                platforms.push(staticPlat(0, 3800, 1200, 40));
-                checkpoints.push(makeCheckpoint(60, 3736, true));
+                world.width = 2000; world.height = 4800;
+                const groundY = 4600;
+                platforms.push(staticPlat(0, groundY, world.width, 40));
+                checkpoints.push(makeCheckpoint(120, groundY - 64, true));
                 lastCheckpoint = checkpoints[0];
 
-                // Spikes on ground
-                platforms.push(spike(400, 3788, 80, 12));
-                platforms.push(spike(600, 3788, 80, 12));
+                platforms.push(spike(500, groundY - 12, 80, 12));
+                platforms.push(spike(900, groundY - 12, 80, 12));
+                platforms.push(spike(1300, groundY - 12, 80, 12));
 
-                // Row 1
-                platforms.push(staticPlat(150, 3700, 140, 20));
-                platforms.push(staticPlat(420, 3700, 140, 20));
-                platforms.push(staticPlat(690, 3700, 140, 20));
-                platforms.push(staticPlat(960, 3700, 140, 20));
+                platforms.push(staticPlat(200, groundY - 160, 220, 24));
+                platforms.push(staticPlat(560, groundY - 300, 220, 24));
+                platforms.push(staticPlat(900, groundY - 440, 220, 24));
+                platforms.push(staticPlat(1240, groundY - 580, 220, 24));
+                platforms.push(staticPlat(1560, groundY - 720, 240, 24));
 
-                // Row 2
-                platforms.push(staticPlat(300, 3600, 140, 20));
-                platforms.push(staticPlat(560, 3600, 140, 20));
-                platforms.push(staticPlat(820, 3600, 140, 20));
+                checkpoints.push(makeCheckpoint(1620, groundY - 784, false));
 
-                // Moving platform
-                platforms.push(movingPlat(560, 3500, 120, 20, 500, 720, 1.8));
+                platforms.push(movingPlat(1100, groundY - 880, 180, 24, 950, 1350, 1.6));
 
-                // Wide platform with enemy
-                platforms.push(staticPlat(200, 3400, 240, 20));
-                enemies.push(makeEnemy(300, 3350, 200, 440, 1.5));
-                coins.push(makeCoin(320, 3340));
+                coins.push(makeCoin(280, groundY - 210));
+                coins.push(makeCoin(640, groundY - 350));
+                coins.push(makeCoin(980, groundY - 490));
+                coins.push(makeCoin(1320, groundY - 630));
 
-                // Bouncy pad
-                platforms.push(bouncyPlat(560, 3350, 120, 20));
+                platforms.push(staticPlat(700, groundY - 1020, 400, 24));
+                enemies.push(makeEnemy(800, groundY - 1070, 700, 1100, 1.6));
 
-                // Row 4
-                platforms.push(staticPlat(780, 3300, 140, 20));
-                platforms.push(staticPlat(80, 3300, 140, 20));
+                platforms.push(bouncyPlat(300, groundY - 1160, 160, 24));
 
-                // Lava pit section
-                platforms.push(lava(250, 3800, 300, 24));
+                platforms.push(staticPlat(620, groundY - 1300, 220, 24));
+                powerUps.push(makePowerUp(680, groundY - 1340, 'doubleJump'));
 
-                // Row 5 (with lava barrier)
-                platforms.push(staticPlat(300, 3200, 160, 20));
-                platforms.push(staticPlat(560, 3200, 160, 20));
-                platforms.push(staticPlat(820, 3200, 160, 20));
+                platforms.push(staticPlat(980, groundY - 1440, 220, 24));
+                platforms.push(staticPlat(1320, groundY - 1580, 220, 24));
+                platforms.push(staticPlat(1660, groundY - 1720, 240, 24));
 
-                // Conveyor
-                platforms.push(conveyor(100, 3100, 150, 20, -1));
-
-                // Row 6
-                platforms.push(staticPlat(340, 3000, 140, 20));
-                platforms.push(staticPlat(600, 3000, 140, 20));
-
-                // Enemy on wide platform
-                platforms.push(staticPlat(840, 2950, 220, 20));
-                enemies.push(makeEnemy(920, 2900, 840, 1060, 1.7));
-                coins.push(makeCoin(920, 2890));
-
-                // Checkpoint mid
-                checkpoints.push(makeCheckpoint(920, 2886, false));
-
-                // Row 7 with fall platform
-                platforms.push(fallPlat(80, 2900, 130, 20, 350));
-                platforms.push(staticPlat(340, 2800, 140, 20));
-
-                // Bouncy chain
-                platforms.push(bouncyPlat(600, 2750, 120, 20));
-                platforms.push(bouncyPlat(340, 2600, 120, 20));
-
-                // Row 8
-                platforms.push(staticPlat(80, 2500, 160, 20));
-                platforms.push(staticPlat(360, 2400, 140, 20));
-
-                // Lift platform
-                platforms.push(liftPlat(640, 2350, 130, 20, 600, 820, 1.8));
-
-                // Row 9 with spike
-                platforms.push(staticPlat(880, 2300, 200, 20));
-                platforms.push(spike(920, 2288, 60, 12));
-
-                // Powerup
-                platforms.push(staticPlat(540, 2200, 160, 20));
-                powerUps.push(makePowerUp(580, 2160, 'doubleJump'));
-
-                // Enemy
-                platforms.push(staticPlat(200, 2100, 220, 20));
-                enemies.push(makeEnemy(280, 2050, 200, 420, 1.9));
-                coins.push(makeCoin(280, 2040));
-
-                // Final climb
-                platforms.push(staticPlat(500, 2000, 140, 20));
-                platforms.push(staticPlat(760, 1900, 140, 20));
-                platforms.push(staticPlat(500, 1800, 140, 20));
-                platforms.push(staticPlat(220, 1700, 140, 20));
-
-                // Goal
-                platforms.push(staticPlat(60, 1600, 240, 20));
-                goal = { x: 120, y: 1530, w: 50, h: 70, anim: 0 };
+                goal = { x: 1760, y: groundY - 1790, w: 50, h: 70, anim: 0 };
             }
 
-            // --------------------------------------------------------
-            // LEVEL 3 — "The Climb" (world 4600 tall)
-            // --------------------------------------------------------
             if (level === 3) {
-                world.width = 1250; world.height = 4600;
-
-                // Ground
-                platforms.push(staticPlat(0, 4400, 1250, 40));
-                checkpoints.push(makeCheckpoint(60, 4336, true));
+                world.width = 2200; world.height = 5400;
+                const groundY = 5200;
+                platforms.push(staticPlat(0, groundY, world.width, 40));
+                checkpoints.push(makeCheckpoint(120, groundY - 64, true));
                 lastCheckpoint = checkpoints[0];
 
-                // Row 1
-                platforms.push(staticPlat(150, 4300, 140, 20));
-                platforms.push(staticPlat(420, 4300, 140, 20));
-                platforms.push(staticPlat(690, 4300, 140, 20));
-                platforms.push(staticPlat(960, 4300, 140, 20));
+                platforms.push(lava(700, groundY, 500, 24));
 
-                // Row 2
-                platforms.push(staticPlat(300, 4200, 140, 20));
-                platforms.push(staticPlat(560, 4200, 140, 20));
-                platforms.push(staticPlat(820, 4200, 140, 20));
+                platforms.push(staticPlat(200, groundY - 150, 200, 24));
+                platforms.push(staticPlat(560, groundY - 290, 200, 24));
+                platforms.push(staticPlat(900, groundY - 430, 200, 24));
+                platforms.push(staticPlat(1240, groundY - 570, 200, 24));
 
-                // Bouncy pad
-                platforms.push(bouncyPlat(1000, 4100, 120, 20));
+                platforms.push(staticPlat(1580, groundY - 710, 240, 24));
+                checkpoints.push(makeCheckpoint(1640, groundY - 774, false));
 
-                // Row 3 — wide platform with enemy
-                platforms.push(staticPlat(200, 4000, 220, 20));
-                enemies.push(makeEnemy(280, 3950, 200, 420, 1.6));
-                coins.push(makeCoin(300, 3940));
+                platforms.push(conveyor(1200, groundY - 860, 200, 24, -1));
+                platforms.push(conveyor(900, groundY - 1000, 200, 24, 1));
 
-                // Row 4
-                platforms.push(staticPlat(500, 3900, 140, 20));
-                platforms.push(staticPlat(760, 3900, 140, 20));
+                platforms.push(staticPlat(500, groundY - 1140, 460, 24));
+                enemies.push(makeEnemy(600, groundY - 1190, 500, 960, 1.8));
+                enemies.push(makeEnemy(820, groundY - 1190, 500, 960, 1.8));
+                coins.push(makeCoin(600, groundY - 1150));
+                coins.push(makeCoin(820, groundY - 1150));
 
-                // Checkpoint mid
-                platforms.push(staticPlat(1000, 3850, 180, 20));
-                checkpoints.push(makeCheckpoint(1040, 3786, false));
+                platforms.push(fallPlat(240, groundY - 1280, 160, 24, 300));
 
-                // Moving platform
-                platforms.push(movingPlat(500, 3800, 120, 20, 440, 660, 1.8));
+                platforms.push(bouncyPlat(520, groundY - 1420, 160, 24));
+                platforms.push(bouncyPlat(880, groundY - 1560, 160, 24));
 
-                // Bouncy chain
-                platforms.push(bouncyPlat(140, 3750, 120, 20));
-                platforms.push(bouncyPlat(340, 3600, 120, 20));
+                platforms.push(staticPlat(1200, groundY - 1700, 240, 24));
+                powerUps.push(makePowerUp(1260, groundY - 1740, 'doubleJump'));
 
-                // Conveyor
-                platforms.push(conveyor(560, 3550, 150, 20, -1));
+                platforms.push(liftPlat(700, groundY - 1840, 160, 24, 600, 1000, 1.8));
 
-                // Row 6
-                platforms.push(staticPlat(800, 3500, 140, 20));
-                platforms.push(spike(840, 3488, 60, 12));
+                platforms.push(staticPlat(1100, groundY - 1980, 220, 24));
+                platforms.push(staticPlat(1440, groundY - 2120, 220, 24));
+                platforms.push(staticPlat(1780, groundY - 2260, 240, 24));
 
-                // Enemy
-                platforms.push(staticPlat(400, 3400, 220, 20));
-                enemies.push(makeEnemy(480, 3350, 400, 620, 1.8));
-                coins.push(makeCoin(480, 3340));
-
-                // Fall platform
-                platforms.push(fallPlat(140, 3350, 130, 20, 350));
-
-                // Row 7
-                platforms.push(staticPlat(700, 3300, 140, 20));
-                platforms.push(staticPlat(960, 3300, 140, 20));
-
-                // Bouncy chain
-                platforms.push(bouncyPlat(440, 3200, 120, 20));
-                platforms.push(bouncyPlat(680, 3100, 120, 20));
-
-                // Powerup reward
-                platforms.push(staticPlat(880, 3050, 180, 20));
-                powerUps.push(makePowerUp(940, 3010, 'doubleJump'));
-
-                // Lift
-                platforms.push(liftPlat(200, 2950, 130, 20, 160, 400, 2.0));
-
-                // Row 9 — wide platform with two enemies
-                platforms.push(staticPlat(480, 2900, 240, 20));
-                enemies.push(makeEnemy(560, 2850, 480, 720, 2.0));
-                enemies.push(makeEnemy(660, 2850, 480, 720, 2.0));
-                coins.push(makeCoin(560, 2840), makeCoin(660, 2840));
-
-                // Checkpoint mid 2
-                platforms.push(staticPlat(820, 2800, 180, 20));
-                checkpoints.push(makeCheckpoint(860, 2736, false));
-
-                // Conveyor + moving
-                platforms.push(conveyor(100, 2800, 150, 20, 1));
-                platforms.push(movingPlat(420, 2700, 120, 20, 360, 580, 2.0));
-
-                // Fall platforms
-                platforms.push(fallPlat(680, 2650, 130, 20, 320));
-                platforms.push(bouncyPlat(940, 2600, 120, 20));
-
-                // Row 11
-                platforms.push(staticPlat(480, 2500, 160, 20));
-                platforms.push(staticPlat(180, 2400, 160, 20));
-
-                // Enemy
-                platforms.push(staticPlat(740, 2350, 220, 20));
-                enemies.push(makeEnemy(820, 2300, 740, 960, 2.2));
-                coins.push(makeCoin(820, 2290));
-
-                // Row 12 — high platforms
-                platforms.push(staticPlat(440, 2250, 140, 20));
-                platforms.push(staticPlat(160, 2150, 140, 20));
-
-                // Lift
-                platforms.push(liftPlat(700, 2100, 130, 20, 660, 900, 2.2));
-
-                // Row 13
-                platforms.push(staticPlat(960, 2050, 180, 20));
-                platforms.push(spike(1000, 2038, 60, 12));
-
-                // Bouncy chain
-                platforms.push(bouncyPlat(680, 1950, 120, 20));
-                platforms.push(bouncyPlat(440, 1850, 120, 20));
-                platforms.push(bouncyPlat(200, 1750, 120, 20));
-
-                // Row 15
-                platforms.push(staticPlat(500, 1650, 160, 20));
-                platforms.push(staticPlat(780, 1550, 160, 20));
-
-                // Enemy
-                platforms.push(staticPlat(200, 1500, 220, 20));
-                enemies.push(makeEnemy(280, 1450, 200, 420, 2.4));
-                coins.push(makeCoin(280, 1440));
-
-                // Final climb
-                platforms.push(staticPlat(520, 1450, 140, 20));
-                platforms.push(staticPlat(800, 1350, 140, 20));
-                platforms.push(staticPlat(500, 1250, 140, 20));
-                platforms.push(staticPlat(200, 1150, 180, 20));
-
-                // Goal
-                platforms.push(staticPlat(440, 1050, 220, 20));
-                goal = { x: 500, y: 980, w: 50, h: 70, anim: 0 };
+                goal = { x: 1880, y: groundY - 2330, w: 50, h: 70, anim: 0 };
             }
 
-            // --------------------------------------------------------
-            // LEVEL 4 — "Precision" (world 5200 tall)
-            // --------------------------------------------------------
             if (level === 4) {
-                world.width = 1300; world.height = 5200;
-
-                // Ground
-                platforms.push(staticPlat(0, 5000, 1300, 40));
-                checkpoints.push(makeCheckpoint(60, 4936, true));
+                world.width = 2400; world.height = 6000;
+                const groundY = 5800;
+                platforms.push(staticPlat(0, groundY, world.width, 40));
+                checkpoints.push(makeCheckpoint(120, groundY - 64, true));
                 lastCheckpoint = checkpoints[0];
 
-                // Spikes
-                platforms.push(spike(400, 4988, 60, 12));
-                platforms.push(spike(600, 4988, 60, 12));
+                platforms.push(spike(600, groundY - 12, 80, 12));
+                platforms.push(spike(1000, groundY - 12, 80, 12));
+                platforms.push(lava(1500, groundY, 400, 24));
 
-                // Row 1
-                platforms.push(staticPlat(180, 4900, 130, 20));
-                platforms.push(staticPlat(440, 4900, 130, 20));
-                platforms.push(staticPlat(700, 4900, 130, 20));
-                platforms.push(staticPlat(960, 4900, 130, 20));
+                platforms.push(staticPlat(200, groundY - 160, 220, 24));
+                platforms.push(staticPlat(540, groundY - 300, 220, 24));
+                platforms.push(staticPlat(880, groundY - 440, 220, 24));
+                platforms.push(staticPlat(1220, groundY - 580, 220, 24));
+                platforms.push(staticPlat(1560, groundY - 720, 220, 24));
+                platforms.push(staticPlat(1900, groundY - 860, 240, 24));
 
-                // Row 2
-                platforms.push(staticPlat(320, 4800, 130, 20));
-                platforms.push(staticPlat(580, 4800, 130, 20));
-                platforms.push(staticPlat(840, 4800, 130, 20));
-                platforms.push(staticPlat(1100, 4800, 130, 20));
+                checkpoints.push(makeCheckpoint(1960, groundY - 924, false));
 
-                // Moving + spike
-                platforms.push(movingPlat(280, 4700, 110, 20, 220, 440, 1.8));
-                platforms.push(staticPlat(560, 4700, 180, 20));
-                platforms.push(spike(600, 4688, 60, 12));
+                platforms.push(movingPlat(1400, groundY - 960, 180, 24, 1250, 1650, 1.8));
 
-                // Wide platform with enemy
-                platforms.push(staticPlat(840, 4650, 220, 20));
-                enemies.push(makeEnemy(920, 4600, 840, 1060, 1.7));
-                coins.push(makeCoin(920, 4590));
+                coins.push(makeCoin(280, groundY - 210));
+                coins.push(makeCoin(620, groundY - 350));
+                coins.push(makeCoin(960, groundY - 490));
+                coins.push(makeCoin(1300, groundY - 630));
 
-                // Checkpoint mid
-                checkpoints.push(makeCheckpoint(920, 4586, false));
+                platforms.push(staticPlat(800, groundY - 1100, 440, 24));
+                enemies.push(makeEnemy(900, groundY - 1150, 800, 1240, 2.0));
+                enemies.push(makeEnemy(1100, groundY - 1150, 800, 1240, 2.0));
 
-                // Bouncy pad
-                platforms.push(bouncyPlat(120, 4600, 120, 20));
+                platforms.push(staticPlat(400, groundY - 1240, 220, 24));
+                powerUps.push(makePowerUp(460, groundY - 1280, 'doubleJump'));
 
-                // Row 4
-                platforms.push(staticPlat(360, 4500, 140, 20));
-                platforms.push(staticPlat(620, 4500, 140, 20));
+                platforms.push(fallPlat(700, groundY - 1380, 160, 24, 280));
+                platforms.push(bouncyPlat(1000, groundY - 1520, 160, 24));
 
-                // Lava pit
-                platforms.push(lava(500, 5000, 400, 24));
+                platforms.push(liftPlat(1400, groundY - 1660, 160, 24, 1300, 1700, 2.0));
 
-                // Lift over lava
-                platforms.push(liftPlat(860, 4450, 120, 20, 820, 1040, 2.0));
+                platforms.push(staticPlat(1700, groundY - 1800, 240, 24));
+                platforms.push(staticPlat(1400, groundY - 1940, 220, 24));
+                platforms.push(staticPlat(1700, groundY - 2080, 220, 24));
+                platforms.push(staticPlat(2000, groundY - 2220, 240, 24));
 
-                // Conveyor chain
-                platforms.push(conveyor(240, 4400, 140, 20, 1));
-                platforms.push(conveyor(500, 4350, 140, 20, -1));
-
-                // Row 5 — wide platform with two enemies
-                platforms.push(staticPlat(760, 4300, 240, 20));
-                enemies.push(makeEnemy(840, 4250, 760, 1000, 1.9));
-                enemies.push(makeEnemy(940, 4250, 760, 1000, 1.9));
-                coins.push(makeCoin(840, 4240), makeCoin(940, 4240));
-
-                // Powerup
-                platforms.push(staticPlat(440, 4200, 180, 20));
-                powerUps.push(makePowerUp(480, 4160, 'doubleJump'));
-
-                // Fall platform gauntlet
-                platforms.push(fallPlat(120, 4100, 120, 20, 300));
-                platforms.push(fallPlat(340, 4000, 120, 20, 280));
-
-                // Bouncy pad
-                platforms.push(bouncyPlat(560, 3950, 120, 20));
-
-                // Row 7
-                platforms.push(staticPlat(800, 3900, 140, 20));
-                platforms.push(staticPlat(1040, 3900, 140, 20));
-
-                // Moving platforms (gauntlet)
-                platforms.push(movingPlat(560, 3800, 110, 20, 500, 720, 2.0));
-                platforms.push(movingPlat(820, 3700, 110, 20, 760, 980, 2.0));
-
-                // Wide platform with enemy
-                platforms.push(staticPlat(340, 3650, 220, 20));
-                enemies.push(makeEnemy(420, 3600, 340, 560, 2.1));
-                coins.push(makeCoin(420, 3590));
-
-                // Checkpoint 3
-                platforms.push(staticPlat(60, 3550, 180, 20));
-                checkpoints.push(makeCheckpoint(100, 3486, false));
-
-                // Conveyor + lift
-                platforms.push(conveyor(340, 3500, 140, 20, -1));
-                platforms.push(liftPlat(620, 3450, 120, 20, 580, 800, 2.2));
-
-                // Bouncy chain
-                platforms.push(bouncyPlat(880, 3400, 120, 20));
-                platforms.push(bouncyPlat(640, 3250, 120, 20));
-                platforms.push(bouncyPlat(400, 3100, 120, 20));
-
-                // Row 11
-                platforms.push(staticPlat(140, 3050, 180, 20));
-                platforms.push(spike(180, 3038, 60, 12));
-
-                // Wide platform with two enemies
-                platforms.push(staticPlat(440, 3000, 240, 20));
-                enemies.push(makeEnemy(520, 2950, 440, 680, 2.3));
-                enemies.push(makeEnemy(620, 2950, 440, 680, 2.3));
-                coins.push(makeCoin(520, 2940), makeCoin(620, 2940));
-
-                // Moving platforms
-                platforms.push(movingPlat(820, 2950, 110, 20, 760, 980, 2.3));
-                platforms.push(movingPlat(560, 2850, 110, 20, 500, 720, 2.3));
-                platforms.push(movingPlat(820, 2750, 110, 20, 760, 980, 2.3));
-
-                // Fall platforms
-                platforms.push(fallPlat(340, 2700, 120, 20, 280));
-
-                // Conveyor
-                platforms.push(conveyor(120, 2650, 140, 20, 1));
-
-                // Row 15
-                platforms.push(staticPlat(400, 2600, 160, 20));
-                platforms.push(staticPlat(680, 2550, 160, 20));
-
-                // Final climb
-                platforms.push(staticPlat(960, 2500, 180, 20));
-                platforms.push(liftPlat(700, 2400, 120, 20, 660, 900, 2.4));
-                platforms.push(conveyor(420, 2350, 140, 20, -1));
-                platforms.push(staticPlat(140, 2300, 180, 20));
-
-                // Final platform
-                platforms.push(staticPlat(440, 2200, 220, 20));
-                goal = { x: 500, y: 2130, w: 50, h: 70, anim: 0 };
+                goal = { x: 2100, y: groundY - 2290, w: 50, h: 70, anim: 0 };
             }
 
-            // --------------------------------------------------------
-            // LEVEL 5 — "Endurance" (world 5800 tall)
-            // --------------------------------------------------------
             if (level === 5) {
-                world.width = 1350; world.height = 5800;
-
-                // Ground
-                platforms.push(staticPlat(0, 5600, 1350, 40));
-                checkpoints.push(makeCheckpoint(60, 5536, true));
+                world.width = 2600; world.height = 6600;
+                const groundY = 6400;
+                platforms.push(staticPlat(0, groundY, world.width, 40));
+                checkpoints.push(makeCheckpoint(120, groundY - 64, true));
                 lastCheckpoint = checkpoints[0];
 
-                // Lava
-                platforms.push(lava(400, 5600, 300, 24));
+                platforms.push(lava(800, groundY, 400, 24));
+                platforms.push(spike(1400, groundY - 12, 80, 12));
+                platforms.push(spike(1700, groundY - 12, 80, 12));
 
-                // Row 1
-                platforms.push(staticPlat(180, 5500, 130, 20));
-                platforms.push(staticPlat(460, 5500, 130, 20));
-                platforms.push(staticPlat(740, 5500, 130, 20));
-                platforms.push(staticPlat(1020, 5500, 130, 20));
+                platforms.push(staticPlat(220, groundY - 160, 220, 24));
+                platforms.push(staticPlat(580, groundY - 300, 220, 24));
+                platforms.push(staticPlat(940, groundY - 440, 220, 24));
+                platforms.push(staticPlat(1300, groundY - 580, 220, 24));
+                platforms.push(staticPlat(1660, groundY - 720, 220, 24));
+                platforms.push(staticPlat(2020, groundY - 860, 240, 24));
 
-                // Spikes on ground
-                platforms.push(spike(820, 5588, 60, 12));
-                platforms.push(spike(960, 5588, 60, 12));
+                checkpoints.push(makeCheckpoint(2080, groundY - 924, false));
 
-                // Row 2
-                platforms.push(staticPlat(320, 5400, 130, 20));
-                platforms.push(staticPlat(580, 5400, 130, 20));
-                platforms.push(staticPlat(840, 5400, 130, 20));
-                platforms.push(staticPlat(1100, 5400, 130, 20));
+                platforms.push(conveyor(1500, groundY - 960, 200, 24, -1));
+                platforms.push(conveyor(1100, groundY - 1100, 200, 24, 1));
 
-                // Wide platform with enemy
-                platforms.push(staticPlat(140, 5300, 220, 20));
-                enemies.push(makeEnemy(220, 5250, 140, 360, 1.8));
-                coins.push(makeCoin(220, 5240));
+                platforms.push(staticPlat(600, groundY - 1240, 480, 24));
+                enemies.push(makeEnemy(700, groundY - 1290, 600, 1080, 2.0));
+                enemies.push(makeEnemy(900, groundY - 1290, 600, 1080, 2.0));
+                enemies.push(makeEnemy(1050, groundY - 1290, 600, 1080, 2.0));
+                coins.push(makeCoin(700, groundY - 1250));
+                coins.push(makeCoin(900, groundY - 1250));
+                coins.push(makeCoin(1050, groundY - 1250));
 
-                // Checkpoint mid
-                checkpoints.push(makeCheckpoint(180, 5236, false));
+                platforms.push(staticPlat(300, groundY - 1380, 220, 24));
+                powerUps.push(makePowerUp(360, groundY - 1420, 'doubleJump'));
 
-                // Moving platforms
-                platforms.push(movingPlat(560, 5250, 120, 20, 500, 720, 1.9));
-                platforms.push(movingPlat(880, 5200, 120, 20, 820, 1040, 1.9));
+                platforms.push(bouncyPlat(700, groundY - 1520, 160, 24));
+                platforms.push(bouncyPlat(1050, groundY - 1660, 160, 24));
 
-                // Bouncy + conveyor
-                platforms.push(bouncyPlat(120, 5100, 120, 20));
-                platforms.push(conveyor(400, 5050, 150, 20, 1));
+                platforms.push(movingPlat(1500, groundY - 1700, 180, 24, 1350, 1750, 2.0));
+                platforms.push(movingPlat(1900, groundY - 1800, 180, 24, 1750, 2150, 2.0));
 
-                // Row 4
-                platforms.push(staticPlat(660, 5000, 160, 20));
-                platforms.push(staticPlat(940, 5000, 160, 20));
+                platforms.push(staticPlat(2200, groundY - 1940, 240, 24));
+                platforms.push(staticPlat(1900, groundY - 2080, 220, 24));
+                platforms.push(staticPlat(2200, groundY - 2220, 220, 24));
+                platforms.push(staticPlat(1900, groundY - 2360, 220, 24));
+                platforms.push(staticPlat(2200, groundY - 2500, 240, 24));
 
-                // Lift
-                platforms.push(liftPlat(180, 4950, 130, 20, 140, 400, 2.1));
-
-                // Row 5 — wide platform with two enemies
-                platforms.push(staticPlat(500, 4900, 240, 20));
-                enemies.push(makeEnemy(580, 4850, 500, 740, 2.0));
-                enemies.push(makeEnemy(680, 4850, 500, 740, 2.0));
-                coins.push(makeCoin(580, 4840), makeCoin(680, 4840));
-
-                // Powerup
-                platforms.push(staticPlat(880, 4800, 180, 20));
-                powerUps.push(makePowerUp(940, 4760, 'doubleJump'));
-
-                // Fall platforms
-                platforms.push(fallPlat(360, 4750, 120, 20, 320));
-                platforms.push(fallPlat(600, 4650, 120, 20, 300));
-
-                // Conveyor
-                platforms.push(conveyor(880, 4600, 150, 20, -1));
-
-                // Moving
-                platforms.push(movingPlat(1080, 4550, 110, 20, 1040, 1260, 2.1));
-
-                // Row 7 — wide platform with enemy
-                platforms.push(staticPlat(780, 4500, 220, 20));
-                enemies.push(makeEnemy(860, 4450, 780, 1000, 2.2));
-                coins.push(makeCoin(860, 4440));
-
-                // Checkpoint 3
-                platforms.push(staticPlat(380, 4450, 180, 20));
-                checkpoints.push(makeCheckpoint(420, 4386, false));
-
-                // Bouncy chain
-                platforms.push(bouncyPlat(100, 4400, 120, 20));
-                platforms.push(bouncyPlat(340, 4250, 120, 20));
-                platforms.push(bouncyPlat(580, 4100, 120, 20));
-
-                // Spike platform
-                platforms.push(staticPlat(820, 4050, 200, 20));
-                platforms.push(spike(860, 4038, 60, 12));
-
-                // Moving + lift
-                platforms.push(movingPlat(400, 4000, 110, 20, 340, 560, 2.2));
-                platforms.push(liftPlat(640, 3950, 120, 20, 600, 820, 2.3));
-
-                // Row 10 — wide platform with two enemies
-                platforms.push(staticPlat(880, 3900, 240, 20));
-                enemies.push(makeEnemy(960, 3850, 880, 1120, 2.3));
-                enemies.push(makeEnemy(1060, 3850, 880, 1120, 2.3));
-                coins.push(makeCoin(960, 3840), makeCoin(1060, 3840));
-
-                // Fall gauntlet
-                platforms.push(fallPlat(660, 3800, 120, 20, 300));
-                platforms.push(bouncyPlat(400, 3750, 120, 20));
-
-                // Row 12
-                platforms.push(staticPlat(140, 3700, 180, 20));
-                platforms.push(spike(180, 3688, 60, 12));
-
-                // Conveyor
-                platforms.push(conveyor(440, 3650, 140, 20, 1));
-
-                // Row 13 — enemy
-                platforms.push(staticPlat(760, 3600, 200, 20));
-                enemies.push(makeEnemy(820, 3550, 760, 960, 2.4));
-                coins.push(makeCoin(820, 3540));
-
-                // Conveyor + bouncy
-                platforms.push(conveyor(180, 3550, 140, 20, -1));
-                platforms.push(bouncyPlat(460, 3500, 120, 20));
-
-                // Row 15
-                platforms.push(staticPlat(720, 3450, 180, 20));
-                platforms.push(staticPlat(460, 3350, 140, 20));
-
-                // Moving + bouncy
-                platforms.push(movingPlat(200, 3300, 110, 20, 140, 360, 2.4));
-                platforms.push(bouncyPlat(520, 3200, 120, 20));
-
-                // Row 17
-                platforms.push(staticPlat(800, 3150, 180, 20));
-                platforms.push(liftPlat(520, 3050, 120, 20, 480, 700, 2.4));
-                platforms.push(conveyor(240, 3000, 140, 20, 1));
-                platforms.push(staticPlat(880, 2950, 180, 20));
-
-                // Final climb
-                platforms.push(staticPlat(600, 2900, 160, 20));
-                platforms.push(staticPlat(320, 2850, 160, 20));
-                platforms.push(staticPlat(600, 2800, 160, 20));
-                platforms.push(staticPlat(880, 2750, 180, 20));
-
-                // Goal
-                platforms.push(staticPlat(560, 2650, 220, 20));
-                goal = { x: 620, y: 2580, w: 50, h: 70, anim: 0 };
+                goal = { x: 2300, y: groundY - 2570, w: 50, h: 70, anim: 0 };
             }
 
-            // --------------------------------------------------------
-            // LEVEL 6 — "The Impossible" (world 6600 tall)
-            // --------------------------------------------------------
             if (level === 6) {
-                world.width = 1400; world.height = 6600;
-
-                // Ground
-                platforms.push(staticPlat(0, 6400, 1400, 40));
-                checkpoints.push(makeCheckpoint(60, 6336, true));
+                world.width = 3000; world.height = 7600;
+                const groundY = 7400;
+                platforms.push(staticPlat(0, groundY, world.width, 40));
+                checkpoints.push(makeCheckpoint(120, groundY - 64, true));
                 lastCheckpoint = checkpoints[0];
 
-                // Spikes
-                platforms.push(spike(400, 6388, 60, 12));
-                platforms.push(spike(540, 6388, 60, 12));
-                platforms.push(spike(680, 6388, 60, 12));
+                platforms.push(spike(600, groundY - 12, 70, 12));
+                platforms.push(spike(850, groundY - 12, 70, 12));
+                platforms.push(spike(1100, groundY - 12, 70, 12));
 
-                // Row 1
-                platforms.push(staticPlat(180, 6300, 130, 20));
-                platforms.push(staticPlat(440, 6300, 130, 20));
-                platforms.push(staticPlat(700, 6300, 130, 20));
-                platforms.push(staticPlat(960, 6300, 130, 20));
-                platforms.push(staticPlat(1220, 6300, 130, 20));
+                platforms.push(staticPlat(220, groundY - 160, 220, 24));
+                platforms.push(staticPlat(580, groundY - 300, 220, 24));
+                platforms.push(staticPlat(940, groundY - 440, 220, 24));
+                platforms.push(staticPlat(1300, groundY - 580, 220, 24));
+                platforms.push(staticPlat(1660, groundY - 720, 220, 24));
+                platforms.push(staticPlat(2020, groundY - 860, 220, 24));
+                platforms.push(staticPlat(2380, groundY - 1000, 240, 24));
 
-                // Row 2
-                platforms.push(staticPlat(320, 6200, 130, 20));
-                platforms.push(staticPlat(580, 6200, 130, 20));
-                platforms.push(staticPlat(840, 6200, 130, 20));
-                platforms.push(staticPlat(1100, 6200, 130, 20));
+                checkpoints.push(makeCheckpoint(2440, groundY - 1064, false));
 
-                // Moving platforms
-                platforms.push(movingPlat(200, 6100, 110, 20, 140, 360, 2.0));
-                platforms.push(movingPlat(480, 6100, 110, 20, 420, 640, 2.0));
+                platforms.push(movingPlat(1800, groundY - 1100, 180, 24, 1650, 2050, 2.0));
+                platforms.push(movingPlat(1400, groundY - 1240, 180, 24, 1250, 1650, 2.0));
 
-                // Row 3 — wide platform with enemy
-                platforms.push(staticPlat(760, 6050, 240, 20));
-                enemies.push(makeEnemy(840, 6000, 760, 1000, 2.0));
-                coins.push(makeCoin(840, 5990));
+                platforms.push(staticPlat(600, groundY - 1380, 520, 24));
+                enemies.push(makeEnemy(700, groundY - 1430, 600, 1120, 2.0));
+                enemies.push(makeEnemy(900, groundY - 1430, 600, 1120, 2.0));
+                enemies.push(makeEnemy(1050, groundY - 1430, 600, 1120, 2.0));
+                coins.push(makeCoin(700, groundY - 1390));
+                coins.push(makeCoin(900, groundY - 1390));
+                coins.push(makeCoin(1050, groundY - 1390));
 
-                // Checkpoint mid
-                checkpoints.push(makeCheckpoint(840, 5986, false));
+                platforms.push(staticPlat(300, groundY - 1520, 220, 24));
+                powerUps.push(makePowerUp(360, groundY - 1560, 'doubleJump'));
 
-                // Conveyor
-                platforms.push(conveyor(1060, 6000, 150, 20, 1));
+                platforms.push(fallPlat(600, groundY - 1660, 160, 24, 280));
+                platforms.push(bouncyPlat(950, groundY - 1800, 160, 24));
+                platforms.push(bouncyPlat(1300, groundY - 1940, 160, 24));
 
-                // Bouncy pad
-                platforms.push(bouncyPlat(100, 6000, 120, 20));
+                platforms.push(liftPlat(1700, groundY - 2080, 160, 24, 1600, 2000, 2.2));
 
-                // Moving gauntlet (3 in a row)
-                platforms.push(movingPlat(360, 5900, 110, 20, 300, 520, 2.1));
-                platforms.push(movingPlat(620, 5900, 110, 20, 560, 780, 2.1));
-                platforms.push(movingPlat(880, 5900, 110, 20, 820, 1040, 2.1));
+                platforms.push(staticPlat(2100, groundY - 2220, 240, 24));
+                platforms.push(staticPlat(1800, groundY - 2360, 220, 24));
+                platforms.push(staticPlat(2100, groundY - 2500, 220, 24));
+                platforms.push(staticPlat(2400, groundY - 2640, 220, 24));
+                platforms.push(staticPlat(2700, groundY - 2780, 240, 24));
 
-                // Wide platform with two enemies
-                platforms.push(staticPlat(200, 5800, 240, 20));
-                enemies.push(makeEnemy(280, 5750, 200, 440, 2.2));
-                enemies.push(makeEnemy(380, 5750, 200, 440, 2.2));
-                coins.push(makeCoin(280, 5740), makeCoin(380, 5740));
-
-                // Lift
-                platforms.push(liftPlat(540, 5750, 130, 20, 500, 720, 2.2));
-
-                // Bouncy + conveyor
-                platforms.push(bouncyPlat(760, 5700, 120, 20));
-                platforms.push(conveyor(1000, 5650, 150, 20, -1));
-
-                // Row 7 — wide platform with enemy
-                platforms.push(staticPlat(660, 5600, 240, 20));
-                enemies.push(makeEnemy(740, 5550, 660, 900, 2.3));
-                coins.push(makeCoin(740, 5540));
-
-                // Checkpoint 3
-                platforms.push(staticPlat(200, 5550, 180, 20));
-                checkpoints.push(makeCheckpoint(240, 5486, false));
-
-                // Powerup
-                platforms.push(staticPlat(440, 5500, 180, 20));
-                powerUps.push(makePowerUp(480, 5460, 'doubleJump'));
-
-                // Fall platforms
-                platforms.push(fallPlat(680, 5450, 120, 20, 280));
-                platforms.push(fallPlat(900, 5350, 120, 20, 260));
-                platforms.push(fallPlat(1120, 5250, 120, 20, 240));
-
-                // Conveyor + spike
-                platforms.push(conveyor(200, 5250, 150, 20, 1));
-                platforms.push(staticPlat(460, 5200, 180, 20));
-                platforms.push(spike(500, 5188, 60, 12));
-
-                // Wide platform with three enemies
-                platforms.push(staticPlat(760, 5150, 260, 20));
-                enemies.push(makeEnemy(840, 5100, 760, 1020, 2.4));
-                enemies.push(makeEnemy(940, 5100, 760, 1020, 2.4));
-                enemies.push(makeEnemy(1040, 5100, 760, 1020, 2.4));
-                coins.push(makeCoin(840, 5090), makeCoin(940, 5090), makeCoin(1040, 5090));
-
-                // Bouncy chain
-                platforms.push(bouncyPlat(560, 5100, 120, 20));
-                platforms.push(bouncyPlat(340, 4950, 120, 20));
-
-                // Vertical challenge
-                platforms.push(staticPlat(120, 4900, 180, 20));
-                platforms.push(spike(160, 4888, 60, 12));
-
-                // Moving + lift
-                platforms.push(movingPlat(400, 4850, 110, 20, 340, 560, 2.4));
-                platforms.push(liftPlat(660, 4800, 120, 20, 620, 840, 2.4));
-
-                // Wide platform with three enemies
-                platforms.push(staticPlat(900, 4750, 260, 20));
-                enemies.push(makeEnemy(980, 4700, 900, 1160, 2.4));
-                enemies.push(makeEnemy(1080, 4700, 900, 1160, 2.4));
-                enemies.push(makeEnemy(1180, 4700, 900, 1160, 2.4));
-                coins.push(makeCoin(980, 4690), makeCoin(1080, 4690), makeCoin(1180, 4690));
-
-                // Fall gauntlet
-                platforms.push(fallPlat(660, 4700, 120, 20, 260));
-                platforms.push(bouncyPlat(440, 4650, 120, 20));
-                platforms.push(bouncyPlat(680, 4550, 120, 20));
-
-                // Moving gauntlet (3 in a row)
-                platforms.push(movingPlat(340, 4500, 110, 20, 280, 500, 2.4));
-                platforms.push(movingPlat(580, 4450, 110, 20, 520, 740, 2.4));
-                platforms.push(movingPlat(820, 4400, 110, 20, 760, 980, 2.4));
-
-                // Conveyor + spike
-                platforms.push(conveyor(100, 4400, 150, 20, -1));
-                platforms.push(staticPlat(340, 4350, 180, 20));
-                platforms.push(spike(380, 4338, 60, 12));
-
-                // Wide platform with enemy
-                platforms.push(staticPlat(620, 4300, 240, 20));
-                enemies.push(makeEnemy(700, 4250, 620, 860, 2.5));
-                coins.push(makeCoin(700, 4240));
-
-                // Checkpoint 4
-                platforms.push(staticPlat(920, 4250, 180, 20));
-                checkpoints.push(makeCheckpoint(960, 4186, false));
-
-                // Bouncy + conveyor
-                platforms.push(bouncyPlat(400, 4200, 120, 20));
-                platforms.push(conveyor(660, 4150, 150, 20, 1));
-                platforms.push(conveyor(920, 4100, 150, 20, -1));
-
-                // Moving platforms
-                platforms.push(movingPlat(400, 4050, 110, 20, 340, 560, 2.5));
-                platforms.push(movingPlat(660, 4000, 110, 20, 600, 820, 2.5));
-                platforms.push(movingPlat(920, 3950, 110, 20, 860, 1080, 2.5));
-
-                // Wide platform with enemy
-                platforms.push(staticPlat(120, 3900, 240, 20));
-                enemies.push(makeEnemy(200, 3850, 120, 360, 2.6));
-                coins.push(makeCoin(200, 3840));
-
-                // Fall platforms
-                platforms.push(fallPlat(440, 3850, 120, 20, 260));
-                platforms.push(fallPlat(680, 3800, 120, 20, 240));
-
-                // Lift
-                platforms.push(liftPlat(920, 3750, 120, 20, 880, 1100, 2.6));
-
-                // Final climb section
-                platforms.push(staticPlat(660, 3650, 180, 20));
-                platforms.push(staticPlat(400, 3550, 160, 20));
-                platforms.push(staticPlat(660, 3450, 160, 20));
-                platforms.push(staticPlat(920, 3350, 180, 20));
-
-                // Final bouncy chain
-                platforms.push(bouncyPlat(640, 3250, 120, 20));
-                platforms.push(bouncyPlat(400, 3150, 120, 20));
-                platforms.push(bouncyPlat(640, 3050, 120, 20));
-
-                // Final platforms
-                platforms.push(staticPlat(880, 2950, 180, 20));
-                platforms.push(staticPlat(600, 2850, 160, 20));
-                platforms.push(staticPlat(320, 2750, 160, 20));
-                platforms.push(staticPlat(600, 2650, 160, 20));
-                platforms.push(staticPlat(880, 2550, 180, 20));
-
-                // Goal
-                platforms.push(staticPlat(560, 2450, 220, 20));
-                goal = { x: 620, y: 2380, w: 50, h: 70, anim: 0 };
+                goal = { x: 2800, y: groundY - 2850, w: 50, h: 70, anim: 0 };
             }
 
             resetPlayer();
             updateHeartsDisplay();
         }
 
-        // ============================================================
-        // DEBUG: SKIP LEVEL (TAB)
-        // ============================================================
         function debugSkipLevel() {
             if (!DEBUG_SKIP || !gameStarted) return;
             for (let c of coins) {
@@ -2179,7 +1535,7 @@
             }
             enemies = [];
             player.canDoubleJump = true;
-            doubleJumpIndicator.style.display = "flex";
+            // doubleJumpIndicator.style.display = "flex";
             if (goal) {
                 player.x = goal.x + goal.w / 2 - player.w / 2;
                 player.y = goal.y - player.h - 10;
@@ -2190,9 +1546,6 @@
             createParticles(player.x + player.w / 2, player.y + player.h / 2, 40, "#ffdd00", 5);
         }
 
-        // ============================================================
-        // INPUT
-        // ============================================================
         document.addEventListener("keydown", e => {
             if (!gameStarted) return;
             switch (e.key.toLowerCase()) {
@@ -2265,9 +1618,6 @@
             showHomeScreen();
         };
 
-        // ============================================================
-        // COLLISION / DAMAGE / HEAL
-        // ============================================================
         function rectCollision(a, b) {
             return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
         }
@@ -2283,7 +1633,6 @@
             setTimeout(() => canvas.style.filter = "", 150);
             player.invincible = 90;
 
-            // Knockback
             if (knockbackDir !== undefined) {
                 player.vx = knockbackDir * 7;
                 player.vy = -7;
@@ -2291,8 +1640,6 @@
             }
 
             if (lastCheckpoint) {
-                // Don't teleport on enemy contact — only on death/fall.
-                // (Teleport only if health hits 0 or from hazards)
                 if (source !== 'enemy') {
                     player.x = lastCheckpoint.x + lastCheckpoint.w / 2 - player.w / 2;
                     player.y = lastCheckpoint.y - player.h;
@@ -2310,9 +1657,7 @@
             }
         }
 
-        // Start the floating "totem" heart animation that drifts to the HP bar
         function startFloatingHeartAnimation() {
-            // Find target HUD slot (first empty one)
             const slots = heartsDisplay.querySelectorAll('.heart');
             let targetIndex = 0;
             for (let s = 0; s < slots.length; s++) {
@@ -2331,14 +1676,12 @@
             }
 
             floatingHearts.push({
-                // starts at screen center in world coordinates
                 startScreenX: canvas.width / 2,
                 startScreenY: canvas.height / 2,
                 targetScreenX: targetScreenX,
                 targetScreenY: targetScreenY,
                 time: 0,
                 duration: 1.4,
-                // large scale that shrinks as it flies
                 startScale: 12,
                 endScale: 2
             });
@@ -2349,9 +1692,7 @@
             health = Math.min(maxHealth, health + amount);
             updateHeartsDisplay();
             if (health > before) {
-                // Big "totem" heart animation from center of screen
                 startFloatingHeartAnimation();
-                // Also spawn some particles at the player
                 createParticles(player.x + player.w / 2, player.y + player.h / 2, 25, "#FF66AA", 4);
             }
         }
@@ -2365,11 +1706,12 @@
             }
             player.vx = 0; player.vy = 0;
             player.jumping = false; player.onGround = false;
-            player.coyote = 0; player.canDoubleJump = false;
+            player.coyote = 0; player.canDoubleJump = true;
             player.invincible = 0; player.jumpBuffer = 0;
             player.knockbackTimer = 0;
+            player.lastJumpTap = 0; player.jumpCount = 0;
             camera.x = 0; camera.y = 0;
-            doubleJumpIndicator.style.display = "none";
+            // doubleJumpIndicator.style.display = "flex";
             heartDrops = [];
         }
 
@@ -2388,6 +1730,7 @@
             homeScreenEl.classList.remove("active");
             gameContainerEl.classList.add("active");
             gameStarted = true;
+            resizeCanvas();
             resetGame();
         }
 
@@ -2417,9 +1760,6 @@
             drawHomeKnight();
         }
 
-        // ============================================================
-        // PARTICLES
-        // ============================================================
         function createParticles(x, y, count, color, speed = 3) {
             for (let i = 0; i < count; i++) {
                 particles.push({
@@ -2432,9 +1772,6 @@
             }
         }
 
-        // ============================================================
-        // UPDATE
-        // ============================================================
         function update(deltaTime) {
             if (paused || !gameStarted) return;
 
@@ -2448,14 +1785,12 @@
                 if (particles[i].life <= 0) particles.splice(i, 1);
             }
 
-            // Floating heart (totem) animation
             for (let i = floatingHearts.length - 1; i >= 0; i--) {
                 const fh = floatingHearts[i];
                 fh.time += deltaTime;
                 if (fh.time >= fh.duration) floatingHearts.splice(i, 1);
             }
 
-            // Heart drops
             for (let i = heartDrops.length - 1; i >= 0; i--) {
                 const heart = heartDrops[i];
                 if (!heart.collected) {
@@ -2494,9 +1829,7 @@
             if (player.jumpBuffer > 0) player.jumpBuffer -= deltaTime;
             if (player.knockbackTimer > 0) player.knockbackTimer--;
 
-            // During knockback, don't let the player control horizontal movement
             if (player.knockbackTimer > 0) {
-                // Keep the current vx but decay it slightly
                 player.vx *= 0.95;
             } else {
                 player.vx = 0;
@@ -2506,26 +1839,29 @@
 
             if (player.onGround) {
                 player.coyote = COYOTE_TIME;
-                player.canDoubleJump = false;
+                player.jumpCount = 0;
             } else {
                 player.coyote -= deltaTime;
             }
 
-            // Jump (blocked during knockback for a moment)
-            if ((keys.up || player.jumpBuffer > 0) &&
-                player.knockbackTimer <= 0 &&
-                (player.onGround || player.coyote > 0 || (player.canDoubleJump && !player.jumping))) {
-                player.vy = jumpForce;
-                if (!player.onGround && player.coyote <= 0) {
-                    player.canDoubleJump = false;
-                    doubleJumpIndicator.style.display = "none";
+            if (player.jumpBuffer > 0 && player.knockbackTimer <= 0) {
+                if (player.onGround || player.coyote > 0) {
+                    player.vy = jumpForce;
+                    player.jumping = true;
+                    player.onGround = false;
+                    player.coyote = 0;
+                    player.jumpBuffer = 0;
+                    player.jumpCount = 1;
+                    player.lastJumpTap = gameTime;
+                    createParticles(player.x + player.w / 2, player.y + player.h, 15, "#ffffff", 3);
+                } else if (player.jumpCount === 1 && (gameTime - player.lastJumpTap) < DOUBLE_TAP_TIME) {
+                    player.vy = jumpForce * 0.9;
+                    player.jumping = true;
+                    player.jumpCount = 2;
+                    player.jumpBuffer = 0;
+                    player.lastJumpTap = gameTime;
                     createParticles(player.x + player.w / 2, player.y + player.h / 2, 20, "#00ffff", 4);
                 }
-                player.jumping = true;
-                player.onGround = false;
-                player.coyote = 0;
-                player.jumpBuffer = 0;
-                createParticles(player.x + player.w / 2, player.y + player.h, 15, "#ffffff", 3);
             }
 
             player.vy += gravity;
@@ -2546,6 +1882,7 @@
                         player.vy = 0;
                         player.jumping = false;
                         onGround = true;
+                        player.jumpCount = 0;
                         if (p.type === 'bouncy') {
                             player.vy = -p.bounce;
                             createParticles(p.x + p.w / 2, p.y, 25, "#FFD700", 4);
@@ -2583,6 +1920,7 @@
                     if (player.vy >= 0 && previousBottom <= l.y + 10) {
                         player.y = l.y - player.h;
                         player.vy = 0; player.jumping = false; onGround = true;
+                        player.jumpCount = 0;
                         player.x += l.vx;
                         let leftBound = l.x;
                         let rightBound = l.x + l.w - player.w;
@@ -2591,9 +1929,14 @@
                 }
             }
 
-            // ---- Enemies ----
             for (let i = enemies.length - 1; i >= 0; i--) {
                 const e = enemies[i];
+
+                if (e.dead) {
+                    enemies.splice(i, 1);
+                    continue;
+                }
+
                 e.x += e.vx;
                 e.anim += 0.15;
                 e.facing = e.vx > 0 ? 1 : -1;
@@ -2608,12 +1951,31 @@
                 if (e.x > e.maxX) { e.vx = -Math.abs(e.vx); e.x = e.maxX; e.facing = -1; }
 
                 if (e.swordCooldown > 0) e.swordCooldown--;
+                if (e.stompCooldown > 0) e.stompCooldown--;
 
-                // Check if player is touching the enemy (any contact = attack)
                 const touchingPlayer = rectCollision(player, e);
 
-                if (touchingPlayer) {
-                    // Make enemy face the player and swing immediately
+                if (touchingPlayer && player.vy > 0 && e.stompCooldown <= 0) {
+                    const playerFeet = player.y + player.h;
+                    const enemyTop = e.y;
+                    const enemyMid = e.y + e.h / 2;
+                    const isAbove = playerFeet - player.vy <= enemyTop + 12;
+
+                    if (isAbove && playerFeet <= enemyMid) {
+                        e.dead = true;
+                        e.stompCooldown = 30;
+                        player.vy = -11;
+                        player.jumpCount = 0;
+                        player.canDoubleJump = true;
+                        // doubleJumpIndicator.style.display = "flex";
+                        score += 200;
+                        createParticles(e.x + e.w / 2, e.y + e.h / 2, 25, "#ff6688", 5);
+                        spawnHeartFromEnemy(e);
+                        continue;
+                    }
+                }
+
+                if (touchingPlayer && !e.dead) {
                     const dx = (player.x + player.w / 2) - (e.x + e.w / 2);
                     e.facing = dx > 0 ? 1 : -1;
                     if (!e.swordActive && e.swordCooldown <= 0) {
@@ -2640,13 +2002,11 @@
                         };
                         if (rectCollision(player, swordHitbox) && player.invincible <= 0) {
                             e.swordHitDone = true;
-                            // 1 heart of damage + knockback
                             const dir = player.x < e.x ? -1 : 1;
                             damage(1, 'enemy', dir);
                         }
                     }
                 } else if (e.swordCooldown <= 0 && !touchingPlayer) {
-                    // Idle aggro check
                     const dx = (player.x + player.w / 2) - (e.x + e.w / 2);
                     const dy = (player.y + player.h / 2) - (e.y + e.h / 2);
                     const dist = Math.sqrt(dx * dx + dy * dy);
@@ -2658,10 +2018,7 @@
                     }
                 }
 
-                // Contact damage: any touch triggers attack (handled above),
-                // but if the player still overlaps after the sword swing,
-                // apply body damage too (with knockback).
-                if (touchingPlayer && player.invincible <= 0) {
+                if (touchingPlayer && player.invincible <= 0 && player.vy <= 0) {
                     const dir = player.x < e.x ? -1 : 1;
                     damage(1, 'enemy', dir);
                 }
@@ -2711,7 +2068,7 @@
                         p.collected = true;
                         if (p.type === 'doubleJump') {
                             player.canDoubleJump = true;
-                            doubleJumpIndicator.style.display = "flex";
+                            // doubleJumpIndicator.style.display = "flex";
                             createParticles(p.x + 14, p.y + 14, 25, "#00ffff", 4);
                         }
                     }
@@ -2752,9 +2109,6 @@
             scoreText.textContent = score;
         }
 
-        // ============================================================
-        // DRAW PARALLAX BACKGROUND
-        // ============================================================
         function drawParallax() {
             const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
             gradient.addColorStop(0, "#0a1628");
@@ -2765,9 +2119,9 @@
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             ctx.fillStyle = "rgba(255,255,255,0.6)";
-            for (let i = 0; i < 40; i++) {
+            for (let i = 0; i < 60; i++) {
                 const sx = ((i * 137 + camera.x * 0.02) % (canvas.width + 100)) - 50;
-                const sy = ((i * 73 + camera.y * 0.02) % (canvas.height * 0.6));
+                const sy = ((i * 73 + camera.y * 0.02) % (canvas.height * 0.8));
                 const twinkle = Math.sin(gameTime * 2 + i) * 0.3 + 0.7;
                 ctx.globalAlpha = twinkle * 0.6;
                 ctx.fillRect(sx, sy, 2, 2);
@@ -2775,7 +2129,7 @@
             ctx.globalAlpha = 1;
 
             ctx.fillStyle = "#0f1a35";
-            for (let i = 0; i < 8; i++) {
+            for (let i = 0; i < 12; i++) {
                 let x = (i * 280 - camera.x * 0.06) % (canvas.width + 560) - 280;
                 let baseY = canvas.height - 40;
                 let h = 200 + Math.sin(i * 1.3) * 80;
@@ -2788,7 +2142,7 @@
             }
 
             ctx.fillStyle = "#14224a";
-            for (let i = 0; i < 8; i++) {
+            for (let i = 0; i < 12; i++) {
                 let x = (i * 240 - camera.x * 0.12) % (canvas.width + 480) - 240;
                 let baseY = canvas.height - 10;
                 let h = 140 + Math.sin(i * 1.8 + 1) * 60;
@@ -2801,7 +2155,7 @@
             }
 
             ctx.fillStyle = "rgba(180, 200, 240, 0.12)";
-            for (let i = 0; i < 6; i++) {
+            for (let i = 0; i < 8; i++) {
                 let cx = (i * 300 + camera.x * 0.04 + gameTime * 0.3) % (canvas.width + 600) - 300;
                 let cy = 80 + Math.sin(i * 1.2) * 60;
                 const s = 3;
@@ -2820,11 +2174,21 @@
                     }
                 }
             }
+
+            ctx.fillStyle = "rgba(10, 18, 40, 0.5)";
+            for (let i = 0; i < 10; i++) {
+                let x = (i * 200 - camera.x * 0.2) % (canvas.width + 400) - 200;
+                let baseY = canvas.height;
+                let h = 100 + Math.sin(i * 2.5) * 40;
+                ctx.beginPath();
+                ctx.moveTo(x, baseY);
+                ctx.lineTo(x + 100, baseY - h);
+                ctx.lineTo(x + 200, baseY);
+                ctx.closePath();
+                ctx.fill();
+            }
         }
 
-        // ============================================================
-        // DRAW PLATFORM
-        // ============================================================
         function drawPlatform(p) {
             let sx = p.x - camera.x;
             let sy = p.y - camera.y;
@@ -3089,10 +2453,9 @@
             ctx.restore();
         }
 
-        // ============================================================
-        // DRAW ENEMY
-        // ============================================================
         function drawEnemy(e) {
+            if (e.dead) return;
+
             const ex = e.x - camera.x;
             const ey = e.y - camera.y;
             const spriteH = 16;
@@ -3100,6 +2463,16 @@
             const pixelSize = Math.floor(e.w / spriteW);
             const spriteMap = e.walkFrame === 1 ? ENEMY_WALK : ENEMY_IDLE;
             const flip = e.facing < 0;
+
+            let squash = 1;
+            if (e.stompCooldown > 0) {
+                squash = 0.4 + (1 - e.stompCooldown / 30) * 0.6;
+            }
+
+            ctx.save();
+            ctx.translate(ex + e.w / 2, ey + e.h);
+            ctx.scale(1, squash);
+            ctx.translate(-(ex + e.w / 2), -(ey + e.h));
 
             ctx.fillStyle = "rgba(0,0,0,0.4)";
             ctx.beginPath();
@@ -3116,7 +2489,7 @@
                 flip
             );
 
-            if (e.swordActive) {
+            if (e.swordActive && !e.dead) {
                 const swing = e.swordSwing;
                 const swordX = e.facing > 0 ? ex + e.w - 4 : ex - 20;
                 const swordY = ey + 18;
@@ -3144,7 +2517,7 @@
                 const arcY = ey + e.h / 2;
                 ctx.arc(arcX, arcY, 24, -0.8 + swing * 1.6, -0.8 + swing * 2.4);
                 ctx.stroke();
-            } else {
+            } else if (!e.dead) {
                 ctx.save();
                 ctx.translate(e.facing > 0 ? ex + e.w - 6 : ex + 6, ey + 22);
                 ctx.scale(e.facing, 1);
@@ -3157,11 +2530,10 @@
                 ctx.fillRect(-3, -2, 4, 5);
                 ctx.restore();
             }
+
+            ctx.restore();
         }
 
-        // ============================================================
-        // DRAW PLAYER
-        // ============================================================
         function drawPlayer() {
             const px = player.x - camera.x;
             const py = player.y - camera.y;
@@ -3197,7 +2569,7 @@
             );
             ctx.globalAlpha = 1;
 
-            if (player.canDoubleJump && !player.onGround) {
+            if (player.canDoubleJump && !player.onGround && player.jumpCount < 2) {
                 ctx.fillStyle = `rgba(0, 255, 255, ${alpha * 0.7})`;
                 const s = Math.sin(gameTime * 0.02) * 2;
                 ctx.fillRect(px + player.w / 2 - 6, py - 8 + s, 3, 3);
@@ -3206,9 +2578,6 @@
             }
         }
 
-        // ============================================================
-        // DRAW COIN
-        // ============================================================
         function drawCoin(c) {
             const cx = c.x - camera.x;
             const cy = c.y - camera.y + Math.sin(c.anim) * 3;
@@ -3228,9 +2597,6 @@
             );
         }
 
-        // ============================================================
-        // DRAW HEART DROP
-        // ============================================================
         function drawHeartDrop(h) {
             const hx = h.x - camera.x;
             const hy = h.y - camera.y + Math.sin(h.anim) * 3;
@@ -3248,13 +2614,9 @@
             );
         }
 
-        // ============================================================
-        // DRAW FLOATING HEART (totem animation)
-        // ============================================================
         function drawFloatingHearts() {
             for (let fh of floatingHearts) {
                 const t = Math.min(fh.time / fh.duration, 1);
-                // Ease-out cubic
                 const eased = 1 - Math.pow(1 - t, 3);
                 const x = fh.startScreenX + (fh.targetScreenX - fh.startScreenX) * eased;
                 const y = fh.startScreenY + (fh.targetScreenY - fh.startScreenY) * eased - Math.sin(t * Math.PI) * 60;
@@ -3263,14 +2625,12 @@
 
                 ctx.save();
                 ctx.globalAlpha = Math.max(0, alpha);
-                // Draw pixel heart scaled up
                 const pixelSize = Math.max(1, Math.round(scale));
                 const cols = HEART_SPRITE[0].length;
                 const rows = HEART_SPRITE.length;
                 const drawX = x - (cols * pixelSize) / 2;
                 const drawY = y - (rows * pixelSize) / 2;
 
-                // Glow
                 const glow = ctx.createRadialGradient(x, y, 0, x, y, cols * pixelSize * 0.9);
                 glow.addColorStop(0, `rgba(255, 80, 140, ${0.5 * (1 - t)})`);
                 glow.addColorStop(1, 'rgba(255, 80, 140, 0)');
@@ -3290,9 +2650,6 @@
             }
         }
 
-        // ============================================================
-        // DRAW POWERUP
-        // ============================================================
         function drawPowerUp(p) {
             const px = p.x - camera.x;
             const py = p.y - camera.y + Math.sin(p.anim) * 4;
@@ -3314,58 +2671,105 @@
             );
         }
 
-        // ============================================================
-        // DRAW GOAL
-        // ============================================================
         function drawGoal() {
+            if (!goal) return;
+
             const gx = goal.x - camera.x;
             const gy = goal.y - camera.y;
-            const pixelSize = 3;
-            ctx.fillStyle = "#886644";
-            ctx.fillRect(gx + 20, gy, 6, goal.h);
-            ctx.fillStyle = "#664422";
-            ctx.fillRect(gx + 20, gy, 2, goal.h);
+            const pixelSize = 4;
+
             goal.anim += 0.1;
-            const sway = Math.sin(goal.anim) * 6;
+
             ctx.save();
-            ctx.translate(gx + 26 + sway, gy + 8);
-            drawPixelSprite(
-                ctx,
-                GOAL_FLAG,
-                FLAG_PALETTE,
-                0, 0,
-                pixelSize,
-                false
+
+            ctx.fillStyle = "rgba(0,0,0,0.35)";
+            ctx.beginPath();
+            ctx.ellipse(gx + goal.w / 2, gy + goal.h + 2, goal.w * 0.6, 6, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            const totalW = 14 * pixelSize;
+            const offsetX = gx + goal.w / 2 - totalW / 2;
+
+            for (let r = 0; r < 16; r++) {
+                for (let c = 0; c < 14; c++) {
+                    const ch = GOAL_FLAG[r][c];
+                    if (ch === '.' || !ch) continue;
+                    const color = GOAL_PALETTE[ch];
+                    if (!color) continue;
+                    const sway = Math.sin(goal.anim * 1.5 + r * 0.5) * 2;
+                    const xOffset = r < 8 ? (8 - r) * 0.2 * sway : 0;
+                    ctx.fillStyle = color;
+                    ctx.fillRect(
+                        offsetX + c * pixelSize + xOffset,
+                        gy + r * pixelSize,
+                        pixelSize,
+                        pixelSize
+                    );
+                }
+            }
+
+            const glow = ctx.createRadialGradient(
+                gx + goal.w / 2, gy + 30, 0,
+                gx + goal.w / 2, gy + 30, 70
             );
+            glow.addColorStop(0, 'rgba(255, 215, 0, 0.35)');
+            glow.addColorStop(1, 'rgba(255, 215, 0, 0)');
+            ctx.fillStyle = glow;
+            ctx.fillRect(gx - 40, gy - 20, goal.w + 80, goal.h + 60);
+
             ctx.restore();
-            ctx.fillStyle = "#444444";
-            ctx.fillRect(gx, gy + goal.h, 50, 10);
-            ctx.fillStyle = "#666666";
-            ctx.fillRect(gx, gy + goal.h, 50, 3);
         }
 
-        // ============================================================
-        // DRAW CHECKPOINT
-        // ============================================================
         function drawCheckpoint(cp) {
             const cpx = cp.x - camera.x;
             const cpy = cp.y - camera.y;
             const pixelSize = 4;
             const sprite = cp.active ? FLAG_ACTIVE : FLAG_INACTIVE;
-            drawPixelSprite(
-                ctx,
-                sprite,
-                FLAG_PALETTE,
-                cpx,
-                cpy,
-                pixelSize,
-                false
-            );
+
+            ctx.save();
+
+            ctx.fillStyle = "rgba(0,0,0,0.3)";
+            ctx.beginPath();
+            ctx.ellipse(cpx + cp.w / 2, cpy + cp.h - 4, cp.w * 0.4, 5, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            const totalW = 14 * pixelSize;
+            const totalH = 16 * pixelSize;
+            const offsetX = cpx + (cp.w - totalW) / 2;
+            const offsetY = cpy + cp.h - totalH;
+
+            for (let r = 0; r < 16; r++) {
+                for (let c = 0; c < 14; c++) {
+                    const ch = sprite[r][c];
+                    if (ch === '.') continue;
+                    const color = FLAG_PALETTE[ch];
+                    if (!color) continue;
+                    const sway = Math.sin(gameTime * 2 + r * 0.4) * (cp.active ? 1.5 : 0.8);
+                    const xOffset = r < 8 ? (8 - r) * 0.15 * sway : 0;
+                    ctx.fillStyle = color;
+                    ctx.fillRect(
+                        offsetX + c * pixelSize + xOffset,
+                        offsetY + r * pixelSize,
+                        pixelSize,
+                        pixelSize
+                    );
+                }
+            }
+
+            if (cp.active) {
+                const glow = ctx.createRadialGradient(
+                    cpx + cp.w / 2, cpy + 20, 0,
+                    cpx + cp.w / 2, cpy + 20, 50
+                );
+                glow.addColorStop(0, 'rgba(34, 204, 68, 0.35)');
+                glow.addColorStop(1, 'rgba(34, 204, 68, 0)');
+                ctx.fillStyle = glow;
+                ctx.fillRect(cpx - 20, cpy - 20, cp.w + 40, cp.h + 40);
+            }
+
+            ctx.restore();
         }
 
-        // ============================================================
-        // DRAW
-        // ============================================================
         function draw() {
             let shakeX = screenShake > 0 ? (Math.random() - 0.5) * screenShake : 0;
             let shakeY = screenShake > 0 ? (Math.random() - 0.5) * screenShake : 0;
@@ -3418,7 +2822,6 @@
 
             drawPlayer();
 
-            // Particles
             ctx.setTransform(1, 0, 0, 1, 0, 0);
             for (let p of particles) {
                 ctx.globalAlpha = p.life;
@@ -3427,16 +2830,12 @@
             }
             ctx.globalAlpha = 1;
 
-            // Floating hearts (UI animation, drawn in screen space)
             ctx.setTransform(1, 0, 0, 1, 0, 0);
             drawFloatingHearts();
 
             ctx.setTransform(1, 0, 0, 1, 0, 0);
         }
 
-        // ============================================================
-        // LOOP
-        // ============================================================
         function loop(currentTime) {
             const deltaTime = Math.min((currentTime - lastTime) / 1000, 0.1);
             lastTime = currentTime;
@@ -3454,6 +2853,7 @@
         window.showHomeScreen = showHomeScreen;
 
         window.addEventListener('resize', () => {
+            resizeCanvas();
             if (homeScreenEl.classList.contains('active')) {
                 drawHomeKnight();
             }

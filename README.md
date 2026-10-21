@@ -39,7 +39,8 @@ This project is distributed under the **MIT License**.
 - Pokémon FireRed (GBA)
 - HexManiacAdvance
 - EmulatorJS
+- Mike's ROM Base
+- Github Copilot
 
 ---
-
 © 2026 Littletree866 – All rights reserved under MIT License

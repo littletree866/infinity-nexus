@@ -1,5 +1,4 @@
 # Infinity Nexus
-**Version 1.3.0** 
 
 A collection of HTML-5 browser games that require no external dependecies or frameworks.
 

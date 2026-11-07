@@ -700,7 +700,7 @@
             <div id="healthContainer">
                 <div id="heartsDisplay"></div>
             </div>
-            <!-- <div id="doubleJumpIndicator"><span class="double-jump-icon">💨</span> Double Jump Ready</div> -->
+            
         </div>
         <div id="mobileControls">
             <div class="mobile-btn" id="leftBtn">←</div>
@@ -755,7 +755,7 @@
         const finalScore = document.getElementById("finalScore");
         const finalLevel = document.getElementById("finalLevel");
         const winScore = document.getElementById("winScore");
-        // const doubleJumpIndicator = document.getElementById("doubleJumpIndicator");
+        
 
         let world = { width: 1400, height: 8000 };
         let camera = { x: 0, y: 0, width: 800, height: 600, smooth: 0.08 };
@@ -1535,7 +1535,7 @@
             }
             enemies = [];
             player.canDoubleJump = true;
-            // doubleJumpIndicator.style.display = "flex";
+            
             if (goal) {
                 player.x = goal.x + goal.w / 2 - player.w / 2;
                 player.y = goal.y - player.h - 10;
@@ -1711,7 +1711,7 @@
             player.knockbackTimer = 0;
             player.lastJumpTap = 0; player.jumpCount = 0;
             camera.x = 0; camera.y = 0;
-            // doubleJumpIndicator.style.display = "flex";
+            
             heartDrops = [];
         }
 
@@ -1967,7 +1967,7 @@
                         player.vy = -11;
                         player.jumpCount = 0;
                         player.canDoubleJump = true;
-                        // doubleJumpIndicator.style.display = "flex";
+                        
                         score += 200;
                         createParticles(e.x + e.w / 2, e.y + e.h / 2, 25, "#ff6688", 5);
                         spawnHeartFromEnemy(e);
@@ -2068,7 +2068,7 @@
                         p.collected = true;
                         if (p.type === 'doubleJump') {
                             player.canDoubleJump = true;
-                            // doubleJumpIndicator.style.display = "flex";
+                            
                             createParticles(p.x + 14, p.y + 14, 25, "#00ffff", 4);
                         }
                     }

@@ -4,26 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Clicker Quest</title>
-    <link rel="icon" href="../../icon.jpg">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">  
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">  
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="../../icon.jpg" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --royal-purple: #7c3aed;
-            --royal-gold: #f5b042;
-            --emerald: #10b981;
-            --crimson: #ef4444;
-            --dark-bg: #0f0c1e;
-            --card-bg: #1a162e;
-            --text-light: #f3f0ff;
-            --shadow-xl: 0 25px 45px rgba(0,0,0,0.5);
-            --glow-purple: 0 0 20px rgba(124, 58, 237, 0.6);
-            --cyan: #06b6d4;
-            --lime: #84cc16;
+            --bg: #eef1f6;
+            --panel: #ffffff;
+            --panel-alt: #f4f6fa;
+            --border: #d8dee9;
+            --border-strong: #b8c2d1;
+            --text: #1e2430;
+            --text-dim: #6b7484;
+            --accent: #3b6fd4;
+            --accent-soft: #e3ecfb;
+            --accent-text: #ffffff;
+            --danger: #c0392b;
+            --shadow: 0 4px 16px rgba(30,40,60,0.08);
+            --shadow-lg: 0 12px 40px rgba(30,40,60,0.15);
+            --overlay: rgba(20,28,40,0.5);
+            --chest-wood: #8a94a6;
+            --chest-dark: #5f6878;
+            --chest-metal: #a8b2c2;
+            --chest-stroke: #2b3240;
+        }
+        [data-theme="dark"] {
+            --bg: #14181f;
+            --panel: #1d232d;
+            --panel-alt: #161b23;
+            --border: #2e3746;
+            --border-strong: #4a5568;
+            --text: #dde3ec;
+            --text-dim: #8b95a6;
+            --accent: #5b8def;
+            --accent-soft: #24324a;
+            --accent-text: #ffffff;
+            --danger: #e05a4a;
+            --shadow: 0 4px 16px rgba(0,0,0,0.4);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.6);
+            --overlay: rgba(0,0,0,0.7);
+            --chest-wood: #6b7688;
+            --chest-dark: #4a5262;
+            --chest-metal: #8a94a6;
+            --chest-stroke: #1a1f28;
         }
 
-        
         * {
             margin: 0;
             padding: 0;
@@ -32,455 +59,266 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        html, body {
+            width: 100%;
+            min-height: 100vh;
+        }
 
         body {
-            font-family: 'Inter', 'Segoe UI', sans-serif;
-            background: radial-gradient(ellipse at 30% 40%, #1a1435, #070412);
-            min-height: 100vh;
+            font-family: "Inter", sans-serif;
+            background: var(--bg);
+            color: var(--text);
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 1.5rem;
-            position: relative;
-            overflow-x: hidden;
+            align-items: flex-start;
+            padding: 1rem;
+            transition: background 0.3s, color 0.3s;
         }
 
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(124, 58, 237, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 50%);
-            pointer-events: none;
-            animation: gradientShift 15s ease-in-out infinite;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
-        }
-
-        
-        .home-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 30% 20%, #0e0a1f, #03010a);
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(4px);
-            transition: all 0.4s ease;
-        }
-
-        .hero-card {
-            background: linear-gradient(145deg, #1e1935, #110d26);
-            border-radius: 56px;
-            padding: clamp(1rem, 2.5vw, 2rem) clamp(1rem, 4vw, 2rem) clamp(1rem, 3.5vw, 2.5rem);
-            max-width: min(520px, 95vw);
-            width: 100%;
-            text-align: center;
-            border: 2px solid rgba(245, 176, 66, 0.6);
-            box-shadow: var(--shadow-xl), 0 0 40px rgba(245, 176, 66, 0.2);
-            animation: fadeSlideUp 0.6s cubic-bezier(0.2,0.9,0.4,1.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(245, 176, 66, 0.1), transparent);
-            animation: orbRotate 20s linear infinite;
-        }
-
-        @keyframes orbRotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes fadeSlideUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .hero-icon {
-            font-size: clamp(3rem, 6vw, 4.5rem);
-            color: #ffd966;
-            text-shadow: 0 4px 18px rgba(245,176,66,0.25);
-        }
-
-        .hero-title {
-            font-size: clamp(1.4rem, 4vw, 2.2rem);
-            font-weight: 800;
-            color: #fff3d6;
-            text-shadow: 0 6px 18px rgba(0,0,0,0.6);
-            margin: 0.5rem 0;
-            letter-spacing: 0.6px;
-        }
-
-        .feature-list {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin: 1.5rem 0;
-            text-align: left;
-        }
-
-        .feature-badge {
-            background: rgba(255,255,255,0.04);
-            padding: 10px 12px;
-            border-radius: 60px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #efeaf8;
-        }
-
-        .launch-btn {
-            background: linear-gradient(95deg, #f5b042, #c084fc);
-            border: none;
-            padding: 1rem 2rem;
-            width: 100%;
-            border-radius: 80px;
-            font-weight: 800;
-            font-size: 1.2rem;
-            color: #0a0618;
-            cursor: pointer;
-            margin-top: 0.5rem;
-            transition: 0.2s;
-            box-shadow: 0 8px 20px rgba(192, 132, 252, 0.3);
-        }
-
-        .launch-btn:active { transform: scale(0.97); }
-
-        
         .game-container {
-            max-width: min(620px, 96vw);
             width: 100%;
-            background: rgba(26, 22, 46, 0.95);
-            backdrop-filter: blur(8px);
-            border-radius: 48px;
-            padding: clamp(0.8rem, 2.8vw, 1.5rem);
-            border: 2px solid rgba(245, 176, 66, 0.5);
-            box-shadow: var(--shadow-xl), 0 0 40px rgba(124, 58, 237, 0.15);
-            transition: 0.2s;
+            max-width: 100%;
+            min-height: calc(100vh - 2rem);
+            background: var(--panel);
+            border-radius: 20px;
+            padding: 1.25rem;
+            border: 2px solid var(--border);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            transition: background 0.3s, border-color 0.3s;
             position: relative;
-            overflow: hidden;
-        }
-
-        .game-container::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: none;
-            pointer-events: none;
-            z-index: -1;
         }
 
         .game-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
-            padding-bottom: 0.8rem;
-            border-bottom: 2px solid rgba(245, 176, 66, 0.3);
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--border);
+            flex-shrink: 0;
         }
 
         .game-title {
-            font-size: clamp(1rem, 2.8vw, 1.5rem);
-            font-weight: 800;
-            color: #fff7df;
-            text-shadow: 0 6px 14px rgba(0,0,0,0.6);
-        }
-
-        .home-icon-btn {
-            background: rgba(124, 58, 237, 0.2);
-            border: none;
-            width: 44px;
-            height: 44px;
-            border-radius: 60px;
             font-size: 1.4rem;
-            cursor: pointer;
-            color: #f5b042;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        
-        .stats-panel {
+        .header-actions {
             display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            background: linear-gradient(135deg, rgba(15, 12, 28, 0.8), rgba(20, 16, 40, 0.6));
-            border-radius: 32px;
-            padding: 1rem;
-            margin: 1rem 0;
-            border: 1px solid rgba(132, 204, 22, 0.2);
-            backdrop-filter: blur(4px);
+            gap: 8px;
+        }
+
+        .icon-btn {
+            background: var(--panel-alt);
+            border: 1px solid var(--border);
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            font-size: 1rem;
+            cursor: pointer;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.15s;
+        }
+
+        .icon-btn:hover {
+            background: var(--accent-soft);
+            border-color: var(--border-strong);
+            color: var(--accent-text);
+        }
+
+        .icon-btn:active {
+            transform: scale(0.95);
+        }
+
+        .stats-panel {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            flex-shrink: 0;
         }
 
         .stat-card {
-            flex: 1 1 120px;
-            background: linear-gradient(180deg, #191425, #141022);
-            border-radius: 18px;
-            padding: 0.8rem 0.9rem;
+            background: var(--panel-alt);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 0.6rem 0.3rem;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.03);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.2s ease;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(132, 204, 22, 0.5), transparent);
-            opacity: 0;
-            animation: statGlow 2s infinite;
-        }
-
-        @keyframes statGlow {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 1; }
-        }
-
-        .stat-card:hover {
-            border-color: rgba(132, 204, 22, 0.4);
-            background: linear-gradient(180deg, rgba(25, 20, 37, 0.8), rgba(20, 13, 34, 0.6));
+            transition: background 0.3s, border-color 0.3s;
         }
 
         .stat-value {
-            font-size: clamp(1rem, 3.2vw, 1.5rem);
-            font-weight: 800;
-            font-family: monospace;
-            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.2;
+            font-variant-numeric: tabular-nums;
         }
 
         .stat-label {
-            font-size: 0.75rem;
-            color: #f0e8ff;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+            margin-top: 2px;
             font-weight: 600;
         }
 
-        
-        .click-core {
-            width: 100%;
-            background: linear-gradient(145deg, #8b5cf6, #5b21b6);
-            border: none;
-            padding: clamp(0.9rem, 2.8vw, 1.6rem);
-            border-radius: 80px;
-            font-size: clamp(1rem, 4vw, 1.8rem);
-            font-weight: 800;
-            color: #fff;
-            cursor: pointer;
-            transition: transform 0.07s linear, box-shadow 0.07s linear;
-            margin: 1rem 0;
-            box-shadow: 0 12px 0 rgba(76,29,149,0.9), 0 0 30px rgba(139, 92, 246, 0.3);
-            font-family: inherit;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .click-core::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .click-core:hover::before {
-            left: 100%;
-        }
-
-        .click-core:active {
-            transform: translateY(5px);
-            box-shadow: 0 6px 0 #4c1d95, 0 0 20px rgba(139, 92, 246, 0.5);
-        }
-
-        .boost-active {
-            animation: pulseGold 0.6s infinite alternate;
-            background: linear-gradient(145deg, #f59e0b, #d97706);
-            box-shadow: 0 12px 0 #b45309, 0 0 8px gold, 0 0 30px rgba(245, 158, 11, 0.6);
-        }
-
-        @keyframes pulseGold {
-            from { box-shadow: 0 12px 0 #b45309, 0 0 8px gold; }
-            to { box-shadow: 0 12px 0 #b45309, 0 0 28px #ffd966; }
-        }
-
-        
-        .upgrades-grid {
+        .progress-section {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin: 1.2rem 0;
+            gap: 4px;
+            flex-shrink: 0;
         }
 
-        .upgrade-row {
-            background: linear-gradient(180deg, #120e24, #0f0b1a);
-            border-radius: 18px;
-            padding: 0.75rem 0.9rem;
+        .progress-label {
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            border-left: 4px solid #f5b042;
-            border: 1px solid rgba(255,255,255,0.02);
-            transition: all 0.2s ease;
-            position: relative;
+        }
+
+        .progress-bar {
+            background: var(--panel-alt);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            height: 12px;
             overflow: hidden;
         }
 
-        .upgrade-row::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
+        .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(132, 204, 22, 0.08), transparent);
-            transition: left 0.5s;
+            background: linear-gradient(90deg, var(--accent), #8fb4ff);
+            border-radius: 20px;
+            transition: width 0.2s;
         }
 
-        .upgrade-row:hover::before {
-            left: 100%;
-        }
-
-        .upgrade-row:hover {
-            border-color: rgba(255,255,255,0.08);
-            background: linear-gradient(180deg, #1a1230, #130d22);
-        }
-
-        .upgrade-info {
-            flex: 2;
-        }
-
-        .upgrade-name {
-            font-weight: 700;
-            color: white;
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .key-hint {
-            background: #2a2345;
-            padding: 3px 10px;
-            border-radius: 40px;
-            font-size: 0.7rem;
-        }
-
-        .upgrade-stats {
-            font-size: 0.7rem;
-            color: #e6d9ff;
-            font-weight: 500;
-            display: flex;
-            gap: 12px;
-            margin-top: 5px;
-        }
-
-        .upgrade-btn {
-            background: linear-gradient(135deg, #7c3aed, #6d28d9);
-            border: 2px solid rgba(196, 181, 253, 0.4);
-            padding: 8px 18px;
-            border-radius: 60px;
-            font-weight: 700;
-            cursor: pointer;
-            color: #fef5ff;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
-        }
-
-        .upgrade-btn:hover:not(:disabled) {
-            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-            box-shadow: 0 6px 16px rgba(124, 58, 237, 0.5);
-            transform: translateY(-2px);
-        }
-
-        .upgrade-btn:active:not(:disabled) {
-            transform: translateY(0);
-        }
-
-        .upgrade-btn:disabled { 
-            opacity: 0.35; 
-            cursor: default; 
-        }
-
-        
-        .prestige-area {
-            background: linear-gradient(135deg, #251e3b, #18122e);
-            border-radius: 28px;
-            padding: 1rem;
-            margin-top: 1rem;
-            border: 2px solid rgba(132, 204, 22, 0.4);
+        .combo-display {
             text-align: center;
-            position: relative;
-            overflow: hidden;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--accent);
+            min-height: 24px;
+            letter-spacing: 0.5px;
         }
 
-        .prestige-area::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(132, 204, 22, 0.05), transparent);
-            animation: orbRotate 25s linear infinite;
+        .click-object-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            min-height: 200px;
+            position: relative;
         }
 
-        .prestige-area > * {
+        .chest-button {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
             position: relative;
-            z-index: 1;
+            transition: transform 0.08s ease;
+            filter: drop-shadow(0 8px 12px rgba(0,0,0,0.25));
+            outline: none;
+        }
+
+        .chest-button:active {
+            transform: scale(0.93);
+        }
+
+        .chest-svg {
+            width: 200px;
+            height: auto;
+            display: block;
+        }
+
+        .chest-button.boost-active .chest-svg {
+            filter: drop-shadow(0 0 16px #5b8def) drop-shadow(0 0 28px #8fb4ff);
+        }
+
+        .chest-button.boost-active {
+            animation: chestPulse 0.8s infinite alternate;
+        }
+
+        @keyframes chestPulse {
+            from { filter: drop-shadow(0 0 8px #5b8def); }
+            to { filter: drop-shadow(0 0 24px #8fb4ff); }
+        }
+
+        .floating-number {
+            position: fixed;
+            font-weight: 800;
+            pointer-events: none;
+            z-index: 2000;
+            font-size: 1.1rem;
+            animation: floatRise 0.8s ease-out forwards;
+            color: var(--accent);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            font-variant-numeric: tabular-nums;
+        }
+
+        @keyframes floatRise {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-70px) scale(1.1); }
+        }
+
+        .prestige-area {
+            background: var(--panel-alt);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 0.9rem;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .prestige-area .title {
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 2px;
+        }
+
+        .prestige-area .desc {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            margin-bottom: 6px;
+        }
+
+        .prestige-area .bonus {
+            font-size: 0.8rem;
+            color: var(--text);
+            font-weight: 600;
         }
 
         .prestige-btn {
-            background: linear-gradient(135deg, #a3e635, #84cc16);
-            border: 2px solid rgba(163, 230, 53, 0.5);
-            padding: 0.9rem;
+            background: var(--panel);
+            border: 2px solid var(--border-strong);
+            padding: 0.65rem;
             width: 100%;
-            border-radius: 60px;
-            font-weight: 800;
-            color: #0a0a0a;
-            margin-top: 10px;
+            border-radius: 12px;
+            font-weight: 700;
+            color: var(--text);
+            margin-top: 8px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 6px 20px rgba(163, 230, 53, 0.4);
+            transition: 0.15s;
+            font-size: 0.85rem;
         }
 
         .prestige-btn:hover:not(:disabled) {
-            background: linear-gradient(135deg, #a3e635, #84cc16);
-            box-shadow: 0 8px 20px rgba(132, 204, 22, 0.5);
-            transform: translateY(-2px);
-        }
-
-        .prestige-btn:active:not(:disabled) {
-            transform: translateY(0);
+            background: var(--accent-soft);
+            border-color: var(--accent);
+            color: var(--accent-text);
         }
 
         .prestige-btn:disabled {
@@ -488,324 +326,511 @@
             cursor: default;
         }
 
-        
-        .floating-number {
-            position: fixed;
-            font-weight: 800;
-            pointer-events: none;
-            z-index: 2000;
-            font-size: 1.2rem;
-            animation: floatRise 1s ease-out forwards;
-            text-shadow: 0 2px 6px black;
-        }
-
-        @keyframes floatRise {
-            0% { opacity: 1; transform: translateY(0) scale(0.9); }
-            100% { opacity: 0; transform: translateY(-80px) scale(1.3); }
-        }
-
         .toast-msg {
             position: fixed;
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%) translateY(80px);
-            background: #10b981;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 60px;
+            background: var(--panel);
+            color: var(--text);
+            padding: 12px 22px;
+            border-radius: 12px;
             font-weight: 600;
-            transition: 0.25s;
-            z-index: 3000;
             font-size: 0.85rem;
+            transition: 0.25s cubic-bezier(0.2,0.9,0.4,1.1);
+            z-index: 3000;
+            border: 2px solid var(--border-strong);
+            box-shadow: var(--shadow-lg);
             white-space: nowrap;
         }
-        .toast-msg.show { transform: translateX(-50%) translateY(0); }
-        .toast-msg.error { background: #ef4444; }
+
+        .toast-msg.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast-msg.error {
+            border-color: var(--danger);
+            color: var(--danger);
+        }
 
         .bonus-orb {
             position: fixed;
-            width: 55px;
-            height: 55px;
-            background: radial-gradient(circle, #fbbf24, #eab308);
+            width: 44px;
+            height: 44px;
+            background: radial-gradient(circle at 30% 30%, #ffe066, #d4a843);
+            border: 2px solid #f0c040;
             border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 0 20px gold;
-            animation: orbFloat 7s linear forwards;
             z-index: 500;
-        }
-        @keyframes orbFloat {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-300px) rotate(360deg); opacity: 0; }
-        }
-
-        
-        .energy-bar {
-            margin: 0.8rem 0;
-            background: rgba(0,0,0,0.3);
-            border-radius: 20px;
-            height: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(6, 182, 212, 0.3);
-        }
-
-        .energy-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #06b6d4, #0891b2);
-            border-radius: 20px;
-            transition: width 0.3s ease;
-            box-shadow: 0 0 10px rgba(6, 182, 212, 0.6);
-        }
-
-        .energy-label {
-            font-size: 0.75rem;
-            color: #00e5ff;
-            font-weight: 700;
-            margin-bottom: 3px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        
-        .combo-display {
-            text-align: center;
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: #ffed4e;
-            min-height: 24px;
-            text-shadow: 0 0 15px rgba(255, 237, 78, 0.8);
-            margin: 0.5rem 0;
-            letter-spacing: 1px;
-        }
-
-        .combo-pulse {
-            animation: comboPulse 0.3s ease;
-        }
-
-        @keyframes comboPulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.15); }
-            100% { transform: scale(1); }
-        }
-
-        
-        .achievement-popup {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, #ff006e, #d60067);
-            border-radius: 16px;
-            padding: 20px 28px;
-            color: #fff;
-            font-weight: 800;
-            font-size: 1rem;
-            box-shadow: 0 15px 40px rgba(255, 0, 110, 0.5), 0 0 30px rgba(255, 0, 110, 0.3);
-            animation: slideInRight 0.5s ease, slideOutRight 0.5s ease 3.5s forwards;
-            z-index: 2500;
-            max-width: 320px;
-            border: 2px solid rgba(255, 100, 200, 0.6);
-        }
-
-        @keyframes slideInRight {
-            from { transform: translateX(400px) scale(0.8); opacity: 0; }
-            to { transform: translateX(0) scale(1); opacity: 1; }
-        }
-
-        @keyframes slideOutRight {
-            from { transform: translateX(0) scale(1); opacity: 1; }
-            to { transform: translateX(400px) scale(0.8); opacity: 0; }
-        }
-
-        
-        .upgrade-progress {
-            height: 4px;
-            background: rgba(0,0,0,0.2);
-            border-radius: 2px;
-            overflow: hidden;
-            margin-top: 4px;
-        }
-
-        .upgrade-progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #c084fc, #8b5cf6);
-            border-radius: 2px;
-            transition: width 0.3s ease;
-        }
-
-        
-        .event-banner {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            border-radius: 20px;
-            padding: 12px 16px;
-            margin: 1rem 0;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-align: center;
-            color: white;
-            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
-            animation: slideDown 0.4s ease;
-        }
-
-        @keyframes slideDown {
-            from { transform: translateY(-30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        
-        .upgrade-slots {
-            display: flex;
-            gap: 6px;
-            justify-content: center;
-            margin: 0.5rem 0;
-            font-size: 0.8rem;
-        }
-
-        .slot {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: rgba(132, 204, 22, 0.2);
-            border: 2px solid #84cc16;
+            box-shadow: 0 0 16px #e0b040, 0 4px 8px rgba(0,0,0,0.4);
+            animation: orbFloat 7s linear forwards;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.6rem;
-            font-weight: 600;
-            color: #84cc16;
+            color: #2b3240;
+            font-size: 1rem;
+            font-weight: 800;
         }
 
-        .slot.active {
-            background: #ffed4e;
-            color: #1a1a1a;
-            box-shadow: 0 0 12px rgba(255, 237, 78, 0.8);
+        @keyframes orbFloat {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-260px) rotate(180deg); opacity: 0; }
         }
 
-        
-        .level-up {
-            animation: levelUpBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-        }
-
-        @keyframes levelUpBounce {
-            0% { transform: scale(0.8); opacity: 0; }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        
-        @keyframes shimmer {
-            0% { background-position: -1000px 0; }
-            100% { background-position: 1000px 0; }
-        }
-
-        .shimmer {
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            background-size: 1000px 100%;
-            animation: shimmer 2s infinite;
-        }
-
-        
-        .stat-card {
-            flex: 1 1 120px;
-            background: linear-gradient(180deg, #191425, #141022);
-            border-radius: 18px;
-            padding: 0.8rem 0.9rem;
+        .event-banner {
+            background: var(--accent-soft);
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            padding: 10px 14px;
+            font-size: 0.8rem;
+            font-weight: 700;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.03);
-            position: relative;
-            overflow: hidden;
+            color: var(--accent-text);
+            flex-shrink: 0;
+            animation: bannerIn 0.3s ease;
         }
 
-        .stat-card.boosted {
-            border: 2px solid #84cc16;
-            background: linear-gradient(180deg, rgba(132, 204, 22, 0.1), rgba(132, 204, 22, 0.05));
+        @keyframes bannerIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        
-        .daily-bonus {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: #ef4444;
+        .popup-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: var(--overlay);
+            backdrop-filter: blur(4px);
+            z-index: 4000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .popup-overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .popup {
+            background: var(--panel);
+            border-radius: 20px;
+            border: 2px solid var(--border-strong);
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 560px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            animation: popIn 0.25s cubic-bezier(0.2,0.9,0.4,1.1);
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.92) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.1rem 1.25rem;
+            border-bottom: 2px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .popup-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .popup-close {
+            background: var(--panel-alt);
+            border: 1px solid var(--border);
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.15s;
+        }
+
+        .popup-close:hover {
+            background: var(--danger);
             color: white;
-            font-size: 0.6rem;
-            padding: 2px 6px;
+            border-color: var(--danger);
+        }
+
+        .popup-body {
+            padding: 1rem 1.25rem 1.25rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .upgrade-item {
+            background: var(--panel-alt);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 0.85rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            transition: border-color 0.15s;
+            cursor: pointer;
+        }
+
+        .upgrade-item:hover {
+            border-color: var(--accent);
+        }
+
+        .upgrade-item.disabled {
+            opacity: 0.55;
+            cursor: default;
+        }
+
+        .upgrade-item.disabled:hover {
+            border-color: var(--border);
+        }
+
+        .upgrade-item.maxed {
+            opacity: 0.55;
+            cursor: default;
+        }
+
+        .upgrade-item.maxed:hover {
+            border-color: var(--border);
+        }
+
+        .upgrade-item-left {
+            flex: 1 1 200px;
+            min-width: 0;
+        }
+
+        .upgrade-item-name {
+            font-weight: 700;
+            color: var(--text);
+            font-size: 0.95rem;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .upgrade-item-icon {
+            color: var(--accent);
+            width: 20px;
+            text-align: center;
+        }
+
+        .upgrade-item-desc {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-top: 4px;
+            line-height: 1.4;
+        }
+
+        .upgrade-item-meta {
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            font-weight: 600;
+            flex-wrap: wrap;
+        }
+
+        .upgrade-item-meta span {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            padding: 2px 8px;
+            border-radius: 20px;
+        }
+
+        .buy-btn {
+            background: var(--accent);
+            border: none;
+            padding: 8px 18px;
             border-radius: 10px;
             font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            color: var(--accent-text);
+            transition: 0.15s;
+            white-space: nowrap;
+            font-variant-numeric: tabular-nums;
         }
 
-        @media (max-width: 550px) {
+        .upgrade-item .buy-btn {
+            pointer-events: none;
+        }
+
+        .buy-btn:hover:not(:disabled) {
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+        }
+
+        .buy-btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .buy-btn:disabled {
+            opacity: 0.35;
+            cursor: default;
+        }
+
+        .buy-btn.maxed {
+            background: var(--panel);
+            color: var(--text-dim);
+            border: 1px solid var(--border);
+        }
+
+        .settings-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.85rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .settings-row:last-child {
+            border-bottom: none;
+        }
+
+        .settings-row-label {
+            font-weight: 600;
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+
+        .settings-row-desc {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+
+        .toggle {
+            width: 52px;
+            height: 30px;
+            background: var(--border);
+            border-radius: 20px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.2s;
+            flex-shrink: 0;
+        }
+
+        .toggle.active {
+            background: var(--accent);
+        }
+
+        .toggle::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .toggle.active::after {
+            transform: translateX(22px);
+        }
+
+        .danger-btn {
+            background: transparent;
+            border: 2px solid var(--danger);
+            padding: 8px 18px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            color: var(--danger);
+            transition: 0.15s;
+        }
+
+        .danger-btn:hover {
+            background: var(--danger);
+            color: white;
+        }
+
+        .shop-tabs {
+            display: flex;
+            gap: 6px;
+            padding: 0 1.25rem;
+            margin-top: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .shop-tab {
+            flex: 1;
+            background: var(--panel-alt);
+            border: 1px solid var(--border);
+            padding: 8px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            color: var(--text-dim);
+            transition: 0.15s;
+        }
+
+        .shop-tab.active {
+            background: var(--accent);
+            color: var(--accent-text);
+            border-color: var(--accent);
+        }
+
+        @media (max-width: 480px) {
             .game-container { padding: 1rem; }
-            .upgrade-row { flex-direction: column; align-items: stretch; color: white;}
-            .upgrade-btn { align-self: flex-end; color: white;}
-            .stat-value { font-size: 1.1rem; color: white;}
-            .achievement-popup { right: 10px; left: 10px; max-width: none; }
+            .stats-panel { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+            .chest-svg { width: 160px; }
+            .game-title { font-size: 1.15rem; }
+            .icon-btn { width: 36px; height: 36px; }
         }
     </style>
-
 </head>
 <body>
 
-
-<div class="home-overlay" id="homeScreen">
-    <div class="hero-card">
-        <div class="hero-icon"><i class="fas fa-crown"></i></div>
-        <div class="hero-title">Clicker Quest</div>
-        <div class="feature-list">
-            <div class="feature-badge"><i class="fas fa-bolt"></i> Strategic upgrades</div>
-            <div class="feature-badge"><i class="fas fa-robot"></i> Passive income</div>
-            <div class="feature-badge"><i class="fas fa-percentage"></i> Multiplier bonuses</div>
-            <div class="feature-badge"><i class="fas fa-star"></i> Prestige system</div>
-            <div class="feature-badge"><i class="fas fa-chart-line"></i> Progress tracking</div>
-            <div class="feature-badge"><i class="fas fa-play"></i> Keyboard shortcuts</div>
-        </div>
-        <div style="display:flex;gap:10px;margin-top:0.5rem;">
-            <button class="launch-btn" id="startGameBtn"><i class="fas fa-play"></i> Start</button>
-            <a class="home-icon-btn" id="backToSiteBtn" href="../../index.html" title="Back to site" style="display:flex;align-items:center;justify-content:center;text-decoration:none;">
-              <i class="fas fa-home"></i></a>
-        </div>
-    </div>
-</div>
-
-
-<div class="game-container" id="gameContainer" style="display: none;">
+<div class="game-container" id="gameContainer">
     <div class="game-header">
-        <div class="game-title">Clicker Quest</div>
-        <div style="display:flex;gap:8px;align-items:center;">
-            <button class="home-icon-btn" id="backHomeBtn" title="Back to home"><i class="fas fa-home"></i></button>
-            <a class="home-icon-btn" href="../../mainpages/index.html" title="Back" style="display:flex;align-items:center;justify-content:center;text-decoration:none;">←</a>
+        <div class="game-title"><i class="fas fa-crown"></i> Clicker Quest</div>
+        <div class="header-actions">
+            <button class="icon-btn" id="settingsBtn" title="Settings"><i class="fas fa-cog"></i></button>
+            <button class="icon-btn" id="shopBtn" title="Shop"><i class="fas fa-store"></i></button>
         </div>
     </div>
 
     <div class="stats-panel">
         <div class="stat-card"><div class="stat-value" id="moneyDisplay">0</div><div class="stat-label">Gold</div></div>
-        <div class="stat-card"><div class="stat-value" id="incomeDisplay">0</div><div class="stat-label">/sec</div></div>
+        <div class="stat-card"><div class="stat-value" id="incomeDisplay">0</div><div class="stat-label">per sec</div></div>
         <div class="stat-card"><div class="stat-value" id="multiplierDisplay">1.0x</div><div class="stat-label">Mult.</div></div>
         <div class="stat-card"><div class="stat-value" id="clickCountDisplay">0</div><div class="stat-label">Clicks</div></div>
     </div>
 
     <div id="eventBanner"></div>
 
-    <div class="energy-label">Energy</div>
-    <div class="energy-bar">
-        <div class="energy-fill" id="energyBar" style="width: 100%"></div>
+    <div class="progress-section">
+        <div class="progress-label"><span>Energy</span><span id="energyText">100 / 100</span></div>
+        <div class="progress-bar"><div class="progress-fill" id="energyBar" style="width: 100%"></div></div>
     </div>
 
     <div class="combo-display" id="comboDisplay"></div>
 
-    <button class="click-core" id="mainClickBtn">Click</button>
+    <div class="click-object-area">
+        <button class="chest-button" id="chestBtn" title="Open the chest">
+            <svg class="chest-svg" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="80" width="160" height="70" rx="8" fill="var(--chest-dark)" stroke="var(--chest-stroke)" stroke-width="4"/>
+                <line x1="40" y1="80" x2="40" y2="150" stroke="var(--chest-stroke)" stroke-width="3" opacity="0.5"/>
+                <line x1="80" y1="80" x2="80" y2="150" stroke="var(--chest-stroke)" stroke-width="3" opacity="0.5"/>
+                <line x1="120" y1="80" x2="120" y2="150" stroke="var(--chest-stroke)" stroke-width="3" opacity="0.5"/>
+                <line x1="160" y1="80" x2="160" y2="150" stroke="var(--chest-stroke)" stroke-width="3" opacity="0.5"/>
+                <rect x="20" y="50" width="160" height="35" rx="8" fill="var(--chest-wood)" stroke="var(--chest-stroke)" stroke-width="4"/>
+                <rect x="20" y="50" width="160" height="12" rx="6" fill="#9aa4b4" stroke="var(--chest-stroke)" stroke-width="2"/>
+                <rect x="50" y="50" width="12" height="65" fill="var(--chest-metal)" stroke="var(--chest-stroke)" stroke-width="2" rx="2"/>
+                <rect x="138" y="50" width="12" height="65" fill="var(--chest-metal)" stroke="var(--chest-stroke)" stroke-width="2" rx="2"/>
+                <rect x="20" y="110" width="160" height="8" fill="var(--chest-metal)" stroke="var(--chest-stroke)" stroke-width="2"/>
+                <rect x="88" y="70" width="24" height="28" rx="4" fill="#d4a843" stroke="var(--chest-stroke)" stroke-width="3"/>
+                <circle cx="100" cy="84" r="5" fill="var(--chest-stroke)"/>
+                <rect x="97" y="86" width="6" height="10" fill="var(--chest-stroke)"/>
+                <circle cx="100" cy="80" r="3" fill="#f0c040"/>
+                <circle cx="60" cy="65" r="5" fill="#c0392b" stroke="var(--chest-stroke)" stroke-width="2"/>
+                <circle cx="140" cy="65" r="5" fill="#3b6fd4" stroke="var(--chest-stroke)" stroke-width="2"/>
+                <line x1="30" y1="40" x2="30" y2="30" stroke="#f0c040" stroke-width="2" opacity="0.8"/>
+                <line x1="25" y1="35" x2="35" y2="35" stroke="#f0c040" stroke-width="2" opacity="0.8"/>
+            </svg>
+        </button>
+    </div>
 
-    <div class="upgrades-grid" id="upgradesList"></div>
+</div>
 
-    <div class="prestige-area">
-        <div>Prestige</div>
-        <div style="font-size:0.75rem;">Reset progress for permanent +15% boost</div>
-        <div>Current bonus: <span id="prestigeBonusSpan">0</span>%</div>
-        <button class="prestige-btn" id="prestigeActionBtn">Prestige ($10k)</button>
+<div class="toast-msg" id="toastMsg"></div>
+
+<div class="popup-overlay" id="shopPopup">
+    <div class="popup">
+        <div class="popup-header">
+            <div class="popup-title"><i class="fas fa-store"></i> Shop</div>
+            <button class="popup-close" id="shopCloseBtn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="shop-tabs">
+            <button class="shop-tab active" data-tab="upgrades">Upgrades</button>
+            <button class="shop-tab" data-tab="boosts">Boosts</button>
+        </div>
+        <div class="popup-body" id="shopBody"></div>
     </div>
 </div>
 
-<div id="toastMsg" class="toast-msg"></div>
+<div class="popup-overlay" id="settingsPopup">
+    <div class="popup">
+        <div class="popup-header">
+            <div class="popup-title"><i class="fas fa-cog"></i> Settings</div>
+            <button class="popup-close" id="settingsCloseBtn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="popup-body">
+            <div class="settings-row">                
+                <div>
+                    <div class="settings-row-label">Dark theme</div>
+                    <div class="settings-row-desc">Toggle between light and dark mode</div>
+                </div>
+                <div class="toggle" id="themeToggle"></div>
+            </div>
+            <div class="settings-row">
+                <div>
+                    <div class="settings-row-label">Floating numbers</div>
+                    <div class="settings-row-desc">Show gold popups when clicking</div>
+                </div>
+                <div class="toggle active" id="floatToggle"></div>
+            </div>
+            <div class="settings-row">
+                <div>
+                    <div class="settings-row-label">Bonus orbs</div>
+                    <div class="settings-row-desc">Allow clickable gold orbs to appear</div>
+                </div>
+                <div class="toggle active" id="orbToggle"></div>
+            </div>
+            <div class="settings-row">
+                <div>
+                    <div class="settings-row-label">Prestige</div>
+                    <div class="settings-row-desc">Reset progress for a permanent +15% bonus. Current: <span id="prestigeBonusSpan">0</span>%</div>
+                </div>
+                <button class="danger-btn" id="prestigeActionBtn">Prestige</button>
+            </div>
+            <div class="settings-row">
+                <div>
+                    <div class="settings-row-label">Reset game</div>
+                    <div class="settings-row-desc">Erase all progress permanently</div>
+                </div>
+                <button class="danger-btn" id="resetBtn">Reset</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
+    const SAVE_KEY = 'clicker_medieval_save';
+    const THEME_KEY = 'clicker_theme';
+
     let gold = 0;
     let clickPower = 1;
     let passiveIncome = 0;
@@ -813,6 +838,8 @@
     let autoUpgradeLevel = 0;
     let critUpgradeLevel = 0;
     let magnetUpgradeLevel = 0;
+    let comboUpgradeLevel = 0;
+    let energyUpgradeLevel = 0;
     let ascensionCount = 0;
     let totalClicks = 0;
 
@@ -820,6 +847,10 @@
     let autoCost = 28;
     let critCost = 1200;
     let magnetCost = 700;
+    let comboCost = 250;
+    let energyCostUpgrade = 400;
+
+    const MAX_LEVEL = 50;
 
     let boostActive = false;
     let boostTimer = null;
@@ -830,31 +861,23 @@
 
     let maxEnergy = 100;
     let currentEnergy = 100;
-    let energyRegenRate = 0.5; 
-    let energyCost = 1;
+    let energyRegenRate = 0.4;
+    let energyCostPerClick = 1;
 
     let comboCount = 0;
     let lastClickTime = 0;
-    let comboTimeout = 500; 
-    
+    let comboTimeout = 500;
+
     let achievements = {};
-    const achievementsList = {
-        'first_100': { name: 'Golden Start', desc: 'Earn 100 gold', reward: 50 },
-        'first_1k': { name: 'Rising Star', desc: 'Earn 1,000 gold', reward: 200 },
-        'first_10k': { name: 'Wealth', desc: 'Earn 10,000 gold', reward: 500 },
-        'first_100k': { name: 'Fortune', desc: 'Earn 100,000 gold', reward: 1000 },
-        'first_upgrade': { name: 'Growth', desc: 'Buy your first upgrade', reward: 25 },
-        'prestige_first': { name: 'Rebirth', desc: 'Prestige for the first time', reward: 100 },
-        'combo_10': { name: 'On a Roll', desc: 'Reach 10x combo', reward: 75 },
-        'crit_hit': { name: 'Precision', desc: 'Land a critical hit', reward: 30 },
-    };
-
-    let lastDailyBonusDate = localStorage.getItem('daily_bonus_date') || '';
-    let dailyBonusActive = false;
-
+    let lastDailyBonusDate = '';
     let eventActive = false;
     let eventType = '';
-    
+
+    let floatNumbersEnabled = true;
+    let orbsEnabled = true;
+
+    let currentShopTab = 'upgrades';
+
     function getGlobalMult() {
         let mult = 1 + (ascensionCount * 0.15) + (magnetUpgradeLevel * 0.15);
         if (boostActive) mult *= 3;
@@ -862,8 +885,10 @@
         return mult;
     }
 
-    function getCritChance() { return critChanceBase + (critUpgradeLevel * 4); }
+    function getCritChance() { return Math.min(80, critChanceBase + (critUpgradeLevel * 4)); }
     function getCritDamage() { return critDamage + (critUpgradeLevel * 1.2); }
+    function getComboBonus() { return 0.05 + (comboUpgradeLevel * 0.02); }
+    function getMaxEnergy() { return maxEnergy + (energyUpgradeLevel * 25); }
 
     function formatMoney(val) {
         if (val >= 1e9) return (val/1e9).toFixed(2).replace(/\.00$/,'') + 'B';
@@ -874,256 +899,303 @@
 
     function updateUI() {
         const mult = getGlobalMult();
-        const displayMoney = formatMoney(gold);
-        document.getElementById('moneyDisplay').innerHTML = displayMoney;
-        document.getElementById('incomeDisplay').innerHTML = formatMoney(passiveIncome * mult) + '/s';
-        document.getElementById('multiplierDisplay').innerHTML = mult.toFixed(2) + 'x';
-        document.getElementById('clickCountDisplay').innerHTML = formatMoney(totalClicks);
-        document.getElementById('prestigeBonusSpan').innerHTML = ascensionCount * 15;
-        
-        const energyPercent = (currentEnergy / maxEnergy) * 100;
+        document.getElementById('moneyDisplay').textContent = formatMoney(gold);
+        document.getElementById('incomeDisplay').textContent = formatMoney(passiveIncome * mult) + '/s';
+        document.getElementById('multiplierDisplay').textContent = mult.toFixed(2) + 'x';
+        document.getElementById('clickCountDisplay').textContent = formatMoney(totalClicks);
+        document.getElementById('prestigeBonusSpan').textContent = ascensionCount * 15;
+
+        const maxE = getMaxEnergy();
+        const energyPercent = Math.max(0, Math.min(100, (currentEnergy / maxE) * 100));
         document.getElementById('energyBar').style.width = energyPercent + '%';
+        document.getElementById('energyText').textContent = `${Math.floor(currentEnergy)} / ${maxE}`;
 
         const comboDiv = document.getElementById('comboDisplay');
         if (comboCount > 1) {
-            comboDiv.textContent = `${comboCount}x COMBO!`;
+            comboDiv.textContent = `${comboCount}x combo (+${Math.floor(comboCount * getComboBonus() * 100)}%)`;
         } else {
             comboDiv.textContent = '';
         }
-        
-        const upgradesDiv = document.getElementById('upgradesList');
-        upgradesDiv.innerHTML = `
-            <div class="upgrade-row">
-                <div class="upgrade-info"><div class="upgrade-name"><span class="key-hint">1</span> Strike Power</div><div class="upgrade-stats">+50% per click | Lv.${clickUpgradeLevel} | +${(clickPower * getGlobalMult()).toFixed(1)}/click</div><div class="upgrade-progress"><div class="upgrade-progress-fill" style="width: ${Math.min(100, (gold/clickCost)*100)}%"></div></div></div>
-                <button class="upgrade-btn" id="buyClickUpg" ${gold < clickCost ? 'disabled' : ''}>$${formatMoney(clickCost)}</button>
-            </div>
-            <div class="upgrade-row">
-                <div class="upgrade-info"><div class="upgrade-name"><span class="key-hint">2</span> Passive Income</div><div class="upgrade-stats">+1.5/sec | Lv.${autoUpgradeLevel} | +${(passiveIncome * getGlobalMult()).toFixed(1)}/s</div><div class="upgrade-progress"><div class="upgrade-progress-fill" style="width: ${Math.min(100, (gold/autoCost)*100)}%"></div></div></div>
-                <button class="upgrade-btn" id="buyAutoUpg" ${gold < autoCost ? 'disabled' : ''}>$${formatMoney(autoCost)}</button>
-            </div>
-            <div class="upgrade-row">
-                <div class="upgrade-info"><div class="upgrade-name"><span class="key-hint">3</span> Critical Hit</div><div class="upgrade-stats">Crit ${getCritChance()}% | x${getCritDamage().toFixed(1)} multiplier | Lv.${critUpgradeLevel}</div><div class="upgrade-progress"><div class="upgrade-progress-fill" style="width: ${Math.min(100, (gold/critCost)*100)}%"></div></div></div>
-                <button class="upgrade-btn" id="buyCritUpg" ${gold < critCost ? 'disabled' : ''}>$${formatMoney(critCost)}</button>
-            </div>
-            <div class="upgrade-row">
-                <div class="upgrade-info"><div class="upgrade-name"><span class="key-hint">4</span> Global Boost</div><div class="upgrade-stats">+15% all earnings | Lv.${magnetUpgradeLevel} | Total +${Math.floor(magnetUpgradeLevel * 15)}%</div><div class="upgrade-progress"><div class="upgrade-progress-fill" style="width: ${Math.min(100, (gold/magnetCost)*100)}%"></div></div></div>
-                <button class="upgrade-btn" id="buyMagnetUpg" ${gold < magnetCost ? 'disabled' : ''}>$${formatMoney(magnetCost)}</button>
-            </div>
-            <div class="upgrade-row">
-                <div class="upgrade-info"><div class="upgrade-name"><span class="key-hint">5</span> Speed Boost</div><div class="upgrade-stats">3x earnings for 45s ${boostActive ? `(${Math.floor(boostTimeLeft)}s remaining)` : 'Ready'}</div></div>
-                <button class="upgrade-btn" id="buyBoostUpg" ${gold < 600 || boostActive ? 'disabled' : ''}>$600</button>
-            </div>
-        `;
-        
-        const boostBtn = document.getElementById('buyBoostUpg');
-        if (boostActive) {
-            document.getElementById('mainClickBtn').classList.add('boost-active');
-        } else {
-            document.getElementById('mainClickBtn').classList.remove('boost-active');
+
+        const chestBtn = document.getElementById('chestBtn');
+        chestBtn.classList.toggle('boost-active', boostActive);
+
+        document.getElementById('prestigeActionBtn').disabled = gold < 10000;
+
+        if (document.getElementById('shopPopup').classList.contains('active')) {
+            const upgrades = getUpgrades();
+            upgrades.forEach(u => {
+                const row = document.querySelector(`.upgrade-item[data-upgrade="${u.id}"]`);
+                if (!row) return;
+                const maxed = u.level >= u.max;
+                const disabled = maxed || gold < u.cost;
+                row.classList.toggle('disabled', disabled);
+                row.classList.toggle('maxed', maxed);
+            });
+            const boostRow = document.querySelector('.upgrade-item[data-boost="1"]');
+            if (boostRow) {
+                boostRow.classList.toggle('disabled', gold < 600 || boostActive);
+            }
         }
-        
-        const prestigeBtn = document.getElementById('prestigeActionBtn');
-        prestigeBtn.disabled = gold < 10000;
-        
-        document.getElementById('buyClickUpg')?.addEventListener('click', () => buyUpgrade('click'));
-        document.getElementById('buyAutoUpg')?.addEventListener('click', () => buyUpgrade('auto'));
-        document.getElementById('buyCritUpg')?.addEventListener('click', () => buyUpgrade('crit'));
-        document.getElementById('buyMagnetUpg')?.addEventListener('click', () => buyUpgrade('magnet'));
-        document.getElementById('buyBoostUpg')?.addEventListener('click', () => activateBoost());
     }
 
     function showToast(msg, isErr = false) {
         const toast = document.getElementById('toastMsg');
         toast.textContent = msg;
-        toast.classList.remove('error');
-        if (isErr) toast.classList.add('error');
+        toast.classList.toggle('error', isErr);
         toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 2200);
+        clearTimeout(toast._timer);
+        toast._timer = setTimeout(() => toast.classList.remove('show'), 2000);
     }
 
-    function showAchievement(achvKey) {
-        if (achievements[achvKey]) return; 
-        achievements[achvKey] = true;
-        const achv = achievementsList[achvKey];
-        if (!achv) return;
-
-        const popup = document.createElement('div');
-        popup.className = 'achievement-popup';
-        popup.innerHTML = `🏆 <strong>${achv.name}</strong><br><span style="font-size: 0.9rem; opacity: 0.95; display: block; margin-top: 6px;">+${achv.reward} gold</span>`;
-        document.body.appendChild(popup);
-        gold += achv.reward;
-        triggerConfetti(window.innerWidth - 100, 80);
-        showToast(`Achievement Unlocked: ${achv.name}`, false);
-        setTimeout(() => popup.remove(), 4000);
-        saveGame();
+    function checkAchievement(key) {
+        if (achievements[key]) return;
+        achievements[key] = true;
+        const rewards = {
+            first_100: 10, first_1k: 25, first_10k: 50, first_100k: 100,
+            first_upgrade: 5, prestige_first: 50, combo_10: 15, crit_hit: 5
+        };
+        if (rewards[key]) gold += rewards[key];
     }
 
     function addFloatingNumber(value, x, y, isCrit = false) {
-        const floatDiv = document.createElement('div');
-        floatDiv.className = 'floating-number';
-        floatDiv.textContent = `+${formatMoney(value)}`;
-        floatDiv.style.left = x + 'px';
-        floatDiv.style.top = y + 'px';
-        floatDiv.style.color = isCrit ? '#ffd966' : '#b9f5b0';
-        floatDiv.style.fontWeight = '800';
-        document.body.appendChild(floatDiv);
-        setTimeout(() => floatDiv.remove(), 950);
-    }
-
-    function triggerConfetti(x, y) {
-        for (let i=0;i<12;i++) {
-            const particle = document.createElement('div');
-            particle.style.position = 'fixed';
-            particle.style.width = '7px';
-            particle.style.height = '7px';
-            particle.style.background = `hsl(${Math.random()*360}, 80%, 65%)`;
-            particle.style.left = x + 'px';
-            particle.style.top = y + 'px';
-            particle.style.pointerEvents = 'none';
-            particle.style.zIndex = '9999';
-            document.body.appendChild(particle);
-            let vx = (Math.random() - 0.5) * 6;
-            let vy = (Math.random() - 0.5) * 6 - 4;
-            let life = 1;
-            const animatePart = () => {
-                vx *= 0.97;
-                vy += 0.2;
-                x += vx; y += vy;
-                particle.style.left = x + 'px';
-                particle.style.top = y + 'px';
-                life -= 0.025;
-                particle.style.opacity = life;
-                if (life > 0) requestAnimationFrame(animatePart);
-                else particle.remove();
-            };
-            requestAnimationFrame(animatePart);
+        if (!floatNumbersEnabled) return;
+        const div = document.createElement('div');
+        div.className = 'floating-number';
+        div.textContent = `+${formatMoney(value)}`;
+        div.style.left = x + 'px';
+        div.style.top = y + 'px';
+        if (isCrit) {
+            div.style.color = '#f0c040';
+            div.style.fontSize = '1.4rem';
         }
+        document.body.appendChild(div);
+        setTimeout(() => div.remove(), 800);
     }
 
     function handleClick(e) {
-        if (currentEnergy < energyCost) {
-            showToast('No energy left', true);
+        if (currentEnergy < energyCostPerClick) {
+            showToast('Not enough energy', true);
             return;
         }
 
-        currentEnergy -= energyCost;
+        currentEnergy -= energyCostPerClick;
 
         const now = Date.now();
-        if (now - lastClickTime > comboTimeout) {
-            comboCount = 0;
-        }
+        if (now - lastClickTime > comboTimeout) comboCount = 0;
         comboCount++;
         lastClickTime = now;
 
-        let comboMult = 1 + (comboCount * 0.05);
-
+        let comboMult = 1 + (comboCount * getComboBonus());
         let value = clickPower * getGlobalMult() * comboMult;
         const isCrit = Math.random() * 100 < getCritChance();
         if (isCrit) {
             value *= getCritDamage();
-            showToast(`Critical hit! x${getCritDamage().toFixed(1)}`, false);
-            const btnRect = document.getElementById('mainClickBtn').getBoundingClientRect();
-            triggerConfetti(btnRect.left + btnRect.width/2, btnRect.top + btnRect.height/2);
-            showAchievement('crit_hit');
+            checkAchievement('crit_hit');
         }
 
-        if (comboCount >= 10) {
-            showAchievement('combo_10');
-        }
+        if (comboCount >= 10) checkAchievement('combo_10');
 
         gold += value;
         totalClicks++;
 
-        if (gold >= 100 && gold - value < 100) showAchievement('first_100');
-        if (gold >= 1000 && gold - value < 1000) showAchievement('first_1k');
-        if (gold >= 10000 && gold - value < 10000) showAchievement('first_10k');
-        if (gold >= 100000 && gold - value < 100000) showAchievement('first_100k');
+        if (gold >= 100) checkAchievement('first_100');
+        if (gold >= 1000) checkAchievement('first_1k');
+        if (gold >= 10000) checkAchievement('first_10k');
+        if (gold >= 100000) checkAchievement('first_100k');
 
         let clientX = e.clientX, clientY = e.clientY;
         if (!clientX || !clientY) {
-            const rect = document.getElementById('mainClickBtn').getBoundingClientRect();
+            const rect = document.getElementById('chestBtn').getBoundingClientRect();
             clientX = rect.left + rect.width/2;
             clientY = rect.top + rect.height/2;
         }
-        addFloatingNumber(value, clientX, clientY-30, isCrit);
+        addFloatingNumber(value, clientX, clientY - 30, isCrit);
         updateUI();
-        playTapEffect();
     }
 
-    function playTapEffect() {
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.frequency.value = 880;
-        gain.gain.value = 0.08;
-        osc.start();
-        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.2);
-        osc.stop(audioCtx.currentTime + 0.2);
-        setTimeout(() => audioCtx.close(), 250);
+    function getUpgrades() {
+        return [
+            {
+                id: 'click', name: 'Strike Power', icon: 'fa-fist-raised',
+                desc: 'Increases gold gained per click by 50%.',
+                level: clickUpgradeLevel, cost: clickCost, max: MAX_LEVEL,
+                meta: [`+${(clickPower * getGlobalMult()).toFixed(1)}/click`],
+                buy: () => {
+                    if (gold < clickCost || clickUpgradeLevel >= MAX_LEVEL) return;
+                    gold -= clickCost;
+                    clickPower = Math.floor(clickPower * 1.5) + 1;
+                    clickUpgradeLevel++;
+                    clickCost = Math.floor(clickCost * 1.25);
+                    checkAchievement('first_upgrade');
+                    showToast('Strike Power upgraded');
+                }
+            },
+            {
+                id: 'auto', name: 'Passive Income', icon: 'fa-coins',
+                desc: 'Generates gold automatically every second.',
+                level: autoUpgradeLevel, cost: autoCost, max: MAX_LEVEL,
+                meta: [`+${(passiveIncome * getGlobalMult()).toFixed(1)}/s`],
+                buy: () => {
+                    if (gold < autoCost || autoUpgradeLevel >= MAX_LEVEL) return;
+                    gold -= autoCost;
+                    passiveIncome += 1;
+                    autoUpgradeLevel++;
+                    autoCost = Math.floor(autoCost * 1.35);
+                    checkAchievement('first_upgrade');
+                    showToast('Passive income increased');
+                }
+            },
+            {
+                id: 'crit', name: 'Critical Hit', icon: 'fa-bolt',
+                desc: 'Increases critical hit chance and damage.',
+                level: critUpgradeLevel, cost: critCost, max: MAX_LEVEL,
+                meta: [`Crit ${getCritChance()}%`, `x${getCritDamage().toFixed(1)}`],
+                buy: () => {
+                    if (gold < critCost || critUpgradeLevel >= MAX_LEVEL) return;
+                    gold -= critCost;
+                    critUpgradeLevel++;
+                    critCost = Math.floor(critCost * 1.4);
+                    checkAchievement('first_upgrade');
+                    showToast(`Critical chance: ${getCritChance()}%`);
+                }
+            },
+            {
+                id: 'magnet', name: 'Global Boost', icon: 'fa-magnet',
+                desc: 'Increases all earnings by 15% per level.',
+                level: magnetUpgradeLevel, cost: magnetCost, max: MAX_LEVEL,
+                meta: [`+${Math.floor(magnetUpgradeLevel * 15)}% total`],
+                buy: () => {
+                    if (gold < magnetCost || magnetUpgradeLevel >= MAX_LEVEL) return;
+                    gold -= magnetCost;
+                    magnetUpgradeLevel++;
+                    magnetCost = Math.floor(magnetCost * 1.35);
+                    checkAchievement('first_upgrade');
+                    showToast('Global boost +15%');
+                }
+            },
+            {
+                id: 'combo', name: 'Combo Master', icon: 'fa-fire',
+                desc: 'Increases the bonus gained per combo click.',
+                level: comboUpgradeLevel, cost: comboCost, max: MAX_LEVEL,
+                meta: [`+${Math.floor(getComboBonus() * 100)}% per combo`],
+                buy: () => {
+                    if (gold < comboCost || comboUpgradeLevel >= MAX_LEVEL) return;
+                    gold -= comboCost;
+                    comboUpgradeLevel++;
+                    comboCost = Math.floor(comboCost * 1.4);
+                    checkAchievement('first_upgrade');
+                    showToast('Combo bonus increased');
+                }
+            },
+            {
+                id: 'energy', name: 'Energy Capacity', icon: 'fa-battery-full',
+                desc: 'Increases maximum energy by 25.',
+                level: energyUpgradeLevel, cost: energyCostUpgrade, max: MAX_LEVEL,
+                meta: [`Max ${getMaxEnergy()} energy`],
+                buy: () => {
+                    if (gold < energyCostUpgrade || energyUpgradeLevel >= MAX_LEVEL) return;
+                    gold -= energyCostUpgrade;
+                    energyUpgradeLevel++;
+                    energyCostUpgrade = Math.floor(energyCostUpgrade * 1.4);
+                    checkAchievement('first_upgrade');
+                    showToast('Max energy +25');
+                }
+            }
+        ];
     }
 
-    function buyUpgrade(type) {
-        let upgraded = false;
-        if (type === 'click' && gold >= clickCost) {
-            gold -= clickCost;
-            clickPower = Math.floor(clickPower * 1.5);
-            clickUpgradeLevel++;
-            clickCost = Math.floor(clickCost * 1.25);
-            showToast('Strike power upgraded');
-            upgraded = true;
-        } else if (type === 'auto' && gold >= autoCost) {
-            gold -= autoCost;
-            passiveIncome += 1;
-            autoUpgradeLevel++;
-            autoCost = Math.floor(autoCost * 1.35);
-            showToast('Passive income increased');
-            upgraded = true;
-        } else if (type === 'crit' && gold >= critCost) {
-            gold -= critCost;
-            critUpgradeLevel++;
-            critCost = Math.floor(critCost * 1.4);
-            showToast(`Critical rate: ${getCritChance()}%`);
-            upgraded = true;
-        } else if (type === 'magnet' && gold >= magnetCost) {
-            gold -= magnetCost;
-            magnetUpgradeLevel++;
-            magnetCost = Math.floor(magnetCost * 1.35);
-            showToast('Global boost +15%');
-            upgraded = true;
+    function renderShop() {
+        const body = document.getElementById('shopBody');
+        if (currentShopTab === 'upgrades') {
+            const upgrades = getUpgrades();
+            body.innerHTML = upgrades.map(u => {
+                const maxed = u.level >= u.max;
+                const disabled = maxed || gold < u.cost;
+                const metaHtml = u.meta.map(m => `<span>${m}</span>`).join('') +
+                    `<span>Lv. ${u.level} / ${u.max}</span>`;
+                return `
+                    <div class="upgrade-item ${maxed ? 'maxed' : ''} ${disabled ? 'disabled' : ''}" data-upgrade="${u.id}">
+                        <div class="upgrade-item-left">
+                            <div class="upgrade-item-name">
+                                <i class="fas ${u.icon} upgrade-item-icon"></i>${u.name}
+                            </div>
+                            <div class="upgrade-item-desc">${u.desc}</div>
+                            <div class="upgrade-item-meta">${metaHtml}</div>
+                        </div>
+                        <button class="buy-btn ${maxed ? 'maxed' : ''}" ${disabled ? 'disabled' : ''}>
+                            ${maxed ? 'MAX' : '$' + formatMoney(u.cost)}
+                        </button>
+                    </div>
+                `;
+            }).join('');
+
+            body.querySelectorAll('.upgrade-item[data-upgrade]').forEach(item => {
+                item.addEventListener('click', () => {
+                    if (item.classList.contains('disabled') || item.classList.contains('maxed')) return;
+                    const id = item.dataset.upgrade;
+                    const upg = getUpgrades().find(u => u.id === id);
+                    if (upg) {
+                        upg.buy();
+                        updateUI();
+                        saveGame();
+                        renderShop();
+                    }
+                });
+            });
+        } else {
+            body.innerHTML = `
+                <div class="upgrade-item" data-boost="1">
+                    <div class="upgrade-item-left">
+                        <div class="upgrade-item-name"><i class="fas fa-rocket upgrade-item-icon"></i>Speed Boost</div>
+                        <div class="upgrade-item-desc">Triples all earnings for 45 seconds.</div>
+                        <div class="upgrade-item-meta"><span>3x earnings</span><span>45s duration</span></div>
+                    </div>
+                    <button class="buy-btn" ${gold < 600 || boostActive ? 'disabled' : ''}>
+                        ${boostActive ? `${Math.floor(boostTimeLeft)}s` : '$600'}
+                    </button>
+                </div>
+                <div class="upgrade-item">
+                    <div class="upgrade-item-left">
+                        <div class="upgrade-item-name"><i class="fas fa-gem upgrade-item-icon"></i>Gold Orb</div>
+                        <div class="upgrade-item-desc">A bonus orb appears every 20 seconds. Click it for free gold.</div>
+                        <div class="upgrade-item-meta"><span>+${formatMoney(80 + magnetUpgradeLevel * 30)} base</span></div>
+                    </div>
+                    <button class="buy-btn" disabled>Automatic</button>
+                </div>
+            `;
+            document.querySelector('.upgrade-item[data-boost="1"]')?.addEventListener('click', () => {
+                if (gold < 600 || boostActive) return;
+                activateBoost();
+                renderShop();
+            });
         }
-        if (upgraded) {
-            showAchievement('first_upgrade');
-        }
-        updateUI();
-        saveGame();
     }
 
     function activateBoost() {
         if (boostActive) return;
-        if (gold < 600) { showToast('Insufficient funds', true); return; }
+        if (gold < 600) { showToast('Need $600', true); return; }
         gold -= 600;
         boostActive = true;
         boostTimeLeft = 45;
         if (boostTimer) clearInterval(boostTimer);
         boostTimer = setInterval(() => {
             boostTimeLeft--;
-            updateUI();
             if (boostTimeLeft <= 0) {
                 clearInterval(boostTimer);
                 boostActive = false;
-                showToast('Boost expired');
-                updateUI();
+                showToast('Boost ended');
             }
+            updateUI();
         }, 1000);
-        showToast('Speed boost active: 3x for 45s');
+        showToast('Boost active: 3x for 45s');
         updateUI();
         saveGame();
     }
 
     function ascension() {
-        if (gold < 10000) { showToast('Need $10k to prestige', true); return; }
+        if (gold < 10000) { showToast('Need $10K to prestige', true); return; }
+        if (!confirm('Prestige now? You will reset all progress for a permanent +15% bonus.')) return;
         ascensionCount++;
         gold = 0;
         clickPower = 1;
@@ -1132,15 +1204,19 @@
         autoUpgradeLevel = 0;
         critUpgradeLevel = 0;
         magnetUpgradeLevel = 0;
+        comboUpgradeLevel = 0;
+        energyUpgradeLevel = 0;
         clickCost = 12;
         autoCost = 28;
         critCost = 1200;
         magnetCost = 700;
+        comboCost = 250;
+        energyCostUpgrade = 400;
         comboCount = 0;
-        currentEnergy = maxEnergy;
+        currentEnergy = getMaxEnergy();
         if (boostActive) { clearInterval(boostTimer); boostActive = false; }
-        showAchievement('prestige_first');
-        showToast(`Prestige unlocked: +${ascensionCount*15}% permanent bonus`);
+        checkAchievement('prestige_first');
+        showToast(`Prestige! +${ascensionCount * 15}% permanent bonus`);
         updateUI();
         saveGame();
     }
@@ -1149,8 +1225,9 @@
     function startEnergyRegen() {
         if (energyRegenInterval) clearInterval(energyRegenInterval);
         energyRegenInterval = setInterval(() => {
-            if (currentEnergy < maxEnergy) {
-                currentEnergy = Math.min(maxEnergy, currentEnergy + energyRegenRate);
+            const maxE = getMaxEnergy();
+            if (currentEnergy < maxE) {
+                currentEnergy = Math.min(maxE, currentEnergy + energyRegenRate);
                 updateUI();
             }
         }, 100);
@@ -1161,24 +1238,23 @@
         if (passiveInterval) clearInterval(passiveInterval);
         passiveInterval = setInterval(() => {
             if (passiveIncome > 0) {
-                const earn = passiveIncome * getGlobalMult();
-                gold += earn;
+                gold += passiveIncome * getGlobalMult();
                 updateUI();
             }
         }, 1000);
     }
 
     function triggerRandomEvent() {
-        if (Math.random() < 0.3 && !eventActive) {
+        if (Math.random() < 0.15 && !eventActive) {
             eventActive = true;
             eventType = 'double';
             const banner = document.getElementById('eventBanner');
             banner.className = 'event-banner';
-            banner.textContent = '⚡ Bonus Event: 2x earnings for 30 seconds!';
-            
+            banner.textContent = 'Royal Decree: 2x earnings for 30 seconds!';
             setTimeout(() => {
                 eventActive = false;
                 banner.textContent = '';
+                banner.className = '';
                 updateUI();
             }, 30000);
             updateUI();
@@ -1186,39 +1262,42 @@
     }
 
     function spawnOrb() {
-        if (document.getElementById('gameContainer').style.display !== 'none') {
-            const orb = document.createElement('div');
-            orb.className = 'bonus-orb';
-            orb.style.left = Math.random() * 80 + 10 + '%';
-            orb.style.bottom = '20px';
-            document.body.appendChild(orb);
-            orb.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const magnetBonus = 1 + (magnetUpgradeLevel * 0.15);
-                let bonus = Math.floor((Math.random() * 400 + 150) * magnetBonus);
-                gold += bonus;
-                showToast(`Bonus earned: +${formatMoney(bonus)}`);
-                const rect = orb.getBoundingClientRect();
-                addFloatingNumber(bonus, rect.left + 20, rect.top - 20, false);
-                orb.remove();
-                updateUI();
-                saveGame();
-            });
-            setTimeout(() => { if (orb.parentNode) orb.remove(); }, 6500);
-        }
+        if (!orbsEnabled) return;
+        const orb = document.createElement('div');
+        orb.className = 'bonus-orb';
+        orb.innerHTML = '&#9670;';
+        orb.style.left = Math.random() * 80 + 10 + '%';
+        orb.style.bottom = '20px';
+        document.body.appendChild(orb);
+        orb.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const magnetBonus = 1 + (magnetUpgradeLevel * 0.15);
+            const bonus = Math.floor((Math.random() * 200 + 80) * magnetBonus);
+            gold += bonus;
+            showToast(`+${formatMoney(bonus)} gold`);
+            orb.remove();
+            updateUI();
+            saveGame();
+        });
+        setTimeout(() => { if (orb.parentNode) orb.remove(); }, 6000);
     }
 
     function saveGame() {
-        const data = { 
-            gold, clickPower, passiveIncome, clickUpgradeLevel, autoUpgradeLevel, 
-            critUpgradeLevel, magnetUpgradeLevel, clickCost, autoCost, critCost, magnetCost, 
-            ascensionCount, totalClicks, currentEnergy, achievements 
+        const data = {
+            gold, clickPower, passiveIncome, clickUpgradeLevel, autoUpgradeLevel,
+            critUpgradeLevel, magnetUpgradeLevel, comboUpgradeLevel, energyUpgradeLevel,
+            clickCost, autoCost, critCost, magnetCost, comboCost, energyCostUpgrade,
+            ascensionCount, totalClicks, currentEnergy, achievements,
+            lastBonusDate: lastDailyBonusDate
         };
-        localStorage.setItem('clicker_odyssey_save', JSON.stringify(data));
+        try {
+            localStorage.setItem(SAVE_KEY, JSON.stringify(data));
+        } catch(e) {}
     }
 
     function loadGame() {
-        const raw = localStorage.getItem('clicker_odyssey_save');
+        const raw = localStorage.getItem(SAVE_KEY);
+        let savedDate = '';
         if (raw) {
             try {
                 const d = JSON.parse(raw);
@@ -1229,59 +1308,131 @@
                 autoUpgradeLevel = d.autoUpgradeLevel ?? 0;
                 critUpgradeLevel = d.critUpgradeLevel ?? 0;
                 magnetUpgradeLevel = d.magnetUpgradeLevel ?? 0;
+                comboUpgradeLevel = d.comboUpgradeLevel ?? 0;
+                energyUpgradeLevel = d.energyUpgradeLevel ?? 0;
                 clickCost = d.clickCost ?? 12;
                 autoCost = d.autoCost ?? 28;
                 critCost = d.critCost ?? 1200;
                 magnetCost = d.magnetCost ?? 700;
+                comboCost = d.comboCost ?? 250;
+                energyCostUpgrade = d.energyCostUpgrade ?? 400;
                 ascensionCount = d.ascensionCount ?? 0;
                 totalClicks = d.totalClicks ?? 0;
-                currentEnergy = d.currentEnergy ?? maxEnergy;
+                currentEnergy = d.currentEnergy ?? getMaxEnergy();
                 achievements = d.achievements ?? {};
+                savedDate = d.lastBonusDate ?? '';
             } catch(e) {}
         }
 
         const today = new Date().toDateString();
-        if (lastDailyBonusDate !== today) {
-            dailyBonusActive = true;
-            gold += 100;
+        if (savedDate !== today) {
+            gold += 80;
+            showToast('+80 gold daily bonus');
             lastDailyBonusDate = today;
-            showToast('Daily bonus: +100 gold!');
-            showAchievement('daily_bonus');
-            localStorage.setItem('daily_bonus_date', today);
+            saveGame();
+        } else {
+            lastDailyBonusDate = today;
         }
 
+        if (currentEnergy > getMaxEnergy()) currentEnergy = getMaxEnergy();
         updateUI();
     }
 
-    function onKey(e) {
-        if (document.getElementById('gameContainer').style.display === 'none') return;
-        const key = e.key;
-        if (key === ' ' || key === 'Space') {
-            e.preventDefault();
-            const fakeEvent = { clientX: window.innerWidth/2, clientY: window.innerHeight/2 };
-            handleClick(fakeEvent);
-        }
-        if (key === '1') document.getElementById('buyClickUpg')?.click();
-        if (key === '2') document.getElementById('buyAutoUpg')?.click();
-        if (key === '3') document.getElementById('buyCritUpg')?.click();
-        if (key === '4') document.getElementById('buyMagnetUpg')?.click();
-        if (key === '5') document.getElementById('buyBoostUpg')?.click();
+    function resetGame() {
+        if (!confirm('Erase ALL progress? This cannot be undone.')) return;
+        localStorage.removeItem(SAVE_KEY);
+        localStorage.removeItem(THEME_KEY);
+        location.reload();
     }
 
-    const homeDiv = document.getElementById('homeScreen');
-    const gameDiv = document.getElementById('gameContainer');
-    document.getElementById('startGameBtn').onclick = () => { homeDiv.style.display = 'none'; gameDiv.style.display = 'block'; loadGame(); startPassive(); startEnergyRegen(); setInterval(() => spawnOrb(), 18000); setInterval(() => triggerRandomEvent(), 75000); };
-    document.getElementById('backHomeBtn').onclick = () => { saveGame(); gameDiv.style.display = 'none'; homeDiv.style.display = 'flex'; };
-    document.getElementById('prestigeActionBtn').onclick = ascension;
-    document.getElementById('mainClickBtn').onclick = handleClick;
-    
+    function onKey(e) {
+        const key = e.key;
+        if (document.getElementById('shopPopup').classList.contains('active') ||
+            document.getElementById('settingsPopup').classList.contains('active')) {
+            if (key === 'Escape') {
+                document.getElementById('shopPopup').classList.remove('active');
+                document.getElementById('settingsPopup').classList.remove('active');
+            }
+            return;
+        }
+        if (key === ' ' || key === 'Space') {
+            e.preventDefault();
+            handleClick({ clientX: window.innerWidth/2, clientY: window.innerHeight/2 });
+        }
+        if (key === 's' || key === 'S') document.getElementById('shopBtn').click();
+    }
+
+    function applyTheme(dark) {
+        document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+        document.getElementById('themeToggle').classList.toggle('active', dark);
+        localStorage.setItem(THEME_KEY, dark ? 'dark' : 'light');
+    }
+
+    function openShop() {
+        document.getElementById('shopPopup').classList.add('active');
+        renderShop();
+    }
+
+    document.getElementById('chestBtn').addEventListener('click', handleClick);
+    document.getElementById('prestigeActionBtn').addEventListener('click', ascension);
+
+    document.getElementById('shopBtn').addEventListener('click', openShop);
+    document.getElementById('shopCloseBtn').addEventListener('click', () => {
+        document.getElementById('shopPopup').classList.remove('active');
+    });
+
+    document.getElementById('settingsBtn').addEventListener('click', () => {
+        document.getElementById('settingsPopup').classList.add('active');
+    });
+    document.getElementById('settingsCloseBtn').addEventListener('click', () => {
+        document.getElementById('settingsPopup').classList.remove('active');
+    });
+
+    document.querySelectorAll('.popup-overlay').forEach(overlay => {
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) overlay.classList.remove('active');
+        });
+    });
+
+    document.querySelectorAll('.shop-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            document.querySelectorAll('.shop-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            currentShopTab = tab.dataset.tab;
+            renderShop();
+        });
+    });
+
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+        const isDark = !themeToggle.classList.contains('active');
+        applyTheme(isDark);
+    });
+
+    const floatToggle = document.getElementById('floatToggle');
+    floatToggle.addEventListener('click', () => {
+        floatNumbersEnabled = !floatNumbersEnabled;
+        floatToggle.classList.toggle('active', floatNumbersEnabled);
+    });
+
+    const orbToggle = document.getElementById('orbToggle');
+    orbToggle.addEventListener('click', () => {
+        orbsEnabled = !orbsEnabled;
+        orbToggle.classList.toggle('active', orbsEnabled);
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', resetGame);
     document.addEventListener('keydown', onKey);
+
+    const savedTheme = localStorage.getItem(THEME_KEY);
+    applyTheme(savedTheme === 'dark');
+
     loadGame();
     startPassive();
     startEnergyRegen();
-    setInterval(() => { if (gameDiv.style.display !== 'none') saveGame(); }, 15000);
+    setInterval(spawnOrb, 20000);
+    setInterval(triggerRandomEvent, 80000);
+    setInterval(saveGame, 15000);
 </script>
 </body>
 </html>
-
-

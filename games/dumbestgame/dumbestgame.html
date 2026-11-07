@@ -197,9 +197,9 @@
     const feedbackEl = document.getElementById('feedback');
     const statusEl = document.getElementById('connectionStatus');
 
-    let localClickCount = 0;             // total clicks by this user
-    let globalClickCount = 0;            // cached cloud value
-    let pageViewCount = 0;               // cached cloud value
+    let localClickCount = 0;             
+    let globalClickCount = 0;            
+    let pageViewCount = 0;               
 
     const CLOUD_KEY_CLICKS = 'cloud_global_clicks';
     const CLOUD_KEY_VIEWS = 'cloud_page_views';
@@ -313,7 +313,7 @@
     clickBtn.addEventListener('click', handleMainClick);
 
     fetchCloudValues();
-    initPageView();  // increments views if not counted
+    initPageView();  
     refreshUI();
 
 

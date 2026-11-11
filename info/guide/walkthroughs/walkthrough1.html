@@ -1094,29 +1094,6 @@
 </head>
 
 <body>
-
-<!-- STARTER SELECTION MODAL -->
-<div class="modal-overlay active" id="starterModal">
-  <div class="modal-content">
-    <h2>Choose your Starter</h2>
-    <p>Which starter did you choose?</p>
-    <div class="starter-options">
-      <div class="starter-btn" onclick="selectStarter('bulbasaur')">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/1.gif" alt="Bulbasaur">
-        <span>Bulbasaur</span>
-      </div>
-      <div class="starter-btn" onclick="selectStarter('charmander')">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/4.gif" alt="Charmander">
-        <span>Charmander</span>
-      </div>
-      <div class="starter-btn" onclick="selectStarter('squirtle')">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/7.gif" alt="Squirtle">
-        <span>Squirtle</span>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="page">
   <h1>Walkthrough - Part 1</h1>
 
@@ -1141,7 +1118,7 @@
   <p>After the title screen, press the <b>A Button</b> or <b>Start</b>. A brief introduction to the world of Pokémon will be presented. Professor Oak, the region's leading researcher, appears and welcomes you to the world of Pokémon.</p>
   <p>First, select your character's gender and enter a name (up to seven characters). Use the Control Pad to move the cursor and press <b>A</b> to confirm a letter; press <b>B</b> to erase the previous letter. After that, you will name your rival - the character who will challenge you throughout your journey. Once both names are set, you will receive your first Pokémon from Professor Oak's laboratory.</p>
 
-  <!-- PALLET TOWN -->
+  
   <h2 id="pallet-town">Pallet Town</h2>
   <div class="clearfix">
     <div class="map-container">
@@ -1153,10 +1130,10 @@
 
     <table class="poi-table">
       <tr><th>#</th><th>Point of Interest</th></tr>
-      <tr><td><span class="poi-number">1</span></td><td>Player's House</td></tr>
-      <tr><td><span class="poi-number">2</span></td><td>Rival's House</td></tr>
-      <tr><td><span class="poi-number">3</span></td><td>Professor Oak's Laboratory</td></tr>
-      <tr><td><span class="poi-number">4</span></td><td>Exit to Route 1 (North)</td></tr>
+      <tr><td><span class="poi-number"><img src="https://static.unboundwiki.com/wp-content/assets/icons/number/1.png" alt="1"></span></span></td><td>Encounter with Professor Oak</td></tr>
+      <tr><td><span class="poi-number"><img src="https://static.unboundwiki.com/wp-content/assets/icons/number/2.png" alt="2"></span></span></td><td>NPC with information</td></tr>
+      <tr><td><span class="poi-number"><img src="https://static.unboundwiki.com/wp-content/assets/icons/number/3.png" alt="3"></span></span></td><td>Professor Oak's Laboratory</td></tr>
+      <tr><td><span class="poi-number"><img src="https://static.unboundwiki.com/wp-content/assets/icons/number/4.png" alt="4"></span></span></td><td>Exit to Route 1 (North)</td></tr>
     </table>
   </div>
 
@@ -1188,7 +1165,7 @@
   <p><b>Rival Battle 1</b></p>
   <p>Professor Oak explains the basics: each Trainer sends out one Pokémon at a time, and they attack in turns until one faints. You can switch out, use items, or attack. Choose <b>Fight</b> to use a move; each Pokémon has two moves at this point. If your Pokémon's HP gets low, use a Potion from your Bag. Keep attacking until your rival's Pokémon faints.</p>
 
-  <!-- ROUTE 1 -->
+  
   <h2 id="route-1">Route 1</h2>
   <div class="clearfix">
     <div class="map-container">
@@ -1200,38 +1177,39 @@
 
     <table class="poi-table">
       <tr><th>#</th><th>Point of Interest</th></tr>
-      <tr><td><span class="poi-number">1</span></td><td>Path to Pallet Town (South)</td></tr>
-      <tr><td><span class="poi-number">2</span></td><td>Path to Viridian City (North)</td></tr>
+      <tr><td><span class="poi-number"><img src="https://static.unboundwiki.com/wp-content/assets/icons/number/1.png" alt="1"></span></td><td>Viridian City Poké Mart clerk</td></tr>
+      <tr><td><span class="poi-number"><img src="https://static.unboundwiki.com/wp-content/assets/icons/number/2.png" alt="2"></span></td><td>Viridian City</td></tr>
+      <tr><td><span class="poi-number"><img src="https://static.unboundwiki.com/wp-content/assets/icons/number/3.png" alt="3"></span></td><td>Pallet Town</td></tr>
     </table>
 
-    <!-- ENCOUNTER DATA SCRIPT (Route 1) -->
+    
     <script type="text/plain" id="encounter-data-route1">
-# 20%
-2, 3, Pidgey
-2, 3, Starly
+      # 20%
+      2, 3, Pidgey
+      2, 3, Starly
 
-# 10%
-2, 3, Purrloin
-2, 3, Poochyena
-3, 4, Rattata
-3, 4, Meditite
+      # 10%
+      2, 3, Purrloin
+      2, 3, Poochyena
+      3, 4, Rattata
+      3, 4, Meditite
 
-# 5%
-3, 4, Poochyena
-3, 4, Starly
+      # 5%
+      3, 4, Poochyena
+      3, 4, Starly
 
-# 4%
-3, 4, Mienfoo
-3, 4, Spearow
+      # 4%
+      3, 4, Mienfoo
+      3, 4, Spearow
 
-# 1%
-3, 5, Mienfoo
-3, 5, Poochyena
+      # 1%
+      3, 5, Mienfoo
+      3, 5, Poochyena
     </script>
 
     <div id="encounter-container-1"></div>
 
-    <!-- WIKI CARD: ITEMS -->
+    
     <div class="wiki-card" data-collapsed="true">
       <div class="wiki-header" onclick="toggleWikiCard(this)">
         <span class="title">Items</span>
@@ -1250,7 +1228,7 @@
   <h3 class="clear-right">Free Sample</h3>
   <p>Near the south end of Route 1, a man mentions the Poké Mart in Viridian City. He gives you a free Potion as a gift.</p>
 
-  <!-- VIRIDIAN CITY -->
+  
   <h2 id="viridian-city">Viridian City</h2>
   <div class="clearfix">
     <div class="map-container">
@@ -1262,12 +1240,12 @@
 
     <table class="poi-table">
       <tr><th>#</th><th>Point of Interest</th></tr>
-      <tr><td><span class="poi-number">1</span></td><td>Pokémon Center</td></tr>
-      <tr><td><span class="poi-number">2</span></td><td>Poké Mart</td></tr>
-      <tr><td><span class="poi-number">3</span></td><td>Pokémon Gym</td></tr>
-      <tr><td><span class="poi-number">4</span></td><td>Pokémon Academy</td></tr>
-      <tr><td><span class="poi-number">5</span></td><td>Path to Route 2 (North)</td></tr>
-      <tr><td><span class="poi-number">6</span></td><td>Path to Route 22 (West)</td></tr>
+      <tr><td><span class="poi-number"><img src="https://static.unboundwiki.com/wp-content/assets/icons/number/1.png" alt="1"></span></td><td>Pokémon Center</td></tr>
+      <tr><td><span class="poi-number"><img src="https://static.unboundwiki.com/wp-content/assets/icons/number/2.png" alt="2"></span></td><td>Poké Mart</td></tr>
+      <tr><td><span class="poi-number"><img src="https://static.unboundwiki.com/wp-content/assets/icons/number/3.png" alt="3"></span></td><td>Pokémon Gym</td></tr>
+      <tr><td><span class="poi-number"><img src="https://static.unboundwiki.com/wp-content/assets/icons/number/4.png" alt="4"></span></td><td>Pokémon Academy</td></tr>
+      <tr><td><span class="poi-number"><img src="https://static.unboundwiki.com/wp-content/assets/icons/number/5.png" alt="5"></span></td><td>Path to Route 2 (North)</td></tr>
+      <tr><td><span class="poi-number"><img src="https://static.unboundwiki.com/wp-content/assets/icons/number/6.png" alt="6"></span></td><td>Path to Route 22 (West)</td></tr>
     </table>
   </div>
 
@@ -1311,7 +1289,7 @@
   <h3>Back to Viridian City</h3>
   <p>With the Parcel delivered, the old man blocking the north path is now feeling better. He gives you a <strong>Quick Ball</strong>, and he will let you pass to Route 2. You can also head west to Route 22 for an optional rival battle.</p>
 
-  <!-- ROUTE 22 -->
+  
   <h2 id="route-22">Route 22</h2>
   <div class="clearfix">
     <div class="map-container">
@@ -1323,118 +1301,125 @@
 
     <table class="poi-table">
       <tr><th>#</th><th>Point of Interest</th></tr>
-      <tr><td><span class="poi-number">1</span></td><td>Path to Viridian City (East)</td></tr>
-      <tr><td><span class="poi-number">2</span></td><td>Path to Pokémon League (North)</td></tr>
+      <tr><td><span class="poi-number"><img src="https://static.unboundwiki.com/wp-content/assets/icons/number/1.png" alt="1"></span></td><td>Path to Viridian City (East)</td></tr>
+      <tr><td><span class="poi-number"><img src="https://static.unboundwiki.com/wp-content/assets/icons/number/2.png" alt="2"></span></td><td>Path to Pokémon League (North)</td></tr>
     </table>
 
-        <script type="text/plain" id="encounter-data-route22">
-# 20%
-2, 4, Starly
-2, 4, Pidgey
+    <script type="text/plain" id="encounter-data-route22">
+      # 20%
+      2, 4, Starly
+      2, 4, Pidgey
 
-# 10%
-2, 4, Mankey
-2, 4, Sentret
-2, 5, Rattata
-2, 5, Poochyena
+      # 10%
+      2, 4, Mankey
+      2, 4, Sentret
+      2, 5, Rattata
+      2, 5, Poochyena
 
-# 5%
-3, 5, Ponyta
-3, 5, Spearow
+      # 5%
+      3, 5, Ponyta
+      3, 5, Spearow
 
-# 4%
-3, 5, Ponyta
-3, 5, Poochyena
+      # 4%
+      3, 5, Ponyta
+      3, 5, Poochyena
 
-# 1%
-3, 5, Mankey
-4, 5, Spearow
+      # 1%
+      3, 5, Mankey
+      4, 5, Spearow
     </script>
 
     <div id="encounter-container-22"></div>
   </div>
 
   <h3 class="clear-right">Rival Battle 2</h3>
-  <p>Your rival has trained and added a Starly to his team. Use the same tactics as before to take the win.</p>
+  <p>Your rival has trained and added two more Pokémon to his team. Use the same tactics as before to take the win.</p>
 
-  <!-- BATTLE TEAM DATA SCRIPTS -->
+  
   <script type="text/plain" id="team-data-bulbasaur">
-Trainer: Blue
-Location: Route 22
-Reward: ₽128
+    Trainer: Blue
+    Location: Route 22
+    Reward: ₽128
 
-8 Starly (IVs=0)@????????
-- Tackle
-- Growl
-- "Quick Attack"
-- -
+    8 Starly (IVs=0)@None
+    - Tackle
+    - Growl
+    - "Quick Attack"
+    - -
 
-8 Mienfoo (IVs=0)@????????
-- "Fake Out"
-- Meditate
-- Feint
-- "Force Palm"
+    8 Mienfoo (IVs=0)@None
+    - "Fake Out"
+    - Meditate
+    - Feint
+    - "Force Palm"
 
-9 Charmander (IVs=0)@"Oran Berry"
-- Scratch
-- Growl
-- Ember
-- -
+    9 Charmander (IVs=0)@"Oran Berry"
+    - Scratch
+    - Growl
+    - Ember
+    - -
   </script>
 
   <script type="text/plain" id="team-data-charmander">
-Trainer: Blue
-Location: Route 22
-Reward: ₽128
+    Trainer: Blue
+    Location: Route 22
+    Reward: ₽128
 
-8 Starly (IVs=0)@????????
-- Tackle
-- Growl
-- "Quick Attack"
-- -
+    8 Starly (IVs=0)@None
+    - Tackle
+    - Growl
+    - "Quick Attack"
+    - -
 
-8 Shinx (IVs=0)@????????
-- Tackle
-- Charge
-- Spark
-- Bite
+    8 Shinx (IVs=0)@None
+    - Tackle
+    - Charge
+    - Spark
+    - Bite
 
-9 Squirtle (IVs=0)@"Oran Berry"
-- Tackle
-- "Tail Whip"
-- "Water Gun"
-- -
+    9 Squirtle (IVs=0)@"Oran Berry"
+    - Tackle
+    - "Tail Whip"
+    - "Water Gun"
+    - -
   </script>
 
   <script type="text/plain" id="team-data-squirtle">
-Trainer: Blue
-Location: Route 22
-Reward: ₽128
+    Trainer: Blue
+    Location: Route 22
+    Reward: ₽128
 
-8 Starly (IVs=0)@????????
-- Tackle
-- Growl
-- "Quick Attack"
-- -
+    8 Starly (IVs=0)@None
+    - Tackle
+    - Growl
+    - "Quick Attack"
+    - -
 
-8 Growlithe (IVs=0)@????????
-- Bite
-- Roar
-- "Flame Wheel"
-- Leer
+    8 Growlithe (IVs=0)@None
+    - Bite
+    - Roar
+    - "Flame Wheel"
+    - Leer
 
-9 Bulbasaur (IVs=0)@"Oran Berry"
-- Tackle
-- Growl
-- "Vine Whip"
-- "Leech Seed"
+    9 Bulbasaur (IVs=0)@"Oran Berry"
+    - Tackle
+    - Growl
+    - "Vine Whip"
+    - "Leech Seed"
   </script>
 
+  <div style="margin-top:12px; font-style:italic; font-size:0.9rem; margin-bottom:6px;">If the player chose Bulbasaur:</div>
   <div id="battle-card-container-1"></div>
+
+  <div style="margin-top:12px; font-style:italic; font-size:0.9rem; margin-bottom:6px;">If the player chose Charmander:</div>
+  <div id="battle-card-container-2"></div>
+
+  <div style="margin-top:12px; font-style:italic; font-size:0.9rem; margin-bottom:6px;">If the player chose Squirtle:</div>
+  <div id="battle-card-container-3"></div>
 
   <p>After the battle, heal your team and stock up on Potions, then head north to Route 2. If you beat your rival without catching any other Pokémon, you may go back to Pallet Town to receive 5 Poké Balls from Professor Oak.</p>
 
-  <!-- ROUTE 2 SOUTH -->
+  
   <h2 id="route-2-south">Route 2 (South)</h2>
   <div class="clearfix">
     <div class="map-container">
@@ -1446,35 +1431,35 @@ Reward: ₽128
 
     <table class="poi-table">
       <tr><th>#</th><th>Point of Interest</th></tr>
-      <tr><td><span class="poi-number">1</span></td><td>Path to Viridian City (South)</td></tr>
-      <tr><td><span class="poi-number">2</span></td><td>Viridian Forest Entrance</td></tr>
-      <tr><td><span class="poi-number">3</span></td><td>Path to Pewter City (North)</td></tr>
-      <tr><td><span class="poi-number">4</span></td><td>Rival's House (East)</td></tr>
+      <tr><td><span class="poi-number"><img src="https://static.unboundwiki.com/wp-content/assets/icons/number/1.png" alt="1"></span></td><td>Path to Viridian City (South)</td></tr>
+      <tr><td><span class="poi-number"><img src="https://static.unboundwiki.com/wp-content/assets/icons/number/2.png" alt="2"></span></td><td>Viridian Forest Entrance</td></tr>
+      <tr><td><span class="poi-number"><img src="https://static.unboundwiki.com/wp-content/assets/icons/number/3.png" alt="3"></span></td><td>Path to Pewter City (North)</td></tr>
+      <tr><td><span class="poi-number"><img src="https://static.unboundwiki.com/wp-content/assets/icons/number/4.png" alt="4"></span></td><td>Rival's House (East)</td></tr>
     </table>
 
-    <!-- ENCOUNTER DATA SCRIPT (Route 2) -->
+    
     <script type="text/plain" id="encounter-data-route2">
-# 20%
-3, 5, Starly
-3, 5, Fletchling
+      # 20%
+      3, 5, Starly
+      3, 5, Fletchling
 
-# 10%
-3, 5, Pikipek
-3, 5, Oddish
-4, 5, Growlithe
-4, 5, Vulpix
+      # 10%
+      3, 5, Pikipek
+      3, 5, Oddish
+      4, 5, Growlithe
+      4, 5, Vulpix
 
-# 5%
-4, 6, Cutiefly
-4, 6, Rattata
+      # 5%
+      4, 6, Cutiefly
+      4, 6, Rattata
 
-# 4%
-5, 7, Budew
-5, 7, Zigzagoon
+      # 4%
+      5, 7, Budew
+      5, 7, Zigzagoon
 
-# 1%
-5, 7, Abra
-5, 7, Bagon
+      # 1%
+      5, 7, Abra
+      5, 7, Bagon
     </script>
 
     <div id="encounter-container-2"></div>
@@ -1487,41 +1472,50 @@ Reward: ₽128
   </div>
 </div>
 
-<!-- Image Lightbox Modal -->
+
 <div id="imageLightbox" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); align-items: center; justify-content: center; cursor: zoom-out; opacity: 0; transition: opacity 0.3s ease;">
   <img id="lightboxImg" src="" alt="Enlarged Image" style="max-width: 95%; max-height: 95%; border: 3px solid #fff; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); object-fit: contain;">
 </div>
 
 <script>
-  // --- GLOBAL VARIABLES ---
+  
   let selectedStarter = null;
 
-  // Caches to prevent fetching the same data twice
+  
   const pokeCache = {};
   const moveCache = {};
 
-  // --- HELPER FUNCTIONS (API FETCHING) ---
+  
   async function getPokemonData(name) {
-    const lowerName = name.toLowerCase().replace(/\s+/g, '-');
-    if (pokeCache[lowerName]) return pokeCache[lowerName];
+    let searchName = name.toLowerCase().replace(/\s+/g, '-');
+
+    if (searchName.startsWith('alolan-')) searchName = searchName.replace('alolan-', '') + '-alola';
+    if (searchName.startsWith('galarian-')) searchName = searchName.replace('galarian-', '') + '-galar';
+
+    if (pokeCache[searchName]) return pokeCache[searchName];
 
     try {
-      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${lowerName}`);
+      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchName}`);
       if (!response.ok) throw new Error('Not found');
       const data = await response.json();
       
       const types = data.types.map(t => t.type.name);
       
-      // USE SHOWDOWN ANIMATED GIF HERE:
-      const img = `https://play.pokemonshowdown.com/sprites/ani/${lowerName}.gif`;
       
-      pokeCache[lowerName] = { types, img };
-      return pokeCache[lowerName];
+      let img = data.sprites.other['official-artwork'].front_default;
+      
+      if (!img) {
+        img = data.sprites.front_default;
+      }
+      
+      pokeCache[searchName] = { types, img };
+      return pokeCache[searchName];
     } catch (error) {
       console.error(`Failed to fetch ${name}`, error);
       return { types: ["normal"], img: "https://img.pokemondb.net/artwork/unknown.jpg" };
     }
   }
+
 
   async function getMoveData(name) {
     const lowerName = name.toLowerCase().replace(/\s+/g, '-');
@@ -1536,11 +1530,11 @@ Reward: ₽128
       return moveCache[lowerName];
     } catch (error) {
       console.error(`Failed to fetch move ${name}`, error);
-      return "normal"; // Fallback
+      return "normal"; 
     }
   }
 
-  // --- UI TOGGLE FUNCTIONS ---
+  
   function toggleWikiCard(headerEl) {
     const card = headerEl.closest('.wiki-card');
     const body = card.querySelector('.wiki-body');
@@ -1572,17 +1566,17 @@ Reward: ₽128
     }
   }
 
-  // --- STARTER SELECTION LOGIC ---
+  
   async function selectStarter(starter) {
     selectedStarter = starter;
     document.getElementById('starterModal').classList.remove('active');
     
-    // Generate the correct battle (now async)
+    
     await generateBattleCard(`team-data-${starter}`, 'battle-card-container-1', 'battle1');
   }
 
-  // --- ENCOUNTER PARSER (API VERSION) ---
-    // --- ENCOUNTER PARSER (WITH RATE SUMMING AND SORTING) ---
+  
+    
   async function generateEncounterCard(scriptId, containerId) {
     const rawText = document.getElementById(scriptId).textContent;
     const lines = rawText.trim().split('\n');
@@ -1590,7 +1584,7 @@ Reward: ₽128
     let currentRateNum = 0;
     let rawEncounters = [];
 
-    // 1. Parse text and extract numbers
+    
     lines.forEach(line => {
       line = line.trim();
       if (!line) return;
@@ -1610,7 +1604,7 @@ Reward: ₽128
       }
     });
 
-    // 2. Group by Pokémon name and sum the rates/levels
+    
     let groupedEncounters = {};
 
     rawEncounters.forEach(enc => {
@@ -1630,10 +1624,10 @@ Reward: ₽128
       }
     });
 
-    // Convert to array and SORT by rate (highest to lowest)
+    
     const encounters = Object.values(groupedEncounters).sort((a, b) => b.rate - a.rate);
 
-    // 3. Fetch data and build HTML
+    
     let tableRows = "";
     for (const enc of encounters) {
       const pData = await getPokemonData(enc.name);
@@ -1648,7 +1642,7 @@ Reward: ₽128
         </tr>`;
     }
 
-    // 4. Assemble final card
+    
     const cardHTML = `
       <div class="wiki-card" data-collapsed="true">
         <div class="wiki-header" onclick="toggleWikiCard(this)">
@@ -1666,7 +1660,7 @@ Reward: ₽128
     document.getElementById(containerId).innerHTML = cardHTML;
   }
 
-  // --- BATTLE PARSER (API VERSION) ---
+  
   async function generateBattleCard(scriptId, containerId, cardId) {
     const rawText = document.getElementById(scriptId).textContent;
     const lines = rawText.trim().split('\n');
@@ -1674,7 +1668,7 @@ Reward: ₽128
     let team = [];
     let currentPokemon = null;
 
-    // 1. Parse text
+    
     lines.forEach(line => {
       line = line.trim();
       if (!line) return;
@@ -1704,7 +1698,7 @@ Reward: ₽128
     });
     if (currentPokemon) team.push(currentPokemon);
 
-    // 2. Fetch data asynchronously
+    
     let teamHtml = "";
     for (const pkmn of team) {
       const pData = await getPokemonData(pkmn.name);
@@ -1715,7 +1709,7 @@ Reward: ₽128
       for (let i = 0; i < 4; i++) {
         if (pkmn.moves[i]) {
           let mName = pkmn.moves[i];
-          let mType = await getMoveData(mName); // Fetch move type
+          let mType = await getMoveData(mName); 
           
           movesHtml += `
             <div class="move-box">
@@ -1778,14 +1772,18 @@ Reward: ₽128
     document.getElementById(containerId).innerHTML = cardHTML;
   }
 
-  // --- INITIALIZATION ON PAGE LOAD ---
+  
   document.addEventListener('DOMContentLoaded', async () => {
-    // 1. Generate Encounters (Asynchronous now)
+    
     await generateEncounterCard('encounter-data-route1', 'encounter-container-1');
     await generateEncounterCard('encounter-data-route2', 'encounter-container-2');
     await generateEncounterCard('encounter-data-route22', 'encounter-container-22');
 
-    // 2. Lightbox Functionality
+    await generateBattleCard('team-data-bulbasaur', 'battle-card-container-1', 'battle1');
+    await generateBattleCard('team-data-charmander', 'battle-card-container-2', 'battle2');
+    await generateBattleCard('team-data-squirtle', 'battle-card-container-3', 'battle3');
+
+    
     const lightbox = document.getElementById('imageLightbox');
     const lightboxImg = document.getElementById('lightboxImg');
     const mapImages = document.querySelectorAll('.map-container img');

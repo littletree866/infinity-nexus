@@ -1,0 +1,750 @@
+@!00(33000) ^data.items.stats[name""13 unused. index: price: holdeffect.holdeffects param. description<""> keyitemvalue. bagkeyitem. pocket.pocketid type.|s=pocket(0=itemtype|1=itemtype|2=itemtype|4=itemtype|5=itemtype) fieldeffect<> battleusage:: battleeffect<> battleextra::]750 "????????", 0, 0, 0, None, 0, <2BD494>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Master Ball", 0, 1, 0, None, 0, <3D4ECC>, 0, 0, ball, 0, <null>, 2, <0A1E1D>, 0
++"Ultra Ball", 0, 2, 800, None, 0, <3D4F26>, 0, 0, ball, 1, <null>, 2, <0A1E1D>, 1
++"Great Ball", 0, 3, 400, None, 0, <3D4F78>, 0, 0, ball, 2, <null>, 2, <0A1E1D>, 2
++"Poké Ball", 0, 4, 200, None, 0, <3D4FD0>, 0, 0, ball, 3, <null>, 2, <0A1E1D>, 3
++"Safari Ball", 0, 5, 0, None, 0, <3D501A>, 0, 0, ball, 4, <null>, 2, <0A1E1D>, 4
++"Net Ball", 0, 6, 800, None, 0, <3D5077>, 0, 0, ball, 5, <null>, 2, <0A1E1D>, 5
++"Dive Ball", 0, 7, 800, None, 0, <3D50CC>, 0, 0, ball, 6, <null>, 2, <0A1E1D>, 6
++"Nest Ball", 0, 8, 800, None, 0, <3D511D>, 0, 0, ball, 7, <null>, 2, <0A1E1D>, 7
++"Repeat Ball", 0, 9, 800, None, 0, <3D5165>, 0, 0, ball, 8, <null>, 2, <0A1E1D>, 8
++"Timer Ball", 0, 10, 800, None, 0, <3D51B4>, 0, 0, ball, 9, <null>, 2, <0A1E1D>, 9
++"Luxury Ball", 0, 11, 800, None, 0, <3D5216>, 0, 0, ball, 10, <null>, 2, <0A1E1D>, 10
++"Premier Ball", 0, 12, 0, None, 0, <3D5263>, 0, 0, ball, 11, <null>, 2, <0A1E1D>, 11
++"Potion", 0, 13, 100, None, 20, <3D52B2>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Antidote", 0, 14, 50, None, 0, <3D52FF>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Burn Heal", 0, 15, 50, None, 0, <3D533D>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Ice Heal", 0, 16, 50, None, 0, <3D5374>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Awakening", 0, 17, 50, None, 0, <3D53A9>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Paralyz Heal", 255, 18, 50, None, 0, <3D53DF>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Full Restore", 0, 19, 2000, None, 255, <3D541B>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Max Potion", 0, 20, 1500, None, 255, <3D546F>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Hyper Potion", 0, 21, 1200, None, 200, <3D54B5>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Super Potion", 0, 22, 600, None, 50, <3D5503>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Full Heal", 0, 23, 400, None, 0, <3D5550>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Revive", 0, 24, 1000, None, 0, <3D5598>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Max Revive", 0, 25, 1500, None, 0, <3D55EC>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Fresh Water", 0, 26, 200, None, 50, <3D562B>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Soda Pop", 0, 27, 300, None, 60, <3D567E>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Lemonade", 0, 28, 350, None, 80, <3D56C2>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Moomoo Milk", 0, 29, 600, None, 100, <3D5706>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"EnergyPowder", 255, 30, 500, None, 0, <3D574F>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Energy Root", 0, 31, 1200, None, 0, <3D579E>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Heal Powder", 0, 32, 300, None, 0, <3D57E3>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Revival Herb", 0, 33, 2800, None, 0, <3D5833>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Ether", 0, 34, 1200, None, 10, <3D5883>, 0, 0, item, Party_Menu, <0A16FD>, 0, <0A1FF5>, 0
++"Max Ether", 0, 35, 2000, None, 255, <3D58BF>, 0, 0, item, Party_Menu, <0A16FD>, 0, <0A1FF5>, 0
++"Elixir", 0, 36, 2000, None, 10, <3D58F4>, 0, 0, item, Party_Menu, <0A16FD>, 0, <0A1FF5>, 0
++"Max Elixir", 0, 37, 2500, None, 255, <3D5934>, 0, 0, item, Party_Menu, <0A16FD>, 0, <0A1FF5>, 0
++"Lava Cookie", 0, 38, 350, None, 0, <3D5968>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Blue Flute", 0, 39, 100, None, 0, <3D59BB>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Yellow Flute", 0, 40, 300, None, 0, <3D59EF>, 0, 0, item, Party_Menu, <0A2239>, 0, <0A1FBD>, 0
++"Red Flute", 0, 41, 200, None, 0, <3D5A2D>, 0, 0, item, Party_Menu, <0A2239>, 0, <0A1FBD>, 0
++"Black Flute", 0, 42, 400, None, 50, <3D5A6A>, 0, 0, item, Party_Menu, <0A1A95>, 0, <null>, 0
++"White Flute", 0, 43, 500, None, 150, <3D5AB8>, 0, 0, item, Party_Menu, <0A1A95>, 0, <null>, 0
++"Berry Juice", 0, 44, 100, "Heal|HP Yellow|Once", 20, <3D5B06>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Sacred Ash", 0, 45, 200, None, 0, <3D5B49>, 0, 0, item, Party_Menu, <0A176D>, 0, <null>, 0
++"Shoal Salt", 0, 46, 20, None, 0, <3D5B7A>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Shoal Shell", 0, 47, 20, None, 0, <3D5BC5>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Red Shard", 0, 48, 1000, None, 0, <3D5C1A>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Blue Shard", 0, 49, 1000, None, 0, <3D5C66>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Yellow Shard", 0, 50, 1000, None, 0, <3D5CB3>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Green Shard", 0, 51, 1000, None, 0, <3D5D02>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"RageCandyBar", 0, 52, 350, None, 0, <13CFB90>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Old Gateau", 0, 53, 350, None, 0, <13CFC50>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Casteliacone", 0, 54, 350, None, 0, <13CFAC0>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Lumiose Gal.", 0, 55, 350, None, 0, <13CFB30>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"ShalourSable", 0, 56, 350, None, 0, <13CFBF0>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Health Wing", 0, 57, 300, None, 0, <13CF0C0>, 0, 0, item, Party_Menu, <0A16E1>, 0, <null>, 0
++"Muscle Wing", 0, 58, 300, None, 0, <13CF120>, 0, 0, item, Party_Menu, <0A16E1>, 0, <null>, 0
++"Resist Wing", 0, 59, 300, None, 0, <13CF180>, 0, 0, item, Party_Menu, <0A16E1>, 0, <null>, 0
++"Genius Wing", 0, 60, 300, None, 0, <13CF1F0>, 0, 0, item, Party_Menu, <0A16E1>, 0, <null>, 0
++"Clever Wing", 220, 61, 300, None, 0, <13CF260>, 0, 0, item, Party_Menu, <0A16E1>, 0, <null>, 0
++"Swift Wing", 217, 62, 300, None, 0, <13CF2D0>, 0, 0, item, Party_Menu, <0A16E1>, 0, <null>, 0
++"HP Up", 0, 63, 5000, None, 0, <3D5D50>, 0, 0, item, Party_Menu, <0A16E1>, 0, <null>, 0
++"Protein", 0, 64, 5000, None, 0, <3D5D96>, 0, 0, item, Party_Menu, <0A16E1>, 0, <null>, 0
++"Iron", 0, 65, 5000, None, 0, <3D5DE5>, 0, 0, item, Party_Menu, <0A16E1>, 0, <null>, 0
++"Carbos", 0, 66, 5000, None, 0, <3D5E35>, 0, 0, item, Party_Menu, <0A16E1>, 0, <null>, 0
++"Calcium", 0, 67, 5000, None, 0, <3D5E83>, 0, 0, item, Party_Menu, <0A16E1>, 0, <null>, 0
++"Rare Candy", 0, 68, 5000, None, 0, <3D5ED3>, 0, 0, item, Party_Menu, <0A1735>, 0, <null>, 0
++"PP Up", 0, 69, 5000, None, 0, <3D5F20>, 0, 0, item, Party_Menu, <0A1719>, 0, <null>, 0
++"Zinc", 0, 70, 5000, None, 0, <3D5F63>, 0, 0, item, Party_Menu, <0A16E1>, 0, <null>, 0
++"PP Max", 0, 71, 7500, None, 0, <3D5FB3>, 0, 0, item, Party_Menu, <0A1719>, 0, <null>, 0
++"Max Candy", 0, 72, 7500, None, 0, <13CA610>, 0, 0, item, Party_Menu, <14870E9>, 0, <null>, 0
++"Guard Spec.", 0, 73, 1500, None, 0, <3D5FFA>, 0, 0, item, Bag_Menu, <0A2239>, 2, <0A1E7D>, 0
++"Dire Hit", 0, 74, 1000, None, 0, <3D604D>, 0, 0, item, Bag_Menu, <0A2239>, 2, <0A1E7D>, 0
++"X Attack", 0, 75, 1000, None, 0, <3D60A8>, 0, 0, item, Bag_Menu, <0A2239>, 2, <0A1E7D>, 0
++"X Defend", 0, 76, 2000, None, 0, <3D60FC>, 0, 0, item, Bag_Menu, <0A2239>, 2, <0A1E7D>, 0
++"X Speed", 0, 77, 1000, None, 0, <3D6151>, 0, 0, item, Bag_Menu, <0A2239>, 2, <0A1E7D>, 0
++"X Accuracy", 0, 78, 1000, None, 0, <3D61A4>, 0, 0, item, Bag_Menu, <0A2239>, 2, <0A1E7D>, 0
++"X Sp. Atk", 0, 79, 1000, None, 0, <3D61FA>, 0, 0, item, Bag_Menu, <0A2239>, 2, <0A1E7D>, 0
++"Poké Doll", 0, 80, 300, None, 0, <3D624F>, 0, 0, item, Bag_Menu, <0A2239>, 2, <0A2011>, 0
++"Fluffy Tail", 0, 81, 1000, None, 0, <3D6297>, 0, 0, item, Bag_Menu, <0A2239>, 2, <0A2011>, 0
++"Big Malasada", 0, 82, 350, None, 0, <13CFA50>, 0, 0, item, Party_Menu, <0A16E1>, 0, <0A1FBD>, 0
++"Super Repel", 0, 83, 400, None, 200, <3D62DF>, 0, 0, item, Bag_Menu, <0A1999>, 0, <null>, 0
++"Max Repel", 0, 84, 500, None, 250, <3D6318>, 0, 0, item, Bag_Menu, <0A1999>, 0, <null>, 0
++"Escape Rope", 0, 85, 1000, None, 0, <3D6351>, 0, 0, item, Field_Item, <0A1BAD>, 0, <null>, 0
++"Repel", 0, 86, 100, None, 100, <3D639C>, 0, 0, item, Bag_Menu, <0A1999>, 0, <null>, 0
++"Link Cable", 0, 87, 3000, None, 0, <13C9AC0>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"Protector", 0, 88, 3000, None, 0, <13C9890>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"Electirizer", 0, 89, 2000, None, 0, <13C9900>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"Magmarizer", 0, 90, 2000, None, 0, <13C9960>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"Dubious Disc", 0, 91, 2000, None, 0, <13C99C0>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"Reaper Cloth", 0, 92, 3000, None, 0, <13C9A10>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"Sun Stone", 0, 93, 3000, None, 0, <3D63D5>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"Moon Stone", 0, 94, 3000, None, 0, <3D642D>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"Fire Stone", 0, 95, 3000, None, 0, <3D648D>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"ThunderStone", 255, 96, 3000, None, 0, <3D64E2>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"Water Stone", 0, 97, 3000, None, 0, <3D653F>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"Leaf Stone", 0, 98, 3000, None, 0, <3D6598>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"Shiny Stone", 0, 99, 3000, None, 0, <13C9C00>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"Dusk Stone", 0, 100, 3000, None, 0, <13C9C70>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"Dawn Stone", 0, 101, 3000, None, 0, <13C9CD0>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"Ice Stone", 0, 102, 3000, None, 0, <13C9D30>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"TinyMushroom", 255, 103, 500, None, 0, <3D65EE>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Big Mushroom", 0, 104, 5000, None, 0, <3D6633>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"BalmMushroom", 0, 105, 15000, None, 0, <13C9F40>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Pearl", 0, 106, 2000, None, 0, <3D6677>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Big Pearl", 0, 107, 8000, None, 0, <3D66D0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Stardust", 0, 108, 3000, None, 0, <3D672C>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Star Piece", 0, 109, 12000, None, 0, <3D6778>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Nugget", 0, 110, 10000, None, 0, <3D67CE>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Heart Scale", 0, 111, 2500, None, 0, <3D6825>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Rare Bone", 0, 112, 5000, None, 0, <13CF830>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Pearl String", 0, 113, 20000, None, 0, <13CF890>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Comet Shard", 0, 114, 25000, None, 0, <13CF970>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Big Nugget", 0, 115, 40000, None, 0, <13CF900>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Honey", 0, 116, 900, None, 0, <13CF9E0>, 0, 0, item, Field_Item, <1487105>, 0, <null>, 0
++"Pretty Wing", 0, 117, 1000, None, 0, <13CF330>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Oval Stone", 0, 118, 2000, None, 0, <13CA1E0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Razor Claw", 0, 119, 3000, "Boost Crit Ratio", 0, <13CA240>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Razor Fang", 0, 120, 3000, "Enemy May Flinch", 10, <13CA2B0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Orange Mail", 0, 121, 50, None, 0, <3D6887>, 0, 0, item, Mail, <0A11E9>, 0, <null>, 0
++"Harbor Mail", 0, 122, 50, None, 0, <3D68D8>, 0, 0, item, Mail, <0A11E9>, 0, <null>, 1
++"Glitter Mail", 0, 123, 50, None, 0, <3D6927>, 0, 0, item, Mail, <0A11E9>, 0, <null>, 2
++"Mech Mail", 0, 124, 50, None, 0, <3D6976>, 0, 0, item, Mail, <0A11E9>, 0, <null>, 3
++"Wood Mail", 0, 125, 50, None, 0, <3D69C7>, 0, 0, item, Mail, <0A11E9>, 0, <null>, 4
++"Wave Mail", 0, 126, 50, None, 0, <3D6A16>, 0, 0, item, Mail, <0A11E9>, 0, <null>, 5
++"Bead Mail", 0, 127, 50, None, 0, <3D6A65>, 0, 0, item, Mail, <0A11E9>, 0, <null>, 6
++"Shadow Mail", 0, 128, 50, None, 0, <3D6AC0>, 0, 0, item, Mail, <0A11E9>, 0, <null>, 7
++"Tropic Mail", 0, 129, 50, None, 0, <3D6B0F>, 0, 0, item, Mail, <0A11E9>, 0, <null>, 8
++"Dream Mail", 0, 130, 50, None, 0, <3D6B60>, 0, 0, item, Mail, <0A11E9>, 0, <null>, 9
++"Fab Mail", 0, 131, 50, None, 0, <3D6BBB>, 0, 0, item, Mail, <0A11E9>, 0, <null>, 10
++"Retro Mail", 0, 132, 50, None, 0, <3D6C13>, 0, 0, item, Mail, <0A11E9>, 0, <null>, 11
++"Cheri Berry", 0, 133, 20, "Remove Paralysis|Once", 0, <3D6C6B>, 0, 1, berry, Party_Menu, <0A16E1>, 1, <0A1FBD>, 0
++"Chesto Berry", 0, 134, 20, "Remove Sleep|Once", 0, <3D6CB0>, 0, 2, berry, Party_Menu, <0A16E1>, 1, <0A1FBD>, 0
++"Pecha Berry", 0, 135, 20, "Remove Poison|Once", 0, <3D6CEE>, 0, 3, berry, Party_Menu, <0A16E1>, 1, <0A1FBD>, 0
++"Rawst Berry", 0, 136, 20, "Remove Burn|Once", 0, <3D6D30>, 0, 4, berry, Party_Menu, <0A16E1>, 1, <0A1FBD>, 0
++"Aspear Berry", 0, 137, 20, "Remove Freeze|Once", 0, <3D6D72>, 0, 5, berry, Party_Menu, <0A16E1>, 1, <0A1FBD>, 0
++"Leppa Berry", 0, 138, 20, "Restore PP|Empty|Once", 10, <3D6DB4>, 0, 6, berry, Party_Menu, <0A16FD>, 1, <0A1FF5>, 0
++"Oran Berry", 0, 139, 20, "Heal|HP Yellow|Once", 10, <384200>, 0, 7, berry, Party_Menu, <0A16E1>, 1, <0A1FBD>, 0
++"Persim Berry", 0, 140, 20, "Remove Confusion|Once", 0, <3D6E3C>, 0, 8, berry, Bag_Menu, <0A2239>, 1, <0A1FBD>, 0
++"Lum Berry", 0, 141, 20, "Remove Any Status Condition|Once", 0, <3D6E81>, 0, 9, berry, Party_Menu, <0A16E1>, 1, <0A1FBD>, 0
++"Sitrus Berry", 0, 142, 20, "Heal|HP Yellow|Once", 30, <388540>, 0, 10, berry, Party_Menu, <0A16E1>, 1, <0A1FBD>, 0
++"Figy Berry", 0, 143, 20, "Heal, May Confuse − Attack natures|Once", 8, <3D6F0C>, 0, 11, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Wiki Berry", 0, 144, 20, "Heal, May Confuse − Sp. Atk natures|Once", 8, <3D6F4C>, 0, 12, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Mago Berry", 0, 145, 20, "Heal, May Confuse − Speed natures|Once", 8, <3D6F8C>, 0, 13, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Aguav Berry", 0, 146, 20, "Heal, May Confuse − Sp. Def natures|Once", 8, <3D6FCC>, 0, 14, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Iapapa Berry", 0, 147, 20, "Heal, May Confuse − Defense natures|Once", 8, <3D700C>, 0, 15, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Razz Berry", 0, 148, 500, None, 0, <3D704C>, 0, 16, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Bluk Berry", 0, 149, 500, None, 0, <3D708A>, 0, 17, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Nanab Berry", 0, 150, 500, None, 0, <3D70C8>, 0, 18, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Wepear Berry", 0, 151, 500, None, 0, <3D7106>, 0, 19, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Pinap Berry", 0, 152, 500, None, 0, <3D7144>, 0, 20, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Pomeg Berry", 0, 153, 20, None, 0, <13CADD0>, 0, 21, berry, Party_Menu, <148690D>, 0, <null>, 0
++"Kelpsy Berry", 0, 154, 20, None, 1, <13CAE20>, 0, 22, berry, Party_Menu, <148690D>, 0, <null>, 0
++"Qualot Berry", 0, 155, 20, None, 2, <13CAE70>, 0, 23, berry, Party_Menu, <148690D>, 0, <null>, 0
++"Hondew Berry", 0, 156, 20, None, 4, <13CAEC0>, 0, 24, berry, Party_Menu, <148690D>, 0, <null>, 0
++"Grepa Berry", 0, 157, 20, None, 5, <13CAF10>, 0, 25, berry, Party_Menu, <148690D>, 0, <null>, 0
++"Tamato Berry", 0, 158, 20, None, 3, <13CAF60>, 0, 26, berry, Party_Menu, <148690D>, 0, <null>, 0
++"Cornn Berry", 0, 159, 500, None, 0, <3D72F6>, 0, 27, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Magost Berry", 0, 160, 500, None, 0, <3D7334>, 0, 28, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Rabuta Berry", 0, 161, 500, None, 0, <3D7372>, 0, 29, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Nomel Berry", 0, 162, 500, None, 0, <3D73B0>, 0, 30, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Spelon Berry", 0, 163, 500, None, 0, <3D73EE>, 0, 31, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Pamtre Berry", 0, 164, 500, None, 0, <3D742C>, 0, 32, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Watmel Berry", 0, 165, 500, None, 0, <3D746A>, 0, 33, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Durin Berry", 0, 166, 500, None, 0, <3D74A8>, 0, 34, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Belue Berry", 0, 167, 500, None, 0, <3D74E6>, 0, 35, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Liechi Berry", 0, 168, 20, "Boost ATK|HP Red|Once", 4, <3D7524>, 0, 53, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Ganlon Berry", 0, 169, 20, "Boost DEF|HP Red|Once", 4, <3D7562>, 0, 54, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Salac Berry", 0, 170, 20, "Boost SPD|HP Red|Once", 4, <3D75A1>, 0, 55, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Petaya Berry", 0, 171, 20, "Boost SP.ATK|HP Red|Once", 4, <3D75DE>, 0, 56, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Apicot Berry", 0, 172, 20, "Boost SP.DEF|HP Red|Once", 4, <3D761D>, 0, 57, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Lansat Berry", 0, 173, 30000, "Boost Crit.Ratio|HP Red|Once", 4, <3D765C>, 0, 58, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Starf Berry", 0, 174, 30000, "Sharp Boost Random Stat|HP Red|Once", 4, <3D76A1>, 0, 59, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Enigma Berry", 0, 175, 30000, 128, 0, <3D76E0>, 0, 60, berry, Bag_Menu, <0A2069>, 1, <0A2195>, 0
++"Prism Scale", 0, 176, 2000, None, 0, <13C9A70>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"Sachet", 0, 177, 2000, None, 0, <13C9B30>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"Whip Dream", 0, 178, 2000, None, 0, <13C9BA0>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"BrightPowder", 255, 179, 4000, "Reduce Enemy Accuracy", 10, <3D771E>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"White Herb", 0, 180, 4000, "Restore Any Stat Loss|Once", 0, <3D777C>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Macho Brace", 0, 181, 3000, "Macho Brace", 0, <3D77DF>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Exp. Share", 0, 182, 0, "Exp. Share", 0, <3D783D>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Quick Claw", 0, 183, 4000, "May Strike First", 20, <3D789F>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Soothe Bell", 0, 184, 4000, "Boost Friendliness", 0, <3D7900>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"Mental Herb", 0, 185, 4000, "Remove Infatuation", 0, <3D7969>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Choice Band", 0, 186, 50500, "Choice Band", 0, <13CAFB0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"King's Rock", 0, 187, 45000, "Enemy May Flinch", 10, <3D7A22>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"SilverPowder", 255, 188, 3000, "Boost Bug-Type Moves", 10, <3D7A76>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Amulet Coin", 0, 189, 60000, "Doubles Battle Money", 10, <3D7AD6>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Cleanse Tag", 0, 190, 5000, "Repels Wild PKMN", 0, <3D7B36>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Soul Dew", 0, 191, 0, "Soul Dew", 0, <3D7B93>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"DeepSeaTooth", 220, 255, 2000, "Boost SP.ATK for Clamperl", 0, <3D7BE5>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"DeepSeaScale", 217, 255, 2000, "Boost SP.DEF for Clamperl", 0, <3D7C45>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"Smoke Ball", 0, 194, 4000, "Flee Any Wild Battle", 0, <3D7CA4>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Everstone", 0, 195, 3000, "Prevent Evolution", 0, <3D7D02>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Focus Band", 0, 196, 50000, "May Endure Hit", 10, <3D7D53>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Lucky Egg", 0, 197, 10000, "Boost Exp. Gain", 0, <3D7DB1>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Scope Lens", 0, 198, 4000, "Boost Crit Ratio", 0, <3D7E17>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Metal Coat", 0, 199, 3000, "Boost Steel-Type Moves", 20, <3D7E7A>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"Leftovers", 0, 200, 4000, "Restore Health Each Round", 10, <3D7EDE>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Dragon Scale", 0, 201, 2000, "No effect", 0, <3D7F37>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"Light Ball", 0, 202, 1000, "Boost SP.ATK For Pikachu", 0, <3D7F79>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Soft Sand", 0, 203, 1000, "Boost Ground-Type Moves", 20, <3D7FD5>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Hard Stone", 0, 204, 1000, "Boost Rock-Type Moves", 20, <3D8036>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Miracle Seed", 0, 205, 1000, "Boost Grass-Type Moves", 20, <3D8096>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"BlackGlasses", 255, 206, 1000, "Boost Dark-Type Moves", 20, <3D80FA>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Black Belt", 0, 207, 1000, "Boost Fighting-Type Moves", 20, <3D8158>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Magnet", 0, 208, 1000, "Boost Electric-Type Moves", 20, <3D81B3>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Mystic Water", 0, 209, 1000, "Boost Water-Type Moves", 20, <3D8214>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Sharp Beak", 0, 210, 1000, "Boost Flying-Type Moves", 20, <3D8276>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Poison Barb", 0, 211, 1000, "Boost Poison-Type Moves", 20, <3D82D6>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Nevermeltice", 0, 212, 1000, "Boost Ice-Type Moves", 20, <3D833B>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Spell Tag", 0, 213, 1000, "Boost Ghost-Type Moves", 20, <3D8397>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"TwistedSpoon", 255, 214, 1000, "Boost Psychic-Type Moves", 20, <3D83EC>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Charcoal", 0, 215, 1000, "Boost Fire-Type Moves", 20, <3D844E>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Dragon Fang", 0, 216, 1000, "Boost Dragon-Type Moves", 20, <3D84AC>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Silk Scarf", 0, 217, 1000, "Boost Normal-Type Moves", 20, <3D850F>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Upgrade", 0, 218, 2000, Up-Grade, 0, <3D856E>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"Shell Bell", 0, 219, 4000, "Heal When Striking An Enemy", 8, <3D85BA>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Sea Incense", 0, 220, 2000, "Boost Water-Type Moves", 10, <3D8616>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Lax Incense", 0, 221, 5000, "Reduce Enemy Accuracy", 10, <3D8669>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Lucky Punch", 0, 222, 1000, "Boost Chansey's Crit.Ratio", 0, <3D86C0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Metal Powder", 0, 223, 1000, "Boost Ditto's DEF", 0, <3D8709>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Thick Club", 0, 224, 1000, "Boost Cubone and Marowak ATK", 0, <3D8754>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Leek", 0, 225, 1000, "Boost Farfetch'd Crit.Ratio", 0, <3D87AB>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Straw. Sweet", 0, 226, 500, None, 0, <13C9FA0>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"Berry Sweet", 0, 227, 500, None, 0, <13CA000>, 0, 0, item, Party_Menu, <0A1751>, 0, <null>, 0
++"Love Sweet", 0, 228, 500, None, 0, <13CA050>, 0, 0, item, Party_Menu, <0A1751>, 0, <000000>, 0
++"Clover Sweet", 0, 229, 500, None, 0, <13CA0A0>, 0, 0, item, Party_Menu, <0A1751>, 0, <000000>, 0
++"Flower Sweet", 0, 230, 500, None, 0, <13CA0F0>, 0, 0, item, Party_Menu, <0A1751>, 0, <000000>, 0
++"Ribbon Sweet", 0, 231, 500, None, 0, <13CA140>, 0, 0, item, Party_Menu, <0A1751>, 0, <000000>, 0
++"Star Sweet", 0, 232, 500, None, 0, <13CA190>, 0, 0, item, Party_Menu, <0A1751>, 0, <000000>, 0
++"Sweet Apple", 0, 233, 2200, None, 0, <13C9D90>, 0, 0, item, Party_Menu, <0A1751>, 0, <000000>, 0
++"Tart Apple", 0, 234, 2200, None, 0, <13C9E00>, 0, 0, item, Party_Menu, <0A1751>, 0, <000000>, 0
++"Cracked Pot", 0, 235, 3000, None, 0, <13C9E60>, 0, 0, item, Party_Menu, <0A1751>, 0, <000000>, 0
++"Chipped Pot", 0, 236, 3000, None, 0, <13C9ED0>, 0, 0, item, Party_Menu, <0A1751>, 0, <000000>, 0
++"Galar Cuff", 0, 237, 6000, None, 0, <13CB020>, 0, 0, item, Party_Menu, <0A1751>, 0, <000000>, 0
++"Galar Wreath", 0, 238, 6000, None, 0, <13CB090>, 0, 0, item, Party_Menu, <0A1751>, 0, <000000>, 0
++"Cherish Ball", 0, 239, 0, None, 0, <13CA680>, 0, 0, ball, 15, <000000>, 2, <0A1E1D>, 0
++"Dusk Ball", 0, 240, 1000, None, 0, <13CA6E0>, 0, 0, ball, 12, <000000>, 2, <0A1E1D>, 0
++"Heal Ball", 0, 241, 300, None, 0, <13CA740>, 0, 0, ball, 13, <000000>, 2, <0A1E1D>, 0
++"Quick Ball", 0, 242, 1000, None, 0, <13CA7A0>, 0, 0, ball, 14, <000000>, 2, <0A1E1D>, 0
++"Fast Ball", 0, 243, 1000, None, 0, <13CA800>, 0, 0, ball, 17, <000000>, 2, <0A1E1D>, 0
++"Level Ball", 0, 244, 1000, None, 0, <13CA850>, 0, 0, ball, 18, <000000>, 2, <0A1E1D>, 0
++"Lure Ball", 0, 245, 1000, None, 0, <13CA8B0>, 0, 0, ball, 19, <000000>, 2, <0A1E1D>, 0
++"Heavy Ball", 0, 246, 1000, None, 0, <13CA910>, 0, 0, ball, 20, <000000>, 2, <0A1E1D>, 0
++"Love Ball", 0, 247, 1000, None, 0, <13CA960>, 0, 0, ball, 21, <000000>, 2, <0A1E1D>, 0
++"Friend Ball", 0, 248, 1000, None, 0, <13CA9B0>, 0, 0, ball, 22, <000000>, 2, <0A1E1D>, 0
++"Moon Ball", 0, 249, 1000, None, 0, <13CAA10>, 0, 0, ball, 23, <000000>, 2, <0A1E1D>, 0
++"Sport Ball", 0, 250, 0, None, 0, <13CAA70>, 0, 0, ball, 24, <000000>, 2, <0A1E1D>, 0
++"Beast Ball", 0, 251, 2000, None, 0, <13CAAC0>, 0, 0, ball, 25, <000000>, 2, <0A1E1D>, 0
++"Dream Ball", 0, 252, 1000, None, 0, <13CAB20>, 0, 0, ball, 26, <000000>, 2, <0A1E1D>, 0
++"Park Ball", 0, 253, 0, None, 0, <13CAB70>, 0, 0, ball, 16, <000000>, 2, <0A1E1D>, 0
++"Red Scarf", 0, 254, 100, None, 0, <3D8802>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Blue Scarf", 0, 255, 100, None, 0, <3D885F>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Pink Scarf", 0, 256, 100, None, 0, <3D88BE>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Green Scarf", 0, 257, 100, None, 0, <3D891B>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Yellow Scarf", 0, 258, 100, None, 0, <3D8979>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Mach Bike", 0, 259, 0, None, 0, <3D89D7>, 1, 1, key, Field_Item, <0A122D>, 0, <null>, 0
++"Coin Case", 0, 260, 0, None, 0, <3D8A14>, 1, 0, key, Bag_Menu, <0A1461>, 0, <null>, 0
++"Itemfinder", 0, 261, 0, None, 0, <3D8A66>, 1, 1, key, Field_Item, <0A1439>, 0, <null>, 0
++"Old Rod", 0, 262, 0, None, 0, <3D8ACC>, 1, 1, key, Field_Item, <0A1339>, 0, <null>, 0
++"Good Rod", 0, 263, 0, None, 0, <3D8B23>, 1, 1, key, Field_Item, <0A1339>, 0, <null>, 1
++"Super Rod", 0, 264, 0, None, 0, <3D8B7B>, 1, 1, key, Field_Item, <0A1339>, 0, <null>, 2
++"S.S. Ticket", 0, 265, 0, None, 0, <3D8BD4>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Contest Pass", 0, 266, 0, None, 0, <3D8C2E>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Z-Power Ring", 0, 267, 0, None, 0, <13CB100>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Wailmer Pail", 0, 268, 0, None, 0, <3D8C8A>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Devon Goods", 0, 269, 0, None, 0, <3D8CE2>, 2, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Soot Sack", 0, 270, 0, None, 0, <3D8D37>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Basement Key", 0, 271, 0, None, 0, <3D8D85>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Acro Bike", 0, 272, 0, None, 0, <3D8DCB>, 1, 1, key, Field_Item, <0A122D>, 0, <null>, 1
++"\Po\Ke\Bl\Lo\Ck CASE", 0, 273, 0, None, 0, <3D8E10>, 1, 1, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Letter", 0, 274, 0, None, 0, <3D8E68>, 2, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Eon Ticket", 0, 275, 0, None, 0, <3D8EBD>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 1
++"Red Orb", 0, 276, 0, 93, 0, <3D8F2A>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Blue Orb", 0, 277, 0, 93, 1, <3D8F7F>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Scanner", 0, 278, 0, None, 0, <3D8FD5>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Go-Goggles", 0, 279, 0, None, 0, <3D9025>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Meteorite", 0, 280, 0, None, 0, <3D9083>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"RM. 1 Key", 0, 281, 0, None, 0, <3D90D7>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"RM. 2 Key", 0, 282, 0, None, 0, <3D9139>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"RM. 4 Key", 0, 283, 0, None, 0, <3D919B>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"RM. 6 Key", 0, 284, 0, None, 0, <3D91FD>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Storage Key", 0, 285, 0, None, 0, <3D925F>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Root Fossil", 0, 286, 7000, None, 0, <3D92BF>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Claw Fossil", 0, 287, 7000, None, 0, <3D931A>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Devon Scope", 0, 288, 0, None, 0, <3D936F>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"TM01", 0, 289, 0, None, 0, <486EBE>, 1, 1, tm, Party_Menu, <null>, 0, <null>, 0
++"TM02", 0, 290, 0, None, 0, <48821F>, 1, 2, tm, Party_Menu, <null>, 0, <null>, 0
++"TM03", 0, 291, 0, None, 0, <488614>, 1, 3, tm, Party_Menu, <null>, 0, <null>, 0
++"TM04", 0, 292, 0, None, 0, <4884C5>, 1, 4, tm, Party_Menu, <null>, 0, <null>, 0
++"TM05", 0, 293, 0, None, 0, <4833DC>, 1, 5, tm, Party_Menu, <null>, 0, <null>, 0
++"TM06", 0, 294, 0, None, 0, <48400F>, 1, 6, tm, Party_Menu, <null>, 0, <null>, 0
++"TM07", 0, 295, 0, None, 0, <486D1C>, 1, 7, tm, Party_Menu, <null>, 0, <null>, 0
++"TM08", 0, 296, 0, None, 0, <4882B4>, 1, 8, tm, Party_Menu, <null>, 0, <null>, 0
++"TM09", 0, 297, 0, None, 0, <48808A>, 1, 9, tm, Party_Menu, <null>, 0, <null>, 0
++"TM10", 0, 298, 0, None, 0, <486774>, 1, 10, tm, Party_Menu, <null>, 0, <null>, 0
++"TM11", 0, 299, 0, None, 0, <48687C>, 1, 11, tm, Party_Menu, <null>, 0, <null>, 0
++"TM12", 0, 300, 0, None, 0, <487014>, 1, 12, tm, Party_Menu, <null>, 0, <null>, 0
++"TM13", 0, 301, 0, None, 0, <48371F>, 1, 13, tm, Party_Menu, <null>, 0, <null>, 0
++"TM14", 0, 302, 0, None, 0, <483760>, 1, 14, tm, Party_Menu, <null>, 0, <null>, 0
++"TM15", 0, 303, 0, None, 0, <48386D>, 1, 15, tm, Party_Menu, <null>, 0, <null>, 0
++"TM16", 0, 304, 0, None, 0, <4845C5>, 1, 16, tm, Party_Menu, <null>, 0, <null>, 0
++"TM17", 0, 305, 0, None, 0, <485857>, 1, 17, tm, Party_Menu, <null>, 0, <null>, 0
++"TM18", 0, 306, 0, None, 0, <48683A>, 1, 18, tm, Party_Menu, <null>, 0, <null>, 0
++"TM19", 0, 307, 0, None, 0, <485DC1>, 1, 19, tm, Party_Menu, <null>, 0, <null>, 0
++"TM20", 0, 308, 0, None, 0, <486265>, 1, 20, tm, Party_Menu, <null>, 0, <null>, 0
++"TM21", 0, 309, 0, None, 0, <48621B>, 1, 21, tm, Party_Menu, <null>, 0, <null>, 0
++"TM22", 0, 310, 0, None, 0, <483BDA>, 1, 22, tm, Party_Menu, <null>, 0, <null>, 0
++"TM23", 0, 311, 0, None, 0, <4865BF>, 1, 23, tm, Party_Menu, <null>, 0, <null>, 0
++"TM24", 0, 312, 0, None, 0, <483E3E>, 1, 24, tm, Party_Menu, <null>, 0, <null>, 0
++"TM25", 0, 313, 0, None, 0, <483EC2>, 1, 25, tm, Party_Menu, <null>, 0, <null>, 0
++"TM26", 0, 314, 0, None, 0, <483F44>, 1, 26, tm, Party_Menu, <null>, 0, <null>, 0
++"TM27", 0, 315, 0, None, 0, <486187>, 1, 27, tm, Party_Menu, <null>, 0, <null>, 0
++"TM28", 0, 316, 0, None, 0, <483FC7>, 1, 28, tm, Party_Menu, <null>, 0, <null>, 0
++"TM29", 0, 317, 0, None, 0, <484098>, 1, 29, tm, Party_Menu, <null>, 0, <null>, 0
++"TM30", 0, 318, 0, None, 0, <486A1B>, 1, 30, tm, Party_Menu, <null>, 0, <null>, 0
++"TM31", 0, 319, 0, None, 0, <4872F2>, 1, 31, tm, Party_Menu, <null>, 0, <null>, 0
++"TM32", 0, 320, 0, None, 0, <484353>, 1, 32, tm, Party_Menu, <null>, 0, <null>, 0
++"TM33", 0, 321, 0, None, 0, <484647>, 1, 33, tm, Party_Menu, <null>, 0, <null>, 0
++"TM34", 0, 322, 0, None, 0, <4885D3>, 1, 34, tm, Party_Menu, <null>, 0, <null>, 0
++"TM35", 0, 323, 0, None, 0, <4835C2>, 1, 35, tm, Party_Menu, <null>, 0, <null>, 0
++"TM36", 0, 324, 0, None, 0, <4859F2>, 1, 36, tm, Party_Menu, <null>, 0, <null>, 0
++"TM37", 0, 325, 0, None, 0, <485D77>, 1, 37, tm, Party_Menu, <null>, 0, <null>, 0
++"TM38", 0, 326, 0, None, 0, <48493B>, 1, 38, tm, Party_Menu, <null>, 0, <null>, 0
++"TM39", 0, 327, 0, None, 0, <487CD2>, 1, 39, tm, Party_Menu, <null>, 0, <null>, 0
++"TM40", 0, 328, 0, None, 0, <4880D0>, 1, 40, tm, Party_Menu, <null>, 0, <null>, 0
++"TM41", 0, 329, 0, None, 0, <486D64>, 1, 41, tm, Party_Menu, <null>, 0, <null>, 0
++"TM42", 0, 330, 0, None, 0, <486E79>, 1, 42, tm, Party_Menu, <null>, 0, <null>, 0
++"TM43", 0, 331, 0, None, 0, <48759A>, 1, 43, tm, Party_Menu, <null>, 0, <null>, 0
++"TM44", 0, 332, 0, None, 0, <48515E>, 1, 44, tm, Party_Menu, <null>, 0, <null>, 0
++"TM45", 0, 333, 0, None, 0, <4860B7>, 1, 45, tm, Party_Menu, <null>, 0, <null>, 0
++"TM46", 0, 334, 0, None, 0, <48548B>, 1, 46, tm, Party_Menu, <null>, 0, <null>, 0
++"TM47", 0, 335, 0, None, 0, <48602B>, 1, 47, tm, Party_Menu, <null>, 0, <null>, 0
++"TM48", 0, 336, 0, None, 0, <48743C>, 1, 48, tm, Party_Menu, <null>, 0, <null>, 0
++"TM49", 0, 337, 0, None, 0, <487558>, 1, 49, tm, Party_Menu, <null>, 0, <null>, 0
++"TM50", 0, 338, 0, None, 0, <487C46>, 1, 50, tm, Party_Menu, <null>, 0, <null>, 0
++"HM01", 0, 339, 0, None, 0, <482BD5>, 1, 121, tm, Party_Menu, <null>, 0, <null>, 0
++"HM02", 0, 340, 0, None, 0, <482CD3>, 1, 122, tm, Party_Menu, <null>, 0, <null>, 0
++"HM03", 0, 341, 0, None, 0, <4836D6>, 1, 123, tm, Party_Menu, <null>, 0, <null>, 0
++"HM04", 0, 342, 0, None, 0, <483A3A>, 1, 124, tm, Party_Menu, <null>, 0, <null>, 0
++"HM05", 0, 343, 0, None, 0, <4875E5>, 1, 125, tm, Party_Menu, <null>, 0, <null>, 0
++"HM06", 0, 344, 0, None, 0, <486AA6>, 1, 126, tm, Party_Menu, <null>, 0, <null>, 0
++"HM07", 0, 345, 0, None, 0, <484986>, 1, 127, tm, Party_Menu, <null>, 0, <null>, 0
++"HM08", 0, 346, 0, None, 0, <383300>, 1, 128, tm, Party_Menu, <null>, 0, <null>, 0
++"Dynamax Band", 0, 347, 0, None, 0, <13CAD20>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Gold Teeth", 0, 348, 0, None, 0, <3DA907>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Oak's Parcel", 0, 349, 0, None, 0, <3DA7D1>, 2, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Poké Flute", 0, 350, 0, None, 0, <3DA81A>, 1, 0, key, Bag_Menu, <0A156D>, 2, <0A1E65>, 0
++"Secret Key", 0, 351, 0, None, 0, <3DA866>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Bike Voucher", 0, 352, 0, None, 0, <3DA8B4>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Mega Ring", 0, 353, 0, None, 0, <13CAD80>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Old Amber", 0, 354, 7000, None, 0, <3DA95A>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Card Key", 0, 355, 0, None, 0, <3DA9BB>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Lift Key", 0, 356, 0, None, 0, <3DAA0A>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Helix Fossil", 0, 357, 7000, None, 0, <3DAA64>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Dome Fossil", 0, 358, 7000, None, 0, <3DAABD>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Silph Scope", 0, 359, 0, None, 0, <3DAB13>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Bicycle", 0, 360, 0, None, 0, <3DAB59>, 1, 1, key, Field_Item, <0A122D>, 0, <null>, 0
++"Town Map", 0, 361, 0, None, 0, <3DAB9F>, 1, 1, key, Bag_Menu, <0A1C61>, 0, <null>, 0
++"VS Seeker", 0, 362, 0, None, 0, <3DABF7>, 1, 1, key, Field_Item, <0A1D9D>, 0, <null>, 0
++"Fame Checker", 0, 363, 0, None, 0, <3DAC51>, 1, 1, key, Bag_Menu, <0A1CF9>, 0, <null>, 0
++"TM Case", 0, 364, 0, None, 0, <3DACA5>, 1, 1, key, Bag_Menu, <0A1789>, 0, <null>, 0
++"Berry Pouch", 0, 365, 0, None, 0, <3DAD01>, 1, 1, key, Bag_Menu, <0A1821>, 3, <0A18B9>, 0
++"Teachy TV", 0, 366, 0, None, 0, <3DAD5C>, 1, 1, key, Field_Item, <0A18ED>, 0, <null>, 0
++"Tri-Pass", 0, 367, 0, None, 0, <3DADAE>, 1, 1, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Rainbow Pass", 0, 368, 0, None, 0, <3DAE08>, 1, 1, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Tea", 0, 369, 0, None, 0, <3DAE68>, 1, 1, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"MysticTicket", 255, 370, 0, None, 0, <3DAEB6>, 1, 1, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"AuroraTicket", 255, 371, 0, None, 0, <3DAF07>, 1, 1, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Powder Jar", 0, 372, 0, None, 0, <3DAF52>, 1, 1, key, Bag_Menu, <0A14E9>, 0, <null>, 0
++"Ruby", 0, 373, 0, None, 0, <3DAF8D>, 1, 1, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Sapphire", 0, 374, 0, None, 0, <3DAFD6>, 1, 1, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"-DONT USE-", 0, 0, 0, None, 0, <2BD49C>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"TM51", 0, 376, 0, None, 0, <26FEC0>, 1, 51, tm, Party_Menu, <000000>, 0, <null>, 0
++"TM52", 0, 377, 0, None, 0, <2BD7C0>, 1, 52, tm, Party_Menu, <null>, 0, <null>, 0
++"TM53", 0, 378, 0, None, 0, <2BD880>, 1, 53, tm, Party_Menu, <null>, 0, <null>, 0
++"TM54", 0, 379, 0, None, 0, <2BD940>, 1, 54, tm, Party_Menu, <null>, 0, <null>, 0
++"TM55", 0, 380, 0, None, 0, <2BDA00>, 1, 55, tm, Party_Menu, <null>, 0, <null>, 0
++"TM56", 0, 381, 0, None, 0, <2BDAC0>, 1, 56, tm, Party_Menu, <null>, 0, <null>, 0
++"TM57", 0, 382, 0, None, 0, <2CA480>, 1, 57, tm, Party_Menu, <null>, 0, <null>, 0
++"TM58", 0, 383, 0, None, 0, <2CA540>, 1, 58, tm, Party_Menu, <null>, 0, <null>, 0
++"TM59", 0, 384, 0, None, 0, <2CA600>, 1, 59, tm, Party_Menu, <null>, 0, <null>, 0
++"TM60", 0, 385, 0, None, 0, <2CA6C0>, 1, 60, tm, Party_Menu, <null>, 0, <null>, 0
++"TM61", 0, 386, 0, None, 0, <363740>, 1, 61, tm, Party_Menu, <null>, 0, <null>, 0
++"TM62", 0, 387, 0, None, 0, <363980>, 1, 62, tm, Party_Menu, <null>, 0, <null>, 0
++"TM63", 0, 388, 0, None, 0, <363BC0>, 1, 63, tm, Party_Menu, <null>, 0, <null>, 0
++"TM64", 0, 389, 0, None, 0, <386380>, 0, 64, tm, Party_Menu, <null>, 0, <null>, 0
++"TM65", 0, 390, 0, None, 0, <386440>, 0, 65, tm, Party_Menu, <null>, 0, <null>, 0
++"TM66", 0, 391, 0, None, 0, <386680>, 0, 66, tm, Party_Menu, <null>, 0, <null>, 0
++"TM67", 0, 392, 0, None, 0, <3868C0>, 0, 67, tm, Party_Menu, <null>, 0, <null>, 0
++"TM68", 0, 393, 0, None, 0, <386940>, 0, 68, tm, Party_Menu, <null>, 0, <null>, 0
++"TM69", 0, 394, 0, None, 0, <386B80>, 0, 69, tm, Party_Menu, <null>, 0, <null>, 0
++"TM70", 0, 395, 0, None, 0, <29BCC0>, 0, 70, tm, Party_Menu, <null>, 0, <null>, 0
++"TM71", 0, 396, 0, None, 0, <386D80>, 0, 71, tm, Party_Menu, <null>, 0, <null>, 0
++"TM72", 0, 397, 0, None, 0, <387DC0>, 0, 72, tm, Party_Menu, <null>, 0, <null>, 0
++"TM73", 0, 398, 0, None, 0, <388000>, 0, 73, tm, Party_Menu, <null>, 0, <null>, 0
++"TM74", 0, 399, 0, None, 0, <388240>, 0, 74, tm, Party_Menu, <null>, 0, <null>, 0
++"TM75", 0, 400, 0, None, 0, <388480>, 0, 75, tm, Party_Menu, <null>, 0, <null>, 0
++"TM76", 0, 401, 0, None, 0, <380200>, 0, 76, tm, Party_Menu, <null>, 0, <null>, 0
++"TM77", 0, 402, 0, None, 0, <380440>, 0, 77, tm, Party_Menu, <null>, 0, <null>, 0
++"TM78", 0, 403, 0, None, 0, <380500>, 0, 78, tm, Party_Menu, <null>, 0, <null>, 0
++"TM79", 0, 404, 0, None, 0, <380700>, 0, 79, tm, Party_Menu, <null>, 0, <null>, 0
++"TM80", 0, 405, 0, None, 0, <380940>, 0, 80, tm, Party_Menu, <null>, 0, <null>, 0
++"TM81", 0, 406, 0, None, 0, <380B80>, 0, 81, tm, Party_Menu, <null>, 0, <null>, 0
++"TM82", 0, 407, 0, None, 0, <380C40>, 0, 82, tm, Party_Menu, <null>, 0, <null>, 0
++"TM83", 0, 408, 0, None, 0, <380D00>, 0, 83, tm, Party_Menu, <null>, 0, <null>, 0
++"TM84", 0, 409, 0, None, 0, <380F00>, 0, 84, tm, Party_Menu, <null>, 0, <null>, 0
++"TM85", 0, 410, 0, None, 0, <381140>, 0, 85, tm, Party_Menu, <null>, 0, <null>, 0
++"TM86", 0, 411, 0, None, 0, <381380>, 0, 86, tm, Party_Menu, <null>, 0, <null>, 0
++"TM87", 0, 412, 0, None, 0, <3815C0>, 0, 87, tm, Party_Menu, <null>, 0, <null>, 0
++"TM88", 0, 413, 0, None, 0, <381680>, 0, 88, tm, Party_Menu, <null>, 0, <null>, 0
++"TM89", 0, 414, 0, None, 0, <381A40>, 0, 89, tm, Party_Menu, <null>, 0, <null>, 0
++"TM90", 0, 415, 0, None, 0, <381B00>, 0, 90, tm, Party_Menu, <null>, 0, <null>, 0
++"TM91", 0, 416, 0, None, 0, <382080>, 0, 91, tm, Party_Menu, <null>, 0, <null>, 0
++"TM92", 0, 417, 0, None, 0, <382140>, 0, 92, tm, Party_Menu, <null>, 0, <null>, 0
++"TM93", 0, 418, 0, None, 0, <382380>, 0, 93, tm, Party_Menu, <null>, 0, <null>, 0
++"TM94", 0, 419, 0, None, 0, <3825C0>, 0, 94, tm, Party_Menu, <null>, 0, <null>, 0
++"TM95", 0, 420, 0, None, 0, <382800>, 0, 95, tm, Party_Menu, <null>, 0, <null>, 0
++"TM96", 0, 421, 0, None, 0, <382A40>, 0, 96, tm, Party_Menu, <null>, 0, <null>, 0
++"TM97", 0, 422, 0, None, 0, <382C80>, 0, 97, tm, Party_Menu, <null>, 0, <null>, 0
++"TM98", 0, 423, 0, None, 0, <382EC0>, 0, 98, tm, Party_Menu, <null>, 0, <null>, 0
++"TM99", 0, 424, 0, None, 0, <382F80>, 0, 99, tm, Party_Menu, <null>, 0, <null>, 0
++"TM100", 0, 425, 0, None, 0, <3831C0>, 0, 100, tm, Party_Menu, <null>, 0, <null>, 0
++"TM101", 0, 426, 0, None, 0, <389880>, 0, 101, tm, Party_Menu, <null>, 0, <null>, 0
++"TM102", 0, 427, 0, None, 0, <796100>, 0, 102, tm, Party_Menu, <null>, 0, <null>, 0
++"TM103", 0, 428, 0, None, 0, <796340>, 0, 103, tm, Party_Menu, <null>, 0, <null>, 0
++"TM104", 0, 429, 0, None, 0, <798600>, 0, 104, tm, Party_Menu, <null>, 0, <null>, 0
++"TM105", 0, 430, 0, None, 0, <798840>, 0, 105, tm, Party_Menu, <null>, 0, <null>, 0
++"TM106", 0, 431, 0, None, 0, <798C00>, 0, 106, tm, Party_Menu, <null>, 0, <null>, 0
++"TM107", 0, 432, 0, None, 0, <798E40>, 0, 107, tm, Party_Menu, <null>, 0, <null>, 0
++"TM108", 0, 433, 0, None, 0, <799080>, 0, 108, tm, Party_Menu, <null>, 0, <null>, 0
++"TM109", 0, 434, 0, None, 0, <7A1980>, 0, 109, tm, Party_Menu, <null>, 0, <null>, 0
++"TM110", 0, 435, 0, None, 0, <7A1BC0>, 0, 110, tm, Party_Menu, <null>, 0, <null>, 0
++"TM111", 0, 436, 0, None, 0, <7AE100>, 0, 111, tm, Party_Menu, <null>, 0, <null>, 0
++"TM112", 0, 437, 0, None, 0, <7AE1C0>, 0, 112, tm, Party_Menu, <null>, 0, <null>, 0
++"TM113", 0, 438, 0, None, 0, <7AE280>, 0, 113, tm, Party_Menu, <null>, 0, <null>, 0
++"TM114", 0, 439, 0, None, 0, <7AE340>, 0, 114, tm, Party_Menu, <null>, 0, <null>, 0
++"TM115", 0, 440, 0, None, 0, <7AE400>, 0, 115, tm, Party_Menu, <null>, 0, <null>, 0
++"TM116", 0, 441, 0, None, 0, <7AE480>, 0, 116, tm, Party_Menu, <null>, 0, <null>, 0
++"TM117", 0, 442, 0, None, 0, <7AE840>, 0, 117, tm, Party_Menu, <null>, 0, <null>, 0
++"TM118", 0, 443, 0, None, 0, <7AE900>, 0, 118, tm, Party_Menu, <null>, 0, <null>, 0
++"TM119", 0, 444, 0, None, 0, <7AEB40>, 0, 119, tm, Party_Menu, <null>, 0, <null>, 0
++"TM120", 0, 445, 0, None, 0, <7AEC00>, 0, 120, tm, Party_Menu, <null>, 0, <null>, 0
++"Occa Berry", 0, 446, 20, 95, 10, <13CB300>, 0, 36, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Passho Berry", 0, 447, 20, 95, 11, <13CB350>, 0, 37, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Wacan Berry", 0, 448, 20, 95, 13, <13CB3A0>, 0, 38, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Rindo Berry", 0, 449, 20, 95, 12, <13CB3F0>, 0, 39, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Yache Berry", 0, 450, 20, 95, 15, <13CB440>, 0, 40, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Chople Berry", 0, 451, 20, 95, 1, <13CB490>, 0, 41, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Kebia Berry", 0, 452, 20, 95, 3, <13CB4E0>, 0, 42, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Shuca Berry", 0, 453, 20, 95, 4, <13CB530>, 0, 43, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Coba Berry", 0, 454, 20, 95, 2, <13CB580>, 0, 44, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Payapa Berry", 0, 455, 20, 95, 14, <13CB5D0>, 0, 45, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Tanga Berry", 0, 456, 20, 95, 6, <13CB620>, 0, 46, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Charti Berry", 0, 457, 20, 95, 5, <13CB670>, 0, 47, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Kasib Berry", 0, 458, 20, 95, 7, <13CB6C0>, 0, 48, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Haban Berry", 0, 459, 20, 95, 16, <13CB710>, 0, 49, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Colbur Berry", 0, 460, 20, 95, 17, <13CB760>, 0, 50, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Babiri Berry", 0, 461, 20, 95, 8, <13CB7B0>, 0, 51, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Chilan Berry", 0, 462, 20, 95, 0, <13CB800>, 0, 52, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Micle Berry", 0, 463, 20, 127, 0, <13CB840>, 0, 61, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Custap Berry", 0, 464, 20, 96, 0, <13CB890>, 0, 62, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Jacoba Berry", 0, 465, 20, 121, 0, <13CB8E0>, 0, 63, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Rowap Berry", 0, 466, 20, 121, 1, <13CB930>, 0, 64, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Roseli Berry", 0, 467, 20, 95, 23, <13CB980>, 0, 65, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Kee Berry", 0, 468, 20, 122, 0, <13CB9D0>, 0, 66, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Marang Berry", 0, 469, 20, 123, 0, <13CBA20>, 0, 67, berry, Bag_Menu, <0A2239>, 0, <null>, 0
++"Oval Charm", 0, 470, 0, None, 0, <13CBA70>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Shiny Charm", 0, 471, 0, None, 0, <13CBAD0>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Rainbow Wing", 0, 472, 0, None, 0, <13CBB20>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Silver Wing", 0, 473, 0, None, 0, <13CBB50>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Magma Stone", 0, 474, 0, None, 0, <13CBB80>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Light Stone", 0, 475, 0, None, 0, <13CBBF0>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Dark Stone", 0, 476, 0, None, 0, <13CBC60>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Sun Flute", 0, 477, 0, None, 0, <13CBCC0>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Moon Flute", 0, 478, 0, None, 0, <13CBCC0>, 1, 0, key, Bag_Menu, <0A2239>, 0, <null>, 0
++"Gracidea", 0, 479, 0, None, 0, <13CBD20>, 1, 0, key, Party_Menu, <1486929>, 0, <null>, 0
++"DNA Splicers", 0, 480, 0, None, 0, <13CBD90>, 1, 0, key, Party_Menu, <1486929>, 0, <null>, 0
++"Reveal Glass", 0, 481, 0, None, 0, <13CBDF0>, 1, 0, key, Party_Menu, <1486929>, 0, <null>, 0
++"PrisonBottle", 0, 482, 0, None, 0, <13CBE60>, 1, 0, key, Party_Menu, <1486929>, 0, <null>, 0
++"N-Solarizer", 0, 483, 0, None, 0, <13CBED0>, 1, 0, key, Party_Menu, <1486929>, 0, <null>, 0
++"N-Lunarizer", 0, 484, 0, None, 0, <13CBF20>, 1, 0, key, Party_Menu, <1486929>, 0, <null>, 0
++"Rusty Sword", 0, 485, 0, None, 0, <13CBF70>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Rusty Shield", 0, 486, 0, None, 0, <13CBFF0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Adamant Orb", 0, 487, 0, 88, 0, <13CC070>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Lustrous Orb", 0, 488, 0, 89, 0, <13CC0E0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Griseous Orb", 0, 489, 0, 90, 0, <13CC150>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Fist Plate", 0, 490, 0, 72, 1, <13CC1C0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Sky Plate", 0, 491, 0, 72, 2, <13CC230>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Toxic Plate", 0, 492, 0, 72, 3, <13CC2A0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Earth Plate", 0, 493, 0, 72, 4, <13CC310>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Stone Plate", 0, 494, 0, 72, 5, <13CC380>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Insect Plate", 0, 495, 0, 72, 6, <13CC3F0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Spooky Plate", 0, 496, 0, 72, 7, <13CC460>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Iron Plate", 0, 497, 0, 72, 8, <13CC4D0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Flame Plate", 0, 498, 0, 72, 10, <13CC540>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Splash Plate", 0, 499, 0, 72, 11, <13CC5B0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Meadow Plate", 0, 500, 0, 72, 12, <13CC620>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Zap Plate", 0, 501, 0, 72, 13, <13CC690>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Mind Plate", 0, 502, 0, 72, 14, <13CC700>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Icicle Plate", 0, 503, 0, 72, 15, <13CC770>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Draco Plate", 0, 504, 0, 72, 16, <13CC7E0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Dread Plate", 0, 505, 0, 72, 17, <13CC850>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Pixie Plate", 0, 506, 0, 72, 23, <13CC8C0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Fight Mem.", 0, 507, 0, 87, 1, <13CC930>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Flying Mem.", 0, 508, 0, 87, 2, <13CC990>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Poison Mem.", 0, 509, 0, 87, 3, <13CC9F0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Ground Mem.", 0, 510, 0, 87, 4, <13CCA50>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Rock Mem.", 0, 511, 0, 87, 5, <13CCAB0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Bug Mem.", 0, 512, 0, 87, 6, <13CCB10>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Ghost Mem.", 0, 513, 0, 87, 7, <13CCB70>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Steel Mem.", 0, 514, 0, 87, 8, <13CCBD0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Fire Mem.", 0, 515, 0, 87, 10, <13CCC30>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Water Mem.", 0, 516, 0, 87, 11, <13CCC90>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Grass Mem.", 0, 517, 0, 87, 12, <13CCCF0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Electr Mem.", 0, 518, 0, 87, 13, <13CCD50>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Psychic Mem.", 0, 519, 0, 87, 14, <13CCDB0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Ice Mem.", 0, 520, 0, 87, 15, <13CCE10>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Dragon Mem.", 0, 521, 0, 87, 16, <13CCE70>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Dark Mem.", 0, 522, 0, 87, 17, <13CCED0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Fairy Mem.", 0, 523, 0, 87, 23, <13CCF30>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Burn Drive", 0, 524, 0, 86, 10, <13CCF90>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Douse Drive", 0, 525, 0, 86, 11, <13CCFF0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Shock Drive", 0, 526, 0, 86, 13, <13CD050>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Chill Drive", 0, 527, 0, 86, 15, <13CD0B0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Red Nectar", 0, 528, 300, None, 0, <13CD110>, 0, 0, item, Party_Menu, <1486929>, 0, <null>, 0
++"YellowNectar", 0, 529, 300, None, 0, <13CD180>, 0, 0, item, Party_Menu, <1486929>, 0, <null>, 0
++"Pink Nectar", 0, 530, 300, None, 0, <13CD1F0>, 0, 0, item, Party_Menu, <1486929>, 0, <null>, 0
++"PurpleNectar", 0, 531, 300, None, 0, <13CD250>, 0, 0, item, Party_Menu, <1486929>, 0, <null>, 0
++"Necrozium Z", 0, 532, 0, 73, 0, <13CD2B0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Venusaurite", 0, 533, 0, 73, 0, <13CD310>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"CharzarditeX", 0, 534, 0, 73, 0, <13CD370>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"CharzarditeY", 0, 535, 0, 73, 0, <13CD370>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Blastoisnite", 0, 536, 0, 73, 0, <13CD3D0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Beedrillite", 0, 537, 0, 73, 0, <13CD430>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Pidgeotite", 0, 538, 0, 73, 0, <13CD490>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Alakazite", 0, 539, 0, 73, 0, <13CD4F0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Slowbronite", 0, 540, 0, 73, 0, <13CD550>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Gengarite", 0, 541, 0, 73, 0, <13CD5B0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Kangaskanite", 0, 542, 0, 73, 0, <13CD610>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Pinsirite", 0, 543, 0, 73, 0, <13CD670>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Gyaradosite", 0, 544, 0, 73, 0, <13CD6D0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Aerodactlite", 0, 545, 0, 73, 0, <13CD730>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"MewtwoniteX", 0, 546, 0, 73, 0, <13CD790>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"MewtwoniteY", 0, 547, 0, 73, 0, <13CD790>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Ampharosite", 0, 548, 0, 73, 0, <13CD7F0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Steelixite", 0, 549, 0, 73, 0, <13CD850>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Scizorite", 0, 550, 0, 73, 0, <13CD8B0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Heracronite", 0, 551, 0, 73, 0, <13CD910>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Houndoomnite", 0, 552, 0, 73, 0, <13CD970>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Tyranitarite", 0, 553, 0, 73, 0, <13CD9D0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Sceptilite", 0, 554, 0, 73, 0, <13CDA30>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Blazikenite", 0, 555, 0, 73, 0, <13CDA90>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Swampertite", 0, 556, 0, 73, 0, <13CDAF0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Gardevoirite", 0, 557, 0, 73, 0, <13CDB50>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Sablenite", 0, 558, 0, 73, 0, <13CDBB0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Mawilite", 0, 559, 0, 73, 0, <13CDC10>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Aggronite", 0, 560, 0, 73, 0, <13CDC70>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Medichamite", 0, 561, 0, 73, 0, <13CDCD0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Manectite", 0, 562, 0, 73, 0, <13CDD30>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Sharpedonite", 0, 563, 0, 73, 0, <13CDD90>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Cameruptite", 0, 564, 0, 73, 0, <13CDDF0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Altarianite", 0, 565, 0, 73, 0, <13CDE50>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Banettite", 0, 566, 0, 73, 0, <13CDEB0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Absolite", 0, 567, 0, 73, 0, <13CDF10>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Glalitite", 0, 568, 0, 73, 0, <13CDF70>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Salamencite", 0, 569, 0, 73, 0, <13CDFD0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Metagrossite", 0, 570, 0, 73, 0, <13CE030>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Latiasite", 0, 571, 0, 73, 0, <13CE090>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Latiosite", 0, 572, 0, 73, 0, <13CE0F0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Lopunnite", 0, 573, 0, 73, 0, <13CE150>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Garchompite", 0, 574, 0, 73, 0, <13CE1B0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Lucarionite", 0, 575, 0, 73, 0, <13CE210>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Abomasite", 0, 576, 0, 73, 0, <13CE270>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Galladite", 0, 577, 0, 73, 0, <13CE2D0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Audinite", 0, 578, 0, 73, 0, <13CE330>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Diancite", 0, 579, 0, 73, 0, <13CE390>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Normalium Z", 0, 580, 0, 130, 0, <13CE3F0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Fightinium Z", 0, 581, 0, 130, 1, <13CE450>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Flyinium Z", 0, 582, 0, 130, 2, <13CE4B0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Poisonium Z", 0, 583, 0, 130, 3, <13CE510>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Groundium Z", 0, 584, 0, 130, 4, <13CE570>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Rockium Z", 0, 585, 0, 130, 5, <13CE5D0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Buginium Z", 0, 586, 0, 130, 6, <13CE630>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Ghostium Z", 0, 587, 0, 130, 7, <13CE690>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Steelium Z", 0, 588, 0, 130, 8, <13CE6F0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Firium Z", 0, 589, 0, 130, 10, <13CE750>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Waterium Z", 0, 590, 0, 130, 11, <13CE7B0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Grassium Z", 0, 591, 0, 130, 12, <13CE810>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Electrium Z", 0, 592, 0, 130, 13, <13CE870>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Psychium Z", 0, 593, 0, 130, 14, <13CE8D0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Icium Z", 0, 594, 0, 130, 15, <13CE930>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Dragonium Z", 0, 595, 0, 130, 16, <13CE990>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Darkinium Z", 0, 596, 0, 130, 17, <13CE9F0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Fairium Z", 0, 597, 0, 130, 23, <13CEA50>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Alorichium Z", 0, 598, 0, 130, 255, <13CEAB0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Decidium Z", 0, 599, 0, 130, 255, <13CEB10>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Eevium Z", 0, 600, 0, 130, 255, <13CEB70>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Incinium Z", 0, 601, 0, 130, 255, <13CEBD0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Kommonium Z", 0, 602, 0, 130, 255, <13CEC30>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Lunalium Z", 0, 603, 0, 130, 255, <13CEC90>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Lycanium Z", 0, 604, 0, 130, 255, <13CECF0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Marshadium Z", 0, 605, 0, 130, 255, <13CED50>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Mewnium Z", 0, 606, 0, 130, 255, <13CEDB0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Mimikium Z", 0, 607, 0, 130, 255, <13CEE10>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Pikanium Z", 0, 608, 0, 130, 255, <13CEE70>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Pikshunium Z", 0, 609, 0, 130, 255, <13CEED0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Primarium Z", 0, 610, 0, 130, 255, <13CEF40>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Snorlium Z", 0, 611, 0, 130, 255, <13CEFA0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Solganium Z", 0, 612, 0, 130, 255, <13CF000>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Tapunium Z", 0, 613, 0, 130, 255, <13CF060>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Blk Apricorn", 0, 614, 200, None, 0, <13CB170>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Blu Apricorn", 0, 615, 200, None, 0, <13CB1B0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Grn Apricorn", 0, 616, 200, None, 0, <13CB1E0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Pnk Apricorn", 0, 617, 200, None, 0, <13CB220>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Red Apricorn", 0, 618, 200, None, 0, <13CB250>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Wht Apricorn", 0, 619, 200, None, 0, <13CB280>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Ylw Apricorn", 0, 620, 200, None, 0, <13CB2C0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Relic Copper", 0, 621, 1000, None, 0, <13CF390>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Relic Silver", 0, 622, 5000, None, 0, <13CF3E0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Relic Gold", 0, 623, 10000, None, 0, <13CF430>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Relic Vase", 0, 624, 20000, None, 0, <13CF480>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Relic Band", 0, 625, 30000, None, 0, <13CF4D0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Relic Statue", 0, 626, 40000, None, 0, <13CF520>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Relic Crown", 0, 627, 50000, None, 0, <13CF570>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Skull Fossil", 0, 628, 7000, None, 0, <13CF5C0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Armor Fossil", 0, 629, 7000, None, 0, <13CF620>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Cover Fossil", 0, 630, 7000, None, 0, <13CF690>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Plume Fossil", 0, 631, 7000, None, 0, <13CF6F0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Jaw Fossil", 0, 632, 7000, None, 0, <13CF750>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Sail Fossil", 0, 633, 7000, None, 0, <13CF7C0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Bird Fossil", 0, 634, 7000, None, 0, <13D1D20>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Fish Fossil", 0, 635, 7000, None, 0, <13D1D90>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Drake Fossil", 0, 636, 7000, None, 0, <13D1E00>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Dino Fossil", 0, 637, 7000, None, 0, <13D1E60>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Odd Keystone", 0, 638, 2100, None, 0, <13CABA0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Bottle Cap", 0, 639, 5000, None, 0, <13CAC10>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"G.Bottle Cap", 0, 640, 10000, None, 0, <13CAC70>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Wish Piece", 0, 641, 6000, None, 0, <13CACD0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Power Bracer", 0, 642, 3000, "Macho Brace", 2, <13CFCB0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Power Belt", 0, 643, 3000, "Macho Brace", 3, <13CFD10>, 0, 0, item, Bag_Menu, <0A2239>, 0, <000000>, 0
++"Power Lens", 0, 644, 3000, "Macho Brace", 5, <13CFD70>, 0, 0, item, Bag_Menu, <0A2239>, 0, <000000>, 0
++"Power Band", 0, 645, 3000, "Macho Brace", 6, <13CFDE0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <000000>, 0
++"Power Anklet", 0, 646, 3000, "Macho Brace", 4, <13CFE50>, 0, 0, item, Bag_Menu, <0A2239>, 0, <000000>, 0
++"Power Weight", 0, 647, 3000, "Macho Brace", 1, <13CFEB0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <000000>, 0
++"Luck Incense", 0, 648, 11000, "Doubles Battle Money", 10, <3D7AD6>, 0, 0, item, Bag_Menu, <0A2239>, 0, <000000>, 0
++"Full Incense", 0, 649, 5000, 97, 0, <13CFF10>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Odd Incense", 0, 650, 2000, "Boost Psychic-Type Moves", 20, <13CFF80>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Pure Incense", 0, 651, 6000, "Repels Wild PKMN", 0, <3D7B36>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Rock Incense", 0, 652, 2000, "Boost Rock-Type Moves", 20, <13CFFE0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Rose Incense", 0, 653, 2000, "Boost Grass-Type Moves", 20, <13D0050>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Wave Incense", 0, 654, 2000, "Boost Water-Type Moves", 20, <13D00C0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Normal Gem", 0, 655, 4000, 94, 0, <13D0130>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Fighting Gem", 0, 656, 4000, 94, 1, <13D01A0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Flying Gem", 0, 657, 4000, 94, 2, <13D0210>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Poison Gem", 0, 658, 4000, 94, 3, <13D0270>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Ground Gem", 0, 659, 4000, 94, 4, <13D02E0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Rock Gem", 0, 660, 4000, 94, 5, <13D0350>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Bug Gem", 0, 661, 4000, 94, 6, <13D03B0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Ghost Gem", 0, 662, 4000, 94, 7, <13D0420>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Steel Gem", 0, 663, 4000, 94, 8, <13D0480>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Fire Gem", 0, 664, 4000, 94, 10, <13D04F0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Water Gem", 0, 665, 4000, 94, 11, <13D0550>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Grass Gem", 0, 666, 4000, 94, 12, <13D05C0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Electric Gem", 0, 667, 4000, 94, 13, <13D0630>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Psychic Gem", 0, 668, 4000, 94, 14, <13D06A0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Ice Gem", 0, 669, 4000, 94, 15, <13D0710>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Dragon Gem", 0, 670, 4000, 94, 16, <13D0770>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Dark Gem", 0, 671, 4000, 94, 17, <13D07E0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Fairy Gem", 0, 672, 4000, 94, 23, <13D0850>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Wide Lens", 0, 673, 4000, 83, 10, <13CA470>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Muscle Band", 0, 674, 4000, 112, 0, <13CA390>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Wise Glasses", 0, 675, 4000, 119, 0, <13CA400>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Expert Belt", 0, 676, 4000, 92, 0, <13D0D70>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Light Clay", 0, 677, 4000, 82, 0, <13D0E50>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Life Orb", 0, 678, 4000, 74, 0, <13D08C0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Power Herb", 0, 679, 4000, 126, 0, <13D0C90>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Toxic Orb", 0, 680, 4000, 75, 0, <13D0930>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Flame Orb", 0, 681, 4000, 76, 0, <13D0990>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Quick Powder", 0, 682, 1000, 69, 0, <13CA5B0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Focus Sash", 0, 683, 4000, "May Endure Hit", 100, <13D0BC0>, 0, 1, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Zoom Lens", 0, 684, 4000, 124, 20, <13D1080>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Metronome", 0, 685, 4000, 111, 0, <13D0D00>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Iron Ball", 0, 686, 4000, 98, 0, <13D0EC0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Lagging Tail", 0, 687, 4000, 97, 0, <13D0F30>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Destiny Knot", 0, 688, 4000, 91, 0, <13D0C20>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Black Sludge", 0, 689, 4000, 77, 0, <13CA4D0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Icy Rock", 0, 690, 4000, 81, 0, <13D0B50>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Smooth Rock", 0, 691, 4000, 78, 0, <13D0A00>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Heat Rock", 0, 692, 4000, 80, 0, <13D0AE0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Damp Rock", 0, 693, 4000, 79, 0, <13D0A70>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Grip Claw", 0, 694, 4000, 108, 0, <13D10F0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Choice Scarf", 0, 695, 4000, "Choice Band", 2, <13CA540>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Choice Specs", 0, 696, 4000, "Choice Band", 1, <13CA320>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Sticky Barb", 0, 697, 4000, 117, 0, <13D1010>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Shed Shell", 0, 698, 4000, 115, 0, <13D0FA0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Big Root", 0, 699, 4000, 104, 0, <13D0DE0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Eviolite", 0, 700, 4000, 71, 0, <13D1160>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Float Stone", 0, 701, 4000, 107, 0, <13D1530>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Rocky Helmet", 0, 702, 4000, 68, 0, <13D11D0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Air Balloon", 0, 703, 4000, 103, 0, <13D1240>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Red Card", 0, 704, 4000, 113, 0, <13D12B0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Ring Target", 0, 705, 4000, 114, 0, <13D1390>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Binding Band", 0, 706, 4000, 99, 0, <13D1400>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Absorb Bulb", 0, 707, 4000, 102, 0, <13D1470>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Cell Battery", 0, 708, 4000, 105, 0, <13D14D0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Eject Button", 0, 709, 4000, 106, 0, <13D1320>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"WeaknessPol.", 0, 710, 1000, 85, 0, <13D15A0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Assault Vest", 0, 711, 1000, 70, 0, <13D1610>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"LuminousMoss", 0, 712, 4000, 109, 0, <13D16E0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Snowball", 0, 713, 4000, 116, 0, <13D1740>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Safe Goggles", 0, 714, 4000, 84, 0, <13D1680>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Adrenal Orb", 0, 715, 300, 125, 0, <13D17A0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Terrain Ext.", 0, 716, 4000, 118, 0, <13D19C0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Protect Pads", 0, 717, 4000, 101, 2, <13D1A30>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Electr. Seed", 0, 718, 4000, 120, 1, <13D1800>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Grassy Seed", 0, 719, 4000, 120, 2, <13D1870>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Misty Seed", 0, 720, 4000, 120, 3, <13D18E0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Psychic Seed", 0, 721, 4000, 120, 4, <13D1950>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Eject Pack", 0, 722, 4000, 132, 0, <13D1AA0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Room Service", 0, 723, 4000, 133, 0, <13D1B10>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Blunder Pol.", 0, 724, 4000, 134, 0, <13D1B70>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"HeavyDBoots", 0, 725, 4000, 135, 0, <13D1BE0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Ut. Umbrella", 0, 726, 4000, 136, 0, <13D1C50>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Throat Spray", 0, 727, 4000, 137, 0, <13D1CC0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Ability Pill", 0, 728, 2000, None, 0, <13E6AB0>, 0, 0, item, Party_Menu, <14870CD>, 0, <null>, 0
++"AbilityPatch", 0, 729, 4000, None, 1, <13E6C60>, 0, 30, item, Party_Menu, <14870CD>, 0, <null>, 0
++"Laprasite", 0, 730, 0, 73, 0, <798540>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Kinglerite", 0, 731, 0, 73, 0, <7AEDC0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Centiskite", 0, 732, 0, 73, 0, <7B0300>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Sandacodite", 0, 733, 0, 73, 0, <7B03C0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Butterfreite", 0, 734, 0, 73, 0, <7B0480>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Drednawite", 0, 735, 0, 73, 0, <7B0540>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Copperjaite", 0, 736, 0, 73, 0, <7B0600>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Garbadorite", 0, 737, 0, 73, 0, <7B06C0>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Machampite", 0, 738, 0, 73, 0, <7B0780>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Snorlaxite", 0, 739, 0, 73, 0, <7B0840>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Toxtricite", 0, 740, 0, 73, 0, <7B0900>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Free Space14", 0, 741, 0, None, 0, <2BD71C>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Free Space15", 0, 742, 0, None, 0, <2BD724>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Free Space16", 0, 743, 0, None, 0, <2BD72C>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Free Space17", 0, 744, 0, None, 0, <2BD734>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Free Space18", 0, 745, 0, None, 0, <2BD73C>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Free Space19", 0, 746, 0, None, 0, <2BD744>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Free Space20", 0, 747, 0, None, 0, <2BD74C>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Free Space21", 0, 748, 0, None, 0, <2BD754>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0
++"Free Space22", 0, 749, 0, None, 0, <2BD75C>, 0, 0, item, Bag_Menu, <0A2239>, 0, <null>, 0

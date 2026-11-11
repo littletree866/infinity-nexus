@@ -44,7 +44,7 @@
     ul, ol { padding-left: 25px; margin: 6px 0 14px; }
     li { margin-bottom: 3px; }
 
-    /* --- MAP SECTION --- */
+    
     .location-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; border-bottom: 1px solid #8fc98f; padding-bottom: 6px; }
     .location-header h2 { border-bottom: none; margin: 0; padding: 0; }
     .map-container {
@@ -56,7 +56,7 @@
     .map-caption { font-size: 0.8rem; font-weight: 600; color: #1f4a1f; padding: 6px 0 2px; margin: 0; }
     .map-placeholder { display: flex; align-items: center; justify-content: center; width: 100%; height: 140px; background: #dceadc; color: #4f7f4f; font-size: 0.8rem; font-weight: 500; border-radius: 4px; }
 
-    /* --- POINTS OF INTEREST TABLE --- */
+    
     .poi-table {
       width: calc(100% - 264px); 
       border-collapse: collapse; font-size: 0.9rem; background: #f2faf2; border: 1px solid #8fc98f; margin-top: 15px; margin-bottom: 20px;
@@ -72,7 +72,7 @@
       background: #000; border: 2px solid #fff; color: #fff; font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; line-height: 1; box-shadow: 0 1px 2px rgba(0,0,0,0.4);
     }
 
-    /* --- TOC --- */
+    
     .toc { background: #f2faf2; border: 1px solid #8fc98f; padding: 14px 22px 18px; margin: 0 0 24px; display: inline-block; min-width: 240px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0, 60, 0, 0.04); }
     .toc-title { font-size: 1.1rem; font-weight: bold; text-align: center; margin-bottom: 6px; color: #1f4a1f; }
     .toc ul { list-style: none; padding-left: 0; margin: 0; counter-reset: toc-counter; }
@@ -83,7 +83,7 @@
     .toc ul ul li { padding-left: 26px; }
     .toc ul ul li::before { counter-increment: sub-counter; content: counter(toc-counter) "." counter(sub-counter) "."; position: absolute; left: 2px; }
 
-    /* --- TABLES --- */
+    
     .table-green { background: #e6f2e6; border: 1px solid #6faf6f; border-collapse: collapse; margin: 8px 0 14px; width: 100%; border-radius: 6px; overflow: hidden; }
     .table-green th, .table-green td { border: 1px solid #5f9f5f; padding: 5px 10px; text-align: center; }
     .table-green th { background: #9fd09f; font-weight: 700; color: #0f3f0f; }
@@ -105,12 +105,12 @@
     .clearfix::after { content: ""; clear: both; display: table; }
     .clear-right { clear: right; }
 
-    /* --- FOOTER --- */
+    
     .footer-nav { display: flex; justify-content: space-between; align-items: center; border-top: 2px solid #8fc98f; padding-top: 14px; margin-top: 24px; font-size: 0.95rem; flex-wrap: wrap; gap: 8px; }
     .footer-nav a { font-weight: 500; padding: 4px 8px; border-radius: 4px; transition: "background" 0.2s; }
     .footer-nav a:hover { background: #e6f2e6; text-decoration: none; }
 
-    /* --- WIKI CARDS --- */
+    
     .wiki-card {
       width: 50%; min-width: unset; float: none; clear: none; margin: 14px 0 18px;
       border-radius: 18px; background: #90d76d; border: 2px solid #72b151;
@@ -131,7 +131,7 @@
     .wiki-card table td .item-mini-icon img { width: 100%; height: auto; object-fit: contain; }
     .grass-icon { height: 16px; vertical-align: middle; margin-right: 4px; }
 
-    /* --- BATTLE CARDS (Standard) --- */
+    
     .battle-card { width: 100%; max-width: 680px; margin: 16px 0 24px; border-radius: 16px; background: #f8f9fc; border: 2px solid #b8c4e0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); overflow: hidden; transition: box-shadow 0.2s; }
     .battle-card:hover { box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12); }
     .battle-card .card-header { background: #dce6f5; padding: 10px 16px; display: grid; grid-template-columns: 80px 1fr 80px; grid-template-rows: auto auto; column-gap: 12px; align-items: center; cursor: pointer; user-select: none; color: #1a1a1a; min-height: 90px; }
@@ -167,7 +167,7 @@
     .battle-card .pokemon-panel .type-row { display: flex; align-items: center; justify-content: center; gap: 3px; flex-wrap: nowrap; margin-top: 1px; }
     .battle-card .pokemon-panel .type-chip { padding: 2px 7px; border-radius: 4px; font-size: 0.6rem; font-weight: 700; color: #ffffff; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25); }
     
-    /* Type Colors */
+    
     .battle-card .pokemon-panel .type-chip.normal { background: #A8A878; }
     .battle-card .pokemon-panel .type-chip.flying { background: #A890F0; }
     .battle-card .pokemon-panel .type-chip.fire { background: #F08030; }
@@ -194,7 +194,7 @@
     .battle-card .move-name { font-size: 0.72rem; padding: 4px 3px; flex: 1; display: flex; align-items: center; justify-content: center; font-weight: 500; color: #1a2b4a; }
     .battle-card .move-type { font-size: 0.6rem; color: #ffffff; padding: 3px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
     
-    /* Move Colors */
+    
     .battle-card .move-type.normal { background: #A8A878; }
     .battle-card .move-type.fire { background: #F08030; }
     .battle-card .move-type.water { background: #6890F0; }
@@ -214,7 +214,7 @@
     .battle-card .move-type.steel { background: #B8B8D0; color: #1a1a1a; }
     .battle-card .move-type.fairy { background: #EE99AC; }
 
-    /* --- BATTLE CARD THEMES --- */
+    
     .battle-card.theme-blue .card-header { background: #dce6f5; }
     .battle-card.theme-blue .trainer-icon { border-color: #2a3f6e; background: #b0c4de; }
     .battle-card.theme-blue .battle-info, .battle-card.theme-blue .reward-box { background: #e8eef8; border-color: #c2d0e8; }
@@ -243,7 +243,7 @@
     .battle-card.theme-rock .toggle-btn:hover { background: #403324; }
     .battle-card.theme-rock .party-ball { border-color: #5c4a35; }
 
-    /* --- CONDENSED TRAINER LIST --- */
+    
     .trainer-list-container { 
       width: 50%; max-width: 600px; min-width: unset; float: none; clear: none; margin: 14px 0 18px;
       border-radius: 18px; background: #90d76d; border: 2px solid #72b151;
@@ -271,7 +271,7 @@
     .pokemon-list-row .p-item { font-size: 0.75rem; color: #666; display: block; text-align: right; width: 100px; }
     .trainer-list-footer { background: #c6eca9; padding: 8px; font-size: 0.75rem; text-align: center; color: #1a2b1a; border-radius: 0 0 12px 12px; }
 
-    /* --- RESPONSIVE --- */
+    
     @media (max-width: 820px) {
       .battle-card { max-width: 100%; }
       .wiki-card { min-width: unset; width: 100%; }
@@ -328,7 +328,7 @@
 
   <p>Welcome to Part 5 of the Pokémon Infinite Sun Walkthrough! In this section, we'll travel south from Cerulean City through Routes 5 and 6 to Vermilion City, explore the luxurious S.S. Anne, and take on the Vermilion Gym to earn the Thunder Badge.</p>
 
-  <!-- ROUTE 5 -->
+  
   <h2 id="route-5">Route 5</h2>
   <div class="clearfix">
     <div class="map-container">
@@ -346,7 +346,7 @@
       <tr><td><span class="poi-number">4</span></td><td>Gate to Saffron City (Locked)</td></tr>
     </table>
 
-    <!-- ENCOUNTER DATA SCRIPT (Route 5) -->
+    
     <script type="text/plain" id="encounter-data-route5">
 # 30%
 13, 16, Pidgey
@@ -393,7 +393,7 @@ Reward: ₽340
 
   </div>
 
-  <!-- ROUTE 6 -->
+  
   <h2 id="route-6">Route 6</h2>
   <div class="clearfix">
     <div class="map-container">
@@ -409,7 +409,7 @@ Reward: ₽340
       <tr><td><span class="poi-number">2</span></td><td>Path to Vermilion City (South)</td></tr>
     </table>
 
-    <!-- ENCOUNTER DATA SCRIPT (Route 6) -->
+    
     <script type="text/plain" id="encounter-data-route6">
 # 30%
 13, 16, Pidgey
@@ -448,7 +448,7 @@ Reward: ₽360
 
   </div>
 
-  <!-- VERMILION CITY -->
+  
   <h2 id="vermilion-city">Vermilion City</h2>
   <div class="clearfix">
     <div class="map-container">
@@ -517,7 +517,7 @@ Reward: ₽1200
 
 
 
-  <!-- VERMILION GYM -->
+  
   <h2 id="vermilion-gym">Vermilion Gym</h2>
   <div class="clearfix">
     <div class="map-container">
@@ -598,17 +598,17 @@ Reward: ₽3,240
   </div>
 </div>
 
-<!-- Image Lightbox Modal -->
+
 <div id="imageLightbox" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); align-items: center; justify-content: center; cursor: zoom-out; opacity: 0; transition: opacity 0.3s ease;">
   <img id="lightboxImg" src="" alt="Enlarged Image" style="max-width: 95%; max-height: 95%; border: 3px solid #fff; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); object-fit: contain;">
 </div>
 
 <script>
-  // Caches to prevent fetching the same data twice
+  
   const pokeCache = {};
   const moveCache = {};
 
-  // --- HELPER FUNCTIONS (API FETCHING) ---
+  
   async function getPokemonData(name) {
     let searchName = name.toLowerCase().replace(/\s+/g, '-');
 
@@ -652,7 +652,7 @@ Reward: ₽3,240
     }
   }
 
-  // --- UI TOGGLE FUNCTIONS ---
+  
   function toggleWikiCard(headerEl) {
     const card = headerEl.closest('.wiki-card');
     const body = card.querySelector('.wiki-body');
@@ -695,7 +695,7 @@ Reward: ₽3,240
     }
   }
 
-  // --- ENCOUNTER PARSER ---
+  
   async function generateEncounterCard(scriptId, containerId) {
     const rawText = document.getElementById(scriptId).textContent;
     const lines = rawText.trim().split('\n');
@@ -758,7 +758,7 @@ Reward: ₽3,240
     document.getElementById(containerId).innerHTML = cardHTML;
   }
 
-  // --- CONDENSED TRAINER LIST PARSER ---
+  
   async function generateTrainerList(scriptId, containerId) {
     const rawText = document.getElementById(scriptId).textContent;
     const blocks = rawText.split('---');
@@ -835,7 +835,7 @@ Reward: ₽3,240
     document.getElementById(containerId).innerHTML = html;
   }
 
-  // --- BATTLE PARSER ---
+  
   async function generateBattleCard(scriptId, containerId, cardId) {
     const rawText = document.getElementById(scriptId).textContent;
     const lines = rawText.trim().split('\n');
@@ -930,7 +930,7 @@ Reward: ₽3,240
     document.getElementById(containerId).innerHTML = cardHTML;
   }
 
-  // --- INITIALIZATION ON PAGE LOAD ---
+  
   document.addEventListener('DOMContentLoaded', async () => {
     await generateEncounterCard('encounter-data-route5', 'encounter-container-1');
     await generateEncounterCard('encounter-data-route6', 'encounter-container-2');
@@ -942,7 +942,7 @@ Reward: ₽3,240
     await generateTrainerList('team-data-vermilion-gym-trainers', 'battle-card-container-gym-trainers');
     await generateBattleCard('team-data-lt-surge', 'battle-card-container-lt-surge', 'battle-lt-surge');
 
-    // Lightbox Functionality
+    
     const lightbox = document.getElementById('imageLightbox');
     const lightboxImg = document.getElementById('lightboxImg');
     const mapImages = document.querySelectorAll('.map-container img');

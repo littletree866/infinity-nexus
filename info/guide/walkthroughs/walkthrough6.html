@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Walkthrough - Part 3 | Pokémon Infinite Sun</title>
+  <title>Walkthrough - Part 6 | Pokémon Infinite Sun</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="icon" type="image/png" href="../../icon.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,7 +44,7 @@
     ul, ol { padding-left: 25px; margin: 6px 0 14px; }
     li { margin-bottom: 3px; }
 
-    /* --- MAP SECTION --- */
+    
     .location-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; border-bottom: 1px solid #8fc98f; padding-bottom: 6px; }
     .location-header h2 { border-bottom: none; margin: 0; padding: 0; }
     .map-container {
@@ -56,7 +56,7 @@
     .map-caption { font-size: 0.8rem; font-weight: 600; color: #1f4a1f; padding: 6px 0 2px; margin: 0; }
     .map-placeholder { display: flex; align-items: center; justify-content: center; width: 100%; height: 140px; background: #dceadc; color: #4f7f4f; font-size: 0.8rem; font-weight: 500; border-radius: 4px; }
 
-    /* --- POINTS OF INTEREST TABLE --- */
+    
     .poi-table {
       width: calc(100% - 264px); 
       border-collapse: collapse; font-size: 0.9rem; background: #f2faf2; border: 1px solid #8fc98f; margin-top: 15px; margin-bottom: 20px;
@@ -72,7 +72,7 @@
       background: #000; border: 2px solid #fff; color: #fff; font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; line-height: 1; box-shadow: 0 1px 2px rgba(0,0,0,0.4);
     }
 
-    /* --- TOC --- */
+    
     .toc { background: #f2faf2; border: 1px solid #8fc98f; padding: 14px 22px 18px; margin: 0 0 24px; display: inline-block; min-width: 240px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0, 60, 0, 0.04); }
     .toc-title { font-size: 1.1rem; font-weight: bold; text-align: center; margin-bottom: 6px; color: #1f4a1f; }
     .toc ul { list-style: none; padding-left: 0; margin: 0; counter-reset: toc-counter; }
@@ -83,7 +83,7 @@
     .toc ul ul li { padding-left: 26px; }
     .toc ul ul li::before { counter-increment: sub-counter; content: counter(toc-counter) "." counter(sub-counter) "."; position: absolute; left: 2px; }
 
-    /* --- TABLES --- */
+    
     .table-green { background: #e6f2e6; border: 1px solid #6faf6f; border-collapse: collapse; margin: 8px 0 14px; width: 100%; border-radius: 6px; overflow: hidden; }
     .table-green th, .table-green td { border: 1px solid #5f9f5f; padding: 5px 10px; text-align: center; }
     .table-green th { background: #9fd09f; font-weight: 700; color: #0f3f0f; }
@@ -105,12 +105,12 @@
     .clearfix::after { content: ""; clear: both; display: table; }
     .clear-right { clear: right; }
 
-    /* --- FOOTER --- */
+    
     .footer-nav { display: flex; justify-content: space-between; align-items: center; border-top: 2px solid #8fc98f; padding-top: 14px; margin-top: 24px; font-size: 0.95rem; flex-wrap: wrap; gap: 8px; }
     .footer-nav a { font-weight: 500; padding: 4px 8px; border-radius: 4px; transition: "background" 0.2s; }
     .footer-nav a:hover { background: #e6f2e6; text-decoration: none; }
 
-    /* --- WIKI CARDS --- */
+    
     .wiki-card {
       width: 50%; min-width: unset; float: none; clear: none; margin: 14px 0 18px;
       border-radius: 18px; background: #90d76d; border: 2px solid #72b151;
@@ -131,7 +131,7 @@
     .wiki-card table td .item-mini-icon img { width: 100%; height: auto; object-fit: contain; }
     .grass-icon { height: 16px; vertical-align: middle; margin-right: 4px; }
 
-    /* --- BATTLE CARDS (Standard) --- */
+    
     .battle-card { width: 100%; max-width: 680px; margin: 16px 0 24px; border-radius: 16px; background: #f8f9fc; border: 2px solid #b8c4e0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); overflow: hidden; transition: box-shadow 0.2s; }
     .battle-card:hover { box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12); }
     .battle-card .card-header { background: #dce6f5; padding: 10px 16px; display: grid; grid-template-columns: 80px 1fr 80px; grid-template-rows: auto auto; column-gap: 12px; align-items: center; cursor: pointer; user-select: none; color: #1a1a1a; min-height: 90px; }
@@ -167,7 +167,7 @@
     .battle-card .pokemon-panel .type-row { display: flex; align-items: center; justify-content: center; gap: 3px; flex-wrap: nowrap; margin-top: 1px; }
     .battle-card .pokemon-panel .type-chip { padding: 2px 7px; border-radius: 4px; font-size: 0.6rem; font-weight: 700; color: #ffffff; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25); }
     
-    /* Type Colors */
+    
     .battle-card .pokemon-panel .type-chip.normal { background: #A8A878; }
     .battle-card .pokemon-panel .type-chip.flying { background: #A890F0; }
     .battle-card .pokemon-panel .type-chip.fire { background: #F08030; }
@@ -194,7 +194,7 @@
     .battle-card .move-name { font-size: 0.72rem; padding: 4px 3px; flex: 1; display: flex; align-items: center; justify-content: center; font-weight: 500; color: #1a2b4a; }
     .battle-card .move-type { font-size: 0.6rem; color: #ffffff; padding: 3px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
     
-    /* Move Colors */
+    
     .battle-card .move-type.normal { background: #A8A878; }
     .battle-card .move-type.fire { background: #F08030; }
     .battle-card .move-type.water { background: #6890F0; }
@@ -214,7 +214,7 @@
     .battle-card .move-type.steel { background: #B8B8D0; color: #1a1a1a; }
     .battle-card .move-type.fairy { background: #EE99AC; }
 
-    /* --- BATTLE CARD THEMES --- */
+    
     .battle-card.theme-blue .card-header { background: #dce6f5; }
     .battle-card.theme-blue .trainer-icon { border-color: #2a3f6e; background: #b0c4de; }
     .battle-card.theme-blue .battle-info, .battle-card.theme-blue .reward-box { background: #e8eef8; border-color: #c2d0e8; }
@@ -243,7 +243,7 @@
     .battle-card.theme-rock .toggle-btn:hover { background: #403324; }
     .battle-card.theme-rock .party-ball { border-color: #5c4a35; }
 
-    /* --- CONDENSED TRAINER LIST --- */
+    
     .trainer-list-container { 
       width: 50%; max-width: 600px; min-width: unset; float: none; clear: none; margin: 14px 0 18px;
       border-radius: 18px; background: #90d76d; border: 2px solid #72b151;
@@ -271,7 +271,7 @@
     .pokemon-list-row .p-item { font-size: 0.75rem; color: #666; display: block; text-align: right; width: 100px; }
     .trainer-list-footer { background: #c6eca9; padding: 8px; font-size: 0.75rem; text-align: center; color: #1a2b1a; border-radius: 0 0 12px 12px; }
 
-    /* --- RESPONSIVE --- */
+    
     @media (max-width: 820px) {
       .battle-card { max-width: 100%; }
       .wiki-card { min-width: unset; width: 100%; }
@@ -308,261 +308,255 @@
 
 <body>
 <div class="page">
-  <h1>Walkthrough - Part 3</h1>
+  <h1>Walkthrough - Part 6</h1>
 
   <div class="toc">
     <div class="toc-title">Contents</div>
     <ul>
-      <li><a href="#route-3">Route 3</a></li>
-      <li><a href="#mt-moon">Mt. Moon</a></li>
-      <li><a href="#route-4">Route 4</a></li>
-      <li><a href="#cerulean-city">Cerulean City</a></li>
+      <li><a href="#route-7">Route 7</a></li>
+      <li><a href="#celadon-city">Celadon City</a></li>
+      <li><a href="#celadon-gym">Celadon Gym (Erika)</a></li>
+      <li><a href="#rocket-hideout">Team Rocket Hideout</a></li>
     </ul>
   </div>
 
-  <p>Welcome to Part 3 of the Pokémon Infinite Sun Walkthrough! After defeating Brock, the journey continues east through Route 3, deep into the cavernous Mt. Moon, and finally into Cerulean City.</p>
+  <p>Welcome to Part 6 of the Pokémon Infinite Sun Walkthrough! In this section, we'll traverse Route 7 to reach the bustling Celadon City, take on the Celadon Gym to earn the Rainbow Badge, and infiltrate the secret Team Rocket Hideout beneath the Game Corner.</p>
 
-  <!-- ROUTE 3 -->
-  <h2 id="route-3">Route 3</h2>
+  
+  <h2 id="route-7">Route 7</h2>
   <div class="clearfix">
     <div class="map-container">
-      <img src="Route3.png" alt="Route 3">
-      <div class="map-caption">Route 3</div>
+      <img src="Route7.png" alt="Route 7">
+      <div class="map-caption">Route 7</div>
     </div>
     
-    <p>Route 3 is a winding path that leads from Pewter City to the entrance of Mt. Moon. You'll encounter several trainers here who are also heading toward the mountain. This is a great place to train your team before the cave.</p>
+    <p>Route 7 is a short path connecting Saffron City to Celadon City. The gate to Saffron City is locked for now, so just head straight east toward Celadon. You'll find a few trainers on the way and some decent Pokémon to catch.</p>
 
     <table class="poi-table">
       <tr><th>#</th><th>Point of Interest</th></tr>
-      <tr><td><span class="poi-number">1</span></td><td>Path to Pewter City (West)</td></tr>
-      <tr><td><span class="poi-number">2</span></td><td>Pokémon Center (Near Mt. Moon)</td></tr>
-      <tr><td><span class="poi-number">3</span></td><td>Mt. Moon Entrance (East)</td></tr>
+      <tr><td><span class="poi-number">1</span></td><td>Path to Saffron City (West - Locked)</td></tr>
+      <tr><td><span class="poi-number">2</span></td><td>Path to Celadon City (East)</td></tr>
     </table>
 
-    <!-- ENCOUNTER DATA SCRIPT (Route 3) -->
-    <script type="text/plain" id="encounter-data-route3">
+    
+    <script type="text/plain" id="encounter-data-route7">
 # 30%
-5, 8, Spearow
-5, 8, Pidgey
+17, 20, Pidgey
+17, 20, Oddish
 
 # 20%
-6, 9, Mankey
-6, 9, Rattata
+17, 20, Meowth
+17, 20, Bellsprout
 
 # 10%
-7, 10, Ekans
-7, 10, Sandshrew
-7, 10, Jigglypuff
+19, 22, Abra
+19, 22, Mankey
 
 # 5%
-8, 11, Nidoran-F
-8, 11, Nidoran-M
+19, 22, Vulpix
     </script>
 
     <div id="encounter-container-1"></div>
 
     <h3 class="clear-right">Trainers</h3>
-    <p>There are several trainers on this route. Make sure your team is healed up before tackling them.</p>
+    <p>A couple of trainers are waiting on this short route. They use mid-level Pokémon, so be prepared.</p>
 
-    <script type="text/plain" id="team-data-route3-list">
-Trainer: Youngster Calvin
-Sprite: youngster-gen4
-Reward: ₽144
-10 Spearow (IVs=0)@None
-10 Rattata (IVs=0)@None
+    <script type="text/plain" id="team-data-route7-list">
+Trainer: Picnicker Kelsey
+Sprite: picnicker
+Reward: ₽420
+20 Nidoran-M (IVs=0)@None
+20 Nidoran-F (IVs=0)@None
 ---
-Trainer: Bug Catcher Greg
-Sprite: bugcatcher
-Reward: ₽120
-9 Caterpie (IVs=0)@None
-9 Metapod (IVs=0)@None
-10 Kakuna (IVs=0)@None
-10 Weedle (IVs=0)@None
----
-Trainer: Lass Janice
-Sprite: lass-gen4
-Reward: ₽160
-10 Pidgey (IVs=0)@None
-10 Nidoran-F (IVs=0)@None
----
-Trainer: Youngster Ben
-Sprite: youngster-gen4
-Reward: ₽160
-11 Rattata (IVs=0)@None
-11 Ekans (IVs=0)@None
+Trainer: Camper Flint
+Sprite: camper
+Reward: ₽400
+20 Rattata (IVs=0)@None
+20 Ekans (IVs=0)@None
     </script>
 
-    <div id="trainer-list-container-route3"></div>
+    <div id="trainer-list-container-route7"></div>
 
   </div>
 
-  <!-- MT. MOON -->
-  <h2 id="mt-moon">Mt. Moon</h2>
+  
+  <h2 id="celadon-city">Celadon City</h2>
   <div class="clearfix">
     <div class="map-container">
-      <img src="MtMoon.png" alt="Mt. Moon">
-      <div class="map-caption">Mt. Moon</div>
+      <img src="CeladonCity.png" alt="Celadon City">
+      <div class="map-caption">Celadon City</div>
     </div>
 
-    <p>Mt. Moon is a large cave that connects Route 3 to Route 4. It is famous for its supply of Moon Stones and the fossilized Pokémon found within. The cave is filled with Zubat and Geodude, so bring plenty of Potions and Repels.</p>
-
-    <table class="poi-table">
-      <tr><th>#</th><th>Point of Interest</th></tr>
-      <tr><td><span class="poi-number">1</span></td><td>Entrance (From Route 3)</td></tr>
-      <tr><td><span class="poi-number">2</span></td><td>Fossil Room (Choose Helix or Dome)</td></tr>
-      <tr><td><span class="poi-number">3</span></td><td>Exit (To Route 4)</td></tr>
-    </table>
-
-    <!-- ENCOUNTER DATA SCRIPT (Mt. Moon) -->
-    <script type="text/plain" id="encounter-data-mtmoon">
-# 40%
-7, 10, Zubat
-
-# 30%
-8, 10, Geodude
-
-# 10%
-8, 12, Paras
-
-# 5%
-9, 11, Clefairy
-
-# 1%
-10, 12, Chansey
-    </script>
-
-    <div id="encounter-container-2"></div>
-
-    <h3 class="clear-right">Trainers</h3>
-    <p>Mt. Moon is crawling with Team Rocket grunts and other trainers looking to cause trouble.</p>
-
-    <script type="text/plain" id="team-data-mtmoon-list">
-Trainer: Bug Catcher Kent
-Sprite: bugcatcher
-Reward: ₽132
-11 Weedle (IVs=0)@None
-11 Kakuna (IVs=0)@None
----
-Trainer: Lass Iris
-Sprite: lass-gen4
-Reward: ₽192
-12 Clefairy (IVs=0)@None
-12 Oddish (IVs=0)@None
----
-Trainer: Super Nerd Jovan
-Sprite: supernerd
-Reward: ₽280
-13 Magnemite (IVs=0)@None
-13 Voltorb (IVs=0)@None
-13 Grimer (IVs=0)@None
----
-Trainer: Team Rocket Grunt
-Sprite: rocketgrunt
-Reward: ₽280
-12 Rattata (IVs=0)@None
-12 Zubat (IVs=0)@None
----
-Trainer: Super Nerd Miguel
-Sprite: supernerd
-Reward: ₽320
-14 Grimer (IVs=0)@None
-14 Voltorb (IVs=0)@None
-14 Koffing (IVs=0)@None
-    </script>
-
-    <div id="trainer-list-container-mtmoon"></div>
-
-  </div>
-
-  <!-- ROUTE 4 -->
-  <h2 id="route-4">Route 4</h2>
-  <div class="clearfix">
-    <div class="map-container">
-      <img src="Route4.png" alt="Route 4">
-      <div class="map-caption">Route 4</div>
-    </div>
-
-    <p>Route 4 is a short route that connects Mt. Moon to Cerulean City. It also has a small path leading to the entrance of the Cerulean Cave, which is currently blocked off. You will find a Move Tutor here in some versions of the game, but for now, just head east to Cerulean.</p>
-
-    <table class="poi-table">
-      <tr><th>#</th><th>Point of Interest</th></tr>
-      <tr><td><span class="poi-number">1</span></td><td>Exit from Mt. Moon (West)</td></tr>
-      <tr><td><span class="poi-number">2</span></td><td>Path to Cerulean City (East)</td></tr>
-    </table>
-
-    <!-- ENCOUNTER DATA SCRIPT (Route 4) -->
-    <script type="text/plain" id="encounter-data-route4">
-# 30%
-8, 12, Spearow
-8, 12, Rattata
-
-# 20%
-9, 12, Ekans
-9, 12, Sandshrew
-
-# 10%
-10, 14, Mankey
-
-# 5%
-10, 14, Spearow
-    </script>
-
-    <div id="encounter-container-3"></div>
-  </div>
-
-  <!-- CERULEAN CITY -->
-  <h2 id="cerulean-city">Cerulean City</h2>
-  <div class="clearfix">
-    <div class="map-container">
-      <img src="CeruleanCity.png" alt="Cerulean City">
-      <div class="map-caption">Cerulean City</div>
-    </div>
-
-    <p>Cerulean City is a beautiful city surrounded by water. It is home to the second Gym, led by Misty, a Water-type specialist. The city also features a Bike Shop, a Pokémon Center, and a Poké Mart.</p>
+    <p>Celadon City is the largest city in Kanto, known for its massive Department Store and the Game Corner. It is also home to the Celadon Gym, led by Erika, a Grass-type specialist. The city has a lot to explore, including the Celadon Condominiums and a man who will give you a free Eevee.</p>
 
     <table class="poi-table">
       <tr><th>#</th><th>Point of Interest</th></tr>
       <tr><td><span class="poi-number">1</span></td><td>Pokémon Center</td></tr>
-      <tr><td><span class="poi-number">2</span></td><td>Poké Mart</td></tr>
-      <tr><td><span class="poi-number">3</span></td><td>Cerulean Gym</td></tr>
-      <tr><td><span class="poi-number">4</span></td><td>Bike Shop</td></tr>
-      <tr><td><span class="poi-number">5</span></td><td>Cerulean Cave Entrance (Blocked)</td></tr>
-      <tr><td><span class="poi-number">6</span></td><td>Path to Route 24 (North)</td></tr>
-      <tr><td><span class="poi-number">7</span></td><td>Path to Route 5 (South)</td></tr>
+      <tr><td><span class="poi-number">2</span></td><td>Celadon Department Store</td></tr>
+      <tr><td><span class="poi-number">3</span></td><td>Celadon Gym</td></tr>
+      <tr><td><span class="poi-number">4</span></td><td>Game Corner</td></tr>
+      <tr><td><span class="poi-number">5</span></td><td>Celadon Condominiums (Eevee)</td></tr>
+      <tr><td><span class="poi-number">6</span></td><td>Path to Route 7 (West)</td></tr>
+      <tr><td><span class="poi-number">7</span></td><td>Path to Route 16 (West - Locked)</td></tr>
     </table>
   </div>
 
-  <h3 class="clear-right">Poké Mart</h3>
-  <p>Stock up on Super Potions and Repels before heading out to Routes 24 and 25, or challenging the Gym.</p>
+  <h3 class="clear-right">Celadon Department Store</h3>
+  <p>The Department Store is the biggest shop in the game. You can buy TMs, evolution stones, and a variety of Poké Balls here. Be sure to check out the rooftop for vending machines and a thirsty girl who will give you TMs in exchange for drinks.</p>
 
   <div class="shop-box">
-    <div class="shop-box-header">Poké Mart</div>
-    <div class="shop-item-row"><span class="name">Poké Ball</span><span class="price">₽200</span></div>
-    <div class="shop-item-row"><span class="name">Super Potion</span><span class="price">₽700</span></div>
-    <div class="shop-item-row"><span class="name">Repel</span><span class="price">₽350</span></div>
-    <div class="shop-item-row"><span class="name">Antidote</span><span class="price">₽100</span></div>
-    <div class="shop-item-row"><span class="name">Parlyz Heal</span><span class="price">₽200</span></div>
+    <div class="shop-box-header">2F: Trainer Items</div>
+    <div class="shop-item-row"><span class="name">TM05 Roar</span><span class="price">₽1000</span></div>
+    <div class="shop-item-row"><span class="name">TM09 Bullet Seed</span><span class="price">₽2000</span></div>
+    <div class="shop-item-row"><span class="name">TM17 Protect</span><span class="price">₽3000</span></div>
+    <div class="shop-item-row"><span class="name">TM32 Double Team</span><span class="price">₽2000</span></div>
+    <div class="shop-item-row"><span class="name">TM42 Facade</span><span class="price">₽3000</span></div>
+    <div class="shop-item-row"><span class="name">TM44 Rest</span><span class="price">₽3000</span></div>
+    <div class="shop-item-row"><span class="name">TM45 Attract</span><span class="price">₽3000</span></div>
   </div>
 
-  <p>Before challenging the Gym, you might want to explore the routes to the north (Routes 24 and 25) to train your team and help out Bill, the Pokémon Researcher. But if you're ready, the Cerulean Gym is just ahead!</p>
+  <h3>Game Corner & Rocket Hideout</h3>
+  <p>The Game Corner is a casino where you can play slots to win coins for rare Pokémon. However, there is a suspicious poster on the wall. If you interact with it, you'll discover a hidden switch that opens the entrance to the <strong>Team Rocket Hideout</strong>.</p>
+
+  <h3>Team Rocket Hideout</h3>
+  <p>The hideout is a maze filled with Team Rocket grunts. Your goal is to reach the bottom floor, defeat the boss, and retrieve the Silph Scope. The Silph Scope is required to identify the ghost in the Pokémon Tower in Lavender Town.</p>
+
+  <script type="text/plain" id="team-data-rocket-hideout-list">
+Trainer: Team Rocket Grunt
+Sprite: rocketgrunt
+Reward: ₽480
+21 Rattata (IVs=0)@None
+21 Zubat (IVs=0)@None
+---
+Trainer: Team Rocket Grunt
+Sprite: rocketgrunt
+Reward: ₽480
+21 Ekans (IVs=0)@None
+21 Koffing (IVs=0)@None
+---
+Trainer: Team Rocket Grunt
+Sprite: rocketgrunt
+Reward: ₽500
+22 Sandshrew (IVs=0)@None
+22 Drowzee (IVs=0)@None
+---
+Trainer: Boss Giovanni
+Sprite: giovanni
+Theme: rock
+Reward: ₽2400
+24 Onix (IVs=0)@None
+24 Rhyhorn (IVs=0)@None
+25 Kangaskhan (IVs=0)@None
+    </script>
+
+    <div id="trainer-list-container-rocket-hideout"></div>
+
+
+  
+  <h2 id="celadon-gym">Celadon Gym (Erika)</h2>
+  <div class="clearfix">
+    <div class="map-container">
+      <img src="CeladonGym.png" alt="Celadon Gym">
+      <div class="map-caption">Celadon Gym</div>
+    </div>
+
+    <p>The Celadon Gym specializes in Grass-type Pokémon. The Gym is filled with beautiful plants and flowers, but don't let that fool you—the trainers here are tough. Bring Fire, Flying, or Ice-types to make quick work of their teams.</p>
+  </div>
+
+  <h3 id="gym-trainers" class="clear-right">Gym Trainers</h3>
+  <p>Before you can challenge Erika, you must defeat three Gym Trainers. They all use Grass-types, so bring your best counter.</p>
+
+  <script type="text/plain" id="team-data-celadon-gym-trainers">
+Trainer: Lass Kay
+Sprite: lass
+Reward: ₽480
+24 Bellsprout (IVs=0)@None
+24 Weepinbell (IVs=0)@None
+---
+Trainer: Picnicker Tina
+Sprite: picnicker
+Reward: ₽500
+24 Bulbasaur (IVs=0)@None
+24 Ivysaur (IVs=0)@None
+---
+Trainer: Beauty Tamia
+Sprite: beauty
+Reward: ₽1500
+24 Oddish (IVs=0)@None
+24 Gloom (IVs=0)@None
+    </script>
+
+  <div id="battle-card-container-gym-trainers"></div>
+
+  <h3 id="erika">Gym Leader Erika</h3>
+  <p>Erika uses three Grass-type Pokémon: Victreebel, Tangela, and Vileplume. They are all high-level and have strong Grass moves like Razor Leaf and Sleep Powder. Use Fire or Flying moves to take them down quickly, and be prepared to heal status conditions.</p>
+
+  <script type="text/plain" id="team-data-erika">
+Trainer: Erika
+Sprite: erika
+Theme: green
+Location: Celadon Gym
+Reward: ₽2,900
+
+39 Whimsicott (IVs=60)@"Focus Sash"
+- Tailwind
+- Encore
+- "Dazzling Gleam"
+- "Fake Tears"
+
+39 Lilligant (IVs=39)@"Grass Gem"
+- "Quiver Dance"
+- "Sunny Day"
+- "Giga Drain"
+- Synthesis
+
+39 Shiftry (IVs=3)@"Life Orb"
+- "Fake Out"
+- "Leaf Blade"
+- "Swords Dance"
+- "Night Slash"
+
+39 Amoonguss (IVs=41)@Leftovers
+- Spore
+- "Rage Powder"
+- "Sludge Bomb"
+- "Giga Drain"
+
+40 Breloom (IVs=28)@"Toxic Orb"
+- Spore
+- "Mach Punch"
+- "Seed Bomb"
+- Facade
+
+41 Venusaur (IVs=39)@Venusaurite
+- "Leech Seed"
+- "Earth Power"
+- "Sludge Bomb"
+- "Giga Drain"
+
+  </script>
+
+  <div id="battle-card-container-erika"></div>
+
+  <p>Defeating Erika earns you the <strong>Rainbow Badge</strong>, which makes all Pokémon up to level 50 obey you, and allows the use of Strength outside of battle. She will also give you <strong>TM19 Giga Drain</strong>.</p>
 
   <div class="footer-nav">
-    <div><a href="walkthrough2.html">← Part 2: Viridian Forest to Pewter Gym</a></div>
-    <div><a href="walkthrough4.html">Part 4: Cerulean Gym and Routes 24 & 25</a> →</div>
+    <div><a href="walkthrough5.html">← Part 5: Vermilion City and the S.S. Anne</a></div>
+    <div><a href="walkthrough7.html">Part 7: The Pokémon Tower</a> →</div>
   </div>
 </div>
 
-<!-- Image Lightbox Modal -->
+
 <div id="imageLightbox" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); align-items: center; justify-content: center; cursor: zoom-out; opacity: 0; transition: opacity 0.3s ease;">
   <img id="lightboxImg" src="" alt="Enlarged Image" style="max-width: 95%; max-height: 95%; border: 3px solid #fff; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); object-fit: contain;">
 </div>
 
 <script>
-  // Caches to prevent fetching the same data twice
+  
   const pokeCache = {};
   const moveCache = {};
 
-  // --- HELPER FUNCTIONS (API FETCHING) ---
+  
   async function getPokemonData(name) {
     let searchName = name.toLowerCase().replace(/\s+/g, '-');
 
@@ -606,7 +600,7 @@ Reward: ₽320
     }
   }
 
-  // --- UI TOGGLE FUNCTIONS ---
+  
   function toggleWikiCard(headerEl) {
     const card = headerEl.closest('.wiki-card');
     const body = card.querySelector('.wiki-body');
@@ -649,7 +643,7 @@ Reward: ₽320
     }
   }
 
-  // --- ENCOUNTER PARSER ---
+  
   async function generateEncounterCard(scriptId, containerId) {
     const rawText = document.getElementById(scriptId).textContent;
     const lines = rawText.trim().split('\n');
@@ -712,7 +706,7 @@ Reward: ₽320
     document.getElementById(containerId).innerHTML = cardHTML;
   }
 
-  // --- CONDENSED TRAINER LIST PARSER ---
+  
   async function generateTrainerList(scriptId, containerId) {
     const rawText = document.getElementById(scriptId).textContent;
     const blocks = rawText.split('---');
@@ -759,7 +753,6 @@ Reward: ₽320
           </div>`;
       }
 
-      // Direct link to Pokemon Showdown's official sprites
       const trainerImg = `https://play.pokemonshowdown.com/sprites/trainers/${trainerInfo.sprite}.png`;
       const fallbackImg = `https://play.pokemonshowdown.com/sprites/trainers/blue.png`;
 
@@ -790,7 +783,7 @@ Reward: ₽320
     document.getElementById(containerId).innerHTML = html;
   }
 
-  // --- BATTLE PARSER ---
+  
   async function generateBattleCard(scriptId, containerId, cardId) {
     const rawText = document.getElementById(scriptId).textContent;
     const lines = rawText.trim().split('\n');
@@ -861,7 +854,6 @@ Reward: ₽320
       else partyBalls += `<span class="party-ball"></span>`;
     }
 
-    // Direct link to Pokemon Showdown's official sprites
     const trainerImg = `https://play.pokemonshowdown.com/sprites/trainers/${trainerInfo.sprite}.png`;
     const fallbackImg = `https://play.pokemonshowdown.com/sprites/trainers/blue.png`;
 
@@ -886,112 +878,16 @@ Reward: ₽320
     document.getElementById(containerId).innerHTML = cardHTML;
   }
 
-  // --- BATTLE PARSER ---
-  async function generateBattleCard(scriptId, containerId, cardId) {
-    const rawText = document.getElementById(scriptId).textContent;
-    const lines = rawText.trim().split('\n');
-    let trainerInfo = { trainer: "Trainer", location: "Unknown", reward: "???", sprite: "blue", theme: "blue" };
-    let team = [];
-    let currentPokemon = null;
-
-    lines.forEach(line => {
-      line = line.trim();
-      if (!line) return;
-      if (line.startsWith("Trainer:")) trainerInfo.trainer = line.replace("Trainer:", "").trim();
-      else if (line.startsWith("Sprite:")) trainerInfo.sprite = line.replace("Sprite:", "").trim();
-      else if (line.startsWith("Theme:")) trainerInfo.theme = line.replace("Theme:", "").trim();
-      else if (line.startsWith("Location:")) trainerInfo.location = line.replace("Location:", "").trim();
-      else if (line.startsWith("Reward:")) trainerInfo.reward = line.replace("Reward:", "").trim();
-      else if (line.match(/^\d+\s+[A-Za-z]+/)) {
-        if (currentPokemon) team.push(currentPokemon);
-        let cleanLine = line.replace(/\(.*?\)/g, '').replace(/@.*$/, '').trim();
-        let parts = cleanLine.split(/\s+/);
-        let level = parts[0];
-        let name = parts.slice(1).join(" ");
-        let itemMatch = line.match(/@["']?(.+?)["']?$/);
-        let item = itemMatch ? itemMatch[1].replace(/["']/g, '') : "None";
-        currentPokemon = { name: name, level: level, item: item, moves: [] };
-      } else if (line.startsWith("-")) {
-        let moveName = line.replace("-", "").replace(/["']/g, '').trim();
-        if (moveName && moveName !== "-") currentPokemon.moves.push(moveName);
-      }
-    });
-    if (currentPokemon) team.push(currentPokemon);
-
-    let teamHtml = "";
-    for (const pkmn of team) {
-      const pData = await getPokemonData(pkmn.name);
-      let typesHtml = pData.types.map(t => `<span class="type-chip ${t}">${t.charAt(0).toUpperCase() + t.slice(1)}</span>`).join("");
-      
-      let displayName = pkmn.name.replace(/^(Alolan|Galarian)\s+/i, '');
-
-      let movesHtml = "";
-      for (let i = 0; i < 4; i++) {
-        if (pkmn.moves[i]) {
-          let mName = pkmn.moves[i];
-          let mType = await getMoveData(mName);
-          movesHtml += `<div class="move-box"><div class="move-name">${mName}</div><div class="move-type ${mType}">${mType}</div></div>`;
-        } else {
-          movesHtml += `<div class="move-box empty"></div>`;
-        }
-      }
-      teamHtml += `
-      <div class="pokemon-panel">
-        <div class="pokemon-top">
-          <div class="pokemon-image"><img src="${pData.img}" alt="${pkmn.name}"></div>
-          <div class="pokemon-details">
-            <div class="pokemon-name">${displayName} Lv.${pkmn.level}</div>
-            <div class="detail-label">Types</div>
-            <div class="type-row">${typesHtml}</div>
-            <div class="detail-label">Held item</div>
-            <div class="held-item">${pkmn.item}</div>
-          </div>
-        </div>
-        <div class="moves-grid">${movesHtml}</div>
-      </div>`;
-    }
-
-    let partyBalls = "";
-    for (let i = 0; i < 6; i++) {
-      if (i < team.length) partyBalls += `<span class="party-ball active"></span>`;
-      else partyBalls += `<span class="party-ball"></span>`;
-    }
-
-    const trainerImg = `https://cdn.jsdelivr.net/gh/pkmn/ps@main/img/sprites/trainers/${trainerInfo.sprite}.png`;
-    // Fallback added here for the card image
-    const fallbackImg = `https://cdn.jsdelivr.net/gh/pkmn/ps@main/img/sprites/trainers/blue.png`;
-
-    const cardHTML = `
-    <div class="battle-card theme-${trainerInfo.theme}" id="${cardId}">
-      <div class="card-header" onclick="toggleBattle('${cardId}')">
-        <div class="trainer-icon"><img src="${trainerImg}" alt="${trainerInfo.trainer}" onerror="this.src='${fallbackImg}'"></div>
-        <div class="battle-info">
-          <div class="trainer-class">Trainer</div>
-          <div class="trainer-name">${trainerInfo.trainer}</div>
-          <div class="location">${trainerInfo.location}</div>
-          <div class="game">Infinite Sun</div>
-        </div>
-        <div class="reward-box"><div class="reward-label">Reward</div><div class="reward-value">${trainerInfo.reward}</div></div>
-        <div class="party-display">${partyBalls}</div>
-        <button class="toggle-btn" onclick="event.stopPropagation(); toggleBattle('${cardId}')">[Expand]</button>
-      </div>
-      <div class="card-body hidden" id="${cardId}-body">
-        <div class="team-grid">${teamHtml}</div>
-      </div>
-    </div>`;
-    document.getElementById(containerId).innerHTML = cardHTML;
-  }
-
-  // --- INITIALIZATION ON PAGE LOAD ---
+  
   document.addEventListener('DOMContentLoaded', async () => {
-    await generateEncounterCard('encounter-data-route3', 'encounter-container-1');
-    await generateEncounterCard('encounter-data-mtmoon', 'encounter-container-2');
-    await generateEncounterCard('encounter-data-route4', 'encounter-container-3');
+    await generateEncounterCard('encounter-data-route7', 'encounter-container-1');
+    await generateTrainerList('team-data-route7-list', 'trainer-list-container-route7');
+    await generateTrainerList('team-data-rocket-hideout-list', 'trainer-list-container-rocket-hideout');
 
-    await generateTrainerList('team-data-route3-list', 'trainer-list-container-route3');
-    await generateTrainerList('team-data-mtmoon-list', 'trainer-list-container-mtmoon');
+    await generateTrainerList('team-data-celadon-gym-trainers', 'battle-card-container-gym-trainers');
+    await generateBattleCard('team-data-erika', 'battle-card-container-erika', 'battle-erika');
 
-    // Lightbox Functionality
+    
     const lightbox = document.getElementById('imageLightbox');
     const lightboxImg = document.getElementById('lightboxImg');
     const mapImages = document.querySelectorAll('.map-container img');

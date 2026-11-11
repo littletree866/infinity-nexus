@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Walkthrough - Part 6 | Pokémon Infinite Sun</title>
+  <title>Walkthrough - Part 7 | Pokémon Infinite Sun</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="icon" type="image/png" href="../../icon.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,7 +44,7 @@
     ul, ol { padding-left: 25px; margin: 6px 0 14px; }
     li { margin-bottom: 3px; }
 
-    /* --- MAP SECTION --- */
+    
     .location-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; border-bottom: 1px solid #8fc98f; padding-bottom: 6px; }
     .location-header h2 { border-bottom: none; margin: 0; padding: 0; }
     .map-container {
@@ -56,7 +56,7 @@
     .map-caption { font-size: 0.8rem; font-weight: 600; color: #1f4a1f; padding: 6px 0 2px; margin: 0; }
     .map-placeholder { display: flex; align-items: center; justify-content: center; width: 100%; height: 140px; background: #dceadc; color: #4f7f4f; font-size: 0.8rem; font-weight: 500; border-radius: 4px; }
 
-    /* --- POINTS OF INTEREST TABLE --- */
+    
     .poi-table {
       width: calc(100% - 264px); 
       border-collapse: collapse; font-size: 0.9rem; background: #f2faf2; border: 1px solid #8fc98f; margin-top: 15px; margin-bottom: 20px;
@@ -72,7 +72,7 @@
       background: #000; border: 2px solid #fff; color: #fff; font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; line-height: 1; box-shadow: 0 1px 2px rgba(0,0,0,0.4);
     }
 
-    /* --- TOC --- */
+    
     .toc { background: #f2faf2; border: 1px solid #8fc98f; padding: 14px 22px 18px; margin: 0 0 24px; display: inline-block; min-width: 240px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0, 60, 0, 0.04); }
     .toc-title { font-size: 1.1rem; font-weight: bold; text-align: center; margin-bottom: 6px; color: #1f4a1f; }
     .toc ul { list-style: none; padding-left: 0; margin: 0; counter-reset: toc-counter; }
@@ -83,7 +83,7 @@
     .toc ul ul li { padding-left: 26px; }
     .toc ul ul li::before { counter-increment: sub-counter; content: counter(toc-counter) "." counter(sub-counter) "."; position: absolute; left: 2px; }
 
-    /* --- TABLES --- */
+    
     .table-green { background: #e6f2e6; border: 1px solid #6faf6f; border-collapse: collapse; margin: 8px 0 14px; width: 100%; border-radius: 6px; overflow: hidden; }
     .table-green th, .table-green td { border: 1px solid #5f9f5f; padding: 5px 10px; text-align: center; }
     .table-green th { background: #9fd09f; font-weight: 700; color: #0f3f0f; }
@@ -105,12 +105,12 @@
     .clearfix::after { content: ""; clear: both; display: table; }
     .clear-right { clear: right; }
 
-    /* --- FOOTER --- */
+    
     .footer-nav { display: flex; justify-content: space-between; align-items: center; border-top: 2px solid #8fc98f; padding-top: 14px; margin-top: 24px; font-size: 0.95rem; flex-wrap: wrap; gap: 8px; }
     .footer-nav a { font-weight: 500; padding: 4px 8px; border-radius: 4px; transition: "background" 0.2s; }
     .footer-nav a:hover { background: #e6f2e6; text-decoration: none; }
 
-    /* --- WIKI CARDS --- */
+    
     .wiki-card {
       width: 50%; min-width: unset; float: none; clear: none; margin: 14px 0 18px;
       border-radius: 18px; background: #90d76d; border: 2px solid #72b151;
@@ -131,7 +131,7 @@
     .wiki-card table td .item-mini-icon img { width: 100%; height: auto; object-fit: contain; }
     .grass-icon { height: 16px; vertical-align: middle; margin-right: 4px; }
 
-    /* --- BATTLE CARDS (Standard) --- */
+    
     .battle-card { width: 100%; max-width: 680px; margin: 16px 0 24px; border-radius: 16px; background: #f8f9fc; border: 2px solid #b8c4e0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); overflow: hidden; transition: box-shadow 0.2s; }
     .battle-card:hover { box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12); }
     .battle-card .card-header { background: #dce6f5; padding: 10px 16px; display: grid; grid-template-columns: 80px 1fr 80px; grid-template-rows: auto auto; column-gap: 12px; align-items: center; cursor: pointer; user-select: none; color: #1a1a1a; min-height: 90px; }
@@ -167,7 +167,7 @@
     .battle-card .pokemon-panel .type-row { display: flex; align-items: center; justify-content: center; gap: 3px; flex-wrap: nowrap; margin-top: 1px; }
     .battle-card .pokemon-panel .type-chip { padding: 2px 7px; border-radius: 4px; font-size: 0.6rem; font-weight: 700; color: #ffffff; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25); }
     
-    /* Type Colors */
+    
     .battle-card .pokemon-panel .type-chip.normal { background: #A8A878; }
     .battle-card .pokemon-panel .type-chip.flying { background: #A890F0; }
     .battle-card .pokemon-panel .type-chip.fire { background: #F08030; }
@@ -194,7 +194,7 @@
     .battle-card .move-name { font-size: 0.72rem; padding: 4px 3px; flex: 1; display: flex; align-items: center; justify-content: center; font-weight: 500; color: #1a2b4a; }
     .battle-card .move-type { font-size: 0.6rem; color: #ffffff; padding: 3px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
     
-    /* Move Colors */
+    
     .battle-card .move-type.normal { background: #A8A878; }
     .battle-card .move-type.fire { background: #F08030; }
     .battle-card .move-type.water { background: #6890F0; }
@@ -214,7 +214,7 @@
     .battle-card .move-type.steel { background: #B8B8D0; color: #1a1a1a; }
     .battle-card .move-type.fairy { background: #EE99AC; }
 
-    /* --- BATTLE CARD THEMES --- */
+    
     .battle-card.theme-blue .card-header { background: #dce6f5; }
     .battle-card.theme-blue .trainer-icon { border-color: #2a3f6e; background: #b0c4de; }
     .battle-card.theme-blue .battle-info, .battle-card.theme-blue .reward-box { background: #e8eef8; border-color: #c2d0e8; }
@@ -243,7 +243,7 @@
     .battle-card.theme-rock .toggle-btn:hover { background: #403324; }
     .battle-card.theme-rock .party-ball { border-color: #5c4a35; }
 
-    /* --- CONDENSED TRAINER LIST --- */
+    
     .trainer-list-container { 
       width: 50%; max-width: 600px; min-width: unset; float: none; clear: none; margin: 14px 0 18px;
       border-radius: 18px; background: #90d76d; border: 2px solid #72b151;
@@ -271,7 +271,130 @@
     .pokemon-list-row .p-item { font-size: 0.75rem; color: #666; display: block; text-align: right; width: 100px; }
     .trainer-list-footer { background: #c6eca9; padding: 8px; font-size: 0.75rem; text-align: center; color: #1a2b1a; border-radius: 0 0 12px 12px; }
 
-    /* --- RESPONSIVE --- */
+    
+    .wild-card {
+      width: 100%;
+      max-width: 420px;
+      margin: 16px 0 24px;
+      background: #b3805d;
+      border: 2px solid #8c5f40;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      color: #333;
+    }
+
+    .wild-card .top-section {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .wild-card .sprite-container {
+      background: #ffffff;
+      border-radius: 10px;
+      border: 2px solid #d1c0ab;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      height: 120px;
+    }
+
+    .wild-card .sprite-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .wild-card .name-badge {
+      background: #ffffff;
+      border-radius: 8px;
+      border: 1px solid #d1c0ab;
+      text-align: center;
+      padding: 4px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-top: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .wild-card .gender-icon {
+      color: #F85888;
+      font-weight: bold;
+    }
+
+    .wild-card .details-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .wild-card .detail-header {
+      font-size: 0.75rem;
+      color: #5c4a35;
+      margin-top: 4px;
+    }
+
+    .wild-card .type-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #fff;
+      margin-top: 2px;
+      text-transform: capitalize;
+    }
+
+    .wild-card .type-badge.ground { background: #E0C068; color: #1a1a1a; }
+    .wild-card .type-badge.normal { background: #A8A878; }
+
+    .wild-card .ability-text, .wild-card .item-text {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-top: 2px;
+    }
+
+    .wild-card .moves-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .wild-card .move-box {
+      background: #ffffff;
+      border-radius: 8px;
+      border: 1px solid #d1c0ab;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .wild-card .move-name {
+      padding: 8px 4px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #1a1a1a;
+    }
+
+    .wild-card .move-type {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #ffffff;
+      padding: 4px;
+      text-transform: capitalize;
+    }
+
+    .wild-card .move-type.normal { background: #A8A878; }
+    .wild-card .move-type.ground { background: #8B4513; }
+
+    
     @media (max-width: 820px) {
       .battle-card { max-width: 100%; }
       .wiki-card { min-width: unset; width: 100%; }
@@ -308,255 +431,275 @@
 
 <body>
 <div class="page">
-  <h1>Walkthrough - Part 6</h1>
+  <h1>Walkthrough - Part 7</h1>
 
   <div class="toc">
     <div class="toc-title">Contents</div>
     <ul>
-      <li><a href="#route-7">Route 7</a></li>
-      <li><a href="#celadon-city">Celadon City</a></li>
-      <li><a href="#celadon-gym">Celadon Gym (Erika)</a></li>
-      <li><a href="#rocket-hideout">Team Rocket Hideout</a></li>
+      <li><a href="#lavender-town">Lavender Town</a></li>
+      <li><a href="#pokemon-tower">Pokémon Tower</a>
+        <ul>
+          <li><a href="#tower-trainers">Tower Trainers</a></li>
+          <li><a href="#rival-battle">Rival Battle</a></li>
+          <li><a href="#ghost-marowak">The Ghost Marowak</a></li>
+        </ul>
+      </li>
+      <li><a href="#mr-fuji">Mr. Fuji</a></li>
     </ul>
   </div>
 
-  <p>Welcome to Part 6 of the Pokémon Infinite Sun Walkthrough! In this section, we'll traverse Route 7 to reach the bustling Celadon City, take on the Celadon Gym to earn the Rainbow Badge, and infiltrate the secret Team Rocket Hideout beneath the Game Corner.</p>
+  <p>Welcome to Part 7 of the Pokémon Infinite Sun Walkthrough! After dealing with Team Rocket in Celadon City and obtaining the Silph Scope, we now head to Lavender Town to investigate the haunted Pokémon Tower and rescue Mr. Fuji.</p>
 
-  <!-- ROUTE 7 -->
-  <h2 id="route-7">Route 7</h2>
+  
+  <h2 id="lavender-town">Lavender Town</h2>
   <div class="clearfix">
     <div class="map-container">
-      <img src="Route7.png" alt="Route 7">
-      <div class="map-caption">Route 7</div>
+      <img src="LavenderTown.png" alt="Lavender Town">
+      <div class="map-caption">Lavender Town</div>
     </div>
     
-    <p>Route 7 is a short path connecting Saffron City to Celadon City. The gate to Saffron City is locked for now, so just head straight east toward Celadon. You'll find a few trainers on the way and some decent Pokémon to catch.</p>
-
-    <table class="poi-table">
-      <tr><th>#</th><th>Point of Interest</th></tr>
-      <tr><td><span class="poi-number">1</span></td><td>Path to Saffron City (West - Locked)</td></tr>
-      <tr><td><span class="poi-number">2</span></td><td>Path to Celadon City (East)</td></tr>
-    </table>
-
-    <!-- ENCOUNTER DATA SCRIPT (Route 7) -->
-    <script type="text/plain" id="encounter-data-route7">
-# 30%
-17, 20, Pidgey
-17, 20, Oddish
-
-# 20%
-17, 20, Meowth
-17, 20, Bellsprout
-
-# 10%
-19, 22, Abra
-19, 22, Mankey
-
-# 5%
-19, 22, Vulpix
-    </script>
-
-    <div id="encounter-container-1"></div>
-
-    <h3 class="clear-right">Trainers</h3>
-    <p>A couple of trainers are waiting on this short route. They use mid-level Pokémon, so be prepared.</p>
-
-    <script type="text/plain" id="team-data-route7-list">
-Trainer: Picnicker Kelsey
-Sprite: picnicker
-Reward: ₽420
-20 Nidoran-M (IVs=0)@None
-20 Nidoran-F (IVs=0)@None
----
-Trainer: Camper Flint
-Sprite: camper
-Reward: ₽400
-20 Rattata (IVs=0)@None
-20 Ekans (IVs=0)@None
-    </script>
-
-    <div id="trainer-list-container-route7"></div>
-
-  </div>
-
-  <!-- CELADON CITY -->
-  <h2 id="celadon-city">Celadon City</h2>
-  <div class="clearfix">
-    <div class="map-container">
-      <img src="CeladonCity.png" alt="Celadon City">
-      <div class="map-caption">Celadon City</div>
-    </div>
-
-    <p>Celadon City is the largest city in Kanto, known for its massive Department Store and the Game Corner. It is also home to the Celadon Gym, led by Erika, a Grass-type specialist. The city has a lot to explore, including the Celadon Condominiums and a man who will give you a free Eevee.</p>
+    <p>Lavender Town is a small, quiet town known for its Pokémon Tower, a graveyard for deceased Pokémon. The town has a somber atmosphere, and the locals are currently terrified by ghosts that have appeared in the tower.</p>
 
     <table class="poi-table">
       <tr><th>#</th><th>Point of Interest</th></tr>
       <tr><td><span class="poi-number">1</span></td><td>Pokémon Center</td></tr>
-      <tr><td><span class="poi-number">2</span></td><td>Celadon Department Store</td></tr>
-      <tr><td><span class="poi-number">3</span></td><td>Celadon Gym</td></tr>
-      <tr><td><span class="poi-number">4</span></td><td>Game Corner</td></tr>
-      <tr><td><span class="poi-number">5</span></td><td>Celadon Condominiums (Eevee)</td></tr>
-      <tr><td><span class="poi-number">6</span></td><td>Path to Route 7 (West)</td></tr>
-      <tr><td><span class="poi-number">7</span></td><td>Path to Route 16 (West - Locked)</td></tr>
+      <tr><td><span class="poi-number">2</span></td><td>Poké Mart</td></tr>
+      <tr><td><span class="poi-number">3</span></td><td>Pokémon Tower</td></tr>
+      <tr><td><span class="poi-number">4</span></td><td>Mr. Fuji's House</td></tr>
+      <tr><td><span class="poi-number">5</span></td><td>Path to Route 8 (West)</td></tr>
+      <tr><td><span class="poi-number">6</span></td><td>Path to Route 12 (South)</td></tr>
     </table>
   </div>
 
-  <h3 class="clear-right">Celadon Department Store</h3>
-  <p>The Department Store is the biggest shop in the game. You can buy TMs, evolution stones, and a variety of Poké Balls here. Be sure to check out the rooftop for vending machines and a thirsty girl who will give you TMs in exchange for drinks.</p>
+  <h3 class="clear-right">Poké Mart</h3>
+  <p>Stock up on Super Potions, Revives, and Escape Ropes before entering the tower.</p>
 
   <div class="shop-box">
-    <div class="shop-box-header">2F: Trainer Items</div>
-    <div class="shop-item-row"><span class="name">TM05 Roar</span><span class="price">₽1000</span></div>
-    <div class="shop-item-row"><span class="name">TM09 Bullet Seed</span><span class="price">₽2000</span></div>
-    <div class="shop-item-row"><span class="name">TM17 Protect</span><span class="price">₽3000</span></div>
-    <div class="shop-item-row"><span class="name">TM32 Double Team</span><span class="price">₽2000</span></div>
-    <div class="shop-item-row"><span class="name">TM42 Facade</span><span class="price">₽3000</span></div>
-    <div class="shop-item-row"><span class="name">TM44 Rest</span><span class="price">₽3000</span></div>
-    <div class="shop-item-row"><span class="name">TM45 Attract</span><span class="price">₽3000</span></div>
+    <div class="shop-box-header">Poké Mart</div>
+    <div class="shop-item-row"><span class="name">Poké Ball</span><span class="price">₽200</span></div>
+    <div class="shop-item-row"><span class="name">Great Ball</span><span class="price">₽600</span></div>
+    <div class="shop-item-row"><span class="name">Super Potion</span><span class="price">₽700</span></div>
+    <div class="shop-item-row"><span class="name">Revive</span><span class="price">₽1500</span></div>
+    <div class="shop-item-row"><span class="name">Escape Rope</span><span class="price">₽550</span></div>
   </div>
 
-  <h3>Game Corner & Rocket Hideout</h3>
-  <p>The Game Corner is a casino where you can play slots to win coins for rare Pokémon. However, there is a suspicious poster on the wall. If you interact with it, you'll discover a hidden switch that opens the entrance to the <strong>Team Rocket Hideout</strong>.</p>
+  <h3>Pokémon Tower</h3>
+  <p>The Pokémon Tower is a multi-story building where trainers come to mourn their lost Pokémon. However, Team Rocket has infiltrated the tower, and a powerful ghost is blocking the path to the top. You will need the Silph Scope to identify and battle this ghost.</p>
 
-  <h3>Team Rocket Hideout</h3>
-  <p>The hideout is a maze filled with Team Rocket grunts. Your goal is to reach the bottom floor, defeat the boss, and retrieve the Silph Scope. The Silph Scope is required to identify the ghost in the Pokémon Tower in Lavender Town.</p>
+  <table class="poi-table">
+      <tr><th>#</th><th>Point of Interest</th></tr>
+      <tr><td><span class="poi-number">1</span></td><td>Entrance</td></tr>
+      <tr><td><span class="poi-number">2</span></td><td>Healing Channeler (3F)</td></tr>
+      <tr><td><span class="poi-number">3</span></td><td>Ghost Marowak (5F)</td></tr>
+      <tr><td><span class="poi-number">4</span></td><td>Mr. Fuji's Location (7F)</td></tr>
+    </table>
 
-  <script type="text/plain" id="team-data-rocket-hideout-list">
-Trainer: Team Rocket Grunt
-Sprite: rocketgrunt
-Reward: ₽480
-21 Rattata (IVs=0)@None
-21 Zubat (IVs=0)@None
+  <h3 id="tower-trainers">Tower Trainers</h3>
+  <p>The tower is filled with Channelers, who use Ghost-type Pokémon. Ghost-types are immune to Normal and Fighting moves, so bring a Pokémon with a Dark, Ghost, or Psychic move. You'll also encounter several Team Rocket grunts.</p>
+
+  <script type="text/plain" id="team-data-tower-list">
+Trainer: Medium Hope
+Sprite: medium
+Reward: ₽600
+22 Gastly (IVs=0)@None
+22 Haunter (IVs=0)@None
+---
+Trainer: Medium Patricia
+Sprite: medium
+Reward: ₽600
+22 Gastly (IVs=0)@None
+22 Gastly (IVs=0)@None
 ---
 Trainer: Team Rocket Grunt
 Sprite: rocketgrunt
-Reward: ₽480
-21 Ekans (IVs=0)@None
-21 Koffing (IVs=0)@None
+Reward: ₽560
+23 Zubat (IVs=0)@None
+23 Golbat (IVs=0)@None
+---
+Trainer: Medium Carly
+Sprite: medium
+Reward: ₽600
+22 Gastly (IVs=0)@None
+22 Haunter (IVs=0)@None
 ---
 Trainer: Team Rocket Grunt
 Sprite: rocketgrunt
-Reward: ₽500
-22 Sandshrew (IVs=0)@None
-22 Drowzee (IVs=0)@None
----
-Trainer: Boss Giovanni
-Sprite: giovanni
-Theme: rock
-Reward: ₽2400
-24 Onix (IVs=0)@None
-24 Rhyhorn (IVs=0)@None
-25 Kangaskhan (IVs=0)@None
+Reward: ₽560
+23 Koffing (IVs=0)@None
+23 Drowzee (IVs=0)@None
     </script>
 
-    <div id="trainer-list-container-rocket-hideout"></div>
+    <div id="trainer-list-container-tower"></div>
 
+  <h3 id="rival-battle">Rival Battle</h3>
+  <p>On the second floor, you'll encounter your rival. He is also here to investigate the tower. He will challenge you to a battle.</p>
 
-  <!-- CELADON GYM -->
-  <h2 id="celadon-gym">Celadon Gym (Erika)</h2>
-  <div class="clearfix">
-    <div class="map-container">
-      <img src="CeladonGym.png" alt="Celadon Gym">
-      <div class="map-caption">Celadon Gym</div>
-    </div>
+  
+  <script type="text/plain" id="team-data-rival-bulbasaur">
+Trainer: Blue
+Sprite: blue
+Theme: blue
+Location: Pokémon Tower
+Reward: ₽2,820
 
-    <p>The Celadon Gym specializes in Grass-type Pokémon. The Gym is filled with beautiful plants and flowers, but don't let that fool you—the trainers here are tough. Bring Fire, Flying, or Ice-types to make quick work of their teams.</p>
-  </div>
+45 Staraptor (IVs=27)@"Choice Band"
+- Double-Edge
+- "Close Combat"
+- "Brave Bird"
+- U-turn
 
-  <h3 id="gym-trainers" class="clear-right">Gym Trainers</h3>
-  <p>Before you can challenge Erika, you must defeat three Gym Trainers. They all use Grass-types, so bring your best counter.</p>
-
-  <script type="text/plain" id="team-data-celadon-gym-trainers">
-Trainer: Lass Kay
-Sprite: lass
-Reward: ₽480
-24 Bellsprout (IVs=0)@None
-24 Weepinbell (IVs=0)@None
----
-Trainer: Picnicker Tina
-Sprite: picnicker
-Reward: ₽500
-24 Bulbasaur (IVs=0)@None
-24 Ivysaur (IVs=0)@None
----
-Trainer: Beauty Tamia
-Sprite: beauty
-Reward: ₽1500
-24 Oddish (IVs=0)@None
-24 Gloom (IVs=0)@None
-    </script>
-
-  <div id="battle-card-container-gym-trainers"></div>
-
-  <h3 id="erika">Gym Leader Erika</h3>
-  <p>Erika uses three Grass-type Pokémon: Victreebel, Tangela, and Vileplume. They are all high-level and have strong Grass moves like Razor Leaf and Sleep Powder. Use Fire or Flying moves to take them down quickly, and be prepared to heal status conditions.</p>
-
-  <script type="text/plain" id="team-data-erika">
-Trainer: Erika
-Sprite: erika
-Theme: green
-Location: Celadon Gym
-Reward: ₽2,900
-
-39 Whimsicott (IVs=60)@"Focus Sash"
-- Tailwind
-- Encore
-- "Dazzling Gleam"
-- "Fake Tears"
-
-39 Lilligant (IVs=39)@"Grass Gem"
-- "Quiver Dance"
-- "Sunny Day"
-- "Giga Drain"
-- Synthesis
-
-39 Shiftry (IVs=3)@"Life Orb"
-- "Fake Out"
-- "Leaf Blade"
-- "Swords Dance"
-- "Night Slash"
-
-39 Amoonguss (IVs=41)@Leftovers
-- Spore
-- "Rage Powder"
-- "Sludge Bomb"
-- "Giga Drain"
-
-40 Breloom (IVs=28)@"Toxic Orb"
-- Spore
-- "Mach Punch"
-- "Seed Bomb"
+45 Luxray (IVs=5)@"Flame Orb"
+- "Play Rough"
+- "Wild Charge"
+- Crunch
 - Facade
 
-41 Venusaur (IVs=39)@Venusaurite
-- "Leech Seed"
-- "Earth Power"
-- "Sludge Bomb"
-- "Giga Drain"
+46 Metagross (IVs=3)@"Air Balloon"
+- "Hammer Arm"
+- "Bullet Punch"
+- "Zen Headbutt"
+- Earthquake
+
+46 Breloom (IVs=28)@"Toxic Orb"
+- Facade
+- "Mach Punch"
+- "Seed Bomb"
+- Spore
+
+47 Blastoise (IVs=39)@Blastoisnite
+- "Hydro Pump"
+- "Ice Beam"
+- "Aura Sphere"
+- "Shell Smash"
 
   </script>
 
-  <div id="battle-card-container-erika"></div>
+  <script type="text/plain" id="team-data-rival-charmander">
+Trainer: Blue
+Sprite: blue
+Theme: blue
+Location: Pokémon Tower
+Reward: ₽2,820
 
-  <p>Defeating Erika earns you the <strong>Rainbow Badge</strong>, which makes all Pokémon up to level 50 obey you, and allows the use of Strength outside of battle. She will also give you <strong>TM19 Giga Drain</strong>.</p>
+45 Staraptor (IVs=27)@"Choice Band"
+- Double-Edge
+- "Close Combat"
+- "Brave Bird"
+- U-turn
+
+45 Dusknoir (IVs=3)@Leftovers
+- "Shadow Sneak"
+- Earthquake
+- "Shadow Punch"
+- "Ice Punch"
+
+46 Nidoking (IVs=5)@"Assault Vest"
+- "Poison Jab"
+- "Body Slam"
+- "Earth Power"
+- "Ice Punch"
+
+46 Gyarados (IVs=5)@"Sitrus Berry"
+- "Dragon Dance"
+- Waterfall
+- Crunch
+- "Ice Fang"
+
+47 Venusaur (IVs=39)@Venusaurite
+- "Giga Drain"
+- "Sludge Bomb"
+- "Sleep Powder"
+- "Earth Power"
+
+  </script>
+
+  <script type="text/plain" id="team-data-rival-squirtle">
+Trainer: Blue
+Sprite: blue
+Theme: blue
+Location: Pokémon Tower
+Reward: ₽2,820
+
+45 Staraptor (IVs=27)@"Choice Band"
+- Double-Edge
+- "Close Combat"
+- "Brave Bird"
+- U-turn
+
+45 Mienshao (IVs=27)@"Life Orb"
+- "Swords Dance"
+- "Stone Edge"
+- "Hi Jump Kick"
+- U-turn
+
+46 Magnezone (IVs=40)@"Custap Berry"
+- "Flash Cannon"
+- Thunderbolt
+- "Volt Switch"
+- "Tri Attack"
+
+46 Gogoat (IVs=3)@Leftovers
+- "Horn Leech"
+- "Bulk Up"
+- Earthquake
+- "Milk Drink"
+
+47 Charizard (IVs=27)@CharzarditeX
+- "Flare Blitz"
+- "Dragon Dance"
+- Earthquake
+- "Dragon Claw"
+
+  </script>
+
+  <div style="margin-top:12px; font-style:italic; font-size:0.9rem; margin-bottom:6px;">If the player chose Bulbasaur:</div>
+  <div id="battle-card-container-rival-1"></div>
+
+  <div style="margin-top:12px; font-style:italic; font-size:0.9rem; margin-bottom:6px;">If the player chose Charmander:</div>
+  <div id="battle-card-container-rival-2"></div>
+
+  <div style="margin-top:12px; font-style:italic; font-size:0.9rem; margin-bottom:6px;">If the player chose Squirtle:</div>
+  <div id="battle-card-container-rival-3"></div>
+
+  <h3 id="ghost-marowak">The Ghost Marowak</h3>
+  <p>When you reach the 5th floor, a ghost will appear and block your path. If you have the Silph Scope, it will reveal the ghost's true form: a Marowak. This is a special battle—you cannot catch this Marowak, but defeating it will free its spirit and allow you to proceed.</p>
+
+  <script type="text/plain" id="team-data-marowak">
+    Trainer: Ghost Marowak
+    Sprite: marowak
+    Theme: rock
+    Location: Pokémon Tower
+    Reward: ₽0
+
+    30 Marowak (IVs=0)@None
+    - Bone Club
+    - Headbutt
+    - Leer
+    - Growl
+  </script>
+
+  <div id="battle-card-container-marowak"></div>
+
+  <h3 id="mr-fuji" class="clear-right">Mr. Fuji</h3>
+  <p>After the ghost is defeated, continue to the top floor of the tower. You'll find Mr. Fuji being held hostage by Team Rocket. Defeat the grunts, and Mr. Fuji will thank you. He will take you back to his house in Lavender Town and give you the <strong>Poké Flute</strong>, an item that can wake up sleeping Pokémon.</p>
 
   <div class="footer-nav">
-    <div><a href="walkthrough5.html">← Part 5: Vermilion City and the S.S. Anne</a></div>
-    <div><a href="walkthrough7.html">Part 7: The Pokémon Tower</a> →</div>
+    <div><a href="walkthrough6.html">← Part 6: Celadon City and the Rocket Hideout</a></div>
+    <div><a href="walkthrough8.html">Part 8: Saffron City, Silph Co, and Saffron Gym</a> →</div>
   </div>
 </div>
 
-<!-- Image Lightbox Modal -->
+
 <div id="imageLightbox" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); align-items: center; justify-content: center; cursor: zoom-out; opacity: 0; transition: opacity 0.3s ease;">
   <img id="lightboxImg" src="" alt="Enlarged Image" style="max-width: 95%; max-height: 95%; border: 3px solid #fff; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); object-fit: contain;">
 </div>
 
 <script>
-  // Caches to prevent fetching the same data twice
+  
   const pokeCache = {};
   const moveCache = {};
 
-  // --- HELPER FUNCTIONS (API FETCHING) ---
+  
   async function getPokemonData(name) {
     let searchName = name.toLowerCase().replace(/\s+/g, '-');
 
@@ -571,11 +714,9 @@ Reward: ₽2,900
       const data = await response.json();
       
       const types = data.types.map(t => t.type.name);
-      let img = data.sprites.other.showdown.front_default;
       
-      if (!img) {
-        img = data.sprites.front_default;
-      }
+      
+      let img = data.sprites.other['official-artwork'].front_default;
       
       pokeCache[searchName] = { types, img };
       return pokeCache[searchName];
@@ -600,7 +741,7 @@ Reward: ₽2,900
     }
   }
 
-  // --- UI TOGGLE FUNCTIONS ---
+  
   function toggleWikiCard(headerEl) {
     const card = headerEl.closest('.wiki-card');
     const body = card.querySelector('.wiki-body');
@@ -643,7 +784,7 @@ Reward: ₽2,900
     }
   }
 
-  // --- ENCOUNTER PARSER ---
+  
   async function generateEncounterCard(scriptId, containerId) {
     const rawText = document.getElementById(scriptId).textContent;
     const lines = rawText.trim().split('\n');
@@ -706,7 +847,7 @@ Reward: ₽2,900
     document.getElementById(containerId).innerHTML = cardHTML;
   }
 
-  // --- CONDENSED TRAINER LIST PARSER ---
+  
   async function generateTrainerList(scriptId, containerId) {
     const rawText = document.getElementById(scriptId).textContent;
     const blocks = rawText.split('---');
@@ -716,7 +857,7 @@ Reward: ₽2,900
       block = block.trim();
       if (!block) continue;
 
-      let trainerInfo = { trainer: "Trainer", sprite: "youngster", reward: "???" };
+      let trainerInfo = { trainer: "Trainer", sprite: "channeler", reward: "???" };
       let team = [];
       let currentPokemon = null;
 
@@ -783,7 +924,7 @@ Reward: ₽2,900
     document.getElementById(containerId).innerHTML = html;
   }
 
-  // --- BATTLE PARSER ---
+  
   async function generateBattleCard(scriptId, containerId, cardId) {
     const rawText = document.getElementById(scriptId).textContent;
     const lines = rawText.trim().split('\n');
@@ -857,37 +998,96 @@ Reward: ₽2,900
     const trainerImg = `https://play.pokemonshowdown.com/sprites/trainers/${trainerInfo.sprite}.png`;
     const fallbackImg = `https://play.pokemonshowdown.com/sprites/trainers/blue.png`;
 
-    const cardHTML = `
-    <div class="battle-card theme-${trainerInfo.theme}" id="${cardId}">
-      <div class="card-header" onclick="toggleBattle('${cardId}')">
-        <div class="trainer-icon"><img src="${trainerImg}" alt="${trainerInfo.trainer}" onerror="this.src='${fallbackImg}'"></div>
-        <div class="battle-info">
-          <div class="trainer-class">Trainer</div>
-          <div class="trainer-name">${trainerInfo.trainer}</div>
-          <div class="location">${trainerInfo.location}</div>
-          <div class="game">Infinite Sun</div>
+    let cardHTML = "";
+
+    
+    if (trainerInfo.trainer.includes("Ghost Marowak") || trainerInfo.trainer.includes("Wild")) {
+      
+      const pkmn = team[0]; 
+      const pData = await getPokemonData(pkmn.name);
+      
+      const typeClass = pData.types[0].toLowerCase();
+      const typeName = pData.types[0].charAt(0).toUpperCase() + pData.types[0].slice(1);
+      
+      let movesHtml = "";
+      for (let i = 0; i < 4; i++) {
+        if (pkmn.moves[i]) {
+          let mName = pkmn.moves[i];
+          let mType = await getMoveData(mName);
+          movesHtml += `
+            <div class="move-box">
+              <div class="move-name">${mName}</div>
+              <div class="move-type ${mType}">${mType.charAt(0).toUpperCase() + mType.slice(1)}</div>
+            </div>`;
+        } else {
+          movesHtml += `<div class="move-box empty"></div>`;
+        }
+      }
+
+      cardHTML = `
+      <div class="wild-card">
+        <div class="top-section">
+          <div>
+            <div class="sprite-container">
+              <img src="${pData.img}" alt="${pkmn.name}">
+            </div>
+            <div class="name-badge">
+              ${pkmn.name} <span class="gender-icon">♀</span> Lv.${pkmn.level}
+            </div>
+          </div>
+          <div class="details-section">
+            <div class="detail-header">Type:</div>
+            <div><span class="type-badge ${typeClass}">${typeName}</span></div>
+            
+            <div class="detail-header">Ability:</div>
+            <div class="ability-text">Rock Head or<br>Lightningrod</div>
+            
+            <div class="detail-header">Held item:</div>
+            <div class="item-text">None</div>
+          </div>
         </div>
-        <div class="reward-box"><div class="reward-label">Reward</div><div class="reward-value">${trainerInfo.reward}</div></div>
-        <div class="party-display">${partyBalls}</div>
-        <button class="toggle-btn" onclick="event.stopPropagation(); toggleBattle('${cardId}')">[Expand]</button>
-      </div>
-      <div class="card-body hidden" id="${cardId}-body">
-        <div class="team-grid">${teamHtml}</div>
-      </div>
-    </div>`;
+        <div class="moves-grid">
+          ${movesHtml}
+        </div>
+      </div>`;
+
+    } else {
+      
+      cardHTML = `
+      <div class="battle-card theme-${trainerInfo.theme}" id="${cardId}">
+        <div class="card-header" onclick="toggleBattle('${cardId}')">
+          <div class="trainer-icon"><img src="${trainerImg}" alt="${trainerInfo.trainer}" onerror="this.src='${fallbackImg}'"></div>
+          <div class="battle-info">
+            <div class="trainer-class">Trainer</div>
+            <div class="trainer-name">${trainerInfo.trainer}</div>
+            <div class="location">${trainerInfo.location}</div>
+            <div class="game">Infinite Sun</div>
+          </div>
+          <div class="reward-box"><div class="reward-label">Reward</div><div class="reward-value">${trainerInfo.reward}</div></div>
+          <div class="party-display">${partyBalls}</div>
+          <button class="toggle-btn" onclick="event.stopPropagation(); toggleBattle('${cardId}')">[Expand]</button>
+        </div>
+        <div class="card-body hidden" id="${cardId}-body">
+          <div class="team-grid">${teamHtml}</div>
+        </div>
+      </div>`;
+    }
+
     document.getElementById(containerId).innerHTML = cardHTML;
   }
 
-  // --- INITIALIZATION ON PAGE LOAD ---
+  
   document.addEventListener('DOMContentLoaded', async () => {
-    await generateEncounterCard('encounter-data-route7', 'encounter-container-1');
-    await generateTrainerList('team-data-route7-list', 'trainer-list-container-route7');
-    await generateTrainerList('team-data-rocket-hideout-list', 'trainer-list-container-rocket-hideout');
+    await generateTrainerList('team-data-tower-list', 'trainer-list-container-tower');
+    
+    
+    await generateBattleCard('team-data-rival-bulbasaur', 'battle-card-container-rival-1', 'battle-rival-1');
+    await generateBattleCard('team-data-rival-charmander', 'battle-card-container-rival-2', 'battle-rival-2');
+    await generateBattleCard('team-data-rival-squirtle', 'battle-card-container-rival-3', 'battle-rival-3');
+    
+    await generateBattleCard('team-data-marowak', 'battle-card-container-marowak', 'battle-marowak');
 
-    await generateTrainerList('team-data-celadon-gym-trainers', 'battle-card-container-gym-trainers');
-    await generateBattleCard('team-data-erika', 'battle-card-container-erika', 'battle-erika');
-
-    // Lightbox Functionality
+    
     const lightbox = document.getElementById('imageLightbox');
     const lightboxImg = document.getElementById('lightboxImg');
     const mapImages = document.querySelectorAll('.map-container img');

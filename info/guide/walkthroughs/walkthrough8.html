@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Walkthrough - Part 4 | Pokémon Infinite Sun</title>
+  <title>Walkthrough - Part 8 | Pokémon Infinite Sun</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="icon" type="image/png" href="../../icon.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,7 +44,7 @@
     ul, ol { padding-left: 25px; margin: 6px 0 14px; }
     li { margin-bottom: 3px; }
 
-    /* --- MAP SECTION --- */
+    
     .location-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; border-bottom: 1px solid #8fc98f; padding-bottom: 6px; }
     .location-header h2 { border-bottom: none; margin: 0; padding: 0; }
     .map-container {
@@ -56,7 +56,7 @@
     .map-caption { font-size: 0.8rem; font-weight: 600; color: #1f4a1f; padding: 6px 0 2px; margin: 0; }
     .map-placeholder { display: flex; align-items: center; justify-content: center; width: 100%; height: 140px; background: #dceadc; color: #4f7f4f; font-size: 0.8rem; font-weight: 500; border-radius: 4px; }
 
-    /* --- POINTS OF INTEREST TABLE --- */
+    
     .poi-table {
       width: calc(100% - 264px); 
       border-collapse: collapse; font-size: 0.9rem; background: #f2faf2; border: 1px solid #8fc98f; margin-top: 15px; margin-bottom: 20px;
@@ -72,7 +72,7 @@
       background: #000; border: 2px solid #fff; color: #fff; font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; line-height: 1; box-shadow: 0 1px 2px rgba(0,0,0,0.4);
     }
 
-    /* --- TOC --- */
+    
     .toc { background: #f2faf2; border: 1px solid #8fc98f; padding: 14px 22px 18px; margin: 0 0 24px; display: inline-block; min-width: 240px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0, 60, 0, 0.04); }
     .toc-title { font-size: 1.1rem; font-weight: bold; text-align: center; margin-bottom: 6px; color: #1f4a1f; }
     .toc ul { list-style: none; padding-left: 0; margin: 0; counter-reset: toc-counter; }
@@ -83,7 +83,7 @@
     .toc ul ul li { padding-left: 26px; }
     .toc ul ul li::before { counter-increment: sub-counter; content: counter(toc-counter) "." counter(sub-counter) "."; position: absolute; left: 2px; }
 
-    /* --- TABLES --- */
+    
     .table-green { background: #e6f2e6; border: 1px solid #6faf6f; border-collapse: collapse; margin: 8px 0 14px; width: 100%; border-radius: 6px; overflow: hidden; }
     .table-green th, .table-green td { border: 1px solid #5f9f5f; padding: 5px 10px; text-align: center; }
     .table-green th { background: #9fd09f; font-weight: 700; color: #0f3f0f; }
@@ -105,12 +105,12 @@
     .clearfix::after { content: ""; clear: both; display: table; }
     .clear-right { clear: right; }
 
-    /* --- FOOTER --- */
+    
     .footer-nav { display: flex; justify-content: space-between; align-items: center; border-top: 2px solid #8fc98f; padding-top: 14px; margin-top: 24px; font-size: 0.95rem; flex-wrap: wrap; gap: 8px; }
     .footer-nav a { font-weight: 500; padding: 4px 8px; border-radius: 4px; transition: "background" 0.2s; }
     .footer-nav a:hover { background: #e6f2e6; text-decoration: none; }
 
-    /* --- WIKI CARDS --- */
+    
     .wiki-card {
       width: 50%; min-width: unset; float: none; clear: none; margin: 14px 0 18px;
       border-radius: 18px; background: #90d76d; border: 2px solid #72b151;
@@ -131,7 +131,7 @@
     .wiki-card table td .item-mini-icon img { width: 100%; height: auto; object-fit: contain; }
     .grass-icon { height: 16px; vertical-align: middle; margin-right: 4px; }
 
-    /* --- BATTLE CARDS (Standard) --- */
+    
     .battle-card { width: 100%; max-width: 680px; margin: 16px 0 24px; border-radius: 16px; background: #f8f9fc; border: 2px solid #b8c4e0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); overflow: hidden; transition: box-shadow 0.2s; }
     .battle-card:hover { box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12); }
     .battle-card .card-header { background: #dce6f5; padding: 10px 16px; display: grid; grid-template-columns: 80px 1fr 80px; grid-template-rows: auto auto; column-gap: 12px; align-items: center; cursor: pointer; user-select: none; color: #1a1a1a; min-height: 90px; }
@@ -159,7 +159,14 @@
     .battle-card .pokemon-panel { border-radius: 12px; overflow: hidden; border: 1px solid #c8d4e8; background: #f4f7fc; }
     .battle-card .pokemon-panel .pokemon-top { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 10px; min-height: 140px; }
     .battle-card .pokemon-panel .pokemon-image { background: #ffffff; border-radius: 10px; height: 90px; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 1px solid #d8e2f0; padding: 4px; }
-    .battle-card .pokemon-panel .pokemon-image img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    
+    .battle-card .pokemon-panel .pokemon-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
     .battle-card .pokemon-panel .pokemon-details { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 2px; min-width: 0; }
     .battle-card .pokemon-panel .pokemon-name { background: #ffffff; border-radius: 10px; width: 100%; padding: 3px 4px; font-size: 0.78rem; font-weight: 600; white-space: nowrap; border: 1px solid #d8e2f0; color: #1a2b4a; }
     .battle-card .pokemon-panel .detail-label { font-size: 0.65rem; font-weight: 600; color: #5a6f8e; text-transform: uppercase; letter-spacing: 0.3px; margin-top: 3px; }
@@ -167,7 +174,7 @@
     .battle-card .pokemon-panel .type-row { display: flex; align-items: center; justify-content: center; gap: 3px; flex-wrap: nowrap; margin-top: 1px; }
     .battle-card .pokemon-panel .type-chip { padding: 2px 7px; border-radius: 4px; font-size: 0.6rem; font-weight: 700; color: #ffffff; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25); }
     
-    /* Type Colors */
+    
     .battle-card .pokemon-panel .type-chip.normal { background: #A8A878; }
     .battle-card .pokemon-panel .type-chip.flying { background: #A890F0; }
     .battle-card .pokemon-panel .type-chip.fire { background: #F08030; }
@@ -194,7 +201,7 @@
     .battle-card .move-name { font-size: 0.72rem; padding: 4px 3px; flex: 1; display: flex; align-items: center; justify-content: center; font-weight: 500; color: #1a2b4a; }
     .battle-card .move-type { font-size: 0.6rem; color: #ffffff; padding: 3px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
     
-    /* Move Colors */
+    
     .battle-card .move-type.normal { background: #A8A878; }
     .battle-card .move-type.fire { background: #F08030; }
     .battle-card .move-type.water { background: #6890F0; }
@@ -214,7 +221,7 @@
     .battle-card .move-type.steel { background: #B8B8D0; color: #1a1a1a; }
     .battle-card .move-type.fairy { background: #EE99AC; }
 
-    /* --- BATTLE CARD THEMES --- */
+    
     .battle-card.theme-blue .card-header { background: #dce6f5; }
     .battle-card.theme-blue .trainer-icon { border-color: #2a3f6e; background: #b0c4de; }
     .battle-card.theme-blue .battle-info, .battle-card.theme-blue .reward-box { background: #e8eef8; border-color: #c2d0e8; }
@@ -243,7 +250,7 @@
     .battle-card.theme-rock .toggle-btn:hover { background: #403324; }
     .battle-card.theme-rock .party-ball { border-color: #5c4a35; }
 
-    /* --- CONDENSED TRAINER LIST --- */
+    
     .trainer-list-container { 
       width: 50%; max-width: 600px; min-width: unset; float: none; clear: none; margin: 14px 0 18px;
       border-radius: 18px; background: #90d76d; border: 2px solid #72b151;
@@ -271,7 +278,7 @@
     .pokemon-list-row .p-item { font-size: 0.75rem; color: #666; display: block; text-align: right; width: 100px; }
     .trainer-list-footer { background: #c6eca9; padding: 8px; font-size: 0.75rem; text-align: center; color: #1a2b1a; border-radius: 0 0 12px 12px; }
 
-    /* --- RESPONSIVE --- */
+    
     @media (max-width: 820px) {
       .battle-card { max-width: 100%; }
       .wiki-card { min-width: unset; width: 100%; }
@@ -308,266 +315,392 @@
 
 <body>
 <div class="page">
-  <h1>Walkthrough - Part 4</h1>
+  <h1>Walkthrough - Part 8</h1>
 
   <div class="toc">
     <div class="toc-title">Contents</div>
     <ul>
-      <li><a href="#route-24">Route 24 (Nugget Bridge)</a></li>
-      <li><a href="#route-25">Route 25 & Bill's Cottage</a></li>
-      <li><a href="#cerulean-gym">Cerulean Gym</a>
+      <li><a href="#saffron-city">Saffron City</a></li>
+      <li><a href="#silph-co">Silph Co. Takeover</a>
         <ul>
-          <li><a href="#gym-trainers">Gym Trainers</a></li>
-          <li><a href="#misty">Misty</a></li>
+          <li><a href="#silph-trainers">Silph Co. Trainers</a></li>
+          <li><a href="#rival-battle">Rival Battle</a></li>
+          <li><a href="#giovanni">Boss Giovanni</a></li>
         </ul>
       </li>
+      <li><a href="#saffron-gym">Saffron Gym (Sabrina)</a></li>
     </ul>
   </div>
 
-  <p>Welcome to Part 4 of the Pokémon Infinite Sun Walkthrough! Now that you've arrived in Cerulean City, it's time to explore the routes to the north and take on your second Gym Leader, Misty.</p>
+  <p>Welcome to Part 8 of the Pokémon Infinite Sun Walkthrough! After obtaining the Poké Flute from Mr. Fuji, we can finally enter Saffron City. However, Team Rocket has taken over the Silph Co. building. We'll need to liberate the company before we can challenge Sabrina at the Saffron Gym.</p>
 
-  <!-- ROUTE 24 -->
-  <h2 id="route-24">Route 24 (Nugget Bridge)</h2>
+  
+  <h2 id="saffron-city">Saffron City</h2>
   <div class="clearfix">
     <div class="map-container">
-      <img src="Route24.png" alt="Route 24">
-      <div class="map-caption">Route 24</div>
+      <img src="SaffronCity.png" alt="Saffron City">
+      <div class="map-caption">Saffron City</div>
     </div>
     
-    <p>Route 24 is famous for the Nugget Bridge, a challenge where you must defeat five trainers in a row to win a Nugget. It is also a great place to catch some new Pokémon, including Abra and Bellsprout.</p>
+    <p>Saffron City is the largest and most central city in the Kanto region. It features the Silph Co. headquarters, the Fighting Dojo, and the Saffron Gym. Currently, Team Rocket is occupying the Silph Co. building and has locked down the city's gates.</p>
 
     <table class="poi-table">
       <tr><th>#</th><th>Point of Interest</th></tr>
-      <tr><td><span class="poi-number">1</span></td><td>Nugget Bridge</td></tr>
-      <tr><td><span class="poi-number">2</span></td><td>Path to Route 25 (North)</td></tr>
-      <tr><td><span class="poi-number">3</span></td><td>Path to Cerulean City (South)</td></tr>
+      <tr><td><span class="poi-number">1</span></td><td>Pokémon Center</td></tr>
+      <tr><td><span class="poi-number">2</span></td><td>Poké Mart</td></tr>
+      <tr><td><span class="poi-number">3</span></td><td>Saffron Gym</td></tr>
+      <tr><td><span class="poi-number">4</span></td><td>Fighting Dojo</td></tr>
+      <tr><td><span class="poi-number">5</span></td><td>Silph Co. Headquarters</td></tr>
+      <tr><td><span class="poi-number">6</span></td><td>Mr. Psychic's House</td></tr>
+      <tr><td><span class="poi-number">7</span></td><td>Copycat's House</td></tr>
+    </table>
+  </div>
+
+  <h3 class="clear-right">Fighting Dojo</h3>
+  <p>The Fighting Dojo is located just west of the Saffron Gym. If you defeat the Blackbelt inside, he will offer you a choice between two Fighting-type Pokémon: Hitmonlee or Hitmonchan.</p>
+
+  <h3>Mr. Psychic's House</h3>
+  <p>In the house to the south, a man named Mr. Psychic will give you <strong>TM29 Psychic</strong> if you have an empty slot in your party.</p>
+
+  <h3>Copycat's House</h3>
+  <p>A little girl in the house to the east has lost her favorite Pokémon doll. You can find a replacement in Vermilion City (using the Itemfinder near the S.S. Anne dock). She will reward you with <strong>TM41 Torment</strong> and a Magnet Train Pass (in some versions of the game).</p>
+
+  
+  <h2 id="silph-co">Silph Co. Takeover</h2>
+  <div class="clearfix">
+    <div class="map-container">
+      <img src="SilphCo.png" alt="Silph Co.">
+      <div class="map-caption">Silph Co.</div>
+    </div>
+
+    <p>The Silph Co. building is a massive 11-floor labyrinth filled with Team Rocket Grunts and teleporters. Your goal is to reach the top floor, defeat Giovanni, and rescue the company president. You can find several useful items along the way, including a Master Ball.</p>
+
+    <table class="poi-table">
+      <tr><th>#</th><th>Point of Interest</th></tr>
+      <tr><td><span class="poi-number">1</span></td><td>Entrance (1F)</td></tr>
+      <tr><td><span class="poi-number">2</span></td><td>Card Key Location (5F)</td></tr>
+      <tr><td><span class="poi-number">3</span></td><td>Rival Battle (7F)</td></tr>
+      <tr><td><span class="poi-number">4</span></td><td>Giovanni's Office (11F)</td></tr>
     </table>
 
-    <!-- ENCOUNTER DATA SCRIPT (Route 24) -->
-    <script type="text/plain" id="encounter-data-route24">
-# 20%
-12, 14, Abra
-12, 14, Bellsprout
+  <h3 id="silph-trainers">Silph Co. Trainers</h3>
+  <p>The building is crawling with Team Rocket Grunts. You'll also encounter a few scientists and other trainers who have been trapped inside.</p>
 
-# 10%
-12, 14, Pidgey
-12, 14, Oddish
-13, 16, Meowth
-
-# 5%
-13, 16, Venonat
-13, 16, Psyduck
-    </script>
-
-    <div id="encounter-container-1"></div>
-
-    <h3 class="clear-right">Nugget Bridge Trainers</h3>
-    <p>You must defeat all five trainers on the bridge in a row. If you win, the last trainer gives you a Nugget. But beware—afterward, he reveals himself to be a Team Rocket Grunt and tries to recruit you! Refuse, and defeat him.</p>
-
-    <script type="text/plain" id="team-data-route24-list">
-Trainer: Bug Catcher Cale
-Sprite: bugcatcher
-Reward: ₽144
-10 Caterpie (IVs=0)@None
-10 Weedle (IVs=0)@None
-10 Metapod (IVs=0)@None
-10 Kakuna (IVs=0)@None
+  <script type="text/plain" id="team-data-silph-list">
+Trainer: Team Rocket Grunt
+Sprite: rocketgrunt
+Reward: ₽720
+26 Rattata (IVs=0)@None
+26 Zubat (IVs=0)@None
 ---
-Trainer: Lass Ali
-Sprite: lass-gen4
-Reward: ₽192
-12 Pidgey (IVs=0)@None
-12 Oddish (IVs=0)@None
-12 Bellsprout (IVs=0)@None
----
-Trainer: Youngster Timmy
-Sprite: youngster-gen4
-Reward: ₽168
-14 Sandshrew (IVs=0)@None
-14 Ekans (IVs=0)@None
----
-Trainer: Lass Reli
-Sprite: lass-gen4
-Reward: ₽192
-14 Nidoran-M (IVs=0)@None
-14 Nidoran-F (IVs=0)@None
----
-Trainer: Camper Ethan
-Sprite: camper
-Reward: ₽200
-15 Mankey (IVs=0)@None
-15 Spearow (IVs=0)@None
+Trainer: Scientist Jerry
+Sprite: scientist
+Reward: ₽1300
+28 Electrode (IVs=0)@None
+28 Magnemite (IVs=0)@None
+28 Magneton (IVs=0)@None
 ---
 Trainer: Team Rocket Grunt
 Sprite: rocketgrunt
-Reward: ₽240
-15 Ekans (IVs=0)@None
-15 Zubat (IVs=0)@None
+Reward: ₽740
+27 Sandshrew (IVs=0)@None
+27 Ekans (IVs=0)@None
+---
+Trainer: Team Rocket Grunt
+Sprite: rocketgrunt
+Reward: ₽760
+28 Zubat (IVs=0)@None
+28 Golbat (IVs=0)@None
+28 Koffing (IVs=0)@None
     </script>
 
-    <div id="trainer-list-container-route24"></div>
+    <div id="trainer-list-container-silph"></div>
+
+  <h3 id="rival-battle">Rival Battle</h3>
+  <p>On the 7th floor, you'll encounter your rival again. He's also here to take down Team Rocket (and prove he's better than you).</p>
+
+  
+  <script type="text/plain" id="team-data-rival-silph-bulbasaur">
+Trainer: Blue
+Sprite: blue
+Theme: blue
+Location: Silph Co.
+Reward: ₽2400
+
+28 Pidgeot (IVs=0)@None
+- Quick Attack
+- Whirlwind
+- Wing Attack
+- -
+
+28 Growlithe (IVs=0)@None
+- Bite
+- Roar
+- Ember
+- -
+
+26 Exeggcute (IVs=0)@None
+- Barrage
+- Hypnosis
+- Reflect
+- -
+
+30 Kadabra (IVs=0)@None
+- Confusion
+- Disable
+- Psybeam
+- -
+
+30 Charmander (IVs=0)@None
+- Scratch
+- Ember
+- Smokescreen
+- -
+  </script>
+
+  <script type="text/plain" id="team-data-rival-silph-charmander">
+Trainer: Blue
+Sprite: blue
+Theme: blue
+Location: Silph Co.
+Reward: ₽2400
+
+28 Pidgeot (IVs=0)@None
+- Quick Attack
+- Whirlwind
+- Wing Attack
+- -
+
+28 Growlithe (IVs=0)@None
+- Bite
+- Roar
+- Ember
+- -
+
+26 Exeggcute (IVs=0)@None
+- Barrage
+- Hypnosis
+- Reflect
+- -
+
+30 Kadabra (IVs=0)@None
+- Confusion
+- Disable
+- Psybeam
+- -
+
+30 Squirtle (IVs=0)@None
+- Tackle
+- Water Gun
+- Bite
+- Withdraw
+  </script>
+
+  <script type="text/plain" id="team-data-rival-silph-squirtle">
+Trainer: Blue
+Sprite: blue
+Theme: blue
+Location: Silph Co.
+Reward: ₽2400
+
+28 Pidgeot (IVs=0)@None
+- Quick Attack
+- Whirlwind
+- Wing Attack
+- -
+
+28 Growlithe (IVs=0)@None
+- Bite
+- Roar
+- Ember
+- -
+
+26 Exeggcute (IVs=0)@None
+- Barrage
+- Hypnosis
+- Reflect
+- -
+
+30 Kadabra (IVs=0)@None
+- Confusion
+- Disable
+- Psybeam
+- -
+
+30 Bulbasaur (IVs=0)@None
+- Tackle
+- Vine Whip
+- Poison Powder
+- Leech Seed
+  </script>
+
+  <div style="margin-top:12px; font-style:italic; font-size:0.9rem; margin-bottom:6px;">If the player chose Bulbasaur:</div>
+  <div id="battle-rival-silph-1"></div>
+
+  <div style="margin-top:12px; font-style:italic; font-size:0.9rem; margin-bottom:6px;">If the player chose Charmander:</div>
+  <div id="battle-rival-silph-2"></div>
+
+  <div style="margin-top:12px; font-style:italic; font-size:0.9rem; margin-bottom:6px;">If the player chose Squirtle:</div>
+  <div id="battle-rival-silph-3"></div>
+
+  <h3 id="giovanni">Boss Giovanni</h3>
+  <p>After reaching the 11th floor and defeating the remaining grunts, you'll face Giovanni, the leader of Team Rocket. He uses Ground and Normal-type Pokémon. Water, Grass, and Ice moves will work well here.</p>
+
+  <script type="text/plain" id="team-data-giovanni-silph">
+Trainer: Giovanni
+Sprite: giovanni
+Theme: rock
+Location: Silph Co.
+Reward: ₽6,720
+
+48 Garchomp (IVs=29)@"Rocky Helmet"
+- "Stealth Rock"
+- "Swords Dance"
+- Earthquake
+- "Dragon Claw"
+
+47 Bouffalant (IVs=3)@"Normal Gem"
+- "Flame Charge"
+- "Swords Dance"
+- "Head Charge"
+- "Wild Charge"
+
+48 Kangaskhan (IVs=3)@Kangaskanite
+- "Power-up Punch"
+- "Fake Out"
+- "Body Slam"
+- "Sucker Punch"
+
+48 Hariyama (IVs=4)@"Flame Orb"
+- "Close Combat"
+- "Knock Off"
+- Facade
+- "Ice Punch"
+
+48 Copperajah (IVs=3)@Leftovers
+- "Play Rough"
+- "Body Slam"
+- "Iron Head"
+- High Horsepower
+
+48 Exploud (IVs=0)@"Throat Spray"
+- Boomburst
+- Crunch
+- "Hammer Arm"
+- Uproar
+
+  </script>
+
+  <div id="battle-card-container-giovanni-silph"></div>
+
+  <p>After defeating Giovanni, he will flee, and the Silph Co. president will reward you with the <strong>Master Ball</strong>. You are now free to challenge the Saffron Gym.</p>
 
   </div>
 
-  <!-- ROUTE 25 -->
-  <h2 id="route-25">Route 25 & Bill's Cottage</h2>
+  
+  <h2 id="saffron-gym">Saffron Gym (Sabrina)</h2>
   <div class="clearfix">
     <div class="map-container">
-      <img src="Route25.png" alt="Route 25">
-      <div class="map-caption">Route 25</div>
+      <img src="SaffronGym.png" alt="Saffron Gym">
+      <div class="map-caption">Saffron Gym</div>
     </div>
 
-    <p>Route 25 is a peaceful path leading to Bill's Cottage. You'll find several trainers here, including a few who are training their Pokémon. At the end of the route, you'll meet Bill, a famous Pokémon Researcher who has gotten himself into a bit of a predicament.</p>
-
-    <table class="poi-table">
-      <tr><th>#</th><th>Point of Interest</th></tr>
-      <tr><td><span class="poi-number">1</span></td><td>Path to Route 24 (South)</td></tr>
-      <tr><td><span class="poi-number">2</span></td><td>Bill's Cottage (North)</td></tr>
-    </table>
-
-    <!-- ENCOUNTER DATA SCRIPT (Route 25) -->
-    <script type="text/plain" id="encounter-data-route25">
-# 25%
-12, 14, Pidgey
-12, 14, Bellsprout
-
-# 15%
-12, 14, Oddish
-12, 14, Abra
-
-# 10%
-13, 15, Venonat
-13, 15, Meowth
-
-# 5%
-13, 15, Psyduck
-    </script>
-
-    <div id="encounter-container-2"></div>
-
-    <h3 class="clear-right">Trainers</h3>
-    <p>The trainers here are slightly stronger than those on Route 24. Make sure your team is healed up.</p>
-
-    <script type="text/plain" id="team-data-route25-list">
-Trainer: Hiker Marcos
-Sprite: hiker-gen4
-Reward: ₽420
-14 Geodude (IVs=0)@None
-14 Machop (IVs=0)@None
----
-Trainer: Picnicker Kelsey
-Sprite: picnicker
-Reward: ₽240
-15 Nidoran-M (IVs=0)@None
-15 Nidoran-F (IVs=0)@None
----
-Trainer: Camper Flint
-Sprite: camper
-Reward: ₽240
-14 Rattata (IVs=0)@None
-14 Ekans (IVs=0)@None
----
-Trainer: Youngster Chad
-Sprite: youngster-gen4
-Reward: ₽240
-14 Sandshrew (IVs=0)@None
-14 Mankey (IVs=0)@None
-    </script>
-
-    <div id="trainer-list-container-route25"></div>
-
-    <h3>Bill's Cottage</h3>
-    <p>At the end of the route, you'll find a cottage. Inside, a Pokémon is running around a teleporter machine. Talk to it, and you'll discover it's actually Bill, fused with a Clefairy! Help him by using his computer to separate them. Afterward, he'll give you the <strong>S.S. Ticket</strong>, granting you access to the S.S. Anne in Vermilion City.</p>
-
-  </div>
-
-  <!-- CERULEAN GYM -->
-  <h2 id="cerulean-gym">Cerulean Gym</h2>
-  <div class="clearfix">
-    <div class="map-container">
-      <img src="CeruleanGym.png" alt="Cerulean Gym">
-      <div class="map-caption">Cerulean Gym</div>
-    </div>
-
-    <p>The Cerulean Gym specializes in Water-type Pokémon. If you chose Charmander, this will be a tough battle. If you chose Bulbasaur or Squirtle, you should have an easier time. Avoid using Fire, Ground, or Rock-types here.</p>
+    <p>The Saffron Gym specializes in Psychic-type Pokémon. The Gym is a maze of teleporters. To reach Sabrina, you must navigate the correct sequence of warp tiles. Psychic-types are weak to Bug, Ghost, and Dark moves, so bring your best counters.</p>
   </div>
 
   <h3 id="gym-trainers" class="clear-right">Gym Trainers</h3>
-  <p>Before challenging Misty, you must defeat two Gym Trainers. They use Water-type Pokémon, so bring your best Grass or Electric moves.</p>
+  <p>Before challenging Sabrina, you'll face several Psychic trainers. They use Pokémon like Slowpoke, Mr. Mime, and Kadabra.</p>
 
-  <script type="text/plain" id="team-data-gym-trainers">
-Trainer: Swimmer Luis
-Sprite: swimmerm-gen3
-Reward: ₽320
-16 Horsea (IVs=0)@None
-16 Shellder (IVs=0)@None
+  <script type="text/plain" id="team-data-saffron-gym-trainers">
+Trainer: Psychic Johan
+Sprite: psychic
+Reward: ₽1200
+31 Slowpoke (IVs=0)@None
+31 Slowbro (IVs=0)@None
 ---
-Trainer: Swimmer Diana
-Sprite: swimmerf-gen3
-Reward: ₽360
-16 Goldeen (IVs=0)@None
-16 Poliwag (IVs=0)@None
+Trainer: Psychic Tyron
+Sprite: psychic
+Reward: ₽1240
+32 Mr-Mime (IVs=0)@None
+32 Kadabra (IVs=0)@None
+---
+Trainer: Psychic Cameron
+Sprite: psychic
+Reward: ₽1280
+33 Slowbro (IVs=0)@None
+    </script>
+
+  <div id="battle-card-container-gym-trainers"></div>
+
+  <h3 id="sabrina">Gym Leader Sabrina</h3>
+  <p>Sabrina uses three Psychic-type Pokémon: Kadabra, Mr. Mime, and Alakazam. Alakazam is incredibly fast and has a high Special Attack, so it can hit hard with Psybeam and Psychic. Use physical attacks (like Normal or Fighting moves) if you can, as her Pokémon have low Defense.</p>
+
+  <script type="text/plain" id="team-data-sabrina">
+Trainer: Sabrina
+Sprite: sabrina-gen3
+Theme: red
+Location: Saffron City
+Reward: ₽5,184
+
+47 Indeedee-Female (IVs=0)@"Psychic Seed"
+- Psychic
+- "Calm Mind"
+- "Helping Hand"
+- "Baton Pass"
+
+47 Hatterene (IVs=41)@"Focus Sash"
+- Psychic
+- "Mystical Fire"
+- "Dazzling Gleam"
+- Protect
+
+47 Cresselia (IVs=39)@Leftovers
+- "Calm Mind"
+- Psychic
+- Moonlight
+- Safeguard
+
+48 Gallade (IVs=4)@"Lum Berry"
+- "Psycho Cut"
+- "Leaf Blade"
+- "Close Combat"
+- Protect
+
+48 Lunatone (IVs=39)@"Psychic Gem"
+- "Stored Power"
+- Psychic
+- "Cosmic Power"
+- "Power Gem"
+
+48 Alakazam (IVs=60)@Alakazite
+- "Shadow Ball"
+- Psychic
+- "Dazzle Gleam"
+- "Calm Mind"
+
   </script>
 
-  <div id="trainer-list-container-gym-trainers"></div>
+  <div id="battle-card-container-sabrina"></div>
 
-  <h3 id="misty">Gym Leader Misty</h3>
-  <p>Misty uses two Water-type Pokémon: Staryu and Starmie. Starmie is fast and has a high Special Attack, so it can deal serious damage with Water Gun and Swift. Use Grass or Electric moves to take it down quickly.</p>
-
-  <script type="text/plain" id="team-data-misty">
-Trainer: Misty
-Sprite: misty-gen3
-Theme: blue
-Location: Cerulean Gym
-Reward: ₽2,268
-
-20 Frogadier (IVs=2)@Eviolite
-- Scald
-- "Rock Tomb"
-- "Flip Turn"
-- "Ice Punch"
-
-21 Huntail (IVs=0)@"White Herb"
-- "Shell Smash"
-- Crunch
-- "Sucker Punch"
-- "Aqua Tail"
-
-21 Ludicolo (IVs=0)@Leftovers
-- "Hydro Pump"
-- "Giga Drain"
-- "Leech Seed"
-- "Knock Off"
-
-21 Lapras (IVs=2)@"Water Gem"
-- Liquidation
-- "Ice Shard"
-- "Body Slam"
-- Freeze-Dry
-
-  </script>
-
-  <div id="battle-card-container-misty"></div>
-
-  <p>Defeating Misty earns you the <strong>Cascade Badge</strong>, which makes all Pokémon up to level 30 obey you, and allows the use of Cut outside of battle. She will also give you <strong>TM03 Water Pulse</strong>.</p>
+  <p>Defeating Sabrina earns you the <strong>Marsh Badge</strong>, which makes all Pokémon up to level 70 obey you. She will also give you <strong>TM04 Calm Mind</strong>.</p>
 
   <div class="footer-nav">
-    <div><a href="walkthrough3.html">← Part 3: Mt. Moon to Cerulean City</a></div>
-    <div><a href="walkthrough5.html">Part 5: Vermilion City and the S.S. Anne</a> →</div>
+    <div><a href="walkthrough7.html">← Part 7: Lavender Town and the Pokémon Tower</a></div>
+    <div><a href="walkthrough9.html">Part 9: Fuchsia City and the Safari Zone</a> →</div>
   </div>
 </div>
 
-<!-- Image Lightbox Modal -->
+
 <div id="imageLightbox" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); align-items: center; justify-content: center; cursor: zoom-out; opacity: 0; transition: opacity 0.3s ease;">
   <img id="lightboxImg" src="" alt="Enlarged Image" style="max-width: 95%; max-height: 95%; border: 3px solid #fff; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); object-fit: contain;">
 </div>
 
 <script>
-  // Caches to prevent fetching the same data twice
+  
   const pokeCache = {};
   const moveCache = {};
 
-  // --- HELPER FUNCTIONS (API FETCHING) ---
+  
   async function getPokemonData(name) {
     let searchName = name.toLowerCase().replace(/\s+/g, '-');
 
@@ -582,7 +715,10 @@ Reward: ₽2,268
       const data = await response.json();
       
       const types = data.types.map(t => t.type.name);
-      let img = data.sprites.other.showdown.front_default;
+      
+      
+      let img = data.sprites.other['official-artwork'].front_default;
+      
       
       if (!img) {
         img = data.sprites.front_default;
@@ -611,7 +747,7 @@ Reward: ₽2,268
     }
   }
 
-  // --- UI TOGGLE FUNCTIONS ---
+  
   function toggleWikiCard(headerEl) {
     const card = headerEl.closest('.wiki-card');
     const body = card.querySelector('.wiki-body');
@@ -654,7 +790,7 @@ Reward: ₽2,268
     }
   }
 
-  // --- ENCOUNTER PARSER ---
+  
   async function generateEncounterCard(scriptId, containerId) {
     const rawText = document.getElementById(scriptId).textContent;
     const lines = rawText.trim().split('\n');
@@ -717,7 +853,7 @@ Reward: ₽2,268
     document.getElementById(containerId).innerHTML = cardHTML;
   }
 
-  // --- CONDENSED TRAINER LIST PARSER ---
+  
   async function generateTrainerList(scriptId, containerId) {
     const rawText = document.getElementById(scriptId).textContent;
     const blocks = rawText.split('---');
@@ -727,7 +863,7 @@ Reward: ₽2,268
       block = block.trim();
       if (!block) continue;
 
-      let trainerInfo = { trainer: "Trainer", sprite: "youngster", reward: "???" };
+      let trainerInfo = { trainer: "Trainer", sprite: "rocketgrunt", reward: "???" };
       let team = [];
       let currentPokemon = null;
 
@@ -764,7 +900,6 @@ Reward: ₽2,268
           </div>`;
       }
 
-      // Use standard Showdown trainer sprites
       const trainerImg = `https://play.pokemonshowdown.com/sprites/trainers/${trainerInfo.sprite}.png`;
       const fallbackImg = `https://play.pokemonshowdown.com/sprites/trainers/blue.png`;
 
@@ -795,7 +930,7 @@ Reward: ₽2,268
     document.getElementById(containerId).innerHTML = html;
   }
 
-  // --- BATTLE PARSER ---
+  
   async function generateBattleCard(scriptId, containerId, cardId) {
     const rawText = document.getElementById(scriptId).textContent;
     const lines = rawText.trim().split('\n');
@@ -832,7 +967,7 @@ Reward: ₽2,268
       const pData = await getPokemonData(pkmn.name);
       let typesHtml = pData.types.map(t => `<span class="type-chip ${t}">${t.charAt(0).toUpperCase() + t.slice(1)}</span>`).join("");
       
-      let displayName = pkmn.name.replace(/^(Alolan|Galarian)\s+/i, '');
+      let displayName = pkmn.name.replace(/^(Alolan|Galarian)\s+/i, '') .replace(/[- ](F|M|Female|Male)$/i, '');
 
       let movesHtml = "";
       for (let i = 0; i < 4; i++) {
@@ -866,7 +1001,6 @@ Reward: ₽2,268
       else partyBalls += `<span class="party-ball"></span>`;
     }
 
-    // Use standard Showdown trainer sprites
     const trainerImg = `https://play.pokemonshowdown.com/sprites/trainers/${trainerInfo.sprite}.png`;
     const fallbackImg = `https://play.pokemonshowdown.com/sprites/trainers/blue.png`;
 
@@ -891,18 +1025,21 @@ Reward: ₽2,268
     document.getElementById(containerId).innerHTML = cardHTML;
   }
 
-  // --- INITIALIZATION ON PAGE LOAD ---
+  
   document.addEventListener('DOMContentLoaded', async () => {
-    await generateEncounterCard('encounter-data-route24', 'encounter-container-1');
-    await generateEncounterCard('encounter-data-route25', 'encounter-container-2');
+    await generateTrainerList('team-data-silph-list', 'trainer-list-container-silph');
+    
+     await generateBattleCard('team-data-rival-silph-bulbasaur', 'battle-rival-silph-1', 'battle-rival-silph-1-card');
+    await generateBattleCard('team-data-rival-silph-charmander', 'battle-rival-silph-2', 'battle-rival-silph-2-card');
+    await generateBattleCard('team-data-rival-silph-squirtle', 'battle-rival-silph-3', 'battle-rival-silph-3-card');
 
-    await generateTrainerList('team-data-route24-list', 'trainer-list-container-route24');
-    await generateTrainerList('team-data-route25-list', 'trainer-list-container-route25');
+    await generateBattleCard('team-data-giovanni-silph', 'battle-card-container-giovanni-silph', 'battle-giovanni-silph');
 
-    await generateTrainerList('team-data-gym-trainers', 'trainer-list-container-gym-trainers');
-    await generateBattleCard('team-data-misty', 'battle-card-container-misty', 'battle-misty');
+    await generateTrainerList('team-data-saffron-gym-trainers', 'battle-card-container-gym-trainers');
 
-    // Lightbox Functionality
+    await generateBattleCard('team-data-sabrina', 'battle-card-container-sabrina', 'battle-sabrina');
+
+    
     const lightbox = document.getElementById('imageLightbox');
     const lightboxImg = document.getElementById('lightboxImg');
     const mapImages = document.querySelectorAll('.map-container img');

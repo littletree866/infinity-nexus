@@ -1,0 +1,1788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex | Infinite Sun</title>
+    <link rel="icon" href="../../../icon.jpg" sizes="16x16 32x32 48x48 64x64" type="image/vnd.microsoft.icon">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <style>
+    :root {
+        --bg: #111714;
+        --panel: #1b2520;
+        --panel2: #243129;
+        --green: #58c77b;
+        --text: #edf5ef;
+        --muted: #9aaca0;
+        --border: #35443a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: 'Inter', sans-serif;
+    }
+
+    header {
+        background: #19231d;
+        padding: 20px 5%;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .logo { font-size: 25px; font-weight: bold; color: var(--green); }
+    .logo span { color: white; }
+    header a { color: var(--muted); text-decoration: none; }
+
+    .container { max-width: 1400px; margin: auto; padding: 30px 20px; }
+    .page-title { font-size: 30px; margin-bottom: 8px; }
+    .subtitle { color: var(--muted); margin-bottom: 25px; }
+
+    .search-area { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
+
+    input, select {
+        background: var(--panel);
+        color: white;
+        border: 1px solid var(--border);
+        border-radius: 7px;
+        padding: 13px;
+        font-size: 15px;
+        outline: none;
+    }
+
+    input { flex: 1; min-width: 200px; }
+    input:focus, select:focus { border-color: var(--green); }
+
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 25px; }
+
+    .filter {
+        border: none;
+        padding: 8px 13px;
+        border-radius: 5px;
+        cursor: pointer;
+        color: white;
+        background: var(--panel2);
+        font-weight: bold;
+    }
+
+    .filter.active { background: var(--green); color: #102016; }
+
+    .results { color: var(--muted); margin-bottom: 15px; font-size: 14px; }
+
+    .pokemon-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+    }
+
+    .pokemon-card {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 15px;
+        cursor: pointer;
+        transition: 0.2s;
+        content-visibility: auto;
+        contain-intrinsic-size: 220px;
+        position: relative;
+    }
+
+    .pokemon-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--green);
+        background: var(--panel2);
+    }
+
+    .pokemon-card.is-form { border-style: dashed; }
+    .pokemon-card.is-form .pokemon-name { font-size: 15px; }
+
+    .pokemon-number { color: var(--muted); font-size: 13px; }
+
+    .pokemon-image {
+        width: 125px;
+        height: 125px;
+        object-fit: contain;
+        display: block;
+        margin: 5px auto;
+    }
+
+    .pokemon-name {
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: capitalize;
+        margin: 8px 0;
+    }
+
+    .types { display: flex; justify-content: center; gap: 5px; flex-wrap: nowrap; }
+
+    .type {
+        padding: 5px 10px;
+        border-radius: 4px;
+        color: white;
+        font-size: 11px;
+        font-weight: bold;
+        text-transform: uppercase;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    .Normal { background: #929a79; }
+    .Fire { background: #e56b36; }
+    .Water { background: #4789d5; }
+    .Electric { background: #d6b52e; }
+    .Grass { background: #59a94f; }
+    .Ice { background: #68bfc5; }
+    .Fighting { background: #bd4844; }
+    .Poison { background: #9653a9; }
+    .Ground { background: #b18b49; }
+    .Flying { background: #8c83d0; }
+    .Psychic { background: #e45c8b; }
+    .Bug { background: #8c9d32; }
+    .Rock { background: #a18c50; }
+    .Ghost { background: #665b9c; }
+    .Dragon { background: #6253c7; }
+    .Dark { background: #65544c; }
+    .Steel { background: #8796a6; }
+    .Fairy { background: #d887b5; }
+
+    .detail {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        background: rgba(0, 0, 0, 0.65);
+        padding: 40px 20px;
+        overflow-y: auto;
+    }
+
+    .detail.open {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    .detail-panel {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 25px;
+        width: 100%;
+        max-width: 1000px;
+        max-height: calc(100vh - 80px);
+        overflow-y: auto;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        animation: detail-pop 0.15s ease-out;
+    }
+
+    .detail-panel.compare-panel { max-width: 1200px; }
+
+    @keyframes detail-pop {
+        from { transform: scale(0.96); opacity: 0; }
+        to   { transform: scale(1);    opacity: 1; }
+    }
+
+    .detail-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .close {
+        background: #35443a;
+        border: none;
+        color: white;
+        padding: 9px 14px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    .close:hover { background: #465a4c; }
+
+    body.modal-open { overflow: hidden; }
+
+    .detail-main {
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        gap: 30px;
+        margin-top: 20px;
+    }
+
+    .detail-image { width: 100%; max-width: 240px; object-fit: contain; }
+    .detail-info h2 { font-size: 28px; text-transform: capitalize; margin: 0 0 10px; }
+    .section-title { color: var(--green); font-size: 18px; margin: 25px 0 12px; }
+
+    .stat-row {
+        display: grid;
+        grid-template-columns: 100px 35px 1fr;
+        gap: 10px;
+        align-items: center;
+        margin: 10px 0;
+        font-size: 14px;
+    }
+
+    .stat-bar { height: 9px; background: #35443a; border-radius: 10px; overflow: hidden; }
+    .stat-fill { height: 100%; background: var(--green); border-radius: 10px; }
+    .total { color: var(--green); font-weight: bold; margin-top: 15px; }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 12px;
+    }
+
+    .info-box { background: var(--panel2); padding: 13px; border-radius: 7px; }
+    .info-box small { color: var(--muted); display: block; margin-bottom: 6px; }
+    .info-box strong { text-transform: capitalize; }
+
+    .empty { text-align: center; padding: 60px 10px; color: var(--muted); display: none; }
+
+    /* ---- Evolution Lines ---- */
+    .evo-row {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 12px;
+        background: var(--panel2);
+        border-radius: 8px;
+    }
+
+    .evo-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        padding: 8px;
+        border-radius: 6px;
+        min-width: 90px;
+        cursor: pointer;
+        transition: background 0.15s;
+    }
+
+    .evo-item:hover { background: rgba(255, 255, 255, 0.05); }
+
+    .evo-current {
+        background: rgba(88, 199, 123, 0.15);
+        outline: 1px solid var(--green);
+    }
+
+    .evo-sprite {
+        width: 72px;
+        height: 72px;
+        object-fit: contain;
+        image-rendering: auto;
+    }
+
+    .evo-name {
+        font-size: 12px;
+        color: var(--text);
+        text-align: center;
+        text-transform: capitalize;
+    }
+
+    .evo-arrow {
+        font-size: 18px;
+        color: var(--muted);
+        align-self: center;
+    }
+
+    /* Branch styling */
+    .evo-branch-root { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .evo-branch-column { 
+        display: flex; 
+        flex-direction: row; 
+        flex-wrap: wrap; 
+        justify-content: center; 
+        gap: 24px; 
+        width: 100%; 
+        margin-top: 10px;
+    }
+    .evo-branch-item {
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        gap: 4px;
+        background: var(--panel2); 
+        border-radius: 8px; 
+        padding: 8px;
+        border: 1px solid var(--border);
+    }
+    .evo-arrow-down { font-size: 18px; color: var(--muted); margin: 4px 0; }
+
+    /* Compare UI */
+    .detail-actions { margin: 14px 0 4px; }
+    .detail-actions .cmp-btn { width: 100%; padding: 10px 0; }
+
+    .compare-pick-bar {
+        display: none;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 12px 16px;
+        margin-bottom: 18px;
+        background: var(--panel);
+        border: 1px solid var(--green);
+        border-radius: 9px;
+        flex-wrap: wrap;
+    }
+    .compare-pick-bar.visible { display: flex; }
+    .compare-pick-bar strong { color: var(--green); text-transform: capitalize; }
+    .compare-pick-bar .cmp-btn { padding: 8px 14px; }
+
+    .compare-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        margin-top: 10px;
+    }
+
+    .compare-col {
+        background: var(--panel2);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 18px;
+    }
+
+    .compare-col .cmp-head {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 14px;
+    }
+
+    .compare-col .cmp-head img { width: 130px; height: 130px; object-fit: contain; }
+    .compare-col .cmp-head h2 { font-size: 22px; text-transform: capitalize; margin: 0; }
+    .compare-col .types { justify-content: center; }
+    .compare-col .section-title { margin-top: 18px; }
+
+    .cmp-winner { color: var(--green); font-weight: bold; }
+    .cmp-loser  { color: var(--muted); }
+
+    .cmp-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin-top: 22px;
+        flex-wrap: wrap;
+    }
+
+    .cmp-btn {
+        background: var(--panel2);
+        border: 1px solid var(--border);
+        color: white;
+        padding: 11px 18px;
+        border-radius: 7px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 14px;
+    }
+    .cmp-btn:hover { border-color: var(--green); }
+    .cmp-btn.primary { background: var(--green); color: #102016; border-color: var(--green); }
+
+    @media(max-width: 650px) {
+        .detail-main { grid-template-columns: 1fr; }
+        .detail-image { display: block; margin: auto; }
+        header { padding: 18px; }
+        .detail { padding: 15px; }
+        .detail-panel { max-height: calc(100vh - 30px); padding: 18px; }
+        .evo-sprite { width: 56px; height: 56px; }
+        .evo-item { min-width: 70px; padding: 6px; }
+        .compare-grid { grid-template-columns: 1fr; }
+        .compare-col .cmp-head img { width: 100px; height: 100px; }
+    }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">INFINITE <span>SUN</span></div>
+</header>
+
+<div class="container">
+
+    <h1 class="page-title">Pokédex</h1>
+    <p class="subtitle">Explore Pokémon, their stats, abilities, and moves.</p>
+
+    <div class="search-area">
+        <input type="text" id="search" placeholder="Search Pokémon by name or number...">
+        <select id="sort">
+            <option value="number">Sort: Pokédex Number</option>
+            <option value="name">Sort: Name</option>
+            <option value="bst">Sort: Base Stat Total</option>
+        </select>
+    </div>
+
+    <div class="compare-pick-bar" id="compare-pick-bar"></div>
+
+    <div class="filters" id="filters">
+        <button class="filter active" data-type="All">All</button>
+        <button class="filter" data-type="Normal">Normal</button>
+        <button class="filter" data-type="Fire">Fire</button>
+        <button class="filter" data-type="Water">Water</button>
+        <button class="filter" data-type="Electric">Electric</button>
+        <button class="filter" data-type="Grass">Grass</button>
+        <button class="filter" data-type="Ice">Ice</button>
+        <button class="filter" data-type="Fighting">Fighting</button>
+        <button class="filter" data-type="Poison">Poison</button>
+        <button class="filter" data-type="Ground">Ground</button>
+        <button class="filter" data-type="Flying">Flying</button>
+        <button class="filter" data-type="Psychic">Psychic</button>
+        <button class="filter" data-type="Bug">Bug</button>
+        <button class="filter" data-type="Rock">Rock</button>
+        <button class="filter" data-type="Ghost">Ghost</button>
+        <button class="filter" data-type="Dragon">Dragon</button>
+        <button class="filter" data-type="Dark">Dark</button>
+        <button class="filter" data-type="Steel">Steel</button>
+        <button class="filter" data-type="Fairy">Fairy</button>
+    </div>
+
+    <div class="detail" id="detail">
+        <div class="detail-panel" id="detail-panel">
+            <div class="detail-header">
+                <h2 id="detail-title">Pokémon Information</h2>
+                <button class="close" onclick="closeDetail()">X</button>
+            </div>
+            <div id="detail-content"></div>
+        </div>
+    </div>
+
+    <div class="results" id="results"></div>
+    <div class="pokemon-grid" id="pokemon-grid"></div>
+
+    <div class="empty" id="empty">
+        <h2>No Pokémon found</h2>
+        <p>Try another search or type filter.</p>
+    </div>
+
+</div>
+
+<script>
+
+const DEX_NUMBERS = {
+    Bulbasaur: 1, Ivysaur: 2, Venusaur: 3, Charmander: 4, Charmeleon: 5, Charizard: 6,
+    Squirtle: 7, Wartortle: 8, Blastoise: 9, Caterpie: 10, Metapod: 11, Butterfree: 12,
+    Weedle: 13, Kakuna: 14, Beedrill: 15, Pidgey: 16, Pidgeotto: 17, Pidgeot: 18,
+    Rattata: 19, Raticate: 20, Spearow: 21, Fearow: 22, Ekans: 23, Arbok: 24,
+    Pikachu: 25, Raichu: 26, Sandshrew: 27, Sandslash: 28, "Nidoran♀": 29, Nidorina: 30,
+    Nidoqueen: 31, "Nidoran♂": 32, Nidorino: 33, Nidoking: 34, Clefairy: 35, Clefable: 36,
+    Vulpix: 37, Ninetales: 38, Jigglypuff: 39, Wigglytuff: 40, Zubat: 41, Golbat: 42,
+    Oddish: 43, Gloom: 44, Vileplume: 45, Paras: 46, Parasect: 47, Venonat: 48,
+    Venomoth: 49, Diglett: 50, Dugtrio: 51, Meowth: 52, Persian: 53, Psyduck: 54,
+    Golduck: 55, Mankey: 56, Primeape: 57, Growlithe: 58, Arcanine: 59, Poliwag: 60,
+    Poliwhirl: 61, Poliwrath: 62, Abra: 63, Kadabra: 64, Alakazam: 65, Machop: 66,
+    Machoke: 67, Machamp: 68, Bellsprout: 69, Weepinbell: 70, Victreebel: 71, Tentacool: 72,
+    Tentacruel: 73, Geodude: 74, Graveler: 75, Golem: 76, Ponyta: 77, Rapidash: 78,
+    Slowpoke: 79, Slowbro: 80, Magnemite: 81, Magneton: 82, "Farfetch'd": 83, Doduo: 84,
+    Dodrio: 85, Seel: 86, Dewgong: 87, Grimer: 88, Muk: 89, Shellder: 90,
+    Cloyster: 91, Gastly: 92, Haunter: 93, Gengar: 94, Onix: 95, Drowzee: 96,
+    Hypno: 97, Krabby: 98, Kingler: 99, Voltorb: 100, Electrode: 101, Exeggcute: 102,
+    Exeggutor: 103, Cubone: 104, Marowak: 105, Hitmonlee: 106, Hitmonchan: 107, Lickitung: 108,
+    Koffing: 109, Weezing: 110, Rhyhorn: 111, Rhydon: 112, Chansey: 113, Tangela: 114,
+    Kangaskhan: 115, Horsea: 116, Seadra: 117, Goldeen: 118, Seaking: 119, Staryu: 120,
+    Starmie: 121, "Mr. Mime": 122, Scyther: 123, Jynx: 124, Electabuzz: 125, Magmar: 126,
+    Pinsir: 127, Tauros: 128, Magikarp: 129, Gyarados: 130, Lapras: 131, Ditto: 132,
+    Eevee: 133, Vaporeon: 134, Jolteon: 135, Flareon: 136, Porygon: 137, Omanyte: 138,
+    Omastar: 139, Kabuto: 140, Kabutops: 141, Aerodactyl: 142, Snorlax: 143, Articuno: 144,
+    Zapdos: 145, Moltres: 146, Dratini: 147, Dragonair: 148, Dragonite: 149, Mewtwo: 150,
+    Mew: 151, Chikorita: 152, Bayleef: 153, Meganium: 154, Cyndaquil: 155, Quilava: 156,
+    Typhlosion: 157, Totodile: 158, Croconaw: 159, Feraligatr: 160, Sentret: 161, Furret: 162,
+    Hoothoot: 163, Noctowl: 164, Ledyba: 165, Ledian: 166, Spinarak: 167, Ariados: 168,
+    Crobat: 169, Chinchou: 170, Lanturn: 171, Pichu: 172, Cleffa: 173, Igglybuff: 174,
+    Togepi: 175, Togetic: 176, Natu: 177, Xatu: 178, Mareep: 179, Flaaffy: 180,
+    Ampharos: 181, Bellossom: 182, Marill: 183, Azumarill: 184, Sudowoodo: 185, Politoed: 186,
+    Hoppip: 187, Skiploom: 188, Jumpluff: 189, Aipom: 190, Sunkern: 191, Sunflora: 192,
+    Yanma: 193, Wooper: 194, Quagsire: 195, Espeon: 196, Umbreon: 197, Murkrow: 198,
+    Slowking: 199, Misdreavus: 200, Unown: 201, Wobbuffet: 202, Girafarig: 203, Pineco: 204,
+    Forretress: 205, Dunsparce: 206, Gligar: 207, Steelix: 208, Snubbull: 209, Granbull: 210,
+    Qwilfish: 211, Scizor: 212, Shuckle: 213, Heracross: 214, Sneasel: 215, Teddiursa: 216,
+    Ursaring: 217, Slugma: 218, Magcargo: 219, Swinub: 220, Piloswine: 221, Corsola: 222,
+    Remoraid: 223, Octillery: 224, Delibird: 225, Mantine: 226, Skarmory: 227, Houndour: 228,
+    Houndoom: 229, Kingdra: 230, Phanpy: 231, Donphan: 232, Porygon2: 233, Stantler: 234,
+    Smeargle: 235, Tyrogue: 236, Hitmontop: 237, Smoochum: 238, Elekid: 239, Magby: 240,
+    Miltank: 241, Blissey: 242, Raikou: 243, Entei: 244, Suicune: 245, Larvitar: 246,
+    Pupitar: 247, Tyranitar: 248, Lugia: 249, "Ho-Oh": 250, Celebi: 251, Treecko: 252,
+    Grovyle: 253, Sceptile: 254, Torchic: 255, Combusken: 256, Blaziken: 257, Mudkip: 258,
+    Marshtomp: 259, Swampert: 260, Poochyena: 261, Mightyena: 262, Zigzagoon: 263, Linoone: 264,
+    Wurmple: 265, Silcoon: 266, Beautifly: 267, Cascoon: 268, Dustox: 269, Lotad: 270,
+    Lombre: 271, Ludicolo: 272, Seedot: 273, Nuzleaf: 274, Shiftry: 275, Taillow: 276,
+    Swellow: 277, Wingull: 278, Pelipper: 279, Ralts: 280, Kirlia: 281, Gardevoir: 282,
+    Surskit: 283, Masquerain: 284, Shroomish: 285, Breloom: 286, Slakoth: 287, Vigoroth: 288,
+    Slaking: 289, Nincada: 290, Ninjask: 291, Shedinja: 292, Whismur: 293, Loudred: 294,
+    Exploud: 295, Makuhita: 296, Hariyama: 297, Azurill: 298, Nosepass: 299, Skitty: 300,
+    Delcatty: 301, Sableye: 302, Mawile: 303, Aron: 304, Lairon: 305, Aggron: 306,
+    Meditite: 307, Medicham: 308, Electrike: 309, Manectric: 310, Plusle: 311, Minun: 312,
+    Volbeat: 313, Illumise: 314, Roselia: 315, Gulpin: 316, Swalot: 317, Carvanha: 318,
+    Sharpedo: 319, Wailmer: 320, Wailord: 321, Numel: 322, Camerupt: 323, Torkoal: 324,
+    Spoink: 325, Grumpig: 326, Spinda: 327, Trapinch: 328, Vibrava: 329, Flygon: 330,
+    Cacnea: 331, Cacturne: 332, Swablu: 333, Altaria: 334, Zangoose: 335, Seviper: 336,
+    Lunatone: 337, Solrock: 338, Barboach: 339, Whiscash: 340, Corphish: 341, Crawdaunt: 342,
+    Baltoy: 343, Claydol: 344, Lileep: 345, Cradily: 346, Anorith: 347, Armaldo: 348,
+    Feebas: 349, Milotic: 350, Castform: 351, Kecleon: 352, Shuppet: 353, Banette: 354,
+    Duskull: 355, Dusclops: 356, Tropius: 357, Chimecho: 358, Absol: 359, Wynaut: 360,
+    Snorunt: 361, Glalie: 362, Spheal: 363, Sealeo: 364, Walrein: 365, Clamperl: 366,
+    Huntail: 367, Gorebyss: 368, Relicanth: 369, Luvdisc: 370, Bagon: 371, Shelgon: 372,
+    Salamence: 373, Beldum: 374, Metang: 375, Metagross: 376, Regirock: 377, Regice: 378,
+    Registeel: 379, Latias: 380, Latios: 381, Kyogre: 382, Groudon: 383, Rayquaza: 384,
+    Jirachi: 385, Deoxys: 386, Turtwig: 387, Grotle: 388, Torterra: 389, Chimchar: 390,
+    Monferno: 391, Infernape: 392, Piplup: 393, Prinplup: 394, Empoleon: 395, Starly: 396,
+    Staravia: 397, Staraptor: 398, Bidoof: 399, Bibarel: 400, Kricketot: 401, Kricketune: 402,
+    Shinx: 403, Luxio: 404, Luxray: 405, Budew: 406, Roserade: 407, Cranidos: 408,
+    Rampardos: 409, Shieldon: 410, Bastiodon: 411, Burmy: 412, Wormadam: 413, Mothim: 414,
+    Combee: 415, Vespiquen: 416, Pachirisu: 417, Buizel: 418, Floatzel: 419, Cherubi: 420,
+    Cherrim: 421, Shellos: 422, Gastrodon: 423, Ambipom: 424, Drifloon: 425, Drifblim: 426,
+    Buneary: 427, Lopunny: 428, Mismagius: 429, Honchkrow: 430, Glameow: 431, Purugly: 432,
+    Chingling: 433, Stunky: 434, Skuntank: 435, Bronzor: 436, Bronzong: 437, Bonsly: 438,
+    "Mime Jr.": 439, Happiny: 440, Chatot: 441, Spiritomb: 442, Gible: 443, Gabite: 444,
+    Garchomp: 445, Munchlax: 446, Riolu: 447, Lucario: 448, Hippopotas: 449, Hippowdon: 450,
+    Skorupi: 451, Drapion: 452, Croagunk: 453, Toxicroak: 454, Carnivine: 455, Finneon: 456,
+    Lumineon: 457, Mantyke: 458, Snover: 459, Abomasnow: 460, Weavile: 461, Magnezone: 462,
+    Lickilicky: 463, Rhyperior: 464, Tangrowth: 465, Electivire: 466, Magmortar: 467,
+    Togekiss: 468, Yanmega: 469, Leafeon: 470, Glaceon: 471, Gliscor: 472, Mamoswine: 473,
+    "Porygon-Z": 474, Gallade: 475, Probopass: 476, Dusknoir: 477, Froslass: 478, Rotom: 479,
+    Uxie: 480, Mesprit: 481, Azelf: 482, Dialga: 483, Palkia: 484, Heatran: 485,
+    Regigigas: 486, Giratina: 487, Cresselia: 488, Phione: 489, Manaphy: 490, Darkrai: 491,
+    Shaymin: 492, Arceus: 493, Victini: 494, Snivy: 495, Servine: 496, Serperior: 497,
+    Tepig: 498, Pignite: 499, Emboar: 500, Oshawott: 501, Dewott: 502, Samurott: 503,
+    Patrat: 504, Watchog: 505, Lillipup: 506, Herdier: 507, Stoutland: 508, Purrloin: 509,
+    Liepard: 510, Pansage: 511, Simisage: 512, Pansear: 513, Simisear: 514, Panpour: 515,
+    Simipour: 516, Munna: 517, Musharna: 518, Pidove: 519, Tranquill: 520, Unfezant: 521,
+    Blitzle: 522, Zebstrika: 523, Roggenrola: 524, Boldore: 525, Gigalith: 526, Woobat: 527,
+    Swoobat: 528, Drilbur: 529, Excadrill: 530, Audino: 531, Timburr: 532, Gurdurr: 533,
+    Conkeldurr: 534, Tympole: 535, Palpitoad: 536, Seismitoad: 537, Throh: 538, Sawk: 539,
+    Sewaddle: 540, Swadloon: 541, Leavanny: 542, Venipede: 543, Whirlipede: 544,
+    Scolipede: 545, Cottonee: 546, Whimsicott: 547, Petilil: 548, Lilligant: 549,
+    Basculin: 550, Sandile: 551, Krokorok: 552, Krookodile: 553, Darumaka: 554,
+    Darmanitan: 555, Maractus: 556, Dwebble: 557, Crustle: 558, Scraggy: 559, Scrafty: 560,
+    Sigilyph: 561, Yamask: 562, Cofagrigus: 563, Tirtouga: 564, Carracosta: 565, Archen: 566,
+    Archeops: 567, Trubbish: 568, Garbodor: 569, Zorua: 570, Zoroark: 571, Minccino: 572,
+    Cinccino: 573, Gothita: 574, Gothorita: 575, Gothitelle: 576, Solosis: 577, Duosion: 578,
+    Reuniclus: 579, Ducklett: 580, Swanna: 581, Vanillite: 582, Vanillish: 583,
+    Vanilluxe: 584, Deerling: 585, Sawsbuck: 586, Emolga: 587, Karrablast: 588,
+    Escavalier: 589, Foongus: 590, Amoonguss: 591, Frillish: 592, Jellicent: 593,
+    Alomomola: 594, Joltik: 595, Galvantula: 596, Ferroseed: 597, Ferrothorn: 598,
+    Klink: 599, Klang: 600, Klinklang: 601, Tynamo: 602, Eelektrik: 603, Eelektross: 604,
+    Elgyem: 605, Beheeyem: 606, Litwick: 607, Lampent: 608, Chandelure: 609, Axew: 610,
+    Fraxure: 611, Haxorus: 612, Cubchoo: 613, Beartic: 614, Cryogonal: 615, Shelmet: 616,
+    Accelgor: 617, Stunfisk: 618, Mienfoo: 619, Mienshao: 620, Druddigon: 621, Golett: 622,
+    Golurk: 623, Pawniard: 624, Bisharp: 625, Bouffalant: 626, Rufflet: 627, Braviary: 628,
+    Vullaby: 629, Mandibuzz: 630, Heatmor: 631, Durant: 632, Deino: 633, Zweilous: 634,
+    Hydreigon: 635, Larvesta: 636, Volcarona: 637, Cobalion: 638, Terrakion: 639,
+    Virizion: 640, Tornadus: 641, Thundurus: 642, Reshiram: 643, Zekrom: 644, Landorus: 645,
+    Kyurem: 646, Keldeo: 647, Meloetta: 648, Genesect: 649, Chespin: 650, Quilladin: 651,
+    Chesnaught: 652, Fennekin: 653, Braixen: 654, Delphox: 655, Froakie: 656, Frogadier: 657,
+    Greninja: 658, Bunnelby: 659, Diggersby: 660, Fletchling: 661, Fletchindr: 662,
+    Talonflame: 663, Scatterbug: 664, Spewpa: 665, Vivillon: 666, Litleo: 667, Pyroar: 668,
+    "Flabébé": 669, Floette: 670, Florges: 671, Skiddo: 672, Gogoat: 673, Pancham: 674,
+    Pangoro: 675, Furfrou: 676, Espurr: 677, Meowstic: 678, Honedge: 679, Doublade: 680,
+    Aegislash: 681, Spritzee: 682, Aromatisse: 683, Swirlix: 684, Slurpuff: 685, Inkay: 686,
+    Malamar: 687, Binacle: 688, Barbaracle: 689, Skrelp: 690, Dragalge: 691, Clauncher: 692,
+    Clawitzer: 693, Helioptile: 694, Heliolisk: 695, Tyrunt: 696, Tyrantrum: 697, Amaura: 698,
+    Aurorus: 699, Sylveon: 700, Hawlucha: 701, Dedenne: 702, Carbink: 703, Goomy: 704,
+    Sliggoo: 705, Goodra: 706, Klefki: 707, Phantump: 708, Trevenant: 709, Pumpkaboo: 710,
+    Gourgeist: 711, Bergmite: 712, Avalugg: 713, Noibat: 714, Noivern: 715, Xerneas: 716,
+    Yveltal: 717, Zygarde: 718, Diancie: 719, Hoopa: 720, Volcanion: 721, Rowlet: 722,
+    Dartrix: 723, Decidueye: 724, Litten: 725, Torracat: 726, Incineroar: 727, Popplio: 728,
+    Brionne: 729, Primarina: 730, Pikipek: 731, Trumbeak: 732, Toucannon: 733, Yungoos: 734,
+    Gumshoos: 735, Grubbin: 736, Charjabug: 737, Vikavolt: 738, Crabrawler: 739,
+    Crabminble: 740, Oricorio: 741, Cutiefly: 742, Ribombee: 743, Rockruff: 744,
+    Lycanroc: 745, Wishiwashi: 746, Mareanie: 747, Toxapex: 748, Mudbray: 749, Mudsdale: 750,
+    Dewpider: 751, Araquanid: 752, Fomantis: 753, Lurantis: 754, Morelull: 755,
+    Shiinotic: 756, Salandit: 757, Salazzle: 758, Stufful: 759, Bewear: 760,
+    Bounsweet: 761, Steenee: 762, Tsareena: 763, Comfey: 764, Oranguru: 765,
+    Passimian: 766, Wimpod: 767, Golisopod: 768, Sandygast: 769, Palossand: 770,
+    Pyukumuku: 771, "Type: Null": 772, Silvally: 773, Minior: 774, Komala: 775,
+    Turtonator: 776, Togedemaru: 777, Mimikyu: 778, Bruxish: 779, Drampa: 780,
+    Dhelmise: 781, "Jangmo-o": 782, "Hakamo-o": 783, "Kommo-o": 784, "Tapu Koko": 785,
+    "Tapu Lele": 786, "Tapu Bulu": 787, "Tapu Fini": 788, Cosmog: 789, Cosmoem: 790,
+    Solgaleo: 791, Lunala: 792, Nihilego: 793, Buzzwole: 794, Pheromosa: 795,
+    Xurkitree: 796, Celesteela: 797, Kartana: 798, Guzzlord: 799, Necrozma: 800,
+    Magearna: 801, Marshadow: 802, Poipole: 803, Naganadel: 804, Stakataka: 805,
+    Blacphalon: 806, Zeraora: 807, Meltan: 808, Melmetal: 809, Grookey: 810, Thwackey: 811,
+    Rillaboom: 812, Scorbunny: 813, Raboot: 814, Cinderace: 815, Sobble: 816, Drizzile: 817,
+    Inteleon: 818, Skwovet: 819, Greedent: 820, Rookidee: 821, Corvsquire: 822,
+    Corvknight: 823, Blipbug: 824, Dottler: 825, Orbeetle: 826, Nickit: 827, Thievul: 828,
+    Gossifleur: 829, Eldegoss: 830, Wooloo: 831, Dubwool: 832, Chewtle: 833, Drednaw: 834,
+    Yamper: 835, Boltund: 836, Rolycoly: 837, Carkol: 838, Coalossal: 839, Applin: 840,
+    Flapple: 841, Appletun: 842, Silicobra: 843, Sandaconda: 844, Cramorant: 845,
+    Arrokuda: 846, Baraskewda: 847, Toxel: 848, Toxtricity: 849, Sizzlipede: 850,
+    Centskorch: 851, Clobbopus: 852, Grapploct: 853, Sinistea: 854, Poltegeist: 855,
+    Hatenna: 856, Hattrem: 857, Hatterene: 858, Impidimp: 859, Morgrem: 860, Grimmsnarl: 861,
+    Obstagoon: 862, Perrserker: 863, Cursola: 864, "Sirfetch'd": 865, "Mr. Rime": 866,
+    Runerigus: 867, Milcery: 868, Alcremie: 869, Falinks: 870, Pincurchin: 871, Snom: 872,
+    Frosmoth: 873, Stonjorner: 874, Eiscue: 875, Indeedee: 876, Morpeko: 877, Cufant: 878,
+    Copperajah: 879, Dracozolt: 880, Arctozolt: 881, Dracovish: 882, Arctovish: 883,
+    Duraludon: 884, Dreepy: 885, Drakloak: 886, Dragapult: 887, Zacian: 888, Zamazenta: 889,
+    Eternatus: 890, Kubfu: 891, Urshifu: 892, Zarude: 893, Regieleki: 894, Regidrago: 895,
+    Glastrier: 896, Spectrier: 897, Calyrex: 898
+};
+
+    const EVOLUTION_LINES = [
+        [1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12], [13, 14, 15],
+        [16, 17, 18], [19, 20], [21, 22], [23, 24], [25, 26], [172, 25, 26],
+        [27, 28], [29, 30, 31], [32, 33, 34], [173, 35, 36], [37, 38],
+        [174, 39, 40], [41, 42], [169, 41, 42], [43, 44, 45], [46, 47],
+        [48, 49], [50, 51], [52, 53], [54, 55], [56, 57], [58, 59],
+        [60, 61, 62], [63, 64, 65], [66, 67, 68], [69, 70, 71], [72, 73],
+        [74, 75, 76], [77, 78], [79, 80], [199, 79, 80], [81, 82, 462],
+        [83], [84, 85], [86, 87], [88, 89], [90, 91], [92, 93, 94],
+        [95, 208], [96, 97], [98, 99], [100, 101], [102, 103], [104, 105],
+        [106], [107], [108, 463], [109, 110], [111, 112, 464], [440, 113, 242],
+        [114, 465], [115], [116, 117, 230], [118, 119], [120, 121],
+        [439, 122], [123, 212], [238, 124], [239, 125, 466], [240, 126, 467],
+        [127], [128], [129, 130], [131], [132], [133, 134, 135, 136, 196, 197, 470, 471, 700],
+        [137, 233, 474], [138, 139], [140, 141], [142], [446, 143], [144],
+        [145], [146], [147, 148, 149], [150], [151], [152, 153, 154],
+        [155, 156, 157], [158, 159, 160], [161, 162], [163, 164], [165, 166],
+        [167, 168], [170, 171], [175, 176, 468], [177, 178], [179, 180, 181],
+        [182], [298, 183, 184], [438, 185], [186], [187, 188, 189], [190, 424],
+        [191, 192], [193, 469], [194, 195], [198, 430], [200, 429], [201],
+        [202], [203], [204, 205], [206], [207, 472], [209, 210], [211],
+        [212], [213], [214], [215, 461], [216, 217], [218, 219], [220, 221, 473],
+        [222], [223, 224], [225], [226, 458], [227], [228, 229], [231, 232],
+        [234], [235], [236, 106, 107, 237], [241], [243], [244], [245],
+        [246, 247, 248], [249], [250], [251], [252, 253, 254], [255, 256, 257],
+        [258, 259, 260], [261, 262], [263, 264], [265, 266, 267], [265, 268, 269],
+        [270, 271, 272], [273, 274, 275], [276, 277], [278, 279], [280, 281, 282, 475],
+        [283, 284], [285, 286], [287, 288, 289], [290, 291, 292], [293, 294, 295],
+        [296, 297], [299], [300, 301], [302], [303], [304, 305, 306],
+        [307, 308], [309, 310], [311], [312], [313], [314], [315, 406, 407],
+        [316, 317], [318, 319], [320, 321], [322, 323], [324], [325, 326],
+        [327], [328, 329, 330], [331, 332], [333, 334], [335], [336],
+        [337], [338], [339, 340], [341, 342], [343, 344], [345, 346],
+        [347, 348], [349, 350], [351], [352], [353, 354], [355, 356, 477],
+        [357], [358, 433], [359], [360, 202], [361, 362, 478], [363, 364, 365],
+        [366, 367], [366, 368], [369], [370], [371, 372, 373], [374, 375, 376],
+        [377], [378], [379], [380], [381], [382], [383], [384], [385],
+        [386], [387, 388, 389], [390, 391, 392], [393, 394, 395], [396, 397, 398],
+        [399, 400], [401, 402], [403, 404, 405], [406, 315, 407], [408, 409],
+        [410, 411], [412, 413], [412, 414], [415, 416], [417], [418, 419],
+        [420, 421], [422, 423], [424], [425, 426], [427, 428], [429],
+        [430], [431, 432], [433, 358], [434, 435], [436, 437], [438, 185],
+        [439, 122], [440, 113, 242], [441], [442], [443, 444, 445], [446, 143],
+        [447, 448], [449, 450], [451, 452], [453, 454], [455], [456, 457],
+        [458, 226], [459, 460], [461], [462], [463], [464], [465], [466],
+        [467], [468], [469], [470], [471], [472], [473], [474], [475],
+        [476], [477], [478], [479], [480], [481], [482], [483], [484],
+        [485], [486], [487], [488], [489, 490], [491], [492], [493],
+        [494], [495, 496, 497], [498, 499, 500], [501, 502, 503], [504, 505],
+        [506, 507, 508], [509, 510], [511, 512], [513, 514], [515, 516],
+        [517, 518], [519, 520, 521], [522, 523], [524, 525, 526], [527, 528],
+        [529, 530], [532, 533, 534], [535, 536, 537], [538], [539],
+        [540, 541, 542], [543, 544, 545], [546, 547], [548, 549], [550],
+        [551, 552, 553], [554, 555], [556], [557, 558], [559, 560], [561],
+        [562, 563], [564, 565], [566, 567], [568, 569], [570, 571], [572, 573],
+        [574, 575, 576], [577, 578, 579], [580, 581], [582, 583, 584],
+        [585, 586], [587], [588, 589], [590, 591], [592, 593], [594],
+        [595, 596], [597, 598], [599, 600, 601], [602, 603, 604], [605, 606],
+        [607, 608, 609], [610, 611, 612], [613, 614], [615], [616, 617],
+        [618], [619, 620], [621], [622, 623], [624, 625], [626], [627, 628],
+        [629, 630], [631], [632], [633, 634, 635], [636, 637], [638],
+        [639], [640], [641], [642], [643], [644], [645], [646], [647],
+        [648], [649], [650, 651, 652], [653, 654, 655], [656, 657, 658],
+        [659, 660], [661, 662, 663], [664, 665, 666], [667, 668], [669, 670, 671],
+        [672, 673], [674, 675], [676], [677, 678], [679, 680, 681], [682, 683],
+        [684, 685], [686, 687], [688, 689], [690, 691], [692, 693], [694, 695],
+        [696, 697], [698, 699], [700], [701], [702], [703], [704, 705, 706],
+        [707], [708, 709], [710, 711], [712, 713], [714, 715], [716], [717],
+        [718], [719], [720], [721], [722, 723, 724], [725, 726, 727],
+        [728, 729, 730], [731, 732, 733], [734, 735], [736, 737, 738],
+        [739, 740], [741], [742, 743], [744, 745], [746], [747, 748],
+        [749, 750], [751, 752], [753, 754], [755, 756], [757, 758], [759, 760],
+        [761, 762, 763], [764], [765], [766], [767, 768], [769, 770],
+        [771], [772, 773], [774], [775], [776], [777], [778], [779],
+        [780], [781], [782, 783, 784], [785], [786], [787], [788],
+        [789, 790, 791], [789, 790, 792], [793], [794], [795], [796],
+        [797], [798], [799], [800], [801], [802], [803, 804], [805],
+        [806], [807], [808, 809], [810, 811, 812], [813, 814, 815],
+        [816, 817, 818], [819, 820], [821, 822, 823], [824, 825, 826],
+        [827, 828], [829, 830], [831, 832], [833, 834], [835, 836],
+        [837, 838, 839], [840, 841], [840, 842], [843, 844], [845], [846, 847],
+        [848, 849], [850, 851], [852, 853], [854, 855], [856, 857, 858],
+        [859, 860, 861], [862], [863], [864], [865], [866], [867], [868, 869],
+        [870], [871], [872, 873], [874], [875], [876], [877], [878, 879],
+        [880], [881], [882], [883], [884], [885, 886, 887], [888], [889],
+        [890], [891, 892], [893], [894], [895], [896], [897], [898]
+    ];
+
+    const EVOLUTIONS = {};
+    for (const line of EVOLUTION_LINES) {
+        for (const dex of line) EVOLUTIONS[dex] = line;
+    }
+
+    const NAME_BY_DEX = {};
+    for (const [name, dex] of Object.entries(DEX_NUMBERS)) {
+        NAME_BY_DEX[dex] = name;
+    }
+
+    const EVO_BRANCHES = {
+        133: { dex: 133, children: [134, 135, 136, 196, 197, 470, 471, 700].map(d => ({ dex: d })) },
+        265: { dex: 265, children: [
+            { dex: 266, children: [{ dex: 267 }] },
+            { dex: 268, children: [{ dex: 269 }] }
+        ]},
+        236: { dex: 236, children: [106, 107, 237].map(d => ({ dex: d })) },
+        43:  { dex: 43,  children: [
+            { dex: 44, children: [{ dex: 45 }] },
+            { dex: 44, children: [{ dex: 182 }] }
+        ]},
+        60:  { dex: 60,  children: [
+            { dex: 61, children: [{ dex: 62 }] },
+            { dex: 61, children: [{ dex: 186 }] }
+        ]},
+        79:  { dex: 79,  children: [ { dex: 80 }, { dex: 199 } ] },
+        412: { dex: 412, children: [
+            { dex: 413 },
+            { dex: 414 }
+        ]},
+        361: { dex: 361, children: [ { dex: 362 }, { dex: 478 } ] },
+        280: { dex: 280, children: [
+            { dex: 281, children: [{ dex: 282 }, { dex: 475 }] }
+        ]},
+        789: { dex: 789, children: [
+            { dex: 790, children: [{ dex: 791 }] },
+            { dex: 790, children: [{ dex: 792 }] }
+        ]},
+        744: { dex: 744, children: [ { dex: 745 } ] },
+        891: { dex: 891, children: [ { dex: 892 } ] },
+        848: { dex: 848, children: [ { dex: 849 } ] }
+    };
+
+    const typeMap = {
+        Electr: "Electric",
+        Fight: "Fighting",
+        Psychc: "Psychic"
+    };
+
+    // Explicit list of valid alternate forms to parse, mapped by base species name.
+    // Format: "BaseName": ["pokeapi-variant-slug", ...]
+    const ALLOWED_FORMS = {
+        "Venusaur": ["venusaur-mega"],
+        "Charizard": ["charizard-mega-x", "charizard-mega-y"],
+        "Blastoise": ["blastoise-mega"],
+        "Beedrill": ["beedrill-mega"],
+        "Pidgeot": ["pidgeot-mega"],
+        "Alakazam": ["alakazam-mega"],
+        "Slowbro": ["slowbro-mega"],
+        "Gengar": ["gengar-mega"],
+        "Kangaskhan": ["kangaskhan-mega"],
+        "Pinsir": ["pinsir-mega"],
+        "Gyarados": ["gyarados-mega"],
+        "Aerodactyl": ["aerodactyl-mega"],
+        "Mewtwo": ["mewtwo-mega-x", "mewtwo-mega-y"],
+        "Ampharos": ["ampharos-mega"],
+        "Steelix": ["steelix-mega"],
+        "Scizor": ["scizor-mega"],
+        "Heracross": ["heracross-mega"],
+        "Houndoom": ["houndoom-mega"],
+        "Tyranitar": ["tyranitar-mega"],
+        "Sceptile": ["sceptile-mega"],
+        "Blaziken": ["blaziken-mega"],
+        "Swampert": ["swampert-mega"],
+        "Gardevoir": ["gardevoir-mega"],
+        "Sableye": ["sableye-mega"],
+        "Mawile": ["mawile-mega"],
+        "Aggron": ["aggron-mega"],
+        "Medicham": ["medicham-mega"],
+        "Manectric": ["manectric-mega"],
+        "Sharpedo": ["sharpedo-mega"],
+        "Camerupt": ["camerupt-mega"],
+        "Altaria": ["altaria-mega"],
+        "Banette": ["banette-mega"],
+        "Absol": ["absol-mega"],
+        "Glalie": ["glalie-mega"],
+        "Salamence": ["salamence-mega"],
+        "Metagross": ["metagross-mega"],
+        "Latias": ["latias-mega"],
+        "Latios": ["latios-mega"],
+        "Groudon": ["groudon-primal"],
+        "Kyogre": ["kyogre-primal"],
+        "Rayquaza": ["rayquaza-mega"],
+        "Lopunny": ["lopunny-mega"],
+        "Garchomp": ["garchomp-mega"],
+        "Lucario": ["lucario-mega"],
+        "Abomasnow": ["abomasnow-mega"],
+        "Gallade": ["gallade-mega"],
+        "Audino": ["audino-mega"],
+        "Diancie": ["diancie-mega"],
+        "Zacian": ["zacian-crowned"],
+        "Zamazenta": ["zamazenta-crowned"],
+        "Necrozma": ["necrozma-dusk", "necrozma-dawn", "necrozma-ultra"]
+    };
+
+    function isValidForm(baseName, varietyName) {
+        if (!varietyName) return false;
+        const allowed = ALLOWED_FORMS[baseName];
+        if (!allowed) return false;
+        return allowed.includes(varietyName.toLowerCase());
+    }
+
+    function getFormLabel(baseName, varietyName) {
+        const lower = varietyName.toLowerCase();
+        if (lower.includes("-mega-x")) return "Mega X";
+        if (lower.includes("-mega-y")) return "Mega Y";
+        if (lower.includes("-mega")) return "Mega";
+        if (lower.includes("-primal")) return "Primal";
+        if (lower.includes("-crowned")) return "Crowned";
+        if (lower.includes("-dusk")) return "Dusk Mane";
+        if (lower.includes("-dawn")) return "Dawn Wings";
+        if (lower.includes("-ultra")) return "Ultra";
+        return varietyLabel(varietyName, baseName);
+    }
+
+    function splitCSV(line) {
+        const out = [];
+        let cur = "";
+        let inQuotes = false;
+
+        for (let i = 0; i < line.length; i++) {
+            const ch = line[i];
+            if (ch === '"') {
+                inQuotes = !inQuotes;
+                cur += ch;
+            } else if (ch === "," && !inQuotes) {
+                out.push(cur.trim());
+                cur = "";
+            } else {
+                cur += ch;
+            }
+        }
+
+        out.push(cur.trim());
+        return out;
+    }
+
+    function normalizeTypeName(value) {
+        if (!value) return "Unknown";
+        const cleaned = value.trim().replace(/^"|"$/g, "").replace(/\s+/g, " ");
+        if (!cleaned || cleaned === "-------" || cleaned === "None") return "Unknown";
+        return typeMap[cleaned] || cleaned;
+    }
+
+    function normalizeName(value) {
+        return value
+            .trim()
+            .replace(/^#+|#+$/g, "")
+            .replace(/\\sf/g, "♀")
+            .replace(/\\sm/g, "♂")
+            .replace(/^"|"$/g, "")
+            .trim();
+    }
+
+    function parseAbilitySlot(raw) {
+        if (!raw) return "None";
+        const t = raw.trim().replace(/^"|"$/g, "").trim();
+        if (!t || t === "-------" || t === "None" || t === "0") return "None";
+        return t;
+    }
+
+    function getPokemonSpriteUrl(dexNum) {
+        return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${dexNum}.png`;
+    }
+
+    function createPokemonPlaceholderSvg(name, types) {
+        const initials = (name || "PK")
+            .replace(/[^A-Za-z\s]/g, "")
+            .split(/\s+/)
+            .filter(Boolean)
+            .slice(0, 2)
+            .map(part => part[0]?.toUpperCase() || "")
+            .join("") || "PK";
+
+        const primary = types && types[0] ? types[0] : "Normal";
+        const palette = {
+            Normal: ["#929a79", "#6d7659"], Fire: ["#e56b36", "#b24a1f"],
+            Water: ["#4789d5", "#2d5f9d"], Electric: ["#d6b52e", "#a1831b"],
+            Grass: ["#59a94f", "#377d31"], Ice: ["#68bfc5", "#3d8f97"],
+            Fighting: ["#bd4844", "#8d312f"], Poison: ["#9653a9", "#68367e"],
+            Ground: ["#b18b49", "#7f6230"], Flying: ["#8c83d0", "#5e5a9d"],
+            Psychic: ["#e45c8b", "#b7345b"], Bug: ["#8c9d32", "#627421"],
+            Rock: ["#a18c50", "#7b6733"], Ghost: ["#665b9c", "#483f6a"],
+            Dragon: ["#6253c7", "#413590"], Dark: ["#65544c", "#433a36"],
+            Steel: ["#8796a6", "#5a6876"], Fairy: ["#d887b5", "#a95d86"]
+        };
+
+        const [start, end] = palette[primary] || ["#58c77b", "#2a8d4d"];
+        const svg = `
+            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'>
+                <defs>
+                    <linearGradient id='g' x1='0' x2='1'>
+                        <stop offset='0%' stop-color='${start}'/>
+                        <stop offset='100%' stop-color='${end}'/>
+                    </linearGradient>
+                </defs>
+                <rect width='120' height='120' rx='20' fill='#17231d'/>
+                <circle cx='60' cy='48' r='32' fill='url(#g)' opacity='0.95'/>
+                <text x='60' y='69' text-anchor='middle' font-size='29' font-weight='700' fill='white' font-family='Arial, sans-serif'>${initials}</text>
+                <text x='60' y='101' text-anchor='middle' font-size='10' fill='#eaf5ef' font-family='Arial, sans-serif'>${primary.toUpperCase()}</text>
+            </svg>
+        `;
+        return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+    }
+
+    const VARIETY_CACHE_PREFIX = "pokedex.varieties.v2:";
+    const varietyCache = new Map();
+    const varietyPending = new Map();
+
+    function getStoredVarieties(speciesName) {
+        try {
+            const raw = localStorage.getItem(VARIETY_CACHE_PREFIX + speciesName);
+            return raw ? JSON.parse(raw) : null;
+        } catch {
+            return null;
+        }
+    }
+
+    function setStoredVarieties(speciesName, varieties) {
+        try {
+            localStorage.setItem(VARIETY_CACHE_PREFIX + speciesName, JSON.stringify(varieties));
+        } catch {
+        }
+    }
+
+    function speciesSlugForName(name) {
+        return name
+            .toLowerCase()
+            .replace(/♀/g, "-f")
+            .replace(/♂/g, "-m")
+            .replace(/[.':]/g, "")
+            .replace(/\s+/g, "-")
+            .replace(/é/g, "e");
+    }
+
+    async function fetchVarieties(speciesName) {
+        if (varietyCache.has(speciesName)) return varietyCache.get(speciesName);
+        if (varietyPending.has(speciesName)) return varietyPending.get(speciesName);
+
+        const stored = getStoredVarieties(speciesName);
+        if (stored) {
+            varietyCache.set(speciesName, stored);
+            return stored;
+        }
+
+        const promise = (async () => {
+            try {
+                const slug = speciesSlugForName(speciesName);
+                const res = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${slug}`);
+                if (!res.ok) throw new Error(`species ${slug}: ${res.status}`);
+                const data = await res.json();
+
+                const varieties = (data.varieties || []).map(v => {
+                    const parts = v.pokemon.url.split("/").filter(Boolean);
+                    const id = Number(parts[parts.length - 1]);
+                    return { name: v.pokemon.name, id, isDefault: !!v.is_default };
+                });
+
+                varietyCache.set(speciesName, varieties);
+                setStoredVarieties(speciesName, varieties);
+                return varieties;
+            } catch (err) {
+                console.warn("Failed to load varieties for", speciesName, err);
+                varietyCache.set(speciesName, []);
+                return [];
+            } finally {
+                varietyPending.delete(speciesName);
+            }
+        })();
+
+        varietyPending.set(speciesName, promise);
+        return promise;
+    }
+
+    function formNumFromKey(formKey) {
+        const i = formKey.indexOf("~");
+        return i >= 0 ? Number(formKey.slice(i + 1)) : 0;
+    }
+
+    const MEGA_ITEMS = new Set([
+        "Venusaurite", "CharzarditeX", "CharzarditeY", "Blastoisnite", "Beedrillite",
+        "Pidgeotite", "Alakazite", "Slowbronite", "Gengarite", "Kangaskanite",
+        "Pinsirite", "Gyaradosite", "Aerodactlite", "MewtwoniteX", "MewtwoniteY",
+        "Ampharosite", "Steelixite", "Scizorite", "Heracronite", "Houndoomnite",
+        "Tyranitarite", "Sceptilite", "Blazikenite", "Swampertite", "Gardevoirite",
+        "Sablenite", "Mawilite", "Aggronite", "Medichamite", "Manectite",
+        "Sharpedonite", "Cameruptite", "Altarianite", "Banettite", "Absolite",
+        "Glalitite", "Salamencite", "Metagrossite", "Latiasite", "Latiosite",
+        "Lopunnite", "Garchompite", "Lucarionite", "Abomasite", "Galladite",
+        "Audinite", "Diancite", "Laprasite", "Kinglerite", "Centiskite",
+        "Sandacodite", "Butterfreite", "Drednawite", "Copperjaite", "Garbadorite",
+        "Machampite", "Snorlaxite", "Toxtricite"
+    ]);
+    
+    let MEGA_POKEMON = new Set();
+
+    async function loadMegaItems() {
+        try {
+            const res = await fetch("pokedexItems.txt");
+            if (!res.ok) return;
+            const text = await res.text();
+            
+            const lines = text.split(/\r?\n/);
+            for (const rawLine of lines) {
+                const line = rawLine.trim();
+                if (!line || line.startsWith("@!")) continue;
+                
+                const match = line.match(/^\+?"(.+?)"/);
+                if (!match) continue;
+                
+                const itemName = match[1];
+                if (MEGA_ITEMS.has(itemName)) {
+                    let base = itemName.replace(/(ite|iteX|iteY|nite|ite)$/i, "");
+                    base = base.replace(/^Charzard/i, "Charizard")
+                               .replace(/^Blastoise$/i, "Blastoise")
+                               .replace(/^Kangaskan$/i, "Kangaskhan")
+                               .replace(/^Aerodactl$/i, "Aerodactyl")
+                               .replace(/^Houndoomn$/i, "Houndoom")
+                               .replace(/^Sandacod/i, "Sandaconda")
+                               .replace(/^Butterfre/i, "Butterfree")
+                               .replace(/^Copperjai/i, "Copperajah")
+                               .replace(/^Garbador/i, "Garbodor");
+                    MEGA_POKEMON.add(base);
+                }
+            }
+        } catch(e) {
+            console.warn("Could not load items for mega matching", e);
+        }
+    }
+
+    function pickVarietyForForm(varieties, formKey) {
+        if (!varieties.length) return null;
+        
+        const baseName = formKey.split("~")[0];
+        const n = formNumFromKey(formKey);
+
+        // Filter to only the explicitly allowed forms for this Pokémon.
+        const allowedSlugs = ALLOWED_FORMS[baseName] || [];
+        const allowedVarieties = varieties.filter(v => allowedSlugs.includes(v.name.toLowerCase()));
+
+        if (!allowedVarieties.length) return null;
+
+        // If there's only one allowed form, return it.
+        if (allowedVarieties.length === 1) return allowedVarieties[0];
+
+        // Otherwise, use the ~N index to pick the correct one.
+        const idx = n - 2;
+        if (idx >= 0 && idx < allowedVarieties.length) return allowedVarieties[idx];
+        
+        return allowedVarieties[0];
+    }
+
+    function varietyLabel(varietyName, baseName) {
+        if (!varietyName) return "";
+        const slugBase = speciesSlugForName(baseName);
+        let rest = varietyName;
+        if (rest.startsWith(slugBase + "-")) rest = rest.slice(slugBase.length + 1);
+        else if (rest.startsWith(slugBase)) rest = rest.slice(slugBase.length);
+        
+        if (!rest) return ""; 
+        
+        return rest
+            .split("-")
+            .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+            .join(" ");
+    }
+
+    async function resolveFormSprite(baseName, formKey, types) {
+        const varieties = await fetchVarieties(baseName);
+        const picked = pickVarietyForForm(varieties, formKey);
+        
+        if (!picked) {
+            return {
+                image: null,
+                spriteId: null,
+                label: "", 
+                varietyName: null
+            };
+        }
+        
+        const label = getFormLabel(baseName, picked.name);
+
+        return {
+            image: getPokemonSpriteUrl(picked.id),
+            spriteId: picked.id,
+            label: label,
+            varietyName: picked.name
+        };
+    }
+
+    let DEX_ORDER = {};
+
+    function normalizeOrderName(value) {
+        return value
+            .trim()
+            .replace(/^#+|#+$/g, "")
+            .replace(/\\sf/g, "♀")
+            .replace(/\\sm/g, "♂")
+            .replace(/^"|"$/g, "")
+            .replace(/^\+/, "")
+            .trim();
+    }
+
+    async function loadDexOrder() {
+        const res = await fetch("pokedexOrder.txt");
+        if (!res.ok) throw new Error(`Failed to load pokedexOrder.txt: ${res.status}`);
+        const text = await res.text();
+
+        const map = {};
+        const lines = text.split(/\r?\n/);
+
+        for (const rawLine of lines) {
+            const line = rawLine.trim();
+            if (!line || line.startsWith("@!")) continue;
+
+            const match = line.match(/^\+?#(.+?)#\s*,\s*(\d+)\s*$/);
+            if (!match) continue;
+
+            const name = normalizeOrderName(match[1]);
+            const num = Number(match[2]);
+            if (!name || !num) continue;
+
+            if (!(name in map)) map[name] = num;
+        }
+
+        DEX_ORDER = map;
+    }
+
+    let pokemon = [];
+    const formResolveQueue = [];
+
+    function registerFormResolution(entry) {
+        formResolveQueue.push(entry);
+    }
+
+    function parsePokemonData(text) {
+        const lines = text.split(/\r?\n/);
+        const parsed = [];
+
+        for (const rawLine of lines) {
+            const line = rawLine.trim();
+            if (!line || !line.includes("#") || line.startsWith("@!")) continue;
+
+            const match = line.match(/^\+?#(.+?)#\s*,\s*(.*)$/);
+            if (!match) continue;
+
+            const rawName = match[1];
+            if (rawName.includes("?")) continue;
+
+            let baseName, formKey = null, formLabel = null;
+            const tilde = rawName.indexOf("~");
+            if (tilde >= 0) {
+                formKey = rawName;
+                baseName = normalizeName(rawName.slice(0, tilde));
+            } else {
+                baseName = normalizeName(rawName);
+            }
+
+            if (!baseName) continue;
+            const nationalDex = DEX_NUMBERS[baseName];
+            if (!nationalDex) continue;
+
+            const parts = splitCSV(match[2]);
+            if (!parts.length || !/^\d+$/.test(parts[0])) continue;
+
+            const hp = Number(parts[0]) || 0;
+            const attack = Number(parts[1]) || 0;
+            const defense = Number(parts[2]) || 0;
+            const speed = Number(parts[3]) || 0;
+            const spAttack = Number(parts[4]) || 0;
+            const spDefense = Number(parts[5]) || 0;
+            if (hp + attack + defense + speed + spAttack + spDefense === 0) continue;
+
+            const stats = { hp, attack, defense, speed, spAttack, spDefense };
+
+            const type1 = normalizeTypeName(parts[6]);
+            const type2 = normalizeTypeName(parts[7]);
+            const types = [type1];
+            if (type2 && type2 !== "Unknown" && type2 !== type1) types.push(type2);
+
+            const abilities = [19, 20, 23].map(i => parseAbilitySlot(parts[i]));
+
+            const gameDex = DEX_ORDER[baseName] || nationalDex;
+            const uid = formKey ? formKey : baseName;
+            const displayName = formLabel ? `${baseName} (${formLabel})` : baseName;
+
+            const entry = {
+                uid,
+                id: gameDex,
+                spriteId: nationalDex,
+                baseDex: nationalDex,
+                name: baseName,
+                displayName,
+                isForm: !!formKey,
+                formKey,
+                types,
+                image: getPokemonSpriteUrl(nationalDex),
+                stats,
+                abilities,
+                formResolved: !formKey
+            };
+
+            if (formKey) {
+                entry.image = createPokemonPlaceholderSvg(baseName, types);
+                registerFormResolution(entry);
+            }
+
+            parsed.push(entry);
+        }
+
+        parsed.sort((a, b) =>
+            a.id - b.id ||
+            (a.isForm ? 1 : 0) - (b.isForm ? 1 : 0) ||
+            a.uid.localeCompare(b.uid)
+        );
+        return parsed;
+    }
+
+    async function resolveQueuedForms() {
+        const queue = formResolveQueue.slice();
+        formResolveQueue.length = 0;
+
+        const seenSpriteIds = new Set();
+        const toRemove = new Set();
+
+        await Promise.all(queue.map(async entry => {
+            const resolved = await resolveFormSprite(entry.name, entry.formKey, entry.types);
+
+            // Drop it if the resolved sprite is missing, or if the resolved variety 
+            // doesn't match our explicit allowed list.
+            if (!resolved.image || !isValidForm(entry.name, resolved.varietyName)) {
+                toRemove.add(entry.uid);
+                return;
+            }
+
+            // If we already have a card for this exact sprite ID, drop it.
+            if (resolved.spriteId != null && seenSpriteIds.has(resolved.spriteId)) {
+                toRemove.add(entry.uid);
+                return;
+            }
+
+            if (resolved.spriteId != null) {
+                seenSpriteIds.add(resolved.spriteId);
+            }
+
+            entry.image = resolved.image;
+            entry.spriteId = resolved.spriteId != null ? resolved.spriteId : entry.spriteId;
+            entry.formLabel = resolved.label;
+            entry.varietyName = resolved.varietyName;
+            
+            if (resolved.label) {
+                entry.displayName = `${entry.name} (${resolved.label})`;
+            } else {
+                entry.displayName = entry.name;
+            }
+            
+            entry.formResolved = true;
+        }));
+
+        if (toRemove.size > 0) {
+            pokemon = pokemon.filter(p => !toRemove.has(p.uid));
+        }
+
+        renderPokemon();
+    }
+
+    async function loadPokemonData() {
+        try {
+            await loadMegaItems();
+
+            const response = await fetch("pokedex.txt");
+            if (!response.ok) throw new Error(`Failed to load pokedex.txt: ${response.status}`);
+
+            const text = await response.text();
+
+            try {
+                await loadDexOrder();
+            } catch (e) {
+                console.warn("pokedexOrder.txt not loaded, using DEX_NUMBERS", e);
+            }
+
+            pokemon = parsePokemonData(text);
+
+            if (!pokemon.length) {
+                throw new Error("No valid Pokémon entries were parsed from pokedex.txt");
+            }
+
+            renderPokemon();
+            resolveQueuedForms();
+        } catch (error) {
+            console.error(error);
+            pokemon = [{
+                uid: "Bulbasaur", id: 1, spriteId: 1, baseDex: 1, name: "Bulbasaur",
+                displayName: "Bulbasaur", isForm: false,
+                types: ["Grass", "Poison"], image: getPokemonSpriteUrl(1),
+                stats: { hp: 45, attack: 49, defense: 49, speed: 45, spAttack: 65, spDefense: 65 },
+                abilities: ["Overgrow", "None", "Chlorophyll"],
+                formResolved: true
+            }];
+            renderPokemon();
+        }
+    }
+
+    let selectedType = "All";
+
+    function setType(type) {
+        selectedType = type;
+        document.querySelectorAll(".filter").forEach(b => {
+            b.classList.toggle("active", b.dataset.type === type);
+        });
+        renderPokemon();
+    }
+
+    function getStatColor(value) {
+        if (value < 30)  return "#d94a4a";
+        if (value < 60)  return "#e07a2f";
+        if (value < 90)  return "#d9b32a";
+        if (value < 120) return "#7dc25a";
+        if (value < 150) return "#20C073";
+        return "#3a7bd5";
+    }
+
+    function getPokemonByUid(uid) { return pokemon.find(x => x.uid === uid); }
+
+    function evoNodeName(dex) {
+        return NAME_BY_DEX[dex] || `#${dex}`;
+    }
+
+    function evoNodeHTML(dex, currentSpriteId, extraClass = "") {
+        const name = evoNodeName(dex);
+        const isCurrent = dex === currentSpriteId;
+        const sprite = getPokemonSpriteUrl(dex);
+        return `<div class="evo-item${isCurrent ? " evo-current" : ""} ${extraClass}" data-sprite-id="${dex}">
+            <img class="evo-sprite" src="${sprite}" alt="${name}" loading="lazy"
+                onerror="this.onerror=null; this.src='${createPokemonPlaceholderSvg(name, ["Normal"])}'">
+            <div class="evo-name">${name}</div>
+        </div>`;
+    }
+
+    function renderEvoBranch(node, currentSpriteId) {
+        const selfHTML = evoNodeHTML(node.dex, currentSpriteId);
+        if (!node.children || !node.children.length) return selfHTML;
+
+        const childCols = node.children.map(child => {
+            const childSelf = evoNodeHTML(child.dex, currentSpriteId);
+            if (!child.children || !child.children.length) {
+                return `<div class="evo-branch-item">${childSelf}</div>`;
+            }
+            const grandChildren = child.children.map(gc =>
+                `<div class="evo-branch-item">${evoNodeHTML(gc.dex, currentSpriteId)}</div>`
+            ).join("");
+            return `<div class="evo-branch-item">
+                ${childSelf}
+                <div class="evo-branch-column">${grandChildren}</div>
+            </div>`;
+        }).join("");
+
+        return `<div class="evo-branch-root">
+            ${selfHTML}
+            <div class="evo-arrow evo-arrow-down">↓</div>
+            <div class="evo-branch-column">${childCols}</div>
+        </div>`;
+    }
+
+    function buildEvolutionLineHTML(baseDex, currentSpriteId = baseDex) {
+        const contains = (node, dex) => node.dex === dex || (node.children || []).some(c => contains(c, dex));
+
+        for (const baseKey of Object.keys(EVO_BRANCHES)) {
+            const tree = EVO_BRANCHES[baseKey];
+            if (contains(tree, baseDex)) {
+                return `<div class="evo-branch-wrap">${renderEvoBranch(tree, currentSpriteId)}</div>`;
+            }
+        }
+
+        const line = EVOLUTIONS[baseDex];
+        if (!line || line.length < 2) return "";
+
+        const items = line.map(dex => evoNodeHTML(dex, currentSpriteId))
+            .join('<div class="evo-arrow">→</div>');
+
+        return `<div class="evo-row">${items}</div>`;
+    }
+
+    let renderTimer = null;
+
+    function renderPokemon() {
+        clearTimeout(renderTimer);
+        renderTimer = setTimeout(renderPokemonNow, 60);
+    }
+
+    function renderPokemonNow() {
+        const search = document.getElementById("search").value.toLowerCase();
+        const sort = document.getElementById("sort").value;
+
+        let filtered = pokemon.filter(p => {
+            const matchesSearch =
+                p.displayName.toLowerCase().includes(search) ||
+                p.name.toLowerCase().includes(search) ||
+                String(p.id).includes(search);
+            const matchesType =
+                selectedType === "All" || p.types.includes(selectedType);
+            return matchesSearch && matchesType;
+        });
+
+        if (sort === "name") filtered.sort((a, b) => a.displayName.localeCompare(b.displayName));
+        if (sort === "number") filtered.sort((a, b) => a.id - b.id || (a.isForm ? 1 : 0) - (b.isForm ? 1 : 0));
+        if (sort === "bst") filtered.sort((a, b) => getBST(b) - getBST(a));
+
+        const grid = document.getElementById("pokemon-grid");
+        document.getElementById("results").textContent = `Showing ${filtered.length} Pokémon`;
+        document.getElementById("empty").style.display = filtered.length === 0 ? "block" : "none";
+
+        const parts = [];
+        for (const p of filtered) {
+            const types = p.types.map(t => `<span class="type ${t}">${t}</span>`).join("");
+            parts.push(`<div class="pokemon-card${p.isForm ? " is-form" : ""}" data-uid="${p.uid}">
+                <div class="pokemon-number">#${String(p.id).padStart(4, "0")}</div>
+                <img class="pokemon-image"
+                    src="${p.image}" alt="${p.displayName}"
+                    loading="lazy" decoding="async"
+                    data-name="${p.name}" data-types="${p.types.join("|")}">
+                <div class="pokemon-name">${p.displayName}</div>
+                <div class="types">${types}</div>
+            </div>`);
+        }
+        grid.innerHTML = parts.join("");
+    }
+
+    document.getElementById("pokemon-grid").addEventListener("click", e => {
+        const card = e.target.closest(".pokemon-card");
+        if (!card) return;
+        const uid = card.dataset.uid;
+        if (!uid) return;
+
+        if (awaitingCompareSecond && compareFirstUid) {
+            if (uid === compareFirstUid) return;
+            const first = getPokemonByUid(compareFirstUid);
+            const second = getPokemonByUid(uid);
+            if (first && second) {
+                cancelComparePick();
+                openComparison(first.uid, second.uid);
+            }
+            return;
+        }
+        showDetail(uid);
+    });
+
+    document.getElementById("pokemon-grid").addEventListener("error", e => {
+        const img = e.target;
+        if (img.tagName === "IMG" && !img.dataset.fallback) {
+            img.dataset.fallback = "1";
+            const name = img.dataset.name || "PK";
+            const types = (img.dataset.types || "Normal").split("|");
+            img.src = createPokemonPlaceholderSvg(name, types);
+        }
+    }, true);
+
+    document.getElementById("filters").addEventListener("click", e => {
+        const btn = e.target.closest(".filter");
+        if (btn) setType(btn.dataset.type);
+    });
+
+    document.getElementById("search").addEventListener("input", renderPokemon);
+    document.getElementById("sort").addEventListener("change", renderPokemon);
+
+    document.getElementById("detail").addEventListener("click", e => {
+        if (e.target.id === "detail") closeDetail();
+    });
+
+    document.getElementById("detail").addEventListener("click", e => {
+        const tile = e.target.closest(".evo-item");
+        if (!tile) return;
+        const spriteId = Number(tile.dataset.spriteId);
+        if (!spriteId) return;
+        const target = pokemon.find(x => x.spriteId === spriteId || x.baseDex === spriteId);
+        if (target) showDetail(target.uid);
+    });
+
+    document.addEventListener("keydown", e => {
+        if (e.key !== "Escape") return;
+        if (document.getElementById("detail").classList.contains("open")) {
+            closeDetail();
+        } else if (awaitingCompareSecond) {
+            cancelComparePick();
+        }
+    });
+
+    function getBST(p) {
+        return Object.values(p.stats).reduce((a, b) => a + b, 0);
+    }
+
+    let currentDetailUid = null;
+    let currentCompareUids = null;
+    let awaitingCompareSecond = false;
+    let compareFirstUid = null;
+
+    function showDetail(uid) {
+        const p = getPokemonByUid(uid);
+        if (!p) return;
+
+        currentDetailUid = uid;
+        currentCompareUids = null;
+
+        const detail = document.getElementById("detail");
+        const content = document.getElementById("detail-content");
+        const panel = document.getElementById("detail-panel");
+        const title = document.getElementById("detail-title");
+
+        panel.classList.remove("compare-panel");
+        title.textContent = p.isForm ? "Alternate Form Information" : "Pokémon Information";
+
+        detail.classList.add("open");
+        document.body.classList.add("modal-open");
+
+        const types = p.types.map(t => `<span class="type ${t}">${t}</span>`).join("");
+
+        const abilityLabels = ["Ability 1", "Ability 2", "Hidden Ability"];
+        const abilityBoxes = p.abilities.map((a, i) => `
+            <div class="info-box"><small>${abilityLabels[i]}</small><strong>${a}</strong></div>
+        `).join("");
+
+        const statNames = {
+            hp: "HP", attack: "Attack", defense: "Defense",
+            spAttack: "Sp. Attack", spDefense: "Sp. Defense", speed: "Speed"
+        };
+
+        let statsHTML = "";
+        for (const [key, value] of Object.entries(p.stats)) {
+            const color = getStatColor(value);
+            statsHTML += `
+                <div class="stat-row">
+                    <strong>${statNames[key]}</strong>
+                    <span style="color:${color}; font-weight:bold;">${value}</span>
+                    <div class="stat-bar">
+                        <div class="stat-fill" style="width:${Math.min(value / 180 * 100, 100)}%; background:${color};"></div>
+                    </div>
+                </div>`;
+        }
+
+        const evoHTML = buildEvolutionLineHTML(p.baseDex, p.spriteId);
+
+        content.innerHTML = `
+            <div class="detail-main">
+                <div>
+                    <img class="detail-image" src="${p.image}" alt="${p.displayName}"
+                        data-name="${p.name}" data-types="${p.types.join("|")}">
+                    <div class="detail-actions">
+                        <button class="cmp-btn primary" id="detail-compare-btn">⇄ Compare this Pokémon</button>
+                    </div>
+
+                </div>
+                <div class="detail-info">
+                    <h2>#${String(p.id).padStart(4, "0")} ${p.displayName}</h2>
+                    <div class="types">${types}</div>
+
+                    <h3 class="section-title">Base Stats</h3>
+                    ${statsHTML}
+                    <div class="total">Total: ${getBST(p)}</div>
+
+                    <h3 class="section-title">Pokémon Information</h3>
+                    <div class="info-grid">
+                        <div class="info-box"><small>Height</small><strong>N/A</strong></div>
+                        <div class="info-box"><small>Weight</small><strong>N/A</strong></div>
+                    </div>
+
+                    <h3 class="section-title">Abilities</h3>
+                    <div class="info-grid">${abilityBoxes}</div>
+
+                    ${evoHTML ? `<h3 class="section-title">Evolution Line</h3>${evoHTML}` : ""}
+                </div>
+            </div>`;
+
+        const img = content.querySelector(".detail-image");
+        if (img) {
+            img.addEventListener("error", () => {
+                img.onerror = null;
+                img.src = createPokemonPlaceholderSvg(p.name, p.types);
+            }, { once: true });
+        }
+
+        content.querySelector("#detail-compare-btn").addEventListener("click", () => {
+            beginComparePick(p.uid);
+        });
+
+        document.getElementById("detail-panel").scrollTop = 0;
+    }
+
+    const comparePickBar = document.getElementById("compare-pick-bar");
+
+    function beginComparePick(uid) {
+        compareFirstUid = uid;
+        awaitingCompareSecond = true;
+        closeDetail();
+        updateComparePickBar();
+    }
+
+    function cancelComparePick() {
+        awaitingCompareSecond = false;
+        compareFirstUid = null;
+        updateComparePickBar();
+    }
+
+    function updateComparePickBar() {
+        if (!comparePickBar) return;
+        if (awaitingCompareSecond && compareFirstUid) {
+            const p = getPokemonByUid(compareFirstUid);
+            comparePickBar.classList.add("visible");
+            comparePickBar.innerHTML = `
+                <span>Comparing <strong>${p ? p.displayName : "?"}</strong> — pick a second Pokémon.</span>
+                <button class="cmp-btn" id="compare-pick-cancel">Cancel</button>`;
+            comparePickBar.querySelector("#compare-pick-cancel")
+                .addEventListener("click", cancelComparePick);
+        } else {
+            comparePickBar.classList.remove("visible");
+            comparePickBar.innerHTML = "";
+        }
+    }
+
+    function statNamesMap() {
+        return {
+            hp: "HP", attack: "Attack", defense: "Defense",
+            spAttack: "Sp. Attack", spDefense: "Sp. Defense", speed: "Speed"
+        };
+    }
+
+    function buildCompareColumn(p, other) {
+        const statNames = statNamesMap();
+        const types = p.types.map(t => `<span class="type ${t}">${t}</span>`).join("");
+        const abilityLabels = ["Ability 1", "Ability 2", "Hidden Ability"];
+        const abilityBoxes = p.abilities.map((a, i) => `
+            <div class="info-box"><small>${abilityLabels[i]}</small><strong>${a}</strong></div>`).join("");
+
+        let statsHTML = "";
+        for (const [key, value] of Object.entries(p.stats)) {
+            const otherVal = other.stats[key];
+            const color = getStatColor(value);
+            const suffix = value > otherVal ? " ▲" : value < otherVal ? " ▼" : "";
+            statsHTML += `
+                <div class="stat-row">
+                    <strong>${statNames[key]}</strong>
+                    <span style="color:${color}; font-weight:bold;">${value}${suffix}</span>
+                    <div class="stat-bar">
+                        <div class="stat-fill" style="width:${Math.min(value / 180 * 100, 100)}%; background:${color};"></div>
+                    </div>
+                </div>`;
+        }
+
+        const bstOwn = getBST(p), bstOther = getBST(other);
+        const bstClass = bstOwn > bstOther ? "cmp-winner" : bstOwn < bstOther ? "cmp-loser" : "";
+        const bstSuffix = bstOwn > bstOther ? " ▲" : bstOwn < bstOther ? " ▼" : "";
+        
+        const evoHTML = buildEvolutionLineHTML(p.baseDex, p.spriteId);
+
+        return `
+            <div class="compare-col" data-compare-uid="${p.uid}">
+                <div class="cmp-head">
+                    <img src="${p.image}" alt="${p.displayName}"
+                        data-name="${p.name}" data-types="${p.types.join("|")}" class="cmp-sprite">
+                    <h2>#${String(p.id).padStart(4, "0")} ${p.displayName}</h2>
+                    <div class="types">${types}</div>
+                </div>
+
+                <h3 class="section-title">Base Stats</h3>
+                ${statsHTML}
+                <div class="total ${bstClass}">Total: ${bstOwn}${bstSuffix}</div>
+
+                <h3 class="section-title">Pokémon Information</h3>
+                <div class="info-grid">
+                    <div class="info-box"><small>Height</small><strong>N/A</strong></div>
+                    <div class="info-box"><small>Weight</small><strong>N/A</strong></div>
+                </div>
+
+                <h3 class="section-title">Abilities</h3>
+                <div class="info-grid">${abilityBoxes}</div>
+
+                ${evoHTML ? `<h3 class="section-title">Evolution Line</h3>${evoHTML}` : ""}
+            </div>`;
+    }
+
+    function bindCompareImageFallbacks(scope) {
+        scope.querySelectorAll(".cmp-sprite").forEach(img => {
+            img.addEventListener("error", () => {
+                img.onerror = null;
+                img.src = createPokemonPlaceholderSvg(
+                    img.dataset.name || "PK",
+                    (img.dataset.types || "Normal").split("|")
+                );
+            }, { once: true });
+        });
+        scope.querySelectorAll(".evo-sprite").forEach(img => {
+            img.addEventListener("error", () => {
+                img.onerror = null;
+                img.src = createPokemonPlaceholderSvg(img.alt || "PK", ["Normal"]);
+            }, { once: true });
+        });
+    }
+
+    function renderComparisonGrid(uidA, uidB) {
+        const a = getPokemonByUid(uidA), b = getPokemonByUid(uidB);
+        if (!a || !b) return;
+        const grid = document.querySelector("#detail-content .compare-grid");
+        if (!grid) return;
+        grid.innerHTML = buildCompareColumn(a, b) + buildCompareColumn(b, a);
+        bindCompareImageFallbacks(grid);
+    }
+
+    function openComparison(uidA, uidB) {
+        const a = getPokemonByUid(uidA), b = getPokemonByUid(uidB);
+        if (!a || !b) return;
+
+        currentDetailUid = null;
+        currentCompareUids = [uidA, uidB];
+
+        const detail = document.getElementById("detail");
+        const content = document.getElementById("detail-content");
+        const panel = document.getElementById("detail-panel");
+        const title = document.getElementById("detail-title");
+
+        title.textContent = "Pokémon Comparison";
+        panel.classList.add("compare-panel");
+        detail.classList.add("open");
+        document.body.classList.add("modal-open");
+
+        content.innerHTML = `
+            <div class="compare-grid">
+                ${buildCompareColumn(a, b)}
+                ${buildCompareColumn(b, a)}
+            </div>
+            <div class="cmp-actions">
+                <button class="cmp-btn primary" id="cmp-swap">Swap Sides</button>
+                <button class="cmp-btn" id="cmp-change">Change Selection</button>
+                <button class="cmp-btn" id="cmp-close">Close</button>
+            </div>`;
+
+        const grid = content.querySelector(".compare-grid");
+        bindCompareImageFallbacks(grid);
+
+        content.querySelector("#cmp-swap").addEventListener("click", () => {
+            renderComparisonGrid(currentCompareUids[1], currentCompareUids[0]);
+        });
+        content.querySelector("#cmp-change").addEventListener("click", () => {
+            const keep = currentCompareUids[0];
+            closeDetail();
+            beginComparePick(keep);
+        });
+        content.querySelector("#cmp-close").addEventListener("click", closeDetail);
+
+        document.getElementById("detail-panel").scrollTop = 0;
+    }
+
+    function closeDetail() {
+        currentDetailUid = null;
+        currentCompareUids = null;
+        document.getElementById("detail").classList.remove("open");
+        document.body.classList.remove("modal-open");
+    }
+
+    updateComparePickBar();
+    loadPokemonData();
+
+</script>
+</body>
+</html>

@@ -5,399 +5,423 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokédex | Infinite Sun</title>
     <link rel="icon" href="../../../icon.jpg" sizes="16x16 32x32 48x48 64x64" type="image/vnd.microsoft.icon">
-    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-    :root {
-        --bg: #111714;
-        --panel: #1b2520;
-        --panel2: #243129;
-        --green: #58c77b;
-        --text: #edf5ef;
-        --muted: #9aaca0;
-        --border: #35443a;
-    }
+        :root {
+            --bg: #111714;
+            --panel: #1b2520;
+            --panel2: #243129;
+            --green: #58c77b;
+            --text: #edf5ef;
+            --muted: #9aaca0;
+            --border: #35443a;
+        }
 
-    * { box-sizing: border-box; }
+        * { box-sizing: border-box; }
 
-    body {
-        margin: 0;
-        background: var(--bg);
-        color: var(--text);
-        font-family: 'Inter', sans-serif;
-    }
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Roboto', sans-serif;
+        }
 
-    header {
-        background: #19231d;
-        padding: 20px 5%;
-        border-bottom: 1px solid var(--border);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
+        header {
+            background: #19231d;
+            padding: 20px 5%;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-    .logo { font-size: 25px; font-weight: bold; color: var(--green); }
-    .logo span { color: white; }
-    header a { color: var(--muted); text-decoration: none; }
+        .logo { font-size: 25px; font-weight: bold; color: var(--green); }
+        .logo span { color: white; }
+        header a { color: var(--muted); text-decoration: none; }
 
-    .container { max-width: 1400px; margin: auto; padding: 30px 20px; }
-    .page-title { font-size: 30px; margin-bottom: 8px; }
-    .subtitle { color: var(--muted); margin-bottom: 25px; }
+        .container { max-width: 1400px; margin: auto; padding: 30px 20px; }
+        .page-title { font-size: 30px; margin-bottom: 8px; }
+        .subtitle { color: var(--muted); margin-bottom: 25px; }
 
-    .search-area { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
+        .search-area { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
 
-    input, select {
-        background: var(--panel);
-        color: white;
-        border: 1px solid var(--border);
-        border-radius: 7px;
-        padding: 13px;
-        font-size: 15px;
-        outline: none;
-    }
+        input, select {
+            background: var(--panel);
+            color: white;
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            padding: 13px;
+            font-size: 15px;
+            outline: none;
+        }
 
-    input { flex: 1; min-width: 200px; }
-    input:focus, select:focus { border-color: var(--green); }
+        input { flex: 1; min-width: 200px; }
+        input:focus, select:focus { border-color: var(--green); }
 
-    .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 25px; }
+        .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 25px; }
 
-    .filter {
-        border: none;
-        padding: 8px 13px;
-        border-radius: 5px;
-        cursor: pointer;
-        color: white;
-        background: var(--panel2);
-        font-weight: bold;
-    }
+        .filter {
+            border: none;
+            padding: 8px 13px;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            background: var(--panel2);
+            font-weight: bold;
+        }
 
-    .filter.active { background: var(--green); color: #102016; }
+        .filter.active { background: var(--green); color: #102016; }
 
-    .results { color: var(--muted); margin-bottom: 15px; font-size: 14px; }
+        .results { color: var(--muted); margin-bottom: 15px; font-size: 14px; }
 
-    .pokemon-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 15px;
-    }
+        .pokemon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
 
-    .pokemon-card {
-        background: var(--panel);
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        padding: 15px;
-        cursor: pointer;
-        transition: 0.2s;
-        content-visibility: auto;
-        contain-intrinsic-size: 220px;
-        position: relative;
-    }
+        .pokemon-card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: 0.2s;
+            content-visibility: auto;
+            contain-intrinsic-size: 220px;
+            position: relative;
+        }
 
-    .pokemon-card:hover {
-        transform: translateY(-4px);
-        border-color: var(--green);
-        background: var(--panel2);
-    }
+        .pokemon-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--green);
+            background: var(--panel2);
+        }
 
-    .pokemon-card.is-form { border-style: dashed; }
-    .pokemon-card.is-form .pokemon-name { font-size: 15px; }
+        .pokemon-card.is-form { border-style: dashed; }
+        .pokemon-card.is-form .pokemon-name { font-size: 15px; }
 
-    .pokemon-number { color: var(--muted); font-size: 13px; }
+        .pokemon-number { color: var(--muted); font-size: 13px; }
 
-    .pokemon-image {
-        width: 125px;
-        height: 125px;
-        object-fit: contain;
-        display: block;
-        margin: 5px auto;
-    }
+        .pokemon-image {
+            width: 125px;
+            height: 125px;
+            object-fit: contain;
+            display: block;
+            margin: 5px auto;
+        }
 
-    .pokemon-name {
-        text-align: center;
-        font-size: 18px;
-        font-weight: bold;
-        text-transform: capitalize;
-        margin: 8px 0;
-    }
+        .pokemon-name {
+            text-align: center;
+            font-size: 19px;
+            font-weight: bold;
+            text-transform: capitalize;
+            margin: 8px 0;
+        }
 
-    .types { display: flex; justify-content: center; gap: 5px; flex-wrap: nowrap; }
+        .types { display: flex; justify-content: center; gap: 5px; flex-wrap: nowrap; }
 
-    .type {
-        padding: 5px 10px;
-        border-radius: 4px;
-        color: white;
-        font-size: 11px;
-        font-weight: bold;
-        text-transform: uppercase;
-        white-space: nowrap;
-        flex-shrink: 0;
-    }
+        .type {
+            padding: 5px 10px;
+            border-radius: 4px;
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
 
-    .Normal { background: #929a79; }
-    .Fire { background: #e56b36; }
-    .Water { background: #4789d5; }
-    .Electric { background: #d6b52e; }
-    .Grass { background: #59a94f; }
-    .Ice { background: #68bfc5; }
-    .Fighting { background: #bd4844; }
-    .Poison { background: #9653a9; }
-    .Ground { background: #b18b49; }
-    .Flying { background: #8c83d0; }
-    .Psychic { background: #e45c8b; }
-    .Bug { background: #8c9d32; }
-    .Rock { background: #a18c50; }
-    .Ghost { background: #665b9c; }
-    .Dragon { background: #6253c7; }
-    .Dark { background: #65544c; }
-    .Steel { background: #8796a6; }
-    .Fairy { background: #d887b5; }
+        .Normal { background: #929a79; }
+        .Fire { background: #e56b36; }
+        .Water { background: #4789d5; }
+        .Electric { background: #d6b52e; }
+        .Grass { background: #59a94f; }
+        .Ice { background: #68bfc5; }
+        .Fighting { background: #bd4844; }
+        .Poison { background: #9653a9; }
+        .Ground { background: #b18b49; }
+        .Flying { background: #8c83d0; }
+        .Psychic { background: #e45c8b; }
+        .Bug { background: #8c9d32; }
+        .Rock { background: #a18c50; }
+        .Ghost { background: #665b9c; }
+        .Dragon { background: #6253c7; }
+        .Dark { background: #65544c; }
+        .Steel { background: #8796a6; }
+        .Fairy { background: #d887b5; }
 
-    .detail {
-        display: none;
-        position: fixed;
-        inset: 0;
-        z-index: 1000;
-        background: rgba(0, 0, 0, 0.65);
-        padding: 40px 20px;
-        overflow-y: auto;
-    }
+        .detail {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.65);
+            padding: 40px 20px;
+            overflow-y: auto;
+        }
 
-    .detail.open {
-        display: flex;
-        align-items: flex-start;
-        justify-content: center;
-    }
+        .detail.open {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
 
-    .detail-panel {
-        background: var(--panel);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 25px;
-        width: 100%;
-        max-width: 1000px;
-        max-height: calc(100vh - 80px);
-        overflow-y: auto;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        animation: detail-pop 0.15s ease-out;
-    }
+        .detail-panel {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            width: 100%;
+            max-width: 1000px;
+            max-height: calc(100vh - 80px);
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: detail-pop 0.15s ease-out;
+        }
 
-    .detail-panel.compare-panel { max-width: 1200px; }
+        .detail-panel.compare-panel { max-width: 1200px; }
 
-    @keyframes detail-pop {
-        from { transform: scale(0.96); opacity: 0; }
-        to   { transform: scale(1);    opacity: 1; }
-    }
+        @keyframes detail-pop {
+            from { transform: scale(0.96); opacity: 0; }
+            to   { transform: scale(1);    opacity: 1; }
+        }
 
-    .detail-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-    }
+        .detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
 
-    .close {
-        background: #35443a;
-        border: none;
-        color: white;
-        padding: 9px 14px;
-        cursor: pointer;
-        border-radius: 5px;
-    }
+        .close {
+            background: #35443a;
+            border: none;
+            color: white;
+            padding: 9px 14px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
 
-    .close:hover { background: #465a4c; }
+        .close:hover { background: #465a4c; }
 
-    body.modal-open { overflow: hidden; }
+        body.modal-open { overflow: hidden; }
 
-    .detail-main {
-        display: grid;
-        grid-template-columns: 250px 1fr;
-        gap: 30px;
-        margin-top: 20px;
-    }
+        .detail-main {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
 
-    .detail-image { width: 100%; max-width: 240px; object-fit: contain; }
-    .detail-info h2 { font-size: 28px; text-transform: capitalize; margin: 0 0 10px; }
-    .section-title { color: var(--green); font-size: 18px; margin: 25px 0 12px; }
+        .detail-image { width: 100%; max-width: 240px; object-fit: contain; }
+        .detail-info h2 { font-size: 22px; text-transform: capitalize; margin: 0 0 10px; }
+        .section-title { color: var(--green); font-size: 15px; margin: 25px 0 12px; }
 
-    .stat-row {
-        display: grid;
-        grid-template-columns: 100px 35px 1fr;
-        gap: 10px;
-        align-items: center;
-        margin: 10px 0;
-        font-size: 14px;
-    }
+        .stat-row {
+            display: grid;
+            grid-template-columns: 100px 50px 1fr;
+            gap: 10px;
+            align-items: center;
+            margin: 10px 0;
+            font-size: 13px;
+        }
 
-    .stat-bar { height: 9px; background: #35443a; border-radius: 10px; overflow: hidden; }
-    .stat-fill { height: 100%; background: var(--green); border-radius: 10px; }
-    .total { color: var(--green); font-weight: bold; margin-top: 15px; }
+        .compare-col .stat-row {
+            grid-template-columns: 100px 35px 20px 1fr;
+            gap: 4px;
+        }
 
-    .info-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 12px;
-    }
+        .stat-val {
+            text-align: right;
+            white-space: nowrap;
+            font-weight: bold;
+        }
 
-    .info-box { background: var(--panel2); padding: 13px; border-radius: 7px; }
-    .info-box small { color: var(--muted); display: block; margin-bottom: 6px; }
-    .info-box strong { text-transform: capitalize; }
+        .stat-arrow {
+            text-align: center;
+            font-size: 11px;
+            display: none; 
+        }
+        
+        .compare-col .stat-arrow {
+            display: block;
+        }
 
-    .empty { text-align: center; padding: 60px 10px; color: var(--muted); display: none; }
+        .stat-bar { height: 9px; background: #35443a; border-radius: 10px; overflow: hidden; }
+        .stat-fill { height: 100%; background: var(--green); border-radius: 10px; }
+        .total { color: var(--green); font-weight: bold; margin-top: 15px; }
 
-    /* ---- Evolution Lines ---- */
-    .evo-row {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 12px;
-        padding: 12px;
-        background: var(--panel2);
-        border-radius: 8px;
-    }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+        }
 
-    .evo-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 4px;
-        padding: 8px;
-        border-radius: 6px;
-        min-width: 90px;
-        cursor: pointer;
-        transition: background 0.15s;
-    }
+        .info-box { background: var(--panel2); padding: 13px; border-radius: 7px; }
+        .info-box small { color: var(--muted); display: block; margin-bottom: 6px; }
+        .info-box strong { text-transform: capitalize; }
+        .info-box .detail-height, 
+        .info-box .detail-weight,
+        .info-box [class*="cmp-height-"], 
+        .info-box [class*="cmp-weight-"] { 
+            text-transform: none; 
+        }
 
-    .evo-item:hover { background: rgba(255, 255, 255, 0.05); }
+        .empty { text-align: center; padding: 60px 10px; color: var(--muted); display: none; }
 
-    .evo-current {
-        background: rgba(88, 199, 123, 0.15);
-        outline: 1px solid var(--green);
-    }
+        .evo-row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 12px;
+            background: var(--panel2);
+            border-radius: 8px;
+        }
 
-    .evo-sprite {
-        width: 72px;
-        height: 72px;
-        object-fit: contain;
-        image-rendering: auto;
-    }
+        .evo-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 8px;
+            border-radius: 6px;
+            min-width: 90px;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
 
-    .evo-name {
-        font-size: 12px;
-        color: var(--text);
-        text-align: center;
-        text-transform: capitalize;
-    }
+        .evo-item:hover { background: rgba(255, 255, 255, 0.05); }
 
-    .evo-arrow {
-        font-size: 18px;
-        color: var(--muted);
-        align-self: center;
-    }
+        .evo-current {
+            background: rgba(88, 199, 123, 0.15);
+            outline: 1px solid var(--green);
+        }
 
-    /* Branch styling */
-    .evo-branch-root { display: flex; flex-direction: column; align-items: center; gap: 4px; }
-    .evo-branch-column { 
-        display: flex; 
-        flex-direction: row; 
-        flex-wrap: wrap; 
-        justify-content: center; 
-        gap: 24px; 
-        width: 100%; 
-        margin-top: 10px;
-    }
-    .evo-branch-item {
-        display: flex; 
-        flex-direction: column; 
-        align-items: center; 
-        gap: 4px;
-        background: var(--panel2); 
-        border-radius: 8px; 
-        padding: 8px;
-        border: 1px solid var(--border);
-    }
-    .evo-arrow-down { font-size: 18px; color: var(--muted); margin: 4px 0; }
+        .evo-sprite {
+            width: 72px;
+            height: 72px;
+            object-fit: contain;
+            image-rendering: auto;
+        }
 
-    /* Compare UI */
-    .detail-actions { margin: 14px 0 4px; }
-    .detail-actions .cmp-btn { width: 100%; padding: 10px 0; }
+        .evo-name {
+            font-size: 12px;
+            color: var(--text);
+            text-align: center;
+            text-transform: capitalize;
+        }
 
-    .compare-pick-bar {
-        display: none;
-        align-items: center;
-        justify-content: space-between;
-        gap: 14px;
-        padding: 12px 16px;
-        margin-bottom: 18px;
-        background: var(--panel);
-        border: 1px solid var(--green);
-        border-radius: 9px;
-        flex-wrap: wrap;
-    }
-    .compare-pick-bar.visible { display: flex; }
-    .compare-pick-bar strong { color: var(--green); text-transform: capitalize; }
-    .compare-pick-bar .cmp-btn { padding: 8px 14px; }
+        .evo-arrow {
+            font-size: 15px;
+            color: var(--muted);
+            align-self: center;
+        }
 
-    .compare-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 24px;
-        margin-top: 10px;
-    }
+        .evo-branch-root { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+        .evo-branch-column { 
+            display: flex; 
+            flex-direction: row; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 24px; 
+            width: 100%; 
+            margin-top: 10px;
+        }
+        .evo-branch-item {
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 4px;
+            background: var(--panel2); 
+            border-radius: 8px; 
+            padding: 8px;
+            border: 1px solid var(--border);
+        }
+        .evo-arrow-down { font-size: 15px; color: var(--muted); margin: 4px 0; }
 
-    .compare-col {
-        background: var(--panel2);
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        padding: 18px;
-    }
+        .detail-actions { margin: 14px 0 4px; }
+        .detail-actions .cmp-btn { width: 100%; padding: 10px 0; cursor: pointer; }
 
-    .compare-col .cmp-head {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 6px;
-        margin-bottom: 14px;
-    }
+        .compare-pick-bar {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            padding: 12px 16px;
+            margin-bottom: 18px;
+            background: var(--panel);
+            border: 1px solid var(--green);
+            border-radius: 9px;
+            flex-wrap: wrap;
+        }
+        .compare-pick-bar.visible { display: flex; }
+        .compare-pick-bar strong { color: var(--green); text-transform: capitalize; }
+        .compare-pick-bar .cmp-btn { padding: 8px 14px; }
 
-    .compare-col .cmp-head img { width: 130px; height: 130px; object-fit: contain; }
-    .compare-col .cmp-head h2 { font-size: 22px; text-transform: capitalize; margin: 0; }
-    .compare-col .types { justify-content: center; }
-    .compare-col .section-title { margin-top: 18px; }
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 10px;
+        }
 
-    .cmp-winner { color: var(--green); font-weight: bold; }
-    .cmp-loser  { color: var(--muted); }
+        .compare-col {
+            background: var(--panel2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px;
+        }
 
-    .cmp-actions {
-        display: flex;
-        gap: 10px;
-        justify-content: center;
-        margin-top: 22px;
-        flex-wrap: wrap;
-    }
+        .compare-col .cmp-head {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 14px;
+        }
 
-    .cmp-btn {
-        background: var(--panel2);
-        border: 1px solid var(--border);
-        color: white;
-        padding: 11px 18px;
-        border-radius: 7px;
-        cursor: pointer;
-        font-weight: bold;
-        font-size: 14px;
-    }
-    .cmp-btn:hover { border-color: var(--green); }
-    .cmp-btn.primary { background: var(--green); color: #102016; border-color: var(--green); }
+        .compare-col .cmp-head img { width: 130px; height: 130px; object-fit: contain; }
+        .compare-col .cmp-head h2 { font-size: 20px; text-transform: capitalize; margin: 0; }
+        .compare-col .types { justify-content: center; }
+        .compare-col .section-title { margin-top: 18px; }
 
-    @media(max-width: 650px) {
-        .detail-main { grid-template-columns: 1fr; }
-        .detail-image { display: block; margin: auto; }
-        header { padding: 18px; }
-        .detail { padding: 15px; }
-        .detail-panel { max-height: calc(100vh - 30px); padding: 18px; }
-        .evo-sprite { width: 56px; height: 56px; }
-        .evo-item { min-width: 70px; padding: 6px; }
-        .compare-grid { grid-template-columns: 1fr; }
-        .compare-col .cmp-head img { width: 100px; height: 100px; }
-    }
+        .cmp-winner { color: var(--green); font-weight: bold; }
+        .cmp-loser  { color: var(--muted); }
+
+        .cmp-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 22px;
+            flex-wrap: wrap;
+        }
+
+        .cmp-btn {
+            background: var(--panel2);
+            border: 1px solid var(--border);
+            color: white;
+            padding: 11px 18px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .cmp-btn:hover { border-color: var(--green); }
+        .cmp-btn.primary { background: var(--green); color: #102016; border-color: var(--green); }
+
+        @media(max-width: 650px) {
+            .detail-main { grid-template-columns: 1fr; }
+            .detail-image { display: block; margin: auto; }
+            header { padding: 18px; }
+            .detail { padding: 15px; }
+            .detail-panel { max-height: calc(100vh - 30px); padding: 18px; }
+            .evo-sprite { width: 56px; height: 56px; }
+            .evo-item { min-width: 70px; padding: 6px; }
+            .compare-grid { grid-template-columns: 1fr; }
+            .compare-col .cmp-head img { width: 100px; height: 100px; }
+        }
     </style>
 </head>
 
@@ -410,10 +434,10 @@
 <div class="container">
 
     <h1 class="page-title">Pokédex</h1>
-    <p class="subtitle">Explore Pokémon, their stats, abilities, and moves.</p>
+    <p class="subtitle">Explore Pokémon, their stats, abilities, and more.</p>
 
     <div class="search-area">
-        <input type="text" id="search" placeholder="Search Pokémon by name or number...">
+        <input type="text" id="search" placeholder="Search Pokémon by name or dex number...">
         <select id="sort">
             <option value="number">Sort: Pokédex Number</option>
             <option value="name">Sort: Name</option>
@@ -762,9 +786,8 @@ const DEX_NUMBERS = {
         Psychc: "Psychic"
     };
 
-    // Explicit list of valid alternate forms to parse, mapped by base species name.
-    // Format: "BaseName": ["pokeapi-variant-slug", ...]
     const ALLOWED_FORMS = {
+        // Megas & Primals
         "Venusaur": ["venusaur-mega"],
         "Charizard": ["charizard-mega-x", "charizard-mega-y"],
         "Blastoise": ["blastoise-mega"],
@@ -813,10 +836,66 @@ const DEX_NUMBERS = {
         "Gallade": ["gallade-mega"],
         "Audino": ["audino-mega"],
         "Diancie": ["diancie-mega"],
+        
+        // Legendaries / Special
         "Zacian": ["zacian-crowned"],
         "Zamazenta": ["zamazenta-crowned"],
-        "Necrozma": ["necrozma-dusk", "necrozma-dawn", "necrozma-ultra"]
+        "Necrozma": ["necrozma-dusk", "necrozma-dawn", "necrozma-ultra"],
+
+        // Regional Forms
+        "Rattata": ["rattata-alola"],
+        "Raticate": ["raticate-alola"],
+        "Raichu": ["raichu-alola"],
+        "Sandshrew": ["sandshrew-alola"],
+        "Sandslash": ["sandslash-alola"],
+        "Vulpix": ["vulpix-alola"],
+        "Ninetales": ["ninetales-alola"],
+        "Diglett": ["diglett-alola"],
+        "Dugtrio": ["dugtrio-alola"],
+        "Meowth": ["meowth-alola", "meowth-galar"],
+        "Persian": ["persian-alola"],
+        "Geodude": ["geodude-alola"],
+        "Graveler": ["graveler-alola"],
+        "Golem": ["golem-alola"],
+        "Grimer": ["grimer-alola"],
+        "Muk": ["muk-alola"],
+        "Exeggutor": ["exeggutor-alola"],
+        "Marowak": ["marowak-alola"],
+        "Ponyta": ["ponyta-galar"],
+        "Rapidash": ["rapidash-galar"],
+        "Slowpoke": ["slowpoke-galar"],
+        "Slowbro": ["slowbro-galar"],
+        "Farfetch'd": ["farfetchd-galar"],
+        "Weezing": ["weezing-galar"],
+        "Mr. Mime": ["mr-mime-galar"],
+        "Articuno": ["articuno-galar"],
+        "Zapdos": ["zapdos-galar"],
+        "Moltres": ["moltres-galar"],
+        "Slowking": ["slowking-galar"],
+        "Corsola": ["corsola-galar"],
+        "Zigzagoon": ["zigzagoon-galar"],
+        "Linoone": ["linoone-galar"],
+        "Darumaka": ["darumaka-galar"],
+        "Darmanitan": ["darmanitan-galar-standard", "darmanitan-galar-zen"],
+        "Yamask": ["yamask-galar"],
+        "Stunfisk": ["stunfisk-galar"],
+
+        // Alternate Forms
+        "Lycanroc": ["lycanroc-midnight", "lycanroc-dusk"],
+        "Oricorio": ["oricorio-baile", "oricorio-pom-pom", "oricorio-pau", "oricorio-sensu"],
+        "Wishiwashi": ["wishiwashi-solo", "wishiwashi-school"],
+        "Minior": ["minior-red-meteor", "minior-orange-meteor", "minior-yellow-meteor", "minior-green-meteor", "minior-blue-meteor", "minior-indigo-meteor", "minior-violet-meteor"],
+        "Mimikyu": ["mimikyu-disguised", "mimikyu-busted"],
+        "Toxtricity": ["toxtricity-amped", "toxtricity-low-key"],
+        "Eiscue": ["eiscue-ice", "eiscue-noice"],
+        "Indeedee": ["indeedee-male", "indeedee-female"],
+        "Morpeko": ["morpeko-full-belly", "morpeko-hangry"],
+        "Urshifu": ["urshifu-single-strike", "urshifu-rapid-strike"],
+        "Zarude": ["zarude", "zarude-dada"],
+        "Calyrex": ["calyrex", "calyrex-ice", "calyrex-shadow"],
+        "Darmanitan": ["darmanitan-standard", "darmanitan-zen"]
     };
+
 
     function isValidForm(baseName, varietyName) {
         if (!varietyName) return false;
@@ -832,12 +911,57 @@ const DEX_NUMBERS = {
         if (lower.includes("-mega")) return "Mega";
         if (lower.includes("-primal")) return "Primal";
         if (lower.includes("-crowned")) return "Crowned";
-        if (lower.includes("-dusk")) return "Dusk Mane";
-        if (lower.includes("-dawn")) return "Dawn Wings";
-        if (lower.includes("-ultra")) return "Ultra";
+
+        // Specific forms FIRST (before generic substring checks)
+        if (lower.includes("lycanroc-midnight")) return "Midnight";
+        if (lower.includes("lycanroc-dusk")) return "Dusk";
+
+        if (lower.includes("oricorio-baile")) return "Baile";
+        if (lower.includes("oricorio-pom-pom")) return "Pom-Pom";
+        if (lower.includes("oricorio-pau")) return "Pa'u";
+        if (lower.includes("oricorio-sensu")) return "Sensu";
+
+        if (lower.includes("wishiwashi-solo")) return "Solo";
+        if (lower.includes("wishiwashi-school")) return "School";
+
+        if (lower.includes("mimikyu-busted")) return "Busted";
+        if (lower.includes("mimikyu-disguised")) return "";
+
+        if (lower.includes("toxtricity-amped")) return "Amped";
+        if (lower.includes("toxtricity-low-key")) return "Low Key";
+
+        if (lower.includes("eiscue-ice")) return "Ice Face";
+        if (lower.includes("eiscue-noice")) return "Noice Face";
+
+        if (lower.includes("indeedee-male")) return "Male";
+        if (lower.includes("indeedee-female")) return "Female";
+
+        if (lower.includes("morpeko-full-belly")) return "Full Belly";
+        if (lower.includes("morpeko-hangry")) return "Hangry";
+
+        if (lower.includes("urshifu-single-strike")) return "Single Strike";
+        if (lower.includes("urshifu-rapid-strike")) return "Rapid Strike";
+
+        if (lower.includes("calyrex-ice")) return "Ice Rider";
+        if (lower.includes("calyrex-shadow")) return "Shadow Rider";
+
+        if (lower.includes("darmanitan-galar-standard")) return "Galarian Standard";
+        if (lower.includes("darmanitan-galar-zen")) return "Galarian Zen";
+        if (lower.includes("darmanitan-zen")) return "Zen";
+
+        // Generic Necrozma checks (after specific ones)
+        if (lower.includes("necrozma-dusk")) return "Dusk Mane";
+        if (lower.includes("necrozma-dawn")) return "Dawn Wings";
+        if (lower.includes("necrozma-ultra")) return "Ultra";
+
+        // Regional forms
+        if (lower.includes("-alola")) return "Alolan";
+        if (lower.includes("-galar")) return "Galarian";
+        if (lower.includes("-hisui")) return "Hisuian";
+
         return varietyLabel(varietyName, baseName);
     }
-
+    
     function splitCSV(line) {
         const out = [];
         let cur = "";
@@ -1059,16 +1183,13 @@ const DEX_NUMBERS = {
         const baseName = formKey.split("~")[0];
         const n = formNumFromKey(formKey);
 
-        // Filter to only the explicitly allowed forms for this Pokémon.
         const allowedSlugs = ALLOWED_FORMS[baseName] || [];
         const allowedVarieties = varieties.filter(v => allowedSlugs.includes(v.name.toLowerCase()));
 
         if (!allowedVarieties.length) return null;
 
-        // If there's only one allowed form, return it.
         if (allowedVarieties.length === 1) return allowedVarieties[0];
 
-        // Otherwise, use the ~N index to pick the correct one.
         const idx = n - 2;
         if (idx >= 0 && idx < allowedVarieties.length) return allowedVarieties[idx];
         
@@ -1111,6 +1232,64 @@ const DEX_NUMBERS = {
             label: label,
             varietyName: picked.name
         };
+    }
+
+    const EXTRAS_CACHE_PREFIX = "pokedex.extras.v3:";
+    const extrasCache = new Map();
+    const extrasPending = new Map();
+
+    function getStoredExtras(dexNum) {
+        try {
+            const raw = localStorage.getItem(EXTRAS_CACHE_PREFIX + dexNum);
+            return raw ? JSON.parse(raw) : null;
+        } catch {
+            return null;
+        }
+    }
+
+    function setStoredExtras(dexNum, extras) {
+        try {
+            localStorage.setItem(EXTRAS_CACHE_PREFIX + dexNum, JSON.stringify(extras));
+        } catch {
+        }
+    }
+
+    async function fetchPokemonExtras(dexNum) {
+        if (extrasCache.has(dexNum)) return extrasCache.get(dexNum);
+        if (extrasPending.has(dexNum)) return extrasPending.get(dexNum);
+
+        const stored = getStoredExtras(dexNum);
+        if (stored) {
+            extrasCache.set(dexNum, stored);
+            return stored;
+        }
+
+        const promise = (async () => {
+            try {
+                const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${dexNum}`);
+                if (!res.ok) throw new Error(`PokeAPI ${dexNum}: ${res.status}`);
+                const data = await res.json();
+
+                const extras = {
+                    height: data.height != null ? `${(data.height / 10).toFixed(1)} m` : "N/A",
+                    weight: data.weight != null ? `${(data.weight / 10).toFixed(1)} kg` : "N/A"
+                };
+
+                extrasCache.set(dexNum, extras);
+                setStoredExtras(dexNum, extras);
+                return extras;
+            } catch (err) {
+                console.warn("Failed to load extras for", dexNum, err);
+                const fallback = { height: "N/A", weight: "N/A" };
+                extrasCache.set(dexNum, fallback);
+                return fallback;
+            } finally {
+                extrasPending.delete(dexNum);
+            }
+        })();
+
+        extrasPending.set(dexNum, promise);
+        return promise;
     }
 
     let DEX_ORDER = {};
@@ -1251,14 +1430,13 @@ const DEX_NUMBERS = {
         await Promise.all(queue.map(async entry => {
             const resolved = await resolveFormSprite(entry.name, entry.formKey, entry.types);
 
-            // Drop it if the resolved sprite is missing, or if the resolved variety 
-            // doesn't match our explicit allowed list.
             if (!resolved.image || !isValidForm(entry.name, resolved.varietyName)) {
                 toRemove.add(entry.uid);
                 return;
             }
 
-            // If we already have a card for this exact sprite ID, drop it.
+            // Only dedupe if they share the same exact sprite ID.
+            // Regional forms have unique IDs, so this won't clash with base forms.
             if (resolved.spriteId != null && seenSpriteIds.has(resolved.spriteId)) {
                 toRemove.add(entry.uid);
                 return;
@@ -1288,7 +1466,7 @@ const DEX_NUMBERS = {
 
         renderPokemon();
     }
-
+    
     async function loadPokemonData() {
         try {
             await loadMegaItems();
@@ -1532,7 +1710,7 @@ const DEX_NUMBERS = {
         const title = document.getElementById("detail-title");
 
         panel.classList.remove("compare-panel");
-        title.textContent = p.isForm ? "Alternate Form Information" : "Pokémon Information";
+        title.textContent = p.isForm ? "Pokémon Information" : "Pokémon Information";
 
         detail.classList.add("open");
         document.body.classList.add("modal-open");
@@ -1555,7 +1733,7 @@ const DEX_NUMBERS = {
             statsHTML += `
                 <div class="stat-row">
                     <strong>${statNames[key]}</strong>
-                    <span style="color:${color}; font-weight:bold;">${value}</span>
+                    <span class="stat-val" style="color:${color};">${value}</span>
                     <div class="stat-bar">
                         <div class="stat-fill" style="width:${Math.min(value / 180 * 100, 100)}%; background:${color};"></div>
                     </div>
@@ -1584,8 +1762,8 @@ const DEX_NUMBERS = {
 
                     <h3 class="section-title">Pokémon Information</h3>
                     <div class="info-grid">
-                        <div class="info-box"><small>Height</small><strong>N/A</strong></div>
-                        <div class="info-box"><small>Weight</small><strong>N/A</strong></div>
+                        <div class="info-box"><small>Height</small><strong class="detail-height">Loading…</strong></div>
+                        <div class="info-box"><small>Weight</small><strong class="detail-weight">Loading…</strong></div>
                     </div>
 
                     <h3 class="section-title">Abilities</h3>
@@ -1605,6 +1783,15 @@ const DEX_NUMBERS = {
 
         content.querySelector("#detail-compare-btn").addEventListener("click", () => {
             beginComparePick(p.uid);
+        });
+
+        fetchPokemonExtras(p.spriteId).then(extras => {
+            if (currentDetailUid === p.uid) {
+                const hEl = content.querySelector(".detail-height");
+                const wEl = content.querySelector(".detail-weight");
+                if (hEl) hEl.textContent = extras.height;
+                if (wEl) wEl.textContent = extras.weight;
+            }
         });
 
         document.getElementById("detail-panel").scrollTop = 0;
@@ -1659,11 +1846,16 @@ const DEX_NUMBERS = {
         for (const [key, value] of Object.entries(p.stats)) {
             const otherVal = other.stats[key];
             const color = getStatColor(value);
-            const suffix = value > otherVal ? " ▲" : value < otherVal ? " ▼" : "";
+
+            let arrow = "";
+            if (value > otherVal) arrow = "▲";
+            else if (value < otherVal) arrow = "▼";
+
             statsHTML += `
                 <div class="stat-row">
                     <strong>${statNames[key]}</strong>
-                    <span style="color:${color}; font-weight:bold;">${value}${suffix}</span>
+                    <span class="stat-val" style="color:${color};">${value}</span>
+                    <span class="stat-arrow" style="color:${color};">${arrow}</span>
                     <div class="stat-bar">
                         <div class="stat-fill" style="width:${Math.min(value / 180 * 100, 100)}%; background:${color};"></div>
                     </div>
@@ -1691,8 +1883,8 @@ const DEX_NUMBERS = {
 
                 <h3 class="section-title">Pokémon Information</h3>
                 <div class="info-grid">
-                    <div class="info-box"><small>Height</small><strong>N/A</strong></div>
-                    <div class="info-box"><small>Weight</small><strong>N/A</strong></div>
+                    <div class="info-box"><small>Height</small><strong class="cmp-height-${p.uid}">Loading…</strong></div>
+                    <div class="info-box"><small>Weight</small><strong class="cmp-weight-${p.uid}">Loading…</strong></div>
                 </div>
 
                 <h3 class="section-title">Abilities</h3>
@@ -1727,6 +1919,17 @@ const DEX_NUMBERS = {
         if (!grid) return;
         grid.innerHTML = buildCompareColumn(a, b) + buildCompareColumn(b, a);
         bindCompareImageFallbacks(grid);
+
+        [a, b].forEach(p => {
+            fetchPokemonExtras(p.spriteId).then(extras => {
+                if (currentCompareUids && currentCompareUids.includes(p.uid)) {
+                    const hEl = grid.querySelector(`.cmp-height-${p.uid}`);
+                    const wEl = grid.querySelector(`.cmp-weight-${p.uid}`);
+                    if (hEl) hEl.textContent = extras.height;
+                    if (wEl) wEl.textContent = extras.weight;
+                }
+            });
+        });
     }
 
     function openComparison(uidA, uidB) {
@@ -1769,6 +1972,17 @@ const DEX_NUMBERS = {
             beginComparePick(keep);
         });
         content.querySelector("#cmp-close").addEventListener("click", closeDetail);
+
+        [a, b].forEach(p => {
+            fetchPokemonExtras(p.spriteId).then(extras => {
+                if (currentCompareUids && currentCompareUids.includes(p.uid)) {
+                    const hEl = content.querySelector(`.cmp-height-${p.uid}`);
+                    const wEl = content.querySelector(`.cmp-weight-${p.uid}`);
+                    if (hEl) hEl.textContent = extras.height;
+                    if (wEl) wEl.textContent = extras.weight;
+                }
+            });
+        });
 
         document.getElementById("detail-panel").scrollTop = 0;
     }

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokédex | Infinite Sun</title>
     <link rel="icon" href="../../../icon.jpg" sizes="16x16 32x32 48x48 64x64" type="image/vnd.microsoft.icon">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #111714;
@@ -23,7 +23,7 @@
             margin: 0;
             background: var(--bg);
             color: var(--text);
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Fira Sans', sans-serif;
         }
 
         header {
@@ -273,6 +273,7 @@
         .evo-row {
             display: flex;
             align-items: center;
+            justify-content: center;
             flex-wrap: wrap;
             gap: 12px;
             padding: 12px;
@@ -285,18 +286,21 @@
             flex-direction: column;
             align-items: center;
             gap: 4px;
-            padding: 8px;
-            border-radius: 6px;
-            min-width: 90px;
+            padding: 8px 10px;
+            border-radius: 8px;
+            min-width: 92px;
             cursor: pointer;
-            transition: background 0.15s;
+            transition: background 0.15s, transform 0.15s;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid transparent;
         }
 
-        .evo-item:hover { background: rgba(255, 255, 255, 0.05); }
+        .evo-item:hover { background: rgba(255,255,255,0.06); transform: translateY(-1px); }
 
         .evo-current {
             background: rgba(88, 199, 123, 0.15);
             outline: 1px solid var(--green);
+            border-color: rgba(88, 199, 123, 0.45);
         }
 
         .evo-sprite {
@@ -314,32 +318,55 @@
         }
 
         .evo-arrow {
-            font-size: 15px;
+            font-size: 18px;
             color: var(--muted);
             align-self: center;
+            line-height: 1;
         }
 
-        .evo-branch-root { display: flex; flex-direction: column; align-items: center; gap: 4px; }
-        .evo-branch-column { 
-            display: flex; 
-            flex-direction: row; 
-            flex-wrap: wrap; 
-            justify-content: center; 
-            gap: 24px; 
-            width: 100%; 
-            margin-top: 10px;
+        .evo-branch-root {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
         }
+
+        .evo-branch-column {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+            margin-top: 2px;
+        }
+
         .evo-branch-item {
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            gap: 4px;
-            background: var(--panel2); 
-            border-radius: 8px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.02); 
+            border-radius: 8px;
             padding: 8px;
             border: 1px solid var(--border);
         }
-        .evo-arrow-down { font-size: 15px; color: var(--muted); margin: 4px 0; }
+
+        .evo-branch-child {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .evo-branch-line {
+            width: 2px;
+            height: 14px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 999px;
+        }
+
+        .evo-arrow-down { font-size: 15px; color: var(--muted); margin: 0; }
 
         .detail-actions { margin: 14px 0 4px; }
         .detail-actions .cmp-btn { width: 100%; padding: 10px 0; cursor: pointer; }
@@ -438,10 +465,20 @@
 
     <div class="search-area">
         <input type="text" id="search" placeholder="Search Pokémon by name or dex number...">
+        <select id="stage-filter">
+            <option value="all">Stage: All</option>
+            <option value="none">Stage: No Evolution</option>
+            <option value="first">Stage: 1st Stage</option>
+            <option value="middle">Stage: 2nd Stage</option>
+            <option value="final">Stage: Final</option>
+        </select>
         <select id="sort">
-            <option value="number">Sort: Pokédex Number</option>
-            <option value="name">Sort: Name</option>
-            <option value="bst">Sort: Base Stat Total</option>
+            <option value="number-asc">Sort: Pokédex Number ↑</option>
+            <option value="number-desc">Sort: Pokédex Number ↓</option>
+            <option value="name-asc">Sort: Name A-Z</option>
+            <option value="name-desc">Sort: Name Z-A</option>
+            <option value="bst-asc">Sort: Base Stat Total Low → High</option>
+            <option value="bst-desc">Sort: Base Stat Total High → Low</option>
         </select>
     </div>
 
@@ -676,7 +713,7 @@ const DEX_NUMBERS = {
         [246, 247, 248], [249], [250], [251], [252, 253, 254], [255, 256, 257],
         [258, 259, 260], [261, 262], [263, 264], [265, 266, 267], [265, 268, 269],
         [270, 271, 272], [273, 274, 275], [276, 277], [278, 279], [280, 281, 282, 475],
-        [283, 284], [285, 286], [287, 288, 289], [290, 291, 292], [293, 294, 295],
+        [283, 284], [285, 286], [287, 288, 289], [290, 291], [293, 294, 295],
         [296, 297], [299], [300, 301], [302], [303], [304, 305, 306],
         [307, 308], [309, 310], [311], [312], [313], [314], [315, 406, 407],
         [316, 317], [318, 319], [320, 321], [322, 323], [324], [325, 326],
@@ -748,6 +785,13 @@ const DEX_NUMBERS = {
     }
 
     const EVO_BRANCHES = {
+        60: { dex: 60, children: [{
+            dex: 61,
+            children: [
+                { dex: 62 },
+                { dex: 186 }
+            ]
+        }]},
         133: { dex: 133, children: [134, 135, 136, 196, 197, 470, 471, 700].map(d => ({ dex: d })) },
         265: { dex: 265, children: [
             { dex: 266, children: [{ dex: 267 }] },
@@ -758,11 +802,8 @@ const DEX_NUMBERS = {
             { dex: 44, children: [{ dex: 45 }] },
             { dex: 44, children: [{ dex: 182 }] }
         ]},
-        60:  { dex: 60,  children: [
-            { dex: 61, children: [{ dex: 62 }] },
-            { dex: 61, children: [{ dex: 186 }] }
-        ]},
         79:  { dex: 79,  children: [ { dex: 80 }, { dex: 199 } ] },
+        290: { dex: 290, children: [ { dex: 291 }, { dex: 292 } ] },
         412: { dex: 412, children: [
             { dex: 413 },
             { dex: 414 }
@@ -881,18 +922,17 @@ const DEX_NUMBERS = {
         "Stunfisk": ["stunfisk-galar"],
 
         // Alternate Forms
+        "Hoopa": ["hoopa-unbound"],
         "Lycanroc": ["lycanroc-midnight", "lycanroc-dusk"],
-        "Oricorio": ["oricorio-baile", "oricorio-pom-pom", "oricorio-pau", "oricorio-sensu"],
-        "Wishiwashi": ["wishiwashi-solo", "wishiwashi-school"],
-        "Minior": ["minior-red-meteor", "minior-orange-meteor", "minior-yellow-meteor", "minior-green-meteor", "minior-blue-meteor", "minior-indigo-meteor", "minior-violet-meteor"],
-        "Mimikyu": ["mimikyu-disguised", "mimikyu-busted"],
-        "Toxtricity": ["toxtricity-amped", "toxtricity-low-key"],
-        "Eiscue": ["eiscue-ice", "eiscue-noice"],
-        "Indeedee": ["indeedee-male", "indeedee-female"],
-        "Morpeko": ["morpeko-full-belly", "morpeko-hangry"],
-        "Urshifu": ["urshifu-single-strike", "urshifu-rapid-strike"],
-        "Zarude": ["zarude", "zarude-dada"],
-        "Calyrex": ["calyrex", "calyrex-ice", "calyrex-shadow"],
+        "Oricorio": ["oricorio-pom-pom", "oricorio-pau", "oricorio-sensu"],
+        "Wishiwashi": ["wishiwashi-school"],
+        "Mimikyu": ["mimikyu-busted"],
+        "Toxtricity": ["toxtricity-low-key"],
+        "Eiscue": ["eiscue-noice"],
+        "Indeedee": ["indeedee-female"],
+        "Morpeko": ["morpeko-hangry"],
+        "Urshifu": ["urshifu-rapid-strike"],
+        "Calyrex": ["calyrex-ice", "calyrex-shadow"],
         "Darmanitan": ["darmanitan-standard", "darmanitan-zen"]
     };
 
@@ -913,33 +953,27 @@ const DEX_NUMBERS = {
         if (lower.includes("-crowned")) return "Crowned";
 
         // Specific forms FIRST (before generic substring checks)
+        if (lower.includes("hoopa-unbound")) return "Unbound";
+
         if (lower.includes("lycanroc-midnight")) return "Midnight";
         if (lower.includes("lycanroc-dusk")) return "Dusk";
 
-        if (lower.includes("oricorio-baile")) return "Baile";
         if (lower.includes("oricorio-pom-pom")) return "Pom-Pom";
         if (lower.includes("oricorio-pau")) return "Pa'u";
         if (lower.includes("oricorio-sensu")) return "Sensu";
 
-        if (lower.includes("wishiwashi-solo")) return "Solo";
         if (lower.includes("wishiwashi-school")) return "School";
 
         if (lower.includes("mimikyu-busted")) return "Busted";
-        if (lower.includes("mimikyu-disguised")) return "";
 
-        if (lower.includes("toxtricity-amped")) return "Amped";
         if (lower.includes("toxtricity-low-key")) return "Low Key";
 
-        if (lower.includes("eiscue-ice")) return "Ice Face";
         if (lower.includes("eiscue-noice")) return "Noice Face";
 
-        if (lower.includes("indeedee-male")) return "Male";
         if (lower.includes("indeedee-female")) return "Female";
 
-        if (lower.includes("morpeko-full-belly")) return "Full Belly";
         if (lower.includes("morpeko-hangry")) return "Hangry";
 
-        if (lower.includes("urshifu-single-strike")) return "Single Strike";
         if (lower.includes("urshifu-rapid-strike")) return "Rapid Strike";
 
         if (lower.includes("calyrex-ice")) return "Ice Rider";
@@ -955,9 +989,8 @@ const DEX_NUMBERS = {
         if (lower.includes("necrozma-ultra")) return "Ultra";
 
         // Regional forms
-        if (lower.includes("-alola")) return "Alolan";
-        if (lower.includes("-galar")) return "Galarian";
-        if (lower.includes("-hisui")) return "Hisuian";
+        if (lower.includes("-alola")) return "Alola";
+        if (lower.includes("-galar")) return "Galar";
 
         return varietyLabel(varietyName, baseName);
     }
@@ -1526,7 +1559,9 @@ const DEX_NUMBERS = {
     function getPokemonByUid(uid) { return pokemon.find(x => x.uid === uid); }
 
     function evoNodeName(dex) {
-        return NAME_BY_DEX[dex] || `#${dex}`;
+        if (NAME_BY_DEX[dex]) return NAME_BY_DEX[dex];
+        const match = pokemon.find(p => p.spriteId === dex || p.baseDex === dex);
+        return match ? (match.displayName || match.name) : `#${dex}`;
     }
 
     function evoNodeHTML(dex, currentSpriteId, extraClass = "") {
@@ -1541,31 +1576,93 @@ const DEX_NUMBERS = {
     }
 
     function renderEvoBranch(node, currentSpriteId) {
-        const selfHTML = evoNodeHTML(node.dex, currentSpriteId);
-        if (!node.children || !node.children.length) return selfHTML;
+        const seen = new Set();
+        const renderNode = (n) => {
+            if (!n || seen.has(n.dex)) return "";
+            seen.add(n.dex);
+            const selfHTML = evoNodeHTML(n.dex, currentSpriteId);
+            if (!n.children || !n.children.length) return selfHTML;
 
-        const childCols = node.children.map(child => {
-            const childSelf = evoNodeHTML(child.dex, currentSpriteId);
-            if (!child.children || !child.children.length) {
-                return `<div class="evo-branch-item">${childSelf}</div>`;
-            }
-            const grandChildren = child.children.map(gc =>
-                `<div class="evo-branch-item">${evoNodeHTML(gc.dex, currentSpriteId)}</div>`
-            ).join("");
-            return `<div class="evo-branch-item">
-                ${childSelf}
-                <div class="evo-branch-column">${grandChildren}</div>
+            const childCols = n.children
+                .map(child => {
+                    const childMarkup = renderNode(child);
+                    if (!childMarkup) return "";
+
+                    const nested = child.children && child.children.length
+                        ? `<div class="evo-branch-column">${child.children
+                            .map(gc => {
+                                const gcMarkup = renderNode(gc);
+                                return gcMarkup ? `<div class="evo-branch-item">${gcMarkup}</div>` : "";
+                            })
+                            .join("")}</div>`
+                        : "";
+
+                    return `<div class="evo-branch-child">
+                        <div class="evo-branch-item">${childMarkup}</div>
+                        ${nested ? `<div class="evo-branch-line"></div>${nested}` : ""}
+                    </div>`;
+                })
+                .join("");
+
+            return `<div class="evo-branch-root">
+                ${selfHTML}
+                <div class="evo-arrow evo-arrow-down">↓</div>
+                <div class="evo-branch-column">${childCols}</div>
             </div>`;
-        }).join("");
+        };
 
-        return `<div class="evo-branch-root">
-            ${selfHTML}
-            <div class="evo-arrow evo-arrow-down">↓</div>
-            <div class="evo-branch-column">${childCols}</div>
-        </div>`;
+        return renderNode(node);
     }
 
-    function buildEvolutionLineHTML(baseDex, currentSpriteId = baseDex) {
+    const FORM_EVOLUTION_OVERRIDES = {
+        "meowth-galar": ["Perrserker"]
+    };
+
+    function getFormEvolutionLine(baseName, varietyName, currentSpriteId) {
+        if (!baseName || !varietyName) return null;
+
+        const key = varietyName.toLowerCase();
+        const targetNames = FORM_EVOLUTION_OVERRIDES[key] || null;
+        if (targetNames && targetNames.length) {
+            const current = pokemon.find(p => p.name === baseName && p.varietyName && p.varietyName.toLowerCase() === key);
+            const line = [];
+            if (current && current.spriteId != null) line.push(current.spriteId);
+            for (const targetName of targetNames) {
+                const target = pokemon.find(p => p.name === targetName);
+                if (target && target.spriteId != null) line.push(target.spriteId);
+            }
+            if (line.length >= 2) return line;
+        }
+
+        const lower = key.toLowerCase();
+        const isMegaVariant = /(mega|primal|ultra|crowned|dawn|dusk|unbound|gmax)/.test(lower);
+        const baseDex = DEX_NUMBERS[baseName];
+
+        if (isMegaVariant && baseDex && currentSpriteId && currentSpriteId !== baseDex) {
+            return [baseDex, currentSpriteId];
+        }
+
+        const suffix = key.includes("-") ? key.split("-").pop() : null;
+        if (!suffix) return null;
+
+        const baseLine = EVOLUTIONS[baseDex] || [];
+        if (!baseLine.length) return null;
+
+        const mapped = baseLine.map(dex => {
+            const speciesName = NAME_BY_DEX[dex];
+            if (!speciesName) return dex;
+            const match = pokemon.find(p =>
+                p.name === speciesName &&
+                p.varietyName &&
+                p.varietyName.toLowerCase().endsWith(`-${suffix}`)
+            );
+            return match ? (match.spriteId ?? dex) : dex;
+        });
+
+        return mapped.length >= 2 ? mapped : null;
+    }
+
+    function buildEvolutionLineHTML(baseDex, currentSpriteId = baseDex, formKey = null, varietyName = null) {
         const contains = (node, dex) => node.dex === dex || (node.children || []).some(c => contains(c, dex));
 
         for (const baseKey of Object.keys(EVO_BRANCHES)) {
@@ -1575,7 +1672,14 @@ const DEX_NUMBERS = {
             }
         }
 
-        const line = EVOLUTIONS[baseDex];
+        let line = null;
+        const baseName = NAME_BY_DEX[baseDex] || null;
+        if (baseName && varietyName) {
+            line = getFormEvolutionLine(baseName, varietyName, currentSpriteId);
+        }
+        if (!line) {
+            line = EVOLUTIONS[baseDex] || [];
+        }
         if (!line || line.length < 2) return "";
 
         const items = line.map(dex => evoNodeHTML(dex, currentSpriteId))
@@ -1591,9 +1695,40 @@ const DEX_NUMBERS = {
         renderTimer = setTimeout(renderPokemonNow, 60);
     }
 
+    function getPokemonEvolutionStage(p) {
+        const line = getPokemonEvolutionLine(p) || [];
+        if (!line.length || line.length < 2) return "none";
+
+        const index = line.indexOf(p.spriteId);
+        if (index === -1) return "none";
+
+        const hasPredecessor = index > 0;
+        const hasSuccessor = index < line.length - 1;
+        if (!hasPredecessor && !hasSuccessor) return "none";
+        if (!hasPredecessor) return "first";
+        if (!hasSuccessor) return "final";
+        return "middle";
+    }
+
+    function getPokemonEvolutionLine(p) {
+        const byBase = EVOLUTIONS[p.baseDex] || [];
+        if (byBase.length >= 2 && byBase.includes(p.spriteId)) return byBase;
+
+        const bySprite = EVOLUTIONS[p.spriteId] || [];
+        if (bySprite.length >= 2) return bySprite;
+
+        const formLine = p.varietyName ? getFormEvolutionLine(p.name, p.varietyName, p.spriteId) : null;
+        if (formLine && formLine.length >= 2) return formLine;
+
+        return byBase.length >= 2 ? byBase : [];
+    }
+
     function renderPokemonNow() {
         const search = document.getElementById("search").value.toLowerCase();
+        const stage = document.getElementById("stage-filter").value;
         const sort = document.getElementById("sort").value;
+        const direction = sort.endsWith("-desc") ? -1 : 1;
+        const sortKey = sort.split("-")[0];
 
         let filtered = pokemon.filter(p => {
             const matchesSearch =
@@ -1602,12 +1737,20 @@ const DEX_NUMBERS = {
                 String(p.id).includes(search);
             const matchesType =
                 selectedType === "All" || p.types.includes(selectedType);
-            return matchesSearch && matchesType;
+            const matchesStage =
+                stage === "all" || getPokemonEvolutionStage(p) === stage;
+            return matchesSearch && matchesType && matchesStage;
         });
 
-        if (sort === "name") filtered.sort((a, b) => a.displayName.localeCompare(b.displayName));
-        if (sort === "number") filtered.sort((a, b) => a.id - b.id || (a.isForm ? 1 : 0) - (b.isForm ? 1 : 0));
-        if (sort === "bst") filtered.sort((a, b) => getBST(b) - getBST(a));
+        if (sortKey === "name") {
+            filtered.sort((a, b) => direction * a.displayName.localeCompare(b.displayName));
+        }
+        if (sortKey === "number") {
+            filtered.sort((a, b) => direction * (a.id - b.id || (a.isForm ? 1 : 0) - (b.isForm ? 1 : 0)));
+        }
+        if (sortKey === "bst") {
+            filtered.sort((a, b) => direction * (getBST(a) - getBST(b)));
+        }
 
         const grid = document.getElementById("pokemon-grid");
         document.getElementById("results").textContent = `Showing ${filtered.length} Pokémon`;
@@ -1617,7 +1760,7 @@ const DEX_NUMBERS = {
         for (const p of filtered) {
             const types = p.types.map(t => `<span class="type ${t}">${t}</span>`).join("");
             parts.push(`<div class="pokemon-card${p.isForm ? " is-form" : ""}" data-uid="${p.uid}">
-                <div class="pokemon-number">#${String(p.id).padStart(4, "0")}</div>
+                <div class="pokemon-number">#${String(p.id).padStart(3, "0")}</div>
                 <img class="pokemon-image"
                     src="${p.image}" alt="${p.displayName}"
                     loading="lazy" decoding="async"
@@ -1664,6 +1807,7 @@ const DEX_NUMBERS = {
     });
 
     document.getElementById("search").addEventListener("input", renderPokemon);
+    document.getElementById("stage-filter").addEventListener("change", renderPokemon);
     document.getElementById("sort").addEventListener("change", renderPokemon);
 
     document.getElementById("detail").addEventListener("click", e => {
@@ -1740,7 +1884,7 @@ const DEX_NUMBERS = {
                 </div>`;
         }
 
-        const evoHTML = buildEvolutionLineHTML(p.baseDex, p.spriteId);
+        const evoHTML = buildEvolutionLineHTML(p.baseDex, p.spriteId, p.formKey, p.varietyName);
 
         content.innerHTML = `
             <div class="detail-main">
@@ -1753,7 +1897,7 @@ const DEX_NUMBERS = {
 
                 </div>
                 <div class="detail-info">
-                    <h2>#${String(p.id).padStart(4, "0")} ${p.displayName}</h2>
+                    <h2>#${String(p.id).padStart(3, "0")} ${p.displayName}</h2>
                     <div class="types">${types}</div>
 
                     <h3 class="section-title">Base Stats</h3>
@@ -1866,14 +2010,14 @@ const DEX_NUMBERS = {
         const bstClass = bstOwn > bstOther ? "cmp-winner" : bstOwn < bstOther ? "cmp-loser" : "";
         const bstSuffix = bstOwn > bstOther ? " ▲" : bstOwn < bstOther ? " ▼" : "";
         
-        const evoHTML = buildEvolutionLineHTML(p.baseDex, p.spriteId);
+        const evoHTML = buildEvolutionLineHTML(p.baseDex, p.spriteId, p.formKey, p.varietyName);
 
         return `
             <div class="compare-col" data-compare-uid="${p.uid}">
                 <div class="cmp-head">
                     <img src="${p.image}" alt="${p.displayName}"
                         data-name="${p.name}" data-types="${p.types.join("|")}" class="cmp-sprite">
-                    <h2>#${String(p.id).padStart(4, "0")} ${p.displayName}</h2>
+                    <h2>#${String(p.id).padStart(3, "0")} ${p.displayName}</h2>
                     <div class="types">${types}</div>
                 </div>
 
@@ -1883,8 +2027,8 @@ const DEX_NUMBERS = {
 
                 <h3 class="section-title">Pokémon Information</h3>
                 <div class="info-grid">
-                    <div class="info-box"><small>Height</small><strong class="cmp-height-${p.uid}">Loading…</strong></div>
-                    <div class="info-box"><small>Weight</small><strong class="cmp-weight-${p.uid}">Loading…</strong></div>
+                    <div class="info-box"><small>Height</small><strong class="cmp-height" data-uid="${p.uid}">Loading…</strong></div>
+                    <div class="info-box"><small>Weight</small><strong class="cmp-weight" data-uid="${p.uid}">Loading…</strong></div>
                 </div>
 
                 <h3 class="section-title">Abilities</h3>
@@ -1912,6 +2056,11 @@ const DEX_NUMBERS = {
         });
     }
 
+    function findCompareValueElement(scope, uid, type) {
+        const selector = type === "height" ? ".cmp-height" : ".cmp-weight";
+        return Array.from(scope.querySelectorAll(selector)).find(el => el.dataset.uid === uid) || null;
+    }
+
     function renderComparisonGrid(uidA, uidB) {
         const a = getPokemonByUid(uidA), b = getPokemonByUid(uidB);
         if (!a || !b) return;
@@ -1923,8 +2072,8 @@ const DEX_NUMBERS = {
         [a, b].forEach(p => {
             fetchPokemonExtras(p.spriteId).then(extras => {
                 if (currentCompareUids && currentCompareUids.includes(p.uid)) {
-                    const hEl = grid.querySelector(`.cmp-height-${p.uid}`);
-                    const wEl = grid.querySelector(`.cmp-weight-${p.uid}`);
+                    const hEl = findCompareValueElement(grid, p.uid, "height");
+                    const wEl = findCompareValueElement(grid, p.uid, "weight");
                     if (hEl) hEl.textContent = extras.height;
                     if (wEl) wEl.textContent = extras.weight;
                 }
@@ -1976,8 +2125,8 @@ const DEX_NUMBERS = {
         [a, b].forEach(p => {
             fetchPokemonExtras(p.spriteId).then(extras => {
                 if (currentCompareUids && currentCompareUids.includes(p.uid)) {
-                    const hEl = content.querySelector(`.cmp-height-${p.uid}`);
-                    const wEl = content.querySelector(`.cmp-weight-${p.uid}`);
+                    const hEl = findCompareValueElement(content, p.uid, "height");
+                    const wEl = findCompareValueElement(content, p.uid, "weight");
                     if (hEl) hEl.textContent = extras.height;
                     if (wEl) wEl.textContent = extras.weight;
                 }

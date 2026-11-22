@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinity Nexus</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="../../icon.jpg" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../mainpages.css">
+</head>
+
+<body>
+
+
+    <nav class="navbar">
+        <div class="navbar-brand" style="font-weight: 900;">Infinity Nexus</div>
+        <div class="nav-links">
+            <a class="nav-link" href="../../index.html">Home</a>
+            <a class="nav-link" href="../gamecorner/gamecorner.html">Game Corner</a>
+            <a class="nav-link" href="../casino/casino.html">Casino</a>
+            <a class="nav-link" href="../../info/info.html">Guides</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+            <span id="themeIcon">🌙</span>
+        </button>
+    </nav>
+
+    <header>
+        <div class="container">
+
+            <h1 class="main-title">📚 Information & Guides</h1>
+
+        </div>
+    </header>
+
+    <div class="content-wrapper">
+        <div class="container" id="main">
+            <div class="links-section">
+                <div class="archive-grid">
+                    
+
+                    
+                    <div class="archive-card">
+                        <div class="card-header">
+                            <div class="card-image-placeholder">📝</div>
+                        </div>
+                        <h3 class="archive-title">Update Info</h3>
+                        <div style="padding: 0 16px 16px 16px;">
+                            <a href="../../info/updateinfo/updateinfo.html" class="status-pill status-available">View →</a>
+                        </div>
+                    </div>
+
+                  <!--<div class="archive-card">
+                        <div class="card-header">
+                            <div class="card-image-placeholder">📖</div>
+                        </div>
+                        <h3 class="archive-title">Guides</h3>
+                        <div style="padding: 0 16px 16px 16px;">
+                            <a href="../../info/guide/walkthrough1.html" class="status-pill status-available">View →</a>
+                        </div>
+                    </div>-->  
+                    
+                    <div class="archive-card">
+                        <div class="card-header">
+                            <div class="card-image-placeholder">💻</div>
+                        </div>
+                        <h3 class="archive-title">Source Code</h3>
+                        <div style="padding: 0 16px 16px 16px;">
+                            <a href="https://github.com/littletree866/infinity-nexus"
+                                class="status-pill status-available" target="_blank">GitHub →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 class="footer-title">Infinity Nexus</h4>
+                    <p class="footer-desc">Play. Share. Connect.</p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Play</h4>
+                    <ul class="footer-links">
+                        <li><a href="../../index.html">Home</a></li>
+                        <li><a href="../gamecorner/gamecorner.html">Game Corner</a></li>
+                        <li><a href="../../sims/sims.html">Simulations</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Share</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/littletree866/infinity-nexus">Github</a></li>
+                        <li><a href="https://forms.gle/X8p7jkC74MFG9Evj7">Report</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Connect</h4>               
+                    <p class="footer-desc" style="font-size: 0.9rem;">Share with friends. Share your experiences.</p>
+
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p class="copyright">© <span id="copyright-year"></span> Infinity Nexus. All rights reserved.</p>
+                <p class="footer-author">Built by <strong>Littletree866</strong></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const StorageManager = {
+            get: (key) => {
+                try {
+                    return localStorage.getItem(key);
+                } catch (e) {
+                    console.warn('Storage get error:', e);
+                    return null;
+                }
+            },
+            set: (key, value) => {
+                try {
+                    localStorage.setItem(key, value);
+                } catch (e) {
+                    console.warn('Storage set error:', e);
+                }
+            }
+        };
+
+        function initTheme() {
+            try {
+                const savedTheme = StorageManager.get('theme') || 'dark';
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                updateThemeIcon(savedTheme);
+            } catch (e) {
+                console.warn('Theme init error:', e);
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        }
+
+        function updateThemeIcon(theme) {
+            try {
+                const icon = document.getElementById('themeIcon');
+                if (icon) {
+                    icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+                }
+            } catch (e) {
+                console.warn('Theme icon update error:', e);
+            }
+        }
+
+        function toggleTheme() {
+            try {
+                const current = document.documentElement.getAttribute('data-theme') || 'dark';
+                const newTheme = current === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                StorageManager.set('theme', newTheme);
+                updateThemeIcon(newTheme);
+            } catch (e) {
+                console.error('Theme toggle error:', e);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            initTheme();
+            try {
+                document.getElementById('footer-year').textContent = new Date().getFullYear();
+            } catch (e) {
+                console.warn('Year update error:', e);
+            }
+            const themeBtn = document.getElementById('themeToggle');
+            if (themeBtn) {
+                themeBtn.addEventListener('click', toggleTheme);
+            }
+        });
+    </script>
+</body>
+
+</html>
+
+

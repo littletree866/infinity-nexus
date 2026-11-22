@@ -1,0 +1,922 @@
+(() => {
+  const canvas = document.getElementById('c');
+  const ctx = canvas.getContext('2d');
+  const W = 1200, H = 600;
+  const alertEl = document.getElementById('alert');
+
+  
+  const keys = {};
+  window.addEventListener('keydown', e => {
+    keys[e.code] = true;
+    if (['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Space'].includes(e.code)) e.preventDefault();
+    if (e.code === 'KeyR' && gameRunning && !paused) respawn();
+    if (e.code === 'KeyP') togglePause();
+  });
+  window.addEventListener('keyup', e => { keys[e.code] = false; });
+
+  
+  const rand = (a, b) => a + Math.random() * (b - a);
+  const clamp = (v, a, b) => v < a ? a : v > b ? b : v;
+  const dist = (x1,y1,x2,y2) => Math.hypot(x2-x1, y2-y1);
+
+  function lineCircle(x1, y1, x2, y2, cx, cy, r) {
+    const dx = x2 - x1, dy = y2 - y1;
+    const len2 = dx*dx + dy*dy;
+    if (len2 === 0) return dist(x1,y1,cx,cy) < r;
+    let t = ((cx - x1) * dx + (cy - y1) * dy) / len2;
+    t = clamp(t, 0, 1);
+    const px = x1 + t * dx, py = y1 + t * dy;
+    return dist(px, py, cx, cy) < r;
+  }
+
+  
+  const ship = {
+    x: 60, y: 300,
+    vx: 0, vy: 0,
+    r: 11,
+    thrustPower: 0.38,
+    maxSpeed: 4.8,
+    drag: 0.90,
+    angle: 0,
+    trail: [],
+    alive: true,
+    invuln: 0,
+  };
+
+  function resetShip() {
+    ship.x = 60; ship.y = 300;
+    ship.vx = 0; ship.vy = 0;
+    ship.angle = 0;
+    ship.trail = [];
+    ship.alive = true;
+    ship.invuln = 90;
+  }
+
+  
+  const effects = {
+    gravity: false,             
+    gravityStrength: 0.20,
+    meteorShowerTimer: 0,       
+    meteorSpeedMultiplier: 1,
+    turretOverdriveTimer: 0,
+    robotSwarmTimer: 0,
+    robots: [],                 
+  };
+
+  
+  
+  const SECTORS = [
+    {
+      name: "SECTOR 01 · DEBRIS FIELD",
+      goalX: 1140, goalY: 100, goalW: 40, goalH: 400,
+      walls: [
+        { x: 240, y: 0, w: 22, h: 380 },
+        { x: 240, y: 480, w: 22, h: 120 },
+        { x: 400, y: 200, w: 22, h: 400 },
+        { x: 400, y: 0, w: 22, h: 140 },
+        { x: 560, y: 0, w: 22, h: 280 },
+        { x: 560, y: 420, w: 22, h: 180 },
+        { x: 720, y: 160, w: 22, h: 440 },
+        { x: 720, y: 0, w: 22, h: 100 },
+        { x: 880, y: 0, w: 22, h: 300 },
+        { x: 880, y: 440, w: 22, h: 160 },
+        { x: 1030, y: 180, w: 22, h: 420 },
+        { x: 1030, y: 0, w: 22, h: 120 },
+      ],
+      hazards: [
+        { type: 'meteor', x: 340, y: -40, vx: 0.2, vy: 1.6, r: 14, baseVy: 1.6 },
+        { type: 'meteor', x: 480, y: -80, vx: -0.3, vy: 1.8, r: 16, baseVy: 1.8 },
+        { type: 'meteor', x: 640, y: -60, vx: 0.1, vy: 1.5, r: 12, baseVy: 1.5 },
+        { type: 'meteor', x: 800, y: -120, vx: -0.15, vy: 1.9, r: 18, baseVy: 1.9 },
+        { type: 'meteor', x: 960, y: -40, vx: 0.25, vy: 1.7, r: 15, baseVy: 1.7 },
+        { type: 'meteor', x: 1100, y: -90, vx: -0.2, vy: 2.0, r: 14, baseVy: 2.0 },
+      ],
+      rotatingLasers: [],
+      turrets: [],
+      
+      triggers: [
+        { x: 320, type: 'meteorShower', duration: 300, fired: false },
+        { x: 700, type: 'turretOverdrive', duration: 240, fired: false },
+        { x: 960, type: 'robotSwarm', duration: 360, fired: false },
+      ],
+      
+      gravityTriggerX: null,
+    },
+    {
+      name: "SECTOR 02 · LASER GRID",
+      goalX: 1140, goalY: 40, goalW: 40, goalH: 520,
+      walls: [
+        { x: 180, y: 220, w: 200, h: 22 },
+        { x: 180, y: 220, w: 22, h: 220 },
+        { x: 320, y: 0, w: 22, h: 160 },
+        { x: 320, y: 440, w: 22, h: 160 },
+        { x: 460, y: 140, w: 22, h: 320 },
+        { x: 460, y: 500, w: 22, h: 100 },
+        { x: 620, y: 0, w: 22, h: 200 },
+        { x: 620, y: 320, w: 22, h: 280 },
+        { x: 780, y: 140, w: 180, h: 22 },
+        { x: 780, y: 440, w: 180, h: 22 },
+        { x: 940, y: 140, w: 22, h: 140 },
+        { x: 940, y: 340, w: 22, h: 140 },
+        { x: 1060, y: 0, w: 22, h: 260 },
+        { x: 1060, y: 380, w: 22, h: 220 },
+      ],
+      hazards: [
+        { type: 'meteor', x: 400, y: -60, vx: 0.1, vy: 1.7, r: 13, baseVy: 1.7 },
+        { type: 'meteor', x: 850, y: -80, vx: -0.2, vy: 1.9, r: 15, baseVy: 1.9 },
+      ],
+      rotatingLasers: [
+        { cx: 260, cy: 340, len: 100, speed: 0.014, phase: 0 },
+        { cx: 540, cy: 300, len: 120, speed: -0.016, phase: 1.5 },
+        { cx: 700, cy: 460, len: 90, speed: 0.018, phase: 0.8 },
+        { cx: 880, cy: 300, len: 110, speed: -0.013, phase: 2.2 },
+        { cx: 1000, cy: 460, len: 85, speed: 0.02, phase: 0.3 },
+      ],
+      turrets: [
+        { x: 660, y: 60, angle: Math.PI/2, rate: 130, timer: 0, bullets: [] },
+      ],
+      triggers: [
+        { x: 400, type: 'meteorShower', duration: 300, fired: false },
+        { x: 820, type: 'turretOverdrive', duration: 300, fired: false },
+      ],
+      
+      gravityTriggerX: 650,
+    },
+    {
+      name: "SECTOR 03 · THE GAUNTLET",
+      goalX: 1150, goalY: 240, goalW: 40, goalH: 120,
+      walls: [
+        { x: 140, y: 0, w: 22, h: 240 },
+        { x: 140, y: 380, w: 22, h: 220 },
+        { x: 300, y: 120, w: 22, h: 380 },
+        { x: 300, y: 0, w: 22, h: 60 },
+        { x: 440, y: 0, w: 22, h: 220 },
+        { x: 440, y: 360, w: 22, h: 240 },
+        { x: 600, y: 200, w: 22, h: 400 },
+        { x: 600, y: 0, w: 22, h: 120 },
+        { x: 760, y: 0, w: 22, h: 180 },
+        { x: 760, y: 340, w: 22, h: 260 },
+        { x: 900, y: 180, w: 22, h: 420 },
+        { x: 900, y: 0, w: 22, h: 100 },
+        { x: 1040, y: 0, w: 22, h: 200 },
+        { x: 1040, y: 400, w: 22, h: 200 },
+      ],
+      hazards: [
+        { type: 'meteor', x: 240, y: -50, vx: 0.15, vy: 2.0, r: 15, baseVy: 2.0 },
+        { type: 'meteor', x: 400, y: -50, vx: -0.2, vy: 1.8, r: 17, baseVy: 1.8 },
+        { type: 'meteor', x: 540, y: -50, vx: 0.25, vy: 2.2, r: 14, baseVy: 2.2 },
+        { type: 'meteor', x: 700, y: -50, vx: -0.1, vy: 2.1, r: 16, baseVy: 2.1 },
+        { type: 'meteor', x: 850, y: -50, vx: 0.2, vy: 1.9, r: 15, baseVy: 1.9 },
+        { type: 'meteor', x: 1000, y: -50, vx: -0.25, vy: 2.0, r: 13, baseVy: 2.0 },
+      ],
+      rotatingLasers: [
+        { cx: 220, cy: 300, len: 80, speed: 0.018, phase: 0 },
+        { cx: 380, cy: 260, len: 90, speed: -0.02, phase: 2 },
+        { cx: 520, cy: 320, len: 85, speed: 0.016, phase: 1 },
+        { cx: 680, cy: 280, len: 95, speed: -0.018, phase: 3 },
+        { cx: 840, cy: 340, len: 80, speed: 0.02, phase: 0.5 },
+        { cx: 980, cy: 300, len: 90, speed: -0.015, phase: 1.8 },
+      ],
+      turrets: [
+        { x: 380, y: 520, angle: -Math.PI/2, rate: 80, timer: 0, bullets: [] },
+        { x: 700, y: 80, angle: Math.PI/2, rate: 95, timer: 0, bullets: [] },
+        { x: 980, y: 520, angle: -Math.PI/2, rate: 85, timer: 0, bullets: [] },
+      ],
+      triggers: [
+        { x: 250, type: 'turretOverdrive', duration: 300, fired: false },
+        { x: 500, type: 'meteorShower', duration: 360, fired: false },
+        { x: 800, type: 'robotSwarm', duration: 420, fired: false },
+        { x: 1000, type: 'meteorShower', duration: 300, fired: false },
+      ],
+      gravityTriggerX: null, 
+    }
+  ];
+
+  let sectorIndex = 0;
+  let sector = null;
+  let time = 0;
+  let deaths = 0;
+  let gameRunning = false;
+  let gameWon = false;
+  let paused = false;
+  let gravityActive = false;
+  let alertTimeout = null;
+
+  let rotLasers = [];
+  let particles = [];
+
+  function showAlert(text, color = '#ffdd66') {
+    alertEl.textContent = text;
+    alertEl.style.color = color;
+    alertEl.classList.add('show');
+    if (alertTimeout) clearTimeout(alertTimeout);
+    alertTimeout = setTimeout(() => alertEl.classList.remove('show'), 2200);
+  }
+
+  function loadSector(i) {
+    sectorIndex = i;
+    sector = SECTORS[i];
+    resetShip();
+    rotLasers = sector.rotatingLasers.map(l => ({ ...l, angle: l.phase }));
+    sector.turrets.forEach(t => { t.timer = 0; t.bullets = []; });
+    sector.hazards.forEach(m => { if (m.baseVy) m.vy = m.baseVy; });
+    sector.triggers.forEach(t => t.fired = false);
+    particles.length = 0;
+    effects.robots = [];
+    effects.meteorShowerTimer = 0;
+    effects.meteorSpeedMultiplier = 1;
+    effects.turretOverdriveTimer = 0;
+    effects.robotSwarmTimer = 0;
+
+    
+    if (i === 2) {
+      gravityActive = true;
+    } else if (i === 0) {
+      gravityActive = false;
+    }
+    
+
+    document.getElementById('sector').textContent = i + 1;
+  }
+
+  function respawn() {
+    if (!gameRunning || paused) return;
+    deaths++;
+    document.getElementById('deaths').textContent = deaths;
+    resetShip();
+  }
+
+  const pauseBtn = document.getElementById('pauseBtn');
+  function togglePause() {
+    if (!gameRunning) return;
+    paused = !paused;
+    pauseBtn.textContent = paused ? '▶ RESUME' : '❚❚ PAUSE';
+    if (paused) {
+      showOverlay("PAUSED", "PRESS P OR CLICK RESUME", "RESUME");
+    } else {
+      hideOverlay();
+    }
+  }
+  pauseBtn.addEventListener('click', togglePause);
+
+  
+  function spawnRobot() {
+    
+    const g = sector;
+    const spawnX = g.goalX + g.goalW / 2;
+    const spawnY = g.goalY + g.goalH / 2;
+    effects.robots.push({
+      x: spawnX, y: spawnY,
+      vx: 0, vy: 0,
+      r: 13,
+      speed: 1.6 + Math.random() * 0.6,
+      hp: 1,
+      phase: Math.random() * Math.PI * 2,
+    });
+  }
+
+  function updateRobots(dt) {
+    if (!ship.alive) return;
+    for (let i = effects.robots.length - 1; i >= 0; i--) {
+      const rb = effects.robots[i];
+      
+      const dx = ship.x - rb.x;
+      const dy = ship.y - rb.y;
+      const d = Math.hypot(dx, dy) || 0.001;
+      rb.vx = (dx / d) * rb.speed;
+      rb.vy = (dy / d) * rb.speed;
+      
+      rb.phase += 0.1;
+      rb.vx += Math.cos(rb.phase) * 0.3;
+      rb.vy += Math.sin(rb.phase * 1.3) * 0.3;
+      rb.x += rb.vx;
+      rb.y += rb.vy;
+
+      
+      for (const w of sector.walls) {
+        if (rb.x + rb.r > w.x && rb.x - rb.r < w.x + w.w &&
+            rb.y + rb.r > w.y && rb.y - rb.r < w.y + w.h) {
+          
+          const cx = clamp(rb.x, w.x, w.x + w.w);
+          const cy = clamp(rb.y, w.y, w.y + w.h);
+          const ddx = rb.x - cx, ddy = rb.y - cy;
+          const dd = Math.hypot(ddx, ddy) || 0.001;
+          rb.x = cx + (ddx / dd) * rb.r;
+          rb.y = cy + (ddy / dd) * rb.r;
+        }
+      }
+
+      
+      if (dist(rb.x, rb.y, ship.x, ship.y) < rb.r + ship.r) {
+        killShip();
+        return;
+      }
+    }
+  }
+
+  
+  function update(dt) {
+    if (!gameRunning || paused) return;
+    time += dt / 1000;
+    document.getElementById('time').textContent = time.toFixed(1);
+
+    if (!ship.alive) return;
+    if (ship.invuln > 0) ship.invuln--;
+
+    
+    if (effects.meteorShowerTimer > 0) {
+      effects.meteorShowerTimer--;
+      effects.meteorSpeedMultiplier = 2.4;
+      if (effects.meteorShowerTimer === 0) {
+        effects.meteorSpeedMultiplier = 1;
+      }
+    }
+    if (effects.turretOverdriveTimer > 0) {
+      effects.turretOverdriveTimer--;
+    }
+    if (effects.robotSwarmTimer > 0) {
+      effects.robotSwarmTimer--;
+      
+      if (effects.robotSwarmTimer % 40 === 0) {
+        spawnRobot();
+      }
+    }
+
+    
+    for (const tr of sector.triggers) {
+      if (!tr.fired && ship.x >= tr.x) {
+        tr.fired = true;
+        if (tr.type === 'meteorShower') {
+          effects.meteorShowerTimer = tr.duration;
+          effects.meteorSpeedMultiplier = 2.4;
+          showAlert('⚠ METEOR SHOWER ⚠', '#ff8833');
+        } else if (tr.type === 'turretOverdrive') {
+          effects.turretOverdriveTimer = tr.duration;
+          showAlert('⚠ TURRET OVERDRIVE ⚠', '#ff4466');
+        } else if (tr.type === 'robotSwarm') {
+          effects.robotSwarmTimer = tr.duration;
+          showAlert('⚠ ROBOT SWARM ⚠', '#a060ff');
+        }
+      }
+    }
+
+    
+    if (sector.gravityTriggerX !== null && !gravityActive && ship.x >= sector.gravityTriggerX) {
+      gravityActive = true;
+      showAlert('⚠ GRAVITY FIELD ENGAGED ⚠', '#66ddff');
+    }
+
+    
+    const accel = ship.thrustPower;
+    if (keys['ArrowLeft'])  ship.vx -= accel;
+    if (keys['ArrowRight']) ship.vx += accel;
+    if (keys['ArrowUp'])    ship.vy -= accel;
+    if (keys['ArrowDown'])  ship.vy += accel;
+
+    
+    if (gravityActive) {
+      ship.vy += effects.gravityStrength;
+    }
+
+    ship.vx *= ship.drag;
+    ship.vy *= ship.drag;
+
+    
+    const sp = Math.hypot(ship.vx, ship.vy);
+    const maxSp = ship.maxSpeed + (gravityActive ? 1.5 : 0);
+    if (sp > maxSp) {
+      ship.vx = (ship.vx / sp) * maxSp;
+      ship.vy = (ship.vy / sp) * maxSp;
+    }
+
+    ship.x += ship.vx;
+    ship.y += ship.vy;
+
+    
+    if (sp > 0.3) {
+      const targetAngle = Math.atan2(ship.vy, ship.vx);
+      let diff = targetAngle - ship.angle;
+      while (diff > Math.PI) diff -= Math.PI * 2;
+      while (diff < -Math.PI) diff += Math.PI * 2;
+      ship.angle += diff * 0.18;
+    } else {
+      let diff = 0 - ship.angle;
+      while (diff > Math.PI) diff -= Math.PI * 2;
+      while (diff < -Math.PI) diff += Math.PI * 2;
+      ship.angle += diff * 0.08;
+    }
+
+    ship.trail.push({ x: ship.x, y: ship.y, a: 1 });
+    if (ship.trail.length > 20) ship.trail.shift();
+    ship.trail.forEach(t => t.a *= 0.88);
+
+    
+    if (ship.x < ship.r) { ship.x = ship.r; ship.vx *= -0.4; }
+    if (ship.x > W - ship.r) { ship.x = W - ship.r; ship.vx *= -0.4; }
+    if (ship.y < ship.r) { ship.y = ship.r; ship.vy *= -0.4; }
+    if (ship.y > H - ship.r) { ship.y = H - ship.r; ship.vy *= -0.4; }
+
+    
+    for (const w of sector.walls) resolveCircleRect(ship, w);
+
+    
+    for (const l of rotLasers) {
+      l.angle += l.speed;
+      const ex = l.cx + Math.cos(l.angle) * l.len;
+      const ey = l.cy + Math.sin(l.angle) * l.len;
+      if (lineCircle(l.cx, l.cy, ex, ey, ship.x, ship.y, ship.r + 2)) {
+        killShip(); return;
+      }
+    }
+
+    
+    for (const m of sector.hazards) {
+      if (m.type === 'meteor') {
+        const vy = m.baseVy * effects.meteorSpeedMultiplier;
+        m.y += vy;
+        m.x += m.vx;
+        if (m.y > H + 60) { m.y = -60; m.x = rand(40, W - 40); }
+        if (m.x < -60) m.x = W + 60;
+        if (m.x > W + 60) m.x = -60;
+        if (dist(m.x, m.y, ship.x, ship.y) < m.r + ship.r) {
+          killShip(); return;
+        }
+      }
+    }
+
+    
+    for (const t of sector.turrets) {
+      const rate = effects.turretOverdriveTimer > 0 ? Math.max(15, t.rate / 4) : t.rate;
+      const bulletSpeed = effects.turretOverdriveTimer > 0 ? 5.0 : 3.4;
+      t.timer++;
+      if (t.timer >= rate) {
+        t.timer = 0;
+        t.bullets.push({
+          x: t.x, y: t.y,
+          vx: Math.cos(t.angle) * bulletSpeed,
+          vy: Math.sin(t.angle) * bulletSpeed,
+          life: 320,
+        });
+      }
+      for (let i = t.bullets.length - 1; i >= 0; i--) {
+        const b = t.bullets[i];
+        b.x += b.vx; b.y += b.vy; b.life--;
+        if (b.life <= 0 || b.x < -20 || b.x > W + 20 || b.y < -20 || b.y > H + 20) {
+          t.bullets.splice(i, 1); continue;
+        }
+        let hitWall = false;
+        for (const w of sector.walls) {
+          if (b.x > w.x && b.x < w.x + w.w && b.y > w.y && b.y < w.y + w.h) {
+            hitWall = true; break;
+          }
+        }
+        if (hitWall) { t.bullets.splice(i, 1); continue; }
+        if (dist(b.x, b.y, ship.x, ship.y) < ship.r + 3) {
+          killShip(); return;
+        }
+      }
+    }
+
+    
+    updateRobots(dt);
+
+    
+    const g = sector;
+    if (ship.x + ship.r > g.goalX && ship.x - ship.r < g.goalX + g.goalW &&
+        ship.y + ship.r > g.goalY && ship.y - ship.r < g.goalY + g.goalH) {
+      if (sectorIndex < SECTORS.length - 1) {
+        loadSector(sectorIndex + 1);
+      } else {
+        gameWon = true;
+        gameRunning = false;
+        showOverlay("ESCAPED", "YOU CLEARED THE BELT IN " + time.toFixed(1) + "s · " + deaths + " DEATHS", "PLAY AGAIN");
+      }
+    }
+  }
+
+  function resolveCircleRect(c, r) {
+    const nx = clamp(c.x, r.x, r.x + r.w);
+    const ny = clamp(c.y, r.y, r.y + r.h);
+    const dx = c.x - nx, dy = c.y - ny;
+    const d2 = dx*dx + dy*dy;
+    if (d2 < c.r * c.r) {
+      const d = Math.sqrt(d2) || 0.0001;
+      const overlap = c.r - d;
+      const ux = dx / d, uy = dy / d;
+      c.x += ux * overlap;
+      c.y += uy * overlap;
+      const dot = c.vx * ux + c.vy * uy;
+      if (dot < 0) {
+        c.vx -= 1.6 * dot * ux;
+        c.vy -= 1.6 * dot * uy;
+        c.vx *= 0.5;
+        c.vy *= 0.5;
+      }
+    }
+  }
+
+  function killShip() {
+    if (!ship.alive || ship.invuln > 0) return;
+    ship.alive = false;
+    for (let i = 0; i < 28; i++) {
+      particles.push({
+        x: ship.x, y: ship.y,
+        vx: rand(-5, 5), vy: rand(-5, 5),
+        life: 40 + rand(0, 30),
+        maxLife: 70,
+        color: ['#ff6644','#ffaa33','#ff4466','#88ccff'][i % 4],
+        size: rand(1.5, 3.5),
+      });
+    }
+    setTimeout(() => {
+      if (gameRunning && !paused) {
+        deaths++;
+        document.getElementById('deaths').textContent = deaths;
+        resetShip();
+      }
+    }, 700);
+  }
+
+  function updateParticles() {
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.x += p.vx; p.y += p.vy;
+      p.vx *= 0.96; p.vy *= 0.96;
+      p.life--;
+      if (p.life <= 0) particles.splice(i, 1);
+    }
+  }
+
+  
+  let bgStars = [];
+  for (let i = 0; i < 260; i++) {
+    bgStars.push({
+      x: rand(0, W), y: rand(0, H),
+      s: rand(0.4, 1.6),
+      p: rand(0, Math.PI * 2),
+      sp: rand(0.005, 0.02),
+    });
+  }
+
+  function draw(t) {
+    const grad = ctx.createRadialGradient(W/2, H/2, 100, W/2, H/2, W*0.8);
+    grad.addColorStop(0, '#0a1224');
+    grad.addColorStop(1, '#020409');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, W, H);
+
+    
+    if (gravityActive) {
+      ctx.save();
+      ctx.globalAlpha = 0.15;
+      for (let i = 0; i < 30; i++) {
+        const gx = (i * 47 + (t * 1.5) % 47) % W;
+        const gy = ((t * 2) + i * 23) % H;
+        ctx.strokeStyle = '#66ddff';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(gx, gy);
+        ctx.lineTo(gx, gy + 10);
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    for (const s of bgStars) {
+      const tw = 0.5 + 0.5 * Math.sin(t * s.sp + s.p);
+      ctx.fillStyle = `rgba(180, 210, 255, ${0.15 + tw * 0.5})`;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.s, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    if (!sector) return;
+
+    
+    const g = sector;
+    const pulse = 0.5 + 0.5 * Math.sin(t * 0.08);
+    ctx.save();
+    ctx.shadowBlur = 25;
+    ctx.shadowColor = `rgba(120, 255, 180, ${0.6 + pulse * 0.4})`;
+    ctx.fillStyle = `rgba(80, 220, 140, ${0.15 + pulse * 0.15})`;
+    ctx.fillRect(g.goalX, g.goalY, g.goalW, g.goalH);
+    ctx.strokeStyle = `rgba(120, 255, 180, ${0.5 + pulse * 0.4})`;
+    ctx.lineWidth = 2;
+    ctx.strokeRect(g.goalX + 0.5, g.goalY + 0.5, g.goalW - 1, g.goalH - 1);
+    ctx.fillStyle = `rgba(160, 255, 200, ${0.6 + pulse * 0.4})`;
+    for (let y = g.goalY + 20; y < g.goalY + g.goalH - 20; y += 26) {
+      ctx.beginPath();
+      ctx.moveTo(g.goalX + 8, y);
+      ctx.lineTo(g.goalX + 20, y + 8);
+      ctx.lineTo(g.goalX + 8, y + 16);
+      ctx.closePath();
+      ctx.fill();
+    }
+    ctx.restore();
+
+    
+    for (const w of sector.walls) {
+      ctx.save();
+      ctx.shadowBlur = 15;
+      ctx.shadowColor = 'rgba(100, 140, 220, 0.5)';
+      ctx.fillStyle = '#1a2a44';
+      ctx.fillRect(w.x, w.y, w.w, w.h);
+      ctx.fillStyle = '#2a3f5e';
+      ctx.fillRect(w.x + 2, w.y + 2, w.w - 4, w.h - 4);
+      ctx.strokeStyle = 'rgba(140, 180, 255, 0.6)';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(w.x + 0.5, w.y + 0.5, w.w - 1, w.h - 1);
+      ctx.restore();
+    }
+
+    
+    for (const l of rotLasers) {
+      const ex = l.cx + Math.cos(l.angle) * l.len;
+      const ey = l.cy + Math.sin(l.angle) * l.len;
+      ctx.save();
+      ctx.shadowBlur = 20;
+      ctx.shadowColor = '#ff2a6d';
+      ctx.strokeStyle = 'rgba(255, 42, 109, 0.9)';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(l.cx, l.cy); ctx.lineTo(ex, ey);
+      ctx.stroke();
+      ctx.strokeStyle = 'rgba(255, 180, 210, 0.95)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(l.cx, l.cy); ctx.lineTo(ex, ey);
+      ctx.stroke();
+      ctx.fillStyle = '#ffb0c8';
+      ctx.beginPath();
+      ctx.arc(l.cx, l.cy, 5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    
+    const showerActive = effects.meteorShowerTimer > 0;
+    for (const m of sector.hazards) {
+      if (m.type !== 'meteor') continue;
+      ctx.save();
+      
+      const tailMult = showerActive ? 4 : 2.5;
+      const tailGrad = ctx.createRadialGradient(m.x, m.y - m.baseVy * 4, 0, m.x, m.y, m.r * tailMult);
+      tailGrad.addColorStop(0, showerActive ? 'rgba(255, 100, 40, 0.8)' : 'rgba(255, 140, 60, 0.5)');
+      tailGrad.addColorStop(1, 'rgba(255, 140, 60, 0)');
+      ctx.fillStyle = tailGrad;
+      ctx.beginPath();
+      ctx.arc(m.x, m.y, m.r * tailMult, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.shadowBlur = showerActive ? 30 : 20;
+      ctx.shadowColor = showerActive ? '#ff4400' : '#ff8833';
+      ctx.fillStyle = showerActive ? '#6a3020' : '#5a4030';
+      ctx.beginPath();
+      ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#3a2a1c';
+      ctx.beginPath();
+      ctx.arc(m.x - m.r*0.3, m.y - m.r*0.2, m.r*0.35, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(m.x + m.r*0.35, m.y + m.r*0.25, m.r*0.25, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = showerActive ? '#ffcc44' : '#ffaa55';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    
+    const overdrive = effects.turretOverdriveTimer > 0;
+    for (const t of sector.turrets) {
+      ctx.save();
+      ctx.shadowBlur = overdrive ? 25 : 15;
+      ctx.shadowColor = overdrive ? '#ff2266' : '#ff4466';
+      ctx.fillStyle = overdrive ? '#5a1030' : '#3a2030';
+      ctx.beginPath();
+      ctx.arc(t.x, t.y, overdrive ? 16 : 14, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = overdrive ? '#ff2266' : '#ff6688';
+      ctx.lineWidth = overdrive ? 6 : 5;
+      ctx.beginPath();
+      ctx.moveTo(t.x, t.y);
+      ctx.lineTo(t.x + Math.cos(t.angle) * 22, t.y + Math.sin(t.angle) * 22);
+      ctx.stroke();
+      ctx.fillStyle = overdrive ? '#ffddaa' : '#ffaacc';
+      ctx.beginPath();
+      ctx.arc(t.x, t.y, overdrive ? 6 : 5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+
+      for (const b of t.bullets) {
+        ctx.save();
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = overdrive ? '#ffdd44' : '#ff4466';
+        ctx.fillStyle = overdrive ? '#ffeeaa' : '#ffddee';
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, overdrive ? 3.5 : 3, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    
+    for (const rb of effects.robots) {
+      ctx.save();
+      ctx.shadowBlur = 20;
+      ctx.shadowColor = '#a060ff';
+      ctx.translate(rb.x, rb.y);
+      ctx.rotate(Math.sin(t * 0.05 + rb.phase) * 0.4);
+      
+      ctx.fillStyle = '#5a2a90';
+      ctx.beginPath();
+      ctx.arc(0, 0, rb.r, 0, Math.PI * 2);
+      ctx.fill();
+      
+      ctx.strokeStyle = '#c090ff';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(0, 0, rb.r * 0.7, 0, Math.PI * 2);
+      ctx.stroke();
+      
+      ctx.fillStyle = '#ffdd44';
+      ctx.beginPath();
+      ctx.arc(0, 0, 3.5, 0, Math.PI * 2);
+      ctx.fill();
+      
+      ctx.strokeStyle = '#a060ff';
+      ctx.lineWidth = 2;
+      for (let k = 0; k < 4; k++) {
+        const a = k * Math.PI / 2 + t * 0.08;
+        ctx.beginPath();
+        ctx.moveTo(Math.cos(a) * rb.r, Math.sin(a) * rb.r);
+        ctx.lineTo(Math.cos(a) * (rb.r + 6), Math.sin(a) * (rb.r + 6));
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    
+    for (const p of particles) {
+      const alpha = p.life / p.maxLife;
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = alpha;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+
+    
+    if (ship.alive) {
+      for (let i = 0; i < ship.trail.length; i++) {
+        const tr = ship.trail[i];
+        ctx.fillStyle = `rgba(100, 180, 255, ${tr.a * 0.4})`;
+        ctx.beginPath();
+        ctx.arc(tr.x, tr.y, 3 * tr.a, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      ctx.save();
+      ctx.translate(ship.x, ship.y);
+      ctx.rotate(ship.angle);
+
+      if (ship.invuln > 0 && Math.floor(ship.invuln / 6) % 2 === 0) {
+        ctx.globalAlpha = 0.35;
+      }
+
+      ctx.shadowBlur = 20;
+      ctx.shadowColor = '#3a9eff';
+
+      const flameLen = 8 + Math.random() * 6;
+      const flameGrad = ctx.createLinearGradient(-18, 0, -18 - flameLen, 0);
+      flameGrad.addColorStop(0, 'rgba(255, 200, 100, 0.95)');
+      flameGrad.addColorStop(0.5, 'rgba(255, 120, 50, 0.7)');
+      flameGrad.addColorStop(1, 'rgba(255, 60, 30, 0)');
+      ctx.fillStyle = flameGrad;
+      ctx.beginPath();
+      ctx.moveTo(-14, -5);
+      ctx.lineTo(-18 - flameLen, 0);
+      ctx.lineTo(-14, 5);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.fillStyle = '#4aa0ff';
+      ctx.beginPath();
+      ctx.moveTo(16, 0);
+      ctx.lineTo(-10, -10);
+      ctx.lineTo(-6, 0);
+      ctx.lineTo(-10, 10);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.fillStyle = '#a0d0ff';
+      ctx.beginPath();
+      ctx.moveTo(12, 0);
+      ctx.lineTo(-6, -6);
+      ctx.lineTo(-3, 0);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.fillStyle = '#e0f0ff';
+      ctx.shadowColor = '#a0d0ff';
+      ctx.shadowBlur = 12;
+      ctx.beginPath();
+      ctx.ellipse(2, 0, 4, 3, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
+    }
+
+    
+    drawEffectBar();
+  }
+
+  function drawEffectBar() {
+    const items = [];
+    if (effects.meteorShowerTimer > 0) items.push({ label: 'METEOR SHOWER', t: effects.meteorShowerTimer, max: 360, c: '#ff8833' });
+    if (effects.turretOverdriveTimer > 0) items.push({ label: 'TURRET OVERDRIVE', t: effects.turretOverdriveTimer, max: 300, c: '#ff4466' });
+    if (effects.robotSwarmTimer > 0) items.push({ label: 'ROBOT SWARM', t: effects.robotSwarmTimer, max: 420, c: '#a060ff' });
+    if (gravityActive) items.push({ label: 'GRAVITY', t: 1, max: 1, c: '#66ddff' });
+
+    let x = W / 2 - (items.length * 140) / 2;
+    for (const it of items) {
+      ctx.save();
+      ctx.fillStyle = 'rgba(10, 15, 25, 0.8)';
+      ctx.fillRect(x, 60, 130, 16);
+      ctx.fillStyle = it.c;
+      const w = it.max === 1 ? 130 : (it.t / it.max) * 130;
+      ctx.fillRect(x, 60, w, 16);
+      ctx.fillStyle = '#fff';
+      ctx.font = 'bold 10px "Courier New", monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(it.label, x + 65, 72);
+      ctx.restore();
+      x += 140;
+    }
+  }
+
+  
+  const overlay = document.getElementById('overlay');
+  const ovTitle = document.getElementById('ovTitle');
+  const ovSub = document.getElementById('ovSub');
+  const ovBtn = document.getElementById('ovBtn');
+
+  function showOverlay(title, sub, btnText) {
+    ovTitle.textContent = title;
+    ovSub.textContent = sub;
+    ovBtn.textContent = btnText;
+    overlay.classList.add('show');
+  }
+  function hideOverlay() { overlay.classList.remove('show'); }
+
+  ovBtn.addEventListener('click', () => {
+    if (paused) { togglePause(); return; }
+    hideOverlay();
+    deaths = 0;
+    time = 0;
+    gameWon = false;
+    paused = false;
+    gravityActive = false;
+    pauseBtn.textContent = '❚❚ PAUSE';
+    document.getElementById('deaths').textContent = '0';
+    document.getElementById('time').textContent = '0.0';
+    particles.length = 0;
+    loadSector(0);
+    gameRunning = true;
+  });
+
+  
+  let lastT = performance.now();
+  function loop(now) {
+    const dt = Math.min(now - lastT, 50);
+    lastT = now;
+    const t = now * 0.06;
+
+    if (gameRunning && !paused) update(dt);
+    updateParticles();
+    draw(t);
+
+    if (gameRunning && sector && !paused) {
+      ctx.save();
+      ctx.font = '11px "Courier New", monospace';
+      ctx.fillStyle = 'rgba(140, 180, 255, 0.5)';
+      ctx.textAlign = 'center';
+      ctx.fillText(sector.name, W / 2, H - 24);
+      ctx.restore();
+    }
+
+    requestAnimationFrame(loop);
+  }
+
+  loadSector(0);
+  showOverlay(
+    "STARFARER",
+    "3 SECTORS · ESCAPE THE ASTEROID BELT<br><br>⚠ WARNING: GRAVITY ANOMALY DETECTED IN SECTOR 2 ⚠<br>TIMED EVENTS: METEOR SHOWERS · TURRET OVERDRIVE · ROBOT SWARMS",
+    "LAUNCH"
+  );
+  requestAnimationFrame(loop);
+
+})();

@@ -1172,3 +1172,58 @@ li {
   }
 }
 
+/* Expanded utility classes for walkthrough inline layout styles */
+
+.inline-layout {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+}
+
+.inline-layout > * {
+  flex: 1 1 calc(50% - 20px);
+  margin: 10px;
+}
+
+.inline-layout.full-width > * {
+  flex: 1 1 100%;
+}
+
+.inline-layout.centered {
+  justify-content: center;
+  text-align: center;
+}
+
+.inline-layout .map-container {
+  margin: 0 0 16px 0;
+  width: 100%;
+}
+
+.inline-layout .poi-table {
+  width: 100%;
+  margin-top: 0;
+}
+
+.inline-layout .toc {
+  min-width: 100%;
+}
+
+.inline-layout .trainer-list-container {
+  max-width: 100%;
+}
+
+.inline-layout .battle-card {
+  max-width: 100%;
+}
+
+.inline-layout .wiki-card {
+  width: 100%;
+}
+
+@media (max-width: 960px) {
+  .inline-layout > * {
+    flex: 1 1 100%;
+    margin: 10px 0;
+  }
+}
+

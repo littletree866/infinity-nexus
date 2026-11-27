@@ -7,18 +7,20 @@
   <link rel="icon" href="../../icon.jpg" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="spacegame.css">
 </head>
 <body>
-  <a href="../../index.html" class="back-btn">Home</a>
   <div id="gameContainer">
     <canvas id="gameCanvas" width="900" height="640"></canvas>
 
     <div id="hud">
-      <div>✦ <span id="scoreDisplay" class="hud-score">0</span></div>
-      <div>◈ Wave <span id="levelDisplay">1</span></div>
-      <div class="hud-lives" id="livesDisplay">❤️❤️❤️❤️❤️</div>
+      <div>Score: <span id="scoreDisplay" class="hud-score">0</span></div>
+      <div>Wave: <span id="levelDisplay">1</span></div>
+      <div class="hud-lives" id="livesDisplay">
+        <span class="heart"></span><span class="heart"></span><span class="heart"></span>
+        <span class="heart"></span><span class="heart"></span>
+      </div>
       <div id="comboCounter" class="combo-counter">🔥 <span id="comboValue">0</span>x</div>
     </div>
     <div id="comboDisplay">⚡ Combo x<span id="comboBig">0</span></div>

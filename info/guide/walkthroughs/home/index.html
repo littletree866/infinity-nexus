@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokémon Infinite Sun Walkthroughs</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="../../../../icon.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../walkthrough.css">
+  <link rel="stylesheet" href="../../../assets/css/walkthrough-index.css">
+</head>
+
+<body>
+<div class="page">
+  <h1>Pokémon Infinite Sun</h1>
+  <p>A chronological walkthrough guide for the Kanto adventure, its required Johto Gym Leader battles, and the post-game.</p>
+
+  
+  <div class="search-container">
+    <input type="text" id="searchBar" class="search-input" placeholder="Search for a location..." onkeyup="filterCards()">
+  </div>
+  
+<div class="divider">Main Game</div>
+
+  <div class="walkthrough-grid" id="mainGameGrid">
+
+    <div class="wt-card searchable" data-text="pallet town route 1 viridian city route 22 rival">
+      <div class="card-title"><i class="fas fa-map-signs"></i> Part 1: The Challenge Begins</div>
+      <div class="card-desc">Pallet Town, Route 1, Viridian City, Route 22, and the first Rival battles.</div>
+      <a href="../part1/index.html" class="card-btn">Read Part 1</a>
+    </div>
+
+    <div class="wt-card searchable" data-text="route 2 viridian forest pewter city brock gym">
+      <div class="card-title"><i class="fas fa-tree"></i> Part 2: The First Badge</div>
+      <div class="card-desc">Route 2, Viridian Forest, Pewter City, and Brock's Gym.</div>
+      <a href="../part2/index.html" class="card-btn">Read Part 2</a>
+    </div>
+
+    <div class="wt-card searchable" data-text="route 3 mt moon route 4 cerulean">
+      <div class="card-title"><i class="fas fa-mountain"></i> Part 3: Mt. Moon</div>
+      <div class="card-desc">Route 3, Mt. Moon, Route 4, and the journey toward Cerulean City.</div>
+      <a href="../part3/index.html" class="card-btn">Read Part 3</a>
+    </div>
+
+    <div class="wt-card searchable" data-text="cerulean gym misty nugget bridge route 24 25 bill">
+      <div class="card-title"><i class="fas fa-water"></i> Part 4: Cerulean City</div>
+      <div class="card-desc">Cerulean Gym, Misty, Nugget Bridge, Routes 24 and 25, and Bill's house.</div>
+      <a href="../part4/index.html" class="card-btn">Read Part 4</a>
+    </div>
+
+    <div class="wt-card searchable" data-text="route 5 route 6 underground path route 11 diglett cave ss anne">
+      <div class="card-title"><i class="fas fa-bolt"></i> Part 5: Vermillion City & S.S. Anne</div>
+      <div class="card-desc">Routes 5 and 6, the Underground Path, Route 11, Diglett's Cave, and the S.S. Anne.</div>
+      <a href="../part5/index.html" class="card-btn">Read Part 5</a>
+    </div>
+
+    <div class="wt-card searchable" data-text="vermilion city ss anne lt surge gym">
+      <div class="card-title"><i class="fas fa-anchor"></i> Part 6: The Vermilion Gym</div>
+      <div class="card-desc">Explore Vermilion City, obtain the S.S. Anne's reward, and challenge Lt. Surge.</div>
+      <a href="../part6/index.html" class="card-btn">Read Part 6</a>
+    </div>
+
+    <div class="wt-card searchable" data-text="route 9 route 10 rock tunnel lavender town">
+      <div class="card-title"><i class="fas fa-mountain-sun"></i> Part 7: Rock Tunnel & Lavender Town</div>
+      <div class="card-desc">Routes 9 and 10, Rock Tunnel, the Pokémon Center, and the first visit to Lavender Town.</div>
+      <a href="../part7/index.html" class="card-btn">Read Part 7</a>
+    </div>
+
+    <div class="wt-card searchable" data-text="route 7 route 8 celadon city department store erika gym game corner">
+      <div class="card-title"><i class="fas fa-leaf"></i> Part 8: Celadon City</div>
+      <div class="card-desc">Routes 7 and 8, Celadon City, the Department Store, Erika's Gym, and the Game Corner.</div>
+      <a href="../part8/index.html" class="card-btn">Read Part 8</a>
+    </div>
+
+    <div class="wt-card searchable" data-text="rocket hideout game corner silph scope team rocket">
+      <div class="card-title"><i class="fas fa-building"></i> Part 9: The Rocket Hideout</div>
+      <div class="card-desc">Investigate the Game Corner, infiltrate Team Rocket's hideout, and obtain the Silph Scope.</div>
+      <a href="../part9/index.html" class="card-btn">Read Part 9</a>
+    </div>
+
+    <div class="wt-card searchable" data-text="pokemon tower lavender town mr fuji poke flute ghost marowak">
+      <div class="card-title"><i class="fas fa-ghost"></i> Part 10: Pokémon Tower</div>
+      <div class="card-desc">Return to Lavender Town, climb Pokémon Tower, rescue Mr. Fuji, and obtain the Poké Flute.</div>
+      <span class="card-btn disabled-card-btn">Coming soon</span>
+    </div>
+
+    <div class="wt-card searchable" data-text="route 16 route 17 route 18 cycling road fuchsia city">
+      <div class="card-title"><i class="fas fa-bicycle"></i> Part 11: Cycling Road & Fuchsia City</div>
+      <div class="card-desc">Routes 16, 17, and 18, the Cycling Road, and the journey to Fuchsia City.</div>
+      <span class="card-btn disabled-card-btn">Coming soon</span>
+    </div>
+
+    <div class="wt-card searchable" data-text="saffron city silph co giovanni sabrina gym">
+      <div class="card-title"><i class="fas fa-brain"></i> Part 12: Saffron City & Silph Co.</div>
+      <div class="card-desc">Explore Saffron City, clear Silph Co., defeat Giovanni, and challenge Sabrina before moving on to Koga.</div>
+      <span class="card-btn disabled-card-btn">Coming soon</span>
+    </div>
+
+    <div class="wt-card searchable" data-text="safari zone gold teeth secret house surf strength fuchsia koga gym after sabrina">
+      <div class="card-title"><i class="fas fa-binoculars"></i> Part 13: Safari Zone & Koga</div>
+      <div class="card-desc">After Sabrina, explore the Safari Zone, find the Gold Teeth and Secret House, obtain Surf and Strength, and challenge Koga.</div>
+      <span class="card-btn disabled-card-btn">Coming soon</span>
+    </div>
+
+    <div class="wt-card searchable" data-text="route 19 route 20 route 21 seafoam islands cinnabar island">
+      <div class="card-title"><i class="fas fa-fire"></i> Part 14: The Sea Route to Cinnabar</div>
+      <div class="card-desc">Travel through Route 21 or the Seafoam Islands via Routes 19 and 20 to reach Cinnabar Island.</div>
+      <span class="card-btn disabled-card-btn">Coming soon</span>
+    </div>
+
+    <div class="wt-card searchable" data-text="cinnabar island pokemon mansion secret key blaine gym">
+      <div class="card-title"><i class="fas fa-key"></i> Part 15: Cinnabar Island</div>
+      <div class="card-desc">Explore the Pokémon Mansion, find the Secret Key, and challenge Blaine's Gym.</div>
+      <span class="card-btn disabled-card-btn">Coming soon</span>
+    </div>
+
+  <div class="wt-card searchable" data-text="one island two island three island knot island boon island kin island mt ember moltres lostelle">
+    <div class="card-title"><i class="fas fa-ship"></i> Part 16: Islands 1, 2 & 3</div>
+    <div class="card-desc">Arrive via the Seagallop Ferry, explore One, Two, and Three Island, rescue Lostelle, and explore Mt. Ember.</div>
+    <span class="card-btn disabled-card-btn">Coming soon</span>
+  </div>
+
+    <div class="wt-card searchable" data-text="blaine route 10 rock tunnel rocket seafoam viridian gym giovanni earth badge">
+      <div class="card-title"><i class="fas fa-globe"></i> Part 17: The Final Kanto Gym</div>
+      <div class="card-desc">Complete the post-Blaine events, revisit the Route 10 area as required, and face Giovanni at Viridian Gym.</div>
+      <span class="card-btn disabled-card-btn">Coming soon</span>
+    </div>
+
+    <div class="wt-card searchable" data-text="johto gym leaders falkner bugsy whitney morty chuck jasmine pryce clair badges gym battles">
+      <div class="card-title"><i class="fas fa-medal"></i> Part 18: The Johto League</div>
+      <div class="card-desc">Battle Falkner, Bugsy, Whitney, Morty, Chuck, Jasmine, Pryce, and Clair.</div>
+      <span class="card-btn disabled-card-btn">Coming soon</span>
+    </div>
+
+    <div class="wt-card searchable" data-text="route 22 route 23 indigo plateau victory road rival">
+      <div class="card-title"><i class="fas fa-road"></i> Part 19: Victory Road</div>
+      <div class="card-desc">Route 22, Route 23, the final Rival battle, and the journey through Victory Road.</div>
+      <span class="card-btn disabled-card-btn">Coming soon</span>
+    </div>
+
+    <div class="wt-card searchable" data-text="elite four lorelei bruno agatha lance champion blue pokemon league">
+      <div class="card-title"><i class="fas fa-crown"></i> Part 20: The Indigo League</div>
+      <div class="card-desc">Challenge Lorelei, Bruno, Agatha, Lance, and the Champion to complete the main story.</div>
+      <span class="card-btn disabled-card-btn">Coming soon</span>
+    </div>
+  </div>
+
+
+<div class="divider">Post-Game: The Sevii Islands</div>
+
+<div class="walkthrough-grid" id="postGameGrid">
+
+
+  <div class="wt-card searchable" data-text="four island five island floe island chrono island icefall cave lorelei daycare">
+    <div class="card-title"><i class="fas fa-snowflake"></i> Part 21: Islands 4 & 5</div>
+    <div class="card-desc">Explore Four and Five Island, investigate Icefall Cave, and follow the events involving Lorelei.</div>
+    <span class="card-btn disabled-card-btn">Coming soon</span>
+  </div>
+
+  <div class="wt-card searchable" data-text="six island seven island fortune island quest island pattern bush dotted hole ruin valley tanoby ruins unown">
+    <div class="card-title"><i class="fas fa-dungeon"></i> Part 22: Islands 6 & 7</div>
+    <div class="card-desc">Explore Six and Seven Island, including Ruin Valley, the Dotted Hole, Pattern Bush, and Tanoby Ruins.</div>
+    <span class="card-btn disabled-card-btn">Coming soon</span>
+  </div>
+
+  <div class="wt-card searchable" data-text="cerulean cave mewtwo legendary">
+    <div class="card-title"><i class="fas fa-dragon"></i> Part 23: Cerulean Cave</div>
+    <div class="card-desc">Return to Kanto, explore Cerulean Cave, and encounter Mewtwo.</div>
+    <span class="card-btn disabled-card-btn">Coming soon</span>
+  </div>
+
+  <div class="wt-card searchable" data-text="legendary birds articuno zapdos moltres seafoam power plant mt ember">
+    <div class="card-title"><i class="fas fa-feather"></i> Part 24: The Legendary Birds</div>
+    <div class="card-desc">Find Articuno in Seafoam Islands, Zapdos at the Power Plant, and Moltres at Mt. Ember.</div>
+    <span class="card-btn disabled-card-btn">Coming soon</span>
+  </div>
+
+  <div class="wt-card searchable" data-text="optional kanto exploration items tms encounters routes">
+    <div class="card-title"><i class="fas fa-compass"></i> Part 25: Optional Areas</div>
+    <div class="card-desc">Revisit optional Kanto locations, collect remaining items and TMs, and find missed encounters.</div>
+    <span class="card-btn disabled-card-btn">Coming soon</span>
+  </div>
+
+  <div class="wt-card searchable" data-text="complete pokedex catch pokemon">
+    <div class="card-title"><i class="fas fa-book"></i> Part 26: The Pokédex</div>
+    <div class="card-desc">Work toward completing the available Pokédex, including special and version-specific encounters.</div>
+    <span class="card-btn disabled-card-btn">Coming soon</span>
+  </div>
+
+</div>
+
+  <div class="footer-nav">
+    <p>Pokémon Infinite Sun Walkthrough</p>
+  </div>
+</div>
+
+<script>
+  
+  function filterCards() {
+    const input = document.getElementById('searchBar').value.toLowerCase();
+    const cards = document.querySelectorAll('.searchable');
+
+    cards.forEach(card => {
+      const text = card.textContent.toLowerCase();
+      const dataText = card.getAttribute('data-text') || '';
+      
+      if (text.includes(input) || dataText.includes(input)) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+</script>
+
+</body>
+</html>

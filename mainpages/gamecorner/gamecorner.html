@@ -128,7 +128,7 @@
                     <ul class="footer-links">
                         <li><a href="../../index.html">Home</a></li>
                         <li><a href="../gamecorner/gamecorner.html">Game Corner</a></li>
-                        <li><a href="../../sims/sims.html">Simulations</a></li>
+                        <li><a href="../sims/sims.html">Simulations</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -208,7 +208,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             initTheme();
             try {
-                document.getElementById('footer-year').textContent = new Date().getFullYear();
+                document.getElementById('copyright-year').textContent = new Date().getFullYear();
             } catch (e) {
                 console.warn('Year update error:', e);
             }

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Walkthrough - Part 5 | Pokémon Infinite Sun</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="../../../../icon.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../walkthrough.css">
+</head>
+
+<body>
+<div class="page">
+  <h1>Walkthrough - Part 5</h1>
+
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <ul>
+      <li><a href="#route-5">Route 5</a></li>
+      <li><a href="#route-6">Route 6</a></li>
+      <li><a href="#vermilion-city">Vermilion City</a></li>
+      <li><a href="#ss-anne">S.S. Anne</a></li>
+      <li><a href="#vermilion-gym">Vermilion Gym</a>
+        <ul>
+          <li><a href="#gym-trainers">Gym Trainers</a></li>
+          <li><a href="#lt-surge">Lt. Surge</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <p>Welcome to Part 5 of the Pokémon Infinite Sun Walkthrough! In this section, we'll travel south from Cerulean City through Routes 5 and 6 to Vermilion City, explore the luxurious S.S. Anne, and take on the Vermilion Gym to earn the Thunder Badge.</p>
+
+  
+  <h2 id="route-5">Route 5</h2>
+  <div class="clearfix">
+    <div class="map-container">
+      <img src="../../img/Route5.png" alt="Route 5">
+      <div class="map-caption">Route 5</div>
+    </div>
+    
+    <p>Route 5 connects Cerulean City to Saffron City, though the main gate to Saffron is currently locked. The route features a Day Care Center where you can leave Pokémon to gain experience, and a path leading south to Route 6.</p>
+
+    <table class="poi-table">
+      <tr><th>#</th><th>Point of Interest</th></tr>
+      <tr><td><span class="poi-number">1</span></td><td>Path to Cerulean City (North)</td></tr>
+      <tr><td><span class="poi-number">2</span></td><td>Pokémon Day Care</td></tr>
+      <tr><td><span class="poi-number">3</span></td><td>Path to Route 6 (South)</td></tr>
+      <tr><td><span class="poi-number">4</span></td><td>Gate to Saffron City (Locked)</td></tr>
+    </table>
+
+    
+    <script type="text/plain" id="encounter-data-route5">
+# 30%
+13, 16, Pidgey
+13, 16, Oddish
+
+# 20%
+13, 16, Meowth
+13, 16, Bellsprout
+
+# 10%
+15, 18, Abra
+15, 18, Mankey
+
+# 5%
+15, 18, Vulpix
+    </script>
+
+    <div id="encounter-container-1"></div>
+
+    <h3 class="clear-right">Trainers</h3>
+    <p>There are a few trainers on this route, including a Day Care couple who will challenge you.</p>
+
+    <script type="text/plain" id="team-data-route5-list">
+Trainer: Picnicker Hope
+Sprite: picnicker
+Reward: ₽360
+17 Rattata (IVs=0)@None
+17 Ekans (IVs=0)@None
+---
+Trainer: Camper Flint
+Sprite: camper
+Reward: ₽340
+16 Pidgey (IVs=0)@None
+16 Rattata (IVs=0)@None
+---
+Trainer: Youngster Chad
+Sprite: youngster-gen4
+Reward: ₽340
+17 Sandshrew (IVs=0)@None
+17 Mankey (IVs=0)@None
+    </script>
+
+    <div id="trainer-list-container-route5"></div>
+
+  </div>
+
+  
+  <h2 id="route-6">Route 6</h2>
+  <div class="clearfix">
+    <div class="map-container">
+      <img src="../../img/Route6.png" alt="Route 6">
+      <div class="map-caption">Route 6</div>
+    </div>
+
+    <p>Route 6 is a short path that leads directly into Vermilion City. You'll encounter a few trainers here, and it's a good place to catch some Water and Grass types before taking on the Gym.</p>
+
+    <table class="poi-table">
+      <tr><th>#</th><th>Point of Interest</th></tr>
+      <tr><td><span class="poi-number">1</span></td><td>Path to Route 5 (North)</td></tr>
+      <tr><td><span class="poi-number">2</span></td><td>Path to Vermilion City (South)</td></tr>
+    </table>
+
+    
+    <script type="text/plain" id="encounter-data-route6">
+# 30%
+13, 16, Pidgey
+13, 16, Oddish
+
+# 20%
+13, 16, Meowth
+13, 16, Bellsprout
+
+# 10%
+15, 18, Abra
+15, 18, Mankey
+    </script>
+
+    <div id="encounter-container-2"></div>
+
+    <h3 class="clear-right">Trainers</h3>
+    <p>A couple of trainers stand between you and Vermilion City. They use a mix of Normal and Ground types.</p>
+
+    <script type="text/plain" id="team-data-route6-list">
+Trainer: Bug Catcher Keigo
+Sprite: bugcatcher
+Reward: ₽220
+16 Weedle (IVs=0)@None
+16 Caterpie (IVs=0)@None
+16 Metapod (IVs=0)@None
+---
+Trainer: Camper Ricky
+Sprite: camper
+Reward: ₽360
+18 Squirtle (IVs=0)@None
+18 Mankey (IVs=0)@None
+    </script>
+
+    <div id="trainer-list-container-route6"></div>
+
+  </div>
+
+  
+  <h2 id="vermilion-city">Vermilion City</h2>
+  <div class="clearfix">
+    <div class="map-container">
+      <img src="../../img/VermilionCity.png" alt="Vermilion City">
+      <div class="map-caption">Vermilion City</div>
+    </div>
+
+    <p>Vermilion City is a bustling port town. It features a Pokémon Center, a Poké Mart, a Pokémon Fan Club, and the Vermilion Gym. The S.S. Anne is currently docked at the harbor, and you can access it with the S.S. Ticket from Bill.</p>
+
+    <table class="poi-table">
+      <tr><th>#</th><th>Point of Interest</th></tr>
+      <tr><td><span class="poi-number">1</span></td><td>Pokémon Center</td></tr>
+      <tr><td><span class="poi-number">2</span></td><td>Poké Mart</td></tr>
+      <tr><td><span class="poi-number">3</span></td><td>Vermilion Gym</td></tr>
+      <tr><td><span class="poi-number">4</span></td><td>Pokémon Fan Club</td></tr>
+      <tr><td><span class="poi-number">5</span></td><td>S.S. Anne Harbor</td></tr>
+      <tr><td><span class="poi-number">6</span></td><td>Path to Route 6 (North)</td></tr>
+      <tr><td><span class="poi-number">7</span></td><td>Path to Route 11 (East)</td></tr>
+    </table>
+  </div>
+
+  <h3 class="clear-right">Poké Mart</h3>
+  <p>Stock up on Super Potions and Repels before heading to the Gym or the S.S. Anne.</p>
+
+  <div class="shop-box">
+    <div class="shop-box-header">Poké Mart</div>
+    <div class="shop-item-row"><span class="name">Poké Ball</span><span class="price">₽200</span></div>
+    <div class="shop-item-row"><span class="name">Super Potion</span><span class="price">₽700</span></div>
+    <div class="shop-item-row"><span class="name">Repel</span><span class="price">₽350</span></div>
+    <div class="shop-item-row"><span class="name">Antidote</span><span class="price">₽100</span></div>
+    <div class="shop-item-row"><span class="name">Parlyz Heal</span><span class="price">₽200</span></div>
+    <div class="shop-item-row"><span class="name">Awakening</span><span class="price">₽200</span></div>
+  </div>
+
+  <h3>S.S. Anne</h3>
+  <p>Show the S.S. Ticket to the guard at the harbor to board the ship. Inside, you'll find a luxurious cruise liner filled with trainers to battle. Your goal is to reach the Captain's quarters at the back of the ship. Along the way, you can find several hidden items, including a Rare Candy. After helping the Captain, he will give you <strong>HM01 Cut</strong>.</p>
+
+  <script type="text/plain" id="team-data-ssanne-list">
+Trainer: Sailor Dwayne
+Sprite: sailor
+Reward: ₽560
+18 Machop (IVs=0)@None
+18 Geodude (IVs=0)@None
+---
+Trainer: Gentleman Brooks
+Sprite: gentleman
+Reward: ₽1260
+20 Pikachu (IVs=0)@None
+---
+Trainer: Lass Ann
+Sprite: lass
+Reward: ₽360
+18 Bellsprout (IVs=0)@None
+18 Oddish (IVs=0)@None
+---
+Trainer: Rival Blue
+Sprite: blue
+Reward: ₽1200
+20 Pidgeotto (IVs=0)@None
+20 Raticate (IVs=0)@None
+20 Kadabra (IVs=0)@None
+20 Charmander (IVs=0)@None
+    </script>
+
+    <div id="trainer-list-container-ssanne"></div>
+
+
+
+  
+  <h2 id="vermilion-gym">Vermilion Gym</h2>
+  <div class="clearfix">
+    <div class="map-container">
+      <img src="../../img/VermilionGym.png" alt="Vermilion Gym">
+      <div class="map-caption">Vermilion Gym</div>
+    </div>
+
+    <p>The Vermilion Gym specializes in Electric-type Pokémon. The Gym features a puzzle where you must find two hidden switches in the trash cans to open the path to the Leader. Avoid using Water or Flying-types here—they will be at a major disadvantage.</p>
+  </div>
+
+  <h3 id="gym-trainers" class="clear-right">Gym Trainers</h3>
+  <p>Before challenging Lt. Surge, you must defeat a Gym Trainer. He uses Electric-types, so bring your best Ground-type moves.</p>
+
+  <script type="text/plain" id="team-data-vermilion-gym-trainers">
+Trainer: Sailor Tucker
+Sprite: sailor
+Reward: ₽640
+18 Voltorb (IVs=0)@None
+18 Magnemite (IVs=0)@None
+---
+Trainer: Gentleman Tucker
+Sprite: gentleman
+Reward: ₽1260
+20 Pikachu (IVs=0)@None
+    </script>
+
+  <div id="battle-card-container-gym-trainers"></div>
+
+  <h3 id="lt-surge">Gym Leader Lt. Surge</h3>
+  <p>Lt. Surge uses two Electric-type Pokémon: Voltorb and Raichu. Raichu is fast and can hit hard with Thunderbolt. Use Ground-type moves to make this battle much easier, as Electric moves will have no effect on Ground-types.</p>
+
+  <script type="text/plain" id="team-data-lt-surge">
+Trainer: Lt. Surge
+Sprite: ltsurge
+Theme: yellow
+Location: Vermilion Gym
+Reward: ₽3,240
+
+28 Dedenne (IVs=0)@"Sitrus Berry"
+- Nuzzle
+- "Volt Switch"
+- Discharge
+- Encore
+
+29 Alolan Raichu (IVs=0)@"Electr. Seed"
+- Discharge
+- Psychic
+- "Volt Switch"
+- "Nasty Plot"
+
+30 Magnezone (IVs=1)@"Air Balloon"
+- "Flash Cannon"
+- "Volt Switch"
+- "Thunder Wave"
+- "Tri Attack"
+
+30 Electivire (IVs=2)@"Electric Gem"
+- Thunder Punch
+- "Ice Punch"
+- "Fire Punch"
+- "Power-up Punch"
+
+30 Ampharos (IVs=0)@Ampharosite
+- "Dragon Pulse"
+- "Dazzling Gleam"
+- Discharge
+- "Nasty Plot"
+
+  </script>
+
+  <div id="battle-card-container-lt-surge"></div>
+
+  <p>Defeating Lt. Surge earns you the <strong>Thunder Badge</strong>, which makes all Pokémon up to level 40 obey you, and allows the use of Fly outside of battle. He will also give you <strong>TM34 Shock Wave</strong>.</p>
+
+  <div class="footer-nav">
+    <div><a href="../part4/index.html">← Part 4: Routes 24 & 25 and the Cerulean Gym</a></div>
+    <div><a href="../part6/index.html">Part 6: Celadon City and the Celadon Gym</a> →</div>
+  </div>
+</div>
+
+
+<div id="imageLightbox" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); align-items: center; justify-content: center; cursor: zoom-out; opacity: 0; transition: opacity 0.3s ease;">
+  <img id="lightboxImg" src="" alt="Enlarged Image" style="max-width: 95%; max-height: 95%; border: 3px solid #fff; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); object-fit: contain;">
+</div>
+
+<script>
+  
+  const pokeCache = {};
+  const moveCache = {};
+
+  
+  async function getPokemonData(name) {
+    let searchName = name.toLowerCase().replace(/\s+/g, '-');
+
+    if (searchName.startsWith('alolan-')) searchName = searchName.replace('alolan-', '') + '-alola';
+    if (searchName.startsWith('galarian-')) searchName = searchName.replace('galarian-', '') + '-galar';
+
+    if (pokeCache[searchName]) return pokeCache[searchName];
+
+    try {
+      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchName}`);
+      if (!response.ok) throw new Error('Not found');
+      const data = await response.json();
+      
+      const types = data.types.map(t => t.type.name);
+      let img = data.sprites.other.showdown.front_default;
+      
+      if (!img) {
+        img = data.sprites.front_default;
+      }
+      
+      pokeCache[searchName] = { types, img };
+      return pokeCache[searchName];
+    } catch (error) {
+      console.error(`Failed to fetch ${name}`, error);
+      return { types: ["normal"], img: "https://img.pokemondb.net/artwork/unknown.jpg" };
+    }
+  }
+
+  async function getMoveData(name) {
+    const lowerName = name.toLowerCase().replace(/\s+/g, '-');
+    if (moveCache[lowerName]) return moveCache[lowerName];
+
+    try {
+      const response = await fetch(`https://pokeapi.co/api/v2/move/${lowerName}`);
+      if (!response.ok) throw new Error('Not found');
+      const data = await response.json();
+      moveCache[lowerName] = data.type.name;
+      return moveCache[lowerName];
+    } catch (error) {
+      return "normal";
+    }
+  }
+
+  
+  function toggleWikiCard(headerEl) {
+    const card = headerEl.closest('.wiki-card');
+    const body = card.querySelector('.wiki-body');
+    const btn = headerEl.querySelector('.toggle-btn');
+    if (body.classList.contains('hidden')) {
+      body.classList.remove('hidden');
+      btn.textContent = '[hide]';
+    } else {
+      body.classList.add('hidden');
+      btn.textContent = '[show]';
+    }
+  }
+
+  function toggleTrainerList(headerEl) {
+    const card = headerEl.closest('.trainer-list-container');
+    const body = card.querySelector('.trainer-list-body');
+    const btn = headerEl.querySelector('.toggle-btn');
+    if (body.classList.contains('hidden')) {
+      body.classList.remove('hidden');
+      btn.textContent = '[hide]';
+    } else {
+      body.classList.add('hidden');
+      btn.textContent = '[show]';
+    }
+  }
+
+  function toggleBattle(id) {
+    const body = document.getElementById(id + '-body');
+    if (!body) return;
+    const isHidden = body.classList.contains('hidden');
+    if (isHidden) body.classList.remove('hidden');
+    else body.classList.add('hidden');
+    
+    const card = document.getElementById(id);
+    if (card) {
+      const allButtons = card.querySelectorAll('.toggle-btn');
+      allButtons.forEach(btn => {
+        btn.textContent = isHidden ? '[Collapse]' : '[Expand]';
+      });
+    }
+  }
+
+  
+  async function generateEncounterCard(scriptId, containerId) {
+    const rawText = document.getElementById(scriptId).textContent;
+    const lines = rawText.trim().split('\n');
+    let currentRateNum = 0;
+    let rawEncounters = [];
+
+    lines.forEach(line => {
+      line = line.trim();
+      if (!line) return;
+      if (line.startsWith('#')) {
+        currentRateNum = parseInt(line.replace('#', '').replace('%', '').trim(), 10) || 0;
+      } else if (line.includes(',')) {
+        let parts = line.split(',').map(s => s.trim());
+        if (parts.length >= 3) {
+          rawEncounters.push({ minLevel: parseInt(parts[0], 10), maxLevel: parseInt(parts[1], 10), name: parts[2], rate: currentRateNum });
+        }
+      }
+    });
+
+    let groupedEncounters = {};
+    rawEncounters.forEach(enc => {
+      const key = enc.name.toLowerCase();
+      if (!groupedEncounters[key]) {
+        groupedEncounters[key] = { name: enc.name, rate: enc.rate, minLevel: enc.minLevel, maxLevel: enc.maxLevel };
+      } else {
+        groupedEncounters[key].rate += enc.rate;
+        groupedEncounters[key].minLevel = Math.min(groupedEncounters[key].minLevel, enc.minLevel);
+        groupedEncounters[key].maxLevel = Math.max(groupedEncounters[key].maxLevel, enc.maxLevel);
+      }
+    });
+
+    const encounters = Object.values(groupedEncounters).sort((a, b) => b.rate - a.rate);
+
+    let tableRows = "";
+    for (const enc of encounters) {
+      const pData = await getPokemonData(enc.name);
+      tableRows += `
+        <tr>
+          <td><div class="pkmn-mini-icon"><img src="${pData.img}" alt="${enc.name}"></div></td>
+          <td>${enc.name}</td>
+          <td><img src="https://archives.bulbagarden.net/media/upload/3/32/HGSS_Grass.png" alt="Grass" class="grass-icon">Tall Grass</td>
+          <td>${enc.minLevel}-${enc.maxLevel}</td>
+          <td>${enc.rate}%</td>
+        </tr>`;
+    }
+
+    const cardHTML = `
+      <div class="wiki-card" data-collapsed="true">
+        <div class="wiki-header" onclick="toggleWikiCard(this)">
+          <span class="title">Available Pokémon</span>
+          <button class="toggle-btn" onclick="event.stopPropagation(); toggleWikiCard(this.parentElement)">[show]</button>
+        </div>
+        <div class="wiki-body hidden">
+          <table>
+            <tr><th style="width:30px;"></th><th>Pokémon</th><th>Location</th><th>Levels</th><th>Rate</th></tr>
+            ${tableRows}
+          </table>
+        </div>
+      </div>`;
+    document.getElementById(containerId).innerHTML = cardHTML;
+  }
+
+  
+  async function generateTrainerList(scriptId, containerId) {
+    const rawText = document.getElementById(scriptId).textContent;
+    const blocks = rawText.split('---');
+    let rowsHtml = "";
+
+    for (let block of blocks) {
+      block = block.trim();
+      if (!block) continue;
+
+      let trainerInfo = { trainer: "Trainer", sprite: "youngster", reward: "???" };
+      let team = [];
+      let currentPokemon = null;
+
+      const lines = block.split('\n');
+      lines.forEach(line => {
+        line = line.trim();
+        if (!line) return;
+        if (line.startsWith("Trainer:")) trainerInfo.trainer = line.replace("Trainer:", "").trim();
+        else if (line.startsWith("Sprite:")) trainerInfo.sprite = line.replace("Sprite:", "").trim();
+        else if (line.startsWith("Reward:")) trainerInfo.reward = line.replace("Reward:", "").trim();
+        else if (line.match(/^\d+\s+[A-Za-z]+/)) {
+          if (currentPokemon) team.push(currentPokemon);
+          let cleanLine = line.replace(/\(.*?\)/g, '').replace(/@.*$/, '').trim();
+          let parts = cleanLine.split(/\s+/);
+          let level = parts[0];
+          let name = parts.slice(1).join(" ");
+          let itemMatch = line.match(/@["']?(.+?)["']?$/);
+          let item = itemMatch ? itemMatch[1].replace(/["']/g, '') : "None";
+          currentPokemon = { name: name, level: level, item: item };
+        }
+      });
+      if (currentPokemon) team.push(currentPokemon);
+
+      let pokemonHtml = "";
+      for (const pkmn of team) {
+        const pData = await getPokemonData(pkmn.name);
+        pokemonHtml += `
+          <div class="pokemon-list-row">
+            <img src="${pData.img}" alt="${pkmn.name}">
+            <div style="flex: 1; text-align: left;">
+              <span class="p-name">${pkmn.name}</span> <span class="p-level">Lv.${pkmn.level}</span>
+            </div>
+            <span class="p-item">${pkmn.item !== 'None' ? pkmn.item : 'No item'}</span>
+          </div>`;
+      }
+
+      const trainerImg = `https://play.pokemonshowdown.com/sprites/trainers/${trainerInfo.sprite}.png`;
+      const fallbackImg = `https://play.pokemonshowdown.com/sprites/trainers/blue.png`;
+
+      rowsHtml += `
+        <tr>
+          <td class="trainer-info-cell">
+            <img src="${trainerImg}" alt="${trainerInfo.trainer}" onerror="this.src='${fallbackImg}'">
+            <div class="t-name">${trainerInfo.trainer}</div>
+            <div class="t-reward">Reward: ${trainerInfo.reward}</div>
+          </td>
+          <td class="pokemon-list-cell">${pokemonHtml}</td>
+        </tr>`;
+    }
+
+    const html = `
+      <div class="trainer-list-container">
+        <div class="trainer-list-header" onclick="toggleTrainerList(this)">
+          <span class="title">Trainers</span>
+          <button class="toggle-btn" onclick="event.stopPropagation(); toggleTrainerList(this.parentElement)">[show]</button>
+        </div>
+        <div class="trainer-list-body hidden">
+          <table class="trainer-list-table">
+            <tr><th>Trainer</th><th>Pokémon</th></tr>
+            ${rowsHtml}
+          </table>
+        </div>
+      </div>`;
+    document.getElementById(containerId).innerHTML = html;
+  }
+
+  
+  async function generateBattleCard(scriptId, containerId, cardId) {
+    const rawText = document.getElementById(scriptId).textContent;
+    const lines = rawText.trim().split('\n');
+    let trainerInfo = { trainer: "Trainer", location: "Unknown", reward: "???", sprite: "blue", theme: "blue" };
+    let team = [];
+    let currentPokemon = null;
+
+    lines.forEach(line => {
+      line = line.trim();
+      if (!line) return;
+      if (line.startsWith("Trainer:")) trainerInfo.trainer = line.replace("Trainer:", "").trim();
+      else if (line.startsWith("Sprite:")) trainerInfo.sprite = line.replace("Sprite:", "").trim();
+      else if (line.startsWith("Theme:")) trainerInfo.theme = line.replace("Theme:", "").trim();
+      else if (line.startsWith("Location:")) trainerInfo.location = line.replace("Location:", "").trim();
+      else if (line.startsWith("Reward:")) trainerInfo.reward = line.replace("Reward:", "").trim();
+      else if (line.match(/^\d+\s+[A-Za-z]+/)) {
+        if (currentPokemon) team.push(currentPokemon);
+        let cleanLine = line.replace(/\(.*?\)/g, '').replace(/@.*$/, '').trim();
+        let parts = cleanLine.split(/\s+/);
+        let level = parts[0];
+        let name = parts.slice(1).join(" ");
+        let itemMatch = line.match(/@["']?(.+?)["']?$/);
+        let item = itemMatch ? itemMatch[1].replace(/["']/g, '') : "None";
+        currentPokemon = { name: name, level: level, item: item, moves: [] };
+      } else if (line.startsWith("-")) {
+        let moveName = line.replace("-", "").replace(/["']/g, '').trim();
+        if (moveName && moveName !== "-") currentPokemon.moves.push(moveName);
+      }
+    });
+    if (currentPokemon) team.push(currentPokemon);
+
+    let teamHtml = "";
+    for (const pkmn of team) {
+      const pData = await getPokemonData(pkmn.name);
+      let typesHtml = pData.types.map(t => `<span class="type-chip ${t}">${t.charAt(0).toUpperCase() + t.slice(1)}</span>`).join("");
+      
+      let displayName = pkmn.name.replace(/^(Alolan|Galarian)\s+/i, '');
+
+      let movesHtml = "";
+      for (let i = 0; i < 4; i++) {
+        if (pkmn.moves[i]) {
+          let mName = pkmn.moves[i];
+          let mType = await getMoveData(mName);
+          movesHtml += `<div class="move-box"><div class="move-name">${mName}</div><div class="move-type ${mType}">${mType}</div></div>`;
+        } else {
+          movesHtml += `<div class="move-box empty"></div>`;
+        }
+      }
+      teamHtml += `
+      <div class="pokemon-panel">
+        <div class="pokemon-top">
+          <div class="pokemon-image"><img src="${pData.img}" alt="${pkmn.name}"></div>
+          <div class="pokemon-details">
+            <div class="pokemon-name">${displayName} Lv.${pkmn.level}</div>
+            <div class="detail-label">Types</div>
+            <div class="type-row">${typesHtml}</div>
+            <div class="detail-label">Held item</div>
+            <div class="held-item">${pkmn.item}</div>
+          </div>
+        </div>
+        <div class="moves-grid">${movesHtml}</div>
+      </div>`;
+    }
+
+    let partyBalls = "";
+    for (let i = 0; i < 6; i++) {
+      if (i < team.length) partyBalls += `<span class="party-ball active"></span>`;
+      else partyBalls += `<span class="party-ball"></span>`;
+    }
+
+    const trainerImg = `https://play.pokemonshowdown.com/sprites/trainers/${trainerInfo.sprite}.png`;
+    const fallbackImg = `https://play.pokemonshowdown.com/sprites/trainers/blue.png`;
+
+    const cardHTML = `
+    <div class="battle-card theme-${trainerInfo.theme}" id="${cardId}">
+      <div class="card-header" onclick="toggleBattle('${cardId}')">
+        <div class="trainer-icon"><img src="${trainerImg}" alt="${trainerInfo.trainer}" onerror="this.src='${fallbackImg}'"></div>
+        <div class="battle-info">
+          <div class="trainer-class">Trainer</div>
+          <div class="trainer-name">${trainerInfo.trainer}</div>
+          <div class="location">${trainerInfo.location}</div>
+          <div class="game">Infinite Sun</div>
+        </div>
+        <div class="reward-box"><div class="reward-label">Reward</div><div class="reward-value">${trainerInfo.reward}</div></div>
+        <div class="party-display">${partyBalls}</div>
+        <button class="toggle-btn" onclick="event.stopPropagation(); toggleBattle('${cardId}')">[Expand]</button>
+      </div>
+      <div class="card-body hidden" id="${cardId}-body">
+        <div class="team-grid">${teamHtml}</div>
+      </div>
+    </div>`;
+    document.getElementById(containerId).innerHTML = cardHTML;
+  }
+
+  
+  document.addEventListener('DOMContentLoaded', async () => {
+    await generateEncounterCard('encounter-data-route5', 'encounter-container-1');
+    await generateEncounterCard('encounter-data-route6', 'encounter-container-2');
+
+    await generateTrainerList('team-data-route5-list', 'trainer-list-container-route5');
+    await generateTrainerList('team-data-route6-list', 'trainer-list-container-route6');
+    await generateTrainerList('team-data-ssanne-list', 'trainer-list-container-ssanne');
+
+    await generateTrainerList('team-data-vermilion-gym-trainers', 'battle-card-container-gym-trainers');
+    await generateBattleCard('team-data-lt-surge', 'battle-card-container-lt-surge', 'battle-lt-surge');
+
+    
+    const lightbox = document.getElementById('imageLightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const mapImages = document.querySelectorAll('.map-container img');
+
+    mapImages.forEach(img => {
+      img.style.cursor = 'zoom-in'; 
+      img.addEventListener('click', (e) => {
+        lightboxImg.src = e.target.src;
+        lightbox.style.display = 'flex';
+        setTimeout(() => { lightbox.style.opacity = '1'; }, 10);
+      });
+    });
+
+    lightbox.addEventListener('click', () => {
+      lightbox.style.opacity = '0';
+      setTimeout(() => {
+        lightbox.style.display = 'none';
+        lightboxImg.src = ''; 
+      }, 300); 
+    });
+  });
+</script>
+
+</body>
+</html>
